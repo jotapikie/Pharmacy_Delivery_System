@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.*;
 import lapr.project.model.EScooter;
 import lapr.project.model.State;
-import lapr.project.model.User;
 import lapr.project.model.Vehicle;
 import oracle.jdbc.OracleTypes;
 
