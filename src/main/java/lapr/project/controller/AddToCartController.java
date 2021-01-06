@@ -34,8 +34,8 @@ public class AddToCartController {
         return pdb.getProducts();
     }
     
-    public boolean isValid(int id){
-        return Product.getProduct(id) != null;
+    public String showProduct(int id){
+        return Product.getProduct(id).toString();
     }
     
     public void addToCart(int id, int quantity){
