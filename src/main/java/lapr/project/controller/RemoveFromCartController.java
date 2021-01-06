@@ -17,6 +17,7 @@ public class RemoveFromCartController {
     
     private String clientEmail;
     private ShoppingCart cart;
+    private Product pro;
 
     public RemoveFromCartController(String clientEmail) {
         this.clientEmail = clientEmail;
@@ -27,8 +28,12 @@ public class RemoveFromCartController {
            return cart.toString();
     }
     
-    public void removeFromCart(int id){
-        Product pro = Product.getProduct(id);
+    public String getSelectedProduct(int id){
+        pro = Product.getProduct(id);
+        return pro.toString();
+    }
+    
+    public void removeFromCart(){
         if(pro != null){
             cart.removeProduct(pro);
         }
