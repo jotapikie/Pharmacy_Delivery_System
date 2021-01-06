@@ -4,7 +4,7 @@
 The admin start adding products. The system requests required data(i.e. id, name, weight, price). The admin enters the data.The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
 
 ## SSD
-![UC10_SSD.png](UC10_SSD.png)
+![UC11_SSD.png](UC11_SSD.png)
 
 #### Main Actor
 
@@ -20,12 +20,12 @@ The pharmacy should be created in the system.
 ## 2. Engineering Design
 
 ## Sequence Diagram
-![UC10_SD.png](UC10_SD.png)
+![UC11_SD.png](UC11_SD.png)
 
 
 
 ## Class Diagram
-![UC10_CD.png](UC10_CD.png)
+![UC11_CD.png](UC11_CD.png)
 
 ____
 
