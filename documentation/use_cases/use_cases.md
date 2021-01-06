@@ -2,7 +2,7 @@
 
 A use case diagram was developed to understand the responsible actor or actors for the presented use cases.
 
-![Use Cases Diagram](use_case_diagram.png)
+![Use Cases Diagram](duc.png)
 
 # Use Cases
 |  UC  | Description |                   
