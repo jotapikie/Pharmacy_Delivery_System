@@ -30,4 +30,4 @@ The items in the shopping cart are stored until he pays for it (or log out).
 
 ### Class Diagram
 
-![UC6_CD](UC6_SD.jpg)
+![UC6_CD](UC6_CD.jpg)
