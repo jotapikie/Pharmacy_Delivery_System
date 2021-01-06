@@ -4,7 +4,7 @@
 The admin start adding products. The system requests required data(i.e. id, name, weight, price). The admin enters the data.The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
 
 ## SSD
-![UC10_SSD1.png](UC10_SSD.png)
+![UC10_SSD.png](UC10_SSD.png)
 
 #### Main Actor
 
