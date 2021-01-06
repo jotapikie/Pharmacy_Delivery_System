@@ -28,4 +28,4 @@ The scooter should be already defined..
 
 ### Class Diagram
 
-![UC4_CD](UC4_SD.png)
+![UC4_CD](UC4_CD.png)
