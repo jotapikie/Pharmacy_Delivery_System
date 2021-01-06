@@ -23,9 +23,9 @@ The scooter should be already defined..
 
 ### Sequence Diagram
 
-![UC4_SD](UC4_SD.jpg)
+![UC4_SD](UC4_SD.png)
 
 
 ### Class Diagram
 
-![UC4_CD](UC4_SD.jpg)
+![UC4_CD](UC4_SD.png)
