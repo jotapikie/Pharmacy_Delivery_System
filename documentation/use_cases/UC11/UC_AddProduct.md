@@ -1,4 +1,4 @@
-# UC10 - Add Courier
+# UC11 - Add Product
 
 ## 1. Requirements Engineering
 The admin start adding products. The system requests required data(i.e. id, name, weight, price). The admin enters the data.The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
