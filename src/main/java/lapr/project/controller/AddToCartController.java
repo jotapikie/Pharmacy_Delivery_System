@@ -37,7 +37,7 @@ public class AddToCartController {
     
     public String getSelectedProduct(int id){
         pro = Product.getProduct(id);
-        return pro.toString();
+        return pro == null ? null : pro.toString();
     }
     
     public void addToCart(int quantity){

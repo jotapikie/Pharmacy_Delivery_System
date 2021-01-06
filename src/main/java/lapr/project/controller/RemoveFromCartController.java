@@ -30,7 +30,7 @@ public class RemoveFromCartController {
     
     public String getSelectedProduct(int id){
         pro = Product.getProduct(id);
-        return pro.toString();
+        return pro == null ? null : pro.toString();
     }
     
     public void removeFromCart(){
