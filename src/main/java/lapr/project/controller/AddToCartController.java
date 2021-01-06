@@ -18,6 +18,7 @@ public class AddToCartController {
     
     private String clientEmail;
     private ProductDB pdb;
+    private Product pro;
 
 
     public AddToCartController(String clientEmail, ProductDB pdb) {
@@ -34,14 +35,16 @@ public class AddToCartController {
         return pdb.getProducts();
     }
     
-    public String showProduct(int id){
-        return Product.getProduct(id).toString();
+    public String getSelectedProduct(int id){
+        pro = Product.getProduct(id);
+        return pro.toString();
     }
     
-    public void addToCart(int id, int quantity){
-        Client cli = Client.getClient(clientEmail);
-        Product pro = Product.getProduct(id);
-        cli.getCart().updateCart(pro, quantity);
+    public void addToCart(int quantity){
+        if(pro!=null){
+            Client cli = Client.getClient(clientEmail);
+            cli.getCart().updateCart(pro, quantity);
+        }
     }
     
     
