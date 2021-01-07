@@ -1,24 +1,23 @@
 package lapr.project.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class CreditCard {
-    private int visaNumber;
+    private long visaNumber;
     private Date expDate;
     private int ccv;
 
 
-    public CreditCard(int visaNumber, Date expDate, int ccv) {
+    public CreditCard(long visaNumber, Date expDate, int ccv) {
         this.setVisaNumber(visaNumber);
         this.setExpDate(expDate);
         this.setCcv(ccv);
     }
-    public int getVisaNumber() {
+    public long getVisaNumber() {
         return visaNumber;
     }
 
-    public void setVisaNumber(int visaNumber) {
+    public void setVisaNumber(long visaNumber) {
             if (String.valueOf(visaNumber).length()!=16) {
                 throw new IllegalArgumentException("Credit Cards visa is invalid.");
             }
