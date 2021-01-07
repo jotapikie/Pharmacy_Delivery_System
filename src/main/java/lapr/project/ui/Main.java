@@ -2,7 +2,6 @@ package lapr.project.ui;
 
 import lapr.project.data.DataHandler;
 import lapr.project.model.CalculatorExample;
-import lapr.project.model.Sailor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -60,35 +59,7 @@ class Main {
         DataHandler dh = new DataHandler();
         dh.scriptRunner("target/test-classes/demo_jdbc.sql");
 
-        System.out.println("\nVerificar se existe Sailor 100...");
-        try {
-            Sailor.getSailor(100);
-            System.out.println("Nunca deve aparecer esta mensagem");
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
-        }
-        System.out.println("\nAdicionar Sailor ...");
 
-
-        long sailorID = 100;
-        String sailorName = "Popeye";
-        long sailorRating = 11;
-        int sailorAge = 85;
-
-        Sailor sailor = new Sailor(sailorID, sailorName);
-        sailor.setAge(sailorAge);
-        sailor.setRating(sailorRating);
-        sailor.save();
-
-        System.out.println("\t... Sailor Adicionado.");
-
-        System.out.println("\nVerificar se existe Sailor 100...");
-        try {
-            sailor = Sailor.getSailor(100);
-            System.out.println("\nSailor 100 existe...: " + sailor.getName());
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
-        }
 
     }
 }
