@@ -36,11 +36,11 @@ public class ClientDB extends DataHandler {
      * @param visa              - credit card's visa card number
      * @param ccv               - credit card's ccv card number
      * @param address           - client's address
-     * @param longitude         - client's longitude
      * @param latitude          - client's latitude
+     * @param longitude         - client's longitude
      * @return client's instance
      */
-    public Client newClient(String username,String name, String password, String email, int nif, int points, Date expDate, int visa, int ccv, String address, double latitude, double longitude) {
+    public Client newClient(String username, String name, String password, String email, int nif, int points, Date expDate, long visa, int ccv, String address, double latitude, double longitude) {
         return new Client(username,name,password,email,nif,points,new CreditCard(visa, expDate, ccv), new Address(address,latitude,longitude));
     }
 
@@ -62,7 +62,7 @@ public class ClientDB extends DataHandler {
             callStmt.setInt(5, c.getNif());
             callStmt.setInt(6, c.getPoints());
             callStmt.setString(7, c.getCard().getExpDate().toString());
-            callStmt.setInt(8,c.getCard().getVisaNumber());
+            callStmt.setLong(8,c.getCard().getVisaNumber());
             callStmt.setInt(9, c.getCard().getCcv());
             callStmt.setString(10, c.getAddress().getAddress());
             callStmt.setDouble(11, c.getAddress().getLatitude());
@@ -125,7 +125,7 @@ public class ClientDB extends DataHandler {
                 callStmt.setInt(5, c.getNif());
                 callStmt.setInt(6, c.getPoints());
                 callStmt.setString(7, c.getCard().getExpDate().toString());
-                callStmt.setInt(8,c.getCard().getVisaNumber());
+                callStmt.setLong(8,c.getCard().getVisaNumber());
                 callStmt.setInt(9, c.getCard().getCcv());
                 callStmt.setString(10, c.getAddress().getAddress());
                 callStmt.setDouble(11, c.getAddress().getLatitude());
