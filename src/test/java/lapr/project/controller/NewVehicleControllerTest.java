@@ -106,9 +106,9 @@ public class NewVehicleControllerTest {
         int weight = 5;
         State state= State.INACTIVE;
         double aeroCoef = 5.0;
+        int actualBat = 100;
         double frontalArea = 2.0;
         int maxBat = 8;
-        int actualBat = 100;
         int motor = 5;
 
         EScooter b = nvc.newEScooter(id,weight,state,maxBat,actualBat,motor,aeroCoef,frontalArea);

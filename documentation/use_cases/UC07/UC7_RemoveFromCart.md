@@ -30,4 +30,4 @@ n/a
 
 ### Class Diagram
 
-![UC7_CD](UC7_SD.jpg)
+![UC7_CD](UC7_CD.jpg)
