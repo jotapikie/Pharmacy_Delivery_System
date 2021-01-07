@@ -5,6 +5,8 @@
  */
 package lapr.project.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
 import lapr.project.model.Order;
@@ -17,30 +19,42 @@ public class PrepareOrderController {
     
     private OrderDB odb;
     private String administratorEmail;
-    private Order ord;
+    private int orderId;
 
     public PrepareOrderController(OrderDB odb, String administratorEmail) {
         this.odb = odb;
         this.administratorEmail = administratorEmail;
+        this.orderId = -1;
     }
 
     public PrepareOrderController(String administratorEmail) {
         this.odb = new OrderDB();
         this.administratorEmail = administratorEmail;
+        this.orderId = -1;
     }
     
-    public List<String> getReadyToPrepareOrders(){
-        return odb.getReadyToPrepareOrders(administratorEmail);
+    public List<String> getReadyToPrepareOrders() throws SQLException{
+        List<String> orders = new ArrayList<>();
+        for(Order o : odb.getReadyToPrepareOrders(administratorEmail)){
+            orders.add(o.toString());
+        }
+        return orders;
     }
     
-    public String getSelectedOrder(int id){
-        ord = Order.getOrder(id);
-        return ord == null ? null : ord.toString();
-    }
-    
-    public void prepareOrder(){
+    // ADICIONAR CONDICAO PARA VERIFICAR SE É DA SUA FARMACIA
+    public String getSelectedOrder(int id) throws SQLException{
+        Order ord = Order.getOrder(id);
         if(ord != null){
-            odb.setStatus(ord, "Preparing");
+            orderId = ord.getId();
+            return ord.toString();
+        }
+        orderId = -1;
+        return null;
+    }
+    
+    public void prepareOrder() throws SQLException{
+        if(orderId > 0){
+            odb.setStatus(orderId, "Preparing");
         }
     }
     
