@@ -59,6 +59,14 @@ public class OrderDB extends DataHandler{
               callStmt.execute();
         }
     }
+
+    public Iterable<Order> getAllOrderIDPreparing() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setOrderToReady() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     
