@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import lapr.project.utils.Constants;
 
 /**
  * Exemplo de classe cujas instâncias manipulam dados de BD Oracle.
@@ -47,7 +48,19 @@ public class DataHandler {
         this.jdbcUrl = System.getProperty("database.url");
         this.username = System.getProperty("database.username");
         this.password = System.getProperty("database.password");
+        
+        this.jdbcUrl = Constants.CONNECTION_JDBCURL;
+        this.username = Constants.CONNECTION_USERNAME;
+        this.password = Constants.CONNECTION_PWD;
+                
+    
     }
+
+    public String getJdbcUrl() {
+        return jdbcUrl;
+    }
+    
+    
 
     /**
      * Constrói uma instância de "DataHandler" recebendo, por parâmetro, o URL
