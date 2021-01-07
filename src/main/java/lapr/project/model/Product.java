@@ -5,8 +5,6 @@
  */
 package lapr.project.model;
 
-import lapr.project.data.ProductDB;
-
 /**
  *
  * @author Diogo
@@ -32,10 +30,6 @@ public class Product {
     
     
     
-    
-    
-    public static Product getProduct(int id) {
-        return new ProductDB().getProduct(id);
-    }
+   
     
 }

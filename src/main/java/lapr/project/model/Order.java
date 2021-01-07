@@ -13,8 +13,6 @@ import lapr.project.data.OrderDB;
  */
 public class Order {
 
-    public static Order getOrder(int id) {
-        return new OrderDB().getOrder(id);
-    }
+
     
 }
