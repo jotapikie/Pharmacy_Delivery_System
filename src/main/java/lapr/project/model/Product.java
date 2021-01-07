@@ -30,14 +30,7 @@ public class Product {
     public double getPrice() {
         return price;
     }
-    
-    
-    
-    
-    
-    public static Product getProduct(int id) throws SQLException {
-        return new ProductDB().getProduct(id);
-    }
+   
 
     @Override
     public String toString() {
