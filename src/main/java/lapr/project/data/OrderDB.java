@@ -19,11 +19,12 @@ import oracle.jdbc.OracleTypes;
  */
 public class OrderDB extends DataHandler{
 
-    public List<Order> getReadyToPrepareOrders(String administratorEmail) throws SQLException {
+    public List<Order> getOrdersByStatus(String administratorEmail, String status) throws SQLException {
         List<Order> listOrders = new ArrayList<>();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetReadyToPrepareOrders(?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetOrdersByStatus(?, ?) }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.setString(2, administratorEmail);
+            callStmt.setString(3, status);
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
@@ -60,13 +61,6 @@ public class OrderDB extends DataHandler{
         }
     }
 
-    public Iterable<Order> getAllOrderIDPreparing() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setOrderToReady() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     
     

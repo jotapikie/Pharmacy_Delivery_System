@@ -33,7 +33,7 @@ public class PrepareOrderController {
     
     public List<String> getReadyToPrepareOrders() throws SQLException{
         List<String> lst = new ArrayList<>();
-        for(Order o : odb.getReadyToPrepareOrders(administratorEmail)){
+        for(Order o : odb.getOrdersByStatus(administratorEmail, "Processed")){
             lst.add(o.toString());
         }
         return lst;

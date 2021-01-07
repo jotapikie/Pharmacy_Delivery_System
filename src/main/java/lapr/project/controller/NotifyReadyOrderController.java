@@ -20,18 +20,18 @@ public class NotifyReadyOrderController {
     
     private Order order;
     private OrderDB orderDB;
+    private String administratorEmail;
 
-    public NotifyReadyOrderController(OrderDB orderDB) {
-        this.orderDB = orderDB;
-    }
 
-    public NotifyReadyOrderController() {
+
+    public NotifyReadyOrderController(String administratorEmail) {
         this.orderDB= new OrderDB();
+        this.administratorEmail = administratorEmail;
     }
     
     public List<String> getAllOrderIDPreparing() throws SQLException{
         List<String> lst = new ArrayList<>();
-        for(Order o : orderDB.getAllOrderIDPreparing()){
+        for(Order o : orderDB.getOrdersByStatus(administratorEmail, "Preparing")){
             lst.add(o.toString());
         }
         return lst;
@@ -43,12 +43,12 @@ public class NotifyReadyOrderController {
         return orderDB== null ? null : order.toString();
     }
     
-    public boolean setOrderToReady(){
+    public boolean setOrderToReady() throws SQLException{
         if(order == null){
             return false;
         }
         
-        orderDB.setOrderToReady();
+        orderDB.setStatus(order.getId(), "Prepared");
         return true;
     }
     
