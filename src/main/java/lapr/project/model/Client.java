@@ -51,7 +51,7 @@ public class Client extends User {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name=name;
     }
 
