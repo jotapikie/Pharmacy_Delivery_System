@@ -109,27 +109,21 @@ public class VehicleDB extends DataHandler {
         }
     }
 
-    public Vehicle getVehicle(String id, String type) throws SQLException {
+    public Vehicle getVehicle(int id) throws SQLException {
 
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetVehicle(?,?) }")) {
 
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
 
-            callStmt.setString(2, id);
-            callStmt.setString(3, type);
+            callStmt.setInt(2, id);
 
             callStmt.execute();
-
-            if (type.equalsIgnoreCase(ESCOOTER)) {
                 ResultSet rSet = (ResultSet) callStmt.getObject(1);
                 if (rSet.next()) {
                     return new EScooter(rSet.getInt(1), rSet.getInt(2), State.valueOf(rSet.getString(3)),rSet.getInt(4), rSet.getInt(5),rSet.getInt(6), rSet.getDouble(7), rSet.getDouble(8));
                 }
-            } else {
-                throw new IllegalArgumentException("Invalid type of vehicle");
             }
 
-        }
         return null;
     }
 /**
