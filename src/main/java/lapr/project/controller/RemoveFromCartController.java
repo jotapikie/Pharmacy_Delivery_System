@@ -5,9 +5,9 @@
  */
 package lapr.project.controller;
 
+import java.sql.SQLException;
 import lapr.project.data.ClientDB;
 import lapr.project.data.ProductDB;
-import lapr.project.model.Client;
 import lapr.project.model.Product;
 import lapr.project.model.ShoppingCart;
 
@@ -34,7 +34,7 @@ public class RemoveFromCartController {
            return cart.toString();
     }
     
-    public String getSelectedProduct(int id){
+    public String getSelectedProduct(int id) throws SQLException{
         pro = pdb.getProduct(id);
         return pro == null ? null : pro.toString();
     }

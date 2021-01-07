@@ -5,6 +5,8 @@
  */
 package lapr.project.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.ClientDB;
 import lapr.project.data.ProductDB;
@@ -31,11 +33,15 @@ public class AddToCartController {
         this.cdb = new ClientDB();
     }
     
-    public List<String> getAvailableProducts(){
-        return pdb.getProducts();
+    public List<String> getAvailableProducts() throws SQLException{
+        List<String> lst = new ArrayList<>();
+        for(Product p : pdb.getProducts()){
+            lst.add(p.toString());
+        }
+        return lst;
     }
     
-    public String getSelectedProduct(int id){
+    public String getSelectedProduct(int id) throws SQLException{
         pro = pdb.getProduct(id);
         return pro == null ? null : pro.toString();
     }
