@@ -5,6 +5,7 @@
  */
 package lapr.project.model;
 
+import java.sql.SQLException;
 import lapr.project.data.ProductDB;
 
 /**
@@ -34,8 +35,15 @@ public class Product {
     
     
     
-    public static Product getProduct(int id) {
+    public static Product getProduct(int id) throws SQLException {
         return new ProductDB().getProduct(id);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+    
+    
     
 }
