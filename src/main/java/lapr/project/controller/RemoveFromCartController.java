@@ -5,6 +5,8 @@
  */
 package lapr.project.controller;
 
+import lapr.project.data.ClientDB;
+import lapr.project.data.ProductDB;
 import lapr.project.model.Client;
 import lapr.project.model.Product;
 import lapr.project.model.ShoppingCart;
@@ -18,18 +20,22 @@ public class RemoveFromCartController {
     private String clientEmail;
     private ShoppingCart cart;
     private Product pro;
+    private ClientDB cdb;
+    private ProductDB pdb;
 
     public RemoveFromCartController(String clientEmail) {
         this.clientEmail = clientEmail;
+        cdb = new ClientDB();
+        pdb = new ProductDB();
     }
     
     public String getProductsInCart(){
-           cart = Client.getClient(clientEmail).getCart();
+           cart = cdb.getClient(clientEmail).getCart();
            return cart.toString();
     }
     
     public String getSelectedProduct(int id){
-        pro = Product.getProduct(id);
+        pro = pdb.getProduct(id);
         return pro == null ? null : pro.toString();
     }
     
