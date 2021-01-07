@@ -6,7 +6,6 @@
 package lapr.project.model;
 
 import java.util.List;
-import lapr.project.data.ClientDB;
 
 /**
  *
@@ -21,9 +20,6 @@ public class Client {
     private List<Order> orders;
     
     
-     public static Client getClient(String email) {
-         return new ClientDB().getClient(email);
-    }
 
     public ShoppingCart getCart() {
         return cart;
