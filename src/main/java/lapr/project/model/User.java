@@ -53,7 +53,7 @@ public class User {
     
     void setEmail(String email) {
         if (email == null || email.isEmpty() || !email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
-            throw new IllegalArgumentException("Pharmacy's email is invalid.");
+            throw new IllegalArgumentException("User's email is invalid.");
         }
         this.email = email;
     }

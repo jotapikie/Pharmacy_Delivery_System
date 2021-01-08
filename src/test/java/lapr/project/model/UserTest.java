@@ -14,9 +14,9 @@ class UserTest {
 
     @BeforeAll
     public static void setUpClass() {
-        user1 = new User("username_test","email_test", "password_test");
-        user2 = new User("username_test2","email_test2", "password_test2");
-        user3 = new User("username_test","email_test3", "password_test3");
+        user1 = new User("username_test","email3@email.com", "password_test");
+        user2 = new User("username_test2","email2@email.com", "password_test2");
+        user3 = new User("username_test","email3@email.com", "password_test3");
     }
 
     @AfterAll
