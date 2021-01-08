@@ -11,7 +11,7 @@ import java.util.List;
 import lapr.project.data.OrderDB;
 import lapr.project.data.PharmacyDB;
 import lapr.project.model.Order;
-import lapr.project.model.Pharmacy;
+import lapr.project.model.Phamarcy;
 
 /**
  *
@@ -23,7 +23,7 @@ public class PrepareOrderController {
     private PharmacyDB pdb;
     private String administratorEmail;
     private Order ord;
-    private Pharmacy pha;
+    private Phamarcy pha;
 
 
     public PrepareOrderController(String administratorEmail) {
@@ -44,24 +44,11 @@ public class PrepareOrderController {
     
     public String getSelectedOrder(int id) throws SQLException{
         ord = odb.getOrder(id);
-        if(isValid()){
-            return ord.toString();
-        }
-        
-        return null;
-    }
-    
-    private boolean isValid(){
-        if(ord == null){
-            return false;
-        }
-        
-        // adicionar restantes condicoes
-        return true;
+        return ord == null ? null : ord.toString();
     }
     
     public void prepareOrder() throws SQLException{
-        if(isValid()){
+        if(ord!=null){
             odb.setStatus(ord.getId(), "Preparing", pha.getId());
         }
     }

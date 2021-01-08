@@ -55,18 +55,17 @@ public class ClientDB extends DataHandler {
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?) }")) {
 
-            callStmt.setString(1, c.getUsername());
-            callStmt.setString(2, c.getName());
-            callStmt.setString(3, c.getPassword());
-            callStmt.setString(4, c.getEmail());
-            callStmt.setInt(5, c.getNif());
-            callStmt.setInt(6, c.getPoints());
-            callStmt.setString(7, c.getCard().getExpDate().toString());
-            callStmt.setLong(8,c.getCard().getVisaNumber());
-            callStmt.setInt(9, c.getCard().getCcv());
-            callStmt.setString(10, c.getAddress().getAddress());
-            callStmt.setDouble(11, c.getAddress().getLatitude());
-            callStmt.setDouble(12,c.getAddress().getLongitude());
+                callStmt.setString(1, c.getName());
+                callStmt.setString(2, c.getEmail());
+                callStmt.setString(3, c.getPassword());
+                callStmt.setInt(4, c.getNif());
+                callStmt.setInt(5, c.getPoints());
+                callStmt.setString(6, c.getCard().getExpDate().toString());
+                callStmt.setLong(7,c.getCard().getVisaNumber());
+                callStmt.setInt(8, c.getCard().getCcv());
+                callStmt.setString(9, c.getAddress().getAddress());
+                callStmt.setDouble(10, c.getAddress().getLatitude());
+                callStmt.setDouble(11,c.getAddress().getLongitude());
 
 
             callStmt.execute();
@@ -118,18 +117,17 @@ public class ClientDB extends DataHandler {
         int[] rows;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?) }")) {
             for (Client c : clientsList) {
-                callStmt.setString(1, c.getUsername());
-                callStmt.setString(2, c.getName());
+                callStmt.setString(1, c.getName());
+                callStmt.setString(2, c.getEmail());
                 callStmt.setString(3, c.getPassword());
-                callStmt.setString(4, c.getEmail());
-                callStmt.setInt(5, c.getNif());
-                callStmt.setInt(6, c.getPoints());
-                callStmt.setString(7, c.getCard().getExpDate().toString());
-                callStmt.setLong(8,c.getCard().getVisaNumber());
-                callStmt.setInt(9, c.getCard().getCcv());
-                callStmt.setString(10, c.getAddress().getAddress());
-                callStmt.setDouble(11, c.getAddress().getLatitude());
-                callStmt.setDouble(12,c.getAddress().getLongitude());
+                callStmt.setInt(4, c.getNif());
+                callStmt.setInt(5, c.getPoints());
+                callStmt.setString(6, c.getCard().getExpDate().toString());
+                callStmt.setLong(7,c.getCard().getVisaNumber());
+                callStmt.setInt(8, c.getCard().getCcv());
+                callStmt.setString(9, c.getAddress().getAddress());
+                callStmt.setDouble(10, c.getAddress().getLatitude());
+                callStmt.setDouble(11,c.getAddress().getLongitude());
 
                 callStmt.addBatch();
             }

@@ -11,8 +11,6 @@ package lapr.project.model;
  */
 public class Client extends User {
 
-    private String email;
-    private String name;
     private int nif;
     private int points;
     private ShoppingCart cart;
@@ -38,22 +36,13 @@ public class Client extends User {
      *
      */
     public Client(String username,String name, String password, String email,int nif,int points, CreditCard creditCard, Address address) {
-        super(username, password);
-        setName(name);
-        setEmail(email);
+        super(username, email, password);
         setNif(nif);
         setPoints(points);
         setCard(creditCard);
         setAddress(address);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name=name;
-    }
 
     public CreditCard getCard() {
         return card;
@@ -71,12 +60,6 @@ public class Client extends User {
         this.address = address;
     }
 
-
-
-    public String getEmail() {
-        return email;
-    } // returns the client's email
-
     public int getNif() {
         return nif;
     } // returns the client's nif
@@ -85,18 +68,6 @@ public class Client extends User {
         return points;
     } // returns the client's points
 
-
-    /**
-     * Modifies the client's email to the value passed by parameter.
-     *
-     * @param email - client's new email
-     */
-    void setEmail(String email) {
-        if (email == null || email.isEmpty() || !email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
-            throw new IllegalArgumentException("Client's email is invalid.");
-        }
-        this.email = email;
-    }
 
     public ShoppingCart getCart() {
         return cart;

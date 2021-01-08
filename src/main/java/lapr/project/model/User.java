@@ -2,9 +2,11 @@ package lapr.project.model;
 
 public class User {
 
-    private String username; // user's username
-
+    private String name; // user's name
+    
     private String password; // user's password
+    
+    private String email;
 
     /**
      * User's constructor to create instances of this class
@@ -12,24 +14,30 @@ public class User {
      * @param username - user's username
      * @param password - user's password
      */
-    public User(String username, String password) {
-        setUsername(username);
+    public User(String name,String email,  String password) {
+        setName(name);
+        setEmail(email);
         setPassword(password);
+        
     }
 
-    public String getUsername() { return username; } // returns the username of the user
+    public String getName() { return name; } // returns the username of the user
 
     public String getPassword() { return password; } // returns the password of the user
+
+    public String getEmail() { return email;}
+    
+    
 
     /**
      * Modifies the user's username to the value passed by parameter.
      *
      * @param username - user's new username.
      */
-    void setUsername(String username) {
-        if (username == null || username.isEmpty())
-            throw new IllegalArgumentException("Client's username is invalid.");
-        this.username = username;
+    void setName(String name) {
+        if (name == null || name.isEmpty())
+            throw new IllegalArgumentException("Client's name is invalid.");
+        this.name = name;
     }
 
     /**
@@ -41,6 +49,13 @@ public class User {
         if (password == null || password.isEmpty())
             throw new IllegalArgumentException("Client's password is invalid.");
         this.password = password;
+    }
+    
+    void setEmail(String email) {
+        if (email == null || email.isEmpty() || !email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+            throw new IllegalArgumentException("Pharmacy's email is invalid.");
+        }
+        this.email = email;
     }
 
     /**
@@ -55,9 +70,11 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
 
         User user = (User) o;
-        return username.equalsIgnoreCase(user.username);
+        return email.equalsIgnoreCase(user.email);
     }
 
     @Override
-    public int hashCode() { return username.hashCode(); } // hashCode
+    public int hashCode() { return email.hashCode(); } // hashCode
+
+
 }

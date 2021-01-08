@@ -11,7 +11,7 @@ import java.util.List;
 import lapr.project.data.OrderDB;
 import lapr.project.data.PharmacyDB;
 import lapr.project.model.Order;
-import lapr.project.model.Pharmacy;
+import lapr.project.model.Phamarcy;
 
 /**
  *
@@ -23,7 +23,7 @@ public class NotifyReadyOrderController {
     private OrderDB orderDB;
     private String administratorEmail;
     private PharmacyDB pdb;
-    private Pharmacy pha;
+    private Phamarcy pha;
 
 
 

@@ -14,9 +14,9 @@ class UserTest {
 
     @BeforeAll
     public static void setUpClass() {
-        user1 = new User("username_test", "password_test");
-        user2 = new User("username_test2", "password_test2");
-        user3 = new User("username_test", "password_test3");
+        user1 = new User("username_test","email_test", "password_test");
+        user2 = new User("username_test2","email_test2", "password_test2");
+        user3 = new User("username_test","email_test3", "password_test3");
     }
 
     @AfterAll
@@ -35,8 +35,8 @@ class UserTest {
      * Test of getUsername method, of class User. Success
      */
     @Test
-    void getUsername_Success() {
-        String expResult = "username_test", result = user1.getUsername();
+    void getName_Success() {
+        String expResult = "username_test", result = user1.getName();
         assertEquals(expResult, result);
     }
 
@@ -44,10 +44,10 @@ class UserTest {
      * Test of setUsername method, of class User. Success.
      */
     @Test
-    void setUsername_Success() {
+    void setName_Success() {
         String expResult = "new_username";
-        user2.setUsername(expResult);
-        String result = user2.getUsername();
+        user2.setName(expResult);
+        String result = user2.getName();
         assertEquals(expResult, result);
     }
 
@@ -57,7 +57,7 @@ class UserTest {
     @Test
     void setUsername_Null() {
         try {
-            user1.setUsername(null);
+            user1.setName(null);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
@@ -69,7 +69,7 @@ class UserTest {
     @Test
     void setUsername_Empty() {
         try {
-            user1.setUsername("");
+            user1.setName("");
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }

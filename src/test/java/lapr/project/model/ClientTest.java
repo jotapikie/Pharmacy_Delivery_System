@@ -38,8 +38,8 @@ class ClientTest {
      * Test of getUsername method, of class Client. Success
      */
     @Test
-    void getUsername_Success() {
-        String expResult = "username1", result = client1.getUsername();
+    void getName_Success() {
+        String expResult = "username1", result = client1.getName();
         assertEquals(expResult, result);
     }
 
@@ -47,32 +47,16 @@ class ClientTest {
      * Test of setUsername method, of class Client. Success
      */
     @Test
-    void setUsername_Success() {
-        String expResult = "username2";
-        client2.setName(expResult);
-        String result = client2.getUsername();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getHeight method, of class Client. Success.
-     */
-    @Test
-    void getName_Success() {
-        String expResult = "name1", result = client1.getName();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setHeight method, of class Client. Success.
-     */
-    @Test
     void setName_Success() {
-        String expResult = "name1";
+        String expResult = "username2";
         client2.setName(expResult);
         String result = client2.getName();
         assertEquals(expResult, result);
     }
+
+
+
+
 
     /**
      * Test of getPassword, of class Client. Success.

@@ -25,8 +25,8 @@ public class PharmacyDB extends DataHandler {
     private AddressDB adb= new AddressDB();
     private ParkDB pdb= new ParkDB();
 
-    public Pharmacy newPharmacy(int id, int phoneNumber, String name, String email, Address address, HashSet<Park> parks) {
-        return new Pharmacy(id,phoneNumber,name,email,address,parks);
+    public Phamarcy newPharmacy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
+        return new Phamarcy(id,phoneNumber,name,administrator,address,parks);
     }
 
     /**
@@ -36,13 +36,13 @@ public class PharmacyDB extends DataHandler {
      * @return true if we're able to add the pharmacy, false if we're not
      * @throws java.sql.SQLException
      */
-    public boolean savePharmacy(Pharmacy p) throws SQLException {
+    public boolean savePharmacy(Phamarcy p) throws SQLException {
         adb.saveAddress(p.getAddress());
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?) }")) {
             callStmt.setInt(1,p.getId());
             callStmt.setInt(2,p.getPhoneNumber());
-            callStmt.setString(3,p.getEmailAdmin());
+            callStmt.setString(3, p.getAdministrator().getEmail());
             callStmt.setDouble(4,p.getAddress().getLatitude());
             callStmt.setDouble(5,p.getAddress().getLongitude());
             callStmt.execute();
@@ -55,14 +55,16 @@ public class PharmacyDB extends DataHandler {
     }
 
 
-    public int savePharmacies(List<Pharmacy> pharmaciesList) throws SQLException {
+    public int savePharmacies(List<Phamarcy> pharmaciesList) throws SQLException {
         Connection con = getConnection();
         int[] rows;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?) }")) {
-            for (Pharmacy p : pharmaciesList) {
-                    callStmt.setInt(1,p.getId());
-                    callStmt.setInt(2,p.getPhoneNumber());
-                    callStmt.setString(3,p.getEmailAdmin());
+            for (Phamarcy p : pharmaciesList) {
+                     callStmt.setInt(1,p.getId());
+                     callStmt.setInt(2,p.getPhoneNumber());
+                     callStmt.setString(3, p.getAdministrator().getEmail());
+                     callStmt.setDouble(4,p.getAddress().getLatitude());
+                     callStmt.setDouble(5,p.getAddress().getLongitude());
                     callStmt.execute();
 
                     adb.saveAddress(p.getAddress());
@@ -85,8 +87,9 @@ public class PharmacyDB extends DataHandler {
         }
 
     }
-    public Pharmacy getPharmacyByAdministrator(String administratorEmail) {
+    public Phamarcy getPharmacyByAdministrator(String administratorEmail) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
 }

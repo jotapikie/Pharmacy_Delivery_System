@@ -3,18 +3,19 @@ package lapr.project.controller;
 import lapr.project.data.PharmacyDB;
 import lapr.project.model.Address;
 import lapr.project.model.Park;
-import lapr.project.model.Pharmacy;
+import lapr.project.model.Phamarcy;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import lapr.project.model.Administrator;
 
 public class NewPharmacyController {
 
-    private Pharmacy pharmacy;
+    private Phamarcy pharmacy;
     private final PharmacyDB pharmacyDB;
-    private final List<Pharmacy> pharmaciesList = new ArrayList<>();
+    private final List<Phamarcy> pharmaciesList = new ArrayList<>();
 
 
     public NewPharmacyController() {
@@ -25,8 +26,8 @@ public class NewPharmacyController {
         this.pharmacyDB = pharmacyDB;
     }
 
-    public Pharmacy newPharmacy(int id, int phoneNumber, String name, String email, Address address, HashSet<Park> parks) {
-        pharmacy = pharmacyDB.newPharmacy(id, phoneNumber,name,email,address,parks);
+    public Phamarcy newPharmacy(int id, int phoneNumber, String name, Administrator admin,  Address address, HashSet<Park> parks) {
+        pharmacy = pharmacyDB.newPharmacy(id, phoneNumber,name,admin,address,parks);
         return pharmacy;
     }
 
@@ -38,8 +39,8 @@ public class NewPharmacyController {
         return pharmaciesList.add(pharmacy);
     }
 
-    public List<Pharmacy> getPharmacyList(){
-        return new ArrayList<Pharmacy>(pharmaciesList);
+    public List<Phamarcy> getPharmacyList(){
+        return new ArrayList<Phamarcy>(pharmaciesList);
     }
 
     public int insertPharmacyBatchOp() throws SQLException{
