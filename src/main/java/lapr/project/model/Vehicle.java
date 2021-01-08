@@ -23,8 +23,8 @@ public abstract class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(int id, int weight, State state, int maxBat, int actualBat, int motor) {
-        setID(id);
+    public Vehicle(int id, double weight, State state, int maxBat, int actualBat, int motor) {
+        setId(id);
         setWeight(weight);
         setState(state);
         setMaxBat(maxBat);
@@ -33,11 +33,11 @@ public abstract class Vehicle {
     }
 
     /**
-     * returns the description of a bicycle
+     * returns the id of a vehicle
      *
      * @return
      */
-    public int getid() {
+    public int getId() {
         return id;
     }
 
@@ -46,8 +46,8 @@ public abstract class Vehicle {
      *
      * @param id
      */
-    public void setID(int id) {
-        if(id == 0) throw new IllegalArgumentException();
+    public void setId(int id) {
+        if(id <= 0) throw new IllegalArgumentException();
         this.id = id;
     }
 
@@ -138,20 +138,6 @@ public abstract class Vehicle {
     public void setMotor(int motor) {
         if (motor<=0) throw new IllegalArgumentException("Motor cannot be negative");
         this.motor = motor;
-    }
-
-
-
-
-    /**
-     * Hash Code
-     * @return 
-     */
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        return hash;
     }
 
     /**

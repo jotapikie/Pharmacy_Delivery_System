@@ -50,7 +50,7 @@ public class VehicleDB extends DataHandler {
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddVehicle(?,?,?,?,?,?,?,?,?,?,?) }")) {
 
-            callStmt.setInt(1, v.getid());
+            callStmt.setInt(1, v.getId());
             callStmt.setDouble(2, v.getWeight());
             callStmt.setString(3, v.getState().toString());
             callStmt.setDouble(4, v.getMaxBat());
@@ -77,7 +77,7 @@ public class VehicleDB extends DataHandler {
             for (Vehicle v : vehicles) {
 
 
-                callStmt.setInt(1, v.getid());
+                callStmt.setInt(1, v.getId());
                 callStmt.setDouble(2, v.getWeight());
                 callStmt.setString(3, v.getState().toString());
                 callStmt.setDouble(4, v.getMaxBat());
@@ -204,7 +204,7 @@ public class VehicleDB extends DataHandler {
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procUpdateVehicle(?,?,?,?,?,?,?,?) }")) {
 
-            callStmt.setInt(1, v.getid());
+            callStmt.setInt(1, v.getId());
             callStmt.setDouble(2, v.getWeight());
             callStmt.setString(3, v.getState().toString());
             callStmt.setDouble(4, v.getMaxBat());
