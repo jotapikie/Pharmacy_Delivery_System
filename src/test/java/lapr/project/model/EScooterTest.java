@@ -228,6 +228,7 @@ public class EScooterTest {
         try {
             int value = 100;
             EScooter instance = new EScooter();
+            instance.setMaxBat(102);
             instance.setActualBat(value);
             double result = instance.getActualBat();
             double expResult = value;
@@ -246,24 +247,7 @@ public class EScooterTest {
         try {
             int value = 1;
             EScooter instance = new EScooter();
-            instance.setActualBat(value);
-            double result = instance.getActualBat();
-            int expResult = value;
-            assertEquals(expResult, result, 0);
-        } catch (IllegalArgumentException e) {
-            fail("expected IllegalArgumentException");
-        }
-    }
-
-    /**
-     * Test of setActualBat method, of class Vehicle.
-     */
-    @Test
-    public void testSetActualBatLimit3() {
-
-        try {
-            int value = 99;
-            EScooter instance = new EScooter();
+            instance.setMaxBat(2);
             instance.setActualBat(value);
             double result = instance.getActualBat();
             int expResult = value;
