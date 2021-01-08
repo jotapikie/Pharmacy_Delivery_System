@@ -108,7 +108,7 @@ public class CreditCardTest {
      */
     @Test
     void setCcv_Success() {
-        double expResult = 625;
+        int expResult = 625;
         creditCard2.setCcv(expResult);
         double result = creditCard2.getCcv();
         assertEquals(expResult, result);
