@@ -1,4 +1,4 @@
-# UC2 - Add Vehicle
+# UC2 - New Vehicle
 
 ## 1. Requirements Engineering
 
