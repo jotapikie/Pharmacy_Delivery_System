@@ -25,7 +25,7 @@ CREATE TABLE platform_user(
 );
 
 CREATE TABLE phamarcy(
-    phamarcy_id int CONSTRAINT pk_phamarcy_id PRIMARY KEY,
+    phamarcy_id INT CONSTRAINT pk_phamarcy_id PRIMARY KEY,
     phone_number int NOT NULL,
     designation varchar(255) NOT NULL,
     administrator_email varchar(255) NOT NULL CONSTRAINT uk_phamarcy_administrator UNIQUE,
@@ -122,10 +122,9 @@ CREATE TABLE delivery_order(
 );
 
 CREATE TABLE invoice(
-    client_email varchar(255) NOT NULL,
     order_id int NOT NULL,
     nif int NOT NULL, 
-    CONSTRAINT pk_invoice_order_client PRIMARY KEY(client_email, order_id)
+    CONSTRAINT pk_invoice_order_ PRIMARY KEY(order_id)
 );
 
 CREATE TABLE order_product(
@@ -177,7 +176,6 @@ ALTER TABLE park ADD CONSTRAINT fk_park_phamarcy FOREIGN KEY (phamarcy_id) REFER
 ALTER TABLE park_slot ADD CONSTRAINT fk_park_slot_id FOREIGN KEY (park_id) REFERENCES park (park_id);
 ALTER TABLE park_slot ADD CONSTRAINT fk_park_slot_vehicle_parked FOREIGN KEY (vehicle_nr) REFERENCES vehicle (nr);
 ALTER TABLE delivery_order ADD CONSTRAINT fk_delivery_order_client FOREIGN KEY (client_email) REFERENCES platform_client (email);
-ALTER TABLE invoice ADD CONSTRAINT fk_invoice_client FOREIGN KEY (client_email) REFERENCES platform_client (email);
 ALTER TABLE invoice ADD CONSTRAINT fk_invoice_order FOREIGN KEY (order_id) REFERENCES delivery_order (order_id);
 ALTER TABLE order_product ADD CONSTRAINT fk_order_product_pid FOREIGN KEY (product_id) REFERENCES product (product_id);
 ALTER TABLE order_product ADD CONSTRAINT fk_order_product_oid FOREIGN KEY (order_id) REFERENCES delivery_order (order_id);
