@@ -38,7 +38,7 @@ public class NewVehicleControllerTest {
         double aeroCoef = 5.0;
         double frontalArea = 2.0;
         int maxBat = 8;
-        int actualBat = 100;
+        int actualBat = 5;
         int motor = 5;
 
         EScooter value = new EScooter(id,weight,state,maxBat,actualBat,motor,aeroCoef,frontalArea);
@@ -101,12 +101,12 @@ public class NewVehicleControllerTest {
      * Test of getVehicles method, of class NewVehicleController.
      */
     @Test
-    public void testGetVehiclesMap() {
+    public void testGetVehicles() {
         int id = 3;
         int weight = 5;
         State state= State.INACTIVE;
         double aeroCoef = 5.0;
-        int actualBat = 100;
+        int actualBat = 5;
         double frontalArea = 2.0;
         int maxBat = 8;
         int motor = 5;
