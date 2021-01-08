@@ -34,7 +34,7 @@ public class AddProductController {
     }
 
     public boolean registerProduct() throws SQLException {
-        return ProductDB.save(product);
+        return ProductDB.saveProduct(product);
     }
 
     public void addVehicleToQueue() {
@@ -46,7 +46,7 @@ public class AddProductController {
     }
 
     public int insertProductBatchOp() throws SQLException {
-        final int i = ProductDB.save(products);
+        final int i = ProductDB.saveProducts(products);
         products = new HashSet<>();
         return i;
     }
