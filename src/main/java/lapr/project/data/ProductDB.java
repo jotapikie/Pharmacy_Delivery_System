@@ -5,12 +5,15 @@
  */
 package lapr.project.data;
 
+import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import lapr.project.model.Client;
 import lapr.project.model.Product;
 import oracle.jdbc.OracleTypes;
 
@@ -56,12 +59,47 @@ public class ProductDB extends DataHandler{
         return listProducts;
     }
 
-    public boolean save(Product product)throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean saveProduct(Product product)throws SQLException {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddProduct(?,?,?,?) }")) {
+
+            callStmt.setInt(1, product.getId());
+            callStmt.setString(2, product.getName());
+            callStmt.setDouble(3, product.getWeight());
+            callStmt.setDouble(4, product.getPrice());
+
+            callStmt.execute();
+        }
+        return true;
     }
 
-    public int save(HashSet<Product> products) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int saveProducts(HashSet<Product> products) throws SQLException {
+        Connection con = getConnection();
+        int[] rows;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddProduct(?,?,?,?) }")) {
+            for (Product p : products) {
+                callStmt.setInt(1, p.getId());
+                callStmt.setString(2, p.getName());
+                callStmt.setDouble(3, p.getWeight());
+                callStmt.setDouble(4, p.getPrice());
+
+                callStmt.addBatch();
+            }
+
+            con.setAutoCommit(false);
+
+            try {
+                rows = callStmt.executeBatch();
+                con.commit();
+            } catch (BatchUpdateException e) {
+                con.rollback();
+                throw new SQLException(e.getNextException());
+            } finally {
+                con.setAutoCommit(true);
+            }
+
+            return rows.length;
+    }
+        
     }
 
 
