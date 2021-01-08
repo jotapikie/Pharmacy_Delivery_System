@@ -53,7 +53,7 @@ public class ClientDB extends DataHandler {
      */
     public boolean saveClient(Client c) throws SQLException {
         getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
 
                 callStmt.setString(1, c.getName());
                 callStmt.setString(2, c.getEmail());
@@ -66,6 +66,9 @@ public class ClientDB extends DataHandler {
                 callStmt.setString(9, c.getAddress().getAddress());
                 callStmt.setDouble(10, c.getAddress().getLatitude());
                 callStmt.setDouble(11,c.getAddress().getLongitude());
+                callStmt.setString(12,c.getAddress().getZipCode());
+                callStmt.setInt(13,c.getAddress().getPortNumber());
+                callStmt.setString(14,c.getAddress().getZipCode());
 
 
             callStmt.execute();
@@ -93,29 +96,10 @@ public class ClientDB extends DataHandler {
         throw new NullPointerException("No info in the database. Check table Clients.");
     }
 
-    /**
-     * Method to get the debt of the client which's username is passed by parameter.
-     *
-     * @param username - username of the client whom's debt are being returned.
-     * @return client's debt.
-     */
-    public double getClientDebt(String username) throws SQLException {
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetClientDebt(?) }")) {
-            callStmt.registerOutParameter(1, OracleTypes.NUMERIC);
-            callStmt.setString(2, username);
-            callStmt.execute();
-
-            return callStmt.getDouble(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        throw new NullPointerException("No info in the database. Check table Clients.");
-    }
-
     public int saveClients(List<Client> clientsList) throws SQLException {
         Connection con = getConnection();
         int[] rows;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             for (Client c : clientsList) {
                 callStmt.setString(1, c.getName());
                 callStmt.setString(2, c.getEmail());
@@ -128,6 +112,9 @@ public class ClientDB extends DataHandler {
                 callStmt.setString(9, c.getAddress().getAddress());
                 callStmt.setDouble(10, c.getAddress().getLatitude());
                 callStmt.setDouble(11,c.getAddress().getLongitude());
+                callStmt.setString(12,c.getAddress().getZipCode());
+                callStmt.setInt(13,c.getAddress().getPortNumber());
+                callStmt.setString(14,c.getAddress().getZipCode());
 
                 callStmt.addBatch();
             }

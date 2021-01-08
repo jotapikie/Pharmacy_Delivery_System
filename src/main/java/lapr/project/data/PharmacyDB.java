@@ -22,9 +22,6 @@ import java.util.List;
  */
 public class PharmacyDB extends DataHandler {
 
-    private AddressDB adb= new AddressDB();
-    private ParkDB pdb= new ParkDB();
-
     public Phamarcy newPharmacy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
         return new Phamarcy(id,phoneNumber,name,administrator,address,parks);
     }
@@ -37,20 +34,21 @@ public class PharmacyDB extends DataHandler {
      * @throws java.sql.SQLException
      */
     public boolean savePharmacy(Phamarcy p) throws SQLException {
-        adb.saveAddress(p.getAddress());
         getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?,?,?,?,?) }")) {
             callStmt.setInt(1,p.getId());
             callStmt.setInt(2,p.getPhoneNumber());
             callStmt.setString(3, p.getAdministrator().getEmail());
             callStmt.setDouble(4,p.getAddress().getLatitude());
             callStmt.setDouble(5,p.getAddress().getLongitude());
+            callStmt.setString(6,p.getAddress().getAddress());
+            callStmt.setString(7,p.getAddress().getCity());
+            callStmt.setInt(8, p.getAddress().getPortNumber());
+            callStmt.setString(9, p.getAddress().getZipCode());
             callStmt.execute();
 
 
-        for (Park park: p.getParks()){
-            pdb.savePark(park);
-        }}
+        }
         return true;
     }
 
@@ -58,35 +56,35 @@ public class PharmacyDB extends DataHandler {
     public int savePharmacies(List<Phamarcy> pharmaciesList) throws SQLException {
         Connection con = getConnection();
         int[] rows;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?,?,?,?,?) }")) {
             for (Phamarcy p : pharmaciesList) {
-                     callStmt.setInt(1,p.getId());
-                     callStmt.setInt(2,p.getPhoneNumber());
-                     callStmt.setString(3, p.getAdministrator().getEmail());
-                     callStmt.setDouble(4,p.getAddress().getLatitude());
-                     callStmt.setDouble(5,p.getAddress().getLongitude());
-                    callStmt.execute();
+                callStmt.setInt(1, p.getId());
+                callStmt.setInt(2, p.getPhoneNumber());
+                callStmt.setString(3, p.getAdministrator().getEmail());
+                callStmt.setDouble(4, p.getAddress().getLatitude());
+                callStmt.setDouble(5, p.getAddress().getLongitude());
+                callStmt.setString(6, p.getAddress().getAddress());
+                callStmt.setString(7, p.getAddress().getCity());
+                callStmt.setInt(8, p.getAddress().getPortNumber());
+                callStmt.setString(9, p.getAddress().getZipCode());
+                callStmt.execute();
 
-                    adb.saveAddress(p.getAddress());
-                    for (Park park: p.getParks()){
-                        pdb.savePark(park);
-                    }}
-
-            con.setAutoCommit(false);
-            try {
-                rows = callStmt.executeBatch();
-                con.commit();
-            } catch (BatchUpdateException e) {
-                con.rollback();
-                throw new SQLException(e.getNextException());
-            } finally {
-                con.setAutoCommit(true);
+                con.setAutoCommit(false);
             }
+                try {
+                    rows = callStmt.executeBatch();
+                    con.commit();
+                } catch (BatchUpdateException e) {
+                    con.rollback();
+                    throw new SQLException(e.getNextException());
+                } finally {
+                    con.setAutoCommit(true);
+                }
 
-            return rows.length;
+                return rows.length;
+            }
         }
 
-    }
     public Phamarcy getPharmacyByAdministrator(String administratorEmail) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
