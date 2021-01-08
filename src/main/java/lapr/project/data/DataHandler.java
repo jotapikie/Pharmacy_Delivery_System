@@ -144,7 +144,7 @@ public class DataHandler {
     }
 
 
-    protected Connection getConnection() {
+    protected static Connection getConnection() {
         if (connection == null)
             openConnection();
         return connection;
