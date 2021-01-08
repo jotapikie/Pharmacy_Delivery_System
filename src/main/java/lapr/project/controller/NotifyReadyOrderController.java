@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
+import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Order;
+import lapr.project.model.Phamarcy;
 import lapr.project.model.Product;
 
 /**
@@ -21,24 +23,29 @@ public class NotifyReadyOrderController {
     private Order order;
     private OrderDB orderDB;
     private String administratorEmail;
+    private PhamarcyDB pdb;
+    private Phamarcy pha;
 
 
 
     public NotifyReadyOrderController(String administratorEmail) {
         this.orderDB= new OrderDB();
+        this.pdb = new PhamarcyDB();
         this.administratorEmail = administratorEmail;
+        
     }
     
-    public List<String> getAllOrderIDPreparing() throws SQLException{
+    public List<String> getPreparingOrders() throws SQLException{
+        pha = pdb.getPhamarcyByAdministrator(administratorEmail);
         List<String> lst = new ArrayList<>();
-        for(Order o : orderDB.getOrdersByStatus(administratorEmail, "Preparing")){
+        for(Order o : orderDB.getOrdersByStatus(pha.getId(), "Preparing")){
             lst.add(o.toString());
         }
         return lst;
         
     }
     
-    public String getOrderByID(int id) throws SQLException{
+    public String getSelectedOrder(int id) throws SQLException{
         order = orderDB.getOrder(id);
         return orderDB== null ? null : order.toString();
     }
@@ -48,7 +55,7 @@ public class NotifyReadyOrderController {
             return false;
         }
         
-        orderDB.setStatus(order.getId(), "Prepared");
+        orderDB.setStatus(order.getId(), "Prepared", pha.getId());
         return true;
     }
     

@@ -19,11 +19,11 @@ import oracle.jdbc.OracleTypes;
  */
 public class OrderDB extends DataHandler{
 
-    public List<Order> getOrdersByStatus(String administratorEmail, String status) throws SQLException {
+    public List<Order> getOrdersByStatus(int idPhamarcy, String status) throws SQLException {
         List<Order> listOrders = new ArrayList<>();
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetOrdersByStatus(?, ?) }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-            callStmt.setString(2, administratorEmail);
+            callStmt.setInt(2, idPhamarcy);
             callStmt.setString(3, status);
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
@@ -53,10 +53,11 @@ public class OrderDB extends DataHandler{
         }
     }
 
-    public void setStatus(int id, String status) throws SQLException {
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procSetOrderStatus(?,?) }")) {
-              callStmt.setInt(1, id);
+    public void setStatus(int idOrder, String status, int idPhamarcy) throws SQLException {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procSetOrderStatus(?,?,?) }")) {
+              callStmt.setInt(1, idOrder);
               callStmt.setString(2, status);
+              callStmt.setInt(3, idPhamarcy);
               callStmt.execute();
         }
     }
