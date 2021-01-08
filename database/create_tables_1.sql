@@ -28,13 +28,13 @@ CREATE TABLE phamarcy(
     phamarcy_id int CONSTRAINT pk_phamarcy_id PRIMARY KEY,
     phone_number int NOT NULL,
     designation varchar(255) NOT NULL,
+    administrator_email varchar(255) NOT NULL CONSTRAINT uk_phamarcy_administrator UNIQUE,
     longitude float NOT NULL,
     latitude float NOT NULL
 );
 
 CREATE TABLE administrator(
-    email varchar(255) CONSTRAINT pk_administrator_email PRIMARY KEY,
-    phamarcy_id int 
+    email varchar(255) CONSTRAINT pk_administrator_email PRIMARY KEY
 );
 
 CREATE TABLE platform_client(
@@ -163,13 +163,13 @@ CREATE TABLE path(
 );
 
 ALTER TABLE administrator ADD CONSTRAINT fk_administrator_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
-ALTER TABLE administrator ADD CONSTRAINT fk_administrator_phamarcy FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
 ALTER TABLE platform_client ADD CONSTRAINT fk_platform_client_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
 ALTER TABLE courier ADD CONSTRAINT fk_courier_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
 ALTER TABLE courier ADD CONSTRAINT fk_courier_phamarcy FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
 ALTER TABLE phamarcy ADD CONSTRAINT fk_phamarcy_address FOREIGN KEY (longitude, latitude) REFERENCES address (longitude, latitude);
 ALTER TABLE platform_client ADD CONSTRAINT fk_client_address FOREIGN KEY (longitude, latitude) REFERENCES address (longitude, latitude);
 ALTER TABLE super_admin ADD CONSTRAINT fk_super_admin_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
+ALTER TABLE phamarcy ADD CONSTRAINT fk_phamarcy_administrator FOREIGN KEY (administrator_email) REFERENCES administrator (email);
 ALTER TABLE credit_card ADD CONSTRAINT fk_credit_card_owner FOREIGN KEY (owner_email) REFERENCES platform_client (email);
 ALTER TABLE scooter ADD CONSTRAINT fk_scooter_nr FOREIGN KEY (vehicle_nr) REFERENCES vehicle (nr);
 ALTER TABLE vehicle ADD CONSTRAINT fk_vehicle_phamarcy FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
