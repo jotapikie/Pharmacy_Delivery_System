@@ -2,7 +2,6 @@ package lapr.project.controller;
 
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.Set;
 
 import lapr.project.data.VehicleDB;
@@ -34,8 +33,8 @@ public class NewVehicleController {
         this.vehicleDB = new VehicleDB();
     }
 
-    public EScooter newEScooter(int id, int weight, State state, int maxBat, int actualBat, int motor, double aeroCoef, double frontalArea) {
-        vehicle = vehicleDB.newEScooter(id,weight,state,maxBat,actualBat,motor,aeroCoef,frontalArea);
+    public EScooter newEScooter(int id, int weight, int maxBat, int actualBat, int motor, double aeroCoef, double frontalArea) {
+        vehicle = vehicleDB.newEScooter(id,weight,State.INACTIVE,maxBat,actualBat,motor,aeroCoef,frontalArea);
         return (EScooter) vehicle;
     }
 
@@ -47,7 +46,7 @@ public class NewVehicleController {
         vehicles.add(vehicle);
     }
 
-    public HashSet<Vehicle> getVehicles() {
+    public Set<Vehicle> getVehicles() {
         return new HashSet<>(vehicles);
     }
 

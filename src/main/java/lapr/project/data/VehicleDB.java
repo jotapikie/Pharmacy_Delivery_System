@@ -41,7 +41,7 @@ public class VehicleDB extends DataHandler {
         return true;
     }
 
-    public int save(HashSet<Vehicle> vehicles,int pharmID) throws SQLException {
+    public int save(Set<Vehicle> vehicles,int pharmID) throws SQLException {
         return addVehicles(vehicles,pharmID, ESCOOTER);
     }
 
@@ -68,7 +68,7 @@ public class VehicleDB extends DataHandler {
         }
     }
 
-    public int addVehicles(HashSet<Vehicle> vehicles, int pharmID, String typeVehicle ) throws SQLException {
+    public int addVehicles(Set<Vehicle> vehicles, int pharmID, String typeVehicle ) throws SQLException {
 
         Connection c = getConnection();
         int rows[];
