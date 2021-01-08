@@ -8,9 +8,9 @@ A use case diagram was developed to understand the responsible actor or actors f
 |  UC  | Description |                   
 |:---- |:---- |
 | UC01 | [Register as Client](UC01/UC1_RegisterAsClient.md) |
-| UC02 | [Add Scooter](UC2/UC02_AddScooter.md) |
-| UC03 | [Remove Scooter](UC03/UC3_RemoveScooter.md) |
-| UC04 | [Update Scooter](UC04/UC4_UpdateScooter.md) |
+| UC02 | [Add Vehicle](UC2/UC02_AddVehicle.md) |
+| UC03 | [Remove Vehicle](UC03/UC3_RemoveVehicle.md) |
+| UC04 | [Update Vehicle](UC04/UC4_UpdateVehicle.md) |
 | UC05 | [Create Phamarcy](UC05/UC5_CreatePhamarcy.md) |
 | UC06 | [Add to Cart](UC6/UC06_AddToCart.md) |
 | UC07 | [Remove from Cart](UC07/UC7_RemoveFromCart.md) |

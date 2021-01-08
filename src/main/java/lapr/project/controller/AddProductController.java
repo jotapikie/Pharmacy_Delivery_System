@@ -37,7 +37,7 @@ public class AddProductController {
         return ProductDB.save(product);
     }
 
-    public void addVehicleToQueue() {
+    public void addProductToQueue() {
         products.add(product);
     }
 

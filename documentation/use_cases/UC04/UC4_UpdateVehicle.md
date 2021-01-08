@@ -1,8 +1,8 @@
-# UC4 - Update Scooter
+# UC4 - Update Vehicle
 
 ## 1. Requirements Engineering
 
-The admin start the update of a scooter. The system shows the existing vehicles that can be upgraded. The admin selects a scooter. The system requests required data. The admin enters requested data. The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
+The admin start the update of a vehicle. The system shows the existing vehicles that can be upgraded. The admin selects a vehicle. The system requests required data. The admin enters requested data. The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
 
 ### SSD
 ![UC4_SSD.png](UC4_SSD.png)
