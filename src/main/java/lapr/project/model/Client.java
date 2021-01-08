@@ -120,7 +120,7 @@ public class Client extends User {
      * @param points - client's new weight
      */
     void setPoints(int points) {
-        if (points <= 0) {
+        if (points < 0) {
             throw new IllegalArgumentException("Client's points is invalid.");
         }
         this.points = points;

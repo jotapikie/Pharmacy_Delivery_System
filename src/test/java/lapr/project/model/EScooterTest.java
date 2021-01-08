@@ -152,7 +152,7 @@ public class EScooterTest {
     public void testSetActualBatSmaller() {
 
         try {
-            scooterTest.setActualBat(102);
+            scooterTest.setActualBat(-10);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
 

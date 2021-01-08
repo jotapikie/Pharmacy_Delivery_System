@@ -47,7 +47,7 @@ class ClientTest {
      */
     @Test
     void setUsername_Success() {
-        String expResult = "username3";
+        String expResult = "username2";
         client2.setName(expResult);
         String result = client2.getUsername();
         assertEquals(expResult, result);

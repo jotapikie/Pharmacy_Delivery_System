@@ -102,7 +102,7 @@ public abstract class Vehicle {
      * @param currentBat
      */
     public void setActualBat(int currentBat) {
-        if (currentBat<=0&&currentBat>maxBat) throw new IllegalArgumentException("Current battery cannot be negative and greater than maxBattery");
+        if (currentBat>=0&&currentBat>maxBat) throw new IllegalArgumentException("Current battery cannot be negative and greater than maxBattery");
         this.actualBat = currentBat;
     }
 
