@@ -9,10 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
-import lapr.project.data.PhamarcyDB;
+import lapr.project.data.PharmacyDB;
 import lapr.project.model.Order;
-import lapr.project.model.Phamarcy;
-import lapr.project.model.Product;
+import lapr.project.model.Pharmacy;
 
 /**
  *
@@ -23,20 +22,20 @@ public class NotifyReadyOrderController {
     private Order order;
     private OrderDB orderDB;
     private String administratorEmail;
-    private PhamarcyDB pdb;
-    private Phamarcy pha;
+    private PharmacyDB pdb;
+    private Pharmacy pha;
 
 
 
     public NotifyReadyOrderController(String administratorEmail) {
         this.orderDB= new OrderDB();
-        this.pdb = new PhamarcyDB();
+        this.pdb = new PharmacyDB();
         this.administratorEmail = administratorEmail;
         
     }
     
     public List<String> getPreparingOrders() throws SQLException{
-        pha = pdb.getPhamarcyByAdministrator(administratorEmail);
+        pha = pdb.getPharmacyByAdministrator(administratorEmail);
         List<String> lst = new ArrayList<>();
         for(Order o : orderDB.getOrdersByStatus(pha.getId(), "Preparing")){
             lst.add(o.toString());

@@ -36,8 +36,8 @@ public class RegisterClientController {
      * @param latitude          - client's latitude
      * @return created client
      */
-    public Client newClient(String username,String name, String password, String email, int nif, int points, Date expDate, long visa, int ccv, String address, double latitude, double longitude) {
-        client = clientDB.newClient(username,name,password,email,nif,points,expDate, visa, ccv, address, latitude, longitude);
+    public Client newClient(String username,String name, String password, String email, int nif, int points, Date expDate, long visa, int ccv, String address, double latitude, double longitude, String city, int portNumber, String zipCode) {
+        client = clientDB.newClient(username,name,password,email,nif,points,expDate, visa, ccv, address, latitude, longitude, city, portNumber, zipCode);
         return client;
     }
 

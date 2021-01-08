@@ -40,8 +40,8 @@ public class ClientDB extends DataHandler {
      * @param longitude         - client's longitude
      * @return client's instance
      */
-    public Client newClient(String username, String name, String password, String email, int nif, int points, Date expDate, long visa, int ccv, String address, double latitude, double longitude) {
-        return new Client(username,name,password,email,nif,points,new CreditCard(visa, expDate, ccv), new Address(address,latitude,longitude));
+    public Client newClient(String username, String name, String password, String email, int nif, int points, Date expDate, long visa, int ccv, String address, double latitude, double longitude, String city,int portNumber, String zipCode) {
+        return new Client(username,name,password,email,nif,points,new CreditCard(visa, expDate, ccv), new Address(address,latitude, longitude,city,portNumber,zipCode));
     }
 
     /**
