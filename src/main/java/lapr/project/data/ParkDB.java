@@ -6,7 +6,7 @@ import java.sql.CallableStatement;
 import java.sql.SQLException;
 
 public class ParkDB extends DataHandler {
-    public static void savePark(Park park) {
+    public void savePark(Park park) {
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPark(?,?,?) }")) {
 

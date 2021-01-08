@@ -6,7 +6,7 @@ import java.sql.CallableStatement;
 import java.sql.SQLException;
 
 public class AddressDB extends DataHandler {
-    public static boolean saveAddress(Address a) {
+    public boolean saveAddress(Address a) {
             getConnection();
             try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterAddress(?,?,?,?,?,?) }")) {
 

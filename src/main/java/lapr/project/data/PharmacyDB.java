@@ -22,6 +22,8 @@ import java.util.List;
  */
 public class PharmacyDB extends DataHandler {
 
+    private AddressDB adb= new AddressDB();
+    private ParkDB pdb= new ParkDB();
 
     public Pharmacy newPharmacy(int id, int phoneNumber, String name, String email, Address address, HashSet<Park> parks) {
         return new Pharmacy(id,phoneNumber,name,email,address,parks);
@@ -35,10 +37,9 @@ public class PharmacyDB extends DataHandler {
      * @throws java.sql.SQLException
      */
     public boolean savePharmacy(Pharmacy p) throws SQLException {
+        adb.saveAddress(p.getAddress());
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?) }")) {
-
-            AddressDB.saveAddress(p.getAddress());
             callStmt.setInt(1,p.getId());
             callStmt.setInt(2,p.getPhoneNumber());
             callStmt.setString(3,p.getEmailAdmin());
@@ -48,7 +49,7 @@ public class PharmacyDB extends DataHandler {
 
 
         for (Park park: p.getParks()){
-            ParkDB.savePark(park);
+            pdb.savePark(park);
         }}
         return true;
     }
@@ -64,9 +65,9 @@ public class PharmacyDB extends DataHandler {
                     callStmt.setString(3,p.getEmailAdmin());
                     callStmt.execute();
 
-                    AddressDB.saveAddress(p.getAddress());
+                    adb.saveAddress(p.getAddress());
                     for (Park park: p.getParks()){
-                        ParkDB.savePark(park);
+                        pdb.savePark(park);
                     }}
 
             con.setAutoCommit(false);
