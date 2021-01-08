@@ -81,7 +81,7 @@ public class ClientDB extends DataHandler {
      * @param username - username of the client whom's points are being returned.
      * @return client's points.
      */
-    public double getClientPoints(String username) throws SQLException {
+    public int getClientPoints(String username) throws SQLException {
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetClientPoints(?) }")) {
             callStmt.registerOutParameter(1, OracleTypes.INTEGER);
             callStmt.setString(2, username);

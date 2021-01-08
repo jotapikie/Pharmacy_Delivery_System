@@ -5,8 +5,6 @@
  */
 package lapr.project.model;
 
-import java.util.Objects;
-
 /**
  *
  * @author Diogo
@@ -33,6 +31,16 @@ public class Product {
     public int getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {

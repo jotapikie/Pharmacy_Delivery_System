@@ -87,11 +87,14 @@ CREATE TABLE vehicle(
     status varchar(255) NOT NULL,
     max_battery int NOT NULL,
     current_battery int NOT NULL,
+    motor int NOT NULL,
     phamarcy_id int NOT NULL
 );
 
 CREATE TABLE scooter(
-    vehicle_nr int CONSTRAINT pk_scooter_nr PRIMARY KEY
+    vehicle_nr int CONSTRAINT pk_scooter_nr PRIMARY KEY,
+    aero_coef float NOT NULL,
+    frontal_area float NOT NULL
 );
 
 CREATE TABLE park(
@@ -186,4 +189,3 @@ ALTER TABLE phamarcy_product ADD CONSTRAINT fk_phamarcy_product_prdid FOREIGN KE
 ALTER TABLE delivery_order ADD CONSTRAINT fk_delivery_order_phamarcy FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
 ALTER TABLE path ADD CONSTRAINT fk_path_address1 FOREIGN KEY (longitude1, latitude1) REFERENCES address (longitude, latitude);
 ALTER TABLE path ADD CONSTRAINT fk_path_address2 FOREIGN KEY (longitude2, latitude2) REFERENCES address (longitude, latitude);
-
