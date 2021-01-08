@@ -2,7 +2,7 @@
 
 ## 1. Requirements Engineering
 
-The admin start removing an existing vehicle. The system shows the existing vehicles and asks to select one. The admin selects a vehicle ID. The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
+The admin start removing an existing vehicle. The system sasks data. The admin enters data. The system informs the admin of the succes of the operation.
 
 ### SSD
 ![UC3_SSD.png](UC3_SSD.png)
