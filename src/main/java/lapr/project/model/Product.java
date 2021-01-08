@@ -5,6 +5,8 @@
  */
 package lapr.project.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author Diogo
@@ -27,6 +29,36 @@ public class Product {
     public double getPrice() {
         return price;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+         if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Product other = (Product) obj;
+        return this.id == other.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+    
+    
+    
+    
+    
+    
     
     
     

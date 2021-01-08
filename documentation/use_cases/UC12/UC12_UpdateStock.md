@@ -1,21 +1,21 @@
 # UC12 - Update Stock
 
 ## 1. Requirements Engineering
-The admin start the update of a product. The system shows the existing product to select one. The admin selects a product.The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
+The (Phamarcy) administrator starts the update of stock. The system shows all available products and asks to select one and its quantity. The (Phamarcy) administrator inserts the requested data. The system shows data and asks to confirm. The (Phamarcy) administrator confirms. The system update the phamarcy stock and informs the administrator about the sucess of the operation.
 
 ## SSD
 ![UC12_SSD.png](UC12_SSD.png)
 
 #### Main Actor
 
-Admin
+(Phamarcy) Administrator
 
 #### Stakeholders and their interests
-* **Admin:** wants to have a stock updated.
-* **Pharmacy:** wants to know their product stock.	.
+* **Administrator:** wants to update the stock of products of its phamarcy.
+* **Pharmacy:** wants to keep thei stcok updated.	.
 
 #### Pre Conditions
-Should exist at leats one product in the datebase
+The administrator should be logged in.
 
 ## 2. Engineering Design
 

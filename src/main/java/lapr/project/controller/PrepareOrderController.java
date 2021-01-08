@@ -5,6 +5,8 @@
  */
 package lapr.project.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
 import lapr.project.model.Order;
@@ -29,18 +31,36 @@ public class PrepareOrderController {
         this.administratorEmail = administratorEmail;
     }
     
-    public List<String> getReadyToPrepareOrders(){
-        return odb.getReadyToPrepareOrders(administratorEmail);
+    public List<String> getReadyToPrepareOrders() throws SQLException{
+        List<String> lst = new ArrayList<>();
+        for(Order o : odb.getOrdersByStatus(administratorEmail, "Processed")){
+            lst.add(o.toString());
+        }
+        return lst;
+        
     }
     
-    public String getSelectedOrder(int id){
-        ord = Order.getOrder(id);
-        return ord == null ? null : ord.toString();
+    public String getSelectedOrder(int id) throws SQLException{
+        ord = odb.getOrder(id);
+        if(isValid()){
+            return ord.toString();
+        }
+        
+        return null;
     }
     
-    public void prepareOrder(){
-        if(ord != null){
-            odb.setStatus(ord, "Preparing");
+    private boolean isValid(){
+        if(ord == null){
+            return false;
+        }
+        
+        // adicionar restantes condicoes
+        return true;
+    }
+    
+    public void prepareOrder() throws SQLException{
+        if(isValid()){
+            odb.setStatus(ord.getId(), "Preparing");
         }
     }
     
