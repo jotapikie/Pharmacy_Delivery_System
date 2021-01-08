@@ -20,6 +20,11 @@ public class Invoice {
         this.nif=nif;
     }
 
+    public Invoice() {
+    }
+    
+    
+
     public String getEmail() {
         return email;
     }

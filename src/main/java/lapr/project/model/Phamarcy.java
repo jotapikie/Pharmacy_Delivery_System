@@ -12,6 +12,12 @@ package lapr.project.model;
 public class Phamarcy {
     private int id;
 
+    public Phamarcy(int id) {
+        this.id = id;
+    }
+    
+    
+
     public int getId() {
         return id;
     }
