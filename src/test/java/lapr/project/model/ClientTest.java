@@ -11,14 +11,15 @@ class ClientTest {
 
     private static Client client1;
     private static Client client2;
-
+    private final static CreditCard creditCard= new CreditCard(1231231231231231L, new Date(1673109541000L), 554);
+    private final static Address address= new Address("Reta do Pereiro 710", 40.738312, -7.765318);
     private ClientTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
-        client1 = new Client("username1", "name1", "password1", "email1@email.com", 123456789, 35, new CreditCard(1231231231231231L, new Date(1673109541000L), 554), new Address("Reta do Pereiro 710", 40.738312, -7.765318));
-        client2 = new Client("username2", "name2", "password2", "email2@email.com", 987654321, 15, new CreditCard(1231231231231231L, new Date(1673109541000L), 554), new Address("Reta do Pereiro 710", 40.738312, -7.765318));
+        client1 = new Client("username1", "name1", "password1", "email1@email.com", 123456789, 35, creditCard, address);
+        client2 = new Client("username2", "name2", "password2", "email2@email.com", 987654321, 15, creditCard, address);
     }
 
     @AfterAll
@@ -219,7 +220,7 @@ class ClientTest {
      */
     @Test
     void getCard_Success() {
-        CreditCard expResult = new CreditCard(1231231231231231L, new Date(1673109541000L), 554);
+        CreditCard expResult = creditCard;
         CreditCard result = client1.getCard();
         assertEquals(expResult, result);
     }
@@ -240,7 +241,7 @@ class ClientTest {
      */
     @Test
     void getAddress_Success() {
-        Address expResult = new Address("Reta do Pereiro 710", 40.738312, -7.765318);
+        Address expResult = address;
         Address result = client1.getAddress();
         assertEquals(expResult, result);
     }
