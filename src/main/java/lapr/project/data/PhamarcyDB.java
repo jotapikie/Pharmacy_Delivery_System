@@ -5,7 +5,6 @@
  */
 package lapr.project.data;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import lapr.project.model.*;
 import oracle.jdbc.OracleTypes;
 
@@ -14,7 +13,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -111,8 +109,20 @@ public class PhamarcyDB extends DataHandler {
         }
     }
 
-    public Phamarcy getPhamarcyByCourier(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Phamarcy getPhamarcyByCourier(String courierEmail) throws SQLException {
+         Phamarcy p = null;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPhamarcyByCourier(?)}")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setString(2, courierEmail);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
+                p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
+                return p;
+            }
+            throw new IllegalArgumentException("The courier wasn't found.");
+        }
     }
 
 }

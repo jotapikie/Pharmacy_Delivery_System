@@ -10,12 +10,21 @@ package lapr.project.model;
  * @author Diogo
  */
 public class Courier extends User{
+    
+    private int nif;
+    private int nss;
     private double maxWeight;
 
-    public Courier(double maxWeight, String name, String email, String password) {
+    public Courier(String name, String email, String password, int nif, int nss, double maxWeight) {
         super(name, email, password);
+        this.nif = nif;
+        this.nss = nss;
         this.maxWeight = maxWeight;
     }
+    
+    
+
+
 
     public double getMaxWeight() {
         return maxWeight;

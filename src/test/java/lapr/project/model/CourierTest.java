@@ -33,7 +33,7 @@ public class CourierTest {
     
     @BeforeEach
     public void setUp() {
-        courierTest=new Courier(200,"Francisco","abc@gmail.com","1234");
+        courierTest=new Courier("Francisco","abc@gmail.com","1234", 454654,32425,200);
     }
     
     @AfterEach

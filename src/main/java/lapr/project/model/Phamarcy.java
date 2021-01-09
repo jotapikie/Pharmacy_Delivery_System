@@ -24,6 +24,7 @@ public class Phamarcy {
     private Address address;
     private HashSet<Park> parks= new HashSet<Park>();
     private Set<Order> orders;
+    private List<Courier> couriers;
 
     public Phamarcy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
         setId(id);
@@ -33,6 +34,7 @@ public class Phamarcy {
         setAddress( address);
         setParks(parks);
         orders = new TreeSet<>();
+        couriers = new ArrayList<>();
     }
 
 

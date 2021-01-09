@@ -5,6 +5,7 @@
  */
 package lapr.project.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class DeliverOrderController {
         this.courierEmail = courierEmail;
     }
     
-    public List<String> getSuggestedOrders(){
+    public List<String> getSuggestedOrders() throws SQLException{
         List<String> orders = new ArrayList<>();
         cou = cdb.getCourier(courierEmail);
         pha = pdb.getPhamarcyByCourier(cou.getEmail());

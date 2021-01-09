@@ -7,6 +7,7 @@ package lapr.project.model;
 
 import java.sql.SQLException;
 import lapr.project.data.ClientDB;
+import lapr.project.data.PhamarcyDB;
 import lapr.project.data.ProductDB;
 
 /**
@@ -22,8 +23,13 @@ public class teste {
         ClientDB cdb = new ClientDB();
         System.out.println(cdb.getClientPoints("clien1@lapr3"));
         
-        ProductDB pdb = new ProductDB();
-        pdb.saveProduct(new Product(4, "Brufen", 0.45, 5.99));
+//        ProductDB pdb = new ProductDB();
+//        pdb.saveProduct(new Product(4, "Brufen", 0.45, 5.99));
+        
+        PhamarcyDB phdb = new PhamarcyDB();
+        Phamarcy p = phdb.getPharmacyByAdministrator("admin1@lapr.com");
+        System.out.println(p.getParks().size());
+        
     }
     
 }
