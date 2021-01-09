@@ -26,7 +26,7 @@ public class EScooter extends Vehicle{
      * @param actualBat
      * @param motor 
      */
-    public EScooter(int id, int weight, State state, int maxBat, int actualBat, int motor, double aeroCoef, double frontalArea) {
+    public EScooter(int id, double weight, State state, int maxBat, int actualBat, int motor, double aeroCoef, double frontalArea) {
         super(id, weight, state, maxBat, actualBat, motor);
         setAeroCoef(aeroCoef);
         setFrontalArea(frontalArea);

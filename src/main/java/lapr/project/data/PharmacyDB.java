@@ -5,12 +5,14 @@
  */
 package lapr.project.data;
 
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import lapr.project.model.*;
 import oracle.jdbc.OracleTypes;
 
 import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashSet;
@@ -21,8 +23,16 @@ import java.util.List;
  * @author Diogo
  */
 public class PharmacyDB extends DataHandler {
+    
+   private ParkDB pdb;
 
-    public Phamarcy newPharmacy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
+    public PharmacyDB() {
+        pdb = new ParkDB();
+    }
+   
+   
+
+    public Phamarcy newPhamarcy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
         return new Phamarcy(id,phoneNumber,name,administrator,address,parks);
     }
 
@@ -85,9 +95,20 @@ public class PharmacyDB extends DataHandler {
             }
         }
 
-    public Phamarcy getPharmacyByAdministrator(String administratorEmail) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+    public Phamarcy getPharmacyByAdministrator(String administratorEmail) throws SQLException {
+        Phamarcy p = null;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPhamarcyByAdministrator(?)}")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setString(2, administratorEmail);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
+                p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
+                return p;
+            }
+            throw new IllegalArgumentException("Phamarcy does not exist");
+        }
     }
 
 }

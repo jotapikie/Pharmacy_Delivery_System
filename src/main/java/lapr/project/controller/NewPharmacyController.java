@@ -27,7 +27,7 @@ public class NewPharmacyController {
     }
 
     public Phamarcy newPharmacy(int id, int phoneNumber, String name, Administrator admin,  Address address, HashSet<Park> parks) {
-        pharmacy = pharmacyDB.newPharmacy(id, phoneNumber,name,admin,address,parks);
+        pharmacy = pharmacyDB.newPhamarcy(id, phoneNumber,name,admin,address,parks);
         return pharmacy;
     }
 

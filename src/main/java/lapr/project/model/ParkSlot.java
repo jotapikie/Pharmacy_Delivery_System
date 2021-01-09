@@ -19,6 +19,25 @@ public class ParkSlot {
         setInUse(inUse);
         scooter=null;
     }
+    
+     public ParkSlot(int id, boolean ableToCharge, EScooter scooter) {
+        setId(id);
+        setAbleToCharge(ableToCharge);
+        setInUse(true);
+        setScooter(scooter);
+
+    }
+    
+    
+    
+    public ParkSlot(int id, boolean ableToCharge) {
+        setId(id);
+        setAbleToCharge(ableToCharge);
+        inUse = false;
+        scooter=null;
+    }
+    
+    
 
     public int getId() {
         return id;
