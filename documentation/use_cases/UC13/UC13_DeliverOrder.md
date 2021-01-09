@@ -22,7 +22,7 @@ The courier should be logged in.
 ## Sequence Diagram
 ![UC13_SD.jpg](UC13_SD.jpg)
 
-
+![UC13_SD_GetSuggestedOrders.jpg](UC13_SD_GetSuggestedOrders.jpg)
 
 ## Class Diagram
 ![UC13_CD.jpg](UC13_CD.jpg)
