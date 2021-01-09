@@ -5,6 +5,7 @@
  */
 package lapr.project.data;
 
+import java.util.List;
 import lapr.project.model.Courier;
 
 /**
@@ -14,6 +15,18 @@ import lapr.project.model.Courier;
 public class CourierDB {
 
     public Courier getCourier(String courierEmail) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Courier newCourier(double maxWeight, String name, String email, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean saveCourier(Courier courier) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int saveCouriers(List<Courier> couriersList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
