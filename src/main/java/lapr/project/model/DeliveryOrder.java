@@ -21,6 +21,9 @@ public class DeliveryOrder {
     private String email;
     private int delivrun_id;
     private int pharm_id;
+    private Invoice invoice;
+
+    
 
     public DeliveryOrder(int id, Date bdate, Date edate, String status, double price, String email, int delivrun_id, int pharm_id) {
         this.id = id;
@@ -64,6 +67,11 @@ public class DeliveryOrder {
     public int getPharm_id() {
         return pharm_id;
     }
+    
+    public Invoice getInvoice() {
+        return invoice;
+    }
+    
 
     public void setId(int id) {
         this.id = id;
@@ -96,6 +104,11 @@ public class DeliveryOrder {
     public void setPharm_id(int pharm_id) {
         this.pharm_id = pharm_id;
     }
+    
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+    
 
     @Override
     public String toString() {

@@ -40,11 +40,12 @@ public class MakeOrderController {
     
     
     
-    public DeliveryOrder newOrder(int nif){
+    public boolean newOrder(int nif){
         this.nif=nif;
         order=orderDB.newDeliveryOrder();
         invoice=invoiceDB.newInvoice();
-        return order;
+        setInvoice(invoice);
+        return orderListAdd(order);
     }
     
     
@@ -52,9 +53,6 @@ public class MakeOrderController {
         return orders.add(order);
     }
     
-    public boolean InvoiceListAdd(invoice){
-        return invoices.add(invoice);
-    }
     
 }
 */
