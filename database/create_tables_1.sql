@@ -100,6 +100,7 @@ CREATE TABLE scooter(
 CREATE TABLE park(
     park_id int CONSTRAINT pk_park_id PRIMARY KEY,
     max_vehicles int NOT NULL,
+    park_type varchar(255) NOT NULL, 
     phamarcy_id int NOT NULL
 );
 
