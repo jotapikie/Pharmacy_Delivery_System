@@ -22,11 +22,11 @@ import java.util.List;
  *
  * @author Diogo
  */
-public class PharmacyDB extends DataHandler {
+public class PhamarcyDB extends DataHandler {
     
    private ParkDB pdb;
 
-    public PharmacyDB() {
+    public PhamarcyDB() {
         pdb = new ParkDB();
     }
    
@@ -109,6 +109,10 @@ public class PharmacyDB extends DataHandler {
             }
             throw new IllegalArgumentException("Phamarcy does not exist");
         }
+    }
+
+    public Phamarcy getPhamarcyByCourier(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

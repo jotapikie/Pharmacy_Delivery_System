@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
-import lapr.project.data.PharmacyDB;
+import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Order;
 import lapr.project.model.Phamarcy;
 
@@ -22,14 +22,14 @@ public class NotifyReadyOrderController {
     private Order order;
     private OrderDB orderDB;
     private String administratorEmail;
-    private PharmacyDB pdb;
+    private PhamarcyDB pdb;
     private Phamarcy pha;
 
 
 
     public NotifyReadyOrderController(String administratorEmail) {
         this.orderDB= new OrderDB();
-        this.pdb = new PharmacyDB();
+        this.pdb = new PhamarcyDB();
         this.administratorEmail = administratorEmail;
         
     }

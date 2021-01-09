@@ -5,8 +5,12 @@
  */
 package lapr.project.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -19,6 +23,7 @@ public class Phamarcy {
     private Administrator administrator;
     private Address address;
     private HashSet<Park> parks= new HashSet<Park>();
+    private Set<Order> orders;
 
     public Phamarcy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
         setId(id);
@@ -27,6 +32,7 @@ public class Phamarcy {
         setAdministrator(administrator);
         setAddress( address);
         setParks(parks);
+        orders = new TreeSet<>();
     }
 
 
@@ -130,6 +136,20 @@ public class Phamarcy {
         public String toString(){
             return String.format("%d %s  %d  %s  %s ", id, getName(), getPhoneNumber(), getAdministrator().toString(), getAddress().toString());
         }
+
+    public List<Order> getSuggestedOrders(Courier cou) {
+        List<Order> sOrders = new ArrayList<>();
+        double totalWeight = 0;
+        for(Order o : orders){
+            double expWeight = totalWeight + o.getTotalWeight();
+            if(expWeight < cou.getMaxWeight()){
+                sOrders.add(o);
+                totalWeight = expWeight;
+            }
+        }
+        
+        return sOrders;
+    }
 
     }
 
