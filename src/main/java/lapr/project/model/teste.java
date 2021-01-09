@@ -6,9 +6,8 @@
 package lapr.project.model;
 
 import java.sql.SQLException;
-import lapr.project.data.ClientDB;
-import lapr.project.data.PhamarcyDB;
-import lapr.project.data.ProductDB;
+import lapr.project.controller.NotifyReadyOrderController;
+import lapr.project.controller.PrepareOrderController;
 
 /**
  *
@@ -20,15 +19,29 @@ public class teste {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        ClientDB cdb = new ClientDB();
-        System.out.println(cdb.getClientPoints("clien1@lapr3"));
+        PrepareOrderController c1 = new PrepareOrderController("admin1@lapr.com");
+        System.out.println("Encomendas para preparar:");
+        for(String s : c1.getReadyToPrepareOrders()){
+            System.out.println(s);
+        }
+        c1.getSelectedOrder(3);
+        System.out.println("Escolher preparar a encomenda 3");
+        c1.prepareOrder();
+        System.out.println("Encomenda a ser preparada.");
         
-//        ProductDB pdb = new ProductDB();
-//        pdb.saveProduct(new Product(4, "Brufen", 0.45, 5.99));
+        System.out.println("#####################");
         
-        PhamarcyDB phdb = new PhamarcyDB();
-        Phamarcy p = phdb.getPharmacyByAdministrator("admin1@lapr.com");
-        System.out.println(p.getParks().size());
+        NotifyReadyOrderController c2 = new NotifyReadyOrderController("admin1@lapr.com");
+        System.out.println("Selecione uma opcao:");
+        for(String o : c2.getPreparingOrders()){
+            System.out.println(o);
+        }
+        c2.getSelectedOrder(3);
+        System.out.println("Escolher a encomenda 3 como preparada.");
+        c2.setOrderToReady();
+        System.out.println("Encomenda atualizada com o status prepared.");
+        
+
         
     }
     

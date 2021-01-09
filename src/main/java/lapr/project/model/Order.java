@@ -53,6 +53,13 @@ public class Order implements Comparable<Order>{
     }
 
     @Override
+    public String toString() {
+        return String.format("Id: %d | Begin Date: %s | End Date: %s | Status: %s | Price: %.2f €", id, beginDate, endDate, status, price);
+    }
+    
+    
+
+    @Override
     public int compareTo(Order o) {
         return this.beginDate.compareTo(o.beginDate);
     }

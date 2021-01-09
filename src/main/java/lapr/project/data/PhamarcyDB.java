@@ -102,7 +102,7 @@ public class PhamarcyDB extends DataHandler {
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
                 p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
-                p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
+                //p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
                 return p;
             }
             throw new IllegalArgumentException("Phamarcy does not exist");
@@ -118,7 +118,7 @@ public class PhamarcyDB extends DataHandler {
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
                 p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
-                p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
+                //p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
                 return p;
             }
             throw new IllegalArgumentException("The courier wasn't found.");
