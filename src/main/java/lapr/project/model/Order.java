@@ -5,7 +5,9 @@
  */
 package lapr.project.model;
 
+import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -24,10 +26,10 @@ public class Order implements Comparable<Order>{
     private Date beginDate;
     private Date endDate;
     private String status;
-    private float price;
-    private HashSet<Product> products;
+    private double price;
+    private HashMap<Product, Integer> products;
 
-    public Order(int id, Date beginDate, Date endDate, String status, float price, HashSet<Product> products) {
+    public Order(int id, Date beginDate, Date endDate, String status, double price, HashMap<Product, Integer> products) {
         this.id = id;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -36,13 +38,23 @@ public class Order implements Comparable<Order>{
         this.products = products;
     }
     
-    public Order(int id, Date beginDate, Date endDate, String status, float price) {
+    public Order(int id, Date beginDate, Date endDate, String status, double price) {
         this.id = id;
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.status = status;
         this.price = price;
-        this.products = new HashSet<>();
+        this.products = new HashMap<>();
+        
+    }
+    
+    public Order(int id, double price, HashMap<Product, Integer> products){
+        this.id = id;
+        this.beginDate = Date.from(Instant.now());
+        this.endDate = null;
+        this.status = "Processing";
+        this.price = price;
+        this.products = products;
         
     }
     
@@ -58,7 +70,7 @@ public class Order implements Comparable<Order>{
         return endDate;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
     
@@ -66,13 +78,19 @@ public class Order implements Comparable<Order>{
         return status;
     }
 
-    public HashSet<Product> getProducts() {
+    public HashMap<Product, Integer> getProducts() {
         return products;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
     
     public double getTotalWeight(){
         double weight = 0;
-        for(Product p : products){
+        for(Product p : products.keySet()){
             weight = weight + p.getWeight();
         }
         return weight;
@@ -88,6 +106,11 @@ public class Order implements Comparable<Order>{
     @Override
     public int compareTo(Order o) {
         return this.beginDate.compareTo(o.beginDate);
+    }
+
+    public Invoice makeInvoice(Client cli, Address add, double priceToPay, int nif) {
+        Invoice inv = new Invoice(cli, add, priceToPay, price, products, nif);
+        return inv;
     }
     
     

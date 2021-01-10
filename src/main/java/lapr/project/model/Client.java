@@ -5,6 +5,10 @@
  */
 package lapr.project.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  *
  * @author Diogo
@@ -15,10 +19,8 @@ public class Client extends User {
     private int points;
     private ShoppingCart cart;
     private CreditCard card;
-
-
-
     private Address address;
+    private List<Order> orders;
 
 
 
@@ -42,6 +44,7 @@ public class Client extends User {
         setCard(creditCard);
         setAddress(address);
         cart = new ShoppingCart();
+        orders = new ArrayList<>();
     }
 
 
@@ -96,6 +99,16 @@ public class Client extends User {
             throw new IllegalArgumentException("Client's points is invalid.");
         }
         this.points = points;
+    }
+
+    public Order makeOrder(int id, double totalPrice, HashMap<Product, Integer> items) {
+        Order o = new Order(id, totalPrice, items);
+        orders.add(o);
+        return o;
+    }
+
+    public Phamarcy getNeareastPhamarcy() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

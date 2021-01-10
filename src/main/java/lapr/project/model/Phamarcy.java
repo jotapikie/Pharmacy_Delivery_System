@@ -156,6 +156,11 @@ public class Phamarcy {
         return sOrders;
     }
 
+    public void addOrder(Order ord) {
+        ord.setStatus("Processed");
+        orders.add(ord);
+    }
+
     }
 
 

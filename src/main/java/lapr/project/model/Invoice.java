@@ -5,42 +5,31 @@
  */
 package lapr.project.model;
 
+import java.util.HashMap;
+
 /**
  *
  * @author ivoal
  */
 public class Invoice {
     
-    private int id;
+    private Client client;
+    private Address address;
+    private double pricePaid;
+    private double orderPrice;
+    private HashMap<Product, Integer> items;
     private int nif;
-    
-    public Invoice(int id, int nif){
-        this.id=id;
-        this.nif=nif;
-    }
 
-    
-
-    public int getId() {
-        return id;
-    }
-
-    public int getNif() {
-        return nif;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNif(int nif) {
+    public Invoice(Client client, Address address, double pricePaid, double orderPrice, HashMap<Product, Integer> items, int nif) {
+        this.client = client;
+        this.address = address;
+        this.pricePaid = pricePaid;
+        this.orderPrice = orderPrice;
+        this.items = items;
         this.nif = nif;
     }
-
-    @Override
-    public String toString() {
-        return "Invoice{" + "id=" + id + ", nif=" + nif + "}";
-    }
+    
+    
     
     
 }

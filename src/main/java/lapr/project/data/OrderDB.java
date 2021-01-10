@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import lapr.project.model.Invoice;
 import lapr.project.model.Order;
 import oracle.jdbc.OracleTypes;
 
@@ -77,6 +78,10 @@ public class OrderDB extends DataHandler{
             }
         }
         return listOrders;
+    }
+
+    public void saveOrder(Order ord, Invoice inv, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
