@@ -1,21 +1,20 @@
 # UC11 - Add Product
 
 ## 1. Requirements Engineering
-The admin start adding products. The system requests required data(i.e. id, name, weight, price). The admin enters the data.The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
-
+The super admin starts the regist of new products. The system requests required data. The super admin enteres the data (id, name, weight, price). The system shows the entered data ans asks to confirm. The super admin confirms. The system regists the new product(s) and informs about the sucess of the operation.
 ## SSD
 ![UC11_SSD.png](UC11_SSD.png)
 
 #### Main Actor
 
-Admin
+Super Admin
 
 #### Stakeholders and their interests
-* **Admin:** wants to add products in the pharmacy.
-* **Pharamcy:** wants to have products.
+* **Admin:** wants to add products to the platform.
+
 
 #### Pre Conditions
-The pharmacy should be created in the system.
+The super admin must be logged in.
 
 ## 2. Engineering Design
 

@@ -75,7 +75,7 @@ public class ProductDB extends DataHandler{
     public int saveProducts(HashSet<Product> products) throws SQLException {
         Connection con = getConnection();
         int[] rows;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddProduct(?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterProduct(?,?,?,?) }")) {
             for (Product p : products) {
                 callStmt.setInt(1, p.getId());
                 callStmt.setString(2, p.getName());
