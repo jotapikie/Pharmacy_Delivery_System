@@ -31,7 +31,7 @@ public class NewPharmacyController {
         return pharmacy;
     }
 
-    public boolean registerPark() throws SQLException {
+    public boolean registerPharmacy() throws SQLException {
         return pharmacyDB.savePharmacy(pharmacy);
     }
 

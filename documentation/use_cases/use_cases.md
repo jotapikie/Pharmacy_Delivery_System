@@ -17,7 +17,7 @@ A use case diagram was developed to understand the responsible actor or actors f
 | UC08 | [Make Order](UC8/UC08_MakeOrder.md) |
 | UC09 | [Prepare Order](UC09/UC9_PrepareOrder.md) |
 | UC10 | [Regist Courier](UC10/UC10_RegistCourier.md) |
-| UC11 | [Add Product](UC11/UC11_AddProduct.md) |
+| UC11 | [Register Product](UC11/UC11_RegisterProduct.md) |
 | UC12 | [Update Stock](UC12/UC12_UpdateStock.md) |
 | UC13 | [Deliver Order](UC13/UC13_Deliver_Order.md) |
 | UC14 | [Find Route](UC14/UC14_FindRoute.md) |

@@ -1,4 +1,4 @@
-# UC11 - Add Product
+# UC11 - Register Product
 
 ## 1. Requirements Engineering
 The super admin starts the regist of new products. The system requests required data. The super admin enteres the data (id, name, weight, price). The system shows the entered data ans asks to confirm. The super admin confirms. The system regists the new product(s) and informs about the sucess of the operation.
