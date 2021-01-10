@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.ClientDB;
 import lapr.project.data.ProductDB;
-import lapr.project.model.Client;
 import lapr.project.model.Product;
 
 /**
@@ -24,10 +23,13 @@ public class AddToCartController {
     private ClientDB cdb;
     private Product pro;
 
+    public AddToCartController(String clientEmail, ProductDB pdb, ClientDB cdb) {
+        this.clientEmail = clientEmail;
+        this.pdb = pdb;
+        this.cdb = cdb;
+    }
 
-
-
-    public AddToCartController(String clientEmail) {
+   public AddToCartController(String clientEmail) {
         this.clientEmail = clientEmail;
         this.pdb = new ProductDB();
         this.cdb = new ClientDB();

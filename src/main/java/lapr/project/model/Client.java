@@ -41,6 +41,7 @@ public class Client extends User {
         setPoints(points);
         setCard(creditCard);
         setAddress(address);
+        cart = new ShoppingCart();
     }
 
 

@@ -8,9 +8,7 @@ package lapr.project.controller;
 import java.sql.SQLException;
 import java.util.HashSet;
 import lapr.project.data.ProductDB;
-import lapr.project.data.VehicleDB;
 import lapr.project.model.Product;
-import lapr.project.model.Vehicle;
 /**
  *
  * @author Helder

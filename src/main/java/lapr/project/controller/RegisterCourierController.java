@@ -45,14 +45,10 @@ public class RegisterCourierController {
    
     public String newCourier(String name, String email, String password, int nif, int nss, double maxWeight) {
         courier = courierDB.newCourier(name,email,password, nif, nss, maxWeight);
-        addCourierToQueue();
+        couriersList.add(courier);
         return courier.toString();
     }
 
-
-    private boolean addCourierToQueue(){
-        return couriersList.add(courier);
-    }
     
     
     public int registCouriers() throws SQLException {
