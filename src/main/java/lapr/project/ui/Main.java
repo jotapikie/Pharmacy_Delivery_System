@@ -34,30 +34,30 @@ class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, SQLException {
-        CalculatorExample calculatorExample = new CalculatorExample();
-        int value = calculatorExample.sum(3, 5);
-
-        if (LOGGER.isLoggable(Level.INFO))
-            LOGGER.log(Level.INFO, String.valueOf(value));
-
-        //load database properties
-
-        try {
-            Properties properties =
-                    new Properties(System.getProperties());
-            InputStream input = new FileInputStream("target/classes/application.properties");
-            properties.load(input);
-            input.close();
-            System.setProperties(properties);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        //Initial Database Setup
-        DataHandler dh = new DataHandler();
-        dh.scriptRunner("target/test-classes/demo_jdbc.sql");
+//        CalculatorExample calculatorExample = new CalculatorExample();
+//        int value = calculatorExample.sum(3, 5);
+//
+//        if (LOGGER.isLoggable(Level.INFO))
+//            LOGGER.log(Level.INFO, String.valueOf(value));
+//
+//        //load database properties
+//
+//        try {
+//            Properties properties =
+//                    new Properties(System.getProperties());
+//            InputStream input = new FileInputStream("target/classes/application.properties");
+//            properties.load(input);
+//            input.close();
+//            System.setProperties(properties);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        //Initial Database Setup
+//        DataHandler dh = new DataHandler();
+//        dh.scriptRunner("target/test-classes/demo_jdbc.sql");
 
 
 

@@ -39,6 +39,12 @@ public class Product {
     public double getWeight() {
         return weight;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Id: %d | Name: %s | Weight: %.2f kg | Price: %.2f €", id, name, weight, price);
+    }
+    
     
     
 

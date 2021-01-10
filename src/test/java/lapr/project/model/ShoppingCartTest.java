@@ -35,7 +35,7 @@ public class ShoppingCartTest {
      */
     @Test
     public void testGetPrice() {
-        System.out.println("getPrice");
+ 
         ShoppingCart car = new ShoppingCart();
         
         assertEquals(0, car.getPrice());
@@ -59,7 +59,7 @@ public class ShoppingCartTest {
      */
     @Test
     public void testSetItems() {
-        System.out.println("setItems");
+        
         HashMap<Product, Integer> items = new HashMap<>();
         ShoppingCart car = new ShoppingCart();
         items.put(p1, 5);
@@ -76,7 +76,7 @@ public class ShoppingCartTest {
      */
     @Test
     public void testUpdateCart() {
-        System.out.println("updateCart");
+        
         ShoppingCart car = new ShoppingCart();
         
         car.updateCart(p1, 2);
@@ -103,7 +103,7 @@ public class ShoppingCartTest {
      */
     @Test
     public void testRemoveProduct() {
-        System.out.println("removeProduct");
+        
         ShoppingCart car = new ShoppingCart();
         HashMap<Product, Integer> items = new HashMap<>();
         items.put(p1, 2);

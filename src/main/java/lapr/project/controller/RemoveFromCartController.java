@@ -23,6 +23,14 @@ public class RemoveFromCartController {
     private ClientDB cdb;
     private ProductDB pdb;
 
+    public RemoveFromCartController(String clientEmail, ClientDB cdb, ProductDB pdb) {
+        this.clientEmail = clientEmail;
+        this.cdb = cdb;
+        this.pdb = pdb;
+    }
+    
+    
+
     public RemoveFromCartController(String clientEmail) {
         this.clientEmail = clientEmail;
         cdb = new ClientDB();
@@ -36,7 +44,7 @@ public class RemoveFromCartController {
     
     public String getSelectedProduct(int id) throws SQLException{
         pro = pdb.getProduct(id);
-        return pro == null ? null : pro.toString();
+        return pro == null ? null : cart.getItems().keySet().contains(pro) ? pro.toString() : null;
     }
     
     public void removeFromCart(){
