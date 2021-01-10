@@ -36,12 +36,38 @@ public class Order implements Comparable<Order>{
         this.products = products;
     }
     
+    public Order(int id, Date beginDate, Date endDate, String status, float price) {
+        this.id = id;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.price = price;
+        this.products = new HashSet<>();
+        
+    }
     
-
-
-
     public int getId() {
         return id;
+    }
+
+    public Date getBeginDate() {
+        return beginDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public HashSet<Product> getProducts() {
+        return products;
     }
     
     public double getTotalWeight(){

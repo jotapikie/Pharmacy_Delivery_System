@@ -105,9 +105,10 @@ public class Phamarcy {
         this.parks = parks;
     }
 
-
-
-
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -143,10 +144,12 @@ public class Phamarcy {
         List<Order> sOrders = new ArrayList<>();
         double totalWeight = 0;
         for(Order o : orders){
-            double expWeight = totalWeight + o.getTotalWeight();
-            if(expWeight < cou.getMaxWeight()){
-                sOrders.add(o);
-                totalWeight = expWeight;
+            if(o.getStatus().equals("Prepared")){
+                double expWeight = totalWeight + o.getTotalWeight();
+                if(expWeight < cou.getMaxWeight()){
+                    sOrders.add(o);
+                    totalWeight = expWeight;
+                }
             }
         }
         
