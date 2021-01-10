@@ -35,18 +35,23 @@ public class RegisterCourierController {
         this.pdb = new PhamarcyDB();
     }
 
-    public RegisterCourierController(CourierDB courierDB, String administratorEmail) { 
-        this.courierDB = courierDB; 
-        couriersList = new ArrayList<>();
+    public RegisterCourierController(CourierDB courierDB, PhamarcyDB pdb, String administratorEmail) {
+        this.courierDB = courierDB;
+        this.couriersList = new ArrayList<>();
         this.administratorEmail = administratorEmail;
-        this.pdb = new PhamarcyDB();
+        this.pdb = pdb;
     }
+
+    
 
    
     public String newCourier(String name, String email, String password, int nif, int nss, double maxWeight) {
         courier = courierDB.newCourier(name,email,password, nif, nss, maxWeight);
-        couriersList.add(courier);
         return courier.toString();
+    }
+    
+    public boolean addToQueue(){
+        return couriersList.add(courier);
     }
 
     
