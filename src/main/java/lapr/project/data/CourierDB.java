@@ -5,7 +5,9 @@
  */
 package lapr.project.data;
 
+import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -33,16 +35,45 @@ public class CourierDB extends DataHandler{
         }
     }
 
-    public Courier newCourier(double maxWeight, String name, String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Courier newCourier(String name, String email, String password, int nif, int nss, double maxWeight) {
+        return new Courier(name, email, password, nif, nss, maxWeight);
     }
 
-    public boolean saveCourier(Courier courier) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public int saveCouriers(List<Courier> couriersList, int idPhamarcy) throws SQLException {
+        Connection con = getConnection();
+        int[] rows;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterCourier(?,?,?,?,?,?,?) }")) {
+            for (Courier c : couriersList) {
+                callStmt.setString(1, c.getEmail());
+                callStmt.setString(2, c.getPassword());
+                callStmt.setString(3, c.getName());
+                callStmt.setInt(4, c.getNif());
+                callStmt.setInt(5, c.getNss());
+                callStmt.setDouble(6, c.getMaxWeight());
+                callStmt.setInt(7, idPhamarcy);
 
-    public int saveCouriers(List<Courier> couriersList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+                callStmt.addBatch();
+            }
+
+            con.setAutoCommit(false);
+
+            try {
+                rows = callStmt.executeBatch();
+                con.commit();
+            } catch (BatchUpdateException e) {
+                con.rollback();
+                throw new SQLException(e.getNextException());
+            } finally {
+                con.setAutoCommit(true);
+            }
+
+            return rows.length;
+        }
+
     }
+   
+
+ 
     
 }

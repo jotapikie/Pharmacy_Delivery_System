@@ -21,9 +21,18 @@ public class Courier extends User{
         this.nss = nss;
         this.maxWeight = maxWeight;
     }
+
+    public int getNif() {
+        return nif;
+    }
+
+    public int getNss() {
+        return nss;
+    }
     
     
 
+    
 
 
     public double getMaxWeight() {

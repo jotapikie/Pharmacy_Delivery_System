@@ -1,21 +1,21 @@
 # UC10 - Add Courier
 
 ## 1. Requirements Engineering
-The Pharmacy start adding couriers. The system requests data (i.e. name, weight, price). The pharmacy enters the requested data. The system shows data and ask for confirmation. The pharmacy confirms. The system onforms the success od operation.
+The (Phamarcy) administratorstarts the regist of new couries. The system requests the required data. The (Phamarcy) administrator inserts the required data (email, password, name, nif, nss, max weight can carry). The system shows the entered data ans asks to confirm. The (Phamarcy) administrator confirms. The system regist the courier(s) and informs about the sucess of the operation.
 
 ## SSD
 ![UC10_SSD.png](UC10_SSD.png)
 
 #### Main Actor
 
-Pharmacy
+(Phamarcy) Administrator
 
 #### Stakeholders and their interests
-* **Pharmacy:** wants to add couriers to deliver products.
+* **Phamarcy:** wants to add couriers to deliver products.
 * **Courier:** wants to deliver products.
 
 #### Pre Conditions
-The pharmacy should be created in the system.
+The administratro should be logged in as an existing phamarcy administrator.
 
 ## 2. Engineering Design
 

@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.CourierDB;
+import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Courier;
+import lapr.project.model.Phamarcy;
 
 /**
  *
@@ -20,39 +22,42 @@ public class RegisterCourierController {
 
     private final CourierDB courierDB; 
     
+    
     private final List<Courier> couriersList;
+    
+    private String administratorEmail;
+    private PhamarcyDB pdb;
 
-    public RegisterCourierController() { 
+    public RegisterCourierController(String administratorEmail) { 
         courierDB = new CourierDB(); 
-        couriersList = new ArrayList<>(); }
+        couriersList = new ArrayList<>();
+        this.administratorEmail = administratorEmail;
+        this.pdb = new PhamarcyDB();
+    }
 
-    public RegisterCourierController(CourierDB courierDB) { 
+    public RegisterCourierController(CourierDB courierDB, String administratorEmail) { 
         this.courierDB = courierDB; 
-        couriersList = new ArrayList<>(); }
+        couriersList = new ArrayList<>();
+        this.administratorEmail = administratorEmail;
+        this.pdb = new PhamarcyDB();
+    }
 
    
-    public Courier newCourier(double maxWeight, String name, String email, String password) {
-        courier = courierDB.newCourier(maxWeight,name,email,password);
-        return courier;
+    public String newCourier(String name, String email, String password, int nif, int nss, double maxWeight) {
+        courier = courierDB.newCourier(name,email,password, nif, nss, maxWeight);
+        addCourierToQueue();
+        return courier.toString();
     }
 
-    /*
-     * Saves the client known by the controller in our database.
-     */
-    public boolean registerCourier() throws SQLException {
-        return courierDB.saveCourier(courier);
-    }
 
-    public boolean addCourierToQueue(){
+    private boolean addCourierToQueue(){
         return couriersList.add(courier);
     }
     
-    public List<Courier> getCouriersList(){
-        return new ArrayList<>(couriersList);
-    }
     
-    public int insertCouriersBatchOp() throws SQLException {
-        final int numRows = courierDB.saveCouriers(couriersList);
+    public int registCouriers() throws SQLException {
+        Phamarcy pha = pdb.getPharmacyByAdministrator(administratorEmail);
+        final int numRows = courierDB.saveCouriers(couriersList, pha.getId());
         couriersList.clear();
         return numRows;
     }
