@@ -47,8 +47,10 @@ public class Park{
         this.type=type;
     }
 
-    public HashSet<ParkSlot> getSlots() {
-        return slots;
+    public Set<ParkSlot> getSlots() {
+        HashSet<ParkSlot> slotsCopy= new HashSet<ParkSlot>();
+        slotsCopy=slots;
+        return  slotsCopy;
     }
 
     public void setSlots(Set<ParkSlot> slots) {
