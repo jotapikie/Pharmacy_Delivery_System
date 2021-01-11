@@ -51,6 +51,18 @@ public class AddressTest {
     }
 
     /**
+     * Test of setLatitude method, of class Address. Fail
+     */
+    @Test
+    void setAddress_Fail() {
+        try {
+            address1.setAddress("");
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
      * Test of getLatitude method, of class Address. Success
      */
     @Test
@@ -77,6 +89,41 @@ public class AddressTest {
     void setLatitude_Fail() {
         try {
             address1.setLatitude(-95);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setLatitude method, of class Address. Fail
+     */
+    @Test
+    void setLatitude_Fail1() {
+        try {
+            address1.setLatitude(-90);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setLatitude method, of class Address. Fail
+     */
+    @Test
+    void setLatitude_Fail2() {
+        try {
+            address1.setLatitude(95);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+    /**
+     * Test of setLatitude method, of class Address. Fail
+     */
+    @Test
+    void setLatitude_Fail3() {
+        try {
+            address1.setLatitude(90);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
@@ -115,6 +162,41 @@ public class AddressTest {
     }
 
     /**
+     * Test of setLongitude method, of class Address. Fail
+     */
+    @Test
+    void setLongitude_Fail1() {
+        try {
+            address1.setLongitude(-180);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setLongitude method, of class Address. Fail
+     */
+    @Test
+    void setLongitude_Fail2() {
+        try {
+            address1.setLongitude(180);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+    /**
+     * Test of setLongitude method, of class Address. Fail
+     */
+    @Test
+    void setLongitude_Fail3() {
+        try {
+            address1.setLongitude(-190);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
      * Test of setPortNumber
      */
     @Test
@@ -142,7 +224,7 @@ public class AddressTest {
     @Test
     void setPortNumber_Fail1() {
         try {
-            address1.setPortNumber(-1);
+            address1.setPortNumber(-10);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
@@ -170,4 +252,28 @@ public class AddressTest {
         String res= address1.getZipCode();
         assertEquals(expRes,res);
     }
+
+    /**
+     * Test of setCity method, of class Address. Fail
+     */
+    @Test
+    void setCity_Fail() {
+        try {
+            address1.setCity("");
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setCity method, of class Address. Sucess
+     */
+    @Test
+    void setCity() {
+        String expRes="Porto";
+        address1.setCity(expRes);
+        String res= address1.getCity();
+        assertEquals(expRes,res);
+    }
+
 }

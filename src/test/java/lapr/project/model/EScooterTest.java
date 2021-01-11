@@ -79,6 +79,20 @@ public class EScooterTest {
 
         }
     }
+
+    /**
+     * Test of setAeroCoef method, of class escooter.
+     */
+    @Test
+    public void testSetAeroCoef1() {
+
+        try {
+            scooterTest.setAeroCoef(0);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+
+        }
+    }
     /**
      * Test of setAeroCoef method, of class escooter.
      */
@@ -98,20 +112,35 @@ public class EScooterTest {
     public void testSetFrontalArea() {
 
         try {
-            scooterTest.setAeroCoef(-10);
+            scooterTest.setFrontalArea(-10);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
 
         }
     }
+
+    /**
+     * Test of setFrontalArea method, of class escooter.
+     */
+    @Test
+    public void testSetFrontalArea1() {
+
+        try {
+            scooterTest.setFrontalArea(0);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+
+        }
+    }
+
     /**
      * Test of setFrontalArea method, of class escooter.
      */
     @Test
     public void testSetFrontalArea_Sucess() {
         int expRes=10;
-        scooterTest.setAeroCoef(expRes);
-        double res= scooterTest.getAeroCoef();
+        scooterTest.setFrontalArea(expRes);
+        double res= scooterTest.getFrontalArea();
         assertEquals(expRes,res);
 
     }

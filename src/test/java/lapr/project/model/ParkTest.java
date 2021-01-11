@@ -67,7 +67,7 @@ class ParkTest {
     @Test
     void setIdFail2() {
         try {
-            park1.setId(-1);
+            park1.setId(-10);
             fail("Expected IllegalArgument");
         }catch (IllegalArgumentException ignored){
 

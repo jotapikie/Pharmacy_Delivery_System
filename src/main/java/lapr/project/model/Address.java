@@ -4,15 +4,15 @@ public class Address {
     private String streetName;
     private double latitude;
     private double longitude;
-    private final String city;
+    private String city;
     private int portNumber;
     private String zipCode;
 
     public Address(String streetName, double latitude, double longitude, String city, int portNumber, String zipCode) {
-        this.streetName = streetName;
+        setAddress(streetName);
         setLatitude( latitude);
         setLongitude(longitude);
-        this.city=city;
+        setCity(city);
         setPortNumber(portNumber);
         setZipCode(zipCode);
     }
@@ -21,7 +21,10 @@ public class Address {
     }
 
     public void setAddress(String address) {
-        this.streetName = streetName;
+        if (streetName.isEmpty()){
+            throw new IllegalArgumentException("Street Name cannot be null");
+        }
+        this.streetName = address;
     }
 
     public double getLatitude() {
@@ -46,6 +49,12 @@ public class Address {
         this.longitude = longitude;
     }
 
+    void setCity(String city){
+        if (city.isEmpty()){
+            throw new IllegalArgumentException("City cannot be null");
+        }
+        this.city=city;
+    }
 
 
     public void setZipCode(String zipCode) {
