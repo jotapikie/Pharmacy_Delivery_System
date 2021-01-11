@@ -21,7 +21,7 @@ public class Address {
     }
 
     public void setAddress(String address) {
-        if (streetName.isEmpty()){
+        if (address==null){
             throw new IllegalArgumentException("Street Name cannot be null");
         }
         this.streetName = address;
@@ -50,7 +50,7 @@ public class Address {
     }
 
     void setCity(String city){
-        if (city.isEmpty()){
+        if (city==null){
             throw new IllegalArgumentException("City cannot be null");
         }
         this.city=city;
