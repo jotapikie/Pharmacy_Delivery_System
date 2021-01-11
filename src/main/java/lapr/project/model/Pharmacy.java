@@ -23,8 +23,7 @@ public class Pharmacy {
     private Administrator administrator;
     private Address address;
     private HashSet<Park> parks= new HashSet<Park>();
-    private Set<Order> orders;
-    private List<Courier> couriers;
+
 
     public Pharmacy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
         setId(id);
@@ -33,8 +32,7 @@ public class Pharmacy {
         setAdministrator(administrator);
         setAddress( address);
         setParks(parks);
-        orders = new TreeSet<>();
-        couriers = new ArrayList<>();
+  
     }
 
 
@@ -140,27 +138,7 @@ public class Pharmacy {
             return String.format("%d %s  %d  %s  %s ", id, getName(), getPhoneNumber(), getAdministrator().toString(), getAddress().toString());
         }
 
-   /* public List<Order> getSuggestedOrders(Courier cou) {
-        List<Order> sOrders = new ArrayList<>();
-        double totalWeight = 0;
-        for(Order o : orders){
-            if(o.getStatus().equals("Prepared")){
-                double expWeight = totalWeight + o.getTotalWeight();
-                if(expWeight < cou.getMaxWeight()){
-                    sOrders.add(o);
-                    totalWeight = expWeight;
-                }
-            }
-        }
-        
-        return sOrders;
-    }
-
-    public void addOrder(Order ord) {
-        ord.setStatus("Processed");
-        orders.add(ord);
-    }*/
-
+  
     }
 
 
