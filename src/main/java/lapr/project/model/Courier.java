@@ -38,6 +38,11 @@ public class Courier extends User{
     public double getMaxWeight() {
         return maxWeight;
     }
+
+ 
+
+    
+    
     
     
     

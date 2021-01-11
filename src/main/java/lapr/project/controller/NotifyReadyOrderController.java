@@ -9,9 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
-import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Order;
-import lapr.project.model.Phamarcy;
 
 /**
  *
@@ -20,24 +18,21 @@ import lapr.project.model.Phamarcy;
 public class NotifyReadyOrderController {
     
     private Order order;
-    private OrderDB orderDB;
-    private String administratorEmail;
-    private PhamarcyDB pdb;
-    private Phamarcy pha;
+    private final OrderDB orderDB;
+    private final int idPharmacy;
 
 
 
-    public NotifyReadyOrderController(String administratorEmail) {
-        this.orderDB= new OrderDB();
-        this.pdb = new PhamarcyDB();
-        this.administratorEmail = administratorEmail;
+
+    public NotifyReadyOrderController(OrderDB odb, int idPharmacy) {
+        this.orderDB= odb;
+        this.idPharmacy = idPharmacy;
         
     }
     
     public List<String> getPreparingOrders() throws SQLException{
-        pha = pdb.getPharmacyByAdministrator(administratorEmail);
         List<String> lst = new ArrayList<>();
-        for(Order o : orderDB.getOrdersByStatus(pha.getId(), "Preparing")){
+        for(Order o : orderDB.getOrdersByStatus(idPharmacy, "Preparing")){
             lst.add(o.toString());
         }
         return lst;
@@ -46,7 +41,7 @@ public class NotifyReadyOrderController {
     
     public String getSelectedOrder(int id) throws SQLException{
         order = orderDB.getOrder(id);
-        return orderDB== null ? null : order.toString();
+        return order== null ? null : order.toString();
     }
     
     public boolean setOrderToReady() throws SQLException{
@@ -54,7 +49,7 @@ public class NotifyReadyOrderController {
             return false;
         }
         
-        orderDB.setStatus(order.getId(), "Prepared", pha.getId());
+        orderDB.setStatus(order.getId(), "Prepared", idPharmacy);
         return true;
     }
     

@@ -20,13 +20,13 @@ public class UpdateStockController {
     
     private ProductDB pdb;
     private PhamarcyProductDB ppdb;
-    private String administratorEmail;
+    private int idPharmacy;
     private Product pro;
 
-    public UpdateStockController( String administratorEmail) {
+    public UpdateStockController(int idPhamarcy) {
         this.pdb = new ProductDB();
         this.ppdb = new PhamarcyProductDB();
-        this.administratorEmail = administratorEmail;
+        this.idPharmacy = idPharmacy;
     }
     
     public List<String> getProducts() throws SQLException{
@@ -47,7 +47,7 @@ public class UpdateStockController {
             return false;
         }
         
-        ppdb.updateStock(administratorEmail, pro.getId(), quantity);
+        ppdb.updateStock(idPharmacy, pro.getId(), quantity);
         return true;
     }
     

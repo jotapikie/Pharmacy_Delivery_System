@@ -3,6 +3,7 @@ package lapr.project.controller;
 import java.sql.SQLException;
 import java.util.HashSet;
 import lapr.project.data.VehicleDB;
+import lapr.project.model.Drone;
 import lapr.project.model.EScooter;
 import lapr.project.model.State;
 import lapr.project.model.Vehicle;
@@ -22,6 +23,18 @@ public class NewVehicleControllerTest {
         vdb = mock(VehicleDB.class);
         nvc = new NewVehicleController();
         nvc2 = new NewVehicleController(vdb, pharmID);
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+    }
+
+    @BeforeEach
+    public void setUp() throws Exception {
+    }
+
+    @AfterAll
+    public static void tearDownClass() throws Exception {
     }
 
     public NewVehicleControllerTest() {
@@ -116,6 +129,25 @@ public class NewVehicleControllerTest {
         vehicles.add(b);
         nvc.addVehicleToQueue();
         assertEquals(vehicles, nvc.getVehicles());
+    }
+
+    /**
+     * Test of newDrone method, of class NewVehicleController.
+     */
+    @Test
+    public void testNewDrone() {
+        int id = 27;
+        int weight = 5;
+        State state= State.ACTIVE;
+        int maxBat = 8;
+        int actualBat = 5;
+        int motor = 5;
+        Drone value = new Drone(id,weight,state,maxBat,actualBat,motor);
+        when(vdb.newDrone(anyInt(), anyInt(), any(),anyInt(),anyInt(),anyInt())).thenReturn(value);
+
+        Drone expResult = new Drone(id, weight, state, maxBat, actualBat, motor);
+        Drone result = nvc2.newDrone(id, weight, maxBat, actualBat, motor);
+        assertEquals(expResult, result);
     }
 
 }

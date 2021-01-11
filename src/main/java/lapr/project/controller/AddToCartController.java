@@ -18,9 +18,9 @@ import lapr.project.model.Product;
  */
 public class AddToCartController {
     
-    private String clientEmail;
-    private ProductDB pdb;
-    private ClientDB cdb;
+    private final String clientEmail;
+    private final ProductDB pdb;
+    private final ClientDB cdb;
     private Product pro;
 
     public AddToCartController(String clientEmail, ProductDB pdb, ClientDB cdb) {
@@ -29,11 +29,7 @@ public class AddToCartController {
         this.cdb = cdb;
     }
 
-   public AddToCartController(String clientEmail) {
-        this.clientEmail = clientEmail;
-        this.pdb = new ProductDB();
-        this.cdb = new ClientDB();
-    }
+
     
     public List<String> getAvailableProducts() throws SQLException{
         List<String> lst = new ArrayList<>();

@@ -51,7 +51,7 @@ public class DataHandler {
         
         this.jdbcUrl = Constants.CONNECTION_JDBCURL;
         this.username = Constants.CONNECTION_USERNAME;
-        this.password = Constants.CONNECTION_PWD;
+        this.password = Constants.CONNECTION_ACCESS;
     }
 
     /**

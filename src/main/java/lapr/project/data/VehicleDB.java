@@ -2,6 +2,7 @@ package lapr.project.data;
 
 import java.sql.*;
 import java.util.*;
+import lapr.project.model.Drone;
 import lapr.project.model.EScooter;
 import lapr.project.model.State;
 import lapr.project.model.Vehicle;
@@ -276,6 +277,10 @@ public class VehicleDB extends DataHandler {
             e.printStackTrace();
         }
         throw new NullPointerException("No info in the database. Check tables Parks, Bicycles, Vehicles and Parked_Vehicles.");
+    }
+
+    public Vehicle newDrone(int id, int weight, State state, int maxBat, int actualBat, int motor) {
+        return new Drone(id,weight,state,maxBat,actualBat,motor);
     }
 /**
     public Map<Integer, Set<EScooter>> checkIncapableEVehicles(int distance) throws SQLException {

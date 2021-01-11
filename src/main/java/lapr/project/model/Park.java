@@ -17,6 +17,11 @@ public class Park implements Comparable<Park>{
         setSlots(slots);
     }
 
+    public Park() {
+    }
+    
+    
+
     public int getId() {
         return id;
     }

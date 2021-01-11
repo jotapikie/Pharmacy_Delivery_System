@@ -2,7 +2,7 @@
 
 ## 1. Requirements Engineering
 
-The admin start adding a vehicle. The system requests required data. The admin enters the requested data. The system shows data and ask for confirmation. The admin confirms. The system informs the admin of the succes of the operation.
+The admin start adding a vehicle. The system requests required data. The admin enters the requested data for scooter/drone. The system informs the admin of the succes of the operation.
 
 ### SSD
 ![UC2_SSD.png](UC2_SSD.png)
