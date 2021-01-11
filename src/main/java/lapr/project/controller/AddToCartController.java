@@ -37,7 +37,7 @@ public class AddToCartController {
             lst.add(p.toString());
         }
         if (lst.isEmpty()){
-            return null;
+            return new ArrayList<>();
         }else{
         return lst;}
     }
