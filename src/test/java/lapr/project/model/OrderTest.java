@@ -6,11 +6,8 @@
 package lapr.project.model;
 
 import java.time.Instant;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -28,8 +25,9 @@ public class OrderTest {
     
     @BeforeAll
     public static void setUpClass() {
-        order = new Order(2, 34.95, null);
-        order2 = new Order(3, 5.99, null);
+        
+        order = new Order(2, 34.95, new HashMap<>());
+        order2 = new Order(3, 5.99, new HashMap<>());
         order3 = new Order(4, new Date(335345), new Date(3434), "Prepared", 34.56);
     }
     
@@ -67,7 +65,7 @@ public class OrderTest {
      */
     @Test
     public void testGetEndDate() {
-        Date d = Date.from(Instant.now());
+        Date d = new Date(order.getBeginDate().getTime() - 1000);
         order.setEndDate(d);
         assertEquals(d, order.getEndDate());
     }
@@ -112,6 +110,15 @@ public class OrderTest {
     public void testSetId() {
         order.setId(5);
         assertEquals(5, order.getId());
+        
+        boolean expResult = false;
+        try{
+            order.setId(-1);
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
     }
     
     
@@ -123,6 +130,24 @@ public class OrderTest {
         Date d = Date.from(Instant.now());
         order.setBeginDate(d);
         assertEquals(d, order.getBeginDate());
+        
+        boolean expResult = false;
+        try{
+            order.setBeginDate(null);
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
+        
+        expResult = false;
+        try{
+            order.setBeginDate(new Date(new Date().getTime() + 10000));
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
     }
     
                 /**
@@ -130,9 +155,35 @@ public class OrderTest {
      */
     @Test
     public void testSetEndDate() {
-        Date d = Date.from(Instant.now());
+        Date d = new Date(order.getBeginDate().getTime() -344);
         order.setEndDate(d);
         assertEquals(d, order.getEndDate());
+        
+        order.setEndDate(null);
+        assertNull(order.getEndDate());
+        
+        order.setBeginDate(new Date(34345));
+        boolean expResult = false;
+        try{
+            order.setEndDate(new Date(34347));
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
+        
+        
+        expResult = false;
+        try{
+            order.setEndDate(new Date(new Date().getTime() + 10000));
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
+        
+        
+
     }
     
             /**
@@ -142,6 +193,17 @@ public class OrderTest {
     public void testSetPrice() {
         order.setPrice(23.45);
         assertEquals(23.45, order.getPrice());
+        
+        boolean expResult = false;
+        try{
+            order.setPrice(-4);
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
+        
+        
     }
     
             /**
@@ -154,6 +216,15 @@ public class OrderTest {
         pr.put(p, 2);
         order.setProducts(pr);
         assertEquals(pr, order.getProducts());
+        
+        boolean expResult = false;
+        try{
+            order.setProducts(null);
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
     }
     
 
@@ -164,6 +235,24 @@ public class OrderTest {
     public void testSetStatus() {
         order.setStatus("Prepared");
         assertEquals("Prepared", order.getStatus());
+        
+        boolean expResult = false;
+        try{
+            order.setStatus(null);
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
+        
+        expResult = false;
+        try{
+            order.setStatus("");
+            
+        }catch(IllegalArgumentException e){
+            expResult = true;
+        }
+        assertTrue(expResult);
     }
 
     /**

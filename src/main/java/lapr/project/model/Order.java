@@ -31,26 +31,27 @@ public class Order implements Comparable<Order>{
 
     
     public Order(int id, Date beginDate, Date endDate, String status, double price) {
-        this.id = id;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.price = price;
-        this.products = new HashMap<>();
+        setId(id);
+        setBeginDate(beginDate);
+        setEndDate(endDate);
+        setStatus(status);
+        setPrice(price);
+        setProducts(new HashMap<>());
         
     }
     
     public Order(int id, double price, HashMap<Product, Integer> products){
-        this.id = id;
-        this.beginDate = Date.from(Instant.now());
-        this.endDate = null;
-        this.status = "Processing";
-        this.price = price;
-        this.products = products;
+        setId(id);
+        setBeginDate(new Date());
+        setEndDate(null);
+        setStatus("Processing");
+        setPrice(price);
+        setProducts(products);
         
     }
     
     public int getId() {
+        
         return id;
     }
 
@@ -74,31 +75,44 @@ public class Order implements Comparable<Order>{
         return products;
     }
 
-    public void setId(int id) {
+    public final void setId(int id) {
+        if (id <= 0)
+            throw new IllegalArgumentException("Order's id is invalid.");
         this.id = id;
     }
 
-    public void setBeginDate(Date beginDate) {
+    public final void setBeginDate(Date beginDate) {
+        if (beginDate == null || beginDate.after(new Date()))
+            throw new IllegalArgumentException("Order's begin date is invalid.");
         this.beginDate = beginDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public final void setEndDate(Date endDate) {
+        if  (endDate == null)
+            this.endDate = null;
+        else
+            if (endDate.after(new Date()) || endDate.after(beginDate))
+                throw new IllegalArgumentException("Order's end date is invalid.");
         this.endDate = endDate;
     }
 
-    public void setPrice(double price) {
+    public final void setPrice(double price) {
+        if (price < 0)
+            throw new IllegalArgumentException("Order's price is invalid.");
         this.price = price;
     }
 
-    public void setProducts(HashMap<Product, Integer> products) {
+    public final void setProducts(HashMap<Product, Integer> products) {
+        if (products == null)
+            throw new IllegalArgumentException("Order's products is invalid.");
         this.products = products;
     }
     
     
     
-    
-
-    public void setStatus(String status) {
+   public final void setStatus(String status) {
+        if (status == null || status.isEmpty())
+            throw new IllegalArgumentException("Order's status is invalid.");
         this.status = status;
     }
     
