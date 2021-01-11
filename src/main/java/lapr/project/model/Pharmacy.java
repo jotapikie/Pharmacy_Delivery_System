@@ -16,7 +16,7 @@ import java.util.TreeSet;
  *
  * @author Diogo
  */
-public class Phamarcy {
+public class Pharmacy {
     private int id;
     private int phoneNumber;
     private String name;
@@ -26,7 +26,7 @@ public class Phamarcy {
     private Set<Order> orders;
     private List<Courier> couriers;
 
-    public Phamarcy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
+    public Pharmacy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
         setId(id);
         setPhoneNumber(phoneNumber);
         setName(name);
@@ -83,7 +83,7 @@ public class Phamarcy {
     }
 
     void setAdministrator(Administrator administrator) {
-        if (administrator.getEmail() == null || administrator.getEmail().isEmpty() || !administrator.getEmail().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+        if (!administrator.getEmail().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
             throw new IllegalArgumentException("Pharmacy's email is invalid.");
         }
         this.administrator = administrator;
@@ -128,7 +128,7 @@ public class Phamarcy {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Phamarcy other = (Phamarcy) obj;
+        final Pharmacy other = (Pharmacy) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -140,7 +140,7 @@ public class Phamarcy {
             return String.format("%d %s  %d  %s  %s ", id, getName(), getPhoneNumber(), getAdministrator().toString(), getAddress().toString());
         }
 
-    public List<Order> getSuggestedOrders(Courier cou) {
+   /* public List<Order> getSuggestedOrders(Courier cou) {
         List<Order> sOrders = new ArrayList<>();
         double totalWeight = 0;
         for(Order o : orders){
@@ -159,7 +159,7 @@ public class Phamarcy {
     public void addOrder(Order ord) {
         ord.setStatus("Processed");
         orders.add(ord);
-    }
+    }*/
 
     }
 

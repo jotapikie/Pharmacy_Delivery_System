@@ -61,4 +61,17 @@ public class UpdateVehicleControllerTest {
 
     }
 
+    /**
+     * Test of update method, of class UpdateVehicleController.
+     */
+    @Test
+    public void testUpdate2() throws SQLException {
+        when(vdb.update(any(Vehicle.class))).thenReturn(false);
+
+        boolean expResult = false;
+        boolean result = uvc2.update();
+        assertEquals(expResult, result);
+
+    }
+
 }

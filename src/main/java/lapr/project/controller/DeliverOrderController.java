@@ -14,7 +14,7 @@ import lapr.project.data.OrderDB;
 import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Courier;
 import lapr.project.model.Order;
-import lapr.project.model.Phamarcy;
+import lapr.project.model.Pharmacy;
 
 /**
  *
@@ -27,7 +27,7 @@ public class DeliverOrderController {
     private OrderDB odb;
     private String courierEmail;
     private Courier cou;
-    private Phamarcy pha;
+    private Pharmacy pha;
 
     public DeliverOrderController(String courierEmail) {
         this.cdb = new CourierDB();
