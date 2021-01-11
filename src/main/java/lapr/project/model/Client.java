@@ -40,7 +40,7 @@ public class Client extends User {
      */
     public Client(String username,String name, String password, String email,int nif, CreditCard creditCard, Address address) {
         super(username, email, password);
-        this.name=name;
+        setName(name);
         setNif(nif);
         setPoints();
         setCard(creditCard);
@@ -74,6 +74,10 @@ public class Client extends User {
         return points;
     } // returns the client's points
 
+    public void setName(String name) {
+        if (name==null||name.isEmpty()) throw new IllegalArgumentException("Invalid Client Name");
+        this.name=name;
+    }
 
     public ShoppingCart getCart() {
         return cart;

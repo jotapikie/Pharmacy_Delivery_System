@@ -32,10 +32,10 @@ public class Address {
     }
 
     void setLatitude(double latitude) {
-        if (!(-90<=latitude&&latitude<=90)) {
-            throw new IllegalArgumentException("Latitude is invalid.");
-        }
-        this.latitude = latitude;
+        if ((-90<=latitude&&latitude<=90)) {
+            this.latitude=latitude;
+        }else{
+        throw new IllegalArgumentException("Latitude is invalid.");}
     }
 
     public double getLongitude() {
@@ -43,10 +43,10 @@ public class Address {
     }
 
     void setLongitude(double longitude) {
-        if (!(-180<=longitude&&longitude<=180)) {
-            throw new IllegalArgumentException("Longitude is invalid.");
-        }
-        this.longitude = longitude;
+        if (-180<=longitude&&longitude<=180) {
+            this.longitude=longitude;
+        }else{
+        throw new IllegalArgumentException("Longitude is invalid.");}
     }
 
     void setCity(String city){
