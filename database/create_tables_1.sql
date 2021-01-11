@@ -4,7 +4,7 @@ DROP TABLE platform_client              CASCADE CONSTRAINTS PURGE;
 DROP TABLE credit_card                  CASCADE CONSTRAINTS PURGE;
 DROP TABLE administrator       	        CASCADE CONSTRAINTS PURGE;
 DROP TABLE courier                      CASCADE CONSTRAINTS PURGE;
-DROP TABLE phamarcy   	            	CASCADE CONSTRAINTS PURGE;
+DROP TABLE pharmacy   	            	CASCADE CONSTRAINTS PURGE;
 DROP TABLE vehicle     		            CASCADE CONSTRAINTS PURGE;
 DROP TABLE scooter       	            CASCADE CONSTRAINTS PURGE;
 DROP TABLE product         	            CASCADE CONSTRAINTS PURGE;
@@ -15,8 +15,9 @@ DROP TABLE invoice       	            CASCADE CONSTRAINTS PURGE;
 DROP TABLE delivery_order       		CASCADE CONSTRAINTS PURGE;
 DROP TABLE delivery_run       	        CASCADE CONSTRAINTS PURGE;
 DROP TABLE order_product       	        CASCADE CONSTRAINTS PURGE;
-DROP TABLE phamarcy_product             CASCADE CONSTRAINTS PURGE;
-DROP TABLE path                         CASCADE CONSTRAINTS PURGE;
+DROP TABLE pharmacy_product             CASCADE CONSTRAINTS PURGE;
+DROP TABLE pathway                      CASCADE CONSTRAINTS PURGE;
+DROP TABLE geographical_point           CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE platform_user(
     user_email varchar(255) CONSTRAINT pk_user_email PRIMARY KEY,
@@ -24,11 +25,11 @@ CREATE TABLE platform_user(
     user_name varchar(255) NOT NULL
 );
 
-CREATE TABLE phamarcy(
-    phamarcy_id INT CONSTRAINT pk_phamarcy_id PRIMARY KEY,
+CREATE TABLE pharmacy(
+    pharmacy_id INT CONSTRAINT pk_pharmacy_id PRIMARY KEY,
     phone_number int NOT NULL,
     designation varchar(255) NOT NULL,
-    administrator_email varchar(255) NOT NULL CONSTRAINT uk_phamarcy_administrator UNIQUE,
+    administrator_email varchar(255) NOT NULL CONSTRAINT uk_pharmacy_administrator UNIQUE,
     longitude float NOT NULL,
     latitude float NOT NULL
 );
@@ -50,7 +51,7 @@ CREATE TABLE courier(
     nif int NOT NULL, 
     nss int NOT NULL, 
     max_weight float NOT NULL, 
-    phamarcy_id int NOT NULL
+    pharmacy_id int NOT NULL
 );
 
 CREATE TABLE credit_card(
@@ -88,7 +89,7 @@ CREATE TABLE vehicle(
     max_battery int NOT NULL,
     current_battery int NOT NULL,
     motor int NOT NULL,
-    phamarcy_id int NOT NULL
+    pharmacy_id int NOT NULL
 );
 
 CREATE TABLE scooter(
@@ -101,7 +102,7 @@ CREATE TABLE park(
     park_id int CONSTRAINT pk_park_id PRIMARY KEY,
     max_vehicles int NOT NULL,
     park_type varchar(255) NOT NULL, 
-    phamarcy_id int NOT NULL
+    pharmacy_id int NOT NULL
 );
 
 CREATE TABLE park_slot(
@@ -119,7 +120,7 @@ CREATE TABLE delivery_order(
     price float NOT NULL,
     client_email varchar(255) NOT NULL,
     delivery_run_id int,
-    phamarcy_id int NOT NULL
+    pharmacy_id int NOT NULL
 );
 
 CREATE TABLE invoice(
@@ -135,11 +136,11 @@ CREATE TABLE order_product(
     CONSTRAINT pk_order_product PRIMARY KEY(product_id, order_id)
 );
 
-CREATE TABLE phamarcy_product(
-    phamarcy_id int NOT NULL,
+CREATE TABLE pharmacy_product(
+    pharmacy_id int NOT NULL,
     product_id int NOT NULL,
     quantity int NOT NULL,
-    CONSTRAINT pk_phamarcy_product PRIMARY KEY(phamarcy_id, product_id)
+    CONSTRAINT pk_pharmacy_product PRIMARY KEY(pharmacy_id, product_id)
 );
 
 CREATE TABLE delivery_run(
@@ -152,28 +153,38 @@ CREATE TABLE delivery_run(
     vehicle_nr int NOT NULL
 );
 
-CREATE TABLE path(
+CREATE TABLE pathway(
     longitude1 float NOT NULL,
     latitude1 float NOT NULL,
     longitude2 float NOT NULL,
     latitude2 float NOT NULL,
     distance float NOT NULL,
     street varchar(255),
-    CONSTRAINT fk_path_address1_address2 PRIMARY KEY(longitude1, latitude1, longitude2, latitude2)
+    CONSTRAINT pk_path_address1_address2 PRIMARY KEY(longitude1, latitude1, longitude2, latitude2)
 );
+
+CREATE TABLE geographical_point(
+    longitude float NOT NULL,
+    latitude float NOT NULL,
+    altitude float NOT NULL,
+    description varchar(255),
+    CONSTRAINT pk_geo_point_longitude_latitude PRIMARY KEY (longitude, latitude)
+);
+
+
 
 ALTER TABLE administrator ADD CONSTRAINT fk_administrator_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
 ALTER TABLE platform_client ADD CONSTRAINT fk_platform_client_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
 ALTER TABLE courier ADD CONSTRAINT fk_courier_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
-ALTER TABLE courier ADD CONSTRAINT fk_courier_phamarcy FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
-ALTER TABLE phamarcy ADD CONSTRAINT fk_phamarcy_address FOREIGN KEY (longitude, latitude) REFERENCES address (longitude, latitude);
+ALTER TABLE courier ADD CONSTRAINT fk_courier_pharmacy FOREIGN KEY (pharmacy_id) REFERENCES pharmacy (pharmacy_id);
+ALTER TABLE pharmacy ADD CONSTRAINT fk_pharmacy_address FOREIGN KEY (longitude, latitude) REFERENCES address (longitude, latitude);
 ALTER TABLE platform_client ADD CONSTRAINT fk_client_address FOREIGN KEY (longitude, latitude) REFERENCES address (longitude, latitude);
 ALTER TABLE super_admin ADD CONSTRAINT fk_super_admin_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
-ALTER TABLE phamarcy ADD CONSTRAINT fk_phamarcy_administrator FOREIGN KEY (administrator_email) REFERENCES administrator (email);
+ALTER TABLE pharmacy ADD CONSTRAINT fk_pharmacy_administrator FOREIGN KEY (administrator_email) REFERENCES administrator (email);
 ALTER TABLE credit_card ADD CONSTRAINT fk_credit_card_owner FOREIGN KEY (owner_email) REFERENCES platform_client (email);
 ALTER TABLE scooter ADD CONSTRAINT fk_scooter_nr FOREIGN KEY (vehicle_nr) REFERENCES vehicle (nr);
-ALTER TABLE vehicle ADD CONSTRAINT fk_vehicle_phamarcy FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
-ALTER TABLE park ADD CONSTRAINT fk_park_phamarcy FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
+ALTER TABLE vehicle ADD CONSTRAINT fk_vehicle_pharmacy FOREIGN KEY (pharmacy_id) REFERENCES pharmacy (pharmacy_id);
+ALTER TABLE park ADD CONSTRAINT fk_park_pharmacy FOREIGN KEY (pharmacy_id) REFERENCES pharmacy (pharmacy_id);
 ALTER TABLE park_slot ADD CONSTRAINT fk_park_slot_id FOREIGN KEY (park_id) REFERENCES park (park_id);
 ALTER TABLE park_slot ADD CONSTRAINT fk_park_slot_vehicle_parked FOREIGN KEY (vehicle_nr) REFERENCES vehicle (nr);
 ALTER TABLE delivery_order ADD CONSTRAINT fk_delivery_order_client FOREIGN KEY (client_email) REFERENCES platform_client (email);
@@ -183,8 +194,9 @@ ALTER TABLE order_product ADD CONSTRAINT fk_order_product_oid FOREIGN KEY (order
 ALTER TABLE delivery_run ADD CONSTRAINT fk_delivery_run_courier FOREIGN KEY (courier_email) REFERENCES courier (email);
 ALTER TABLE delivery_run ADD CONSTRAINT fk_delivery_run_vehicle FOREIGN KEY (vehicle_nr) REFERENCES vehicle (nr);
 ALTER TABLE delivery_order ADD CONSTRAINT fk_delivery_order_run FOREIGN KEY (delivery_run_id) REFERENCES delivery_run (delivery_run_id);
-ALTER TABLE phamarcy_product ADD CONSTRAINT fk_phamarcy_product_phaid FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
-ALTER TABLE phamarcy_product ADD CONSTRAINT fk_phamarcy_product_prdid FOREIGN KEY (product_id) REFERENCES product (product_id);
-ALTER TABLE delivery_order ADD CONSTRAINT fk_delivery_order_phamarcy FOREIGN KEY (phamarcy_id) REFERENCES phamarcy (phamarcy_id);
-ALTER TABLE path ADD CONSTRAINT fk_path_address1 FOREIGN KEY (longitude1, latitude1) REFERENCES address (longitude, latitude);
-ALTER TABLE path ADD CONSTRAINT fk_path_address2 FOREIGN KEY (longitude2, latitude2) REFERENCES address (longitude, latitude);
+ALTER TABLE pharmacy_product ADD CONSTRAINT fk_pharmacy_product_phaid FOREIGN KEY (pharmacy_id) REFERENCES pharmacy (pharmacy_id);
+ALTER TABLE pharmacy_product ADD CONSTRAINT fk_pharmacy_product_prdid FOREIGN KEY (product_id) REFERENCES product (product_id);
+ALTER TABLE delivery_order ADD CONSTRAINT fk_delivery_order_pharmacy FOREIGN KEY (pharmacy_id) REFERENCES pharmacy (pharmacy_id);
+ALTER TABLE pathway ADD CONSTRAINT fk_path_point1 FOREIGN KEY (longitude1, latitude1) REFERENCES geographical_point (longitude, latitude);
+ALTER TABLE pathway ADD CONSTRAINT fk_path_point22 FOREIGN KEY (longitude2, latitude2) REFERENCES geographical_point (longitude, latitude);
+ALTER TABLE address ADD CONSTRAINT fk_address_geo_point FOREIGN KEY (longitude, latitude) REFERENCES geographical_point(longitude, latitude);
