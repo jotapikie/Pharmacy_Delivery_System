@@ -54,6 +54,30 @@ class ClientTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of setName method, of class Client. Null.
+     */
+    @Test
+    void setName_Null() {
+        try {
+            client1.setName(null);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setName method, of class Client. Empty.
+     */
+    @Test
+    void setName_Empty() {
+        try {
+            client1.setName("");
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
 
 
 
