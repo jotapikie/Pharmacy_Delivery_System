@@ -28,8 +28,6 @@ public class ParkSlot {
 
     }
     
-    
-    
     public ParkSlot(int id, boolean ableToCharge) {
         setId(id);
         setAbleToCharge(ableToCharge);
