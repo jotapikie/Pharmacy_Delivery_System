@@ -63,6 +63,18 @@ public class AddressTest {
     }
 
     /**
+     * Test of setLatitude method, of class Address. Fail
+     */
+    @Test
+    void setAddress_Fail1() {
+        try {
+            address1.setAddress(null);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
      * Test of getLatitude method, of class Address. Success
      */
     @Test
@@ -77,6 +89,28 @@ public class AddressTest {
     @Test
     void setLatitude_Success() {
         double expResult = 40.256192;
+        address2.setLatitude(expResult);
+        double result = address2.getLatitude();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setAddress method, of class Address. Success
+     */
+    @Test
+    void setLatitude_Success1() {
+        double expResult = 90;
+        address2.setLatitude(expResult);
+        double result = address2.getLatitude();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setAddress method, of class Address. Success
+     */
+    @Test
+    void setLatitude_Success2() {
+        double expResult = -90;
         address2.setLatitude(expResult);
         double result = address2.getLatitude();
         assertEquals(expResult, result);
@@ -138,6 +172,8 @@ public class AddressTest {
         assertEquals(expResult, result);
     }
 
+
+
     /**
      * Test of setLongitude method, of class Address. Success
      */
@@ -173,17 +209,7 @@ public class AddressTest {
         }
     }
 
-    /**
-     * Test of setLongitude method, of class Address. Fail
-     */
-    @Test
-    void setLongitude_Fail2() {
-        try {
-            address1.setLongitude(180);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
+
     /**
      * Test of setLongitude method, of class Address. Fail
      */
@@ -260,6 +286,18 @@ public class AddressTest {
     void setCity_Fail() {
         try {
             address1.setCity("");
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setCity method, of class Address. Fail
+     */
+    @Test
+    void setCity_Fail1() {
+        try {
+            address1.setCity(null);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }

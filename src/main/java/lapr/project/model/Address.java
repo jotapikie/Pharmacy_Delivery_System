@@ -43,7 +43,7 @@ public class Address {
     }
 
     void setLongitude(double longitude) {
-        if (!(-180<longitude&&longitude<180)) {
+        if (!(-180<=longitude&&longitude<=180)) {
             throw new IllegalArgumentException("Longitude is invalid.");
         }
         this.longitude = longitude;

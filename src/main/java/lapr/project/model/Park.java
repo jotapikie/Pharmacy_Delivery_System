@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Park implements Comparable<Park>{
+public class Park{
     private int id;
     private int nMaxVehicles;
     private String type;
@@ -56,7 +56,7 @@ public class Park implements Comparable<Park>{
     }
 
     public void setSlots(Set<ParkSlot> slots) {
-        if(slots.size()>nMaxVehicles|| slots.size()==0)
+        if(slots.size()>nMaxVehicles|| slots.isEmpty())
             throw new IllegalArgumentException("Invalid park slots");
         this.slots = (HashSet<ParkSlot>) slots;
     }
@@ -65,14 +65,6 @@ public class Park implements Comparable<Park>{
         setnMaxVehicles(nMaxVehicles);
         setType(type);
         setSlots(slots);
-    }
-
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 31 * hash + Objects.hashCode(this.id);
-        return hash;
     }
 
     @Override
@@ -94,12 +86,15 @@ public class Park implements Comparable<Park>{
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+
+    @Override
     public String toString(){
         return String.format("%d %d %s", getId(),getnMaxVehicles(),getType());
-    }
-    
-    @Override
-    public int compareTo(Park p) {
-        return id-p.getId();
     }
 }

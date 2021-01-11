@@ -183,9 +183,6 @@ class ParkTest {
         assertNotEquals(park2.toString(), park1.toString());
     }
 
-    @Test
-    void testHashCode() {
-    }
 
     /**
      * Test of equals method
@@ -197,6 +194,54 @@ class ParkTest {
         boolean result = park1.equals(obj);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of equals method
+     */
+    @Test
+    public void testEquals1() {
+        Object obj = park1;
+        boolean expResult = true;
+        boolean result = park1.equals(obj);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of equals method
+     */
+    @Test
+    public void testEquals2() {
+        String obj = "TEST";
+        boolean expResult = false;
+        boolean result = park1.equals(obj);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of equals method
+     */
+    @Test
+    public void testEquals3() {
+        Object obj= park2;
+        boolean expResult = false;
+        boolean result = park1.equals(obj);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of equals method, of class Location.
+     */
+    @Test
+    public void testHashCode() {
+
+        int expResult = 79626;
+        int result = park1.hashCode();
+        assertEquals(expResult, result);
+    }
+
+
+
+
 
 
 }
