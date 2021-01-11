@@ -171,7 +171,7 @@ public class OrderTest {
      */
     @Test
     public void testToString() {
-        String expResult = "Id: 3 | Status: Processing | Price: 5.99 €";
+        String expResult = "Id: 3 | Status: Processing | Price: 5,99 €";
         String result = order2.toString();
         assertEquals(expResult, result);
         
