@@ -18,8 +18,8 @@ class ClientTest {
 
     @BeforeAll
     public static void setUpClass() {
-        client1 = new Client("username1", "name1", "password1", "email1@email.com", 123456789, 35, creditCard, address);
-        client2 = new Client("username2", "name2", "password2", "email2@email.com", 987654321, 15, creditCard, address);
+        client1 = new Client("username1", "name1", "password1", "email1@email.com", 123456789, creditCard, address);
+        client2 = new Client("username2", "name2", "password2", "email2@email.com", 987654321, creditCard, address);
     }
 
     @AfterAll
@@ -193,7 +193,7 @@ class ClientTest {
     @Test
     void setPontos_Invalid() {
         try {
-            client1.setNif(-5);
+            client1.setPoints(-5);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }

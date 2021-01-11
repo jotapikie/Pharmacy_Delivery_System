@@ -40,7 +40,7 @@ public class AddToCartControllerTest {
         cdb = mock(ClientDB.class);
         controller = new AddToCartController("client1@lapr.com", pdb, cdb);
         
-        c = new Client("u1", "Hugo", "123", "client1@lapr.com", 123456789, 0, null, null);
+        c = new Client("u1", "Hugo", "123", "client1@lapr.com", 123456789, null, null);
         when(cdb.getClient("client1@lapr.com")).thenReturn(c);
         controller = new AddToCartController("client1@lapr.com", pdb, cdb);
         

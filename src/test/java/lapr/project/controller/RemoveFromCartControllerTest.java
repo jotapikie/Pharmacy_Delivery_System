@@ -37,7 +37,7 @@ public class RemoveFromCartControllerTest {
         pdb = mock(ProductDB.class);
         controller = new RemoveFromCartController("client1@lapr.com", cdb, pdb);
         
-        c = new Client("u1", "Hugo", "123", "client1@lapr.com", 123456789, 0, null, null);
+        c = new Client("u1", "Hugo", "123", "client1@lapr.com", 123456789,  null, null);
         when(cdb.getClient("client1@lapr.com")).thenReturn(c);
         
         p1 = new Product(1, "Brufen", 0.65, 5);

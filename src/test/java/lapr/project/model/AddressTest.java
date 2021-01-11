@@ -14,8 +14,8 @@ public class AddressTest {
 
     @BeforeAll
     public static void setUpClass() {
-        address1 = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114,"4250-527");
-        address2 = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114,"4250-527");
+        address1 = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
+        address2 = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
     }
 
     @AfterAll
@@ -74,7 +74,7 @@ public class AddressTest {
      * Test of setLatitude method, of class Address. Fail
      */
     @Test
-    void setLatitude_Fail(){
+    void setLatitude_Fail() {
         try {
             address1.setLatitude(-95);
             fail("expected IllegalArgumentException");
@@ -106,11 +106,68 @@ public class AddressTest {
      * Test of setLongitude method, of class Address. Fail
      */
     @Test
-    void setLongitude_Fail(){
+    void setLongitude_Fail() {
         try {
             address1.setLongitude(190);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
+    }
+
+    /**
+     * Test of setPortNumber
+     */
+    @Test
+    void setPortNumber_Sucess(){
+        int expResult= 10;
+        address1.setPortNumber(expResult);
+        int result= address1.getPortNumber();
+        assertEquals(expResult,result);
+    }
+
+    /**
+     * Test of setPortNumber method, of class Address. Fail
+     */
+    @Test
+    void setPortNumber_Fail() {
+        try {
+            address1.setPortNumber(0);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+    /**
+     * Test of setPortNumber method, of class Address. Fail
+     */
+    @Test
+    void setPortNumber_Fail1() {
+        try {
+            address1.setPortNumber(-1);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setZipCode method, of class Address. Fail
+     */
+    @Test
+    void setZipCode_Fail() {
+        try {
+            address1.setZipCode("4450.MAT");
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setZipCode method, of class Address. Sucess
+     */
+    @Test
+    void setZipCode() {
+        String expRes="4250-527";
+        address1.setZipCode(expRes);
+        String res= address1.getZipCode();
+        assertEquals(expRes,res);
     }
 }

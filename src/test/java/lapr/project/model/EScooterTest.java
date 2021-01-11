@@ -51,6 +51,8 @@ public class EScooterTest {
         assertEquals(expResult, result);
     }
 
+
+
     /**
      * Test of setId method, of class vehicle.
      */
@@ -63,6 +65,55 @@ public class EScooterTest {
         } catch (IllegalArgumentException e) {
 
         }
+    }
+    /**
+     * Test of setAeroCoef method, of class escooter.
+     */
+    @Test
+    public void testSetAeroCoef() {
+
+        try {
+            scooterTest.setAeroCoef(-10);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+
+        }
+    }
+    /**
+     * Test of setAeroCoef method, of class escooter.
+     */
+    @Test
+    public void testSetAeroCoef_Sucess() {
+        int expRes=10;
+        scooterTest.setAeroCoef(expRes);
+        double res= scooterTest.getAeroCoef();
+        assertEquals(expRes,res);
+
+    }
+
+    /**
+     * Test of setFrontalArea method, of class escooter.
+     */
+    @Test
+    public void testSetFrontalArea() {
+
+        try {
+            scooterTest.setAeroCoef(-10);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+
+        }
+    }
+    /**
+     * Test of setFrontalArea method, of class escooter.
+     */
+    @Test
+    public void testSetFrontalArea_Sucess() {
+        int expRes=10;
+        scooterTest.setAeroCoef(expRes);
+        double res= scooterTest.getAeroCoef();
+        assertEquals(expRes,res);
+
     }
 
     /**

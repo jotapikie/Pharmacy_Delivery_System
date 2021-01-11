@@ -1,19 +1,27 @@
 package lapr.project.model;
 
 public class Address {
-    private String address;
+    private String streetName;
     private double latitude;
     private double longitude;
-    private String city;
+    private final String city;
     private int portNumber;
     private String zipCode;
 
+    public Address(String streetName, double latitude, double longitude, String city, int portNumber, String zipCode) {
+        this.streetName = streetName;
+        setLatitude( latitude);
+        setLongitude(longitude);
+        this.city=city;
+        setPortNumber(portNumber);
+        setZipCode(zipCode);
+    }
     public String getAddress() {
-        return address;
+        return streetName;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.streetName = streetName;
     }
 
     public double getLatitude() {
@@ -21,7 +29,7 @@ public class Address {
     }
 
     void setLatitude(double latitude) {
-        if (!(-90<latitude&&latitude<90)) {
+        if (!(-90<=latitude&&latitude<=90)) {
             throw new IllegalArgumentException("Latitude is invalid.");
         }
         this.latitude = latitude;
@@ -32,28 +40,21 @@ public class Address {
     }
 
     void setLongitude(double longitude) {
-        if (!(-180<longitude&&longitude<180)) {
+        if (!(-180<=longitude&&longitude<=180)) {
             throw new IllegalArgumentException("Longitude is invalid.");
         }
         this.longitude = longitude;
     }
 
-    public Address(String address, double latitude, double longitude, String city, int portNumber, String zipCode) {
-        this.address = address;
-        setLatitude( latitude);
-        setLongitude(longitude);
-        this.city=city;
-        setPortNumber(portNumber);
-        setZipCode(zipCode);
-    }
 
-    private void setZipCode(String zipCode) {
+
+    public void setZipCode(String zipCode) {
         if(!zipCode.matches("[1-9][0-9]{3}-[0-9]{3}")) throw new IllegalArgumentException("Wrong zipCode");
         this.zipCode=zipCode;
     }
 
-    private void setPortNumber(int portNumber) {
-        if (portNumber<=0) throw new IllegalArgumentException("Invalid port number");
+    public void setPortNumber(int portNumber) {
+        if (portNumber<0) throw new IllegalArgumentException("Invalid port number");
         this.portNumber=portNumber;
     }
 

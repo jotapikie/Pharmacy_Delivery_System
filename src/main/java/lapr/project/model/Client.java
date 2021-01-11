@@ -5,6 +5,8 @@
  */
 package lapr.project.model;
 
+import lapr.project.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,13 +16,13 @@ import java.util.List;
  * @author Diogo
  */
 public class Client extends User {
-
+    private String name;
     private int nif;
     private int points;
-    private ShoppingCart cart;
+    private final ShoppingCart cart;
     private CreditCard card;
     private Address address;
-    private List<Order> orders;
+    private final List<Order> orders;
 
 
 
@@ -32,15 +34,15 @@ public class Client extends User {
      * @param password   - client's password
      * @param email      - client's email
      * @param nif        - client's nif
-     * @param points     - client's points
      * @param creditCard - client´s credit card
      * @param address    - client's address
      *
      */
-    public Client(String username,String name, String password, String email,int nif,int points, CreditCard creditCard, Address address) {
+    public Client(String username,String name, String password, String email,int nif, CreditCard creditCard, Address address) {
         super(username, email, password);
+        this.name=name;
         setNif(nif);
-        setPoints(points);
+        setPoints();
         setCard(creditCard);
         setAddress(address);
         cart = new ShoppingCart();
@@ -80,7 +82,7 @@ public class Client extends User {
     /**
      * Modifies the client's nif to the value passed by parameter.
      *
-     * @param nif - client's new height
+     * @param nif - client's new nif
      */
     void setNif(int nif) {
         if (String.valueOf(nif).length()!=9) {
@@ -92,7 +94,14 @@ public class Client extends User {
     /**
      * Modifies the client's points to the value passed by parameter.
      *
-     * @param points - client's new weight
+     */
+    void setPoints() {
+        this.points = Constants.INITIAL_POINTS;
+    }
+
+    /**
+     * Modifies the client's points to the value passed by parameter.
+     *
      */
     void setPoints(int points) {
         if (points < 0) {
@@ -101,7 +110,7 @@ public class Client extends User {
         this.points = points;
     }
 
-    public Order makeOrder(int id, double totalPrice, HashMap<Product, Integer> items) {
+   /* public Order makeOrder(int id, double totalPrice, HashMap<Product, Integer> items) {
         Order o = new Order(id, totalPrice, items);
         orders.add(o);
         return o;
@@ -109,7 +118,7 @@ public class Client extends User {
 
     public Phamarcy getNeareastPhamarcy() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 
 
 

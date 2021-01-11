@@ -39,7 +39,7 @@ class RegisterClientControllerTest {
         CreditCard creditCard = new CreditCard(1234567890123456L, new Date(1673109541000L), 554);
         Address address = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "Porto", 122, "4250-527");
 
-        Client expResult = new Client(username, name, password, email, nif, points, creditCard, address);
+        Client expResult = new Client(username, name, password, email, nif, creditCard, address);
         when(clientDB.newClient(anyString(), anyString(), anyString(), anyString(), anyInt(), anyInt(), new Date(anyLong()), anyLong(), anyInt(), anyString(), anyDouble(), anyDouble(), anyString(), anyInt(), anyString())).thenReturn(expResult);
         Client result = registerClientController.newClient(username, name, password, email, nif, points, creditCard.getExpDate(),
                 creditCard.getVisaNumber(), creditCard.getCcv(), address.getAddress(), address.getLatitude(), address.getLongitude(), address.getCity(),address.getPortNumber(),address.getZipCode());

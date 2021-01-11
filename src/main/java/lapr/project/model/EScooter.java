@@ -49,7 +49,7 @@ public class EScooter extends Vehicle{
      * @param aeroCoef
      */
     public void setAeroCoef(double aeroCoef) {
-        if (aeroCoef < 0) throw new IllegalArgumentException("Illegal aero coeficent");
+        if (aeroCoef <= 0) throw new IllegalArgumentException("Illegal aero coeficent");
         this.aeroCoef = aeroCoef;
     }
 
@@ -68,7 +68,7 @@ public class EScooter extends Vehicle{
      * @param frontalArea
      */
     public void setFrontalArea(double frontalArea) {
-        if (frontalArea < 0) {
+        if (frontalArea <= 0) {
 
             throw new IllegalArgumentException("Frontal area cannot be negative");
         }
