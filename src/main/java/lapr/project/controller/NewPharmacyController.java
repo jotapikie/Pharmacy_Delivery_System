@@ -6,9 +6,7 @@ import lapr.project.model.Park;
 import lapr.project.model.Pharmacy;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import lapr.project.model.Administrator;
@@ -16,7 +14,7 @@ import lapr.project.model.Administrator;
 public class NewPharmacyController {
 
     private Pharmacy pharmacy;
-    private PharmacyDB pharmacyDB;
+    private final PharmacyDB pharmacyDB;
     private HashSet<Pharmacy> pharmaciesList = new HashSet<>();
 
 
@@ -39,10 +37,6 @@ public class NewPharmacyController {
 
     public boolean addPharmacyToQueue(){
         return pharmaciesList.add(pharmacy);
-    }
-
-    public void clearList(){
-        pharmaciesList.clear();
     }
 
     public Set<Pharmacy> getPharmacyList(){
