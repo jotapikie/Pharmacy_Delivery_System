@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -34,6 +35,23 @@ public class PharmacyDB extends DataHandler {
         return new Pharmacy(id,phoneNumber,name,administrator,address,parks);
     }
 
+
+
+    /**
+     * Method to save a instance of pharmacy in the dataBase
+     *
+     * @param p
+     * @return
+     * @throws java.sql.SQLException
+     */
+    public boolean save(Pharmacy p) throws SQLException {
+        addPharmacy(p);
+        return true;
+    }
+
+    public int save(Set<Pharmacy> pharmacies) throws SQLException {
+        return addPharmacies(pharmacies);
+    }
     /**
      * Saves the pharmacy passed by parameter in our database.
      *
@@ -41,7 +59,7 @@ public class PharmacyDB extends DataHandler {
      * @return true if we're able to add the pharmacy, false if we're not
      * @throws java.sql.SQLException
      */
-    public boolean savePharmacy(Pharmacy p) throws SQLException {
+    public boolean addPharmacy(Pharmacy p) throws SQLException {
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?,?,?,?,?) }")) {
             callStmt.setInt(1,p.getId());
@@ -61,7 +79,7 @@ public class PharmacyDB extends DataHandler {
     }
 
 
-    public int savePharmacies(List<Pharmacy> pharmaciesList) throws SQLException {
+    public int addPharmacies(Set<Pharmacy> pharmaciesList) throws SQLException {
         Connection con = getConnection();
         int[] rows;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?,?,?,?,?) }")) {

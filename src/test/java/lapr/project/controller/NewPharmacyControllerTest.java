@@ -23,7 +23,7 @@ class NewPharmacyControllerTest {
     public static void setUpClass() {
         fdb = mock(PharmacyDB.class);
         nfc = new NewPharmacyController();
-        nfc2 = new NewPharmacyController();
+        nfc2 = new NewPharmacyController(fdb);
     }
 
     @AfterEach
@@ -47,7 +47,7 @@ class NewPharmacyControllerTest {
     @Test
     public void testNewPharmacy(){
 
-        Administrator admin= new Administrator("jota","1180567@isep","senha");
+        Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
         Address address= new Address("Rua",1,1,"porto",10,"4250-222");
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
@@ -56,7 +56,7 @@ class NewPharmacyControllerTest {
         Pharmacy value = new Pharmacy(1,918222222,"FarmaciaCool",admin,address,parks);
         when(fdb.newPhamarcy(anyInt(),anyInt(),anyString(),anyObject(),anyObject(),anyObject())).thenReturn(value);
 
-        Pharmacy expResult = new Pharmacy(1,918222222,"FarmaciaCool",admin,address,parks);
+        Pharmacy expResult = value;
         Pharmacy result = nfc2.newPharmacy(1,918222222,"FarmaciaCool",admin,address,parks);
         assertEquals(expResult, result);
 
@@ -71,14 +71,14 @@ class NewPharmacyControllerTest {
         int id= 1;
         int nr=918822222;
         String name= "DABID";
-        Administrator admin= new Administrator("jota","1180567@isep","senha");
+        Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
         Address address= new Address("Rua",1,1,"porto",10,"4250-222");
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));
         parks.add(new Park(1,2,"SCOOTER", slots));
         nfc3.newPharmacy(id,nr,name,admin,address,parks);
-        when(fdb.savePharmacy(any(Pharmacy.class))).thenReturn(true);
+        when(fdb.save(any(Pharmacy.class))).thenReturn(true);
 
         boolean expResult = true;
         boolean result = nfc3.registerPharmacy();
@@ -95,7 +95,7 @@ class NewPharmacyControllerTest {
         int id= 1;
         int nr=918822222;
         String name= "DABID";
-        Administrator admin= new Administrator("jota","1180567@isep","senha");
+        Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
         Address address= new Address("Rua",1,1,"porto",10,"4250-222");
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
@@ -110,12 +110,13 @@ class NewPharmacyControllerTest {
      * Test of insertPharmacyBatchOp method, of class NewPharmacyController.
      */
     @Test
-    public void testInsertVehiclesBatchOp() throws Exception {
+    public void testInsertPharmaciesBatchOp() throws Exception {
         int numInserts = nfc2.insertPharmacyBatchOp();
+        when(fdb.save(nfc2.getPharmacyList())).thenReturn(numInserts);
 
-        when(fdb.savePharmacies(nfc2.getPharmacyList())).thenReturn(numInserts);
 
-        assertEquals(0, nfc2.getPharmacyList().size());
+
+        assertEquals(0, nfc.getPharmacyList().size());
         assertEquals(numInserts, numInserts);
     }
 
@@ -127,7 +128,7 @@ class NewPharmacyControllerTest {
         int id= 1;
         int nr=918822222;
         String name= "DABID";
-        Administrator admin= new Administrator("jota","1180567@isep","senha");
+        Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
         Address address= new Address("Rua",1,1,"porto",10,"4250-222");
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
