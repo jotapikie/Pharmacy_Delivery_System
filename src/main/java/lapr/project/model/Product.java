@@ -23,22 +23,43 @@ public class Product {
         this.weight = weight;
         this.price = price;
     }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public double getWeight() {
+        return weight;
+    }
 
     public double getPrice() {
         return price;
     }
 
-    public int getId() {
-        return id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getWeight() {
-        return weight;
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+    
+
+
+
 
     @Override
     public String toString() {

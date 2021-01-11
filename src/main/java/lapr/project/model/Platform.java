@@ -12,19 +12,26 @@ package lapr.project.model;
 public class Platform {
     
     private static final double DELIVERY_PRICE = 3.5;
+    private static final double CREDITS_PER_EURO = 15;
+    private static final double CREDITS_WON_PER_EURO_SPENT = 0.2;
     
     
-
     public double getDeliveryPrice() {
         return DELIVERY_PRICE;
     }
-
-    public double getDiscountedPrice(int cred, double totalPrice) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public double getCreditsPerEuro(){
+        return CREDITS_PER_EURO;
     }
-
-    public void sendEmail(String email, String toString) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public double getCreditsWonPerEuroSpent(){
+        return CREDITS_WON_PER_EURO_SPENT;
     }
+    
+    
+    
+
+
+
     
 }
