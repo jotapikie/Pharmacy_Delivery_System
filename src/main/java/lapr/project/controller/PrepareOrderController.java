@@ -9,9 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
-import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Order;
-import lapr.project.model.Phamarcy;
 
 /**
  *
@@ -19,15 +17,13 @@ import lapr.project.model.Phamarcy;
  */
 public class PrepareOrderController {
     
-    private OrderDB odb;
-    private PhamarcyDB pdb;
-    private int idPhamarcy;
+    private final OrderDB odb;
+    private final int idPhamarcy;
     private Order ord;
 
 
-    public PrepareOrderController(int idPhamarcy) {
-        this.odb = new OrderDB();
-        this.pdb = new PhamarcyDB();
+    public PrepareOrderController(OrderDB odb, int idPhamarcy) {
+        this.odb = odb;
         this.idPhamarcy = idPhamarcy;
     }
     

@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
-import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Order;
 
 /**
@@ -19,15 +18,14 @@ import lapr.project.model.Order;
 public class NotifyReadyOrderController {
     
     private Order order;
-    private OrderDB orderDB;
-    private int idPharmacy;
-    private PhamarcyDB pdb;
+    private final OrderDB orderDB;
+    private final int idPharmacy;
 
 
 
-    public NotifyReadyOrderController(int idPharmacy) {
-        this.orderDB= new OrderDB();
-        this.pdb = new PhamarcyDB();
+
+    public NotifyReadyOrderController(OrderDB odb, int idPharmacy) {
+        this.orderDB= odb;
         this.idPharmacy = idPharmacy;
         
     }
@@ -43,7 +41,7 @@ public class NotifyReadyOrderController {
     
     public String getSelectedOrder(int id) throws SQLException{
         order = orderDB.getOrder(id);
-        return orderDB== null ? null : order.toString();
+        return order== null ? null : order.toString();
     }
     
     public boolean setOrderToReady() throws SQLException{

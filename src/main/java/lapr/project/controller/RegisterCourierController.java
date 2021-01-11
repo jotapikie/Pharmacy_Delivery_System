@@ -7,39 +7,30 @@ package lapr.project.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lapr.project.data.CourierDB;
 import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Courier;
-import lapr.project.model.Phamarcy;
 
 /**
  *
  * @author Helder
  */
 public class RegisterCourierController {
+    
     private Courier courier; 
-
     private final CourierDB courierDB; 
-    
-    
-    private final List<Courier> couriersList;
-    
-    private int idPharmacy;
-    private PhamarcyDB pdb;
+    private final Set<Courier> couriersList;
+    private final int idPharmacy;
 
-    public RegisterCourierController(int idPharmacy) { 
-        courierDB = new CourierDB(); 
-        couriersList = new ArrayList<>();
+    public RegisterCourierController( CourierDB courierDB, int idPharmacy) {
+        this.courierDB = courierDB;
+        this.couriersList = new HashSet<>();
         this.idPharmacy = idPharmacy;
-        this.pdb = new PhamarcyDB();
     }
-
-
-
     
-
-   
     public String newCourier(String name, String email, String password, int nif, int nss, double maxWeight) {
         courier = courierDB.newCourier(name,email,password, nif, nss, maxWeight);
         return courier.toString();
@@ -49,12 +40,19 @@ public class RegisterCourierController {
         return couriersList.add(courier);
     }
 
-    
-    
     public int registCouriers() throws SQLException {
         final int numRows = courierDB.saveCouriers(couriersList, idPharmacy);
         couriersList.clear();
         return numRows;
     }
+
+    // FOR TEST PURPOSES
+
+    public Set<Courier> getCouriersList() {
+        return couriersList;
+    }
+
+    
+    
     
 }

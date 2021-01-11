@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 import lapr.project.model.Courier;
 import oracle.jdbc.OracleTypes;
 
@@ -39,7 +40,7 @@ public class CourierDB extends DataHandler{
         return new Courier(name, email, password, nif, nss, maxWeight);
     }
 
-    public int saveCouriers(List<Courier> couriersList, int idPhamarcy) throws SQLException {
+    public int saveCouriers(Set<Courier> couriersList, int idPhamarcy) throws SQLException {
         Connection con = getConnection();
         int[] rows;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterCourier(?,?,?,?,?,?,?) }")) {
