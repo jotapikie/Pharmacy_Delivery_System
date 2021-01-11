@@ -29,14 +29,6 @@ public class Order implements Comparable<Order>{
     private double price;
     private HashMap<Product, Integer> products;
 
-    public Order(int id, Date beginDate, Date endDate, String status, double price, HashMap<Product, Integer> products) {
-        this.id = id;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.price = price;
-        this.products = products;
-    }
     
     public Order(int id, Date beginDate, Date endDate, String status, double price) {
         this.id = id;
