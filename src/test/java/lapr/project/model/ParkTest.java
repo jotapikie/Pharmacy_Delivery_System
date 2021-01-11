@@ -229,6 +229,18 @@ class ParkTest {
     }
 
     /**
+     * Test of equals method
+     */
+    @Test
+    public void testEquals4() {
+        park2.setId(1);
+        Object obj= park2;
+        boolean expResult = false;
+        boolean result = park1.equals(obj);
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Test of equals method, of class Location.
      */
     @Test
