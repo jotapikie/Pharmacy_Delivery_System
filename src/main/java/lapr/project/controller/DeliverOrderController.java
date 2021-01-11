@@ -36,7 +36,7 @@ public class DeliverOrderController {
         this.courierEmail = courierEmail;
     }
     
-    public List<String> getSuggestedOrders() throws SQLException{
+    /*public List<String> getSuggestedOrders() throws SQLException{
         List<String> orders = new ArrayList<>();
         cou = cdb.getCourier(courierEmail);
         pha = pdb.getPhamarcyByCourier(cou.getEmail());
@@ -45,7 +45,7 @@ public class DeliverOrderController {
             orders.add(o.toString());
         }
         return orders;
-    }
+    }*/
     
     public LinkedList<String> findRoute(){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
