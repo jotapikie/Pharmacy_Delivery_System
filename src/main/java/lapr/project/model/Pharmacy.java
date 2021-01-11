@@ -103,9 +103,6 @@ public class Pharmacy {
         this.parks = parks;
     }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
     
     @Override
     public int hashCode() {
