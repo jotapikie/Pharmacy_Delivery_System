@@ -26,7 +26,7 @@ class ParkTest {
         slots.add(slot);
         slots.add(slot2);
         park1 = new Park(1,3,"SCOOTER",slots);
-        park2 = new Park(2,5,"sr",slots);
+        park2 = new Park(2,5,"scooter",slots);
         park3 = new Park(3, 1, "scooter", slots);
     }
 
@@ -196,5 +196,5 @@ class ParkTest {
         assertEquals(expResult, result);
     }
 
-    
+
 }
