@@ -73,7 +73,7 @@ class ParkSlotTest {
 
     @Test
     void isAbleToCharge1() {
-        boolean expRes=false;
+        boolean expRes=true;
         boolean res=slot2.isAbleToCharge();
         assertEquals(expRes,res);
     }
@@ -86,19 +86,20 @@ class ParkSlotTest {
     }
 
     @Test
-    void isInUse() {
-        boolean expRes=false;
-        boolean res=slot.isInUse();
-        assertEquals(expRes,res);
-    }
-
-    @Test
     void setInUse() {
         boolean expRes=true;
         slot.setInUse(true);
         boolean res=slot.isInUse();
         assertEquals(expRes,res);
     }
+
+    @Test
+    void isInUse() {
+        boolean expRes=true;
+        boolean res=slot.isInUse();
+        assertEquals(expRes,res);
+    }
+
 
     @Test
     void setScooter() {

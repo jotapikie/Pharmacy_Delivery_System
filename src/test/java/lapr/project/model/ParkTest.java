@@ -234,7 +234,7 @@ class ParkTest {
     @Test
     public void testHashCode() {
 
-        int expResult = 79626;
+        int expResult = 94;
         int result = park1.hashCode();
         assertEquals(expResult, result);
     }
