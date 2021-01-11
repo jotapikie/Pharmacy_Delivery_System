@@ -24,7 +24,6 @@ public class PharmacyTest {
     private static Pharmacy pharmacyTest2;
     private static Administrator admin=new Administrator("helder","helder@gmail.com","abc");
     private static HashSet<Park> parks= new HashSet<Park>();
-    private static Park park1 = new Park();
     private static Address address = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
     
     public PharmacyTest() {

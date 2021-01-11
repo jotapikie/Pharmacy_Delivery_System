@@ -36,7 +36,10 @@ public class AddToCartController {
         for(Product p : pdb.getProducts()){
             lst.add(p.toString());
         }
-        return lst;
+        if (lst.isEmpty()){
+            return null;
+        }else{
+        return lst;}
     }
     
     public String getSelectedProduct(int id) throws SQLException{

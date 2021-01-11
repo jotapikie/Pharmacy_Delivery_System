@@ -5,15 +5,12 @@
  */
 package lapr.project.controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
+
 import lapr.project.data.CourierDB;
 import lapr.project.data.OrderDB;
-import lapr.project.data.PhamarcyDB;
+import lapr.project.data.PharmacyDB;
 import lapr.project.model.Courier;
-import lapr.project.model.Order;
 import lapr.project.model.Pharmacy;
 
 /**
@@ -23,7 +20,7 @@ import lapr.project.model.Pharmacy;
 public class DeliverOrderController {
     
     private CourierDB cdb;
-    private PhamarcyDB pdb;
+    private PharmacyDB pdb;
     private OrderDB odb;
     private String courierEmail;
     private Courier cou;
@@ -31,7 +28,7 @@ public class DeliverOrderController {
 
     public DeliverOrderController(String courierEmail) {
         this.cdb = new CourierDB();
-        this.pdb = new PhamarcyDB();
+        this.pdb = new PharmacyDB();
         this.odb = new OrderDB();
         this.courierEmail = courierEmail;
     }

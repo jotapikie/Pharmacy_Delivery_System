@@ -1,6 +1,6 @@
 package lapr.project.controller;
 
-import lapr.project.data.PhamarcyDB;
+import lapr.project.data.PharmacyDB;
 import lapr.project.model.Address;
 import lapr.project.model.Park;
 import lapr.project.model.Pharmacy;
@@ -14,15 +14,15 @@ import lapr.project.model.Administrator;
 public class NewPharmacyController {
 
     private Pharmacy pharmacy;
-    private final PhamarcyDB pharmacyDB;
+    private final PharmacyDB pharmacyDB;
     private final List<Pharmacy> pharmaciesList = new ArrayList<>();
 
 
     public NewPharmacyController() {
-        pharmacyDB = new PhamarcyDB();
+        pharmacyDB = new PharmacyDB();
     }
 
-    public NewPharmacyController(PhamarcyDB pdb, PhamarcyDB pharmacyDB) {
+    public NewPharmacyController( PharmacyDB pharmacyDB) {
         this.pharmacyDB = pharmacyDB;
     }
 

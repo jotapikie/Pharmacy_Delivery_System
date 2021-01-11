@@ -20,11 +20,11 @@ import java.util.List;
  *
  * @author Diogo
  */
-public class PhamarcyDB extends DataHandler {
+public class PharmacyDB extends DataHandler {
     
    private ParkDB pdb;
 
-    public PhamarcyDB() {
+    public PharmacyDB() {
         pdb = new ParkDB();
     }
    

@@ -17,10 +17,6 @@ public class Park{
         setSlots(slots);
     }
 
-    public Park() {
-    }
-    
-    
 
     public int getId() {
         return id;

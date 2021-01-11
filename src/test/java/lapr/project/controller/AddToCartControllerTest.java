@@ -61,7 +61,7 @@ public class AddToCartControllerTest {
 /*
     *//**
      * Test of getAvailableProducts method, of class AddToCartController.
-     *//*
+     */
     @Test
     public void testGetAvailableProducts() throws Exception {
         System.out.println("getAvailableProducts");
@@ -76,7 +76,7 @@ public class AddToCartControllerTest {
        when(pdb.getProducts()).thenReturn(lstEmpty);
         res = controller.getAvailableProducts();
         assertEquals(0, res.size());
-    }*/
+    }
 
     /**
      * Test of getSelectedProduct method, of class AddToCartController.
