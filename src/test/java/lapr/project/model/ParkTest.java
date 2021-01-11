@@ -153,6 +153,7 @@ class ParkTest {
     void setSlotsFail() {
         try {
             slots.add(new ParkSlot(5,true));
+            slots.add(new ParkSlot(7,false));
             park3.setSlots(slots);
             fail("Expected IllegalArgument");
         }catch (IllegalArgumentException ignored){
