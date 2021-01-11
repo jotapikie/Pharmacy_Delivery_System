@@ -78,6 +78,9 @@ public class Client extends User {
         if (name==null||name.isEmpty()) throw new IllegalArgumentException("Invalid Client Name");
         this.name=name;
     }
+    public String getName(){
+        return name;
+    }
 
     public ShoppingCart getCart() {
         return cart;

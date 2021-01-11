@@ -36,7 +36,7 @@ class UserTest {
      */
     @Test
     void getName_Success() {
-        String expResult = "username_test", result = user1.getName();
+        String expResult = "username_test", result = user1.getUsername();
         assertEquals(expResult, result);
     }
 
@@ -47,7 +47,7 @@ class UserTest {
     void setName_Success() {
         String expResult = "new_username";
         user2.setUserame(expResult);
-        String result = user2.getName();
+        String result = user2.getUsername();
         assertEquals(expResult, result);
     }
 
