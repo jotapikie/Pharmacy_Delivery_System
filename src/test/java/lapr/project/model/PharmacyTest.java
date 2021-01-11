@@ -6,8 +6,7 @@
 package lapr.project.model;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,16 +18,16 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Helder
  */
-public class PhamarcyTest {
+public class PharmacyTest {
     
-    private static Phamarcy phamarcyTest;
-    private static Phamarcy phamarcyTest2;
+    private static Pharmacy pharmacyTest;
+    private static Pharmacy pharmacyTest2;
     private static Administrator admin=new Administrator("helder","helder@gmail.com","abc");
     private static HashSet<Park> parks= new HashSet<Park>();
     private static Park park1 = new Park();
     private static Address address = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
     
-    public PhamarcyTest() {
+    public PharmacyTest() {
     }
     
     @BeforeAll
@@ -41,8 +40,8 @@ public class PhamarcyTest {
     
     @BeforeEach
     public void setUp() {
-        phamarcyTest=new Phamarcy(1,912345678,"Farmacia Central",admin,address,new HashSet<Park>());
-        phamarcyTest2=new Phamarcy(2,912345678,"Farmacia ",admin,address,new HashSet<Park>());
+        pharmacyTest =new Pharmacy(1,912345678,"Farmacia Central",admin,address,new HashSet<Park>());
+        pharmacyTest2 =new Pharmacy(2,912345678,"Farmacia ",admin,address,new HashSet<Park>());
                 
     }
     
@@ -56,7 +55,7 @@ public class PhamarcyTest {
     @Test
     public void testGetId() {
         int expResult = 1;
-        int result = phamarcyTest.getId();
+        int result = pharmacyTest.getId();
         assertEquals(expResult, result);
     }
 
@@ -66,8 +65,8 @@ public class PhamarcyTest {
     @Test
     public void testSetId() {
         int expResult = 2;
-        phamarcyTest.setId(expResult);
-        int result = phamarcyTest.getId();
+        pharmacyTest.setId(expResult);
+        int result = pharmacyTest.getId();
         assertEquals(expResult, result);
     }
 
@@ -77,7 +76,7 @@ public class PhamarcyTest {
     @Test
     public void testGetPhoneNumber() {
         int expResult = 912345678;
-        int result = phamarcyTest.getPhoneNumber();
+        int result = pharmacyTest.getPhoneNumber();
         assertEquals(expResult, result);
     }
 
@@ -87,8 +86,8 @@ public class PhamarcyTest {
     @Test
     public void testSetPhoneNumber() {
         int expResult = 987654321;
-        phamarcyTest.setPhoneNumber(expResult);
-        int result=phamarcyTest.getPhoneNumber();
+        pharmacyTest.setPhoneNumber(expResult);
+        int result= pharmacyTest.getPhoneNumber();
         assertEquals(expResult, result);
     }
 
@@ -98,7 +97,7 @@ public class PhamarcyTest {
     @Test
     public void testGetName() {
         String expResult = "Farmacia Central";
-        String result = phamarcyTest.getName();
+        String result = pharmacyTest.getName();
         assertEquals(expResult, result);
     }
 
@@ -108,7 +107,7 @@ public class PhamarcyTest {
     @Test
     public void testGetAdministrator() {
         Administrator expResult = admin;
-        Administrator result = phamarcyTest.getAdministrator();
+        Administrator result = pharmacyTest.getAdministrator();
         assertEquals(expResult, result);
     }
 
@@ -118,8 +117,8 @@ public class PhamarcyTest {
     @Test
     public void testSetAdministrator() {
         Administrator administrator = new Administrator("helder","helder@gmail.com","abc");
-        phamarcyTest.setAdministrator(administrator);
-        Administrator result=phamarcyTest.getAdministrator();
+        pharmacyTest.setAdministrator(administrator);
+        Administrator result= pharmacyTest.getAdministrator();
         assertEquals(administrator,result);
         
     }
@@ -129,7 +128,7 @@ public class PhamarcyTest {
      */
     @Test
     public void testGetAddress() {;
-        Address result = phamarcyTest.getAddress();
+        Address result = pharmacyTest.getAddress();
         assertEquals(address, result);
     }
 
@@ -139,8 +138,8 @@ public class PhamarcyTest {
     @Test
     public void testSetAddress() {
         Address address = new Address("Rua da torre", 40.738312, -7.765318, "porto", 114, "4250-527");
-        phamarcyTest.setAddress(address);
-        Address result= phamarcyTest.getAddress();
+        pharmacyTest.setAddress(address);
+        Address result= pharmacyTest.getAddress();
         assertEquals(address, result);
     }
 
@@ -150,7 +149,7 @@ public class PhamarcyTest {
     @Test
     public void testGetParks() {
         HashSet<Park> expResult = new HashSet<Park>();
-        HashSet<Park> result = phamarcyTest.getParks();
+        HashSet<Park> result = pharmacyTest.getParks();
         assertEquals(expResult, result);
     }
     
@@ -160,8 +159,8 @@ public class PhamarcyTest {
     @Test
     public void testSetName() {
         String expResult = "Farmacia XPTO";
-        phamarcyTest.setName(expResult);
-        String result=phamarcyTest.getName();
+        pharmacyTest.setName(expResult);
+        String result= pharmacyTest.getName();
         assertEquals(expResult, result);
     }
 
@@ -172,7 +171,7 @@ public class PhamarcyTest {
     @Test
     public void testEquals() {
         boolean expResult = false;
-        boolean result = phamarcyTest.equals(phamarcyTest2);
+        boolean result = pharmacyTest.equals(pharmacyTest2);
         assertEquals(expResult, result);
     }
 

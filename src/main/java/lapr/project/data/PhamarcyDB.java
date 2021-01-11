@@ -30,8 +30,8 @@ public class PhamarcyDB extends DataHandler {
    
    
 
-    public Phamarcy newPhamarcy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
-        return new Phamarcy(id,phoneNumber,name,administrator,address,parks);
+    public Pharmacy newPhamarcy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
+        return new Pharmacy(id,phoneNumber,name,administrator,address,parks);
     }
 
     /**
@@ -41,7 +41,7 @@ public class PhamarcyDB extends DataHandler {
      * @return true if we're able to add the pharmacy, false if we're not
      * @throws java.sql.SQLException
      */
-    public boolean savePharmacy(Phamarcy p) throws SQLException {
+    public boolean savePharmacy(Pharmacy p) throws SQLException {
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?,?,?,?,?) }")) {
             callStmt.setInt(1,p.getId());
@@ -61,11 +61,11 @@ public class PhamarcyDB extends DataHandler {
     }
 
 
-    public int savePharmacies(List<Phamarcy> pharmaciesList) throws SQLException {
+    public int savePharmacies(List<Pharmacy> pharmaciesList) throws SQLException {
         Connection con = getConnection();
         int[] rows;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?,?,?,?,?) }")) {
-            for (Phamarcy p : pharmaciesList) {
+            for (Pharmacy p : pharmaciesList) {
                 callStmt.setInt(1, p.getId());
                 callStmt.setInt(2, p.getPhoneNumber());
                 callStmt.setString(3, p.getAdministrator().getEmail());
@@ -93,8 +93,8 @@ public class PhamarcyDB extends DataHandler {
             }
         }
 
-    public Phamarcy getPharmacyByAdministrator(String administratorEmail) throws SQLException {
-        Phamarcy p = null;
+    public Pharmacy getPharmacyByAdministrator(String administratorEmail) throws SQLException {
+        Pharmacy p = null;
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPhamarcyByAdministrator(?)}")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.setString(2, administratorEmail);
@@ -109,8 +109,8 @@ public class PhamarcyDB extends DataHandler {
         }
     }
 
-    public Phamarcy getPhamarcyByCourier(String courierEmail) throws SQLException {
-         Phamarcy p = null;
+    public Pharmacy getPhamarcyByCourier(String courierEmail) throws SQLException {
+         Pharmacy p = null;
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPhamarcyByCourier(?)}")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.setString(2, courierEmail);
