@@ -21,7 +21,7 @@ public class Address {
     }
 
     public void setAddress(String address) {
-        if (address==null){
+        if (address==null||address.isEmpty()){
             throw new IllegalArgumentException("Street Name cannot be null");
         }
         this.streetName = address;
@@ -43,14 +43,14 @@ public class Address {
     }
 
     void setLongitude(double longitude) {
-        if (!(-180<=longitude&&longitude<=180)) {
+        if (!(-180<longitude&&longitude<180)) {
             throw new IllegalArgumentException("Longitude is invalid.");
         }
         this.longitude = longitude;
     }
 
     void setCity(String city){
-        if (city==null){
+        if (city==null||city.isEmpty()){
             throw new IllegalArgumentException("City cannot be null");
         }
         this.city=city;

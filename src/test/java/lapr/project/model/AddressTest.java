@@ -100,7 +100,7 @@ public class AddressTest {
     @Test
     void setLatitude_Fail1() {
         try {
-            address1.setLatitude(-90);
+            address1.setLatitude(-92);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
@@ -123,7 +123,7 @@ public class AddressTest {
     @Test
     void setLatitude_Fail3() {
         try {
-            address1.setLatitude(90);
+            address1.setLatitude(91);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
@@ -167,7 +167,7 @@ public class AddressTest {
     @Test
     void setLongitude_Fail1() {
         try {
-            address1.setLongitude(-180);
+            address1.setLongitude(-181);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
