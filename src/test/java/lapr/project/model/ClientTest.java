@@ -39,7 +39,7 @@ class ClientTest {
      */
     @Test
     void getName_Success() {
-        String expResult = "username1", result = client1.getName();
+        String expResult = "name1", result = client1.getName();
         assertEquals(expResult, result);
     }
 
