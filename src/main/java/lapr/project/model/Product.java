@@ -18,10 +18,10 @@ public class Product {
 
 
     public Product(int id, String name, double weight, double price) {
-        this.id = id;
-        this.name = name;
-        this.weight = weight;
-        this.price = price;
+        setId(id);
+        setName(name);
+        setWeight(weight);
+        setPrice(price);
     }
     
     public int getId() {
@@ -40,19 +40,31 @@ public class Product {
         return price;
     }
 
-    public void setId(int id) {
+    public final void setId(int id) {
+         if (id < 0) {
+            throw new IllegalArgumentException("Product's id is invalid.");
+        }
         this.id = id;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
+         if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Product's name is invalid.");
+        }
         this.name = name;
     }
 
-    public void setWeight(double weight) {
+    public final void setWeight(double weight) {
+        if (weight <= 0) {
+            throw new IllegalArgumentException("Product's weight is invalid.");
+        }
         this.weight = weight;
     }
 
-    public void setPrice(double price) {
+    public final void setPrice(double price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("Product's price is invalid.");
+        }
         this.price = price;
     }
     

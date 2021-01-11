@@ -88,6 +88,14 @@ public class ProductTest {
         double expResult = 3;
         double result = productTest.getId();
         assertEquals(expResult, result);
+        boolean exp = false;
+        try{
+        productTest.setId(-1);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+        
     }
     
     
@@ -100,6 +108,14 @@ public class ProductTest {
         String expResult = "Brufen";
         String result = productTest.getName();
         assertEquals(expResult, result);
+        
+        boolean exp = false;
+        try{
+        productTest.setName(null);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
     }
     
         /**
@@ -111,6 +127,14 @@ public class ProductTest {
         double expResult = 5.9;
         double result = productTest.getWeight();
         assertEquals(expResult, result, 0.0);
+        
+        boolean exp = false;
+        try{
+        productTest.setWeight(-2);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
     }
     
         /**
@@ -122,6 +146,14 @@ public class ProductTest {
         double expResult = 25.99;
         double result = productTest.getPrice();
         assertEquals(expResult, result, 0.0);
+        
+        boolean exp = false;
+        try{
+        productTest.setPrice(-3);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
     }
     
 
