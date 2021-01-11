@@ -54,7 +54,7 @@ public class Address {
     }
 
     public void setPortNumber(int portNumber) {
-        if (portNumber<0) throw new IllegalArgumentException("Invalid port number");
+        if (portNumber<=0) throw new IllegalArgumentException("Invalid port number");
         this.portNumber=portNumber;
     }
 

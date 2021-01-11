@@ -172,7 +172,8 @@ class ClientTest {
      */
     @Test
     void getPontos_Success() {
-        int expResult = 35, result = client1.getPoints();
+        int expResult = 0,
+        result = client1.getPoints();
         assertEquals(expResult, result);
     }
 

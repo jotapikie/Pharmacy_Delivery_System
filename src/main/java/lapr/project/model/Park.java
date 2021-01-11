@@ -10,11 +10,11 @@ public class Park implements Comparable<Park>{
     private String type;
     private HashSet<ParkSlot> slots;
 
-    public Park(int id, int nMaxVehicles, String type, HashSet<ParkSlot> slots) {
-        this.id = id;
-        this.nMaxVehicles = nMaxVehicles;
-        this.type = type;
-        this.slots = slots;
+    public Park(int id, int nMaxVehicles, String type, Set<ParkSlot> slots) {
+        setId(id);
+        setnMaxVehicles(nMaxVehicles);
+        setType(type);
+        setSlots(slots);
     }
 
     public int getId() {
@@ -42,7 +42,7 @@ public class Park implements Comparable<Park>{
     }
 
     public void setType(String type) {
-        if (!type.equals("Scooter")) throw new IllegalArgumentException("Invalid park type");
+        if (!type.equalsIgnoreCase("SCOOTER")) throw new IllegalArgumentException("Invalid park type");
         this.type=type;
     }
 
@@ -50,10 +50,10 @@ public class Park implements Comparable<Park>{
         return slots;
     }
 
-    public void setSlots(HashSet<ParkSlot> slots) {
+    public void setSlots(Set<ParkSlot> slots) {
         if(slots.size()>nMaxVehicles|| slots.size()==0)
             throw new IllegalArgumentException("Invalid park slots");
-        this.slots = slots;
+        this.slots = (HashSet<ParkSlot>) slots;
     }
 
     public void updatePark(int nMaxVehicles, String type, HashSet<ParkSlot> slots ){

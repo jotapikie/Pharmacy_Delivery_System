@@ -15,7 +15,7 @@ public class AddressTest {
     @BeforeAll
     public static void setUpClass() {
         address1 = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
-        address2 = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
+        address2 = new Address("Reta do Pereiro 800", 40.738312, -7.765318, "porto", 114, "4250-527");
     }
 
     @AfterAll
