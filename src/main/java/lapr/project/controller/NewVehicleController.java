@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import lapr.project.data.VehicleDB;
+import lapr.project.model.Drone;
 import lapr.project.model.EScooter;
 import lapr.project.model.State;
 import lapr.project.model.Vehicle;
@@ -38,6 +39,10 @@ public class NewVehicleController {
         return (EScooter) vehicle;
     }
 
+    public Drone newDrone(int id, int weight, int maxBat, int actualBat, int motor) {
+        vehicle = vehicleDB.newDrone(id,weight,State.INACTIVE,maxBat,actualBat,motor);
+        return (Drone) vehicle;
+    }
     public boolean registerVehicle() throws SQLException {
         return vehicleDB.save(vehicle, pharmID);
     }
