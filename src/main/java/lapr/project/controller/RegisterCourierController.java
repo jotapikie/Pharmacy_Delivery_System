@@ -25,22 +25,17 @@ public class RegisterCourierController {
     
     private final List<Courier> couriersList;
     
-    private String administratorEmail;
+    private int idPharmacy;
     private PhamarcyDB pdb;
 
-    public RegisterCourierController(String administratorEmail) { 
+    public RegisterCourierController(int idPharmacy) { 
         courierDB = new CourierDB(); 
         couriersList = new ArrayList<>();
-        this.administratorEmail = administratorEmail;
+        this.idPharmacy = idPharmacy;
         this.pdb = new PhamarcyDB();
     }
 
-    public RegisterCourierController(CourierDB courierDB, PhamarcyDB pdb, String administratorEmail) {
-        this.courierDB = courierDB;
-        this.couriersList = new ArrayList<>();
-        this.administratorEmail = administratorEmail;
-        this.pdb = pdb;
-    }
+
 
     
 
@@ -57,8 +52,7 @@ public class RegisterCourierController {
     
     
     public int registCouriers() throws SQLException {
-        Phamarcy pha = pdb.getPharmacyByAdministrator(administratorEmail);
-        final int numRows = courierDB.saveCouriers(couriersList, pha.getId());
+        final int numRows = courierDB.saveCouriers(couriersList, idPharmacy);
         couriersList.clear();
         return numRows;
     }

@@ -21,21 +21,19 @@ public class PrepareOrderController {
     
     private OrderDB odb;
     private PhamarcyDB pdb;
-    private String administratorEmail;
+    private int idPhamarcy;
     private Order ord;
-    private Phamarcy pha;
 
 
-    public PrepareOrderController(String administratorEmail) {
+    public PrepareOrderController(int idPhamarcy) {
         this.odb = new OrderDB();
         this.pdb = new PhamarcyDB();
-        this.administratorEmail = administratorEmail;
+        this.idPhamarcy = idPhamarcy;
     }
     
     public List<String> getReadyToPrepareOrders() throws SQLException{
-        pha = pdb.getPharmacyByAdministrator(administratorEmail);
         List<String> lst = new ArrayList<>();
-        for(Order o : odb.getOrdersByStatus(pha.getId(), "Processed")){
+        for(Order o : odb.getOrdersByStatus(idPhamarcy, "Processed")){
             lst.add(o.toString());
         }
         return lst;
@@ -49,7 +47,7 @@ public class PrepareOrderController {
     
     public void prepareOrder() throws SQLException{
         if(ord!=null){
-            odb.setStatus(ord.getId(), "Preparing", pha.getId());
+            odb.setStatus(ord.getId(), "Preparing", idPhamarcy);
         }
     }
     

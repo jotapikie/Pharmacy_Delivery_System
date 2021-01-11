@@ -11,7 +11,8 @@ package lapr.project.data;
  */
 public class PhamarcyProductDB extends DataHandler{
 
-    public void updateStock(String administratorEmail, int id, int quantity) {
+
+    public void updateStock(int idPharmacy, int id, int quantity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

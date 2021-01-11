@@ -11,7 +11,6 @@ import java.util.List;
 import lapr.project.data.OrderDB;
 import lapr.project.data.PhamarcyDB;
 import lapr.project.model.Order;
-import lapr.project.model.Phamarcy;
 
 /**
  *
@@ -21,23 +20,21 @@ public class NotifyReadyOrderController {
     
     private Order order;
     private OrderDB orderDB;
-    private String administratorEmail;
+    private int idPharmacy;
     private PhamarcyDB pdb;
-    private Phamarcy pha;
 
 
 
-    public NotifyReadyOrderController(String administratorEmail) {
+    public NotifyReadyOrderController(int idPharmacy) {
         this.orderDB= new OrderDB();
         this.pdb = new PhamarcyDB();
-        this.administratorEmail = administratorEmail;
+        this.idPharmacy = idPharmacy;
         
     }
     
     public List<String> getPreparingOrders() throws SQLException{
-        pha = pdb.getPharmacyByAdministrator(administratorEmail);
         List<String> lst = new ArrayList<>();
-        for(Order o : orderDB.getOrdersByStatus(pha.getId(), "Preparing")){
+        for(Order o : orderDB.getOrdersByStatus(idPharmacy, "Preparing")){
             lst.add(o.toString());
         }
         return lst;
@@ -54,7 +51,7 @@ public class NotifyReadyOrderController {
             return false;
         }
         
-        orderDB.setStatus(order.getId(), "Prepared", pha.getId());
+        orderDB.setStatus(order.getId(), "Prepared", idPharmacy);
         return true;
     }
     
