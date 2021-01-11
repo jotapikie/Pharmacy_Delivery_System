@@ -74,10 +74,6 @@ public class AddToCartControllerTest {
         assertEquals(p2.toString(), it.next());
         assertEquals(p3.toString(), it.next());
         
-        when(pdb.getProducts()).thenReturn(lstEmpty);
-        res = controller.getAvailableProducts();
-        assertEquals(0, res.size());
-        
     }
 
     /**
