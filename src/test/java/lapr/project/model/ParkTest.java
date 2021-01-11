@@ -145,7 +145,7 @@ class ParkTest {
     void setSlots() {
         HashSet<ParkSlot> expResult= slots;
         park1.setSlots(slots);
-        HashSet res= park1.getSlots();
+        HashSet<ParkSlot> res= park1.getSlots();
         assertEquals(expResult,res);
     }
 
@@ -176,8 +176,8 @@ class ParkTest {
 
     @Test
     void updatePark() {
-        park2.updatePark(3,"SCOOTER",slots);
-        assertEquals(park2.getnMaxVehicles(), 3);
+        park2.updatePark(5,"SCOOTER",slots);
+        assertEquals(park2.getnMaxVehicles(), 5);
         assertEquals(park2.getType(), "SCOOTER");
         assertEquals(park2.getSlots(), slots);
         assertNotEquals(park2.toString(), park1.toString());
