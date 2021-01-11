@@ -24,11 +24,13 @@ public class OrderTest {
     
     private static Order order;
     private static Order order2;
+    private static Order order3;
     
     @BeforeAll
     public static void setUpClass() {
         order = new Order(2, 34.95, null);
         order2 = new Order(3, 5.99, null);
+        order3 = new Order(4, new Date(335345), new Date(3434), "Prepared", 34.56);
     }
     
 
@@ -46,6 +48,8 @@ public class OrderTest {
     public void testGetId() {
         order.setId(5);
         assertEquals(5, order.getId());
+        
+        assertEquals(4, order3.getId());
     }
 
     /**
@@ -75,6 +79,8 @@ public class OrderTest {
     public void testGetPrice() {
         order.setPrice(23.56);
         assertEquals(23.56, order.getPrice());
+        
+        assertEquals(34.56, order3.getPrice());
     }
 
     /**
