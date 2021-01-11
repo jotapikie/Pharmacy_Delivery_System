@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -136,16 +137,16 @@ class ParkTest {
 
     @Test
     void getSlots() {
-        HashSet<ParkSlot> expRes= slots;
-        HashSet<ParkSlot> res= park1.getSlots();
+        Set<ParkSlot> expRes= slots;
+        Set<ParkSlot> res= park1.getSlots();
         assertEquals(expRes,res);
     }
 
     @Test
     void setSlots() {
-        HashSet<ParkSlot> expResult= slots;
+        Set<ParkSlot> expResult= slots;
         park1.setSlots(slots);
-        HashSet<ParkSlot> res= park1.getSlots();
+        Set<ParkSlot> res= park1.getSlots();
         assertEquals(expResult,res);
     }
 

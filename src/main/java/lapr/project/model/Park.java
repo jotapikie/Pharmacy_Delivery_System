@@ -8,7 +8,7 @@ public class Park{
     private int id;
     private int nMaxVehicles;
     private String type;
-    private HashSet<ParkSlot> slots;
+    private Set<ParkSlot> slots;
 
     public Park(int id, int nMaxVehicles, String type, Set<ParkSlot> slots) {
         setId(id);
@@ -48,7 +48,7 @@ public class Park{
     }
 
     public Set<ParkSlot> getSlots() {
-        HashSet<ParkSlot> slotsCopy= new HashSet<ParkSlot>();
+        Set<ParkSlot> slotsCopy= new HashSet<ParkSlot>();
         slotsCopy=slots;
         return  slotsCopy;
     }
