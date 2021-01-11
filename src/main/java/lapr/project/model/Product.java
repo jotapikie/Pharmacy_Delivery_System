@@ -41,7 +41,7 @@ public class Product {
     }
 
     public final void setId(int id) {
-         if (id < 0) {
+         if (id <= 0) {
             throw new IllegalArgumentException("Product's id is invalid.");
         }
         this.id = id;
