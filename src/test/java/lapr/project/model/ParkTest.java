@@ -27,7 +27,7 @@ class ParkTest {
         slots.add(slot2);
         park1 = new Park(1,3,"SCOOTER",slots);
         park2 = new Park(2,5,"scooter",slots);
-        park3 = new Park(3, 6, "scooter", slots);
+        park3 = new Park(3, 3, "scooter", slots);
     }
 
     @AfterAll
