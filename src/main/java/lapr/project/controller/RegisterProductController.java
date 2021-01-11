@@ -14,9 +14,9 @@ import lapr.project.model.Product;
  * @author Helder
  */
 public class RegisterProductController {
-    private ProductDB ProductDB;
+    private final ProductDB ProductDB;
     private Product pro;
-    private HashSet<Product> products = new HashSet<>();
+    private final HashSet<Product> products = new HashSet<>();
 
     public RegisterProductController(ProductDB productDB) {
         this.ProductDB=productDB;

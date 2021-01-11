@@ -82,36 +82,50 @@ public class Order implements Comparable<Order>{
         return products;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setProducts(HashMap<Product, Integer> products) {
+        this.products = products;
+    }
+    
+    
+    
+    
+
     public void setStatus(String status) {
         this.status = status;
     }
     
     
     
-    public double getTotalWeight(){
-        double weight = 0;
-        for(Product p : products.keySet()){
-            weight = weight + p.getWeight();
-        }
-        return weight;
-    }
 
     @Override
     public String toString() {
-        return String.format("Id: %d | Begin Date: %s | End Date: %s | Status: %s | Price: %.2f €", id, beginDate, endDate, status, price);
+        return String.format("Id: %d | Status: %s | Price: %.2f €", id, status, price);
     }
     
     
 
     @Override
     public int compareTo(Order o) {
-        return this.beginDate.compareTo(o.beginDate);
+        return this.beginDate.compareTo(o.getBeginDate());
     }
 
-    public Invoice makeInvoice(Client cli, Address add, double priceToPay, int nif) {
-        Invoice inv = new Invoice(cli, add, priceToPay, price, products, nif);
-        return inv;
-    }
+
     
     
 

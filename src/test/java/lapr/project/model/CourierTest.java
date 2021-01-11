@@ -39,6 +39,27 @@ public class CourierTest {
     @AfterEach
     public void tearDown() {
     }
+    
+            /**
+     * Test of getNss method, of class Courier.
+     */
+    @Test
+    public void testGetNss() {
+        double expResult = 32425 ;
+        double result = courierTest.getNss();
+        assertEquals(expResult, result, 0.0);
+    }
+   
+    
+        /**
+     * Test of getNif method, of class Courier.
+     */
+    @Test
+    public void testGetNif() {
+        double expResult = 454654 ;
+        double result = courierTest.getNif();
+        assertEquals(expResult, result, 0.0);
+    }
 
     /**
      * Test of getMaxWeight method, of class Courier.
