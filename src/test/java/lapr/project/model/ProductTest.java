@@ -116,6 +116,16 @@ public class ProductTest {
             exp = true;
         }
         assertTrue(exp);
+        
+        exp = false;
+        try{
+        productTest.setName("");
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+        
+        
     }
     
         /**
