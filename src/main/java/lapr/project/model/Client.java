@@ -107,7 +107,7 @@ public class Client extends User {
      * Modifies the client's points to the value passed by parameter.
      *
      */
-    void setPoints(int points) {
+    public void setPoints(int points) {
         if (points < 0) {
             throw new IllegalArgumentException("Client's points is invalid.");
         }

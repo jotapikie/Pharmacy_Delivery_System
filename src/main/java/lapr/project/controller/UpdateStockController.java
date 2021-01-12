@@ -8,7 +8,7 @@ package lapr.project.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import lapr.project.data.PhamarcyProductDB;
+import lapr.project.data.PharmacyStockDB;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
 
@@ -18,14 +18,14 @@ import lapr.project.model.Product;
  */
 public class UpdateStockController {
     
-    private ProductDB pdb;
-    private PhamarcyProductDB ppdb;
-    private int idPharmacy;
+    private final ProductDB pdb;
+    private final PharmacyStockDB ppdb;
+    private final int idPharmacy;
     private Product pro;
 
-    public UpdateStockController(int idPhamarcy) {
+    public UpdateStockController(int idPharmacy) {
         this.pdb = new ProductDB();
-        this.ppdb = new PhamarcyProductDB();
+        this.ppdb = new PharmacyStockDB();
         this.idPharmacy = idPharmacy;
     }
     

@@ -23,6 +23,7 @@ public class Order implements Comparable<Order>{
     private String status;
     private double price;
     private Map<Product, Integer> products;
+    private Order associatedOrder;
 
     
     public Order(int id, Date beginDate, Date endDate, String status, double price) {
@@ -32,6 +33,7 @@ public class Order implements Comparable<Order>{
         this.status = status;
         this.price = price;
         this.products = new HashMap<>();
+        this.associatedOrder = null;
         
     }
     
@@ -42,7 +44,17 @@ public class Order implements Comparable<Order>{
         this.status = "Processing";
         this.price = price;
         this.products = products;
-        
+        this.associatedOrder = null;
+    }
+    
+    public Order(int id, double price, Map<Product, Integer> products, Order assOrder){
+        this.id = id;
+        this.beginDate = Date.from(Instant.now());
+        this.endDate = null;
+        this.status = "Processing";
+        this.price = price;
+        this.products = products;
+        this.associatedOrder = assOrder;
     }
     
     public int getId() {
@@ -69,6 +81,10 @@ public class Order implements Comparable<Order>{
         return products;
     }
 
+    public Order getAssociatedOrder() {
+        return associatedOrder;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -88,6 +104,12 @@ public class Order implements Comparable<Order>{
     public void setProducts(HashMap<Product, Integer> products) {
         this.products = products;
     }
+
+    public void setAssociatedOrder(Order associatedOrder) {
+        this.associatedOrder = associatedOrder;
+    }
+    
+    
     
     
     

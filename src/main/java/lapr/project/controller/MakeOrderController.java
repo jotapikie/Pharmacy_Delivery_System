@@ -2,96 +2,141 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- *//*
+ */
 package lapr.project.controller;
 
-import java.util.HashMap;
-import lapr.project.data.AddressDB;
-import lapr.project.data.ClientDB;
-import lapr.project.data.OrderDB;
-import lapr.project.model.Address;
-import lapr.project.model.Client;
-import lapr.project.model.Invoice;
-import lapr.project.model.Order;
-import lapr.project.model.Phamarcy;
-import lapr.project.model.Platform;
-import lapr.project.model.Product;
-import lapr.project.model.ShoppingCart;
 
-*//**
- *
- * @author Diogo
- *//*
 public class MakeOrderController {
     
-    private ClientDB cdb;
-    private AddressDB adb;
-    private OrderDB odb;
-    private String email;
-    private Client cli;
-    private ShoppingCart cart;
-    private HashMap<Product, Integer> items;
-    private double totalPrice = 0;
-    private double discPrice = 0;
-    private double priceToPay = 0;
-    private int cred = 0;
-    private Platform plat;
-    private Address add;
+//    private final ClientDB cdb;
+//    private final AddressDB adb;
+//    private final OrderDB odb;
+//    private final InvoiceDB idb;
+//    private final PharmacyStockDB ppdb;
+//    private final String email;
+//    
+//    private Client cli;
+//    private ShoppingCart cart;
+//    private HashMap<Product, Integer> items;
+//    private final Platform plat;
+//    private Address add;
+//    private Pharmacy pha;
+//    private Order ord;
+//    
+//    private double totalPrice;
+//    private double discPrice;
+//    private double priceToPay;
+//    
+//    private int cred;
+//    private int creditsSpent;
+//    private int creditsWon;
+//
+//    public MakeOrderController(ClientDB cdb, AddressDB adb, OrderDB odb,InvoiceDB idb,PharmacyStockDB ppdb, String email) {
+//        this.cdb = cdb;
+//        this.adb = adb;
+//        this.odb = odb;
+//        this.idb = idb;
+//        this.ppdb = ppdb;
+//        this.email = email;
+//        items = new HashMap<>();
+//        plat = new Platform();
+//        totalPrice = 0;
+//        discPrice = 0;
+//        priceToPay = 0;
+//        cred = 0;
+//        creditsSpent = 0;
+//        creditsWon= 0;
+//    }
+//   
+//    public String getCart(){
+//        cli = cdb.getClient(email);
+//        cart = cli.getCart();
+//        items = cart.getItems();
+//        totalPrice = plat.getDeliveryPrice() + cart.getPrice();
+//        return cart.toString();
+//    }
+//    
+//    public String getAddress(){
+//        add = adb.getAddressByClient(email);
+//        return add.toString();
+//    }
+//    
+//    public int getDefaultNif(){
+//        return cli.getNif();
+//    }
+//    
+//    public int getCredits(){
+//        cred = cli.getPoints();
+//        discPrice = totalPrice - Utils.creditsToEuros(cred);
+//        priceToPay = totalPrice;
+//        return cred;
+//    }
+//    
+//    public void discount(){
+//        priceToPay = discPrice;
+//        creditsSpent = cred;
+//    }
+//    
+//    public double getFinalPrice(){
+//        return priceToPay;
+//    }
+//    
+//    public void makeOrder(int nif, int id) throws SQLException{
+//        cli.setPoints(cli.getPoints() - creditsSpent);
+//        ord = odb.newOrder(id, totalPrice, items);
+//        creditsWon = Utils.creditsWon(totalPrice);
+//        cli.setPoints(cli.getPoints() + creditsWon);
+//        Invoice inv = idb.newInvoice(cli, add, items, totalPrice, priceToPay, creditsSpent, creditsWon, nif, id);
+//        getNearestPharmacy();
+//        odb.saveOrder(ord, cli, pha);
+//        idb.saveInvoice(inv, ord.getId());
+//        cdb.setPoints(cli.getPoints());
+//        checkPharmacyStock();
+//        sendEmail();
+//        
+//    }
+//    
+//    private void getNearestPharmacy(){
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//    
+//    private boolean checkPharmacyStock() throws SQLException{
+//        
+//        HashMap<Product, Integer> missingProducts = new HashMap<>();
+//        for(Product p : items.keySet()){
+//            int quantity = ppdb.getQuantity(pha.getId(), p.getId());
+//            int missing = items.get(p) - quantity;
+//            if(missing > 0){
+//                missingProducts.put(p, missing);
+//            }
+//        }
+//        
+//        if(missingProducts.isEmpty()){
+//            odb.setStatus(ord.getId(), "Processed", pha.getId());
+//            ppdb.updateAfterSale(pha.getId(), items);
+//            return true;
+//        }else{
+//            // CREATE A NEW ORDER WITH ord ASSOCIATED
+//            // ASSIGN IT TO THE NEAREST PHARMACY WITH STOCK
+//            return false;
+//            
+//            
+//        }
+//        
+//    }
+//    
+//    private void sendEmail(){
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//    
+ 
+    
     
 
-    public MakeOrderController(ClientDB cdb, AddressDB adb,OrderDB odb, String email) {
-        this.cdb = cdb;
-        this.adb = adb;
-        this.odb = odb;
-        this.email = email;
-    }
-    
-    public String getCart(){
-        cli = cdb.getClient(email);
-        cart = cli.getCart();
-        items = cart.getItems();
-        totalPrice = cart.getPrice() + plat.getDeliveryPrice();
-        return cart.toString() + totalPrice;
-    }
-    
-    public String getAddress(){
-        add = adb.getAddressByClient(cli.getEmail());
-        return add.toString();
-    }
-    
-    public int getDefaultNif(){
-        return cli.getNif();
-    }
-    
-    public int getCredits(){
-        cred = cli.getPoints();
-        discPrice = plat.getDiscountedPrice(cred, totalPrice);
-        priceToPay = totalPrice;
-        return cred;
-    }
-    
-    public void discount(){
-        priceToPay = discPrice;
-    }
-    
-    public double getFinalPrice(){
-        return priceToPay;
-    }
-    
-    public void makeOrder(int nif, int id){
-        Order ord = cli.makeOrder(id, totalPrice, items);
-        Invoice inv = ord.makeInvoice(cli, add, priceToPay, nif);
-        Phamarcy pha = cli.getNeareastPhamarcy();
-        pha.addOrder(ord);
-        plat.sendEmail(cli.getEmail(), inv.toString());
-        odb.saveOrder(ord, inv, pha.getId());
-    }
-
-
     
     
 
     
+
+}
     
-    
-}*/
