@@ -35,7 +35,7 @@ public class RegisterProductController {
         return products.add(pro);
     }
 
-    public int registCouriers() throws SQLException {
+    public int registProduct() throws SQLException {
         final int i = ProductDB.saveProducts(products);
         products.clear();
         return i;
