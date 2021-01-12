@@ -23,6 +23,7 @@ A use case diagram was developed to understand the responsible actor or actors f
 | UC14 | [Find Route](UC14/UC14_FindRoute.md) |
 | UC15 | [Notify Scooter Docked](UC15/UC15_NotifyScooterDocked.md) |
 | UC16 | [Notify Order Ready](UC16/UC16_OrderReady.md) |
+| UC17 | [Add Park](UC16/UC16_AddPark.md) |
 ---
 
 [Back](../Documentation.md)
