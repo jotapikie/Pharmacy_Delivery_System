@@ -6,23 +6,25 @@
 package lapr.project.data;
 
 import java.util.HashMap;
-import lapr.project.model.Address;
-import lapr.project.model.Client;
-import lapr.project.model.Invoice;
 import lapr.project.model.Product;
 
 /**
  *
- * @author ivoal
+ * @author Diogo
  */
-public class InvoiceDB {
+public class PharmacyStockDB extends DataHandler{
 
-    public Invoice newInvoice(Client cli, Address add, HashMap<Product, Integer> items, double totalPrice, double priceToPay, int creditsSpent, int creditsWon, int nif, int id) {
+
+    public void updateStock(int idPharmacy, int id, int quantity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void saveInvoice(Invoice inv, int id) {
+    public int getQuantity(int id, int id0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void updateAfterSale(int id, HashMap<Product, Integer> items) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

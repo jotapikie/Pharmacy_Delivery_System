@@ -26,9 +26,11 @@ An email with the invoice is sent to client.
 
 ### Sequence Diagram
 
-![UC9_SD](UC9_SD.jpg)
+![UC8_SD](UC8_SD.png)
+
+![CheckPharmacyStock_SD](SD_CheckPharmactStock.png)
 
 
 ### Class Diagram
 
-![UC9_CD](UC9_CD.jpg)
+![UC8_CD](UC8_CD.png)

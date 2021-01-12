@@ -9,10 +9,14 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import lapr.project.model.Client;
 import lapr.project.model.Order;
+import lapr.project.model.Pharmacy;
+import lapr.project.model.Product;
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -79,10 +83,24 @@ public class OrderDB extends DataHandler{
         return listOrders;
     }
 
-   /* public void saveOrder(Order ord, Invoice inv, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-*/
+
+
+
+//    public Order newOrder(int id, double totalPrice, HashMap<Product, Integer> items) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public void saveOrder(Order ord) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public void saveOrder(Order ord, Client cli, Pharmacy pha) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public Order newOrder(int cred, double totalPrice, HashMap<Product, Integer> items, Order ord) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     
     
     

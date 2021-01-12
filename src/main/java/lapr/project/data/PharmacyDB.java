@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -138,5 +139,9 @@ public class PharmacyDB extends DataHandler {
             throw new IllegalArgumentException("The courier wasn't found.");
         }
     }
+
+//    public List<Pharmacy> getPharmaciesWithAddress() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
 }
