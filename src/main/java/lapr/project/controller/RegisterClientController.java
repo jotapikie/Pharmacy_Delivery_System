@@ -44,12 +44,7 @@ public class RegisterClientController {
     /*
      * Saves the client known by the controller in our database.
      */
-    public boolean registerClient() throws SQLException {
-        if (clientDB.saveClient(client)){
-            return true;
-        }else{
-            return false;
-        }
+    public boolean registerClient() throws SQLException {  return clientDB.saveClient(client)
     }
 
     public List<Client> getClientsList(){
