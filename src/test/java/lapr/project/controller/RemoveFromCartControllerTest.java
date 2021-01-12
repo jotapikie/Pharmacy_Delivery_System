@@ -23,9 +23,11 @@ public class RemoveFromCartControllerTest {
     
 
     private static RemoveFromCartController controller;
+    private static RemoveFromCartController controller1;
     private static ClientDB cdb;
     private static ProductDB pdb;
     private static Client c;
+    private static Client c1;
     private static Product p1;
     private static Product p2;
     private static Product p3;
@@ -36,9 +38,12 @@ public class RemoveFromCartControllerTest {
         cdb = mock(ClientDB.class);
         pdb = mock(ProductDB.class);
         controller = new RemoveFromCartController("client1@lapr.com", cdb, pdb);
+        controller1 = new RemoveFromCartController("client2@lapr.com", cdb, pdb);
         
         c = new Client("u1", "Hugo", "123", "client1@lapr.com", 123456789,  null, null);
+        c1 = new Client("u2", "Joana", "123", "client2@lapr.com", 123456789,  null, null);
         when(cdb.getClient("client1@lapr.com")).thenReturn(c);
+        when(cdb.getClient("client2@lapr.com")).thenReturn(c1);
         
         p1 = new Product(1, "Brufen", 0.65, 5);
         p2 = new Product(2, "Benuron", 1.23, 3.5);
@@ -69,6 +74,10 @@ public class RemoveFromCartControllerTest {
         assertEquals(true, c.getCart().getItems().keySet().contains(p1));
         assertEquals(true, c.getCart().getItems().keySet().contains(p2));
         assertNotNull(controller.getProductsInCart());
+        
+        
+        
+        
 
     }
 
@@ -101,6 +110,10 @@ public class RemoveFromCartControllerTest {
         assertEquals(true,!c.getCart().getItems().keySet().contains(p1) && c.getCart().getItems().keySet().contains(p2));
         
         controller.getSelectedProduct(2);
+        controller.removeFromCart();
+        assertEquals(0, c.getCart().getItems().size());
+        
+        controller.getSelectedProduct(6);
         controller.removeFromCart();
         assertEquals(0, c.getCart().getItems().size());
 

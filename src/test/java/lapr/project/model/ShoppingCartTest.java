@@ -20,7 +20,7 @@ public class ShoppingCartTest {
     
     @BeforeEach
     public void setUp() {
-        p1 = new Product(1,"a",0,10);
+        p1 = new Product(1,"a",3,10);
         p2 = new Product(2,"d",3,2);
         p3 = new Product(3,"sdsf",2,1);
         p4 = new Product(2,"d",3,2);

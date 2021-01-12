@@ -13,7 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import lapr.project.model.Client;
+import java.util.Set;
+
 import lapr.project.model.Product;
 import oracle.jdbc.OracleTypes;
 
@@ -72,7 +73,7 @@ public class ProductDB extends DataHandler{
         return true;
     }
 
-    public int saveProducts(HashSet<Product> products) throws SQLException {
+    public int saveProducts(Set<Product> products) throws SQLException {
         Connection con = getConnection();
         int[] rows;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterProduct(?,?,?,?) }")) {

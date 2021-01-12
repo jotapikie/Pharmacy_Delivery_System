@@ -39,7 +39,7 @@ class ClientTest {
      */
     @Test
     void getName_Success() {
-        String expResult = "username1", result = client1.getName();
+        String expResult = "name1", result = client1.getName();
         assertEquals(expResult, result);
     }
 
@@ -52,6 +52,30 @@ class ClientTest {
         client2.setName(expResult);
         String result = client2.getName();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setName method, of class Client. Null.
+     */
+    @Test
+    void setName_Null() {
+        try {
+            client1.setName(null);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
+     * Test of setName method, of class Client. Empty.
+     */
+    @Test
+    void setName_Empty() {
+        try {
+            client1.setName("");
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
 

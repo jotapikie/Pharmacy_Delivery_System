@@ -6,16 +6,16 @@ import lapr.project.model.Park;
 import lapr.project.model.Pharmacy;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
+
 import lapr.project.model.Administrator;
 
 public class NewPharmacyController {
 
     private Pharmacy pharmacy;
     private final PharmacyDB pharmacyDB;
-    private final List<Pharmacy> pharmaciesList = new ArrayList<>();
+    private HashSet<Pharmacy> pharmaciesList = new HashSet<>();
 
 
     public NewPharmacyController() {
@@ -26,26 +26,26 @@ public class NewPharmacyController {
         this.pharmacyDB = pharmacyDB;
     }
 
-    public Pharmacy newPharmacy(int id, int phoneNumber, String name, Administrator admin, Address address, HashSet<Park> parks) {
-        pharmacy = pharmacyDB.newPhamarcy(id, phoneNumber,name,admin,address,parks);
+    public Pharmacy newPharmacy(int id, int phoneNumber, String name, Administrator admin, Address address, Set<Park> parks) {
+        pharmacy = pharmacyDB.newPhamarcy(id, phoneNumber,name,admin,address, (HashSet<Park>) parks);
         return pharmacy;
     }
 
     public boolean registerPharmacy() throws SQLException {
-        return pharmacyDB.savePharmacy(pharmacy);
+        return pharmacyDB.save(pharmacy);
     }
 
     public boolean addPharmacyToQueue(){
         return pharmaciesList.add(pharmacy);
     }
 
-    public List<Pharmacy> getPharmacyList(){
-        return new ArrayList<Pharmacy>(pharmaciesList);
+    public Set<Pharmacy> getPharmacyList(){
+        return new HashSet<>(pharmaciesList);
     }
 
     public int insertPharmacyBatchOp() throws SQLException{
-        final int numReturn = pharmacyDB.savePharmacies(pharmaciesList);
-        pharmaciesList.clear();
+        final int numReturn = pharmacyDB.save(pharmaciesList);
+        pharmaciesList= new HashSet<>();
         return numReturn;
     }
 }

@@ -73,7 +73,7 @@ class ParkSlotTest {
 
     @Test
     void isAbleToCharge1() {
-        slot.setAbleToCharge(false);
+        slot2.setAbleToCharge(false);
         boolean expRes=false;
         boolean res=slot2.isAbleToCharge();
         assertEquals(expRes,res);

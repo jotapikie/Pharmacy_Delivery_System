@@ -78,6 +78,94 @@ public class ProductTest {
         double result = productTest.getWeight();
         assertEquals(expResult, result, 0.0);
     }
+    
+        /**
+     * Test of setId method, of class Product.
+     */
+    @Test
+    public void testSetId() {
+        productTest.setId(3);
+        double expResult = 3;
+        double result = productTest.getId();
+        assertEquals(expResult, result);
+        boolean exp = false;
+        try{
+        productTest.setId(-1);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+        
+    }
+    
+    
+        /**
+     * Test of setName method, of class Product.
+     */
+    @Test
+    public void testSetName() {
+        productTest.setName("Brufen");
+        String expResult = "Brufen";
+        String result = productTest.getName();
+        assertEquals(expResult, result);
+        
+        boolean exp = false;
+        try{
+        productTest.setName(null);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+        
+        exp = false;
+        try{
+        productTest.setName("");
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+        
+        
+    }
+    
+        /**
+     * Test of setWeight method, of class Product.
+     */
+    @Test
+    public void testSetWeight() {
+        productTest.setWeight(5.9);
+        double expResult = 5.9;
+        double result = productTest.getWeight();
+        assertEquals(expResult, result, 0.0);
+        
+        boolean exp = false;
+        try{
+        productTest.setWeight(-2);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+    }
+    
+        /**
+     * Test of setPrice method, of class Product.
+     */
+    @Test
+    public void testSetPrice() {
+        productTest.setPrice(25.99);
+        double expResult = 25.99;
+        double result = productTest.getPrice();
+        assertEquals(expResult, result, 0.0);
+        
+        boolean exp = false;
+        try{
+        productTest.setPrice(-3);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+    }
+    
 
     /**
      * Test of equals method, of class Product.
@@ -88,6 +176,17 @@ public class ProductTest {
         boolean expResult = false;
         boolean result = productTest.equals(obj);
         assertEquals(expResult, result);
+        
+        expResult = true;
+        result = productTest.equals(productTest);
+        assertEquals(expResult, result);
+        
+        expResult = false;
+        Address add = new Address("Corga", 34.2323, 23.545, "Smf", 45, "3456-343");
+        result = productTest.equals(add);
+        assertEquals(expResult, result);
+        
+
     }
     
 }

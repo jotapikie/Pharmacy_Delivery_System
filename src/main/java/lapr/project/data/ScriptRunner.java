@@ -1,4 +1,5 @@
 package lapr.project.data;
+
 /*
  * Slightly modified version of the com.ibatis.common.jdbc.ScriptRunner class
  * from the iBATIS Apache project. Only removed dependency on Resource class
@@ -9,7 +10,6 @@ package lapr.project.data;
 /*
  *  Copyright 2004 Clinton Begin
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
@@ -23,7 +23,6 @@ package lapr.project.data;
  *
  *  https://github.com/BenoitDuffez/ScriptRunner
  */
-
 import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -36,8 +35,8 @@ import java.util.regex.Pattern;
 public class ScriptRunner {
 
     /**
-     * regex to detect delimiter.
-     * ignores spaces, allows delimiter in comment, allows an equals-sign
+     * regex to detect delimiter. ignores spaces, allows delimiter in comment,
+     * allows an equals-sign
      */
     public static final Pattern delimP = Pattern.compile("^\\s*(--)?\\s*delimiter\\s*=?\\s*([^\\s]+)+\\s*.*$", Pattern.CASE_INSENSITIVE);
     private static final String DEFAULT_DELIMITER = ";";
@@ -137,10 +136,10 @@ public class ScriptRunner {
      * Runs an SQL script (read in using the Reader parameter) using the
      * connection passed in
      *
-     * @param conn   - the connection to use for the script
+     * @param conn - the connection to use for the script
      * @param reader - the source of the script
      * @throws SQLException if any SQL errors occur
-     * @throws IOException  if there is an error reading from the Reader
+     * @throws IOException if there is an error reading from the Reader
      */
     private void runScript(Connection conn, Reader reader) throws IOException,
             SQLException {
@@ -194,47 +193,45 @@ public class ScriptRunner {
 
     private void execCommand(Connection conn, StringBuffer command,
                              LineNumberReader lineReader) throws SQLException {
-        Statement statement = conn.createStatement();
+        try (Statement statement = conn.createStatement()) {
 
-        println(command);
+            println(command);
 
-        boolean hasResults = false;
-        try {
-            hasResults = statement.execute(command.toString());
-        } catch (SQLException e) {
-            final String errText = String.format("Error executing '%s' (line %d): %s",
-                    command, lineReader.getLineNumber(), e.getMessage());
-            printlnError(errText);
-            System.err.println(errText);
-            if (stopOnError) {
-                throw new SQLException(errText, e);
-            }
-        }
-
-        if (autoCommit && !conn.getAutoCommit()) {
-            conn.commit();
-        }
-
-        ResultSet rs = statement.getResultSet();
-        if (hasResults && rs != null) {
-            ResultSetMetaData md = rs.getMetaData();
-            int cols = md.getColumnCount();
-            for (int i = 1; i <= cols; i++) {
-                String name = md.getColumnLabel(i);
-                print(name + "\t");
-            }
-            println("");
-            while (rs.next()) {
-                for (int i = 1; i <= cols; i++) {
-                    String value = rs.getString(i);
-                    print(value + "\t");
+            boolean hasResults = false;
+            try {
+                hasResults = statement.execute(command.toString());
+            } catch (SQLException e) {
+                final String errText = String.format("Error executing '%s' (line %d): %s",
+                        command, lineReader.getLineNumber(), e.getMessage());
+                printlnError(errText);
+                System.err.println(errText);
+                if (stopOnError) {
+                    throw new SQLException(errText, e);
                 }
-                println("");
             }
-        }
 
-        try {
-            statement.close();
+            if (autoCommit && !conn.getAutoCommit()) {
+                conn.commit();
+            }
+
+            try (ResultSet rs = statement.getResultSet()) {
+                if (hasResults && rs != null) {
+                    ResultSetMetaData md = rs.getMetaData();
+                    int cols = md.getColumnCount();
+                    for (int i = 1; i <= cols; i++) {
+                        String name = md.getColumnLabel(i);
+                        print(name + "\t");
+                    }
+                    println("");
+                    while (rs.next()) {
+                        for (int i = 1; i <= cols; i++) {
+                            String value = rs.getString(i);
+                            print(value + "\t");
+                        }
+                        println("");
+                    }
+                }
+            }
         } catch (Exception e) {
             // Ignore to workaround a bug in Jakarta DBCP
         }

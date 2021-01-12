@@ -8,18 +8,13 @@ package lapr.project.model;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Map;
 
 /**
  *
  * @author Diogo
  */
 
-
-/**
- *
- * @author Diogo
- */
 public class Order implements Comparable<Order>{
     
     private int id;
@@ -27,16 +22,8 @@ public class Order implements Comparable<Order>{
     private Date endDate;
     private String status;
     private double price;
-    private HashMap<Product, Integer> products;
+    private Map<Product, Integer> products;
 
-    public Order(int id, Date beginDate, Date endDate, String status, double price, HashMap<Product, Integer> products) {
-        this.id = id;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.price = price;
-        this.products = products;
-    }
     
     public Order(int id, Date beginDate, Date endDate, String status, double price) {
         this.id = id;
@@ -48,7 +35,7 @@ public class Order implements Comparable<Order>{
         
     }
     
-    public Order(int id, double price, HashMap<Product, Integer> products){
+    public Order(int id, double price, Map<Product, Integer> products){
         this.id = id;
         this.beginDate = Date.from(Instant.now());
         this.endDate = null;
@@ -78,9 +65,33 @@ public class Order implements Comparable<Order>{
         return status;
     }
 
-    public HashMap<Product, Integer> getProducts() {
+    public Map<Product, Integer> getProducts() {
         return products;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setProducts(HashMap<Product, Integer> products) {
+        this.products = products;
+    }
+    
+    
+    
+    
 
     public void setStatus(String status) {
         this.status = status;
@@ -88,30 +99,20 @@ public class Order implements Comparable<Order>{
     
     
     
-    public double getTotalWeight(){
-        double weight = 0;
-        for(Product p : products.keySet()){
-            weight = weight + p.getWeight();
-        }
-        return weight;
-    }
 
     @Override
     public String toString() {
-        return String.format("Id: %d | Begin Date: %s | End Date: %s | Status: %s | Price: %.2f €", id, beginDate, endDate, status, price);
+        return String.format("Id: %d | Status: %s | Price: %.2f €", id, status, price);
     }
     
     
 
     @Override
     public int compareTo(Order o) {
-        return this.beginDate.compareTo(o.beginDate);
+        return this.beginDate.compareTo(o.getBeginDate());
     }
 
-    public Invoice makeInvoice(Client cli, Address add, double priceToPay, int nif) {
-        Invoice inv = new Invoice(cli, add, priceToPay, price, products, nif);
-        return inv;
-    }
+
     
     
 

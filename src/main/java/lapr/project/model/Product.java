@@ -18,27 +18,57 @@ public class Product {
 
 
     public Product(int id, String name, double weight, double price) {
-        this.id = id;
-        this.name = name;
-        this.weight = weight;
-        this.price = price;
+        setId(id);
+        setName(name);
+        setWeight(weight);
+        setPrice(price);
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public double getWeight() {
+        return weight;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public int getId() {
-        return id;
+    public final void setId(int id) {
+         if (id <= 0)
+            throw new IllegalArgumentException("Product's id is invalid.");
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public final void setName(String name) {
+         if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Product's name is invalid.");
+        }
+        this.name = name;
     }
 
-    public double getWeight() {
-        return weight;
+    public final void setWeight(double weight) {
+        if (weight <= 0) 
+            throw new IllegalArgumentException("Product's weight is invalid.");
+        this.weight = weight;
     }
+
+    public final void setPrice(double price) {
+        if (price < 0)
+            throw new IllegalArgumentException("Product's price is invalid.");
+        this.price = price;
+    }
+    
+    
+
+
+
 
     @Override
     public String toString() {

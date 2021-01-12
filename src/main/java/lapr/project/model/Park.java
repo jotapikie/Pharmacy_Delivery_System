@@ -8,7 +8,7 @@ public class Park{
     private int id;
     private int nMaxVehicles;
     private String type;
-    private HashSet<ParkSlot> slots;
+    private Set<ParkSlot> slots;
 
     public Park(int id, int nMaxVehicles, String type, Set<ParkSlot> slots) {
         setId(id);
@@ -47,17 +47,17 @@ public class Park{
         this.type=type;
     }
 
-    public HashSet<ParkSlot> getSlots() {
-        return slots;
+    public Set<ParkSlot> getSlots() {
+        return  slots;
     }
 
     public void setSlots(Set<ParkSlot> slots) {
         if(slots.size()>nMaxVehicles|| slots.isEmpty())
             throw new IllegalArgumentException("Invalid park slots");
-        this.slots = (HashSet<ParkSlot>) slots;
+        this.slots = slots;
     }
 
-    public void updatePark(int nMaxVehicles, String type, HashSet<ParkSlot> slots ){
+    public void updatePark(int nMaxVehicles, String type, Set<ParkSlot> slots ){
         setnMaxVehicles(nMaxVehicles);
         setType(type);
         setSlots(slots);

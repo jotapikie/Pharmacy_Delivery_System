@@ -48,13 +48,14 @@ public class RegisterClientController {
         return clientDB.saveClient(client);
     }
 
-    public boolean addClientToQueue(){
-        return clientsList.add(client);
-    }
-    
     public List<Client> getClientsList(){
         return new ArrayList<>(clientsList);
     }
+
+    public boolean addClientToQueue(){
+        return clientsList.add(client);
+    }
+
     
     public int insertClientsBatchOp() throws SQLException {
         final int numRows = clientDB.saveClients(clientsList);

@@ -17,11 +17,11 @@ import lapr.project.model.ShoppingCart;
  */
 public class RemoveFromCartController {
     
-    private String clientEmail;
+    private final String clientEmail;
     private ShoppingCart cart;
     private Product pro;
-    private ClientDB cdb;
-    private ProductDB pdb;
+    private final ClientDB cdb;
+    private final ProductDB pdb;
 
     public RemoveFromCartController(String clientEmail, ClientDB cdb, ProductDB pdb) {
         this.clientEmail = clientEmail;
@@ -31,20 +31,15 @@ public class RemoveFromCartController {
     
     
 
-    public RemoveFromCartController(String clientEmail) {
-        this.clientEmail = clientEmail;
-        cdb = new ClientDB();
-        pdb = new ProductDB();
-    }
     
     public String getProductsInCart(){
            cart = cdb.getClient(clientEmail).getCart();
-           return cart.toString();
+           return cart == null ? null : cart.toString();
     }
     
     public String getSelectedProduct(int id) throws SQLException{
         pro = pdb.getProduct(id);
-        return pro == null ? null : cart.getItems().keySet().contains(pro) ? pro.toString() : null;
+        return pro == null ? null : (cart.getItems().keySet().contains(pro) ? pro.toString() : null);
     }
     
     public void removeFromCart(){
