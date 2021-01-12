@@ -8,18 +8,13 @@ package lapr.project.model;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Map;
 
 /**
  *
  * @author Diogo
  */
 
-
-/**
- *
- * @author Diogo
- */
 public class Order implements Comparable<Order>{
     
     private int id;
@@ -27,7 +22,7 @@ public class Order implements Comparable<Order>{
     private Date endDate;
     private String status;
     private double price;
-    private HashMap<Product, Integer> products;
+    private Map<Product, Integer> products;
 
     
     public Order(int id, Date beginDate, Date endDate, String status, double price) {
@@ -40,7 +35,7 @@ public class Order implements Comparable<Order>{
         
     }
     
-    public Order(int id, double price, HashMap<Product, Integer> products){
+    public Order(int id, double price, Map<Product, Integer> products){
         this.id = id;
         this.beginDate = Date.from(Instant.now());
         this.endDate = null;
@@ -70,7 +65,7 @@ public class Order implements Comparable<Order>{
         return status;
     }
 
-    public HashMap<Product, Integer> getProducts() {
+    public Map<Product, Integer> getProducts() {
         return products;
     }
 

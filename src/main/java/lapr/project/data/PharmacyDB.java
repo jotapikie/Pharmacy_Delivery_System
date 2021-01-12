@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,17 +21,14 @@ import java.util.Set;
  * @author Diogo
  */
 public class PharmacyDB extends DataHandler {
-    
-   private ParkDB pdb;
 
     public PharmacyDB() {
-        pdb = new ParkDB();
     }
    
    
 
-    public Pharmacy newPhamarcy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
-        return new Pharmacy(id,phoneNumber,name,administrator,address,parks);
+    public Pharmacy newPhamarcy(int id, int phoneNumber, String name, Administrator administrator, Address address, Set<Park> parks) {
+        return new Pharmacy(id,phoneNumber,name,administrator,address, (HashSet<Park>) parks);
     }
 
 

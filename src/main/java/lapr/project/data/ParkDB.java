@@ -6,12 +6,14 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Set;
+
 import lapr.project.model.ParkSlot;
 import oracle.jdbc.OracleTypes;
 
 public class ParkDB extends DataHandler {
     
-    private ParkSlotDB psdb;
+    private final ParkSlotDB psdb;
 
     public ParkDB() {
         psdb = new ParkSlotDB();
@@ -33,7 +35,7 @@ public class ParkDB extends DataHandler {
         }
     }
     
-    public HashSet<Park> getParksByPhamarcy(int phamarcyId) throws SQLException{
+    public Set<Park> getParksByPhamarcy(int phamarcyId) throws SQLException{
         HashSet<Park> parks = new HashSet<>();
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetParksByPhamarcy(?) }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);

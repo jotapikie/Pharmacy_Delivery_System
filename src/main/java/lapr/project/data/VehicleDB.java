@@ -72,7 +72,7 @@ public class VehicleDB extends DataHandler {
     public int addVehicles(Set<Vehicle> vehicles, int pharmID, String typeVehicle ) throws SQLException {
 
         Connection c = getConnection();
-        int rows[];
+        int[] rows;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddVehicle(?,?,?,?,?,?,?,?,?,?,?) }")) {
 
             for (Vehicle v : vehicles) {

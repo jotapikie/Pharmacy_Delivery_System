@@ -9,6 +9,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Set;
+
 import lapr.project.model.EScooter;
 import lapr.project.model.ParkSlot;
 import lapr.project.model.State;
@@ -20,7 +22,7 @@ import oracle.jdbc.OracleTypes;
  */
 public class ParkSlotDB extends DataHandler{
 
-    public HashSet<ParkSlot> getParkSlotsByPark(int parkId) throws SQLException {
+    public Set<ParkSlot> getParkSlotsByPark(int parkId) throws SQLException {
         HashSet<ParkSlot> parks = new HashSet<>();
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetSlotsByPark(?) }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
@@ -37,8 +39,10 @@ public class ParkSlotDB extends DataHandler{
                 int vehicle = rs.getInt(3);
                 if(rs.wasNull()){
                     ps = new ParkSlot(rs.getInt(1), ableToCharge);
+                    parks.add(ps);
                 }else{
                     ps = new ParkSlot(parkId, ableToCharge, new EScooter(vehicle, rs.getDouble(4), State.ACTIVE, rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getDouble(10)));
+                    parks.add(ps);
                 }
             }
         }
