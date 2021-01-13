@@ -30,15 +30,16 @@ public class RouteTest {
     public void setUp() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        Pathway p = new Pathway(or, dest, "Rua de Teste", 34, 5.6);
+        Pathway p = new Pathway(or, dest, 45, 5.6, 3.2, 3.4);
         instance = new Route(p);
+        
+        Route temp = new Route(instance);
+        
+        
        
     }
     
-    @AfterEach
-    public void tearDown() {
-        
-    }
+
 
     /**
      * Test of getPaths method, of class Route.
@@ -46,6 +47,17 @@ public class RouteTest {
     @Test
     public void testGetPaths() {
         assertEquals(1, instance.getPaths().size());
+        
+        Pathway p = null;
+        boolean flag = false;
+        try{
+        Route r = new Route(p);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        
     }
 
     /**
@@ -61,7 +73,7 @@ public class RouteTest {
      */
     @Test
     public void testGetRouteDistance() {
-        assertEquals(34, instance.getRouteDistance());
+        assertEquals(45, instance.getRouteDistance());
     }
 
     /**
@@ -94,10 +106,10 @@ public class RouteTest {
     @Test
     public void testAddPaths() {
         GeographicalPoint p2 = new GeographicalPoint(43.533, 47.23, 35.2);
-        Pathway p = new Pathway(dest, p2, "Rua de Teste", 24, 5.6);
+        Pathway p = new Pathway(dest, p2, 23, 4.5, 3.5, 2.6);
         
         GeographicalPoint p3 = new GeographicalPoint(42.67, 45.23, 34.2);
-        Pathway pp = new Pathway(p2, p3, "Ru de Teste", 56, 5.8);
+        Pathway pp = new Pathway(p2, p3, 23.4, 8.9, 2.5, 2.5);
         
         List<Pathway> list = new ArrayList<>();
         list.add(p);
@@ -105,6 +117,20 @@ public class RouteTest {
         
         instance.addPaths(list);
         assertEquals(3, instance.getPaths().size());
+        
+        list.clear();
+        instance.addPaths(list);
+        assertEquals(3, instance.getPaths().size());
+        
+        boolean flag = false;
+        try{
+        instance.addPaths(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        
+        assertTrue(flag);
+        
         
         
     }
@@ -116,9 +142,18 @@ public class RouteTest {
     public void testAddPath() {
         
         GeographicalPoint p2 = new GeographicalPoint(43.533, 47.23, 35.2);
-        Pathway p = new Pathway(dest, p2, "Rua de Teste", 24, 5.6);
+        Pathway p = new Pathway(dest, p2, 2.6, 9.6, 2.7, 2.4);
         instance.addPath(p);
         assertEquals(2, instance.getPaths().size());
+        
+        boolean flag = false;
+        try{
+        instance.addPath(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        
+        assertTrue(flag);
     }
 
     /**
@@ -135,6 +170,19 @@ public class RouteTest {
         lst.add(p1);
         assertFalse(instance.contains(lst));
         
+        lst.clear();
+        assertTrue(instance.contains(lst));
+        
+        boolean flag = false;
+        try{
+        instance.contains(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        
+        
     }
 
     /**
@@ -144,9 +192,17 @@ public class RouteTest {
     public void testCompareTo() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, "Rua de Teste", 24, 6.5);
+        Pathway p = new Pathway(ori, desti, 3.4, 5.6, 24.5, 2.5);
         Route other = new Route(p);
-        assertTrue(instance.compareTo(other)<0);
+        assertTrue(instance.compareTo(other)>0);
+        
+        boolean flag = false;
+        try{
+            instance.compareTo(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
 
     /**
@@ -156,17 +212,15 @@ public class RouteTest {
     public void testEquals() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, "Rua de Teste", 24, 6.5);
+        Pathway p = new Pathway(ori, desti, 7.4, 3.5, 2.7, 3.5);
         Route other = new Route(p);
         assertFalse(instance.equals(other));
+        
+        assertTrue(instance.equals(instance));
+        assertFalse(instance.equals(null));
+        assertFalse(instance.equals(p));
     }
 
-    /**
-     * Test of hashCode method, of class Route.
-     */
-    @Test
-    public void testHashCode() {
-
-    }
+ 
     
 }

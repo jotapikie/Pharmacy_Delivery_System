@@ -15,21 +15,33 @@ public class Pathway{
     
     private GeographicalPoint origPoint;
     private GeographicalPoint destPoint;
-    private String description;
-    private int distance;
+    private double distance;
     private double energy;
+    private double kinetic_coef;
+    private double wind;
+    private String description;
 
-    public Pathway(GeographicalPoint origPoint, GeographicalPoint destPoint, String description, int distance, double energy) {
+    public Pathway(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, double energy, double kinetic_coef, double wind, String description) {
         this.origPoint = origPoint;
         this.destPoint = destPoint;
-        this.description = description;
         this.distance = distance;
         this.energy = energy;
+        this.kinetic_coef = kinetic_coef;
+        this.wind = wind;
+        this.description = description;
     }
     
+    public Pathway(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, double energy, double kinetic_coef, double wind) {
+        this.origPoint = origPoint;
+        this.destPoint = destPoint;
+        this.distance = distance;
+        this.energy = energy;
+        this.kinetic_coef = kinetic_coef;
+        this.wind = wind;
+        this.description = null;
+    }
     
-
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 

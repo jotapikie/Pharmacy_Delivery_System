@@ -17,7 +17,7 @@ import lapr.project.model.Pathway;
  *
  * @author Diogo
  */
-public class Route {
+public class Route implements Comparable<Route>{
 
     /**
      * List of the edges of the route.
@@ -32,7 +32,7 @@ public class Route {
     /**
      * Total distance of the route.
      */
-    private int routeDistance;
+    private double routeDistance;
 
     /**
      * Constructs a route that is a copy of another route.
@@ -92,7 +92,7 @@ public class Route {
      *
      * @return total distance.
      */
-    public int getRouteDistance() {
+    public double getRouteDistance() {
         return routeDistance;
     }
 
@@ -184,6 +184,7 @@ public class Route {
      * the routes are equal.
      */
   
+    @Override
     public int compareTo(Route otherRoute) {
         if (otherRoute == null) {
             throw new IllegalArgumentException("Invalid Route!");
@@ -247,8 +248,10 @@ public class Route {
         int hash = 7;
         hash = 43 * hash + Objects.hashCode(this.paths);
         hash = 43 * hash + (int) (Double.doubleToLongBits(this.routeEnergy) ^ (Double.doubleToLongBits(this.routeEnergy) >>> 32));
-        hash = 43 * hash + this.routeDistance;
+        hash = (int) (43 * hash + this.routeDistance);
         return hash;
     }
+
+
 }
 

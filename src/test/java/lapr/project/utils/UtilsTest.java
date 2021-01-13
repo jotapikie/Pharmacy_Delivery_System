@@ -21,22 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UtilsTest {
     
     
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
+    Utils u = new Utils();
+
 
     /**
      * Test of creditsToEuros method, of class Utils.
