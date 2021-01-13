@@ -6,7 +6,6 @@
 package lapr.project.controller;
 
 import java.sql.SQLException;
-import java.util.HashSet;
 import lapr.project.data.ParkDB;
 import lapr.project.data.PharmacyDB;
 import lapr.project.model.Park;
@@ -36,9 +35,7 @@ public class AddParkController {
     }
     
     public void addParkToPharmacy() throws SQLException{
-            HashSet<Park> parks=pdb.getPharmacyByAdministrator(administratorEmail).getParks();
-            parks.add(park);
-            pdb.getPharmacyByAdministrator(administratorEmail).setParks(parks);
+            pdb.getPharmacyByAdministrator(administratorEmail).setParks(park);
         
     }
     
