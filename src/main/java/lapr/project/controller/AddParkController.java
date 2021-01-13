@@ -33,11 +33,11 @@ public class AddParkController {
    
     
     public String getSelectedPark(int id) throws SQLException{
-        park = parkdb.getPark(id);
+        park = parkdb.getParkByID(id);
         return park == null ? null : park.toString();
     }
     
-    public void addToPharmacy() throws SQLException{
+    public void addParkToPharmacy() throws SQLException{
         if(park!=null){
             pdb.getPharmacyByAdministrator(administratorEmail).setParks(park);
         }
