@@ -26,7 +26,7 @@ CREATE TABLE platform_user(
 );
 
 CREATE TABLE pharmacy(
-    pharmacy_id INT CONSTRAINT pk_pharmacy_id PRIMARY KEY,
+    pharmacy_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_pharmacy_id PRIMARY KEY,
     phone_number int NOT NULL,
     designation varchar(255) NOT NULL,
     administrator_email varchar(255) NOT NULL CONSTRAINT uk_pharmacy_administrator UNIQUE,
@@ -72,7 +72,7 @@ CREATE TABLE address(
 );
 
 CREATE TABLE product(
-    product_id int CONSTRAINT pk_product_id PRIMARY KEY,
+    product_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_product_id PRIMARY KEY,
     designation varchar(255) NOT NULL,
     weight float NOT NULL,
     price float NOT NULL
@@ -83,7 +83,7 @@ CREATE TABLE super_admin(
 );
 
 CREATE TABLE vehicle(
-    nr int CONSTRAINT pk_vehicle_nr PRIMARY KEY,
+    nr INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_vehicle_nr PRIMARY KEY,
     weight float NOT NULL,
     status varchar(255) NOT NULL,
     max_battery int NOT NULL,
@@ -99,34 +99,39 @@ CREATE TABLE scooter(
 );
 
 CREATE TABLE park(
-    park_id int CONSTRAINT pk_park_id PRIMARY KEY,
+    park_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_park_id PRIMARY KEY,
     max_vehicles int NOT NULL,
     park_type varchar(255) NOT NULL, 
     pharmacy_id int NOT NULL
 );
 
 CREATE TABLE park_slot(
-     slot_id int CONSTRAINT pk_park_slot_id PRIMARY KEY, 
+     slot_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_park_slot_id PRIMARY KEY, 
      able_to_charge NUMBER NOT NULL,
      park_id int NOT NULL,
      vehicle_nr int
 );
 
 CREATE TABLE delivery_order(
-    order_id int CONSTRAINT pk_order_id PRIMARY KEY,
+    order_id INTEGER GENERATED ALWAYS AS IDENTITY  CONSTRAINT pk_order_id PRIMARY KEY,
     begin_date timestamp NOT NULL,
     end_date timestamp NULL,
     status varchar(255) NOT NULL,
-    price float NOT NULL,
-    client_email varchar(255) NOT NULL,
+    price float,
+    client_email varchar(255),
     delivery_run_id int,
-    pharmacy_id int NOT NULL
+    pharmacy_id int NOT NULL,
+    associated_order int 
 );
 
 CREATE TABLE invoice(
-    order_id int NOT NULL,
-    nif int NOT NULL, 
-    CONSTRAINT pk_invoice_order_ PRIMARY KEY(order_id)
+    order_id int NOT NULL CONSTRAINT pk_invoice_order PRIMARY KEY,
+    inv_date timestamp NOT NULL,
+    total_price float NOT NULL,
+    price_paid float NOT NULL,
+    credits_spent int NOT NULL,
+    credits_won int NOT NULL,
+    nif int NOT NULL
 );
 
 CREATE TABLE order_product(
@@ -144,7 +149,7 @@ CREATE TABLE pharmacy_product(
 );
 
 CREATE TABLE delivery_run(
-    delivery_run_id int CONSTRAINT pk_delivery_run_id PRIMARY KEY,
+    delivery_run_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_delivery_run_id PRIMARY KEY,
     distance float NOT NULL,
     energy float NOT NULL,
     start_date timestamp NOT NULL,
@@ -166,7 +171,7 @@ CREATE TABLE pathway(
 CREATE TABLE geographical_point(
     longitude float NOT NULL,
     latitude float NOT NULL,
-    altitude float NOT NULL,
+    elevation float NOT NULL,
     description varchar(255),
     CONSTRAINT pk_geo_point_longitude_latitude PRIMARY KEY (longitude, latitude)
 );
@@ -200,3 +205,4 @@ ALTER TABLE delivery_order ADD CONSTRAINT fk_delivery_order_pharmacy FOREIGN KEY
 ALTER TABLE pathway ADD CONSTRAINT fk_path_point1 FOREIGN KEY (longitude1, latitude1) REFERENCES geographical_point (longitude, latitude);
 ALTER TABLE pathway ADD CONSTRAINT fk_path_point22 FOREIGN KEY (longitude2, latitude2) REFERENCES geographical_point (longitude, latitude);
 ALTER TABLE address ADD CONSTRAINT fk_address_geo_point FOREIGN KEY (longitude, latitude) REFERENCES geographical_point(longitude, latitude);
+ALTER TABLE delivery_order ADD CONSTRAINT fk_order_associated_order FOREIGN KEY (associated_order) REFERENCES delivery_order(order_id);
