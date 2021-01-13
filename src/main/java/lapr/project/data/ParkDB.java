@@ -51,7 +51,23 @@ public class ParkDB extends DataHandler {
         return parks;
     }
 
-    public Park getParkByID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Park getParkByID(int id) throws SQLException {
+        if (id < 1) {
+            throw new IllegalArgumentException("Invalid ID!");
+        }
+        Park p = null;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPark(?)}")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setInt(2, id);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                Set<ParkSlot> slots = null;
+                //to complete
+                p = new Park(rs.getInt(4), rs.getInt(2), rs.getString(3), slots);
+                return p;
+            }
+            throw new IllegalArgumentException("Product does not exist");
+        }
     }
 }
