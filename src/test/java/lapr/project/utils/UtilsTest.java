@@ -107,4 +107,57 @@ public class UtilsTest {
         assertEquals(expResult, result);
     }
     
+    @Test
+    public void testDistance(){
+        assertEquals(1531710.8, Utils.distance(41.2, 43.7, 42, 23.6, 200, 150), 0.1);
+    }
+    
+    @Test
+    public void testPathEnergyCost(){
+        assertEquals(0.1,Utils.pathEnergyCost(2, 2, 2, 2, 4, 8), 0.1);
+        boolean flag = false;
+        try{
+            Utils.pathEnergyCost(2, 2, 2, 2, 2, -2);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        
+        flag = false;
+        try{
+            Utils.pathEnergyCost(2, 2, 2, 2, 2, 1);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            Utils.pathEnergyCost(2, 2, -2, 2, 2, 3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            Utils.pathEnergyCost(2, -3, 2, 2, 2, 3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            Utils.pathEnergyCost(-1, 2, 2, 2, 2, 3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        
+        
+    }
+    
 }

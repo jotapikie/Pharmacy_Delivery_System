@@ -15,7 +15,7 @@ import lapr.project.model.GeographicalPoint;
 public class GeographicalPointDB {
 
     public List<GeographicalPoint> getGeographicalPoints() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

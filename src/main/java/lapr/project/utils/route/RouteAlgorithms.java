@@ -7,8 +7,9 @@ package lapr.project.utils.route;
 
 import java.util.ArrayList;
 import java.util.List;
+import lapr.project.model.VehiclePath;
 import lapr.project.model.GeographicalPoint;
-import lapr.project.model.LandGraph;
+import lapr.project.model.MainGraph;
 import lapr.project.model.Pathway;
 import lapr.project.utils.bst.BST;
 import lapr.project.utils.graph.Graph;
@@ -21,13 +22,13 @@ public class RouteAlgorithms {
 
 
     
-   public static List<Route> kBestRoutes(LandGraph landGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
+   public static List<Route> kBestRoutes(MainGraph landGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
 
         if (landGraph == null || origin == null || destination == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
         }
         @SuppressWarnings("unchecked")
-        Graph<GeographicalPoint, Pathway> graph = landGraph.getRouteGraph();
+        Graph<GeographicalPoint, VehiclePath> graph = (Graph<GeographicalPoint, VehiclePath>) landGraph.getRouteGraph();
         if (graph == null || !graph.isDirected()) {
             throw new IllegalArgumentException("Invalid graph!");
         }
@@ -54,7 +55,7 @@ public class RouteAlgorithms {
             Route route = bst.smallestElement();
 
             // Check if k wanted routes have been found or next route has the same cost
-            if (result.size() >= k && route.getRouteEnergy() > result.get(result.size() - 1).getRouteEnergy()) {
+            if (result.size() >= k && route.getRouteCost() > result.get(result.size() - 1).getRouteCost()) {
                 break;
             }
 
@@ -87,7 +88,7 @@ public class RouteAlgorithms {
    
    
    
-    private static void zeroVertexCounters(Graph<GeographicalPoint, Pathway> graph) {
+    private static void zeroVertexCounters(Graph<GeographicalPoint, VehiclePath> graph) {
 
         for (GeographicalPoint vertex : graph.vertices()) {
             vertex.resetCounter();

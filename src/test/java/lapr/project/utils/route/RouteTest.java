@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
-import org.junit.jupiter.api.AfterEach;
+import lapr.project.model.VehiclePath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,18 +22,29 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class RouteTest {
     
-    Route instance;
+     Route instance;
      GeographicalPoint or;
      GeographicalPoint dest;
+     
+     Route instance3;
+     GeographicalPoint or3;
+     GeographicalPoint dest3;
+     
+     
     
     @BeforeEach
     public void setUp() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        Pathway p = new Pathway(or, dest, 45, 5.6, 3.2, 3.4);
+        Pathway p = new Pathway(or, dest, 2.3, 45, 2.3);
         instance = new Route(p);
         
         Route temp = new Route(instance);
+        
+        or3 = new GeographicalPoint(41.233, 45.23, 34.2);
+        dest3 = new GeographicalPoint(41.533, 47.23, 35.2);
+        VehiclePath p3 = new VehiclePath(or, dest3, 34, 3.4, 2.2, 56.8, 3.4);
+        instance3 = new Route(p3);
         
         
        
@@ -57,15 +68,17 @@ public class RouteTest {
         }
         assertTrue(flag);
         
+        assertEquals(1, instance3.getPaths().size());
+        
         
     }
 
     /**
-     * Test of getRouteEnergy method, of class Route.
+     * Test of getRouteCost method, of class Route.
      */
     @Test
-    public void testGetRouteEnergy() {
-        assertEquals(5.6, instance.getRouteEnergy());
+    public void testGetRouteCost() {
+        assertEquals(45, instance.getRouteCost());
     }
 
     /**
@@ -106,10 +119,10 @@ public class RouteTest {
     @Test
     public void testAddPaths() {
         GeographicalPoint p2 = new GeographicalPoint(43.533, 47.23, 35.2);
-        Pathway p = new Pathway(dest, p2, 23, 4.5, 3.5, 2.6);
+        Pathway p = new Pathway(dest, p2, 23, 34,45);
         
         GeographicalPoint p3 = new GeographicalPoint(42.67, 45.23, 34.2);
-        Pathway pp = new Pathway(p2, p3, 23.4, 8.9, 2.5, 2.5);
+        Pathway pp = new Pathway(p2, p3, 6.7, 45, 56);
         
         List<Pathway> list = new ArrayList<>();
         list.add(p);
@@ -142,7 +155,7 @@ public class RouteTest {
     public void testAddPath() {
         
         GeographicalPoint p2 = new GeographicalPoint(43.533, 47.23, 35.2);
-        Pathway p = new Pathway(dest, p2, 2.6, 9.6, 2.7, 2.4);
+        Pathway p = new Pathway(dest, p2, 2.6, 9.6, 2.7);
         instance.addPath(p);
         assertEquals(2, instance.getPaths().size());
         
@@ -192,7 +205,7 @@ public class RouteTest {
     public void testCompareTo() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, 3.4, 5.6, 24.5, 2.5);
+        Pathway p = new Pathway(ori, desti, 3.4, 5.6, 24.5);
         Route other = new Route(p);
         assertTrue(instance.compareTo(other)>0);
         
@@ -203,6 +216,43 @@ public class RouteTest {
             flag = true;
         }
         assertTrue(flag);
+        
+        GeographicalPoint p1 = new GeographicalPoint(41.233, 45.23, 34.2);
+        GeographicalPoint p2 = new GeographicalPoint(41.533, 47.23, 35.2);
+        VehiclePath p3 = new VehiclePath(p1, p2, 45, 5.7, 3.2, 5.6, 56.5);
+        Route t = new Route(p3);
+        System.out.println(t.getRouteCost()+ " | " + instance3.getRouteCost() + " | " +instance.getRouteCost());
+        assertTrue(instance3.compareTo(t) > 0);
+        assertTrue(t.compareTo(instance3)<0);
+        
+        assertTrue(t.compareTo(t)==0);
+        
+
+        
+        
+
+//        
+//        p3 = new Pathway(p1, p2, 50, 5, 3.2);
+//        Pathway p4 = new Pathway(or, p1, 25, 2.5, 3.2);
+//        Pathway p5 = new Pathway(p1, dest, 25, 2.5, 3.2);
+//        Route t1 = new Route(p4);
+//        t1.addPath(p5);
+//        t = new Route(p3);
+//        assertTrue(t.compareTo(t1)<0);
+//        assertTrue(t1.compareTo(t)>0);
+//        assertTrue(t1.compareTo(t1)==0);
+//        
+//        Pathway p6 = new Pathway(p1, or, 25, 2.5, 3.2);
+//        Pathway p7 = new Pathway(or, p2, 25, 2.5, 3.2);
+//        Route t2 = new Route(p6);
+//        t2.addPath(p7);
+//        assertTrue(t2.compareTo(t1)<0);
+        
+        
+        
+        
+        
+        
     }
 
     /**
@@ -212,13 +262,18 @@ public class RouteTest {
     public void testEquals() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, 7.4, 3.5, 2.7, 3.5);
+        Pathway p = new Pathway(ori, desti, 7.4, 3.5, 2.7);
         Route other = new Route(p);
         assertFalse(instance.equals(other));
         
         assertTrue(instance.equals(instance));
         assertFalse(instance.equals(null));
         assertFalse(instance.equals(p));
+    }
+    
+    @Test
+    public void testHash(){
+        assertTrue(instance.hashCode() != 0);
     }
 
  

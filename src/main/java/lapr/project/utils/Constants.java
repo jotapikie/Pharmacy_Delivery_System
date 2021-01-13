@@ -16,4 +16,5 @@ public class Constants {
     public static final String CONNECTION_ACCESS = "qwerty";
 
     public static final int INITIAL_POINTS = 0;
+    public static double GRAVITY = 9.8;
 }

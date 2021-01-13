@@ -9,7 +9,7 @@ package lapr.project.utils.route;
  *
  * @author Diogo
  */
-public interface VertexInterface {
+public interface PointInterface {
     
     
     int getCounter();

@@ -27,7 +27,7 @@ public class Route implements Comparable<Route>{
     /**
      * Total cost of the route.
      */
-    private double routeEnergy;
+    private double routeCost;
 
     /**
      * Total distance of the route.
@@ -40,7 +40,7 @@ public class Route implements Comparable<Route>{
      * @param otherRoute the route to copy.
      */
     public Route(Route otherRoute) {
-        this.routeEnergy = otherRoute.routeEnergy;
+        this.routeCost = otherRoute.routeCost;
         this.routeDistance = otherRoute.routeDistance;
         this.paths = new ArrayList<>(otherRoute.paths);
     }
@@ -65,7 +65,7 @@ public class Route implements Comparable<Route>{
         }
         paths = new ArrayList<>();
         paths.add(startEdge);
-        routeEnergy = startEdge.getEnergy();
+        routeCost = startEdge.getCost();
         routeDistance = startEdge.getDistance();
     }
 
@@ -83,8 +83,8 @@ public class Route implements Comparable<Route>{
      *
      * @return total cost.
      */
-    public double getRouteEnergy() {
-        return routeEnergy;
+    public double getRouteCost() {
+        return routeCost;
     }
 
     /**
@@ -151,7 +151,7 @@ public class Route implements Comparable<Route>{
             throw new IllegalArgumentException("Invalid Edge!");
         }
         this.paths.add(edge);
-        this.routeEnergy += edge.getEnergy();
+        this.routeCost += edge.getCost();
         this.routeDistance += edge.getDistance();
     }
 
@@ -189,10 +189,10 @@ public class Route implements Comparable<Route>{
         if (otherRoute == null) {
             throw new IllegalArgumentException("Invalid Route!");
         }
-        if (this.routeEnergy < otherRoute.routeEnergy) {
+        if (this.routeCost < otherRoute.routeCost) {
             return -1;
         }
-        if (this.routeEnergy > otherRoute.routeEnergy) {
+        if (this.routeCost > otherRoute.routeCost) {
             return 1;
         }
         if (this.routeDistance < otherRoute.routeDistance) {
@@ -233,7 +233,7 @@ public class Route implements Comparable<Route>{
             return false;
         }
         Route other = (Route) obj;
-        return this.routeEnergy == other.routeEnergy
+        return this.routeCost == other.routeCost
                 && this.routeDistance == other.routeDistance
                 && this.paths.equals(other.paths);
     }
@@ -247,7 +247,7 @@ public class Route implements Comparable<Route>{
     public int hashCode() {
         int hash = 7;
         hash = 43 * hash + Objects.hashCode(this.paths);
-        hash = 43 * hash + (int) (Double.doubleToLongBits(this.routeEnergy) ^ (Double.doubleToLongBits(this.routeEnergy) >>> 32));
+        hash = 43 * hash + (int) (Double.doubleToLongBits(this.routeCost) ^ (Double.doubleToLongBits(this.routeCost) >>> 32));
         hash = (int) (43 * hash + this.routeDistance);
         return hash;
     }
