@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import lapr.project.data.ParkDB;
 import lapr.project.data.PharmacyDB;
 import lapr.project.model.Park;
-import lapr.project.model.Pharmacy;
 
 /**
  *
@@ -17,15 +16,13 @@ import lapr.project.model.Pharmacy;
  */
 public class AddParkController {
     
-    private final int parkID;
+    
     private final PharmacyDB pdb;
     private final ParkDB parkdb;
     private final String administratorEmail;
     private Park park;
-    private Pharmacy pha;
 
-    public AddParkController(int parkID, PharmacyDB pdb, ParkDB parkdb, String administratorEmail) {
-        this.parkID = parkID;
+    public AddParkController(PharmacyDB pdb, ParkDB parkdb, String administratorEmail) {
         this.pdb = pdb;
         this.parkdb = parkdb;
         this.administratorEmail = administratorEmail;
@@ -34,13 +31,12 @@ public class AddParkController {
     
     public String getSelectedPark(int id) throws SQLException{
         park = parkdb.getParkByID(id);
-        return park == null ? null : park.toString();
+        return park.toString();
     }
     
     public void addParkToPharmacy() throws SQLException{
-        if(park!=null){
             pdb.getPharmacyByAdministrator(administratorEmail).setParks(park);
-        }
+        
     }
     
     
