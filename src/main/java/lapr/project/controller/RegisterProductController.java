@@ -7,6 +7,7 @@ package lapr.project.controller;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Set;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
 /**
@@ -40,7 +41,9 @@ public class RegisterProductController {
         products.clear();
         return i;
     }
-    
+    public Set<Product> getProductsList() {
+        return products;
+    }
     
     
     

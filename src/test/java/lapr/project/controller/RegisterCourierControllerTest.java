@@ -97,11 +97,6 @@ public class RegisterCourierControllerTest {
           when(cdb.saveCouriers(controller1.getCouriersList(), 1)).thenReturn(controller1.getCouriersList().size());
           assertEquals(1, controller1.registCouriers());
           
-//          controller1.newCourier("Tiago", "tiago@lapr.com", "123", 12349673, 26312, 4.6);
-//          controller1.addToQueue();
-//          when(cdb.saveCouriers(controller1.getCouriersList(), 1)).thenReturn(controller1.getCouriersList().size());
-//          assertEquals(2, controller1.registCouriers());
-          
 
           
         
