@@ -32,6 +32,9 @@ public class Platform {
     public static double getMaxWeightPerOrder() {
         return MAX_WEIGHT_PER_ORDER;
     }
+
+    
+    
     
     
     

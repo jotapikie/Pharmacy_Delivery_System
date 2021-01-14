@@ -152,6 +152,12 @@ public class Invoice {
         }
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s",name);
+    }
+    
     
     
     

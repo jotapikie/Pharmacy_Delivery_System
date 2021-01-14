@@ -180,7 +180,7 @@ public class MakeOrderController {
     }
     
     private void sendEmail(){
-       
+       //Utils.sendEmail(cli.getEmail(), "Order #" +ord.getId(), inv== null? null:inv.toString());
     }
     
  

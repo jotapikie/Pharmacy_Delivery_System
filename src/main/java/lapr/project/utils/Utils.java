@@ -7,22 +7,60 @@ package lapr.project.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import lapr.project.model.Platform;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
  * @author Diogo
  */
 public class Utils {
-    private static final Platform platform = new Platform();
     
-    public static double creditsToEuros(int credits){
-        return credits/platform.getCreditsPerEuro();
-    }
     
-    public static int creditsWon(double price){
-        return (int) (price*platform.getCreditsWonPerEuroSpent());
+
+    public static boolean sendEmail(String to, String subject, String msg){
+             Properties prop = new Properties();
+        
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(Constants.PLATFORM_EMAIL, Constants.PLATFORM_PWD);
+            }
+        
+        
+        });
+        
+         try{  
+         MimeMessage message = new MimeMessage(session);  
+         message.setFrom(new InternetAddress(Constants.PLATFORM_EMAIL));  
+         message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
+         message.setSubject(subject);  
+         message.setText(msg);  
+  
+         // Send message  
+         Transport.send(message);  
+         return true;
+  
+      }catch (MessagingException mex) {
+          return false;
+
+      }  
     }
+        
+        
+    
     
     
     /**

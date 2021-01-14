@@ -24,24 +24,7 @@ public class UtilsTest {
     Utils u = new Utils();
 
 
-    /**
-     * Test of creditsToEuros method, of class Utils.
-     */
-    @Test
-    public void testCreditsToEuros() {
-        assertEquals(1,Utils.creditsToEuros(15));
-        assertEquals(2, Utils.creditsToEuros(30));
-    }
-
-    /**
-     * Test of creditsWon method, of class Utils.
-     */
-    @Test
-    public void testCreditsWon() {
-        assertEquals(1, Utils.creditsWon(5));
-        assertEquals(1, Utils.creditsWon(8));
-        assertEquals(2, Utils.creditsWon(11));
-    }
+ 
 
 /**
      * Test of permutations method, of class Utils.

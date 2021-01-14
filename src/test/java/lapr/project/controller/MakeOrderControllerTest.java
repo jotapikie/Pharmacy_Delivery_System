@@ -123,6 +123,7 @@ public class MakeOrderControllerTest {
      */
     @Test
     public void testGetCart() throws Exception {
+          
            assertTrue(controller.getCart().length()> 100);
            HashMap<Product, Integer> produ = new HashMap<>();
            produ.put(p1, 200);
