@@ -22,9 +22,9 @@ public class DataHandler {
     private String username;
 
     /**
-     * A password de utilizador da BD.
+     * A pwd de utilizador da BD.
      */
-    private String password;
+    private String pwd;
 
     /**
      * A ligação à BD.
@@ -47,11 +47,11 @@ public class DataHandler {
     public DataHandler() {
         this.jdbcUrl = System.getProperty("database.url");
         this.username = System.getProperty("database.username");
-        this.password = System.getProperty("database.password");
+        this.pwd = System.getProperty("database.password");
         
         this.jdbcUrl = Constants.CONNECTION_JDBCURL;
         this.username = Constants.CONNECTION_USERNAME;
-        this.password = Constants.CONNECTION_ACCESS;
+        this.pwd = Constants.CONNECTION_ACCESS;
     }
 
     /**
@@ -60,12 +60,12 @@ public class DataHandler {
      *
      * @param jdbcUrl  o URL da BD.
      * @param username o nome do utilizador.
-     * @param password a password do utilizador.
+     * @param password a pwd do utilizador.
      */
     public DataHandler(String jdbcUrl, String username, String password) {
         this.jdbcUrl = jdbcUrl;
         this.username = username;
-        this.password = password;
+        this.pwd = password;
         connection = null;
         callStmt = null;
         rSet = null;
@@ -95,8 +95,7 @@ public class DataHandler {
      */
     protected void openConnection() {
         try {
-            connection = DriverManager.getConnection(
-                    jdbcUrl, username, password);
+            connection = DriverManager.getConnection(jdbcUrl, username, pwd);
         } catch (SQLException e) {
             e.printStackTrace();
         }
