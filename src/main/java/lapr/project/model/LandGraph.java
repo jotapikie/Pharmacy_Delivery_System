@@ -40,6 +40,7 @@ public class LandGraph extends MainGraph{
      * @throws java.sql.SQLException
      */
     public LandGraph(int totalWeight, double vehicleAerodynamicCoef) throws SQLException {
+        super();
         if (totalWeight <= 0 || vehicleAerodynamicCoef <= 0) {
             throw new IllegalArgumentException("Invalid energy information!");
         }
@@ -47,7 +48,7 @@ public class LandGraph extends MainGraph{
         this.vehicleAerodynamicCoef = vehicleAerodynamicCoef;
 
         this.landGraph = new Graph<>(true);
-        setupData();
+        
         
         for (GeographicalPoint vertex : super.getVertexes()) {
             this.landGraph.insertVertex(vertex);

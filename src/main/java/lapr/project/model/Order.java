@@ -5,10 +5,12 @@
  */
 package lapr.project.model;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import lapr.project.utils.Constants;
 
 /**
  *
@@ -18,15 +20,15 @@ import java.util.Map;
 public class Order implements Comparable<Order>{
     
     private int id;
-    private Date beginDate;
-    private Date endDate;
+    private Timestamp beginDate;
+    private Timestamp endDate;
     private String status;
     private double price;
     private Map<Product, Integer> products;
     private Order associatedOrder;
 
     
-    public Order(int id, Date beginDate, Date endDate, String status, double price) {
+    public Order(int id, Timestamp beginDate, Timestamp endDate, String status, double price) {
         this.id = id;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -39,7 +41,7 @@ public class Order implements Comparable<Order>{
     
     public Order(int id, double price, Map<Product, Integer> products){
         this.id = id;
-        this.beginDate = Date.from(Instant.now());
+        this.beginDate = Timestamp.from(Instant.now());
         this.endDate = null;
         this.status = "Processing";
         this.price = price;
@@ -47,9 +49,9 @@ public class Order implements Comparable<Order>{
         this.associatedOrder = null;
     }
     
-    public Order(int id, double price, Map<Product, Integer> products, Order assOrder){
-        this.id = id;
-        this.beginDate = Date.from(Instant.now());
+    public Order(Map<Product, Integer> products, Order assOrder){
+        this.id = Constants.DEFAULT_ID;
+        this.beginDate = Timestamp.from(Instant.now());
         this.endDate = null;
         this.status = "Processing";
         this.price = price;
@@ -61,11 +63,11 @@ public class Order implements Comparable<Order>{
         return id;
     }
 
-    public Date getBeginDate() {
+    public Timestamp getBeginDate() {
         return beginDate;
     }
 
-    public Date getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
@@ -89,11 +91,11 @@ public class Order implements Comparable<Order>{
         this.id = id;
     }
 
-    public void setBeginDate(Date beginDate) {
+    public void setBeginDate(Timestamp beginDate) {
         this.beginDate = beginDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 

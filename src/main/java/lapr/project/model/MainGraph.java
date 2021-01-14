@@ -13,12 +13,13 @@ import lapr.project.data.PathwayDB;
 import lapr.project.utils.graph.Edge;
 import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
+import lapr.project.utils.route.RouteAlgorithms;
 
 /**
  *
  * @author Diogo
  */
-public abstract class MainGraph {
+public class MainGraph {
 
 
     /**
@@ -56,7 +57,7 @@ public abstract class MainGraph {
      * @param gpdb
      * @param pdb
      */
-    protected void setupData() throws SQLException {
+    public MainGraph() throws SQLException {
         
         setup(locationDB, pathDB);
         List<GeographicalPoint> vertexes = locationDB.getGeographicalPoints();
@@ -104,7 +105,16 @@ public abstract class MainGraph {
      * @param k number of routes to calculate.
      * @return k shortest routes.
      */
-    public abstract List<Route> kBestPaths(GeographicalPoint origin, GeographicalPoint destination, int k);
+    public List<Route> kBestPaths(GeographicalPoint origin, GeographicalPoint destination, int k){
+        if (origin == null || destination == null || origin.equals(destination) || k <= 0) {
+            throw new IllegalArgumentException("Invalid algorithm arguments!");
+        }
+        try {
+            return RouteAlgorithms.kBestRoutes(this, origin, destination, k);
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException("Invalid graph vertexes!");
+        }
+    }
     
     
 

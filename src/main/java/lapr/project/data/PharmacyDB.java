@@ -13,6 +13,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -140,9 +141,22 @@ public class PharmacyDB extends DataHandler {
         }
     }
     
+    public List<Pharmacy> getPharmaciesWithAdresses() throws SQLException{
+        List<Pharmacy> listPharmacies = new ArrayList<>();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPharmaciesWAdress() }")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                //Pharmacy p = new Pharmacy();
+                //listPharmacies.add(p);
+            }
+        }
+        return listPharmacies;
+    }
 
-//    public List<Pharmacy> getPharmaciesWithAddress() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+
+
+
 
 }

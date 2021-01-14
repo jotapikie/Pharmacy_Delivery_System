@@ -5,6 +5,7 @@
  */
 package lapr.project.model;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class OrderTest {
     public static void setUpClass() {
         order = new Order(2, 34.95, null);
         order2 = new Order(3, 5.99, null);
-        order3 = new Order(4, new Date(335345), new Date(3434), "Prepared", 34.56);
+        order3 = new Order(4, new Timestamp(335345), new Timestamp(3434), "Prepared", 34.56);
     }
     
 
@@ -57,7 +58,7 @@ public class OrderTest {
      */
     @Test
     public void testGetBeginDate() {
-        Date d = Date.from(Instant.now());
+        Timestamp d = Timestamp.from(Instant.now());
         order.setBeginDate(d);
         assertEquals(d, order.getBeginDate());
     }
@@ -67,7 +68,7 @@ public class OrderTest {
      */
     @Test
     public void testGetEndDate() {
-        Date d = Date.from(Instant.now());
+        Timestamp d = Timestamp.from(Instant.now());
         order.setEndDate(d);
         assertEquals(d, order.getEndDate());
     }
@@ -120,7 +121,7 @@ public class OrderTest {
      */
     @Test
     public void testSetBeginDate() {
-        Date d = Date.from(Instant.now());
+        Timestamp d = Timestamp.from(Instant.now());
         order.setBeginDate(d);
         assertEquals(d, order.getBeginDate());
     }
@@ -130,7 +131,7 @@ public class OrderTest {
      */
     @Test
     public void testSetEndDate() {
-        Date d = Date.from(Instant.now());
+        Timestamp d = Timestamp.from(Instant.now());
         order.setEndDate(d);
         assertEquals(d, order.getEndDate());
     }
@@ -183,8 +184,8 @@ public class OrderTest {
     @Test
     public void testCompareTo() {
         assertEquals(0, order.compareTo(order));
-        Date d1 = new Date(45645646);
-        Date d2 = new Date(45645689);
+        Timestamp d1 = new Timestamp(45645646);
+        Timestamp d2 = new Timestamp(45645689);
         order.setBeginDate(d1);
         order2.setBeginDate(d2);
         assertTrue(order.compareTo(order2) < 0);

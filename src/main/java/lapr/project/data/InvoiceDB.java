@@ -5,6 +5,8 @@
  */
 package lapr.project.data;
 
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import lapr.project.model.Address;
 import lapr.project.model.Client;
@@ -15,14 +17,27 @@ import lapr.project.model.Product;
  *
  * @author ivoal
  */
-public class InvoiceDB {
+public class InvoiceDB extends DataHandler{
 
-    public Invoice newInvoice(Client cli, Address add, HashMap<Product, Integer> items, double totalPrice, double priceToPay, int creditsSpent, int creditsWon, int nif, int id) {
+
+    public Invoice newInvoice(Client cli, Address add, HashMap<Product, Integer> items, double totalPrice, double priceToPay, int creditsSpent, int creditsWon, int nif) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void saveInvoice(Invoice inv, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void saveInvoice(Invoice invoice, int orderId) throws SQLException {
+         try (CallableStatement callStmt = getConnection().prepareCall("{ call procSaveInvoice(?,?,?,?,?,?,?) }")) {
+                callStmt.setTimestamp(1, invoice.getDate());
+                callStmt.setDouble(2, invoice.getTotalPrice());
+                callStmt.setDouble(3, invoice.getPricePaid());
+                callStmt.setDouble(4, invoice.getCreditsSpent());
+                callStmt.setDouble(5, invoice.getCreditsWon());
+                callStmt.setInt(6, invoice.getNif());
+                callStmt.setInt(7, orderId);
+
+
+
+            callStmt.execute();
+        }
     }
 
 }
