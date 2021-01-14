@@ -15,10 +15,34 @@ public class Drone extends Vehicle{
         super(id, weight, state, maxBat, actualBat, motor);
     }
     
-    public void updateScooterData(double weight, State state, int maxBat, int motor) {
+    public void updateDroneData(double weight, State state, int maxBat, int motor) {
         super.setWeight(weight);
         super.setState(state);
         super.setMaxBat(maxBat);
         super.setMotor(motor);
     }
+
+    @Override
+    public int getId() {
+        return super.getId(); 
+    }
+
+    @Override
+    public State getState() {
+        return super.getState(); 
+    }
+
+    @Override
+    public double getActualBat() {
+        return super.getActualBat(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    @Override
+    public void setState(State state) {
+        super.setState(state); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
 }
