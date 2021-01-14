@@ -99,16 +99,6 @@ public class InvoiceTest {
     }
 
     /**
-     * Test of getDate method, of class Invoice.
-     */
-    @Test
-    public void testGetDate() {
-        Timestamp expResult = Timestamp.from(Instant.now());
-        Timestamp result = invoiceTest.getDate();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getNif method, of class Invoice.
      */
     @Test
