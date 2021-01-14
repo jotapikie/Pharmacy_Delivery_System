@@ -18,6 +18,7 @@ DROP TABLE order_product       	        CASCADE CONSTRAINTS PURGE;
 DROP TABLE pharmacy_product             CASCADE CONSTRAINTS PURGE;
 DROP TABLE pathway                      CASCADE CONSTRAINTS PURGE;
 DROP TABLE geographical_point           CASCADE CONSTRAINTS PURGE;
+DROP TABLE cart_product                 CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE platform_user(
     user_email varchar(255) CONSTRAINT pk_user_email PRIMARY KEY,
@@ -43,7 +44,8 @@ CREATE TABLE platform_client(
     phone_number int NOT NULL, 
     credits float NOT NULL, 
     longitude float NOT NULL, 
-    latitude float NOT NULL
+    latitude float NOT NULL,
+    nif int NOT NULL
 );
 
 CREATE TABLE courier(
@@ -176,6 +178,15 @@ CREATE TABLE geographical_point(
     CONSTRAINT pk_geo_point_longitude_latitude PRIMARY KEY (longitude, latitude)
 );
 
+CREATE TABLE cart_product(
+    client_email varchar(255),
+    product_id int,
+    quantity int NOT NULL,
+    CONSTRAINT pk_cart_product PRIMARY KEY (client_email, product_id)
+);
+
+
+
 
 
 ALTER TABLE administrator ADD CONSTRAINT fk_administrator_email FOREIGN KEY (email) REFERENCES platform_user (user_email);
@@ -206,3 +217,5 @@ ALTER TABLE pathway ADD CONSTRAINT fk_path_point1 FOREIGN KEY (longitude1, latit
 ALTER TABLE pathway ADD CONSTRAINT fk_path_point22 FOREIGN KEY (longitude2, latitude2) REFERENCES geographical_point (longitude, latitude);
 ALTER TABLE address ADD CONSTRAINT fk_address_geo_point FOREIGN KEY (longitude, latitude) REFERENCES geographical_point(longitude, latitude);
 ALTER TABLE delivery_order ADD CONSTRAINT fk_order_associated_order FOREIGN KEY (associated_order) REFERENCES delivery_order(order_id);
+ALTER TABLE cart_product ADD CONSTRAINT fk_cart_owner FOREIGN KEY (client_email) REFERENCES platform_client (email);
+ALTER TABLE cart_product ADD CONSTRAINT fk_cart_product FOREIGN KEY (product_id) REFERENCES product (product_id);
