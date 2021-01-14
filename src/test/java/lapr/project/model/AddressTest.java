@@ -14,8 +14,8 @@ public class AddressTest {
 
     @BeforeAll
     public static void setUpClass() {
-        address1 = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
-        address2 = new Address("Reta do Pereiro 800", 40.738312, -7.765318, "porto", 114, "4250-527");
+        address1 = new Address("Reta do Pereiro 710", new GeographicalPoint (40.738312, -7.765318, 2.3), "porto", 114, "4250-527");
+        address2 = new Address("Reta do Pereiro 800", new GeographicalPoint (40.738312, -7.765318, 5.6) , "porto", 114, "4250-527");
     }
 
     @AfterAll
@@ -35,7 +35,7 @@ public class AddressTest {
      */
     @Test
     void getAddress_Success() {
-        String expResult = "Reta do Pereiro 710", result = address1.getAddress();
+        String expResult = "Reta do Pereiro 710", result = address1.getStreet();
         assertEquals(expResult, result);
     }
 
@@ -45,8 +45,8 @@ public class AddressTest {
     @Test
     void setAddress_Success() {
         String expResult = "Reta do Pereiro 800";
-        address2.setAddress(expResult);
-        String result = address2.getAddress();
+        address2.setStreet(expResult);
+        String result = address2.getStreet();
         assertEquals(expResult, result);
     }
 
@@ -56,7 +56,7 @@ public class AddressTest {
     @Test
     void setAddress_Fail() {
         try {
-            address1.setAddress("");
+            address1.setStreet("");
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
@@ -68,159 +68,28 @@ public class AddressTest {
     @Test
     void setAddress_Fail1() {
         try {
-            address1.setAddress(null);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
-
-    /**
-     * Test of getLatitude method, of class Address. Success
-     */
-    @Test
-    void getLatitude_Success() {
-        double expResult = 40.738312, result = address1.getLatitude();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setAddress method, of class Address. Success
-     */
-    @Test
-    void setLatitude_Success() {
-        double expResult = 40.256192;
-        address2.setLatitude(expResult);
-        double result = address2.getLatitude();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setAddress method, of class Address. Success
-     */
-    @Test
-    void setLatitude_Success1() {
-        double expResult = 90;
-        address2.setLatitude(expResult);
-        double result = address2.getLatitude();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setAddress method, of class Address. Success
-     */
-    @Test
-    void setLatitude_Success2() {
-        double expResult = -90;
-        address2.setLatitude(expResult);
-        double result = address2.getLatitude();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setLatitude method, of class Address. Fail
-     */
-    @Test
-    void setLatitude_Fail() {
-        try {
-            address1.setLatitude(-95);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
-
-    /**
-     * Test of setLatitude method, of class Address. Fail
-     */
-    @Test
-    void setLatitude_Fail1() {
-        try {
-            address1.setLatitude(-92);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
-
-    /**
-     * Test of setLatitude method, of class Address. Fail
-     */
-    @Test
-    void setLatitude_Fail2() {
-        try {
-            address1.setLatitude(95);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
-    /**
-     * Test of setLatitude method, of class Address. Fail
-     */
-    @Test
-    void setLatitude_Fail3() {
-        try {
-            address1.setLatitude(91);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
-
-    /**
-     * Test of getLongitude method, of class Address. Success
-     */
-    @Test
-    void getLongitude_Success() {
-        double expResult = -7.765318, result = address1.getLongitude();
-        assertEquals(expResult, result);
-    }
-
-
-
-    /**
-     * Test of setLongitude method, of class Address. Success
-     */
-    @Test
-    void setLongitude_Success() {
-        double expResult = -7.765365;
-        address2.setLongitude(expResult);
-        double result = address2.getLongitude();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setLongitude method, of class Address. Fail
-     */
-    @Test
-    void setLongitude_Fail() {
-        try {
-            address1.setLongitude(190);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
-
-    /**
-     * Test of setLongitude method, of class Address. Fail
-     */
-    @Test
-    void setLongitude_Fail1() {
-        try {
-            address1.setLongitude(-181);
+            address1.setStreet(null);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
     }
 
 
-    /**
-     * Test of setLongitude method, of class Address. Fail
-     */
-    @Test
-    void setLongitude_Fail3() {
-        try {
-            address1.setLongitude(-190);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Test of setPortNumber

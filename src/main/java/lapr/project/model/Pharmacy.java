@@ -34,6 +34,14 @@ public class Pharmacy {
         setParks(parks);
   
     }
+    
+    public Pharmacy(int id, int phoneNumber, String name, Administrator ad, Address add){
+        setId(id);
+        setPhoneNumber(phoneNumber);
+        setName(name);
+        setAdministrator(ad);
+        setAddress(add);
+    }
 
 
     /**

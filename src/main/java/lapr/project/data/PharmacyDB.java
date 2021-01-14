@@ -63,9 +63,9 @@ public class PharmacyDB extends DataHandler {
             callStmt.setInt(1,p.getId());
             callStmt.setInt(2,p.getPhoneNumber());
             callStmt.setString(3, p.getAdministrator().getEmail());
-            callStmt.setDouble(4,p.getAddress().getLatitude());
-            callStmt.setDouble(5,p.getAddress().getLongitude());
-            callStmt.setString(6,p.getAddress().getAddress());
+            callStmt.setDouble(4,p.getAddress().getGeographicalPoint().getLatitude());
+            callStmt.setDouble(5,p.getAddress().getGeographicalPoint().getLongitude());
+            callStmt.setString(6,p.getAddress().getStreet());
             callStmt.setString(7,p.getAddress().getCity());
             callStmt.setInt(8, p.getAddress().getPortNumber());
             callStmt.setString(9, p.getAddress().getZipCode());
@@ -85,9 +85,9 @@ public class PharmacyDB extends DataHandler {
                 callStmt.setInt(1, p.getId());
                 callStmt.setInt(2, p.getPhoneNumber());
                 callStmt.setString(3, p.getAdministrator().getEmail());
-                callStmt.setDouble(4, p.getAddress().getLatitude());
-                callStmt.setDouble(5, p.getAddress().getLongitude());
-                callStmt.setString(6, p.getAddress().getAddress());
+                callStmt.setDouble(4, p.getAddress().getGeographicalPoint().getLatitude());
+                callStmt.setDouble(5, p.getAddress().getGeographicalPoint().getLongitude());
+                callStmt.setString(6, p.getAddress().getStreet());
                 callStmt.setString(7, p.getAddress().getCity());
                 callStmt.setInt(8, p.getAddress().getPortNumber());
                 callStmt.setString(9, p.getAddress().getZipCode());
@@ -117,9 +117,9 @@ public class PharmacyDB extends DataHandler {
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
-                //p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
-                return p;
+//                p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
+//                //p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
+//                return p;
             }
             throw new IllegalArgumentException("Phamarcy does not exist");
         }
@@ -133,23 +133,23 @@ public class PharmacyDB extends DataHandler {
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
-                //p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
-                return p;
+//                p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
+//                //p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
+//                return p;
             }
             throw new IllegalArgumentException("The courier wasn't found.");
         }
     }
     
-    public List<Pharmacy> getPharmaciesWithAdresses() throws SQLException{
+    public List<Pharmacy> getPharmacies() throws SQLException{
         List<Pharmacy> listPharmacies = new ArrayList<>();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPharmaciesWAdress() }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPharmacies() }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                //Pharmacy p = new Pharmacy();
-                //listPharmacies.add(p);
+                Pharmacy p = new Pharmacy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(4), rs.getString(5), rs.getString(6)), new Address(rs.getString(7), new GeographicalPoint(rs.getFloat(8), rs.getFloat(9), rs.getFloat(10)), rs.getString(11), rs.getInt(12), rs.getString(13)));
+                listPharmacies.add(p);
             }
         }
         return listPharmacies;

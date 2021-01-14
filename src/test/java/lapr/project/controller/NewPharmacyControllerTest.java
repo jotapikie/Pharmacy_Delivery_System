@@ -48,7 +48,7 @@ class NewPharmacyControllerTest {
     public void testNewPharmacy(){
 
         Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
-        Address address= new Address("Rua",1,1,"porto",10,"4250-222");
+        Address address= new Address("Rua", new GeographicalPoint(1, 1, 1),"porto",10,"4250-222");
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));
@@ -72,7 +72,7 @@ class NewPharmacyControllerTest {
         int nr=918822222;
         String name= "DABID";
         Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
-        Address address= new Address("Rua",1,1,"porto",10,"4250-222");
+        Address address= new Address("Rua", new GeographicalPoint(1, 1, 1),"porto",10,"4250-222");
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));
@@ -96,7 +96,7 @@ class NewPharmacyControllerTest {
         int nr=918822222;
         String name= "DABID";
         Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
-        Address address= new Address("Rua",1,1,"porto",10,"4250-222");
+        Address address= new Address("Rua", new GeographicalPoint(1, 1, 1),"porto",10,"4250-222");
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));
@@ -129,7 +129,7 @@ class NewPharmacyControllerTest {
         int nr=918822222;
         String name= "DABID";
         Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
-        Address address= new Address("Rua",1,1,"porto",10,"4250-222");
+        Address address= new Address("Rua", new GeographicalPoint(1, 1, 1),"porto",10,"4250-222");
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));

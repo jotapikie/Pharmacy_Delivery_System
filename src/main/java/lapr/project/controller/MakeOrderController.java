@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
-import lapr.project.data.AddressDB;
+import lapr.project.data.CartProductDB;
 import lapr.project.data.ClientDB;
 import lapr.project.data.InvoiceDB;
 import lapr.project.data.OrderDB;
@@ -18,6 +18,7 @@ import lapr.project.data.PharmacyDB;
 import lapr.project.data.PharmacyStockDB;
 import lapr.project.model.Address;
 import lapr.project.model.Client;
+import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Invoice;
 import lapr.project.model.Order;
 import lapr.project.model.Pharmacy;
@@ -30,7 +31,7 @@ import lapr.project.utils.Utils;
 public class MakeOrderController {
     
     private final ClientDB cdb;
-    private final AddressDB adb;
+    private final CartProductDB cpdb;
     private final OrderDB odb;
     private final InvoiceDB idb;
     private final PharmacyStockDB ppdb;
@@ -40,7 +41,6 @@ public class MakeOrderController {
     private Client cli;
     private ShoppingCart cart;
     private HashMap<Product, Integer> items;
-    private final Platform plat;
     private Address add;
     private Pharmacy pha;
     private Order ord;
@@ -55,9 +55,9 @@ public class MakeOrderController {
     private int creditsSpent;
     private int creditsWon;
 
-    public MakeOrderController(ClientDB cdb, AddressDB adb, OrderDB odb,InvoiceDB idb,PharmacyStockDB ppdb,PharmacyDB phardb, String email) {
+    public MakeOrderController(ClientDB cdb,CartProductDB cpdb, OrderDB odb,InvoiceDB idb,PharmacyStockDB ppdb,PharmacyDB phardb, String email) {
         this.cdb = cdb;
-        this.adb = adb;
+        this.cpdb = cpdb;
         this.odb = odb;
         this.idb = idb;
         this.ppdb = ppdb;
@@ -65,7 +65,6 @@ public class MakeOrderController {
         this.email = email;
         items = new HashMap<>();
         pharmacies = new ArrayList<>();
-        plat = new Platform();
         totalPrice = 0;
         discPrice = 0;
         priceToPay = 0;
@@ -74,16 +73,27 @@ public class MakeOrderController {
         creditsWon= 0;
     }
    
-    public String getCart(){
+    public String getCart() throws SQLException{
         cli = cdb.getClient(email);
-        cart = cli.getCart();
+        cart = cpdb.getCart(email);
         items = cart.getItems();
-        totalPrice = plat.getDeliveryPrice() + cart.getPrice();
+        double cartPrice = 0;
+        double cartWeight = 0;
+        for(Product p : items.keySet()){
+            cartPrice = cartPrice + (p.getPrice()*items.get(p));
+            cartWeight = cartWeight + (p.getWeight()*items.get(p));
+        }
+        if(cartWeight > Platform.getMaxWeightPerOrder()){
+            return null;
+        }
+        totalPrice = Platform.getDeliveryPrice() + cartPrice;
+        
+       
         return cart.toString();
     }
     
     public String getAddress(){
-        add = adb.getAddressByClient(email);
+        add = cli.getAddress();
         return add.toString();
     }
     
@@ -93,7 +103,7 @@ public class MakeOrderController {
     
     public int getCredits(){
         cred = cli.getPoints();
-        discPrice = totalPrice - (cred/plat.getCreditsPerEuro());
+        discPrice = totalPrice - (cred/Platform.getCreditsPerEuro());
         priceToPay = totalPrice;
         return cred;
     }
@@ -110,11 +120,15 @@ public class MakeOrderController {
     public boolean makeOrder(int nif) throws SQLException{
         cli.setPoints(cli.getPoints() - creditsSpent);
         ord = odb.newOrder(totalPrice, items);
-        creditsWon = (int) (totalPrice * plat.getCreditsWonPerEuroSpent());
+        creditsWon = (int) (totalPrice * Platform.getCreditsWonPerEuroSpent());
         cli.setPoints(cli.getPoints() + creditsWon);
         inv = idb.newInvoice(cli, add, items, totalPrice, priceToPay, creditsSpent, creditsWon, nif);
-        pharmacies = pharDB.getPharmaciesWithAdresses();
-        pha = nearestPharmacies(add).get(0);
+        pharmacies = pharDB.getPharmacies();
+        if(pharmacies.isEmpty()){
+            return false;
+        }
+        pha = nearestPharmacies(add).values().iterator().next();
+        pharmacies.remove(pha);
         boolean success = checkPharmacyStock();
         if(success){
             sendEmail();
@@ -124,11 +138,12 @@ public class MakeOrderController {
     
     private TreeMap<Double, Pharmacy> nearestPharmacies(Address a){    
         TreeMap<Double, Pharmacy> distancesToPharmacies = new TreeMap<>();
+        GeographicalPoint cp = a.getGeographicalPoint();
+        GeographicalPoint pp;
         for(Pharmacy p : pharmacies){
-            //double dist = Utils.distance(totalPrice, totalPrice, totalPrice, totalPrice, totalPrice, totalPrice)
-            //distancesToPharmacies.put(dist, p);
-        
-        
+            pp = p.getAddress().getGeographicalPoint();
+            double dist = Utils.distance(cp.getLatitude(), pp.getLatitude(), cp.getLongitude(), pp.getLongitude(), cp.getElevation(), pp.getElevation());
+            distancesToPharmacies.put(dist, p);
         }
         return distancesToPharmacies;
     }
@@ -148,15 +163,14 @@ public class MakeOrderController {
         
         if(missingProducts.isEmpty()){
             ord.setStatus("Processed");
-            odb.saveOrderProcessed(ord, email, pha.getId(), inv);
+            odb.saveOrderProcessed(ord, cli, pha.getId(), inv);
             return true;
         }else{
             ord.setProducts(existingProducts);
             Order orderToFulfill = odb.newOrder(ord, missingProducts);
-            List<Pharmacy> nearbyPharmacies = (List<Pharmacy>) nearestPharmacies(pha.getAddress()).values();
-            for(Pharmacy nearPha : nearbyPharmacies){
+            for(Pharmacy nearPha : nearestPharmacies(pha.getAddress()).values()){
                 if(ppdb.hasProducts(missingProducts, nearPha.getId())){
-                    odb.saveOrderProcessing(orderToFulfill, email, nearPha.getId(), pha.getId(), inv);
+                    odb.saveOrderProcessing(orderToFulfill, cli, nearPha.getId(), pha.getId(), inv);
                     return true;
                 }
             }
@@ -166,7 +180,7 @@ public class MakeOrderController {
     }
     
     private void sendEmail(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
     
  

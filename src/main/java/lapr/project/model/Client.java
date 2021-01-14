@@ -16,6 +16,7 @@ import java.util.List;
 public class Client extends User {
     private String name;
     private int nif;
+    private int phoneNumber;
     private int points;
     private final ShoppingCart cart;
     private CreditCard card;
@@ -45,6 +46,22 @@ public class Client extends User {
         setAddress(address);
         cart = new ShoppingCart();
     }
+    
+    public Client(String name, String pwd, String email, int phoneNumber, int credits, int nif, Address addres){
+        super(name, email, pwd);
+        this.phoneNumber = phoneNumber;
+        this.nif = nif;
+        this.points = credits;
+        this.address = addres;
+        cart = new ShoppingCart();
+    }
+    
+    public Client(String name, String pwd, String email, ShoppingCart cart){
+        super(name, email, pwd);
+        this.cart = cart;
+    }
+    
+    
 
 
     public CreditCard getCard() {

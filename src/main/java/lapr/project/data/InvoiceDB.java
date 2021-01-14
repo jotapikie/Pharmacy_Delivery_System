@@ -21,7 +21,7 @@ public class InvoiceDB extends DataHandler{
 
 
     public Invoice newInvoice(Client cli, Address add, HashMap<Product, Integer> items, double totalPrice, double priceToPay, int creditsSpent, int creditsWon, int nif) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Invoice(cli, add, items, totalPrice, priceToPay, creditsWon, creditsSpent, nif);
     }
 
     void saveInvoice(Invoice invoice, int orderId) throws SQLException {

@@ -24,7 +24,7 @@ public class PharmacyTest {
     private static Pharmacy pharmacyTest2;
     private static Administrator admin=new Administrator("helder","helder@gmail.com","abc");
     private static HashSet<Park> parks= new HashSet<Park>();
-    private static Address address = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
+    private static Address address = new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 7.8), "porto", 114, "4250-527");
     
     public PharmacyTest() {
     }
@@ -123,7 +123,7 @@ public class PharmacyTest {
     }
 
     /**
-     * Test of getAddress method, of class Phamarcy.
+     * Test of getStreet method, of class Phamarcy.
      */
     @Test
     public void testGetAddress() {;
@@ -132,11 +132,11 @@ public class PharmacyTest {
     }
 
     /**
-     * Test of setAddress method, of class Phamarcy.
+     * Test of setStreet method, of class Phamarcy.
      */
     @Test
     public void testSetAddress() {
-        Address address = new Address("Rua da torre", 40.738312, -7.765318, "porto", 114, "4250-527");
+        Address address = new Address("Rua da torre", new GeographicalPoint(40.738312, -7.765318,6.7), "porto", 114, "4250-527");
         pharmacyTest.setAddress(address);
         Address result= pharmacyTest.getAddress();
         assertEquals(address, result);

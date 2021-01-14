@@ -5,17 +5,18 @@
  */
 package lapr.project.data;
 
-import lapr.project.model.Address;
 import lapr.project.model.Client;
-import lapr.project.model.CreditCard;
 import oracle.jdbc.OracleTypes;
 
 import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import lapr.project.model.Address;
+import lapr.project.model.GeographicalPoint;
 
 /**
  *
@@ -41,7 +42,8 @@ public class ClientDB extends DataHandler {
      * @return client's instance
      */
     public Client newClient(String username, String name, String password, String email, int nif, int points, Date expDate, long visa, int ccv, String address, double latitude, double longitude, String city,int portNumber, String zipCode) {
-        return new Client(username,name,password,email,nif,new CreditCard(visa, expDate, ccv), new Address(address,latitude, longitude,city,portNumber,zipCode));
+        //return new Client(username,name,password,email,nif,new CreditCard(visa, expDate, ccv), new Address(address,latitude, longitude,city,portNumber,zipCode));
+      return null;
     }
 
     /**
@@ -63,9 +65,9 @@ public class ClientDB extends DataHandler {
                 callStmt.setString(6, c.getCard().getExpDate().toString());
                 callStmt.setLong(7,c.getCard().getVisaNumber());
                 callStmt.setInt(8, c.getCard().getCcv());
-                callStmt.setString(9, c.getAddress().getAddress());
-                callStmt.setDouble(10, c.getAddress().getLatitude());
-                callStmt.setDouble(11,c.getAddress().getLongitude());
+                callStmt.setString(9, c.getAddress().getStreet());
+                callStmt.setDouble(10, c.getAddress().getGeographicalPoint().getLatitude());
+                callStmt.setDouble(11,c.getAddress().getGeographicalPoint().getLongitude());
                 callStmt.setString(12,c.getAddress().getZipCode());
                 callStmt.setInt(13,c.getAddress().getPortNumber());
                 callStmt.setString(14,c.getAddress().getZipCode());
@@ -109,9 +111,9 @@ public class ClientDB extends DataHandler {
                 callStmt.setString(6, c.getCard().getExpDate().toString());
                 callStmt.setLong(7,c.getCard().getVisaNumber());
                 callStmt.setInt(8, c.getCard().getCcv());
-                callStmt.setString(9, c.getAddress().getAddress());
-                callStmt.setDouble(10, c.getAddress().getLatitude());
-                callStmt.setDouble(11,c.getAddress().getLongitude());
+                callStmt.setString(9, c.getAddress().getStreet());
+                callStmt.setDouble(10, c.getAddress().getGeographicalPoint().getLatitude());
+                callStmt.setDouble(11,c.getAddress().getGeographicalPoint().getLongitude());
                 callStmt.setString(12,c.getAddress().getZipCode());
                 callStmt.setInt(13,c.getAddress().getPortNumber());
                 callStmt.setString(14,c.getAddress().getZipCode());
@@ -135,12 +137,33 @@ public class ClientDB extends DataHandler {
         }
 
     }
-    public Client getClient(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Client getClient(String email) throws SQLException {
+        Client c = null;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetClient(?)}")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setString(2, email);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                c = new Client(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), new Address(rs.getString(7), new GeographicalPoint(rs.getFloat(8), rs.getFloat(9), rs.getFloat(10)), rs.getString(11), rs.getInt(12), rs.getString(13)));
+                return c;
+            }
+            throw new IllegalArgumentException("Client does not exist");
+        }
     }
 
-    public void setPoints(int points) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    void updateAfterOrder(Client cli) throws SQLException {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procUpdateClientAfterOrder(?,?)")) {
+            
+
+                callStmt.setString(1, cli.getEmail());
+                callStmt.setInt(2, cli.getPoints());
+
+                
+                callStmt.execute();
+            
+        }
     }
     
 }

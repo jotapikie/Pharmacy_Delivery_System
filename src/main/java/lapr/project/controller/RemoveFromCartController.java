@@ -29,10 +29,7 @@ public class RemoveFromCartController {
         this.pdb = pdb;
     }
     
-    
-
-    
-    public String getProductsInCart(){
+    public String getProductsInCart() throws SQLException{
            cart = cdb.getClient(clientEmail).getCart();
            return cart == null ? null : cart.toString();
     }
@@ -44,7 +41,7 @@ public class RemoveFromCartController {
     
     public void removeFromCart(){
         if(pro != null){
-            cart.removeProduct(pro);
+            //cart.removeProduct(pro);
         }
     }
     

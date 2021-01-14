@@ -12,7 +12,7 @@ class ClientTest {
     private static Client client1;
     private static Client client2;
     private final static CreditCard creditCard= new CreditCard(1231231231231231L, new Date(1673109541000L), 554);
-    private final static Address address= new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114,"4250-527");
+    private final static Address address= new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 67), "porto", 114,"4250-527");
     private ClientTest() {
     }
 
@@ -260,7 +260,7 @@ class ClientTest {
      */
     @Test
     void setAddress_Success() {
-        Address expResult = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114,"4250-527");
+        Address expResult = new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 67), "porto", 114,"4250-527");
         client2.setAddress(expResult);
         Address result = client2.getAddress();
         assertEquals(expResult, result);

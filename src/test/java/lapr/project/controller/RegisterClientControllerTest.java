@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import lapr.project.model.GeographicalPoint;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -37,12 +38,12 @@ class RegisterClientControllerTest {
         String username = "username", name = "paulo", password = "password", email = "email@gmail.com";
         int nif = 236159105, points = 0;
         CreditCard creditCard = new CreditCard(1234567890123456L, new Date(1673109541000L), 554);
-        Address address = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "Porto", 122, "4250-527");
+        Address address = new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 4.5), "Porto", 122, "4250-527");
 
         Client expResult = new Client(username, name, password, email, nif, creditCard, address);
         when(clientDB.newClient(anyString(), anyString(), anyString(), anyString(), anyInt(), anyInt(), new Date(anyLong()), anyLong(), anyInt(), anyString(), anyDouble(), anyDouble(), anyString(), anyInt(), anyString())).thenReturn(expResult);
         Client result = registerClientController.newClient(username, name, password, email, nif, points, creditCard.getExpDate(),
-                creditCard.getVisaNumber(), creditCard.getCcv(), address.getAddress(), address.getLatitude(), address.getLongitude(), address.getCity(),address.getPortNumber(),address.getZipCode());
+                creditCard.getVisaNumber(), creditCard.getCcv(), address.getStreet(), address.getGeographicalPoint().getLatitude(), address.getGeographicalPoint().getLongitude(), address.getCity(),address.getPortNumber(),address.getZipCode());
         assertEquals(expResult, result);
     }
 
@@ -80,10 +81,10 @@ class RegisterClientControllerTest {
         String username = "username", name = "paulo", password = "password", email = "email@gmail.com";
         int nif = 236159105, points = 0;
         CreditCard creditCard = new CreditCard(1234567890123456L, new Date(1673109541000L), 554);
-        Address address = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "Porto", 122, "4250-527");
+        Address address = new Address("Reta do Pereiro 710", new GeographicalPoint (40.738312, -7.765318, 4.5), "Porto", 122, "4250-527");
 
         registerClientController.newClient(username, name, password, email, nif, points, creditCard.getExpDate(),
-                creditCard.getVisaNumber(), creditCard.getCcv(), address.getAddress(), address.getLatitude(), address.getLongitude(), address.getCity(),address.getPortNumber(),address.getZipCode());
+                creditCard.getVisaNumber(), creditCard.getCcv(), address.getStreet(), address.getGeographicalPoint().getLatitude(), address.getGeographicalPoint().getLongitude(), address.getCity(),address.getPortNumber(),address.getZipCode());
         registerClientController.addClientToQueue();
 
         int resultFullList = registerClientController.getClientsList().size();

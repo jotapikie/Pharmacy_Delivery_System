@@ -5,7 +5,9 @@
  */
 package lapr.project.data;
 
+import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,18 +40,12 @@ public class PharmacyStockDB extends DataHandler{
     }
 
     public boolean hasProduct(Product p, int quantity, int idPharmacy){
-       try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcPharmacyHasProduct (?,?,?) }")) {
-            callStmt.registerOutParameter(1, OracleTypes.INTEGER);
-            callStmt.setInt(2, p.getId());
-            callStmt.setInt(3, quantity);
-            callStmt.setInt(4, idPharmacy);
-
-
-            return callStmt.getInt(1) > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        try{
+            int res = getQuantity(idPharmacy, p.getId());
+            return res >= quantity;
+        }catch(NullPointerException e){
+            return false;
         }
-        throw new NullPointerException("No info in the database. Check table Pharmacy_Product");
     }
 
     public boolean hasProducts(HashMap<Product, Integer> missingProducts, int idPharmacy) {
@@ -61,23 +57,28 @@ public class PharmacyStockDB extends DataHandler{
            return true;
     }
     
-    public void updateStock(int pharmacyId, Map<Product,Integer> products) throws SQLException{
-        int oldQuantity = 0;
-        int newQuantity = 0;
+    public void updateStockAfterSale(int pharmacyId, Map<Product, Integer> products) throws SQLException{
         for(Product p : products.keySet()){
-            oldQuantity = getQuantity(pharmacyId,p.getId());
-            newQuantity = oldQuantity - products.get(p);
-            setProductQuantity(pharmacyId,p.getId(), newQuantity);
+            updateAfterSale(pharmacyId, p, products.get(p));
         }
+    }
+    
+    public void updateAfterSale(int pharmacyId, Product p, int quantity) throws SQLException{
+
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procUpdateStockAfterSale(?,?,?)")) {
+            
+
+                callStmt.setInt(1, pharmacyId);
+                callStmt.setInt(2, p.getId());
+                callStmt.setInt(3, quantity);
+                
+                callStmt.execute();
+                callStmt.addBatch();
+            
+        }
+           
     }
 
-    private void setProductQuantity(int pharmacyId, int productId, int newQuantity) throws SQLException {
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procPharmacyProductQuantity(?,?,?) }")) {
-              callStmt.setInt(1, pharmacyId);
-              callStmt.setInt(2, productId);
-              callStmt.setInt(3, newQuantity);
-              callStmt.execute();
-        }
-    }
+
     
 }

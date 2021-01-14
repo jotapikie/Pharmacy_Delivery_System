@@ -6,8 +6,7 @@
 package lapr.project.model;
 
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -18,44 +17,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author Helder
+ * @author Diogo
  */
 public class InvoiceTest {
     
-    private static Invoice invoiceTest;
-    private final static CreditCard creditCard= new CreditCard(1231231231231231L, new Date(1673109541000L), 554);
-    private static Address address1 = new Address("Reta do Pereiro 710", 40.738312, -7.765318, "porto", 114, "4250-527");
-    private static Client client1 = new Client("username1", "name1", "password1", "email1@email.com", 123456789, creditCard, address1);
-    private static Map<Product, Integer> productsBought=null;
-    
-    public InvoiceTest() {
-    }
+    static Invoice inv;
+    static Address add;
+    static HashMap<Product, Integer> products;
+    static Client cli;
     
     @BeforeAll
     public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
+        add = new Address("Rua de Teste", new GeographicalPoint(45.7, 29.6, 23.6), "Cidade de Teste", 48, "4525-454");
+        Product p1 = new Product(1, "Brufen", 5.6, 23);
+        Product p2 = new Product(2, "Nasal", 2.7, 24.5);
+        products = new HashMap<>();
+        products.put(p1, 3);
+        products.put(p2, 2);
+        cli = new Client("Tiago", "123", "client1@lapr.com", 912542786, 32, 683903567, add);
+        inv = new Invoice(cli, add, products, 40, 34.5, 2, 3,683903567);
     }
     
     @BeforeEach
-    public void setUp() {
-        invoiceTest= new Invoice(client1,address1,productsBought,50.0,50.0,2,1,12345);
+    public void setUp(){
+        inv = new Invoice(cli, add, products, 40, 34.5, 2, 3,683903567);
     }
-    
-    @AfterEach
-    public void tearDown() {
-    }
+
 
     /**
      * Test of getName method, of class Invoice.
      */
     @Test
     public void testGetName() {
-        String expResult = "name1";
-        String result = invoiceTest.getName();
-        assertEquals(expResult, result);
+        assertEquals("Tiago", inv.getName());
     }
 
     /**
@@ -63,9 +57,7 @@ public class InvoiceTest {
      */
     @Test
     public void testGetAddress() {
-        Address expResult = address1;
-        Address result = invoiceTest.getAddress();
-        assertEquals(expResult, result);
+        assertEquals(add, inv.getAddress());
     }
 
     /**
@@ -73,9 +65,7 @@ public class InvoiceTest {
      */
     @Test
     public void testGetCreditsSpent() {
-        int expResult = 1;
-        int result = invoiceTest.getCreditsSpent();
-        assertEquals(expResult, result);
+        assertEquals(3, inv.getCreditsSpent());
     }
 
     /**
@@ -83,9 +73,7 @@ public class InvoiceTest {
      */
     @Test
     public void testGetCreditsWon() {
-        int expResult = 2;
-        int result = invoiceTest.getCreditsWon();
-        assertEquals(expResult, result);
+        assertEquals(2, inv.getCreditsWon());
     }
 
     /**
@@ -93,9 +81,15 @@ public class InvoiceTest {
      */
     @Test
     public void testGetCurrentCredits() {
-        int expResult = 0;
-        int result = invoiceTest.getCurrentCredits();
-        assertEquals(expResult, result);
+        assertEquals(32, inv.getCurrentCredits());
+    }
+
+    /**
+     * Test of getDate method, of class Invoice.
+     */
+    @Test
+    public void testGetDate() {
+        assertTrue(inv.getDate() != null);
     }
 
     /**
@@ -103,9 +97,7 @@ public class InvoiceTest {
      */
     @Test
     public void testGetNif() {
-        int expResult = 12345;
-        int result = invoiceTest.getNif();
-        assertEquals(expResult, result);
+        assertEquals(683903567, inv.getNif());
     }
 
     /**
@@ -113,9 +105,7 @@ public class InvoiceTest {
      */
     @Test
     public void testGetPricePaid() {
-        double expResult = 50.0;
-        double result = invoiceTest.getPricePaid();
-        assertEquals(expResult, result, 0.0);
+        assertEquals(34.5, inv.getPricePaid());
     }
 
     /**
@@ -123,9 +113,199 @@ public class InvoiceTest {
      */
     @Test
     public void testGetTotalPrice() {
-        double expResult = 50.0;
-        double result = invoiceTest.getTotalPrice();
-        assertEquals(expResult, result, 0.0);
+        assertEquals(40, inv.getTotalPrice());
+    }
+
+    /**
+     * Test of setName method, of class Invoice.
+     */
+    @Test
+    public void testSetName() {
+        inv.setName("Paulo");
+        assertEquals("Paulo", inv.getName());
+        
+        boolean flag = false;
+        try{
+            inv.setName(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            inv.setName("");
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    /**
+     * Test of setCreditsSpent method, of class Invoice.
+     */
+    @Test
+    public void testSetCreditsSpent() {
+        inv.setCreditsSpent(4);
+        assertEquals(4, inv.getCreditsSpent());
+        boolean flag = false;
+        try{
+            inv.setCreditsSpent(-3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    /**
+     * Test of setCreditsWon method, of class Invoice.
+     */
+    @Test
+    public void testSetCreditsWon() {
+        inv.setCreditsWon(5);
+        assertEquals(5, inv.getCreditsWon());
+        boolean flag = false;
+        try{
+            inv.setCreditsWon(-3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    /**
+     * Test of setCurrentCredits method, of class Invoice.
+     */
+    @Test
+    public void testSetCurrentCredits() {
+        inv.setCurrentCredits(7);
+        assertEquals(7, inv.getCurrentCredits());
+        boolean flag = false;
+        try{
+            inv.setCurrentCredits(-3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    /**
+     * Test of setDate method, of class Invoice.
+     */
+    @Test
+    public void testSetDate() {
+        Timestamp t = new Timestamp(555555);
+        inv.setDate(t);
+        assertEquals(t, inv.getDate());
+        boolean flag = false;
+        try{
+            inv.setDate(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    /**
+     * Test of setNif method, of class Invoice.
+     */
+    @Test
+    public void testSetNif() {
+        inv.setNif(111111111);
+        assertEquals(111111111, inv.getNif());
+        boolean flag = false;
+        try{
+            inv.setNif(45845);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+   
+    }
+
+    /**
+     * Test of setPricePaid method, of class Invoice.
+     */
+    @Test
+    public void testSetPricePaid() {
+        inv.setPricePaid(3);
+        assertEquals(3, inv.getPricePaid());
+        boolean flag = false;
+        try{
+            inv.setPricePaid(9999);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            inv.setPricePaid(-3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    /**
+     * Test of setTotalPrice method, of class Invoice.
+     */
+    @Test
+    public void testSetTotalPrice() {
+        inv.setTotalPrice(6);
+        assertEquals(6, inv.getTotalPrice());
+        boolean flag = false;
+        try{
+            inv.setTotalPrice(-3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    /**
+     * Test of setProductsBought method, of class Invoice.
+     */
+    @Test
+    public void testSetProductsBought() {
+        HashMap<Product, Integer> pr = new HashMap<>();
+        pr.put(new Product(3, "test", 6.5, 3.4), 4);
+        inv.setProductsBought(pr);
+        assertEquals(pr, inv.getProductsBought());
+        boolean flag = false;
+        try{
+            inv.setProductsBought(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            inv.setProductsBought(new HashMap<>());
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    /**
+     * Test of setAddress method, of class Invoice.
+     */
+    @Test
+    public void testSetAddress() {
+        Address ad = new Address("sdfsd", new GeographicalPoint(34.23, 35.4, 34.5), "sadf", 7, "4538-343");
+        inv.setAddress(ad);
+        assertEquals(ad, inv.getAddress());
+        boolean flag = false;
+        try{
+            inv.setAddress(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
     }
     
 }

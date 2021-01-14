@@ -182,9 +182,12 @@ public class ProductTest {
         assertEquals(expResult, result);
         
         expResult = false;
-        Address add = new Address("Corga", 34.2323, 23.545, "Smf", 45, "3456-343");
+        Address add = new Address("Corga", new GeographicalPoint(34.2323, 23.545, 6.7), "Smf", 45, "3456-343");
         result = productTest.equals(add);
         assertEquals(expResult, result);
+        
+        Product p = new Product(1,"brufen",0.2,5);
+        assertEquals(true, productTest.equals(p));
         
 
     }

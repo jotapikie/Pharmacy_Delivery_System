@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import lapr.project.model.Client;
 import lapr.project.model.Invoice;
 import lapr.project.model.Order;
 import lapr.project.model.Product;
@@ -27,9 +28,10 @@ import oracle.jdbc.OracleTypes;
  */
 public class OrderDB extends DataHandler{
 
-    private OrderProductDB opdb = new OrderProductDB();
-    private InvoiceDB idb = new InvoiceDB();
-    private PharmacyStockDB ppdb = new PharmacyStockDB();
+    private final OrderProductDB opdb = new OrderProductDB();
+    private final InvoiceDB idb = new InvoiceDB();
+    private final PharmacyStockDB ppdb = new PharmacyStockDB();
+    private final ClientDB cdb = new ClientDB();
     
     
     public List<Order> getOrdersByStatus(int idPhamarcy, String status) throws SQLException {
@@ -121,11 +123,12 @@ public class OrderDB extends DataHandler{
 
 
 
-    public void saveOrderProcessed(Order ord, String email, int idPharmacy, Invoice invoice) throws SQLException {
-        int orderId = saveOrder(ord, email, idPharmacy);
+    public void saveOrderProcessed(Order ord, Client cli, int idPharmacy, Invoice invoice) throws SQLException {
+        int orderId = saveOrder(ord, cli.getEmail(), idPharmacy);
         saveProducts(ord, orderId);
         idb.saveInvoice(invoice, orderId);
-        ppdb.updateStock(idPharmacy, ord.getProducts());
+        cdb.updateAfterOrder(cli);
+        ppdb.updateStockAfterSale(idPharmacy, ord.getProducts());
         
     }
        
@@ -147,14 +150,15 @@ public class OrderDB extends DataHandler{
          return new Order(missingProducts, ord);
     }
 
-    public void saveOrderProcessing(Order orderToFulfill,String email, int idPharmacy,int idPharmacy1, Invoice invoice) throws SQLException {
-        int orderId = saveOrder(orderToFulfill.getAssociatedOrder(), email,idPharmacy1 );
+    public void saveOrderProcessing(Order orderToFulfill,Client cli, int idPharmacy,int idPharmacy1, Invoice invoice) throws SQLException {
+        int orderId = saveOrder(orderToFulfill.getAssociatedOrder(), cli.getEmail(),idPharmacy1 );
         int otherOrderId = saveToFullfillOrder(orderToFulfill, idPharmacy, orderId);
         saveProducts(orderToFulfill.getAssociatedOrder(), orderId);
         saveProducts(orderToFulfill, otherOrderId);
         idb.saveInvoice(invoice, orderId);
-        ppdb.updateStock(idPharmacy, orderToFulfill.getProducts());
-        ppdb.updateStock(idPharmacy1, orderToFulfill.getAssociatedOrder().getProducts());
+        cdb.updateAfterOrder(cli);
+        ppdb.updateStockAfterSale(idPharmacy, orderToFulfill.getProducts());
+        ppdb.updateStockAfterSale(idPharmacy1, orderToFulfill.getAssociatedOrder().getProducts());
     }
 
 
