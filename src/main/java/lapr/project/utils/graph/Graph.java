@@ -56,7 +56,7 @@ public class Graph<V,E> implements GraphInterface<V,E> {
     
     public Iterable<Edge<V,E>> edges() { 
         ArrayList<Edge<V,E>> lista = new ArrayList<>();
-        for(Vertex v : vertices.values()){
+        for(Vertex<V,E> v : vertices.values()){
             @SuppressWarnings("unchecked")
             Iterable <Edge<V,E>> ed = v.getAllOutEdges();
             for(Edge<V,E> e : ed){

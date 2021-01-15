@@ -14,7 +14,7 @@ import java.lang.reflect.Array;
  * @param <E>
  */
 
-public class Edge<V,E> implements Comparable {
+public class Edge<V,E> implements Comparable<E> {
     
     private E element;           // Edge information
     private double weight;       // Edge weight
