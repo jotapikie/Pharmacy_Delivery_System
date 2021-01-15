@@ -28,11 +28,11 @@ public class AddToCartController {
     private Product pro;
     private final Map<Product, Integer> products;
 
-    public AddToCartController(String clientEmail, ProductDB pdb, ClientDB cdb) {
+    public AddToCartController(String clientEmail, ProductDB pdb, ClientDB cdb, CartProductDB cpdb) {
         this.clientEmail = clientEmail;
         this.pdb = pdb;
         this.cdb = cdb;
-        cpdb = new CartProductDB();
+        this.cpdb = cpdb;
         products = new HashMap<>();
     }
 
@@ -59,7 +59,9 @@ public class AddToCartController {
     }
     
     public void addToCart() throws SQLException{
-        cpdb.saveShoppingCart(products, clientEmail);
+        if(!products.isEmpty()){
+            cpdb.saveShoppingCart(products, clientEmail);
+        }
     }
     
     

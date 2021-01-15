@@ -26,9 +26,8 @@ public class CartProductDB extends DataHandler{
 
 
     
-    public int saveShoppingCart(Map<Product, Integer> products, String clientEmail) throws SQLException {
+    public void saveShoppingCart(Map<Product, Integer> products, String clientEmail) throws SQLException {
         Connection con = getConnection();
-        int[] rows;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddToCart(?,?,?}")) {
             for (Product p : products.keySet()) {
 
@@ -43,7 +42,7 @@ public class CartProductDB extends DataHandler{
             con.setAutoCommit(false);
 
             try {
-                rows = callStmt.executeBatch();
+                callStmt.executeBatch();
                 con.commit();
             } catch (BatchUpdateException e) {
                 con.rollback();
@@ -52,10 +51,12 @@ public class CartProductDB extends DataHandler{
                 con.setAutoCommit(true);
             }
 
-            return rows.length;
+            
         }
 
     }
+    
+
     
 
     public ShoppingCart getCart(String email) throws SQLException {
