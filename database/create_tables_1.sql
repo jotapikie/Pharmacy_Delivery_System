@@ -19,6 +19,7 @@ DROP TABLE pharmacy_product             CASCADE CONSTRAINTS PURGE;
 DROP TABLE pathway                      CASCADE CONSTRAINTS PURGE;
 DROP TABLE geographical_point           CASCADE CONSTRAINTS PURGE;
 DROP TABLE cart_product                 CASCADE CONSTRAINTS PURGE;
+DROP TABLE vehicle_category             CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE platform_user(
     user_email varchar(255) CONSTRAINT pk_user_email PRIMARY KEY,
@@ -52,7 +53,7 @@ CREATE TABLE courier(
     email varchar(255) CONSTRAINT pk_courier_email PRIMARY KEY, 
     nif int NOT NULL, 
     nss int NOT NULL, 
-    max_weight float NOT NULL, 
+    weight float NOT NULL, 
     pharmacy_id int NOT NULL
 );
 
@@ -91,7 +92,9 @@ CREATE TABLE vehicle(
     max_battery int NOT NULL,
     current_battery int NOT NULL,
     motor int NOT NULL,
-    pharmacy_id int NOT NULL
+    max_weight float NOT NULL,
+    pharmacy_id int NOT NULL,
+    vehicle_category varchar(255) NOT NULL
 );
 
 CREATE TABLE scooter(
@@ -103,7 +106,7 @@ CREATE TABLE scooter(
 CREATE TABLE park(
     park_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_park_id PRIMARY KEY,
     max_vehicles int NOT NULL,
-    park_type varchar(255) NOT NULL, 
+    vehicle_category varchar(255) NOT NULL, 
     pharmacy_id int NOT NULL
 );
 
@@ -111,7 +114,8 @@ CREATE TABLE park_slot(
      slot_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_park_slot_id PRIMARY KEY, 
      able_to_charge NUMBER NOT NULL,
      park_id int NOT NULL,
-     vehicle_nr int
+     vehicle_nr int,
+     vehicle_category varchar(255)
 );
 
 CREATE TABLE delivery_order(
@@ -123,7 +127,7 @@ CREATE TABLE delivery_order(
     client_email varchar(255),
     delivery_run_id int,
     pharmacy_id int NOT NULL,
-    associated_order int 
+    associated_order int
 );
 
 CREATE TABLE invoice(
@@ -152,12 +156,13 @@ CREATE TABLE pharmacy_product(
 
 CREATE TABLE delivery_run(
     delivery_run_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_delivery_run_id PRIMARY KEY,
-    distance float NOT NULL,
-    energy float NOT NULL,
-    start_date timestamp NOT NULL,
-    end_dat timestamp NULL,
-    courier_email varchar(255) NOT NULL,
-    vehicle_nr int NOT NULL
+    distance float,
+    energy float,
+    start_date timestamp,
+    end_date timestamp NULL,
+    courier_email varchar(255),
+    vehicle_nr int,
+    vehicle_category varchar(255)
 );
 
 CREATE TABLE pathway(
@@ -183,6 +188,10 @@ CREATE TABLE cart_product(
     product_id int,
     quantity int NOT NULL,
     CONSTRAINT pk_cart_product PRIMARY KEY (client_email, product_id)
+);
+
+CREATE TABLE vehicle_category(
+    category_name varchar(255) CONSTRAINT pk_category_name PRIMARY KEY
 );
 
 
@@ -219,3 +228,6 @@ ALTER TABLE address ADD CONSTRAINT fk_address_geo_point FOREIGN KEY (longitude, 
 ALTER TABLE delivery_order ADD CONSTRAINT fk_order_associated_order FOREIGN KEY (associated_order) REFERENCES delivery_order(order_id);
 ALTER TABLE cart_product ADD CONSTRAINT fk_cart_owner FOREIGN KEY (client_email) REFERENCES platform_client (email);
 ALTER TABLE cart_product ADD CONSTRAINT fk_cart_product FOREIGN KEY (product_id) REFERENCES product (product_id);
+ALTER TABLE vehicle ADD CONSTRAINT fk_vehicle_category_name FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
+ALTER TABLE park ADD CONSTRAINT fk_park_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
+ALTER TABLE delivery_run ADD CONSTRAINT fk_run_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
