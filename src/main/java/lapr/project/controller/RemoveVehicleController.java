@@ -15,12 +15,9 @@ public class RemoveVehicleController {
         this.vehicleDB = new VehicleDB();
     }
     
-    public void removeDrone() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     
-    public void removeScooter() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean removeScooter(int id) throws SQLException {
+        return vehicleDB.removeScooter(id);
     }
 
     public boolean remove(int id) throws SQLException {

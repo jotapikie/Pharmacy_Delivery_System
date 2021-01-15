@@ -172,16 +172,34 @@ public class VehicleDB extends DataHandler {
         return removableVehicles;
     }
 */
-
+    
+    
     /**
-     * Removes a vehicle from the database
+     * Remove vehicle
      *
      * @param id
      * @return
+     * @throws java.sql.SQLException
      */
     public boolean remove(int id) throws SQLException {
 
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRemoveVehicle(?) }")) {
+            callStmt.setInt(1, id);
+            callStmt.execute();
+        }
+        return true;
+    }
+    
+    /**
+     * Remove scooter
+     *
+     * @param id
+     * @return
+     * @throws java.sql.SQLException
+     */
+    public boolean removeScooter(int id) throws SQLException {
+
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRemoveScooter(?) }")) {
             callStmt.setInt(1, id);
             callStmt.execute();
         }
