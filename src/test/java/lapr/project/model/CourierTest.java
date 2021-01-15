@@ -67,7 +67,7 @@ public class CourierTest {
     @Test
     public void testGetMaxWeight() {
         double expResult = 200;
-        double result = courierTest.getMaxWeight();
+        double result = courierTest.getWeight();
         assertEquals(expResult, result, 0.0);
     }
     

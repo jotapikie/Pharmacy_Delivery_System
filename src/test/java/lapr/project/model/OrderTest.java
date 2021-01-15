@@ -29,8 +29,13 @@ public class OrderTest {
     
     @BeforeAll
     public static void setUpClass() {
-        order = new Order(2, 34.95, null);
-        order2 = new Order(3, 5.99, null);
+        order = new Order();
+        order.setId(2);
+        order.setPrice(34.95);
+
+        order2 = new Order();
+        order2.setId(3);
+        order.setPrice(5.99);
         order3 = new Order(4, new Timestamp(335345), new Timestamp(3434), "Prepared", 34.56);
     }
     
