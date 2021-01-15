@@ -50,7 +50,7 @@ public class CourierDB extends DataHandler{
                 callStmt.setString(3, c.getUsername());
                 callStmt.setInt(4, c.getNif());
                 callStmt.setInt(5, c.getNss());
-                callStmt.setDouble(6, c.getWeight());
+                callStmt.setDouble(6, c.getMaxWeight());
                 callStmt.setInt(7, idPhamarcy);
 
 

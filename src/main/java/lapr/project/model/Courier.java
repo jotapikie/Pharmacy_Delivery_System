@@ -13,13 +13,13 @@ public class Courier extends User{
     
     private int nif;
     private int nss;
-    private double weight;
+    private double maxWeight;
 
-    public Courier(String name, String email, String password, int nif, int nss, double weight) {
+    public Courier(String name, String email, String password, int nif, int nss, double maxWeight) {
         super(name, email, password);
         this.nif = nif;
         this.nss = nss;
-        this.weight = weight;
+        this.maxWeight = maxWeight;
     }
 
     public int getNif() {
@@ -35,8 +35,8 @@ public class Courier extends User{
     
 
 
-    public double getWeight() {
-        return weight;
+    public double getMaxWeight() {
+        return maxWeight;
     }
 
  

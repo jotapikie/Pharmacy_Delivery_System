@@ -34,8 +34,13 @@ class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, SQLException {
+<<<<<<< HEAD
         System.out.println("Teste");
         //AddToCartUI addToCart = new AddToCartUI("clien1@lapr3.com");
+=======
+        
+        AddToCartUI addToCart = new AddToCartUI("clien1@lapr.com");
+>>>>>>> parent of b1307ed... MEN09-247 #close Maintenance [Fix bugs]
 //        CalculatorExample calculatorExample = new CalculatorExample();
 //        int value = calculatorExample.sum(3, 5);
 //

@@ -58,14 +58,6 @@ public class Utils {
 
       }  
     }
-    
-    public static <V> List<String> listToString(List<V> listToConvert){
-        List<String> lst = new ArrayList<>();
-        for(V el : listToConvert){
-            lst.add(el.toString());
-        }
-        return lst;
-    }
         
         
     

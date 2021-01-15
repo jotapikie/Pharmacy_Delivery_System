@@ -1,7 +1,5 @@
 package lapr.project.model;
 
-import lapr.project.utils.Constants;
-
 /**
  *
  * @author jota
@@ -10,9 +8,6 @@ public class EScooter extends Vehicle{
     
     private double aeroCoef;
     private double frontalArea;
-    
-    private static double sweight = Constants.SCOOTER_WEIGHT;
-    private static double saeroCoef = Constants.SCOOTER_AERO_COEF;
 
     /**
      * Empty Constructor of the instance EScooter
@@ -36,16 +31,6 @@ public class EScooter extends Vehicle{
         setAeroCoef(aeroCoef);
         setFrontalArea(frontalArea);
     }
-
-    public static double getSweight() {
-        return sweight;
-    }
-
-    public static double getSaeroCoef() {
-        return saeroCoef;
-    }
-
-    
 
 
 
@@ -98,9 +83,6 @@ public class EScooter extends Vehicle{
         super.setMaxBat(maxBat);
         super.setMotor(motor);
     }
-
-    
-    
 
     @Override
     public String toString() {
