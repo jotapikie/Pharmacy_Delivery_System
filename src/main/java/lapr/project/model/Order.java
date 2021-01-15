@@ -7,7 +7,6 @@ package lapr.project.model;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import lapr.project.utils.Constants;
@@ -27,6 +26,17 @@ public class Order implements Comparable<Order>{
     private Map<Product, Integer> products;
     private Order associatedOrder;
 
+    public Order() {
+        id = Constants.DEFAULT_ID;
+        beginDate = Constants.DEFAULT_DATE;
+        endDate = Constants.DEFAULT_DATE;
+        status = Constants.DEFAULT_STATUS;
+        price = Constants.DEFAULT_PRICE;
+        products = new HashMap<>();
+        associatedOrder = null;
+    }
+    
+
     
     public Order(int id, Timestamp beginDate, Timestamp endDate, String status, double price) {
         this.id = id;
@@ -38,26 +48,9 @@ public class Order implements Comparable<Order>{
         this.associatedOrder = null;
         
     }
+
+
     
-    public Order(int id, double price, Map<Product, Integer> products){
-        this.id = id;
-        this.beginDate = Timestamp.from(Instant.now());
-        this.endDate = null;
-        this.status = "Processing";
-        this.price = price;
-        this.products = products;
-        this.associatedOrder = null;
-    }
-    
-    public Order(Map<Product, Integer> products, Order assOrder){
-        this.id = Constants.DEFAULT_ID;
-        this.beginDate = Timestamp.from(Instant.now());
-        this.endDate = null;
-        this.status = "Processing";
-        this.price = price;
-        this.products = products;
-        this.associatedOrder = assOrder;
-    }
     
     public int getId() {
         return id;

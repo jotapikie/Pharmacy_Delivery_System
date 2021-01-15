@@ -62,7 +62,7 @@ public class CourierTest {
     }
 
     /**
-     * Test of getMaxWeight method, of class Courier.
+     * Test of getWeight method, of class Courier.
      */
     @Test
     public void testGetMaxWeight() {

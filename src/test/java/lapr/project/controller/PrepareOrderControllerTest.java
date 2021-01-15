@@ -33,7 +33,7 @@ public class PrepareOrderControllerTest {
         controller = new PrepareOrderController(odb, 1);
         
         List<Order> orders = new ArrayList<>();
-<<<<<<< HEAD
+
         ord1 = new Order();
         ord1.setPrice(35);
         ord1.setId(1);
@@ -44,11 +44,7 @@ public class PrepareOrderControllerTest {
         ord3 = new Order();
         ord3.setId(7);
         ord3.setPrice(23.5);
-=======
-        ord1 = new Order(1, 35, new HashMap<>());
-        ord2 = new Order(4, 18.99, new HashMap<>());
-        ord3 = new Order(7, 23.50, new HashMap<>());
->>>>>>> parent of b1307ed... MEN09-247 #close Maintenance [Fix bugs]
+
         orders.add(ord1);
         orders.add(ord2);
         orders.add(ord3);

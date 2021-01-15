@@ -5,6 +5,8 @@
  */
 package lapr.project.utils;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Diogo
@@ -22,4 +24,6 @@ public class Constants {
 
     public static final int INITIAL_POINTS = 0;
     public static double GRAVITY = 9.8;
+    public static Timestamp DEFAULT_DATE = new Timestamp(1);
+    public static String DEFAULT_STATUS= "Processing";
 }

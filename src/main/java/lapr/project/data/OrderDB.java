@@ -141,12 +141,14 @@ public class OrderDB extends DataHandler{
     }
     
    public Order newOrder(double totalPrice, HashMap<Product, Integer> items) {
-        return new Order(Constants.DEFAULT_ID, totalPrice, items);
+        Order res = new Order(); res.setPrice(totalPrice);res.setProducts(items);
+        return res;
     }
 
 
     public Order newOrder(Order ord, HashMap<Product, Integer> missingProducts) {
-         return new Order(missingProducts, ord);
+         Order res = new Order(); res.setProducts(missingProducts);res.setAssociatedOrder(ord);
+         return res;
     }
 
     public void saveOrderProcessing(Order orderToFulfill,Client cli, int idPharmacy,int idPharmacy1, Invoice invoice) throws SQLException {
