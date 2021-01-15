@@ -38,9 +38,15 @@ public class NotifyReadyOrderControllerTest {
         controller = new NotifyReadyOrderController(odb, 1);
         
         List<Order> orders = new ArrayList<>();
-        ord1 = new Order(1, 35, new HashMap<>());
-        ord2 = new Order(4, 18.99, new HashMap<>());
-        ord3 = new Order(7, 23.50, new HashMap<>());
+        ord1 = new Order();
+        ord1.setId(1);
+        ord1.setPrice(35);
+        ord2 = new Order();
+        ord2.setId(4);
+        ord2.setPrice(18.99);
+        ord3 = new Order();
+        ord3.setId(7);
+        ord3.setPrice(23.5);
         orders.add(ord1);
         orders.add(ord2);
         orders.add(ord3);

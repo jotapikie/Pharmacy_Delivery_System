@@ -97,7 +97,10 @@ public class MakeOrderControllerTest {
         HashMap<Product, Integer> pInCart = new HashMap<>();
         pInCart.put(p1, 2);
         pInCart.put(p2, 1);
-        o1 = new Order(1, 28.5, pInCart);
+        o1 = new Order();
+        o1.setId(1);
+        o1.setPrice(28.5);
+        o1.setProducts(pInCart);
         inv = new Invoice(cli, cli.getAddress(), pInCart, 28.5, 28.5, 5, 0, 111111111);
 
         
