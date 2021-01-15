@@ -118,7 +118,7 @@ public class MakeOrderController {
     }
     
     public boolean makeOrder(int nif) throws SQLException{
-        cli.setPoints(cli.getPoints() - creditsSpent);
+        cli.setPoints(cred - creditsSpent);
         ord = odb.newOrder(totalPrice, items);
         creditsWon = (int) (totalPrice * Platform.getCreditsWonPerEuroSpent());
         cli.setPoints(cli.getPoints() + creditsWon);
@@ -180,7 +180,7 @@ public class MakeOrderController {
     }
     
     private void sendEmail(){
-       //Utils.sendEmail(cli.getEmail(), "Order #" +ord.getId(), inv== null? null:inv.toString());
+       Utils.sendEmail(cli.getEmail(), "Order #" +ord.getId() , inv==null? "Your order is being processed.":inv.toString());
     }
     
  

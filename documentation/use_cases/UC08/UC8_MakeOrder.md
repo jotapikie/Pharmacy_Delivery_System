@@ -2,7 +2,7 @@
 
 ## 1. Requirements Engineering
 
-The client starts to make an order. The system shows the items in the shopping cart and the total price and asks to confirm. The client confirms. The system shows the address where the order will be sent to and asks to confirm. The client confirms. The system asks to select the payment method (credit card or credits). The client selects the desired method. The system creates the order, send the invoice to the client's email and informs about the sucess of the operation.
+The client starts to make an order. The system shows the items in the shopping cart and the total price and asks to confirm. The client confirms. The system shows the address where the order will be sent to and asks to confirm. The client confirms. The system ask to insert the desired nif. The client inserts the desired nif. The system shows the current credits and asks if the client wants to use them to have a discount.The client wants to discount.The system shows the final price and asks to confirm. The client confirms. The system creates the order, send the invoice to client's email and informs abour the sucess of the operation.
 ### SSD
 ![UC8_SSD.png](UC8_SSD.png)
 
@@ -28,7 +28,11 @@ An email with the invoice is sent to client.
 
 ![UC8_SD](UC8_SD.png)
 
-![CheckPharmacyStock_SD](SD_CheckPharmactStock.png)
+![NearestPharmacies_SD](SD_NearestPharmacies.png)
+
+![CheckPharmacyStock_SD](SD_CheckPharmacyStock.png)
+
+
 
 
 ### Class Diagram

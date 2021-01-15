@@ -6,6 +6,7 @@
 package lapr.project.model;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Map;
 
@@ -155,7 +156,30 @@ public class Invoice {
 
     @Override
     public String toString() {
-        return String.format("%s",name);
+        StringBuilder sb = new StringBuilder();
+        String s = String.format("1. PERSONAL INFORMATION%n%nName: %s%nNIF: %d%nAddress: %s, %s, %d, %s%n %n2. ORDER INFORMATION%n%nDate: %s%n%n",name, nif, address.getStreet(), address.getCity(), address.getPortNumber(), address.getZipCode(), date.toString().substring(0, 19));
+        sb.append(s);
+        String head = String.format("%-6s %-20s %-9s %-9s %-10s%n%s%n", "Id", "Product", "Quantity", "Price/Un", "Price", "--------------------------------------------------------");
+        sb.append(head);
+        int quantity = 0;
+        DecimalFormat df = new DecimalFormat(".##");
+        
+        for(Product p : productsBought.keySet()){
+            quantity = productsBought.get(p);
+            head = String.format("%-6s %-20s %-9s %-9s %-10s%n", String.valueOf(p.getId()), p.getName(), String.valueOf(quantity), String.valueOf(df.format(p.getPrice())), String.valueOf(df.format(p.getPrice()*quantity) ));
+            sb.append(head);
+        }
+        head = String.format("%-6s %-20s %-9s %-9s %-10s%n"," " , "Delivery tax", String.valueOf(1), Platform.getDeliveryPrice(), Platform.getDeliveryPrice());
+        sb.append(head);
+        head = String.format("%47s %.2f%n%nTotal Price: %.2f€%n", " ", totalPrice,totalPrice);
+        sb.append(head);
+        if(totalPrice != pricePaid){
+            head = String.format("Price Paid: %.2f€ (%d credits used)%n", pricePaid, creditsSpent);
+            sb.append(head);
+        }
+        head = String.format("Credits Won: %d%nCurrent Credits: %d%n %n",creditsWon,  currentCredits);
+        sb.append(head);
+        return sb.toString();
     }
     
     
