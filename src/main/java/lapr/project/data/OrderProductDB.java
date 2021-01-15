@@ -6,7 +6,13 @@
 package lapr.project.data;
 
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import lapr.project.model.Product;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
@@ -26,6 +32,19 @@ public class OrderProductDB extends DataHandler{
                 callStmt.execute();
 
         }
+    }
+
+    public HashMap<Product, Integer> getProductsByOrder(int idOrder) throws SQLException {
+        HashMap<Product, Integer> products = new HashMap<>();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetProductsByOrder(?) }")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                    products.put(new Product(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getFloat(4)), rs.getInt(5));
+            }
+        }
+        return products;
     }
     
 }

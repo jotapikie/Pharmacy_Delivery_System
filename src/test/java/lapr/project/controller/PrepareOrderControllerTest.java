@@ -14,14 +14,16 @@ import lapr.project.model.Order;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 /**
  *
  * @author Diogo
  */
 public class PrepareOrderControllerTest {
     
-   private static PrepareOrderController controller;
+     private static PrepareOrderController controller;
     private static OrderDB odb;
     private static Order ord1;
     private static Order ord2;
@@ -33,7 +35,10 @@ public class PrepareOrderControllerTest {
         controller = new PrepareOrderController(odb, 1);
         
         List<Order> orders = new ArrayList<>();
-        ord1 = new Order(1, 35, new HashMap<>());
+        ord1 = new Order();
+        ord1.setPrice(35);
+        ord1.setId(1);
+        
         ord2 = new Order(4, 18.99, new HashMap<>());
         ord3 = new Order(7, 23.50, new HashMap<>());
         orders.add(ord1);
@@ -79,5 +84,6 @@ public class PrepareOrderControllerTest {
     public void testPrepareOrder() throws Exception {
         // TO DO
     }
+    
     
 }
