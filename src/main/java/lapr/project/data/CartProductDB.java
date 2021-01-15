@@ -28,7 +28,7 @@ public class CartProductDB extends DataHandler{
     
     public void saveShoppingCart(Map<Product, Integer> products, String clientEmail) throws SQLException {
         Connection con = getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddToCart(?,?,?}")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddToCart(?,?,?) }")) {
             for (Product p : products.keySet()) {
 
                 callStmt.setString(1, clientEmail);
