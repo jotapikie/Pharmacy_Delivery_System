@@ -14,11 +14,6 @@ public class RemoveVehicleController {
     public RemoveVehicleController() {
         this.vehicleDB = new VehicleDB();
     }
-    
-    
-    public boolean removeScooter(int id) throws SQLException {
-        return vehicleDB.removeScooter(id);
-    }
 
     public boolean remove(int id) throws SQLException {
         return vehicleDB.remove(id);

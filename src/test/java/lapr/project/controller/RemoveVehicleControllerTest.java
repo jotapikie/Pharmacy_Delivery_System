@@ -23,6 +23,7 @@ public class RemoveVehicleControllerTest {
 
     /**
      * Test of remove method, of class RemoveVehicleController.
+     * @throws java.sql.SQLException
      */
     @Test
     public void testRemove() throws SQLException {
