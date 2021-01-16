@@ -25,7 +25,7 @@ public class LandGraph extends MainGraph{
     /**
      * Total weight to use in energy calculations.
      */
-    private double totalWeight;
+    private int totalWeight;
 
     /**
      * Vehicle aerodynamic coefficient to use in energy calculations.
@@ -39,7 +39,7 @@ public class LandGraph extends MainGraph{
      * @param vehicleAerodynamicCoef aerodynamic coefficient of the vehicle.
      * @throws java.sql.SQLException
      */
-    public LandGraph(double totalWeight, double vehicleAerodynamicCoef) throws SQLException {
+    public LandGraph(int totalWeight, double vehicleAerodynamicCoef) throws SQLException {
         super();
         if (totalWeight <= 0 || vehicleAerodynamicCoef <= 0) {
             throw new IllegalArgumentException("Invalid energy information!");
@@ -81,17 +81,11 @@ public class LandGraph extends MainGraph{
         }
     }
     
-   public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 
     @Override
     public Graph<GeographicalPoint, VehiclePath> getRouteGraph() {
         return this.landGraph;
     }
-
-
 
 
 

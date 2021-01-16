@@ -5,19 +5,13 @@
  */
 package lapr.project.controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import lapr.project.data.DeliveryRunDB;
-import lapr.project.data.GeographicalPointDB;
-import lapr.project.model.DeliveryRun;
-import lapr.project.model.EScooter;
-import lapr.project.model.GeographicalPoint;
-import lapr.project.model.LandGraph;
-import lapr.project.model.Order;
-import lapr.project.model.Product;
-import lapr.project.utils.Utils;
-import lapr.project.utils.route.Route;
+import java.util.LinkedList;
+
+import lapr.project.data.CourierDB;
+import lapr.project.data.OrderDB;
+import lapr.project.data.PharmacyDB;
+import lapr.project.model.Courier;
+import lapr.project.model.Pharmacy;
 
 /**
  *
@@ -25,61 +19,34 @@ import lapr.project.utils.route.Route;
  */
 public class DeliverOrderController {
     
+    private CourierDB cdb;
+    private PharmacyDB pdb;
+    private OrderDB odb;
+    private String courierEmail;
+    private Courier cou;
+    private Pharmacy pha;
 
-    private final DeliveryRunDB drdb;
-    private final GeographicalPointDB gpdb;
-    private final int idPharmacy;
-    private final double courierWeight;
-    private final String email;
-    private List<DeliveryRun> dels;
-    private double deliveryWeight;
-    private DeliveryRun dr;
-
-    public DeliverOrderController(DeliveryRunDB drdb, GeographicalPointDB gpdb, int idPharmacy, double courierWeight, String email) {
-        this.drdb = drdb;
-        this.gpdb = gpdb;
-        this.idPharmacy = idPharmacy;
-        this.courierWeight = courierWeight;
-        this.email = email;
-        this.dels = new ArrayList<>();
-        this.deliveryWeight = 0;
+    public DeliverOrderController(String courierEmail) {
+        this.cdb = new CourierDB();
+        this.pdb = new PharmacyDB();
+        this.odb = new OrderDB();
+        this.courierEmail = courierEmail;
     }
     
-    
-    
-    public List<String> getDeliveryRuns() throws SQLException{
-        dels = drdb.getDeliveryRuns(idPharmacy);
-        return Utils.listToString(dels);
-    }
-    
-    public String selectDeliveryRun(int id){
-        for(DeliveryRun dt : dels){
-            if(dt.getId() == id){
-                dr = dt;
-                deliveryWeight = 0;
-                for(Order ord : dt.getOrders()){
-                    for(Product p : ord.getProducts().keySet()){
-                        deliveryWeight = deliveryWeight + (p.getWeight()*ord.getProducts().get(p));
-                    }
-                }
-            }
+    /*public List<String> getSuggestedOrders() throws SQLException{
+        List<String> orders = new ArrayList<>();
+        cou = cdb.getCourier(courierEmail);
+        pha = pdb.getPhamarcyByCourier(cou.getEmail());
+        pha.setOrders(odb.getOrdersByPhamarcy(pha.getId()));
+        for(Order o : pha.getSuggestedOrders(cou)){
+            orders.add(o.toString());
         }
-        return dr == null ? null : dr.toString();
-    }
+        return orders;
+    }*/
     
-    public String startDeliveryRun() throws SQLException{
-        double totalWeight = deliveryWeight + courierWeight + EScooter.getSweight();
-        LandGraph graph = new LandGraph(totalWeight, EScooter.getSaeroCoef());
-        GeographicalPoint orDest = gpdb.getGeographicalPointByPharmacy(idPharmacy);
-        List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
-        List<Route> routes = graph.kBestPaths(points, orDest, orDest, 1);
-        Route r = routes.isEmpty()? null : routes.get(0);
-        int nrVehicle = drdb.startDelivery(dr.getId(),email,r);
-        
-        return null;
-
+    public LinkedList<String> findRoute(){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
     
     

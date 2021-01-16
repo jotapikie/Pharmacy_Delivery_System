@@ -18,6 +18,7 @@ import lapr.project.model.Client;
 import lapr.project.model.Invoice;
 import lapr.project.model.Order;
 import lapr.project.model.Product;
+import lapr.project.utils.Constants;
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -140,17 +141,13 @@ public class OrderDB extends DataHandler{
     }
     
    public Order newOrder(double totalPrice, HashMap<Product, Integer> items) {
-       Order res = new Order();
-       res.setPrice(totalPrice);
-       res.setProducts(items);
-       return res;
+        Order res = new Order(); res.setPrice(totalPrice);res.setProducts(items);
+        return res;
     }
 
 
     public Order newOrder(Order ord, HashMap<Product, Integer> missingProducts) {
-         Order res = new Order();
-         res.setProducts(missingProducts);
-         res.setAssociatedOrder(ord);
+         Order res = new Order(); res.setProducts(missingProducts);res.setAssociatedOrder(ord);
          return res;
     }
 
@@ -163,25 +160,6 @@ public class OrderDB extends DataHandler{
         cdb.updateAfterOrder(cli);
         ppdb.updateStockAfterSale(idPharmacy, orderToFulfill.getProducts());
         ppdb.updateStockAfterSale(idPharmacy1, orderToFulfill.getAssociatedOrder().getProducts());
-    }
-
-    public List<Order> getOrdersByDeliveryRun(int runId) throws SQLException {
-        List<Order> listOrders = new ArrayList<>();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetOrdersByDelivreyRun(?) }")) {
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-            callStmt.setInt(1, runId);
-            callStmt.execute();
-            ResultSet rs = (ResultSet) callStmt.getObject(1);
-            while (rs.next()) {
-                Order o = new Order();
-                o.setId(rs.getInt(1));
-                o.setBeginDate(rs.getTimestamp(2));
-                o.setStatus(rs.getString(3));
-                o.setPrice(rs.getDouble(4));
-                listOrders.add(o);
-            }
-        }
-        return listOrders;
     }
 
 

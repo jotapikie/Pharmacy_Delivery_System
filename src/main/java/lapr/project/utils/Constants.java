@@ -19,16 +19,11 @@ public class Constants {
     public static final String PLATFORM_EMAIL = "pharmacygolapr@gmail.com";
     public static final String PLATFORM_PWD = "lapr3g55";
     
-    public static final double SCOOTER_WEIGHT = 27.5;
-    public static final int SCOOTER_MOTOR = 300;
-    public static final double SCOOTER_AERO_COEF = 0.7;
-    public static final double SCOOTER_FRONTAL_AREA = 0.65;
-    
     public static final int DEFAULT_ID = 1;
     public static final double DEFAULT_PRICE = 0;
-    public static final Timestamp DEFAULT_DATE = new Timestamp(1);
-    public static final String DEFAULT_STATUS = "Processing";
 
     public static final int INITIAL_POINTS = 0;
     public static double GRAVITY = 9.8;
+    public static Timestamp DEFAULT_DATE = new Timestamp(1);
+    public static String DEFAULT_STATUS= "Processing";
 }

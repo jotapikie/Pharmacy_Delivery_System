@@ -33,7 +33,7 @@ public class Order implements Comparable<Order>{
         status = Constants.DEFAULT_STATUS;
         price = Constants.DEFAULT_PRICE;
         products = new HashMap<>();
-        associatedOrder = new Order();
+        associatedOrder = null;
     }
     
 

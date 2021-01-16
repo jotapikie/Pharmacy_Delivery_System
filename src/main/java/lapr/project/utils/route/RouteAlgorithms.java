@@ -27,7 +27,6 @@ public class RouteAlgorithms {
         if (landGraph == null || origin == null || destination == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
         }
-     
         @SuppressWarnings("unchecked")
         Graph<GeographicalPoint, VehiclePath> graph = (Graph<GeographicalPoint, VehiclePath>) landGraph.getRouteGraph();
         if (graph == null || !graph.isDirected()) {
