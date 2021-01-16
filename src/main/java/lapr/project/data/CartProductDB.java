@@ -36,22 +36,8 @@ public class CartProductDB extends DataHandler{
                 callStmt.setInt(3, products.get(p));
                 
                 callStmt.execute();
-                callStmt.addBatch();
+               
             }
-
-            con.setAutoCommit(false);
-
-            try {
-                callStmt.executeBatch();
-                con.commit();
-            } catch (BatchUpdateException e) {
-                con.rollback();
-                throw new SQLException(e.getNextException());
-            } finally {
-                con.setAutoCommit(true);
-            }
-
-            
         }
 
     }

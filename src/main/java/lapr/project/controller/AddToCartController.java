@@ -14,6 +14,7 @@ import lapr.project.data.CartProductDB;
 import lapr.project.data.ClientDB;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
+import lapr.project.utils.Utils;
 
 /**
  *
@@ -26,6 +27,7 @@ public class AddToCartController {
     private final CartProductDB cpdb;
     private Product pro;
     private final Map<Product, Integer> products;
+    
 
     public AddToCartController(String clientEmail, ProductDB pdb, ClientDB cdb, CartProductDB cpdb) {
         this.clientEmail = clientEmail;
@@ -37,14 +39,8 @@ public class AddToCartController {
 
     
     public List<String> getAvailableProducts() throws SQLException{
-        List<String> lst = new ArrayList<>();
-        for(Product p : pdb.getProducts()){
-            lst.add(p.toString());
-        }
-        if (lst.isEmpty()){
-            return new ArrayList<>();
-        }else{
-        return lst;}
+        List<String> lst = Utils.listToString(pdb.getProducts());
+        return lst;
     }
     
     public String getSelectedProduct(int id) throws SQLException{
@@ -53,7 +49,9 @@ public class AddToCartController {
     }
     
     public void addToQueue(int quantity){
+        if(pro != null){
         products.put(pro, quantity);
+        }
     }
     
     public void addToCart() throws SQLException{

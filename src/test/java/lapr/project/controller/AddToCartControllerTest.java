@@ -12,6 +12,7 @@ import lapr.project.data.CartProductDB;
 import lapr.project.data.ClientDB;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
+import lapr.project.utils.Utils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,56 +24,54 @@ import static org.mockito.Mockito.when;
 
 /**
  *
- * @author Helder
+ * @author Diogo
  */
 public class AddToCartControllerTest {
     
-    private static AddToCartController atcc;
-    private static String clientEmail;
-    private static ProductDB pdb;
-    private static ClientDB cdb;
-    private static CartProductDB cpdb;
-    private static Product p;
+    private static AddToCartController controller;
+    private static String email = "client1@lapr3.com";
+    private static List<Product> products;
+    private static Product p1;
     private static Product p2;
-    private static List<Product> prds = new ArrayList<>();
+    private static Product p3;
     
-    public AddToCartControllerTest() {
-    }
     
     @BeforeAll
     public static void setUpClass() {
+        p1 = new Product(1, "Product 1", 0.56, 23);
+        p2 = new Product(2, "Product 2", 4, 3.99);
+        p3 = new Product(3, "Product 3", 1.2, 9.5);
+        products = new ArrayList<>();
+        products.add(p1);
+        products.add(p2);
+        products.add(p3);
+        
+        
+
     }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
+
     
     @BeforeEach
     public void setUp() throws SQLException {
-        pdb=mock(ProductDB.class);
-        cdb = mock(ClientDB.class);
-        cpdb = mock(CartProductDB.class);
-        atcc=new AddToCartController(clientEmail,pdb,cdb,cpdb);
-        p=new Product(1,"brufen",5.0,5.0);
-        p2=new Product(2,"benerun",5.0,5.0);
-        prds.add(p);
-        prds.add(p2);
-        when(pdb.getProducts()).thenReturn(prds);
-        when(pdb.getProduct(1)).thenReturn(p);
+        ProductDB pdb = mock(ProductDB.class);
+        ClientDB cdb = mock(ClientDB.class);
+        CartProductDB cpdb = mock(CartProductDB.class);
+        
+        when(pdb.getProducts()).thenReturn(products);
+        when(pdb.getProduct(1)).thenReturn(p1);
         when(pdb.getProduct(2)).thenReturn(p2);
+        when(pdb.getProduct(3)).thenReturn(p3);
+        controller = new AddToCartController(email, pdb, cdb, cpdb);
     }
     
-    @AfterEach
-    public void tearDown() {
-    }
+
 
     /**
      * Test of getAvailableProducts method, of class AddToCartController.
      */
     @Test
     public void testGetAvailableProducts() throws Exception {
-        assertEquals(true, pdb.getProducts().contains(p));
-        assertEquals(true, pdb.getProducts().contains(p2));
+        assertEquals(Utils.listToString(products), controller.getAvailableProducts());
     }
 
     /**
@@ -80,11 +79,22 @@ public class AddToCartControllerTest {
      */
     @Test
     public void testGetSelectedProduct() throws Exception {
-        assertEquals(p.toString(), atcc.getSelectedProduct(1));
-        assertEquals(p2.toString(), atcc.getSelectedProduct(2));
-        assertEquals(null, atcc.getSelectedProduct(5));
+        assertEquals(p1.toString(), controller.getSelectedProduct(1));
+        assertEquals(p2.toString(), controller.getSelectedProduct(2));
+        assertEquals(p3.toString(), controller.getSelectedProduct(3));
+        assertEquals(null, controller.getSelectedProduct(4));
     }
 
-    
+   
+
+    /**
+     * Test of addToCart method, of class AddToCartController.
+     */
+    @Test
+    public void testAddToCart() throws Exception {
+        controller.getSelectedProduct(1);
+        controller.addToQueue(4);
+        controller.addToCart();
+    }
     
 }
