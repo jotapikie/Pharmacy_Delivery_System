@@ -13,6 +13,7 @@ class ClientTest {
     private static Client client2;
     private final static CreditCard creditCard= new CreditCard(1231231231231231L, new Date(1673109541000L), 554);
     private final static Address address= new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 67), "porto", 114,"4250-527");
+    private final static ShoppingCart cart= new ShoppingCart();
     private ClientTest() {
     }
 
@@ -265,5 +266,17 @@ class ClientTest {
         Address result = client2.getAddress();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of getCart method, of class Client. Success.
+     */
+    @Test
+    void getCart_Success() {
+        ShoppingCart expResult = cart;
+        ShoppingCart resul=  client1.getCart();
+        Address result = client1.getAddress();
+        assertEquals(expResult, result);
+    }
+
 
 }
