@@ -22,26 +22,7 @@ public class Drone extends Vehicle{
         super.setMotor(motor);
     }
 
-    @Override
-    public int getId() {
-        return super.getId(); 
-    }
 
-    @Override
-    public State getState() {
-        return super.getState(); 
-    }
-
-    @Override
-    public double getActualBat() {
-        return super.getActualBat(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    @Override
-    public void setState(State state) {
-        super.setState(state); //To change body of generated methods, choose Tools | Templates.
-    }
     
     
     

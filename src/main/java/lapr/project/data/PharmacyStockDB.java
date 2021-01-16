@@ -21,9 +21,7 @@ import oracle.jdbc.OracleTypes;
 public class PharmacyStockDB extends DataHandler{
 
 
-    public void updateStock(int idPharmacy, int id, int quantity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     public int getQuantity(int idPharmacy, int idProduct) {
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetQuantity(?,?) }")) {
@@ -76,6 +74,21 @@ public class PharmacyStockDB extends DataHandler{
             
         }
            
+    }
+
+    public void updateStock(int idPharmacy, Map<Product, Integer> products) throws SQLException {
+        Connection con = getConnection();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddToStock(?,?,?) }")) {
+            for (Product p : products.keySet()) {
+
+                callStmt.setInt(1, idPharmacy);
+                callStmt.setInt(2, p.getId());
+                callStmt.setInt(3, products.get(p));
+                
+                callStmt.execute();
+               
+            }
+        }
     }
 
 

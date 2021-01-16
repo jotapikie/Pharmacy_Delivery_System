@@ -84,6 +84,11 @@ public class AddToCartControllerTest {
         assertEquals(p3.toString(), controller.getSelectedProduct(3));
         assertEquals(null, controller.getSelectedProduct(4));
     }
+    
+    @Test
+    public void testAddToQueue(){
+        assertFalse(controller.addToQueue(5));
+    }
 
    
 
@@ -92,9 +97,11 @@ public class AddToCartControllerTest {
      */
     @Test
     public void testAddToCart() throws Exception {
+        assertFalse(controller.addToCart());
+        
         controller.getSelectedProduct(1);
         controller.addToQueue(4);
-        controller.addToCart();
+        assertTrue(controller.addToCart());
     }
     
 }

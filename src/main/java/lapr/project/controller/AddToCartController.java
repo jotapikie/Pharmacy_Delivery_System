@@ -48,16 +48,20 @@ public class AddToCartController {
         return pro== null ? null : pro.toString();
     }
     
-    public void addToQueue(int quantity){
+    public boolean addToQueue(int quantity){
         if(pro != null){
-        products.put(pro, quantity);
+            products.put(pro, quantity);
+            return true;
         }
+        return false;
     }
     
-    public void addToCart() throws SQLException{
+    public boolean addToCart() throws SQLException{
         if(!products.isEmpty()){
             cpdb.saveShoppingCart(products, clientEmail);
+            return true;
         }
+        return false;
     }
     
     
