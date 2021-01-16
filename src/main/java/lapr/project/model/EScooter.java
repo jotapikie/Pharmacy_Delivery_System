@@ -1,13 +1,18 @@
 package lapr.project.model;
 
+import lapr.project.utils.Constants;
+
 /**
  *
  * @author jota
  */
 public class EScooter extends Vehicle{
     
-    private double aeroCoef;
-    private double frontalArea;
+    private static double weight = Constants.SCOOTER_WEIGHT;
+    private static int motor = Constants.SCOOTER_MOTOR;
+    private static double aeroCoef = Constants.SCOOTER_AERO_COEF;
+    private static double frontalArea = Constants.SCOOTER_FRONTAL_AREA;
+
 
     /**
      * Empty Constructor of the instance EScooter
@@ -61,6 +66,18 @@ public class EScooter extends Vehicle{
     public double getFrontalArea() {
         return frontalArea;
     }
+
+    public static double getGenericWeight() {
+        return weight;
+    }
+    
+    public static double getGenericAeroCoef(){
+        return aeroCoef;
+    }
+
+   
+    
+    
 
     /**
      * sets the frontal area of a scooter

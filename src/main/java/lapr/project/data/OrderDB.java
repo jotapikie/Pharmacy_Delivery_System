@@ -8,6 +8,8 @@ package lapr.project.data;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -141,13 +143,13 @@ public class OrderDB extends DataHandler{
     }
     
    public Order newOrder(double totalPrice, HashMap<Product, Integer> items) {
-        Order res = new Order(); res.setPrice(totalPrice);res.setProducts(items);
+        Order res = new Order(); res.setPrice(totalPrice);res.setProducts(items);res.setBeginDate(Timestamp.from(Instant.now()));
         return res;
     }
 
 
     public Order newOrder(Order ord, HashMap<Product, Integer> missingProducts) {
-         Order res = new Order(); res.setProducts(missingProducts);res.setAssociatedOrder(ord);
+         Order res = new Order(); res.setProducts(missingProducts);res.setAssociatedOrder(ord);res.setBeginDate(Timestamp.from(Instant.now()));
          return res;
     }
 
@@ -162,9 +164,23 @@ public class OrderDB extends DataHandler{
         ppdb.updateStockAfterSale(idPharmacy1, orderToFulfill.getAssociatedOrder().getProducts());
     }
 
-
-    
-    
-    
-    
+    List<Order> getOrdersByDeliveryRun(int idDelivery) throws SQLException {
+        List<Order> listOrders = new ArrayList<>();
+        getConnection();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetOrdersByDeliveryRun(?) }")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setInt(2, idDelivery);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                Order o = new Order();
+                o.setId(rs.getInt(1));
+                o.setBeginDate(rs.getTimestamp(2));
+                o.setStatus(rs.getString(3));
+                o.setPrice(rs.getDouble(4));
+                listOrders.add(o);
+            }
+        }
+        return listOrders;
+    }
 }

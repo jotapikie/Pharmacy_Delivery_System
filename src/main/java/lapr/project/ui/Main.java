@@ -35,7 +35,9 @@ class Main {
      */
     public static void main(String[] args) throws IOException, SQLException {
 
-        AddToCartUI addToCart = new AddToCartUI("clien1@lapr3.com");
+        //AddToCartUI addToCart = new AddToCartUI("clien1@lapr3.com"); // ADICIONA O DOBRO DA QUANTIDADE INSERIDA
+        //MakeOrderUI makeOrder = new MakeOrderUI("clien1@lapr3.com"); // FUNCIONA
+        StartDeliveryRunUI startDelivery = new StartDeliveryRunUI();
 
 //        CalculatorExample calculatorExample = new CalculatorExample();
 //        int value = calculatorExample.sum(3, 5);

@@ -162,7 +162,7 @@ CREATE TABLE delivery_run(
     end_date timestamp NULL,
     courier_email varchar(255),
     vehicle_nr int,
-    vehicle_category varchar(255)
+    vehicle_category varchar(255) NOT NULL
 );
 
 CREATE TABLE pathway(
@@ -172,6 +172,8 @@ CREATE TABLE pathway(
     latitude2 float NOT NULL,
     distance float NOT NULL,
     street varchar(255),
+    kinetic_coef float NOT NULL,
+    wind float NOT NULL,
     CONSTRAINT pk_path_address1_address2 PRIMARY KEY(longitude1, latitude1, longitude2, latitude2)
 );
 
