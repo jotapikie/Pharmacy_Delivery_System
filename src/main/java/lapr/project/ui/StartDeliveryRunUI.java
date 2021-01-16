@@ -16,11 +16,11 @@ import lapr.project.data.GeographicalPointDB;
  *
  * @author Diogo
  */
-public class StartDeliveryRunController {
+public class StartDeliveryRunUI {
     private StartDeliveryRunController controller;
     
-    public StartDeliveryRunController() {
-        controller = new StartDeliveryRunController(new DeliveryRunDB(), new GeographicalPointDB(), 1, 65.7, "courier1@lapr3.com");
+    public StartDeliveryRunUI() {
+        controller = new StartDeliveryRunController(new DeliveryRunDB(), new GeographicalPointDB(), 1, 67.5, "courier1@lapr3.com");
         try {
             showAvailableRuns();
             selectOne();
