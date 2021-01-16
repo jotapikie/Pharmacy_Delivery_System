@@ -81,8 +81,12 @@ public class StartDeliveryRunController {
         GeographicalPoint orDest = gpdb.getGeographicalPointByPharmacy(idPharmacy);
         List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
         List<Route> routes = new ArrayList<>();
-        routes = graph.kBestPaths(points, orDest, orDest, 1);
-        r = routes == null? null : routes.get(0);
+        try{
+            routes = graph.kBestPaths(points, orDest, orDest, 1);
+            r = routes== null? null : routes.get(0);
+        }catch(IllegalArgumentException e){
+            r = null;
+        }
         nrVehicle = drdb.startDelivery(dr.getId(),email,r);
         boolean res = nrVehicle>0;
         if(res){

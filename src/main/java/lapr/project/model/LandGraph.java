@@ -94,7 +94,7 @@ public class LandGraph extends MainGraph{
         try {
             return RouteAlgorithms.kBestRoutes(this, toVisit, origin, destination, k);
         } catch (NullPointerException e) {
-            throw new IllegalArgumentException("Couldn't find a route.");
+            throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
         }
     }
 

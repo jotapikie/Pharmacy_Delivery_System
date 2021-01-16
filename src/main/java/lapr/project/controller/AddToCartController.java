@@ -23,7 +23,6 @@ public class AddToCartController {
     
     private final String clientEmail;
     private final ProductDB pdb;
-    private final ClientDB cdb;
     private final CartProductDB cpdb;
     private Product pro;
     private final Map<Product, Integer> products;
@@ -31,7 +30,6 @@ public class AddToCartController {
     public AddToCartController(String clientEmail, ProductDB pdb, ClientDB cdb, CartProductDB cpdb) {
         this.clientEmail = clientEmail;
         this.pdb = pdb;
-        this.cdb = cdb;
         this.cpdb = cpdb;
         products = new HashMap<>();
     }

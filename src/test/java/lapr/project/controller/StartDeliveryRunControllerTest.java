@@ -145,16 +145,16 @@ public class StartDeliveryRunControllerTest {
         allPoints.add(p1);allPoints.add(p2);allPoints.add(p3);allPoints.add(p4);allPoints.add(p5);
         
         path1 = new Pathway(p1, p2, 0.5, 300, 0.6);
-        path2 = new Pathway(p1, p5, 0.23, 100, 0.2);
+        //path2 = new Pathway(p1, p5, 0.23, 100, 0.2);
         path3 = new Pathway(p2, p3, 0.5, 300, 0.6);
         path5 = new Pathway(p3, p2, 0.89, 42.2, 0.2);
         path6 = new Pathway(p2, p1, 0.89, 42.2, 0.2);
         path7 = new Pathway(p2, p4, 0.23, 120.3, 0.28);
         path8 = new Pathway(p3, p4, 0.72, 94.7, 0.59);
-        path9 = new Pathway(p4, p5, 0.25, 23, 0.439);
+        //path9 = new Pathway(p4, p5, 0.25, 23, 0.439);
         allPaths = new ArrayList<>();
-        allPaths.add(path1);allPaths.add(path2);allPaths.add(path3);;allPaths.add(path5);
-        allPaths.add(path6);allPaths.add(path7);allPaths.add(path8);allPaths.add(path9);
+        allPaths.add(path1);allPaths.add(path3);;allPaths.add(path5);
+        allPaths.add(path6);allPaths.add(path7);allPaths.add(path8);
         
         pointsDR1 = new ArrayList<>();
         pointsDR1.add(p2);pointsDR1.add(p3);
