@@ -16,6 +16,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import lapr.project.model.DeliveryRun;
 
 /**
  *
@@ -133,6 +134,25 @@ public class Utils {
 
 
     public static double pathEnergyCost(double totalWeight, double kineticCoef, double vehicleAerodynamicCoef, double windToPath, double altitudeDif, double distance) {
+        if(distance <= 0){
+            System.out.println("Distance invalid");
+        }
+        
+        if(altitudeDif>= distance){
+            System.out.println("altitude dif invalid");
+        }
+        
+        if(vehicleAerodynamicCoef <0){
+            System.out.println("Vehicle Aerodymaci coef invalid");
+        }
+        
+        if(kineticCoef <= 0){
+            System.out.println("kinetic invalid");
+        }
+        
+        if(totalWeight <= 0){
+            System.out.println("weight invalid");
+        }
         if (distance <= 0 || altitudeDif >= distance || vehicleAerodynamicCoef < 0 || kineticCoef <= 0 || totalWeight <= 0) {
             throw new IllegalArgumentException("This path has invalid data!");
         }
@@ -140,5 +160,13 @@ public class Utils {
         double result = ((Constants.GRAVITY * totalWeight * (kineticCoef + Math.asin(Math.abs(altitudeDif) / distance)))
                 + (vehicleAerodynamicCoef + wind)) * distance / 3600;
         return (result < 0) ? 0 : result;
+    }
+
+    public static <V> List<String> listToString(List<V> lst) {
+        List<String> res = new ArrayList<>();
+        for(V v : lst){
+            res.add(v.toString());
+        }
+        return res;
     }
 }

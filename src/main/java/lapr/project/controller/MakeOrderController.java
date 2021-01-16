@@ -83,9 +83,9 @@ public class MakeOrderController {
             cartPrice = cartPrice + (p.getPrice()*items.get(p));
             cartWeight = cartWeight + (p.getWeight()*items.get(p));
         }
-        if(cartWeight > Platform.getMaxWeightPerOrder()){
-            return null;
-        }
+//        if(cartWeight > Platform.getMaxWeightPerOrder()){
+//            return null;
+//        }
         totalPrice = Platform.getDeliveryPrice() + cartPrice;
         
        

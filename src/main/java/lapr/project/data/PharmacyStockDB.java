@@ -73,7 +73,6 @@ public class PharmacyStockDB extends DataHandler{
                 callStmt.setInt(3, quantity);
                 
                 callStmt.execute();
-                callStmt.addBatch();
             
         }
            
