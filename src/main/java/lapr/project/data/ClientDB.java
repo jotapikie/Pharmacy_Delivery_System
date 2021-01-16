@@ -13,10 +13,12 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lapr.project.model.Address;
 import lapr.project.model.GeographicalPoint;
+import lapr.project.model.Product;
 
 /**
  *
@@ -164,6 +166,21 @@ public class ClientDB extends DataHandler {
                 callStmt.execute();
             
         }
+    }
+
+    public List<Client> getClientsByDeliveryRun(int idRun) throws SQLException {
+        List<Client> listClients = new ArrayList<>();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetClientsByDeliveryRun(?) }")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setInt(2, idRun);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), new Address(rs.getString(7), new GeographicalPoint(rs.getFloat(8), rs.getFloat(9), rs.getFloat(10)), rs.getString(11), rs.getInt(12), rs.getString(13)));
+                listClients.add(c);
+            }
+        }
+        return listClients;
     }
     
 }

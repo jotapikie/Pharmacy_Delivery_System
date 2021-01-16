@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lapr.project.controller.StartDeliveryRunController;
+import lapr.project.data.ClientDB;
 import lapr.project.data.DeliveryRunDB;
 import lapr.project.data.GeographicalPointDB;
 
@@ -19,8 +20,8 @@ import lapr.project.data.GeographicalPointDB;
 public class StartDeliveryRunUI {
     private StartDeliveryRunController controller;
     
-    public StartDeliveryRunUI() {
-        controller = new StartDeliveryRunController(new DeliveryRunDB(), new GeographicalPointDB(), 1, 67.5, "courier1@lapr3.com");
+    public StartDeliveryRunUI(int idPharmacy, double weight, String email) {
+        controller = new StartDeliveryRunController(new DeliveryRunDB(), new GeographicalPointDB(),new ClientDB(), idPharmacy, weight, email);
         try {
             showAvailableRuns();
             selectOne();
@@ -48,12 +49,18 @@ public class StartDeliveryRunUI {
     private void startDelivery() throws SQLException{
         System.out.println("Starting the delivery...");
             
-        int nr = controller.startDeliveryRun();
-        if(nr == 0){
-            System.out.println("There are currently no scooters available");
+        boolean res = controller.startDeliveryRun();
+        if(res){
+            String route = controller.getRoute();
+            System.out.println("The delivery run was assigned to you");
+            if(route == null){
+                System.out.println("Couldn't find a route.");
+            }else{
+                System.out.println("Suggested Route:" +route);
+            }
+            System.out.println("Vehicle QRCode: " +controller.getVehicle());
         }else{
-            System.out.println("The delivery run was assigned to you. Start it.");
-            System.out.println("Vehicle QRCode:" +nr);
+            System.out.println("There are no scooters available in the moment, try again later.");
         }
         }
     

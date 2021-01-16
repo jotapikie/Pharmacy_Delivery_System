@@ -8,8 +8,10 @@ package lapr.project.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import lapr.project.data.ClientDB;
 import lapr.project.data.DeliveryRunDB;
 import lapr.project.data.GeographicalPointDB;
+import lapr.project.model.Client;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.EScooter;
 import lapr.project.model.GeographicalPoint;
@@ -28,21 +30,27 @@ public class StartDeliveryRunController {
 
     private final DeliveryRunDB drdb;
     private final GeographicalPointDB gpdb;
+    private final ClientDB cdb;
     private final int idPharmacy;
     private final double courierWeight;
     private final String email;
     private List<DeliveryRun> dels;
     private double deliveryWeight;
     private DeliveryRun dr;
+    
+    private int nrVehicle;
+    private Route r;
 
-    public StartDeliveryRunController(DeliveryRunDB drdb, GeographicalPointDB gpdb, int idPharmacy, double courierWeight, String email) {
+    public StartDeliveryRunController(DeliveryRunDB drdb, GeographicalPointDB gpdb,ClientDB cdb, int idPharmacy, double courierWeight, String email) {
         this.drdb = drdb;
         this.gpdb = gpdb;
+        this.cdb = cdb;
         this.idPharmacy = idPharmacy;
         this.courierWeight = courierWeight;
         this.email = email;
         this.dels = new ArrayList<>();
         this.deliveryWeight = 0;
+        this.nrVehicle = -1;
     }
     
     
@@ -67,23 +75,35 @@ public class StartDeliveryRunController {
         return dr == null ? null : dr.toString();
     }
     
-    public int startDeliveryRun() throws SQLException{
+    public boolean startDeliveryRun() throws SQLException{
         double totalWeight = deliveryWeight + courierWeight + EScooter.getGenericWeight();
         LandGraph graph = new LandGraph(totalWeight, EScooter.getGenericAeroCoef());
         GeographicalPoint orDest = gpdb.getGeographicalPointByPharmacy(idPharmacy);
         List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
         List<Route> routes = new ArrayList<>();
-        int nrVehicle = -1;
-        try{
-            routes = graph.kBestPaths(points, orDest, orDest, 1);
-            Route r = routes.isEmpty()? null : routes.get(0);
-            nrVehicle = drdb.startDelivery(dr.getId(),email,r);
-        }catch(IllegalArgumentException e){
-            nrVehicle = drdb.startDelivery(dr.getId(),email,null);
+        routes = graph.kBestPaths(points, orDest, orDest, 1);
+        r = routes == null? null : routes.get(0);
+        nrVehicle = drdb.startDelivery(dr.getId(),email,r);
+        boolean res = nrVehicle>0;
+        if(res){
+            List<Client> clients = cdb.getClientsByDeliveryRun(dr.getId());
+            for(Client c : clients){
+                Utils.sendEmail(c.getEmail(), "Delivering", "Your order is being delivered.");
+            }
         }
-        return nrVehicle;
+        return res;
+        
     }
     
+    
+    
+    public String getRoute(){
+        return r == null ? null : r.toString();
+    }
+    
+    public int getVehicle(){
+        return nrVehicle;
+    }
 
     
     

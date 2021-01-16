@@ -37,7 +37,7 @@ class Main {
 
         //AddToCartUI addToCart = new AddToCartUI("clien1@lapr3.com"); // ADICIONA O DOBRO DA QUANTIDADE INSERIDA
         //MakeOrderUI makeOrder = new MakeOrderUI("clien1@lapr3.com"); // FUNCIONA
-        StartDeliveryRunUI startDelivery = new StartDeliveryRunUI();
+        //StartDeliveryRunUI startDelivery = new StartDeliveryRunUI(1, 67.5, "courier1@lapr3.com"); // FUNCIONA
 
 //        CalculatorExample calculatorExample = new CalculatorExample();
 //        int value = calculatorExample.sum(3, 5);

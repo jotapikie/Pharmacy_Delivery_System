@@ -17,6 +17,7 @@ public class GeographicalPoint implements PointInterface{
     private double longitude;
     private double latitude;
     private double elevation;
+    private String description;
     
     private int counter;
 
@@ -24,6 +25,7 @@ public class GeographicalPoint implements PointInterface{
         setLongitude(longitude);
         setLatitude(latitude);
         setElevation(elevation);
+        setDescription("Geographical Point (Longitude:" +longitude+",Latitude:"+latitude+")");
         counter = 0;
     }
 
@@ -44,6 +46,15 @@ public class GeographicalPoint implements PointInterface{
     public final void setElevation(double elevation) {
         this.elevation = elevation;
     }
+
+    public void setDescription(String description) {
+        if(description == null || description.isEmpty()){
+            throw new IllegalArgumentException("Invalid geographical point descriprion");
+        }
+        this.description = description;
+    }
+    
+    
     
     
 
@@ -58,6 +69,12 @@ public class GeographicalPoint implements PointInterface{
     public double getElevation() {
         return elevation;
     }
+
+    public String getDescription() {
+        return description;
+    }
+    
+    
 
     @Override
     public String toString() {

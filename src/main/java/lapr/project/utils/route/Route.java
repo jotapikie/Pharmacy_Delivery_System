@@ -215,6 +215,18 @@ public class Route implements Comparable<Route>{
         return -1;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(Pathway p : paths){
+            sb.append(String.format("%s --> %s %n", p.getOriginPoint().getDescription(), p.getDestinationPoint().getDescription()));
+        }
+        sb.append(String.format("Route Distance: %.2f %nRoute Cost: %.2f", routeDistance, routeCost));
+        return sb.toString();
+    }
+    
+    
+
     /**
      * Checks if this route is equal to a given object.
      *

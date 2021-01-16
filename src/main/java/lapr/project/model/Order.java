@@ -96,7 +96,7 @@ public class Order implements Comparable<Order>{
         this.price = price;
     }
 
-    public void setProducts(HashMap<Product, Integer> products) {
+    public void setProducts(Map<Product, Integer> products) {
         this.products = products;
     }
 
