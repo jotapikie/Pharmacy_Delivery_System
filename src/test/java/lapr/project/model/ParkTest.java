@@ -13,7 +13,6 @@ class ParkTest {
 
     private static Park park1;
     private static Park park2;
-    private static Park park3;
     private static ParkSlot slot;
     private static ParkSlot slot2;
     private static HashSet<ParkSlot> slots= new HashSet<>();
@@ -28,7 +27,6 @@ class ParkTest {
         slots.add(slot2);
         park1 = new Park(1,3,"SCOOTER",slots);
         park2 = new Park(2,5,"scooter",slots);
-        park3 = new Park(3, 3, "scooter", slots);
     }
 
     @AfterAll
@@ -42,53 +40,6 @@ class ParkTest {
     @AfterEach
     public void tearDown() {
     }
-    @Test
-    void getId() {
-        int expResult=1;
-        int res=park1.getId();
-        assertEquals(expResult,res);
-    }
-
-    @Test
-    void setIdSucess() {
-        int expResult=10;
-        park1.setId(10);
-        int res= park1.getId();
-        assertEquals(expResult,res);
-    }
-    @Test
-    void setIdFail() {
-        try {
-            park1.setId(0);
-            fail("Expected IllegalArgument");
-        }catch (IllegalArgumentException ignored){
-
-        }
-    }
-    @Test
-    void setIdFail2() {
-        try {
-            park1.setId(-10);
-            fail("Expected IllegalArgument");
-        }catch (IllegalArgumentException ignored){
-
-        }
-    }
-
-    @Test
-    void getnMaxVehicles() {
-        int expRes=3;
-        int res= park1.getnMaxVehicles();
-        assertEquals(expRes,res);
-    }
-
-    @Test
-    void setnMaxVehicles() {
-        int expResult=10;
-        park1.setnMaxVehicles(10);
-        int res= park1.getnMaxVehicles();
-        assertEquals(expResult,res);
-    }
 
     @Test
     void setnMaxVehiclesFail() {
@@ -98,23 +49,6 @@ class ParkTest {
         }catch (IllegalArgumentException ignored){
 
         }
-    }
-
-    @Test
-    void setnMaxVehiclesFail1() {
-        try {
-            park1.setnMaxVehicles(0);
-            fail("Expected IllegalArgument");
-        }catch (IllegalArgumentException ignored){
-
-        }
-    }
-
-    @Test
-    void getType() {
-        String expRes="SCOOTER";
-        String res= park1.getType();
-        assertEquals(expRes,res);
     }
 
     @Test
@@ -151,31 +85,6 @@ class ParkTest {
     }
 
     @Test
-    void setSlotsFail() {
-        try {
-            slots.add(new ParkSlot(5,true));
-            slots.add(new ParkSlot(7,false));
-            park3.setSlots(slots);
-            fail("Expected IllegalArgument");
-        }catch (IllegalArgumentException ignored){
-
-        }
-    }
-
-    @Test
-    void setSlotsFail1() {
-        try {
-            HashSet<ParkSlot> slotsEmpty= new HashSet<>();
-            park3.setSlots(slotsEmpty);
-            fail("Expected IllegalArgument");
-        }catch (IllegalArgumentException ignored){
-
-        }
-    }
-
-
-
-    @Test
     void updatePark() {
         park2.updatePark(5,"SCOOTER",slots);
         assertEquals(park2.getnMaxVehicles(), 5);
@@ -183,7 +92,6 @@ class ParkTest {
         assertEquals(park2.getSlots(), slots);
         assertNotEquals(park2.toString(), park1.toString());
     }
-
 
     /**
      * Test of equals method
@@ -247,8 +155,70 @@ class ParkTest {
     @Test
     public void testHashCode() {
 
-        int expResult = 94;
+        int expResult = 103;
         int result = park1.hashCode();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getId method, of class Park.
+     */
+    @Test
+    public void testGetId() {
+        int expResult = 1;
+        int result = park1.getId();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setId method, of class Park.
+     */
+    @Test
+    public void testSetId() {
+        int expResult=10;
+        park1.setId(10);
+        int res= park1.getId();
+        assertEquals(expResult,res);
+    }
+
+    /**
+     * Test of getnMaxVehicles method, of class Park.
+     */
+    @Test
+    public void testGetnMaxVehicles() {
+        int expRes=3;
+        int res= park1.getnMaxVehicles();
+        assertEquals(expRes,res);
+    }
+
+    /**
+     * Test of setnMaxVehicles method, of class Park.
+     */
+    @Test
+    public void testSetnMaxVehicles() {
+        int expResult=10;
+        park1.setnMaxVehicles(10);
+        int res= park1.getnMaxVehicles();
+        assertEquals(expResult,res);
+    }
+
+    /**
+     * Test of getType method, of class Park.
+     */
+    @Test
+    public void testGetType() {
+        String expRes="SCOOTER";
+        String res= park1.getType();
+        assertEquals(expRes,res);
+    }
+
+    /**
+     * Test of toString method, of class Park.
+     */
+    @Test
+    public void testToString() {
+        String expResult = "10 3 SCOOTER";
+        String result = park1.toString();
         assertEquals(expResult, result);
     }
 
