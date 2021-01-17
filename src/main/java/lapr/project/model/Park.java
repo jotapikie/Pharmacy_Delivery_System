@@ -52,7 +52,7 @@ public class Park{
     }
 
     public void setSlots(Set<ParkSlot> slots) {
-        if(slots.size()>nMaxVehicles|| slots.isEmpty())
+        if(slots == null || slots.size()>nMaxVehicles)
             throw new IllegalArgumentException("Invalid park slots");
         this.slots = slots;
     }

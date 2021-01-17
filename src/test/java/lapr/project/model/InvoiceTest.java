@@ -308,4 +308,8 @@ public class InvoiceTest {
         
     }
     
+    @Test
+    public void testToString(){
+        assertTrue(inv.toString()!=null);
+    }
 }

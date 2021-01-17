@@ -24,11 +24,11 @@ public class ShoppingCart {
      * Class Constructor
      */
     public ShoppingCart() {
-        items = new HashMap<>();
+        setItems(new HashMap<>());
     }
     
     public ShoppingCart(HashMap<Product, Integer> items) {
-        this.items = items;
+        setItems(items);
     }
 
     /**
@@ -45,7 +45,10 @@ public class ShoppingCart {
      * Set the items in the shopping cart.
      * @param items - new items
      */
-    public void setItems(HashMap<Product, Integer> items) {
+    public final void setItems(HashMap<Product, Integer> items) {
+        if(items==null){
+            throw new IllegalArgumentException("Invalid shopping cart products");
+        }
         this.items = items;
     }
     

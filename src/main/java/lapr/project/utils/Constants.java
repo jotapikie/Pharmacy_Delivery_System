@@ -26,5 +26,13 @@ public class Constants {
 
     public static final int INITIAL_POINTS = 0;
     public static double GRAVITY = 9.8;
+
+    /**
+     * Test purposes
+     */
+    protected Constants() {
+    }
+    
+    
     
 }

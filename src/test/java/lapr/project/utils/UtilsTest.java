@@ -22,6 +22,7 @@ public class UtilsTest {
     
     
     Utils u = new Utils();
+    Constants c = new Constants();
 
 
  

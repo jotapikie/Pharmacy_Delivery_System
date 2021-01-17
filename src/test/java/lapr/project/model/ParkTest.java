@@ -82,6 +82,29 @@ class ParkTest {
         park1.setSlots(slots);
         Set<ParkSlot> res= park1.getSlots();
         assertEquals(expResult,res);
+        
+        boolean flag = false;
+        try{
+            park1.setSlots(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        park1.setnMaxVehicles(2);
+        HashSet<ParkSlot> temp = new HashSet<>();
+        temp.add(new ParkSlot(5, true));
+        temp.add(new ParkSlot(6, true));
+        temp.add(new ParkSlot(7, true));
+        try{
+            park1.setSlots(temp);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        
     }
 
     @Test
@@ -179,6 +202,14 @@ class ParkTest {
         park1.setId(10);
         int res= park1.getId();
         assertEquals(expResult,res);
+        
+        boolean flag = false;
+        try{
+            park1.setId(-4);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
 
     /**

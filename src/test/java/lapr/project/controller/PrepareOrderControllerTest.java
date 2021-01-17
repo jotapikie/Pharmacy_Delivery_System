@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import lapr.project.data.OrderDB;
 import lapr.project.model.Order;
+import lapr.project.utils.Utils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,6 +27,7 @@ public class PrepareOrderControllerTest {
     private static Order ord1;
     private static Order ord2;
     private static Order ord3;
+    private static Order ord4;
     
     @BeforeAll
     public static void setUpClass() throws SQLException {
@@ -41,9 +43,14 @@ public class PrepareOrderControllerTest {
         ord2 = new Order();
         ord2.setId(4);
         ord2.setPrice(18.99);
+        
         ord3 = new Order();
         ord3.setId(7);
         ord3.setPrice(23.5);
+        
+        ord4 = new Order();
+        ord4.setId(10);
+        ord4.setPrice(23.5);
 
         orders.add(ord1);
         orders.add(ord2);
@@ -53,6 +60,7 @@ public class PrepareOrderControllerTest {
         when(odb.getOrder(1)).thenReturn(ord1);
         when(odb.getOrder(4)).thenReturn(ord2);
         when(odb.getOrder(7)).thenReturn(ord3);
+        when(odb.getOrder(10)).thenReturn(ord4);
     }
     
 
@@ -63,11 +71,11 @@ public class PrepareOrderControllerTest {
     @Test
     public void testGetReadyToPrepareOrders() throws Exception {
         List<String> res = controller.getReadyToPrepareOrders();
-        
-        assertEquals(3, res.size());
-        assertEquals(true, res.contains(ord1.toString()));
-        assertEquals(true, res.contains(ord2.toString()));
-        assertEquals(true, res.contains(ord3.toString()));
+        assertEquals(3,res.size());
+        assertTrue(res.contains(ord1.toString()));
+        assertTrue(res.contains(ord2.toString()));
+        assertTrue(res.contains(ord3.toString()));
+
     }
 
     /**
@@ -75,10 +83,12 @@ public class PrepareOrderControllerTest {
      */
     @Test
     public void testGetSelectedOrder() throws Exception {
-        assertEquals(ord1.toString(), controller.getSelectedOrder(1));
-        assertEquals(ord2.toString(), controller.getSelectedOrder(4));
+        controller.getReadyToPrepareOrders();
+        assertEquals(null, controller.getSelectedOrder(10));
+        assertEquals(null, controller.getSelectedOrder(9));
         assertEquals(ord3.toString(), controller.getSelectedOrder(7));
-        assertEquals(null, controller.getSelectedOrder(5));
+        assertEquals(ord2.toString(), controller.getSelectedOrder(4));
+        assertEquals(ord1.toString(), controller.getSelectedOrder(1));
     }
 
     /**
@@ -86,7 +96,13 @@ public class PrepareOrderControllerTest {
      */
     @Test
     public void testPrepareOrder() throws Exception {
-        // TO DO
+        controller.getReadyToPrepareOrders();
+        controller.getSelectedOrder(10);
+        assertFalse(controller.prepareOrder());
+        
+        controller.getReadyToPrepareOrders();
+        controller.getSelectedOrder(1);
+        assertTrue(controller.prepareOrder());
     }
     
 }

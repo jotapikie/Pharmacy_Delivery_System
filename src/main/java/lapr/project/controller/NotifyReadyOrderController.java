@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.OrderDB;
 import lapr.project.model.Order;
+import lapr.project.utils.Utils;
 
 /**
  *
@@ -20,6 +21,7 @@ public class NotifyReadyOrderController {
     private Order order;
     private final OrderDB orderDB;
     private final int idPharmacy;
+    private List<Order> ords;
 
 
 
@@ -27,30 +29,26 @@ public class NotifyReadyOrderController {
     public NotifyReadyOrderController(OrderDB odb, int idPharmacy) {
         this.orderDB= odb;
         this.idPharmacy = idPharmacy;
+        ords = new ArrayList<>();
         
     }
     
     public List<String> getPreparingOrders() throws SQLException{
-        List<String> lst = new ArrayList<>();
-        for(Order o : orderDB.getOrdersByStatus(idPharmacy, "Preparing")){
-            lst.add(o.toString());
-        }
-        return lst;
-        
+        ords = orderDB.getOrdersByStatus(idPharmacy, "Preparing");
+        return Utils.listToString(ords);
     }
     
     public String getSelectedOrder(int id) throws SQLException{
         order = orderDB.getOrder(id);
-        return order== null ? null : order.toString();
+        return (order== null || !ords.contains(order)) ? null : order.toString();
     }
     
     public boolean setOrderToReady() throws SQLException{
-        if(order == null){
-            return false;
+        if(order != null && ords.contains(order)){
+             orderDB.setStatus(order.getId(), "Prepared", idPharmacy);
+             return true;
         }
-        
-        orderDB.setStatus(order.getId(), "Prepared", idPharmacy);
-        return true;
+        return false;
     }
     
     

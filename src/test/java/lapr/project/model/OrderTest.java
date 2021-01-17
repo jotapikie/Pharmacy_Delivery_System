@@ -36,7 +36,9 @@ public class OrderTest {
         order2 = new Order();
         order2.setId(3);
         order.setPrice(5.99);
-        order3 = new Order(4, new Timestamp(335345), new Timestamp(3434), "Prepared", 34.56);
+        order2.setAssociatedOrder(order);
+        
+        order3 = new Order(4, new Timestamp(3433), new Timestamp(3434), "Prepared", 34.56);
     }
     
 
@@ -63,7 +65,7 @@ public class OrderTest {
      */
     @Test
     public void testGetBeginDate() {
-        Timestamp d = Timestamp.from(Instant.now());
+        Timestamp d = new Timestamp(2);
         order.setBeginDate(d);
         assertEquals(d, order.getBeginDate());
     }
@@ -73,7 +75,7 @@ public class OrderTest {
      */
     @Test
     public void testGetEndDate() {
-        Timestamp d = Timestamp.from(Instant.now());
+        Timestamp d = new Timestamp(4);
         order.setEndDate(d);
         assertEquals(d, order.getEndDate());
     }
@@ -111,6 +113,12 @@ public class OrderTest {
         
     }
     
+    @Test
+    public void testGetAssociatedOrder(){
+        order2.setAssociatedOrder(order);
+        assertEquals(order, order2.getAssociatedOrder());
+    }
+    
         /**
      * Test of setId method, of class Order.
      */
@@ -118,6 +126,14 @@ public class OrderTest {
     public void testSetId() {
         order.setId(5);
         assertEquals(5, order.getId());
+        
+        boolean flag = false;
+        try{
+            order.setId(-2);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
     
     
@@ -129,6 +145,14 @@ public class OrderTest {
         Timestamp d = Timestamp.from(Instant.now());
         order.setBeginDate(d);
         assertEquals(d, order.getBeginDate());
+        
+        boolean flag = false;
+        try{
+            order.setBeginDate(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
     
                 /**
@@ -139,6 +163,15 @@ public class OrderTest {
         Timestamp d = Timestamp.from(Instant.now());
         order.setEndDate(d);
         assertEquals(d, order.getEndDate());
+        
+        order.setBeginDate(new Timestamp(5));
+        boolean flag = false;
+        try{
+            order.setEndDate(new Timestamp(4));
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
     
             /**
@@ -148,6 +181,14 @@ public class OrderTest {
     public void testSetPrice() {
         order.setPrice(23.45);
         assertEquals(23.45, order.getPrice());
+        
+        boolean flag = false;
+        try{
+            order.setPrice(-2);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
     
             /**
@@ -160,6 +201,25 @@ public class OrderTest {
         pr.put(p, 2);
         order.setProducts(pr);
         assertEquals(pr, order.getProducts());
+        
+        boolean flag = false;
+        try{
+            order.setProducts(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+    
+    @Test
+    public void testSetAssociatedOrder(){
+        boolean flag = false;
+        try{
+            order.setAssociatedOrder(order);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
     
 
@@ -170,6 +230,31 @@ public class OrderTest {
     public void testSetStatus() {
         order.setStatus("Prepared");
         assertEquals("Prepared", order.getStatus());
+        
+        boolean flag = false;
+        try{
+            order.setStatus("");
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        order.setStatus("Prepared");
+        
+//        flag = false;
+//        try{
+//            order.setStatus(null);
+//        }catch(IllegalArgumentException e){
+//            flag = true;
+//        }
+//        assertTrue(flag);
+        
+        flag = false;
+        try{
+            order.setStatus("Other");
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
 
     /**
@@ -181,6 +266,19 @@ public class OrderTest {
         String result = order2.toString();
         assertEquals(result, order2.toString());
         
+    }
+    
+    @Test
+    public void testEquals(){
+        assertTrue(order.equals(order));
+        assertFalse(order.equals(null));
+        assertFalse(order.equals(new GeographicalPoint(34.5, 2.45, 2.3)));
+        assertFalse(order.equals(order2));
+    }
+    
+    @Test
+    public void testHashCode(){
+         assertEquals(order.getId(), order.hashCode());
     }
 
     /**

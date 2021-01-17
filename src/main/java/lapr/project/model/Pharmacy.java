@@ -52,34 +52,11 @@ public class Pharmacy {
     public int getId() {
         return id;
     }
-
-    /**
-     * method to set the Id of the pharmacy
-     *
-     * @param id
-     */
-    public void setId(int id) {
-        if(id<=0)
-            throw new IllegalArgumentException("Invalid pharmacy id");
-        this.id = id;
-    }
-
-    public void setName(String name){
-        if(name == null || name.isEmpty()){
-            throw new IllegalArgumentException("A pharmacy must have a valid name");
-        }
-        this.name=name;
-    }
-
+    
     public int getPhoneNumber() {
         return phoneNumber;
     }
-
-    public void setPhoneNumber(int phoneNumber) {
-        if (String.valueOf(phoneNumber).length()!=9) throw new IllegalArgumentException("Phone number must have 9 digits");
-        this.phoneNumber = phoneNumber;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -87,27 +64,59 @@ public class Pharmacy {
     public Administrator getAdministrator() {
         return administrator;
     }
-
-    void setAdministrator(Administrator administrator) {
-        if (!administrator.getEmail().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
-            throw new IllegalArgumentException("Pharmacy's email is invalid.");
-        }
-        this.administrator = administrator;
-    }
-
+    
+    
     public Address getAddress() {
         return address;
     }
+    
+    
+    public HashSet<Park> getParks() {
+        return parks;
+    }
+
+    /**
+     * method to set the Id of the pharmacy
+     *
+     * @param id
+     */
+    public final void setId(int id) {
+        if(id<=0)
+            throw new IllegalArgumentException("Invalid pharmacy id");
+        this.id = id;
+    }
+
+    public final void setName(String name){
+        if(name == null || name.isEmpty()){
+            throw new IllegalArgumentException("A pharmacy must have a valid name");
+        }
+        this.name=name;
+    }
+
+
+    public void setPhoneNumber(int phoneNumber) {
+        if (String.valueOf(phoneNumber).length()!=9){
+            throw new IllegalArgumentException("Phone number must have 9 digits");
+        }
+        this.phoneNumber = phoneNumber;
+    }
+
+
+
+    void setAdministrator(Administrator administrator) {
+        this.administrator = administrator;
+    }
+
 
     public void setAddress(Address address) {
         this.address = address;
     }
 
-    public HashSet<Park> getParks() {
-        return parks;
-    }
 
     public void setParks(HashSet<Park> parks) {
+        if(parks == null){
+            throw new IllegalArgumentException("Invalid pharmacy parks.");
+        }
         this.parks = parks;
     }
 
@@ -132,20 +141,15 @@ public class Pharmacy {
             return false;
         }
         final Pharmacy other = (Pharmacy) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return (super.equals(other));
+        return this.id == other.getId();
         }
 
-        @Override
-        public String toString(){
-            return String.format("%d %s  %d  %s  %s ", id, getName(), getPhoneNumber(), getAdministrator().toString(), getAddress().toString());
-        }
-
-    public void setParks(Park park) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public String toString(){
+        return String.format("%d %s  %d  %s  %s ", id, getName(), getPhoneNumber(), getAdministrator().toString(), getAddress().toString());
     }
+
+
 
   
     }

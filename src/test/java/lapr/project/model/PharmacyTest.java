@@ -67,6 +67,14 @@ public class PharmacyTest {
         pharmacyTest.setId(expResult);
         int result = pharmacyTest.getId();
         assertEquals(expResult, result);
+        
+        boolean flag = false;
+        try{
+            pharmacyTest.setId(-4);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
 
     /**
@@ -88,6 +96,14 @@ public class PharmacyTest {
         pharmacyTest.setPhoneNumber(expResult);
         int result= pharmacyTest.getPhoneNumber();
         assertEquals(expResult, result);
+        
+        boolean flag = false;
+        try{
+            pharmacyTest.setPhoneNumber(9342);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
 
     /**
@@ -108,6 +124,8 @@ public class PharmacyTest {
         Administrator expResult = admin;
         Administrator result = pharmacyTest.getAdministrator();
         assertEquals(expResult, result);
+        
+
     }
 
     /**
@@ -150,6 +168,14 @@ public class PharmacyTest {
         HashSet<Park> expResult = new HashSet<Park>();
         HashSet<Park> result = pharmacyTest.getParks();
         assertEquals(expResult, result);
+        
+        boolean flag = false;
+        try{
+            pharmacyTest.setParks(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
     
     /**
@@ -161,6 +187,22 @@ public class PharmacyTest {
         pharmacyTest.setName(expResult);
         String result= pharmacyTest.getName();
         assertEquals(expResult, result);
+        
+        boolean flag = false;
+        try{
+            pharmacyTest.setName("");
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            pharmacyTest.setName(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
 
 
@@ -172,7 +214,16 @@ public class PharmacyTest {
         boolean expResult = false;
         boolean result = pharmacyTest.equals(pharmacyTest2);
         assertEquals(expResult, result);
+        
+        assertFalse(pharmacyTest.equals(null));
+        assertFalse(pharmacyTest.equals(admin));
+        Pharmacy temp = new Pharmacy(1,912541888, "ad", admin, address);
+        assertTrue(pharmacyTest.equals(temp));
     }
 
+    @Test
+    public void testToString(){
+        assertTrue(pharmacyTest.toString()!= null);
+    }
 
 }
