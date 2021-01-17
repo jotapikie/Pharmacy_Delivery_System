@@ -5,6 +5,8 @@
  */
 package lapr.project.utils;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -27,25 +29,30 @@ public class Utils {
     
 
     public static boolean sendEmail(String to, String subject, String msg){
-             Properties prop = new Properties();
+       Properties prop = new Properties();
         
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         
-        Session session = Session.getInstance(prop, new Authenticator() {
+
+        Properties props = new Properties();
+        try {
+            props.load(new FileInputStream("src/main/resources/application.properties"));
+            final String email = props.getProperty("email.user");
+            final String password = props.getProperty("email.password");
+            Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(Constants.PLATFORM_EMAIL, Constants.PLATFORM_PWD);
+                return new PasswordAuthentication(email, password);
             }
         
         
         });
-        
-         try{  
+            try{  
          MimeMessage message = new MimeMessage(session);  
-         message.setFrom(new InternetAddress(Constants.PLATFORM_EMAIL));  
+         message.setFrom(new InternetAddress(email));  
          message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
          message.setSubject(subject);  
          message.setText(msg);  
@@ -58,7 +65,11 @@ public class Utils {
           return false;
 
       }  
-    }
+        } catch (IOException ex) {
+            return false;
+        }     
+   }  
+    
         
         
     

@@ -2,9 +2,15 @@ package lapr.project.data;
 
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.Property;
 import lapr.project.utils.Constants;
 
 /**
@@ -45,13 +51,17 @@ public class DataHandler {
      * Use connection properties set on file application.properties
      */
     public DataHandler() {
-        this.jdbcUrl = System.getProperty("database.url");
-        this.username = System.getProperty("database.username");
-        this.pwd = System.getProperty("database.password");
         
-        this.jdbcUrl = Constants.CONNECTION_JDBCURL;
-        this.username = Constants.CONNECTION_USERNAME;
-        this.pwd = Constants.CONNECTION_ACCESS;
+        Properties props = new Properties();
+        try {
+            props.load(new FileInputStream("src/main/resources/application.properties"));
+            this.jdbcUrl = props.getProperty("database.url");
+            this.username = props.getProperty("database.username");
+            this.pwd = props.getProperty("database.password");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }     
+
     }
 
     /**
