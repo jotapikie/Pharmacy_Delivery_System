@@ -116,6 +116,17 @@ public class MainGraph {
         }
     }
     
+    public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
+        if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
+            throw new IllegalArgumentException("Invalid algorithm arguments!");
+        }
+        try {
+            return RouteAlgorithms.kBestRoutes(this, toVisit, origin, destination, k);
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException("Invalid graph vertexes!");
+        }
+    }
+    
     
 
 

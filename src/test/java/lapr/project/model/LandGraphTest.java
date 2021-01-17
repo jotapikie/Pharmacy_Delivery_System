@@ -18,7 +18,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -26,82 +27,226 @@ import static org.mockito.Mockito.*;
  */
 public class LandGraphTest {
     
-    static LandGraph instance;
-    static GeographicalPointDB gpdb;
-    static PathwayDB pdb;
-    static List<GeographicalPoint> points;
-    static List<Pathway> paths;
+    private static LandGraph graph;
     
-    static GeographicalPoint p1;
-    static GeographicalPoint p2;
-    static GeographicalPoint p3;
-    static GeographicalPoint p4;
+    private static PathwayDB pdb;
+    private static GeographicalPointDB gpdb;
     
-    static Pathway p10;
-    static Pathway p11;
-    static Pathway p12;
-    static Pathway p13;
-    static Pathway p14;
+
+    private static GeographicalPoint p1;
+    private static GeographicalPoint p2;
+    private static GeographicalPoint p3;
+    private static GeographicalPoint p4;
+    private static GeographicalPoint p5;
+    private static List<GeographicalPoint> allPoints;
     
+    private static Pathway path1;
+    private static Pathway path2;
+    private static Pathway path3;
+    private static Pathway path4;
+    private static Pathway path6;
+    private static Pathway path7;
+    private static Pathway path8;
+    private static Pathway path9;
+    private static Pathway path10;
+    private static List<Pathway> allPaths;
+    
+    public LandGraphTest() {
+    }
     
     @BeforeAll
-    public static void setUpClass() throws SQLException {
+    public static void setUpClass() {
+        p1 = new GeographicalPoint(42.45, 23.4, 0.2);p1.setDescription("p1");
+        p2 = new GeographicalPoint(41.78, 36.7, 0.2);p2.setDescription("p2");
+        p3 = new GeographicalPoint(84.5, -23.3, 0.2);p3.setDescription("p3");
+        p4 = new GeographicalPoint(-4.53, 1.32, 0.2);p4.setDescription("p4");
+        p5 = new GeographicalPoint(89.2, -57.2, 0.2);p5.setDescription("p5");
+        allPoints = new ArrayList<>();
+        allPoints.add(p1);allPoints.add(p2);allPoints.add(p3);allPoints.add(p4);allPoints.add(p5);
         
-//        gpdb = mock(GeographicalPointDB.class);
-//        pdb = mock(PathwayDB.class);
-//        
-//        points = new ArrayList<>();
-//        paths = new ArrayList<>();
-//        
-//        p1 = new GeographicalPoint(45.7, 23.6, 4.8);
-//        p2 = new GeographicalPoint(48.2, 54.9, 23.7);
-//        p3 = new GeographicalPoint(67.3, 89.3, 54.65);
-//        p4 = new GeographicalPoint(78.2, 56.3, 2.9);
-//        points.add(p1);points.add(p2);points.add(p3);points.add(p4);
-//        
-//        p10 = new Pathway(p1, p2, 4.5, 34.2, 5.7);
-//        p11 = new Pathway(p2, p3, 3.6, 29.5, 2.9);
-//        p12 = new Pathway(p2, p4, 2.7, 45.8, 1.4);
-//        p13 = new Pathway(p4, p1, 6.5, 18.5, 2.6);
-//        p14 = new Pathway(p4, p3, 2.3, 8.9, 2.5);
-//        paths.add(p10);paths.add(p11);paths.add(p12);paths.add(p13);paths.add(p14);
-//        
-//        when(gpdb.getGeographicalPoints()).thenReturn(points);
-//        when(pdb.getPaths()).thenReturn(paths);
-//        
-//        MainGraph.setup(gpdb, pdb);
-//        instance = new LandGraph(68, 2.8);
-        
-        
+        path1 = new Pathway(p1, p2, 0.5, 300, 0.6);
+        path2 = new Pathway(p1, p3, 2, 100, 2);
+        path3 = new Pathway(p2, p3, 0.5, 100, 0.6);
+        path4 = new Pathway(p3, p1, 0.23, 100, 0.2);
+        path6 = new Pathway(p3, p2, 0.89, 450.2, 0.234);
+        path7 = new Pathway(p2, p4, 0.23, 120.3, 0.28);
+        path8 = new Pathway(p3, p4, 0.72, 94.7, 0.59);
+        path9 = new Pathway(p4, p5, 0.25, 23, 0.439);
+        path10 = new Pathway(p5, p4, 0.25, 23, 0.439);
+        allPaths = new ArrayList<>();
+        allPaths.add(path1);allPaths.add(path2);allPaths.add(path3);allPaths.add(path4);
+        allPaths.add(path6);allPaths.add(path7);allPaths.add(path8);allPaths.add(path9);allPaths.add(path10);
     }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
+
     
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws SQLException {
+        gpdb = mock(GeographicalPointDB.class);
+        pdb = mock(PathwayDB.class);
+        when(gpdb.getGeographicalPoints()).thenReturn(allPoints);
+        when(pdb.getPaths()).thenReturn(allPaths);
+        MainGraph.setup(gpdb, pdb);
+        graph = new LandGraph(126, 0.6);
     }
     
-    @AfterEach
-    public void tearDown() {
+
+
+    /**
+     * Test of kBestPaths method, of class LandGraph.
+     */
+    @Test
+    public void testKBestPaths_3args() throws SQLException {
+            // Origin null
+            boolean flag = false;
+            try{
+                graph.kBestPaths(null, p3, 1);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+            // Destination null
+            flag = false;
+            try{
+                graph.kBestPaths(p1, null, 1);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+            // Origin = Destination
+            flag = false;
+            try{
+                graph.kBestPaths(p1, p1, 1);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+            // k <= 0
+            flag = false;
+            try{
+                graph.kBestPaths(p1, p3, -1);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+            List<Route> res = graph.kBestPaths(p1, p3, 1);
+            Route exp = new Route(path2);
+            Route result = res.iterator().next();
+            assertEquals(exp.getRouteDistance(),result.getRouteDistance());
+            assertEquals(exp.getPaths().size(), result.getPaths().size());
+            assertEquals(68.5, result.getRouteCost(), 0.1);
+            
+            // NO PATH
+            res = graph.kBestPaths(p4, p1, 1);
+            assertNull(res);
+            
+                        // No geographical points
+             when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
+             when(pdb.getPaths()).thenReturn(new ArrayList<>());
+             MainGraph.setup(gpdb, pdb);
+             graph = new LandGraph(102, 0.6);
+             assertEquals(false,graph.getEdges().iterator().hasNext());
+             assertEquals(false,graph.getVertexes().iterator().hasNext());
+             
+             flag = false;
+             try{
+                   graph.kBestPaths(p1, p3, 1);
+             }catch(IllegalArgumentException e){
+                 flag = true;
+             }
+             assertTrue(flag);
+            
+            
     }
 
     /**
      * Test of kBestPaths method, of class LandGraph.
      */
     @Test
-    public void testKBestPaths() {
-//        List<Route> routes = instance.kBestPaths(p1, p3, 2);
-//        assertEquals(2, routes.size());
+    public void testKBestPaths_4args() throws SQLException {
+         //Exception
+            boolean flag = false;
+            try{
+                graph.kBestPaths(new ArrayList<>(), null, p3, 1);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+            
+            flag = false;
+            try{
+                graph.kBestPaths(new ArrayList<>(),p1, null, 1);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+            flag = false;
+            try{
+                graph.kBestPaths(p1, p1, 1);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+            flag = false;
+            try{
+                graph.kBestPaths(p1, p3, -1);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+            flag = false;
+            try{
+                graph.kBestPaths(null, p1, p3, 2);
+            }catch(IllegalArgumentException e){
+                flag = true;
+            }
+            assertTrue(flag);
+            
+
+             
+            // No geographical points
+             when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
+             when(pdb.getPaths()).thenReturn(new ArrayList<>());
+             MainGraph.setup(gpdb, pdb);
+             graph = new LandGraph(120,0.5);
+             assertEquals(false,graph.getEdges().iterator().hasNext());
+             assertEquals(false,graph.getVertexes().iterator().hasNext());
+             
+             flag = false;
+             try{
+                   graph.kBestPaths(new ArrayList<>(),p1, p3, 1);
+             }catch(IllegalArgumentException e){
+                 flag = true;
+             }
+             assertTrue(flag);
+
     }
 
-    /**
-     * Test of getRouteGraph method, of class LandGraph.
-     */
     @Test
-    public void testGetRouteGraph() {
-        //assertNotNull(instance.getRouteGraph());
+    public void testInvalidData() throws SQLException{
+        boolean flag = false;
+        try{
+            graph = new LandGraph(-1, 45);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            graph = new LandGraph(120, -2);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
     }
     
 }

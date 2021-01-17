@@ -72,6 +72,33 @@ public class GeographicalPointTest {
         instance.setElevation(23);
         assertEquals(23, instance.getElevation());
     }
+    
+    /**
+     * Test of setDescprition method, of class GeographicalPoint.
+     */
+    @Test
+    public void testSetDescprition() {
+        instance.setDescription("Aliados");
+        assertEquals("Aliados", instance.getDescription());
+        
+        boolean flag = false;
+        try{
+            instance.setDescription("");
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+       flag = false;
+        try{
+            instance.setDescription(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+    
+    
 
     /**
      * Test of getLongitude method, of class GeographicalPoint.

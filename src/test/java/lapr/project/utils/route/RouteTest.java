@@ -227,26 +227,23 @@ public class RouteTest {
         
         assertTrue(t.compareTo(t)==0);
         
-
+        p3 = new VehiclePath(p1, p2, 22, 5.7, 3.2, 5.6, 56.5);
+        t = new Route(p3);
+        Pathway p4 = new Pathway(p1, p2, 0.4, t.getRouteCost(), 23);
+        Route t1 = new Route(p4);
+        assertTrue(t1.compareTo(t) <0);
+        assertTrue(t.compareTo(t1)> 0);
         
+        Pathway p8 = new Pathway(p1, p2, 0.3, 50, 0.3);
+        Pathway p9 = new Pathway(p1, p2, 0.3, 25, 0.3);
+        Pathway p10 = new Pathway(p2, dest, 0.3,25, 0.3);
+        t = new Route(p8);
+        t1 = new Route(p9);
+        t1.addPath(p10);
+        assertTrue(t1.compareTo(t)>0);
         
 
-//        
-//        p3 = new Pathway(p1, p2, 50, 5, 3.2);
-//        Pathway p4 = new Pathway(or, p1, 25, 2.5, 3.2);
-//        Pathway p5 = new Pathway(p1, dest, 25, 2.5, 3.2);
-//        Route t1 = new Route(p4);
-//        t1.addPath(p5);
-//        t = new Route(p3);
-//        assertTrue(t.compareTo(t1)<0);
-//        assertTrue(t1.compareTo(t)>0);
-//        assertTrue(t1.compareTo(t1)==0);
-//        
-//        Pathway p6 = new Pathway(p1, or, 25, 2.5, 3.2);
-//        Pathway p7 = new Pathway(or, p2, 25, 2.5, 3.2);
-//        Route t2 = new Route(p6);
-//        t2.addPath(p7);
-//        assertTrue(t2.compareTo(t1)<0);
+
         
         
         

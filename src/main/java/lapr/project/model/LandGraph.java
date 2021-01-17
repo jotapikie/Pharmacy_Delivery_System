@@ -81,12 +81,7 @@ public class LandGraph extends MainGraph{
         }
     }
     
-
     @Override
-    public Graph<GeographicalPoint, VehiclePath> getRouteGraph() {
-        return this.landGraph;
-    }
-
     public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
         if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
@@ -97,6 +92,14 @@ public class LandGraph extends MainGraph{
             throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
         }
     }
+    
+
+    @Override
+    public Graph<GeographicalPoint, VehiclePath> getRouteGraph() {
+        return this.landGraph;
+    }
+
+
 
 
 

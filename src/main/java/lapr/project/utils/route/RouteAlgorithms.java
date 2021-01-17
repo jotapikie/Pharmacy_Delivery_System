@@ -26,14 +26,14 @@ import lapr.project.utils.graph.Graph;
 public class RouteAlgorithms {
 
 
-    
-   public static List<Route> kBestRoutes(MainGraph landGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
+   @SuppressWarnings("unchecked")
+   public static List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
 
-        if (landGraph == null || origin == null || destination == null || k <= 0) {
+        if (mainGraph == null || origin == null || destination == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
         }
-        @SuppressWarnings("unchecked")
-        Graph<GeographicalPoint, VehiclePath> graph = (Graph<GeographicalPoint, VehiclePath>) landGraph.getRouteGraph();
+        
+        Graph<GeographicalPoint, VehiclePath> graph = (Graph<GeographicalPoint, VehiclePath>) mainGraph.getRouteGraph();
         if (graph == null || !graph.isDirected()) {
             throw new IllegalArgumentException("Invalid graph!");
         }
@@ -100,7 +100,7 @@ public class RouteAlgorithms {
         }
     }
 
-    public static List<Route> kBestRoutes(LandGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
+    public static List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
         
         if (graph == null || origin == null || destination == null || toVisit == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
@@ -158,7 +158,7 @@ public class RouteAlgorithms {
         return (result.isEmpty()) ? null : result;
     }
 
-    private static void fillRouteMap(LandGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map) {
+    private static void fillRouteMap(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map) {
         for (GeographicalPoint vertex : toVisit) {
             map.put(new Pair<>(origin, vertex), RouteAlgorithms.kBestRoutes(graph, origin, vertex, k));
             map.put(new Pair<>(vertex, destination), RouteAlgorithms.kBestRoutes(graph, vertex, destination, k));
@@ -247,5 +247,13 @@ public class RouteAlgorithms {
         }
         return true;
     }
+
+    /**
+     * Test purposes only
+     */
+    protected RouteAlgorithms() {
+    }
+    
+    
 
 }

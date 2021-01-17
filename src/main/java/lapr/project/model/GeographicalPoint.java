@@ -80,6 +80,10 @@ public class GeographicalPoint implements PointInterface{
     public String toString() {
         return String.format("Longitude: %f | Latitude: %f | Elevation: %f (meters)", longitude, latitude, elevation);
     }
+
+
+    
+    
     
     
     
