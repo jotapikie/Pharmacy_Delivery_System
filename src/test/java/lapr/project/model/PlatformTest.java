@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class PlatformTest {
     
-    private static Platform p;
+    
     
     @BeforeAll
     public static void setUpClass() {
-        p = new Platform();
+       
     }
     
 
@@ -38,7 +38,7 @@ public class PlatformTest {
     @Test
     public void testGetDeliveryPrice() {
         double expResult = 3.5;
-        double result = p.getDeliveryPrice();
+        double result = Platform.getDeliveryPrice();
         assertEquals(expResult, result);
     }
 
@@ -48,7 +48,7 @@ public class PlatformTest {
     @Test
     public void testGetCreditsPerEuro() {
         double expResult = 15;
-        double result = p.getCreditsPerEuro();
+        double result = Platform.getCreditsPerEuro();
         assertEquals(expResult, result);
     }
 
@@ -58,7 +58,7 @@ public class PlatformTest {
     @Test
     public void testGetCreditsWonPerEuroSpent() {
         double expResult = 0.2;
-        double result = p.getCreditsWonPerEuroSpent();
+        double result = Platform.getCreditsWonPerEuroSpent();
         assertEquals(expResult, result);
     }
     

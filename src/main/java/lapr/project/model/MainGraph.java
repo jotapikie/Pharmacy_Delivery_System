@@ -50,7 +50,7 @@ public class MainGraph {
     /**
      * Main graph of locations connected by paths.
      */
-    private final Graph<GeographicalPoint, Pathway> mainGraph = new Graph<>(true);
+    private final Graph<GeographicalPoint, Pathway> graph = new Graph<>(true);
 
     /**
      * Constructs an instance of the main graph.
@@ -64,12 +64,12 @@ public class MainGraph {
         List<Pathway> edges = pathDB.getPaths();
 
         for (GeographicalPoint vertex : vertexes) {
-            if (!mainGraph.insertVertex(vertex)) {
+            if (!graph.insertVertex(vertex)) {
                 throw new IllegalArgumentException("Invalid graph Vertex!");
             }
         }
         for (Pathway edge : edges) {
-            if (!mainGraph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
+            if (!graph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
                 throw new IllegalArgumentException("Invalid graph Edge!");
             }
         }
@@ -81,7 +81,7 @@ public class MainGraph {
      * @return iterable of the vertexes of the main graph.
      */
     public Iterable<GeographicalPoint> getVertexes() {
-        return mainGraph.vertices();
+        return graph.vertices();
     }
 
     /**
@@ -91,7 +91,7 @@ public class MainGraph {
      */
     public Iterable<Pathway> getEdges() {
         List<Pathway> edges = new ArrayList<>();
-        for (Edge<GeographicalPoint,? extends Pathway> e : mainGraph.edges()) {
+        for (Edge<GeographicalPoint,? extends Pathway> e : graph.edges()) {
             edges.add(e.getElement());
         }
         return edges;
@@ -138,7 +138,7 @@ public class MainGraph {
      * @return graph to use for route algorithms.
      */
     public Graph<GeographicalPoint, ? extends Pathway> getRouteGraph(){
-        return mainGraph;
+        return graph;
     }
 
     

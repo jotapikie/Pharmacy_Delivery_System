@@ -8,6 +8,7 @@ package lapr.project.data;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import lapr.project.model.Address;
 import lapr.project.model.Client;
 import lapr.project.model.Invoice;
@@ -20,7 +21,7 @@ import lapr.project.model.Product;
 public class InvoiceDB extends DataHandler{
 
 
-    public Invoice newInvoice(Client cli, Address add, HashMap<Product, Integer> items, double totalPrice, double priceToPay, int creditsSpent, int creditsWon, int nif) {
+    public Invoice newInvoice(Client cli, Address add, Map<Product, Integer> items, double totalPrice, double priceToPay, int creditsSpent, int creditsWon, int nif) {
         return new Invoice(cli, add, items, totalPrice, priceToPay, creditsWon, creditsSpent, nif);
     }
 

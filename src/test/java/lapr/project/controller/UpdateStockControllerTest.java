@@ -62,6 +62,7 @@ public class UpdateStockControllerTest {
         when(pdb.getProduct(1)).thenReturn(p1);
         when(pdb.getProduct(2)).thenReturn(p2);
         when(pdb.getProduct(3)).thenReturn(p3);
+        
         controller = new UpdateStockController(pdb, ppdb, id);
     }
 

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddressTest {
@@ -146,6 +147,17 @@ public class AddressTest {
         address1.setZipCode(expRes);
         String res= address1.getZipCode();
         assertEquals(expRes,res);
+    }
+    
+    @Test
+    void setGeoPoint(){
+        boolean flag = false;
+        try{
+            address1.setGeoPoint(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
     }
 
     /**

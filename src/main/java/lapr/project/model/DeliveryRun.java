@@ -5,6 +5,7 @@
  */
 package lapr.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,8 +18,8 @@ public class DeliveryRun {
     private List<Order> orders;
 
     public DeliveryRun(int id, List<Order> orders) {
-        this.id = id;
-        this.orders = orders;
+        setId(id);
+        setOrders(orders);
     }
 
     public int getId() {
@@ -26,8 +27,26 @@ public class DeliveryRun {
     }
 
     public List<Order> getOrders() {
-        return orders;
+        return new ArrayList<>(orders);
     }
+
+    public final void setId(int id) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Invalid delivery run id");
+        }
+        this.id = id;
+    }
+
+    public final void setOrders(List<Order> orders) {
+        if(orders == null){
+            throw new IllegalArgumentException("Invalid delivery run id");
+        }
+        this.orders = new ArrayList<>(orders);
+    }
+    
+    
+    
+    
 
     @Override
     public String toString() {

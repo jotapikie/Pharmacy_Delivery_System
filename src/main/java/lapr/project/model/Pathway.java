@@ -18,7 +18,7 @@ public class Pathway implements PathInterface{
     
     private GeographicalPoint originPoint;
     private GeographicalPoint destinationPoint;
-    private double kinetic_coef;
+    private double kineticCoef;
     private double distance;
     private double wind;
     
@@ -78,7 +78,7 @@ public class Pathway implements PathInterface{
      * @return kinetic coef
      */
     public double getKineticCoef() {
-        return kinetic_coef;
+        return kineticCoef;
     }
 
     /**
@@ -145,7 +145,7 @@ public class Pathway implements PathInterface{
         if (kinetic_coef < 0) {
             throw new IllegalArgumentException("Invalid kinetic coefficient");
         }
-        this.kinetic_coef = kinetic_coef;
+        this.kineticCoef = kinetic_coef;
     }
 
     /**
@@ -177,7 +177,7 @@ public class Pathway implements PathInterface{
             return false;
         }
         final Pathway other = (Pathway) obj;
-        if (Double.doubleToLongBits(this.kinetic_coef) != Double.doubleToLongBits(other.kinetic_coef)) {
+        if (Double.doubleToLongBits(this.kineticCoef) != Double.doubleToLongBits(other.kineticCoef)) {
             return false;
         }
         if (Double.doubleToLongBits(this.wind) != Double.doubleToLongBits(other.wind)) {

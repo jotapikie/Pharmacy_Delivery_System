@@ -172,6 +172,9 @@ public class OrderTest {
             flag = true;
         }
         assertTrue(flag);
+        
+        order.setEndDate(null);
+        
     }
     
             /**
@@ -274,6 +277,8 @@ public class OrderTest {
         assertFalse(order.equals(null));
         assertFalse(order.equals(new GeographicalPoint(34.5, 2.45, 2.3)));
         assertFalse(order.equals(order2));
+        order2.setId(order.getId());
+        assertTrue(order.equals(order2));
     }
     
     @Test

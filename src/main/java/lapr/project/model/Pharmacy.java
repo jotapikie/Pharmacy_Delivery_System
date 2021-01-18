@@ -5,12 +5,11 @@
  */
 package lapr.project.model;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
+
 
 /**
  *
@@ -22,7 +21,7 @@ public class Pharmacy {
     private String name;
     private Administrator administrator;
     private Address address;
-    private HashSet<Park> parks= new HashSet<Park>();
+    private Set<Park> parks;
 
 
     public Pharmacy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
@@ -41,6 +40,7 @@ public class Pharmacy {
         setName(name);
         setAdministrator(ad);
         setAddress(add);
+        setParks(new HashSet<>());
     }
 
 
@@ -71,7 +71,7 @@ public class Pharmacy {
     }
     
     
-    public HashSet<Park> getParks() {
+    public Set<Park> getParks() {
         return parks;
     }
 
@@ -113,7 +113,7 @@ public class Pharmacy {
     }
 
 
-    public void setParks(HashSet<Park> parks) {
+    public void setParks(Set<Park> parks) {
         if(parks == null){
             throw new IllegalArgumentException("Invalid pharmacy parks.");
         }

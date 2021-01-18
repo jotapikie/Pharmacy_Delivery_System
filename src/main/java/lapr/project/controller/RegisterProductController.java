@@ -15,20 +15,20 @@ import lapr.project.model.Product;
  * @author Helder
  */
 public class RegisterProductController {
-    private final ProductDB ProductDB;
+    private final ProductDB pdb;
     private Product pro;
     private final HashSet<Product> products = new HashSet<>();
 
     public RegisterProductController(ProductDB productDB) {
-        this.ProductDB=productDB;
+        this.pdb=productDB;
     }
 
     public RegisterProductController() {
-        this.ProductDB=new ProductDB();
+        this.pdb=new ProductDB();
     }
     
     public String newProduct(int id, String name, double weight, double price) {
-        pro = ProductDB.newProduct(id,name,weight,price);
+        pro = pdb.newProduct(id,name,weight,price);
         return pro.toString();
     }
 
@@ -37,7 +37,7 @@ public class RegisterProductController {
     }
 
     public int registProduct() throws SQLException {
-        final int i = ProductDB.saveProducts(products);
+        final int i = pdb.saveProducts(products);
         products.clear();
         return i;
     }

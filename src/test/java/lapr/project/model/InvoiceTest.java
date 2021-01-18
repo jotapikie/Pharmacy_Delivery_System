@@ -311,5 +311,7 @@ public class InvoiceTest {
     @Test
     public void testToString(){
         assertTrue(inv.toString()!=null);
+        Invoice temp = new Invoice(cli, add, products, 3, 3, 2, 2, 123456789);
+        assertTrue(temp.toString()!= null);
     }
 }

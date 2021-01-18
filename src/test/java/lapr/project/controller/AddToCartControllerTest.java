@@ -9,12 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.CartProductDB;
-import lapr.project.data.ClientDB;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
 import lapr.project.utils.Utils;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -54,14 +51,13 @@ public class AddToCartControllerTest {
     @BeforeEach
     public void setUp() throws SQLException {
         ProductDB pdb = mock(ProductDB.class);
-        ClientDB cdb = mock(ClientDB.class);
         CartProductDB cpdb = mock(CartProductDB.class);
         
         when(pdb.getProducts()).thenReturn(products);
         when(pdb.getProduct(1)).thenReturn(p1);
         when(pdb.getProduct(2)).thenReturn(p2);
         when(pdb.getProduct(3)).thenReturn(p3);
-        controller = new AddToCartController(email, pdb, cdb, cpdb);
+        controller = new AddToCartController(email, pdb, cpdb);
     }
     
 

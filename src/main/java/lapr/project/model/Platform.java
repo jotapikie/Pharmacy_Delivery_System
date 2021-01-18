@@ -15,6 +15,10 @@ public class Platform {
     private static final double CREDITS_PER_EURO = 15;
     private static final double CREDITS_WON_PER_EURO_SPENT = 0.2;
     private static final double MAX_WEIGHT_PER_ORDER = 5;
+
+    private Platform() {
+    }
+    
     
     
     public static double getDeliveryPrice() {

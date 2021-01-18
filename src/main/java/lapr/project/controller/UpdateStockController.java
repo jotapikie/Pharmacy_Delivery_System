@@ -6,7 +6,6 @@
 package lapr.project.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class UpdateStockController {
     private final PharmacyStockDB ppdb;
     private final int idPharmacy;
     private Product pro;
-    private Map<Product, Integer> products;
+    private final Map<Product, Integer> products;
 
     public UpdateStockController(ProductDB pdb, PharmacyStockDB ppdb, int idPharmacy) {
         this.pdb = pdb;
