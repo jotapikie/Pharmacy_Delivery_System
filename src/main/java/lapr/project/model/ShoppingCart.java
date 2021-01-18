@@ -6,6 +6,7 @@
 package lapr.project.model;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -16,7 +17,7 @@ public class ShoppingCart {
     /**
      * The items in the cart
      */
-    private HashMap<Product, Integer> items;
+    private Map<Product, Integer> items;
     
 
 
@@ -27,7 +28,7 @@ public class ShoppingCart {
         setItems(new HashMap<>());
     }
     
-    public ShoppingCart(HashMap<Product, Integer> items) {
+    public ShoppingCart(Map<Product, Integer> items) {
         setItems(items);
     }
 
@@ -35,7 +36,7 @@ public class ShoppingCart {
      * Returns all the products and its quantities.
      * @return - products and quantities.
      */
-    public HashMap<Product, Integer> getItems() {
+    public Map<Product, Integer> getItems() {
         return items;
     }
 
@@ -45,7 +46,7 @@ public class ShoppingCart {
      * Set the items in the shopping cart.
      * @param items - new items
      */
-    public final void setItems(HashMap<Product, Integer> items) {
+    public final void setItems(Map<Product, Integer> items) {
         if(items==null){
             throw new IllegalArgumentException("Invalid shopping cart products");
         }

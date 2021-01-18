@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import lapr.project.data.CartProductDB;
 import lapr.project.data.ClientDB;
@@ -39,7 +40,7 @@ public class MakeOrderController {
     private final String email;
     
     private Client cli;
-    private HashMap<Product, Integer> items;
+    private Map<Product, Integer> items;
     private Address add;
     private Pharmacy pha;
     private Order ord;

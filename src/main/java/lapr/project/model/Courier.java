@@ -17,9 +17,9 @@ public class Courier extends User{
 
     public Courier(String name, String email, String password, int nif, int nss, double weight) {
         super(name, email, password);
-        this.nif = nif;
-        this.nss = nss;
-        this.weight = weight;
+        setNif(nif);
+        setNss(nss);
+        setWeight(weight);
     }
 
     public int getNif() {
@@ -30,15 +30,33 @@ public class Courier extends User{
         return nss;
     }
     
-    
-
-    
-
-
     public double getWeight() {
         return weight;
     }
 
+    public void setNif(int nif) {
+        if(String.valueOf(nif).length()!=9){
+            throw new IllegalArgumentException("The courier's nif should have 9 digits.");
+        }
+        this.nif = nif;
+    }
+
+    public void setNss(int nss) {
+        this.nss = nss;
+    }
+
+    public void setWeight(double weight) {
+        if(weight < 0){
+            throw new IllegalArgumentException("The courier's weight is invalid.");
+        }
+        this.weight = weight;
+    }
+    
+    
+    
+    
+
+    
  
 
     

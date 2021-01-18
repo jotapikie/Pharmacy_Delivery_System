@@ -6,6 +6,7 @@
 package lapr.project.model;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -165,8 +166,8 @@ public class PharmacyTest {
      */
     @Test
     public void testGetParks() {
-        HashSet<Park> expResult = new HashSet<Park>();
-        HashSet<Park> result = pharmacyTest.getParks();
+        Set<Park> expResult = new HashSet<Park>();
+        Set<Park> result = pharmacyTest.getParks();
         assertEquals(expResult, result);
         
         boolean flag = false;

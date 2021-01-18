@@ -142,13 +142,13 @@ public class OrderDB extends DataHandler{
        }
     }
     
-   public Order newOrder(double totalPrice, HashMap<Product, Integer> items) {
+   public Order newOrder(double totalPrice, Map<Product, Integer> items) {
         Order res = new Order(); res.setPrice(totalPrice);res.setProducts(items);res.setBeginDate(Timestamp.from(Instant.now()));
         return res;
     }
 
 
-    public Order newOrder(Order ord, HashMap<Product, Integer> missingProducts) {
+    public Order newOrder(Order ord, Map<Product, Integer> missingProducts) {
          Order res = new Order(); res.setProducts(missingProducts);res.setAssociatedOrder(ord);res.setBeginDate(Timestamp.from(Instant.now()));
          return res;
     }

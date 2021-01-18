@@ -7,21 +7,14 @@ public class Address {
     private int portNumber;
     private String zipCode;
 
-//    public Address(String streetName, double latitude, double longitude, String city, int portNumber, String zipCode) {
-//        setStreet(streetName);
-//        setLatitude( latitude);
-//        setLongitude(longitude);
-//        setCity(city);
-//        setPortNumber(portNumber);
-//        setZipCode(zipCode);
-//    }
+
 
     public Address(String streetName, GeographicalPoint geoPoint, String city, int portNumber, String zipCode) {
-        this.streetName = streetName;
-        this.geoPoint = geoPoint;
-        this.city = city;
-        this.portNumber = portNumber;
-        this.zipCode = zipCode;
+        setStreet(streetName);
+        setGeoPoint(geoPoint);
+        setCity(city);
+        setPortNumber(portNumber);
+        setZipCode(zipCode);
     }
     
     
@@ -29,40 +22,9 @@ public class Address {
         return streetName;
     }
 
-    public void setStreet(String address) {
-        if (address==null||address.isEmpty()){
-            throw new IllegalArgumentException("Street Name cannot be null");
-        }
-        this.streetName = address;
-    }
 
     public GeographicalPoint getGeographicalPoint() {
         return geoPoint;
-    }
-
-    
-
-
-
-
-
-
-    void setCity(String city){
-        if (city==null||city.isEmpty()){
-            throw new IllegalArgumentException("City cannot be null");
-        }
-        this.city=city;
-    }
-
-
-    public void setZipCode(String zipCode) {
-        if(!zipCode.matches("[1-9][0-9]{3}-[0-9]{3}")) throw new IllegalArgumentException("Wrong zipCode");
-        this.zipCode=zipCode;
-    }
-
-    public void setPortNumber(int portNumber) {
-        if (portNumber<=0) throw new IllegalArgumentException("Invalid port number");
-        this.portNumber=portNumber;
     }
 
     public String getCity() {
@@ -75,6 +37,41 @@ public class Address {
 
     public String getZipCode() {
         return zipCode;
+    }
+    
+    public final void setStreet(String address) {
+        if (address==null||address.isEmpty()){
+            throw new IllegalArgumentException("Street Name cannot be null");
+        }
+        this.streetName = address;
+    }
+    
+    
+    public final void setCity(String city){
+        if (city==null||city.isEmpty()){
+            throw new IllegalArgumentException("City cannot be null");
+        }
+        this.city=city;
+    }
+
+    public final void setGeoPoint(GeographicalPoint geoPoint) {
+        if(geoPoint == null){
+            throw new IllegalArgumentException("Geographical Point cannot be null.");
+        }
+        this.geoPoint = geoPoint;
+    }
+    
+    
+    
+    
+    public final void setZipCode(String zipCode) {
+        if(!zipCode.matches("[1-9][0-9]{3}-[0-9]{3}")) throw new IllegalArgumentException("Wrong zipCode");
+        this.zipCode=zipCode;
+    }
+
+    public final void setPortNumber(int portNumber) {
+        if (portNumber<=0) throw new IllegalArgumentException("Invalid port number");
+        this.portNumber=portNumber;
     }
 
     @Override

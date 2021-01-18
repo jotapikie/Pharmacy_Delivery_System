@@ -33,7 +33,7 @@ public class CourierTest {
     
     @BeforeEach
     public void setUp() {
-        courierTest=new Courier("Francisco","abc@gmail.com","1234", 454654,32425,200);
+        courierTest=new Courier("Francisco","abc@gmail.com","1234", 454654567,32425,200);
     }
     
     @AfterEach
@@ -56,7 +56,7 @@ public class CourierTest {
      */
     @Test
     public void testGetNif() {
-        double expResult = 454654 ;
+        double expResult = 454654567;
         double result = courierTest.getNif();
         assertEquals(expResult, result, 0.0);
     }
@@ -71,4 +71,37 @@ public class CourierTest {
         assertEquals(expResult, result, 0.0);
     }
     
+    @Test
+    public void testSetNif(){
+        courierTest.setNif(123456789);
+        assertEquals(123456789, courierTest.getNif());
+        
+        boolean flag = false;
+        try{
+            courierTest.setNif(124);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+    
+    @Test
+    public void testSetNss(){
+        courierTest.setNss(123456789);
+        assertEquals(123456789, courierTest.getNss());
+    }
+    
+        @Test
+    public void testSetWeight(){
+        courierTest.setWeight(67.8);
+        assertEquals(67.8, courierTest.getWeight());
+        
+        boolean flag = false;
+        try{
+            courierTest.setWeight(-12);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
 }
