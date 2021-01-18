@@ -20,7 +20,7 @@ public class EScooterTest {
 
     @BeforeEach
     public void setUp() {
-        scooterTest = new EScooter(20, 20, State.ACTIVE, 2, 2, 50, 75, 5);
+        scooterTest = new EScooter(20,State.ACTIVE, 2, 2);
     }
 
     @AfterEach
@@ -66,84 +66,13 @@ public class EScooterTest {
 
         }
     }
-    /**
-     * Test of setAeroCoef method, of class escooter.
-     */
-    @Test
-    public void testSetAeroCoef() {
+ 
 
-        try {
-            scooterTest.setAeroCoef(-10);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
 
-        }
-    }
+  
 
-    /**
-     * Test of setAeroCoef method, of class escooter.
-     */
-    @Test
-    public void testSetAeroCoef1() {
+ 
 
-        try {
-            scooterTest.setAeroCoef(0);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-
-        }
-    }
-    /**
-     * Test of setAeroCoef method, of class escooter.
-     */
-    @Test
-    public void testSetAeroCoef_Sucess() {
-        int expRes=10;
-        scooterTest.setAeroCoef(expRes);
-        double res= scooterTest.getAeroCoef();
-        assertEquals(expRes,res);
-
-    }
-
-    /**
-     * Test of setFrontalArea method, of class escooter.
-     */
-    @Test
-    public void testSetFrontalArea() {
-
-        try {
-            scooterTest.setFrontalArea(-10);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-
-        }
-    }
-
-    /**
-     * Test of setFrontalArea method, of class escooter.
-     */
-    @Test
-    public void testSetFrontalArea1() {
-
-        try {
-            scooterTest.setFrontalArea(0);
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-
-        }
-    }
-
-    /**
-     * Test of setFrontalArea method, of class escooter.
-     */
-    @Test
-    public void testSetFrontalArea_Sucess() {
-        int expRes=10;
-        scooterTest.setFrontalArea(expRes);
-        double res= scooterTest.getFrontalArea();
-        assertEquals(expRes,res);
-
-    }
 
     /**
      * Test of setId method, of class vehicle.
@@ -159,15 +88,7 @@ public class EScooterTest {
         }
     }
 
-    /**
-     * Test of getWeight method, of class Vehicle.
-     */
-    @Test
-    public void testGetWeight() {
-        double expResult = 20;
-        double result = scooterTest.getWeight();
-        assertEquals(expResult, result);
-    }
+
 
     /**
      * Test of setWeight method, of class vehicle.
@@ -451,15 +372,7 @@ public class EScooterTest {
         assertEquals(expResult, result);
     }
     
-        /**
-     * Test of getMotor method, of class Vehicle.
-     */
-    @Test
-    public void testGetMotor2() {
-        int expResult = 50;
-        double result = scooterTest.getMotor();
-        assertEquals(expResult, result);
-    }
+
 
     /**
      * Test of setActualBat method, of class Vehicle.
@@ -512,22 +425,18 @@ public class EScooterTest {
      */
     @Test
     public void testUpdateEScooterData() {
-        EScooter scooterTest2 = new EScooter(123, 20, State.ACTIVE, 10, 8, 508, 75, 6);
-        scooterTest2.updateScooterData(100, 8.0, 9.0, State.INACTIVE, 5, 5);
-        assertEquals(scooterTest2.getActualBat(), 8);
-        assertEquals(scooterTest2.getAeroCoef(), 8.0,0.0);
+        EScooter scooterTest2 = new EScooter(123, State.ACTIVE, 10, 8);
+        scooterTest2.updateScooterData(State.INACTIVE, 5,5);
+        assertEquals(scooterTest2.getActualBat(), 5);
         assertEquals(scooterTest2.getId(), 123);
-        assertEquals(scooterTest2.getFrontalArea(), 9.0,0.0);
         assertEquals(scooterTest2.getMaxBat(), 5, 0.0);
-        assertEquals(scooterTest2.getMotor(), 5);
         assertEquals(scooterTest2.getState(), State.INACTIVE);
-        assertEquals(scooterTest2.getWeight(), 100);
         assertNotEquals(scooterTest.toString(), scooterTest2.toString());
     }
 
     @Test
     public void testToString() {
-        EScooter scooterTest2 = new EScooter(20, 20, State.ACTIVE, 2, 2, 50, 75, 5);
+        EScooter scooterTest2 = new EScooter(20, State.ACTIVE, 2, 2);
         assertEquals(scooterTest.toString(), scooterTest2.toString());
     }
 
@@ -569,7 +478,7 @@ public class EScooterTest {
      */
     @Test
     public void testEquals3() {
-        EScooter scooter = new EScooter(20, 20, State.ACTIVE, 2, 2, 50, 75, 5);
+        EScooter scooter = new EScooter(20, State.ACTIVE, 2, 2);
         boolean expResult = true;
         boolean result = scooterTest.equals(scooter);
         assertEquals(expResult, result);
@@ -580,7 +489,7 @@ public class EScooterTest {
      */
     @Test
     public void testEquals4() {
-        EScooter scooter = new EScooter(22, 20, State.ACTIVE, 2, 2, 50, 75, 5);
+        EScooter scooter = new EScooter(22, State.ACTIVE, 2, 2);
         boolean expResult = false;
         boolean result = scooterTest.equals(scooter);
         assertEquals(expResult, result);

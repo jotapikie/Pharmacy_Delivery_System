@@ -25,8 +25,8 @@ public class VehicleDB extends DataHandler {
      * @param frontalArea
      * @return
      */
-    public EScooter newEScooter(int id, int weight, State state, int maxBat, int currentBat, int motor, double aeroCoef, double frontalArea) {
-        return new EScooter(id,weight,state,maxBat,currentBat,motor,aeroCoef,frontalArea);
+    public EScooter newEScooter(int id, State state, int maxBat, int currentBat) {
+        return new EScooter(id,state,maxBat,currentBat);
     }
 
     /**
@@ -120,7 +120,7 @@ public class VehicleDB extends DataHandler {
             callStmt.execute();
                 ResultSet rSet = (ResultSet) callStmt.getObject(1);
                 if (rSet.next()) {
-                    return new EScooter(rSet.getInt(1), rSet.getInt(2), State.valueOf(rSet.getString(3)),rSet.getInt(4), rSet.getInt(5),rSet.getInt(6), rSet.getDouble(7), rSet.getDouble(8));
+                    return new EScooter(rSet.getInt(1), State.valueOf(rSet.getString(3)),rSet.getInt(4), rSet.getInt(5));
                 }
             }
 

@@ -54,11 +54,11 @@ public class NewVehicleControllerTest {
         int actualBat = 5;
         int motor = 5;
 
-        EScooter value = new EScooter(id,weight,state,maxBat,actualBat,motor,aeroCoef,frontalArea);
-        when(vdb.newEScooter(anyInt(), anyInt(), any(),anyInt(),anyInt(),anyInt(),anyDouble(),anyDouble())).thenReturn(value);
+        EScooter value = new EScooter(id,state,maxBat,actualBat);
+        when(vdb.newEScooter(anyInt(),any(),anyInt(),anyInt())).thenReturn(value);
 
-        EScooter expResult = new EScooter(id, weight, state, maxBat, actualBat, motor, aeroCoef, frontalArea);
-        EScooter result = nvc2.newEScooter(id, weight, maxBat, actualBat, motor, aeroCoef, frontalArea);
+        EScooter expResult = new EScooter(id, state, maxBat, actualBat);
+        EScooter result = nvc2.newEScooter(id, maxBat, actualBat);
         assertEquals(expResult, result);
 
     }
@@ -77,7 +77,7 @@ public class NewVehicleControllerTest {
         int maxBat = 8;
         int actualBat = 100;
         int motor = 5;
-        nvc3.newEScooter(id, weight, maxBat, actualBat, motor, aeroCoef, frontalArea);
+        nvc3.newEScooter(id,maxBat, actualBat);
         when(vdb.save(any(Vehicle.class), anyInt())).thenReturn(true);
 
         boolean expResult = true;
@@ -92,7 +92,7 @@ public class NewVehicleControllerTest {
     @Test
     public void testAddVehicleToQueue() {
         NewVehicleController nvc2 = new NewVehicleController();
-        EScooter b = nvc2.newEScooter(1, 3,  3, 3, 1, 1,2);
+        EScooter b = nvc2.newEScooter(1, 3,  3);
         nvc2.addVehicleToQueue();
         assertEquals(1, nvc2.getVehicles().size());
     }
@@ -124,7 +124,7 @@ public class NewVehicleControllerTest {
         int maxBat = 8;
         int motor = 5;
 
-        EScooter b = nvc.newEScooter(id,weight,maxBat,actualBat,motor,aeroCoef,frontalArea);
+        EScooter b = nvc.newEScooter(id,maxBat,actualBat);
         HashSet<Vehicle> vehicles = new HashSet<>();
         vehicles.add(b);
         nvc.addVehicleToQueue();

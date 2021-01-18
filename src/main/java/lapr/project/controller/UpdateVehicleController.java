@@ -20,9 +20,9 @@ public class UpdateVehicleController {
     }
 
 
-    public EScooter updateScooterData(int id, int weight, State state, int maxBat, int motor, double aeroCoef, double frontalArea) throws SQLException {
+    public EScooter updateScooterData(int id,  State state, int maxBat, int currentBat) throws SQLException {
         EScooter eScooter = (EScooter) vehicleDB.getVehicle(id);
-        eScooter.updateScooterData(weight,aeroCoef,frontalArea,state,maxBat,motor);
+        eScooter.updateScooterData(state,maxBat,currentBat);
         vehicle = eScooter;
         return eScooter;
     }

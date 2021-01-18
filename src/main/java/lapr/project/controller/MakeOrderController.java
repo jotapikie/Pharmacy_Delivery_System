@@ -80,8 +80,8 @@ public class MakeOrderController {
         double cartPrice = 0;
         double cartWeight = 0;
         for(Map.Entry<Product, Integer > p : items.entrySet()){
-            cartPrice = cartPrice + (p.getValue()*items.get(p));
-            cartWeight = cartWeight + (p.getKey().getWeight()*items.get(p));
+            cartPrice = cartPrice + (p.getKey().getPrice()*p.getValue());
+            cartWeight = cartWeight + (p.getKey().getWeight()*p.getValue());
         }
         if(cartWeight > Platform.getMaxWeightPerOrder()){
             return null;

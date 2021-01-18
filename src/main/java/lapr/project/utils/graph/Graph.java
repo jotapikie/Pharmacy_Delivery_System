@@ -273,6 +273,7 @@ public class Graph<V,E> implements GraphInterface<V,E> {
      * @param the other graph to test for equality
      * @return true if both objects represent the same graph
      */
+    @Override
     public boolean equals(Object otherObj) {
 
         if (this == otherObj) 
@@ -300,6 +301,10 @@ public class Graph<V,E> implements GraphInterface<V,E> {
         }
         return true;
     }
+
+  
+    
+    
 
     //string representation
     @Override

@@ -39,12 +39,12 @@ public class UpdateVehicleControllerTest {
         int actualBat = 1;
         int motor = 5;
 
-        EScooter value = new EScooter(id, weight, state, maxBat, actualBat, motor, aeroCoef, frontalArea);
+        EScooter value = new EScooter(id,  state, maxBat, actualBat);
         when(vdb.getVehicle(anyInt())).thenReturn(value);
 
 
-        EScooter expResult = new EScooter(2, 8, State.ACTIVE, 5, actualBat, 9, 9, 9);
-        EScooter result = uvc2.updateScooterData(id, 8, State.ACTIVE, 5, 9, 9, 9);
+        EScooter expResult = new EScooter(2,  State.ACTIVE, 5, actualBat);
+        EScooter result = uvc2.updateScooterData(id,State.ACTIVE, 5, 1);
         assertEquals(expResult, result);
     }
 
