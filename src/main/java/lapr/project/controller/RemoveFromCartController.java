@@ -6,7 +6,7 @@
 package lapr.project.controller;
 
 import java.sql.SQLException;
-import lapr.project.data.ClientDB;
+import lapr.project.data.CartProductDB;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
 import lapr.project.model.ShoppingCart;
@@ -20,29 +20,31 @@ public class RemoveFromCartController {
     private final String clientEmail;
     private ShoppingCart cart;
     private Product pro;
-    private final ClientDB cdb;
+    private final CartProductDB cdb;
     private final ProductDB pdb;
 
-    public RemoveFromCartController(String clientEmail, ClientDB cdb, ProductDB pdb) {
+    public RemoveFromCartController(String clientEmail, CartProductDB cdb, ProductDB pdb) {
         this.clientEmail = clientEmail;
         this.cdb = cdb;
         this.pdb = pdb;
     }
     
     public String getProductsInCart() throws SQLException{
-           cart = cdb.getClient(clientEmail).getCart();
-           return cart == null ? null : cart.toString();
+           cart = cdb.getCart(clientEmail);
+           return (cart.getItems().isEmpty()) ? null : cart.toString();
     }
     
     public String getSelectedProduct(int id) throws SQLException{
         pro = pdb.getProduct(id);
-        return pro == null ? null : (cart.getItems().keySet().contains(pro) ? pro.toString() : null);
+        return (pro == null || !cart.getItems().containsKey(pro)) ? null : pro.toString();
     }
     
-    public void removeFromCart(){
-        if(pro != null){
-            //cart.removeProduct(pro);
+    public boolean removeFromCart() throws SQLException{
+        if(pro != null && cart.getItems().containsKey(pro)){
+             cdb.removeProduct(pro, clientEmail);
+            return true;
         }
+        return false;
     }
     
     

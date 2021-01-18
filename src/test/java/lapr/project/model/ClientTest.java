@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ClientTest {
@@ -79,6 +80,24 @@ class ClientTest {
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
+    }
+    
+    @Test
+    public void testGetPhoneNumber(){
+        client1.setPhoneNumber(912541222);
+        assertEquals(912541222, client1.getPhoneNumber());
+        
+    }
+    
+    @Test
+    public void testSetPhoneNumber(){
+        boolean flag = false;
+        try{
+            client1.setPhoneNumber(9232);
+        }catch(IllegalArgumentException e){
+         flag = true;
+        }
+        assertTrue(flag);
     }
 
 

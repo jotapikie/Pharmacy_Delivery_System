@@ -21,7 +21,7 @@ public class AddToCartUI {
     private static Scanner ler = new Scanner(System.in);
 
     public AddToCartUI(String email){
-        this.controller = new AddToCartController(email, new ProductDB(), new ClientDB(), new CartProductDB());
+        this.controller = new AddToCartController(email, new ProductDB(), new CartProductDB());
         try {
             showAvailableProducts();
             selectOne();

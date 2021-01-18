@@ -59,5 +59,13 @@ public class CartProductDB extends DataHandler{
         }
         return new ShoppingCart(products);
     }
+
+    public void removeProduct(Product pro, String clientEmail) throws SQLException {
+         try (CallableStatement callStmt = getConnection().prepareCall("{ call procRemoveFromCart(?,?) }")) {
+              callStmt.setInt(1, pro.getId());
+              callStmt.setString(2, clientEmail);
+              callStmt.execute();
+        }
+    }
     
 }

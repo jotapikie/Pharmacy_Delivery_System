@@ -39,7 +39,6 @@ public class MakeOrderController {
     private final String email;
     
     private Client cli;
-    private ShoppingCart cart;
     private HashMap<Product, Integer> items;
     private Address add;
     private Pharmacy pha;
@@ -75,7 +74,7 @@ public class MakeOrderController {
    
     public String getCart() throws SQLException{
         cli = cdb.getClient(email);
-        cart = cpdb.getCart(email);
+        ShoppingCart cart = cpdb.getCart(email);
         items = cart.getItems();
         double cartPrice = 0;
         double cartWeight = 0;

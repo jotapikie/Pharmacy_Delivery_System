@@ -6,8 +6,7 @@
 package lapr.project.model;
 
 import lapr.project.utils.Constants;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  *
@@ -68,17 +67,10 @@ public class Client extends User {
         return card;
     }
 
-    public void setCard(CreditCard card) {
-        this.card = card;
-    }
-
     public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
     public int getNif() {
         return nif;
@@ -88,10 +80,7 @@ public class Client extends User {
         return points;
     } // returns the client's points
 
-    public void setName(String name) {
-        if (name==null||name.isEmpty()) throw new IllegalArgumentException("Invalid Client Name");
-        this.name=name;
-    }
+
     public String getName(){
         return name;
     }
@@ -99,6 +88,12 @@ public class Client extends User {
     public ShoppingCart getCart() {
         return cart;
     }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+    
+    
 
     /**
      * Modifies the client's nif to the value passed by parameter.
@@ -131,7 +126,28 @@ public class Client extends User {
         this.points = points;
     }
 
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
+    public void setName(String name) {
+        if (name==null||name.isEmpty()) throw new IllegalArgumentException("Invalid Client Name");
+        this.name=name;
+    }
+    
+    
+    public void setCard(CreditCard card) {
+        this.card = card;
+    }
 
+    public void setPhoneNumber(int phoneNumber) {
+        if (String.valueOf(phoneNumber).length()!=9){
+            throw new IllegalArgumentException("Phone number must have 9 digits");
+        }
+        this.phoneNumber = phoneNumber;
+    }
+
+    
 
 
 

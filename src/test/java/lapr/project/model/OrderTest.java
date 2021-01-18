@@ -172,6 +172,9 @@ public class OrderTest {
             flag = true;
         }
         assertTrue(flag);
+        
+        order.setEndDate(null);
+        
     }
     
             /**

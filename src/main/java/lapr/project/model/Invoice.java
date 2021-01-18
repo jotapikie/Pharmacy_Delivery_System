@@ -120,7 +120,7 @@ public class Invoice {
     }
 
     public final void setNif(int nif) {
-        if(nif <= 99999999 || nif >= 1000000000){
+        if(String.valueOf(nif).length()!= 9){
             throw new IllegalArgumentException("The nif is invalid.");
         }
         this.nif = nif;

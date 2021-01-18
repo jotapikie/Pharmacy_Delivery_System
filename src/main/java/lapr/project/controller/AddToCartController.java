@@ -6,12 +6,10 @@
 package lapr.project.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lapr.project.data.CartProductDB;
-import lapr.project.data.ClientDB;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
 import lapr.project.utils.Utils;
@@ -29,7 +27,7 @@ public class AddToCartController {
     private final Map<Product, Integer> products;
     
 
-    public AddToCartController(String clientEmail, ProductDB pdb, ClientDB cdb, CartProductDB cpdb) {
+    public AddToCartController(String clientEmail, ProductDB pdb, CartProductDB cpdb) {
         this.clientEmail = clientEmail;
         this.pdb = pdb;
         this.cpdb = cpdb;
