@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
-import lapr.project.model.VehiclePath;
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -22,15 +21,15 @@ import oracle.jdbc.OracleTypes;
 public class PathwayDB extends DataHandler{
     
 
-    public List<VehiclePath> getPaths() throws SQLException {
-        List<VehiclePath> listPaths = new ArrayList<>();
+    public List<Pathway> getPaths() throws SQLException {
+        List<Pathway> listPaths = new ArrayList<>();
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPaths() }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                VehiclePath p = new VehiclePath(new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3)), new GeographicalPoint(rs.getFloat(5), rs.getFloat(6), rs.getFloat(7)), rs.getFloat(9),  rs.getFloat(10), rs.getFloat(11),rs.getDouble(12),rs.getDouble(13));
+                Pathway p = new Pathway(new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3)), new GeographicalPoint(rs.getFloat(5), rs.getFloat(6), rs.getFloat(7)), rs.getFloat(9),  rs.getFloat(10), rs.getFloat(11));
                 listPaths.add(p);
             }
         }

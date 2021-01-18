@@ -50,7 +50,7 @@ public class MainGraph {
     /**
      * Main graph of locations connected by paths.
      */
-    private final Graph<GeographicalPoint, VehiclePath> graph = new Graph<>(true);
+    private final Graph<GeographicalPoint, Pathway> graph = new Graph<>(true);
 
     /**
      * Constructs an instance of the main graph.
@@ -61,14 +61,14 @@ public class MainGraph {
         
         setup(locationDB, pathDB);
         List<GeographicalPoint> vertexes = locationDB.getGeographicalPoints();
-        List<VehiclePath> edges = pathDB.getPaths();
+        List<Pathway> edges = pathDB.getPaths();
 
         for (GeographicalPoint vertex : vertexes) {
             if (!graph.insertVertex(vertex)) {
                 throw new IllegalArgumentException("Invalid graph Vertex!");
             }
         }
-        for (VehiclePath edge : edges) {
+        for (Pathway edge : edges) {
             if (!graph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
                 throw new IllegalArgumentException("Invalid graph Edge!");
             }
@@ -137,7 +137,7 @@ public class MainGraph {
      *
      * @return graph to use for route algorithms.
      */
-    public Graph<GeographicalPoint, VehiclePath> getRouteGraph(){
+    public Graph<GeographicalPoint, ? extends Pathway> getRouteGraph(){
         return graph;
     }
 

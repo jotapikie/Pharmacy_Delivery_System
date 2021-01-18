@@ -20,7 +20,7 @@ class EndDeliveryRunControllerTest {
     @BeforeEach
     void setUp() throws SQLException {
         this.drdb = mock(DeliveryRunDB.class);
-        courier = "courier1@lapr3.com";
+        this.courier = "courier1@lapr3.com";
         this.controller= new EndDeliveryRunController();
 
 
