@@ -214,6 +214,18 @@ class ClientTest {
     }
 
     /**
+     * Test of setNif method, of class Client. Invalid.
+     */
+    @Test
+    void setNif_Invalid2() {
+        try {
+            client1.setNif(1234567891);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    /**
      * Test of getPoints method, of class Client. Success.
      */
     @Test
