@@ -126,53 +126,6 @@ public class VehicleDB extends DataHandler {
 
         return null;
     }
-/**
-    public List<String> getParkedVehicles(String type) throws SQLException {
-        ArrayList<String> updatableVehicles = new ArrayList<>();
-
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetParkedVehicles(?) }")) {
-
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-            callStmt.setString(1, type);
-            callStmt.execute();
-
-            ResultSet rSet = (ResultSet) callStmt.getObject(1);
-
-            if (rSet.next()) {
-                String vehicleType = rSet.getString(1);
-
-                updatableVehicles.add(vehicleType);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return updatableVehicles;
-    }
-
-    public List<String> getRemovableVehicles() throws SQLException {
-        ArrayList<String> removableVehicles = new ArrayList<>();
-
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetRemovableVehicles() }")) {
-
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-
-            callStmt.execute();
-
-            ResultSet rSet = (ResultSet) callStmt.getObject(1);
-
-            if (rSet.next()) {
-
-                String vehicleId = rSet.getString(1);
-
-                removableVehicles.add(vehicleId);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return removableVehicles;
-    }
-*/
-    
     
     /**
      * Remove vehicle
