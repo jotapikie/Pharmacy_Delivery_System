@@ -1,103 +1,122 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package lapr.project.controller;
 
+import java.sql.SQLException;
+import lapr.project.data.AddressDB;
 import lapr.project.data.ClientDB;
+import lapr.project.data.CreditCardDB;
 import lapr.project.model.Address;
 import lapr.project.model.Client;
 import lapr.project.model.CreditCard;
+import lapr.project.model.GeographicalPoint;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import lapr.project.model.GeographicalPoint;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
-
-class RegisterClientControllerTest {
-
-    private static RegisterClientController registerClientController;
-    private static ClientDB clientDB;
-    private static RegisterClientController testController;
-
+/**
+ *
+ * @author Diogo
+ */
+public class RegisterClientControllerTest {
+    
+    private static RegisterClientController controller;
+    private static ClientDB cdb;
+    private static AddressDB adb;
+    private static CreditCardDB ccdb;
+    
+    private static Address add;
+    private static CreditCard card;
+    private static Client client;
+    
+   
+    
     @BeforeAll
     public static void setUpClass() {
-        clientDB = mock(ClientDB.class);
-        testController = new RegisterClientController();
-        registerClientController = new RegisterClientController(clientDB);
+        add = new Address("Street 1", new GeographicalPoint(45.2, 23.5, 0.2), "City 1", 23, "4525-454");
+        card = new CreditCard(1234567891234567L, "02/22", 123);
+        client = new Client("João", "123", "joao@gmail.com", 123456789, 912541623, card, add);
+    }
+    
+
+    
+    @BeforeEach
+    public void setUp() throws SQLException {
+        cdb = mock(ClientDB.class);
+        adb = mock(AddressDB.class);
+        ccdb = mock(CreditCardDB.class);
+        
+        controller = new RegisterClientController(cdb, adb, ccdb);
+        
+        when(adb.newAdress("Street 1", 45, 45, 45, "City 1", 1, "1111-111")).thenReturn(add);
+        when(ccdb.newCreditCard(1234567891234567L, "02/22", 123)).thenReturn(card);
+        when(cdb.newClient("João", "joao@gmail.com", "123", 123456789, 912541623, add, card)).thenReturn(client);
+        when(cdb.saveClient(client)).thenReturn(true);
+    }
+    
+
+
+    /**
+     * Test of newAddress method, of class RegisterClientController.
+     */
+    @Test
+    public void testNewAddress() {
+        String res = controller.newAddress("Street 2", 45, 45, 45, "City 2", 1, "2222-222");
+        assertNull(res);
+        
+        res = controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111");
+        assertEquals(add.toString(), res);
+       
+    }
+
+    /**
+     * Test of newCreditCard method, of class RegisterClientController.
+     */
+    @Test
+    public void testNewCreditCard() {
+        String res = controller.newCreditCard(1234567891231111L, "08/24", 888);
+        assertNull(res);
+        
+        res = controller.newCreditCard(1234567891234567L, "02/22", 123);
+        assertEquals(card.toString(), res);
     }
 
     /**
      * Test of newClient method, of class RegisterClientController.
      */
     @Test
-    void testNewClient() {
-        String username = "username", name = "paulo", password = "password", email = "email@gmail.com";
-        int nif = 236159105, points = 0;
-        CreditCard creditCard = new CreditCard(1234567890123456L, new Date(1673109541000L), 554);
-        Address address = new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 4.5), "Porto", 122, "4250-527");
+    public void testNewClient() {
+        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111");
+        controller.newCreditCard(1234567891234567L, "02/22", 123);
+        String res = controller.newClient("Other name","other@gamil.com", "123", 123456712, 345267834);
+        assertNull(res);
+        
 
-        Client expResult = new Client(username, name, password, email, nif, creditCard, address);
-        when(clientDB.newClient(anyString(), anyString(), anyString(), anyString(), anyInt(), anyInt(), new Date(anyLong()), anyLong(), anyInt(), anyString(), anyDouble(), anyDouble(), anyString(), anyInt(), anyString())).thenReturn(expResult);
-        Client result = registerClientController.newClient(username, name, password, email, nif, points, creditCard.getExpDate(),
-                creditCard.getVisaNumber(), creditCard.getCcv(), address.getStreet(), address.getGeographicalPoint().getLatitude(), address.getGeographicalPoint().getLongitude(), address.getCity(),address.getPortNumber(),address.getZipCode());
-        assertEquals(expResult, result);
+        res = controller.newClient("João", "joao@gmail.com", "123", 123456789, 912541623);
+        assertEquals(client.toString(), res);
+        
+        
     }
 
     /**
-     * Test of registerClient method, of class RegisterClientController.
+     * Test of registClient method, of class RegisterClientController.
      */
     @Test
-    void testRegisterClient() throws SQLException {
-        when(clientDB.saveClient(anyObject())).thenReturn(true);
-        assertTrue(registerClientController.registerClient());
+    public void testRegistClient() throws Exception {
+            assertFalse(controller.registClient());
+            
+        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111");
+        controller.newCreditCard(1234567891234567L, "02/22", 123);
+        controller.newClient("João", "joao@gmail.com", "123", 123456789, 912541623);
+        assertTrue(controller.registClient());
     }
-
-    /**
-     * Test of addClientToQueue method, of class RegisterClientController.
-     */
-    @Test
-    public void testAddClientToQueue() {
-        assertTrue(testController.addClientToQueue());
-    }
-
-    /**
-     * Test of getClientsList method, of class RegisterClientController.
-     */
-    @Test
-    public void testGetClientsList() {
-        List<Client> clientsList = new ArrayList<>();
-        assertEquals(testController.getClientsList(), clientsList);
-    }
-
-    /**
-     * Test of insertClientsBatchOp method, of class RegisterClientController.
-     */
-    @Test
-    public void testInsertClientsBatchOp() throws Exception {
-        String username = "username", name = "paulo", password = "password", email = "email@gmail.com";
-        int nif = 236159105, points = 0;
-        CreditCard creditCard = new CreditCard(1234567890123456L, new Date(1673109541000L), 554);
-        Address address = new Address("Reta do Pereiro 710", new GeographicalPoint (40.738312, -7.765318, 4.5), "Porto", 122, "4250-527");
-
-        registerClientController.newClient(username, name, password, email, nif, points, creditCard.getExpDate(),
-                creditCard.getVisaNumber(), creditCard.getCcv(), address.getStreet(), address.getGeographicalPoint().getLatitude(), address.getGeographicalPoint().getLongitude(), address.getCity(),address.getPortNumber(),address.getZipCode());
-        registerClientController.addClientToQueue();
-
-        int resultFullList = registerClientController.getClientsList().size();
-
-        when(clientDB.saveClients(registerClientController.getClientsList())).thenReturn(resultFullList);
-
-        registerClientController.insertClientsBatchOp();
-
-        int resultEmptyList = registerClientController.getClientsList().size();
-
-        assertEquals(0, resultEmptyList);
-        assertEquals(1, resultFullList);
-
-    }
-
+    
 }

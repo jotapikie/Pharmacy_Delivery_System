@@ -14,8 +14,8 @@ public class CreditCardTest {
 
     @BeforeAll
     public static void setUpClass() {
-        creditCard1 = new CreditCard(1234567890123456L, new Date(1673109541000L), 554);
-        creditCard2 = new CreditCard(6543210987654321L, new Date(1673109545000L), 684);
+        creditCard1 = new CreditCard(1234567890123456L, "02/22", 554);
+        creditCard2 = new CreditCard(6543210987654321L, "04/22", 684);
     }
 
     @AfterAll
@@ -67,7 +67,7 @@ public class CreditCardTest {
      */
     @Test
     void getExpDate_Success() {
-        Date expResult = new Date(1673109541000L), result = creditCard1.getExpDate();
+        String expResult = "02/22", result = creditCard1.getExpDate();
         assertEquals(expResult, result);
     }
 
@@ -76,9 +76,9 @@ public class CreditCardTest {
      */
     @Test
     void setExpDate_Success() {
-        Date expResult = new Date(1673109541000L);
-        creditCard2.setExpDate(expResult);
-        Date result = creditCard2.getExpDate();
+        String expResult = "02/22"; 
+        creditCard2.setExpDate("02/22");
+        String result = creditCard2.getExpDate();
         assertEquals(expResult, result);
     }
 
@@ -88,7 +88,7 @@ public class CreditCardTest {
     @Test
     void setExpDate_Fail(){
         try {
-            creditCard1.setExpDate(new Date(1510010215789L));
+            creditCard1.setExpDate("sdfs");
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }

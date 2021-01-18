@@ -38,8 +38,8 @@ public class RegisterProductControllerTest {
         p1 = new Product (1,"brufen",0.2,5);
         p2 = new Product (2,"benerun",0.2,5);
         
-        when(pdb.newProduct(1,"brufen",0.2,5)).thenReturn(p1);
-        when(pdb.newProduct(2,"benerun",0.2,5)).thenReturn(p2);
+        when(pdb.newProduct("brufen",0.2,5)).thenReturn(p1);
+        when(pdb.newProduct("benerun",0.2,5)).thenReturn(p2);
     }
     
     @AfterAll
@@ -59,8 +59,8 @@ public class RegisterProductControllerTest {
      */
     @Test
     public void testNewProduct() {
-         assertEquals(p1.toString(), rcp.newProduct(1,"brufen",0.2,5));
-         assertEquals(p2.toString(), rcp.newProduct(2,"benerun",0.2,5));
+         assertEquals(p1.toString(), rcp.newProduct("brufen",0.2,5));
+         assertEquals(p2.toString(), rcp.newProduct("benerun",0.2,5));
     }
 
     /**
@@ -68,7 +68,7 @@ public class RegisterProductControllerTest {
      */
     @Test
     public void testAddToQueue() {
-        rcp.newProduct(1,"brufen",0.2,5);
+        rcp.newProduct("brufen",0.2,5);
         
         assertEquals(0, rcp.getProductsList().size());
         
@@ -76,7 +76,7 @@ public class RegisterProductControllerTest {
         assertEquals(1, rcp.getProductsList().size());
         assertEquals(true, rcp.getProductsList().contains(p1));
         
-        rcp.newProduct(2,"benerun",0.2,5);
+        rcp.newProduct("benerun",0.2,5);
         rcp.addToQueue();
         assertEquals(2, rcp.getProductsList().size());
         assertEquals(true, rcp.getProductsList().contains(p2));
@@ -88,7 +88,7 @@ public class RegisterProductControllerTest {
     @Test
     public void testRegistProduct() throws Exception {
         assertEquals(0, rcp.registProduct());          
-        rcp1.newProduct(1,"brufen",0.2,5);
+        rcp1.newProduct("brufen",0.2,5);
         rcp1.addToQueue();
         when(pdb.saveProducts(rcp1.getProductsList())).thenReturn(rcp1.getProductsList().size());
         assertEquals(1, rcp1.registProduct());

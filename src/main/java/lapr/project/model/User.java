@@ -2,7 +2,7 @@ package lapr.project.model;
 
 public class User {
 
-    private String username; // user's name
+    private String name; // user's name
     
     private String password; // user's password
     
@@ -11,17 +11,17 @@ public class User {
     /**
      * User's constructor to create instances of this class
      *
-     * @param username - user's username
+     * @param username - user's name
      * @param password - user's password
      */
-    public User(String username,String email,  String password) {
-        setUserame(username);
+    public User(String name,String email,  String password) {
+        setName(name);
         setEmail(email);
         setPassword(password);
         
     }
 
-    public String getUsername() { return username; } // returns the username of the user
+    public String getName() { return name; } // returns the name of the user
 
     public String getPassword() { return password; } // returns the password of the user
 
@@ -30,14 +30,14 @@ public class User {
     
 
     /**
-     * Modifies the user's username to the value passed by parameter.
+     * Modifies the user's name to the value passed by parameter.
      *
-     * @param username - user's new username.
+     * @param username - user's new name.
      */
-    void setUserame(String username) {
-        if (username == null || username.isEmpty())
+    void setName(String name) {
+        if (name == null || name.isEmpty())
             throw new IllegalArgumentException("Client's name is invalid.");
-        this.username = username;
+        this.name = name;
     }
 
     /**

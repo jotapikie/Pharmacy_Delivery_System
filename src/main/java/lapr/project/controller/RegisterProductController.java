@@ -23,12 +23,9 @@ public class RegisterProductController {
         this.pdb=productDB;
     }
 
-    public RegisterProductController() {
-        this.pdb=new ProductDB();
-    }
     
-    public String newProduct(int id, String name, double weight, double price) {
-        pro = pdb.newProduct(id,name,weight,price);
+    public String newProduct(String name, double weight, double price) {
+        pro = pdb.newProduct(name,weight,price);
         return pro.toString();
     }
 

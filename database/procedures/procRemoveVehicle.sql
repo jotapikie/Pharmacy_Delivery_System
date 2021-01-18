@@ -1,8 +1,8 @@
-CREATE or replace PROCEDURE procRemoveVehicle(p_number vehicle.NUMBER%TYPE) as
+CREATE or replace PROCEDURE procRemoveVehicle(p_number vehicle.nr%TYPE) as
 BEGIN
 	
-    update VEHICLE set STATE = "INACTIVE"
-    where VEHICLE.NUMBER = p_number;
+    update VEHICLE set status = 'Inactive'
+    where VEHICLE.nr = p_number;
 
 EXCEPTION
     When NO_DATA_FOUND then

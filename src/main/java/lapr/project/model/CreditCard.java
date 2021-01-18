@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class CreditCard {
     private long visaNumber;
-    private Date expDate;
+    private String expDate;
     private int ccv;
 
 
-    public CreditCard(long visaNumber, Date expDate, int ccv) {
+    public CreditCard(long visaNumber, String expDate, int ccv) {
         this.setVisaNumber(visaNumber);
         this.setExpDate(expDate);
         this.setCcv(ccv);
@@ -25,12 +25,12 @@ public class CreditCard {
         this.visaNumber = visaNumber;
     }
 
-    public Date getExpDate() {
+    public String getExpDate() {
         return expDate;
     }
 
-    public void setExpDate(Date expDate)  {
-        if (expDate.before(new Date())){
+    public void setExpDate(String expDate)  {
+        if (!expDate.matches("(?:0[1-9]|1[0-2])/[0-9]{2}")){
             throw new IllegalArgumentException("Credit Cards expire date is invalid");
         }
         this.expDate = expDate;

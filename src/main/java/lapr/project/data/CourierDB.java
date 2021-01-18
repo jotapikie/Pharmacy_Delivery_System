@@ -47,7 +47,7 @@ public class CourierDB extends DataHandler{
             for (Courier c : couriersList) {
                 callStmt.setString(1, c.getEmail());
                 callStmt.setString(2, c.getPassword());
-                callStmt.setString(3, c.getUsername());
+                callStmt.setString(3, c.getName());
                 callStmt.setInt(4, c.getNif());
                 callStmt.setInt(5, c.getNss());
                 callStmt.setDouble(6, c.getWeight());

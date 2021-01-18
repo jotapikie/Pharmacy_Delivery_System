@@ -13,7 +13,6 @@ import lapr.project.utils.Constants;
  * @author Diogo
  */
 public class Client extends User {
-    private String name;
     private int nif;
     private int phoneNumber;
     private int points;
@@ -36,12 +35,12 @@ public class Client extends User {
      * @param address    - client's address
      *
      */
-    public Client(String username,String name, String password, String email,int nif, CreditCard creditCard, Address address) {
-        super(username, email, password);
-        setName(name);
+    public Client(String name, String password, String email,int nif,int phoneNumber, CreditCard creditCard, Address address) {
+        super(name, email, password);
         setNif(nif);
         setPoints();
         setCard(creditCard);
+        setPhoneNumber(phoneNumber);
         setAddress(address);
         cart = new ShoppingCart();
     }
@@ -81,9 +80,6 @@ public class Client extends User {
     } // returns the client's points
 
 
-    public String getName(){
-        return name;
-    }
 
     public ShoppingCart getCart() {
         return cart;
@@ -130,10 +126,6 @@ public class Client extends User {
         this.address = address;
     }
     
-    public void setName(String name) {
-        if (name==null||name.isEmpty()) throw new IllegalArgumentException("Invalid Client Name");
-        this.name=name;
-    }
     
     
     public void setCard(CreditCard card) {

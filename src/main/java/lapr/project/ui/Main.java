@@ -178,14 +178,9 @@ class Main {
         return false;
     }
 
-//        AddToCartUI addToCart = new AddToCartUI("clien1@lapr3.com"); // FUNCIONA
-//        MakeOrderUI makeOrder = new MakeOrderUI("clien1@lapr3.com"); // FUNCIONA
-//        StartDeliveryRunUI startDelivery = new StartDeliveryRunUI(1, 67.5, "courier1@lapr3.com"); // FUNCIONA
-//        UpdateStockUI updateStock = new UpdateStockUI(1); 
-//        PrepareOrderUI prepareOrder = new PrepareOrderUI(1); // FUNCIONA
-//        NotifyReadyOrderUI preparedOrder = new NotifyReadyOrderUI(1); //FUNCIONA
-//        RegisterCourierUI rc = new RegisterCourierUI(1);//FUNCIONA
-//        RemoveVehicleUI rv =new RemoveVehicleUI();
+
+                  
+                  
 
                   
 //        CalculatorExample calculatorExample = new CalculatorExample();

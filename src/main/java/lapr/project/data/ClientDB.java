@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lapr.project.model.Address;
+import lapr.project.model.CreditCard;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Product;
 
@@ -57,22 +58,23 @@ public class ClientDB extends DataHandler {
      */
     public boolean saveClient(Client c) throws SQLException {
         getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
 
                 callStmt.setString(1, c.getName());
                 callStmt.setString(2, c.getEmail());
                 callStmt.setString(3, c.getPassword());
                 callStmt.setInt(4, c.getNif());
-                callStmt.setInt(5, c.getPoints());
-                callStmt.setString(6, c.getCard().getExpDate().toString());
+                callStmt.setInt(5, c.getPhoneNumber());
+                callStmt.setString(6, c.getCard().getExpDate());
                 callStmt.setLong(7,c.getCard().getVisaNumber());
                 callStmt.setInt(8, c.getCard().getCcv());
                 callStmt.setString(9, c.getAddress().getStreet());
-                callStmt.setDouble(10, c.getAddress().getGeographicalPoint().getLatitude());
-                callStmt.setDouble(11,c.getAddress().getGeographicalPoint().getLongitude());
-                callStmt.setString(12,c.getAddress().getZipCode());
-                callStmt.setInt(13,c.getAddress().getPortNumber());
-                callStmt.setString(14,c.getAddress().getZipCode());
+                callStmt.setDouble(10, c.getAddress().getGeographicalPoint().getLongitude());
+                callStmt.setDouble(11,c.getAddress().getGeographicalPoint().getLatitude());
+                callStmt.setDouble(12,c.getAddress().getGeographicalPoint().getElevation());
+                callStmt.setString(13,c.getAddress().getCity());
+                callStmt.setInt(14,c.getAddress().getPortNumber());
+                callStmt.setString(15,c.getAddress().getZipCode());
 
 
             callStmt.execute();
@@ -181,6 +183,10 @@ public class ClientDB extends DataHandler {
             }
         }
         return listClients;
+    }
+
+    public Client newClient(String name, String email, String pwd, int nif, int phoneNumber, Address address, CreditCard creditCard) {
+        return new Client(name, pwd, email, nif, phoneNumber, creditCard, address);
     }
     
 }

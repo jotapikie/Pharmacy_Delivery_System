@@ -13,7 +13,7 @@ class ClientTest {
     private static Client client1;
     private static Client client2;
     private static Client client3;
-    private final static CreditCard creditCard= new CreditCard(1231231231231231L, new Date(1673109541000L), 554);
+    private final static CreditCard creditCard= new CreditCard(1231231231231231L, "02/22", 554);
     private final static Address address= new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 67), "porto", 114,"4250-527");
     private final static ShoppingCart cart= new ShoppingCart();
     private ClientTest() {
@@ -21,9 +21,9 @@ class ClientTest {
 
     @BeforeAll
     public static void setUpClass() {
-        client1 = new Client("username1", "name1", "password1", "email1@email.com", 123456789, creditCard, address);
-        client2 = new Client("username2", "name2", "password2", "email2@email.com", 987654321, creditCard, address);
-        client3 = new Client("username3","1234","blabla@gmail.com",cart);
+        client1 = new Client("name1", "password1", "email1@email.com", 123456789,912341999, creditCard, address);
+        client2 = new Client("name2", "password2", "email2@email.com", 987654321,914528456, creditCard, address);
+        client3 = new Client("name3","1234","blabla@gmail.com",cart);
     }
 
     @AfterAll
@@ -261,7 +261,7 @@ class ClientTest {
      */
     @Test
     void setCard_Success() {
-        CreditCard expResult = new CreditCard(1231231231231231L, new Date(1673109541000L), 554);
+        CreditCard expResult = new CreditCard(1231231231231231L, "02/22", 554);
         client2.setCard(expResult);
         CreditCard result = client2.getCard();
         assertEquals(expResult, result);

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import lapr.project.model.Product;
+import lapr.project.utils.Constants;
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -24,8 +25,8 @@ import oracle.jdbc.OracleTypes;
  */
 public class ProductDB extends DataHandler{
 
-    public Product newProduct(int id, String name, double weight, double price){
-        return new Product(id,  name, weight, price);
+    public Product newProduct(String name, double weight, double price){
+        return new Product(Constants.DEFAULT_ID, name, weight, price);
     }
 
     public Product getProduct(int id) throws SQLException {
@@ -61,12 +62,12 @@ public class ProductDB extends DataHandler{
     }
 
     public boolean saveProduct(Product product)throws SQLException {
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddProduct(?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddProduct(?,?,?) }")) {
 
-            callStmt.setInt(1, product.getId());
-            callStmt.setString(2, product.getName());
-            callStmt.setDouble(3, product.getWeight());
-            callStmt.setDouble(4, product.getPrice());
+            
+            callStmt.setString(1, product.getName());
+            callStmt.setDouble(2, product.getWeight());
+            callStmt.setDouble(3, product.getPrice());
 
             callStmt.execute();
         }
@@ -76,12 +77,11 @@ public class ProductDB extends DataHandler{
     public int saveProducts(Set<Product> products) throws SQLException {
         Connection con = getConnection();
         int[] rows;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterProduct(?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterProduct(?,?,?) }")) {
             for (Product p : products) {
-                callStmt.setInt(1, p.getId());
-                callStmt.setString(2, p.getName());
-                callStmt.setDouble(3, p.getWeight());
-                callStmt.setDouble(4, p.getPrice());
+                callStmt.setString(1, p.getName());
+                callStmt.setDouble(2, p.getWeight());
+                callStmt.setDouble(3, p.getPrice());
 
                 callStmt.addBatch();
             }

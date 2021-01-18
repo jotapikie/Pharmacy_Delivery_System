@@ -28,7 +28,7 @@ public class Invoice {
     private Timestamp date;
 
     public Invoice(Client cli, Address address, Map<Product, Integer> productsBought, double totalPrice, double pricePaid, int creditsWon, int creditsSpent, int nif) {
-        setName(cli.getUsername());
+        setName(cli.getName());
         setAddress(address);
         setProductsBought(productsBought);
         setTotalPrice(totalPrice);

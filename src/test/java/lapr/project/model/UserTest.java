@@ -36,7 +36,7 @@ class UserTest {
      */
     @Test
     void getName_Success() {
-        String expResult = "username_test", result = user1.getUsername();
+        String expResult = "username_test", result = user1.getName();
         assertEquals(expResult, result);
     }
 
@@ -46,8 +46,8 @@ class UserTest {
     @Test
     void setName_Success() {
         String expResult = "new_username";
-        user2.setUserame(expResult);
-        String result = user2.getUsername();
+        user2.setName(expResult);
+        String result = user2.getName();
         assertEquals(expResult, result);
     }
 
@@ -57,7 +57,7 @@ class UserTest {
     @Test
     void setUsername_Null() {
         try {
-            user1.setUserame(null);
+            user1.setName(null);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
@@ -69,7 +69,7 @@ class UserTest {
     @Test
     void setUsername_Empty() {
         try {
-            user1.setUserame("");
+            user1.setName("");
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
