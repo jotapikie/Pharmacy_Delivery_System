@@ -13,7 +13,6 @@ import javafx.util.Pair;
 import lapr.project.model.VehiclePath;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
-import lapr.project.model.MainGraph;
 import lapr.project.model.Pathway;
 import lapr.project.utils.Utils;
 import lapr.project.utils.bst.BST;
