@@ -77,6 +77,7 @@ public class UpdateVehicleControllerTest {
     @Test
     public void testUpdateState() throws SQLException{
         when(vdb.update(any(Vehicle.class))).thenReturn(true);
+        when(vdb.getVehicle(anyInt())).thenReturn(new EScooter());
         boolean expResult = true;
         EScooter scooter = uvc2.updateScooterState(1, State.LOCKED);
         boolean result= uvc2.update();
