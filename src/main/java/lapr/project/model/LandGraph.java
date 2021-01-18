@@ -6,7 +6,11 @@
 package lapr.project.model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import lapr.project.data.GeographicalPointDB;
+import lapr.project.data.PathwayDB;
+import lapr.project.utils.graph.Edge;
 import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
 import lapr.project.utils.route.RouteAlgorithms;
@@ -15,7 +19,31 @@ import lapr.project.utils.route.RouteAlgorithms;
  *
  * @author Diogo
  */
-public class LandGraph extends MainGraph{
+public class LandGraph{
+    
+      /**
+     * Static instance of the main graph.
+     */
+    private static GeographicalPointDB locationDB;
+
+    /**
+     * Static instance of the main graph.
+     */
+    private static PathwayDB pathDB;
+
+
+
+    /**
+     * Static method to setup the data accesses of the main graph (implemented
+     * to allow for unit testing).
+     * @param newLocationDB
+     * @param newPathDB
+     */
+    public static void setup(GeographicalPointDB newLocationDB, PathwayDB newPathDB) {
+        locationDB = (newLocationDB != null) ? newLocationDB : new GeographicalPointDB();
+        pathDB = (newPathDB != null) ? newPathDB : new PathwayDB();
+    }
+
     
     /**
      * Graph of locations connected by paths, considering energy efficiency.
@@ -33,23 +61,47 @@ public class LandGraph extends MainGraph{
      * @throws java.sql.SQLException
      */
     public LandGraph(double totalWeight, double vehicleAerodynamicCoef) throws SQLException {
-        super();
         if (totalWeight <= 0 || vehicleAerodynamicCoef <= 0) {
             throw new IllegalArgumentException("Invalid energy information!");
         }
 
+        setup(locationDB, pathDB);
+        List<GeographicalPoint> vertexes = locationDB.getGeographicalPoints();
+        List<Pathway> edges = pathDB.getPaths();
 
         this.graph = new Graph<>(true);
         
         
-        for (GeographicalPoint vertex : super.getVertexes()) {
+        for (GeographicalPoint vertex : vertexes) {
             this.graph.insertVertex(vertex);
         }
-        for (Pathway mainEdge : super.getEdges()) {
+        for (Pathway mainEdge : edges) {
             VehiclePath energyEdge = new VehiclePath(mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getDistance(),
                     mainEdge.getKineticCoef(), mainEdge.getWind(), totalWeight, vehicleAerodynamicCoef);
             graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
         }
+    }
+    
+        /**
+     * Returns an iterable of the vertexes of the main graph.
+     *
+     * @return iterable of the vertexes of the main graph.
+     */
+    public Iterable<GeographicalPoint> getVertexes() {
+        return graph.vertices();
+    }
+
+    /**
+     * Returns an iterable of the edges of the main graph.
+     *
+     * @return iterable of the edges of the main graph.
+     */
+    public Iterable<Pathway> getEdges() {
+        List<Pathway> edges = new ArrayList<>();
+        for (Edge<GeographicalPoint,VehiclePath> e : graph.edges()) {
+            edges.add(e.getElement());
+        }
+        return edges;
     }
 
     /**
@@ -61,7 +113,6 @@ public class LandGraph extends MainGraph{
      * @param k number of routes to calculate.
      * @return k shortest routes.
      */
-    @Override
     public List<Route> kBestPaths(GeographicalPoint origin, GeographicalPoint destination, int k) {
         if (origin == null || destination == null || origin.equals(destination) || k <= 0) {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
@@ -73,7 +124,6 @@ public class LandGraph extends MainGraph{
         }
     }
     
-    @Override
     public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
         if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
@@ -86,7 +136,6 @@ public class LandGraph extends MainGraph{
     }
     
 
-    @Override
     public Graph<GeographicalPoint, VehiclePath> getRouteGraph() {
         return this.graph;
     }

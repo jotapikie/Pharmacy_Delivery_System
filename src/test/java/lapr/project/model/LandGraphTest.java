@@ -85,7 +85,7 @@ public class LandGraphTest {
         pdb = mock(PathwayDB.class);
         when(gpdb.getGeographicalPoints()).thenReturn(allPoints);
         when(pdb.getPaths()).thenReturn(allPaths);
-        MainGraph.setup(gpdb, pdb);
+        LandGraph.setup(gpdb, pdb);
         graph = new LandGraph(126, 0.6);
     }
     
@@ -146,7 +146,7 @@ public class LandGraphTest {
                         // No geographical points
              when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
              when(pdb.getPaths()).thenReturn(new ArrayList<>());
-             MainGraph.setup(gpdb, pdb);
+             LandGraph.setup(gpdb, pdb);
              graph = new LandGraph(102, 0.6);
              assertEquals(false,graph.getEdges().iterator().hasNext());
              assertEquals(false,graph.getVertexes().iterator().hasNext());
@@ -214,7 +214,7 @@ public class LandGraphTest {
             // No geographical points
              when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
              when(pdb.getPaths()).thenReturn(new ArrayList<>());
-             MainGraph.setup(gpdb, pdb);
+             LandGraph.setup(gpdb, pdb);
              graph = new LandGraph(120,0.5);
              assertEquals(false,graph.getEdges().iterator().hasNext());
              assertEquals(false,graph.getVertexes().iterator().hasNext());

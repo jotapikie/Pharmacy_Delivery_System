@@ -18,6 +18,7 @@ import lapr.project.model.Address;
 import lapr.project.model.Client;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.GeographicalPoint;
+import lapr.project.model.LandGraph;
 import lapr.project.model.MainGraph;
 import lapr.project.model.Order;
 import lapr.project.model.Pathway;
@@ -179,7 +180,7 @@ public class StartDeliveryRunControllerTest {
         gpdb = mock(GeographicalPointDB.class);
         cdb = mock(ClientDB.class);
         pdb = mock(PathwayDB.class);
-        MainGraph.setup(gpdb, pdb);
+        LandGraph.setup(gpdb, pdb);
         when(drdb.getDeliveryRuns(1)).thenReturn(runs);
         when(gpdb.getGeographicalPoints()).thenReturn(allPoints);
         when(gpdb.getPointsByDeliveryRun(1)).thenReturn(pointsDR1);

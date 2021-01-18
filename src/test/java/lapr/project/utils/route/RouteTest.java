@@ -241,6 +241,7 @@ public class RouteTest {
         t1 = new Route(p9);
         t1.addPath(p10);
         assertTrue(t1.compareTo(t)>0);
+        assertTrue(t.compareTo(t1)<0);
         
 
 

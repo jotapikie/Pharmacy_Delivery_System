@@ -30,7 +30,6 @@ import static org.mockito.Mockito.when;
  */
 public class RouteAlgorithmsTest {
     
-    private static MainGraph mainGraph;
     private static LandGraph landGraph;
     
     private static PathwayDB pdb;
@@ -88,10 +87,9 @@ public class RouteAlgorithmsTest {
         pdb = mock(PathwayDB.class);
         when(gpdb.getGeographicalPoints()).thenReturn(allPoints);
         when(pdb.getPaths()).thenReturn(allPaths);
-        MainGraph.setup(gpdb, pdb);
+        LandGraph.setup(gpdb, pdb);
         new RouteAlgorithms();
         landGraph = new LandGraph(135.8, 4.7);
-        mainGraph = new MainGraph();
     }
     
 
@@ -113,7 +111,7 @@ public class RouteAlgorithmsTest {
         // ORIGIN NULL
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph, null, p2, 1);
+            RouteAlgorithms.kBestRoutes(landGraph, null, p2, 1);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -122,7 +120,7 @@ public class RouteAlgorithmsTest {
         // DESTINATION NULL
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph, p1, null, 1);
+            RouteAlgorithms.kBestRoutes(landGraph, p1, null, 1);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -131,69 +129,29 @@ public class RouteAlgorithmsTest {
         // k <= 0
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph, p1, p2, -3);
+            RouteAlgorithms.kBestRoutes(landGraph, p1, p2, -3);
         }catch(IllegalArgumentException e){
             flag = true;
         }
         assertTrue(flag);
         
-        // ROUTE WITHOUT HAVING ENERGY IN CONSIDEARION (RETURN THE LESS DISTANCE ROUTE)
-        List<Route> routes = RouteAlgorithms.kBestRoutes(mainGraph, p1, p4, 2);
-        assertEquals(2, routes.size());
-        Route res1 = routes.get(0);
-        Route res2 = routes.get(1);
-        //p1-> p3 -> p4
-        Route exp = new Route(path2);
-        exp.addPath(path8);
-        assertEquals(exp, res1);
-        assertEquals(path2.getDistance()+path8.getDistance(), res1.getRouteDistance());
-        assertTrue(res1.getRouteDistance() == res1.getRouteCost());
         
-        // p1 -> p3 -> p4 -> p5 -> p4
-        exp = new Route(path2);
-        exp.addPath(path8);
-        exp.addPath(path9);
-        exp.addPath(path10);
-        assertEquals(exp, res2);
-        assertEquals(path2.getDistance() + path8.getDistance() + path9.getDistance() + path10.getDistance(), res2.getRouteDistance());
-        assertTrue(res2.getRouteDistance() == res2.getRouteCost());
-        
-        // NO PATH
-        routes = RouteAlgorithms.kBestRoutes(mainGraph, p4, p3, 1);
-        assertNull(routes);
- 
-        
-        // ROUTE WITH ENERGY CONSIDERATION
-        routes = RouteAlgorithms.kBestRoutes(landGraph, p1, p4, 2);
-        assertEquals(2, routes.size());
-        res1 = routes.get(0);
-        res2 = routes.get(1);
-        
-        exp = new Route(path2);
-        exp.addPath(path8);
-        assertEquals(exp.getPaths().size(), res1.getPaths().size());
-        assertTrue(exp.getPaths().get(0).getOriginPoint().equals(res1.getPaths().get(0).getOriginPoint()));
-        assertTrue(exp.getPaths().get(0).getDestinationPoint().equals(res1.getPaths().get(0).getDestinationPoint()));
-        assertEquals(33.9, res1.getRouteCost(), 0.1);
-        assertEquals(path2.getDistance() + path8.getDistance(), res1.getRouteDistance());
-        assertTrue(res1.getRouteCost()< res1.getRouteDistance());
-        
-        mainGraph = mock(MainGraph.class);
-        when(mainGraph.getRouteGraph()).thenReturn(null);
+        landGraph = mock(LandGraph.class);
+        when(landGraph.getRouteGraph()).thenReturn(null);
         
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph, p1, p2, 3);
+            RouteAlgorithms.kBestRoutes(landGraph, p1, p2, 3);
         }catch(IllegalArgumentException e){
             flag = true;
         }
         assertTrue(flag);
         
-        when(mainGraph.getRouteGraph()).thenReturn(new Graph<>(false));
+        when(landGraph.getRouteGraph()).thenReturn(new Graph<>(false));
         
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph, p1, p2, 3);
+            RouteAlgorithms.kBestRoutes(landGraph, p1, p2, 3);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -222,7 +180,7 @@ public class RouteAlgorithmsTest {
         // ORIGIN NULL
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph,new ArrayList<>(), null, p2, 1);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), null, p2, 1);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -231,7 +189,7 @@ public class RouteAlgorithmsTest {
         // DESTINATION NULL
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph,new ArrayList<>(), p1, null, 1);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, null, 1);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -240,7 +198,7 @@ public class RouteAlgorithmsTest {
         // k <= 0
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph,new ArrayList<>(), p1, p2, -3);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, p2, -3);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -249,7 +207,7 @@ public class RouteAlgorithmsTest {
         // toVisit = null
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph,null, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,null, p1, p2, 4);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -260,7 +218,7 @@ public class RouteAlgorithmsTest {
         List<GeographicalPoint> toVisit = new ArrayList<>();
         toVisit.add(p1);
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph,toVisit, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -271,30 +229,14 @@ public class RouteAlgorithmsTest {
         toVisit.clear();
         toVisit.add(p2);
         try{
-            RouteAlgorithms.kBestRoutes(mainGraph,toVisit, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4);
         }catch(IllegalArgumentException e){
             flag = true;
         }
         assertTrue(flag);
 
         
-        // if to visit is empty, the resutl should be the result of the best route between origin and destination
-        List<Route> res = RouteAlgorithms.kBestRoutes(mainGraph, new ArrayList<GeographicalPoint>(), p1, p2, 3);
-        List<Route> exp = RouteAlgorithms.kBestRoutes(mainGraph, p1, p2, 3);
-        assertEquals(exp, res);
-        
-        toVisit.clear();
-        toVisit.add(p5);
-        toVisit.add(p3);
-        res = RouteAlgorithms.kBestRoutes(mainGraph,toVisit, p1, p4, 3);
-        assertEquals(3, res.size());
-        
-        //p1->p3->p4->p5->p4
-        Route expected = new Route(path2);
-        expected.addPath(path8);
-        expected.addPath(path9);
-        expected.addPath(path10);
-        assertEquals(expected, res.get(0));
+ 
         
         
         
