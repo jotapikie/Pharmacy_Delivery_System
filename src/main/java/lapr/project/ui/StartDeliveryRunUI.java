@@ -6,6 +6,7 @@
 package lapr.project.ui;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lapr.project.controller.StartDeliveryRunController;
@@ -19,7 +20,7 @@ import lapr.project.data.GeographicalPointDB;
  */
 public class StartDeliveryRunUI {
     private StartDeliveryRunController controller;
-    
+    private static Scanner read = new Scanner (System.in);
     public StartDeliveryRunUI(int idPharmacy, double weight, String email) {
         controller = new StartDeliveryRunController(new DeliveryRunDB(), new GeographicalPointDB(),new ClientDB(), idPharmacy, weight, email);
         try {
@@ -42,7 +43,8 @@ public class StartDeliveryRunUI {
     
     private void selectOne(){
         System.out.println("Delivery Selected:");
-        System.out.println(controller.selectDeliveryRun(1));
+        int reg = Integer.parseInt(read.nextLine());
+        System.out.println(controller.selectDeliveryRun(reg));
         System.out.println();
     }    
     
