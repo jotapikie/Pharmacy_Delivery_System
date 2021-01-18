@@ -18,6 +18,7 @@ import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
 import lapr.project.model.Order;
 import lapr.project.model.Product;
+import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
 import lapr.project.utils.route.Route;
 
@@ -76,8 +77,8 @@ public class StartDeliveryRunController {
     }
     
     public boolean startDeliveryRun() throws SQLException{
-        double totalWeight = deliveryWeight + courierWeight + EScooter.getGenericWeight();
-        LandGraph graph = new LandGraph(totalWeight, EScooter.getGenericAeroCoef());
+        double totalWeight = deliveryWeight + courierWeight + Constants.SCOOTER_WEIGHT;
+        LandGraph graph = new LandGraph(totalWeight, Constants.SCOOTER_AERO_COEF);
         GeographicalPoint orDest = gpdb.getGeographicalPointByPharmacy(idPharmacy);
         List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
         List<Route> routes = new ArrayList<>();

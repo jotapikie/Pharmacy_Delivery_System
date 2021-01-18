@@ -105,7 +105,7 @@ class ParkSlotTest {
 
     @Test
     void setScooter() {
-        EScooter scooter= new EScooter(1,1,State.INACTIVE,10,1,2,2,2);
+        EScooter scooter= new EScooter(1,State.INACTIVE,10,1);
         slot.setScooter(scooter);
         EScooter scooterRes=slot.getScooter();
         assertEquals(scooter,scooterRes);

@@ -7,6 +7,7 @@ package lapr.project.model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
@@ -89,6 +90,7 @@ public class LandGraphTest {
         graph = new LandGraph(126, 0.6);
     }
     
+  
 
 
     /**
@@ -143,21 +145,9 @@ public class LandGraphTest {
             res = graph.kBestPaths(p4, p1, 1);
             assertNull(res);
             
-                        // No geographical points
-             when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
-             when(pdb.getPaths()).thenReturn(new ArrayList<>());
-             LandGraph.setup(gpdb, pdb);
-             graph = new LandGraph(102, 0.6);
-             assertEquals(false,graph.getEdges().iterator().hasNext());
-             assertEquals(false,graph.getVertexes().iterator().hasNext());
+
              
-             flag = false;
-             try{
-                   graph.kBestPaths(p1, p3, 1);
-             }catch(IllegalArgumentException e){
-                 flag = true;
-             }
-             assertTrue(flag);
+ 
             
             
     }
@@ -211,21 +201,9 @@ public class LandGraphTest {
             
 
              
-            // No geographical points
-             when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
-             when(pdb.getPaths()).thenReturn(new ArrayList<>());
-             LandGraph.setup(gpdb, pdb);
-             graph = new LandGraph(120,0.5);
-             assertEquals(false,graph.getEdges().iterator().hasNext());
-             assertEquals(false,graph.getVertexes().iterator().hasNext());
+
              
-             flag = false;
-             try{
-                   graph.kBestPaths(new ArrayList<>(),p1, p3, 1);
-             }catch(IllegalArgumentException e){
-                 flag = true;
-             }
-             assertTrue(flag);
+    
 
     }
 

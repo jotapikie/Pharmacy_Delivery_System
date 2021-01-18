@@ -41,7 +41,7 @@ public class ParkSlotDB extends DataHandler{
                     ps = new ParkSlot(rs.getInt(1), ableToCharge);
                     parks.add(ps);
                 }else{
-                    ps = new ParkSlot(parkId, ableToCharge, new EScooter(vehicle, rs.getDouble(4), State.ACTIVE, rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getDouble(10)));
+                    ps = new ParkSlot(parkId, ableToCharge, new EScooter(vehicle,  State.ACTIVE, rs.getInt(6), rs.getInt(7)));
                     parks.add(ps);
                 }
             }

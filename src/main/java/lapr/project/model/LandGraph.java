@@ -74,35 +74,17 @@ public class LandGraph{
         
         for (GeographicalPoint vertex : vertexes) {
             this.graph.insertVertex(vertex);
+
         }
         for (Pathway mainEdge : edges) {
             VehiclePath energyEdge = new VehiclePath(mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getDistance(),
                     mainEdge.getKineticCoef(), mainEdge.getWind(), totalWeight, vehicleAerodynamicCoef);
             graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
+         
         }
     }
     
-        /**
-     * Returns an iterable of the vertexes of the main graph.
-     *
-     * @return iterable of the vertexes of the main graph.
-     */
-    public Iterable<GeographicalPoint> getVertexes() {
-        return graph.vertices();
-    }
-
-    /**
-     * Returns an iterable of the edges of the main graph.
-     *
-     * @return iterable of the edges of the main graph.
-     */
-    public Iterable<Pathway> getEdges() {
-        List<Pathway> edges = new ArrayList<>();
-        for (Edge<GeographicalPoint,VehiclePath> e : graph.edges()) {
-            edges.add(e.getElement());
-        }
-        return edges;
-    }
+ 
 
     /**
      * Calculates the k shortest routes from origin to destination parks,
