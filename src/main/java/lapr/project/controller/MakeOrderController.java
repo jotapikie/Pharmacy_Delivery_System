@@ -79,9 +79,9 @@ public class MakeOrderController {
         items = cart.getItems();
         double cartPrice = 0;
         double cartWeight = 0;
-        for(Product p : items.keySet()){
-            cartPrice = cartPrice + (p.getPrice()*items.get(p));
-            cartWeight = cartWeight + (p.getWeight()*items.get(p));
+        for(Map.Entry<Product, Integer > p : items.entrySet()){
+            cartPrice = cartPrice + (p.getValue()*items.get(p));
+            cartWeight = cartWeight + (p.getKey().getWeight()*items.get(p));
         }
         if(cartWeight > Platform.getMaxWeightPerOrder()){
             return null;
@@ -152,12 +152,12 @@ public class MakeOrderController {
         
         HashMap<Product, Integer> missingProducts = new HashMap<>();
         HashMap<Product, Integer> existingProducts = new HashMap<>();
-        for(Product p : items.keySet()){
-            int quantity = ppdb.getQuantity(pha.getId(), p.getId());
+        for(Map.Entry<Product, Integer> p : items.entrySet()){
+            int quantity = ppdb.getQuantity(pha.getId(), p.getKey().getId());
             int missing = items.get(p) - quantity;
             if(missing > 0){
-                missingProducts.put(p, missing);
-                existingProducts.put(p, items.get(p) - missing);
+                missingProducts.put(p.getKey(), missing);
+                existingProducts.put(p.getKey(), items.get(p) - missing);
             }
         }
         
