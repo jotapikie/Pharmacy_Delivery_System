@@ -154,10 +154,10 @@ public class MakeOrderController {
         HashMap<Product, Integer> existingProducts = new HashMap<>();
         for(Map.Entry<Product, Integer> p : items.entrySet()){
             int quantity = ppdb.getQuantity(pha.getId(), p.getKey().getId());
-            int missing = items.get(p) - quantity;
+            int missing = p.getValue() - quantity;
             if(missing > 0){
                 missingProducts.put(p.getKey(), missing);
-                existingProducts.put(p.getKey(), items.get(p) - missing);
+                existingProducts.put(p.getKey(), p.getValue() - missing);
             }
         }
         
