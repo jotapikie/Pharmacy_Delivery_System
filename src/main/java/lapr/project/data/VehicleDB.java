@@ -237,6 +237,23 @@ public class VehicleDB extends DataHandler {
     public Vehicle newDrone(int id, int weight, State state, int maxBat, int actualBat, int motor) {
         return new Drone(id,weight,state,maxBat,actualBat,motor);
     }
+
+    public List<EScooter> getAvailableScooters(int idPharmacy) throws SQLException {
+        List<EScooter> listScooters = new ArrayList<>();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetAvailableScooters(?) }")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setInt(2, idPharmacy);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                EScooter sc = new EScooter(rs.getInt(1), State.fromString(rs.getString(2)), rs.getInt(3), rs.getInt(4));
+                listScooters.add(sc);
+            }
+        }
+        return listScooters;
+    }
+
+
 /**
     public Map<Integer, Set<EScooter>> checkIncapableEVehicles(int distance) throws SQLException {
         HashMap<Integer, Set<EScooter>> mapVehicles = new HashMap<>();

@@ -59,7 +59,7 @@ public class RouteAlgorithms {
             Route route = bst.smallestElement();
 
             // Check if k wanted routes have been found or next route has the same cost
-            if (result.size() >= k && route.getRouteCost() > result.get(result.size() - 1).getRouteCost()) {
+            if (result.size() >= k && route.getTotalEnergy() > result.get(result.size() - 1).getTotalEnergy()) {
                 break;
             }
 
@@ -98,8 +98,10 @@ public class RouteAlgorithms {
             vertex.resetCounter();
         }
     }
+    
 
-    public static List<Route> kBestRoutes(LandGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
+
+    public static List<Route> kBestRoutes(LandGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, int maxEnergy) {
         
         if (graph == null || origin == null || destination == null || toVisit == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
@@ -107,6 +109,7 @@ public class RouteAlgorithms {
 
         // Check if there any vertexes to visit
         if (toVisit.isEmpty()) {
+            
             return RouteAlgorithms.kBestRoutes(graph, origin, destination, k);
         }
         if (toVisit.contains(origin) || toVisit.contains(destination)) {
@@ -119,7 +122,7 @@ public class RouteAlgorithms {
 
         // Check if only 1 permutation is possible
         if (toVisit.size() == 1) {
-            return kBestOfPermutation(map, toVisit, origin, destination, k);
+            return kBestOfPermutation(map, toVisit, origin, destination, k, maxEnergy);
         }
 
         // Permute all possible orders of vertexes
@@ -128,12 +131,15 @@ public class RouteAlgorithms {
 
         // Calculate the k shortest routes of each permutation
         for (List<GeographicalPoint> permutation : permutations) {
-            List<Route> obtained = kBestOfPermutation(map, permutation, origin, destination, k);
+            List<Route> obtained = kBestOfPermutation(map, permutation, origin, destination, k, maxEnergy);
 
             // Add each obtained route to BST
             if (obtained != null) {
                 for (Route route : obtained) {
-                    bst.insert(route);
+                    if(route.getMinimumEnergy()<= maxEnergy){
+                        System.out.println("Entrou aqui " +route.getMinimumEnergy());
+                        bst.insert(route);
+                    }
                 }
             }
         }
@@ -147,7 +153,7 @@ public class RouteAlgorithms {
             Route route = bst.smallestElement();
 
             // Check if k wanted routes have been found or next route has the same cost
-            if (count >= k && route.getRouteCost() > result.get(result.size() - 1).getRouteCost()) {
+            if (count >= k && route.getTotalEnergy() > result.get(result.size() - 1).getTotalEnergy()) {
                 break;
             }
             bst.remove(route);
@@ -169,7 +175,7 @@ public class RouteAlgorithms {
         }
     }
 
-    private static List<Route> kBestOfPermutation(Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map, List<GeographicalPoint> permutation, GeographicalPoint origin, GeographicalPoint destination, int k) {
+    private static List<Route> kBestOfPermutation(Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map, List<GeographicalPoint> permutation, GeographicalPoint origin, GeographicalPoint destination, int k, int maxEnergy) {
         // Fill a list and a BST with the best and alternative route segments for each pair of vertexes
         List<Route> bestList = new ArrayList<>();
         BST<Route> altBST = new BST<>();
@@ -183,7 +189,9 @@ public class RouteAlgorithms {
         for (int i = 1; i < bestList.size(); i++) {
             route.addPaths(bestList.get(i).getPaths());
         }
-        result.add(route);
+        if(route.getMinimumEnergy()<=maxEnergy){
+            result.add(route);
+        }
 
         // While there are alternatives in BST and k wanted routes have not been found
         int count = 1;
@@ -212,7 +220,7 @@ public class RouteAlgorithms {
             }
 
             // Check if k wanted routes have been found or next route has the same cost
-            if (count >= k && route.getRouteCost() > result.get(result.size() - 1).getRouteCost()) {
+            if (count >= k && route.getTotalEnergy() > result.get(result.size() - 1).getTotalEnergy()) {
                 break;
             }
             result.add(route);

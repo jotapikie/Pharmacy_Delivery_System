@@ -168,7 +168,7 @@ public class RouteAlgorithmsTest {
     public void testKBestRoutes_5args() {
         boolean flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(null,new ArrayList<>(), p1, p2, 1);
+            RouteAlgorithms.kBestRoutes(null,new ArrayList<>(), p1, p2, 1,Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -177,7 +177,7 @@ public class RouteAlgorithmsTest {
         // ORIGIN NULL
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), null, p2, 1);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), null, p2, 1, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -186,7 +186,7 @@ public class RouteAlgorithmsTest {
         // DESTINATION NULL
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, null, 1);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, null, 1, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -195,7 +195,7 @@ public class RouteAlgorithmsTest {
         // k <= 0
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, p2, -3);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, p2, -3, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -204,7 +204,7 @@ public class RouteAlgorithmsTest {
         // toVisit = null
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,null, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,null, p1, p2, 4, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -215,7 +215,7 @@ public class RouteAlgorithmsTest {
         List<GeographicalPoint> toVisit = new ArrayList<>();
         toVisit.add(p1);
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -226,7 +226,7 @@ public class RouteAlgorithmsTest {
         toVisit.clear();
         toVisit.add(p2);
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }

@@ -11,13 +11,16 @@ import java.util.List;
 import lapr.project.data.ClientDB;
 import lapr.project.data.DeliveryRunDB;
 import lapr.project.data.GeographicalPointDB;
+import lapr.project.data.VehicleDB;
 import lapr.project.model.Client;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.EScooter;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
 import lapr.project.model.Order;
+import lapr.project.model.Pathway;
 import lapr.project.model.Product;
+import lapr.project.model.State;
 import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
 import lapr.project.utils.route.Route;
@@ -32,37 +35,42 @@ public class StartDeliveryRunController {
     private final DeliveryRunDB drdb;
     private final GeographicalPointDB gpdb;
     private final ClientDB cdb;
+    private final VehicleDB vdb;
     private final int idPharmacy;
     private final double courierWeight;
     private final String email;
-    private List<DeliveryRun> dels;
+    private List<DeliveryRun> runs;
+    private List<EScooter> scooters;
     private double deliveryWeight;
     private DeliveryRun dr;
+    private EScooter scooter;
+    private LandGraph graph;
+    private GeographicalPoint pharmacyAdd;
     
-    private int nrVehicle;
     private Route r;
 
-    public StartDeliveryRunController(DeliveryRunDB drdb, GeographicalPointDB gpdb,ClientDB cdb, int idPharmacy, double courierWeight, String email) {
+    public StartDeliveryRunController(DeliveryRunDB drdb, GeographicalPointDB gpdb,ClientDB cdb, VehicleDB vdb, int idPharmacy, double courierWeight, String email) {
         this.drdb = drdb;
         this.gpdb = gpdb;
         this.cdb = cdb;
         this.idPharmacy = idPharmacy;
         this.courierWeight = courierWeight;
         this.email = email;
-        this.dels = new ArrayList<>();
+        this.runs = new ArrayList<>();
+        this.scooters = new ArrayList<>();
         this.deliveryWeight = 0;
-        this.nrVehicle = -1;
+        this.vdb = vdb;
     }
     
     
     
     public List<String> getDeliveryRuns() throws SQLException{
-        dels = drdb.getDeliveryRuns(idPharmacy);
-        return Utils.listToString(dels);
+        runs = drdb.getDeliveryRuns(idPharmacy);
+        return Utils.listToString(runs);
     }
     
     public String selectDeliveryRun(int id){
-        for(DeliveryRun dt : dels){
+        for(DeliveryRun dt : runs){
             if(dt.getId() == id){
                 dr = dt;
                 deliveryWeight = 0;
@@ -71,45 +79,74 @@ public class StartDeliveryRunController {
                         deliveryWeight = deliveryWeight + (p.getWeight()*ord.getProducts().get(p));
                     }
                 }
+                return dr.toString();
             }
         }
-        return dr == null ? null : dr.toString();
+        return null;
+    }
+    
+    public List<String> getAvailableScooters() throws SQLException{
+        scooters = vdb.getAvailableScooters(idPharmacy);
+        return Utils.listToString(scooters);
+    }
+    
+    public String selectScooter(int id){
+        for(EScooter e : scooters){
+            if(e.getId()== id){
+                scooter = e;
+                return e.toString();
+            }
+        }
+        return null;
     }
     
     public boolean startDeliveryRun() throws SQLException{
         double totalWeight = deliveryWeight + courierWeight + Constants.SCOOTER_WEIGHT;
-        LandGraph graph = new LandGraph(totalWeight, Constants.SCOOTER_AERO_COEF);
-        GeographicalPoint orDest = gpdb.getGeographicalPointByPharmacy(idPharmacy);
+        graph = new LandGraph(totalWeight, Constants.SCOOTER_AERO_COEF);
+        pharmacyAdd = gpdb.getGeographicalPointByPharmacy(idPharmacy);
         List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
         List<Route> routes = new ArrayList<>();
         try{
-            routes = graph.kBestPaths(points, orDest, orDest, 1);
-            r = routes== null? null : routes.get(0);
+            routes = graph.kBestPaths(points, pharmacyAdd, pharmacyAdd, 1, scooter.getMaxBat());
+            r = routes.get(0);
         }catch(IllegalArgumentException e){
             r = null;
+            return false;
         }
-        nrVehicle = drdb.startDelivery(dr.getId(),email,r);
-        boolean res = nrVehicle>0;
-        if(res){
-            List<Client> clients = cdb.getClientsByDeliveryRun(dr.getId());
-            for(Client c : clients){
-                Utils.sendEmail(c.getEmail(), "Delivering", "Your order is being delivered.");
-            }
+        
+        drdb.startDelivery(idPharmacy, email, r, scooter.getId());
+        
+        List<Client> clients = cdb.getClientsByDeliveryRun(dr.getId());
+        for(Client c : clients){
+            Utils.sendEmail(c.getEmail(), "Delivering", "Your order is being delivered.");
         }
-        return res;
+        return true;
         
     }
     
-    
-    
     public String getRoute(){
-        return r == null ? null : r.toString();
+        return r==null?null:r.toString();
     }
     
-    public int getVehicle(){
-        return nrVehicle;
+    public double getEnergyToStart(){
+        if(r!= null && !r.getChargingPoints().isEmpty()){
+            GeographicalPoint chargingStation = r.getChargingPoints().getFirst();
+            double energy = 0;
+            for(Pathway p : r.getPaths()){
+                energy = energy + p.getCost();
+                if(p.getDestinationPoint().equals(chargingStation)){
+                    return energy;
+                }
+            }
+        }
+        return 0;
     }
-
+    
+    
+    
+    
+    
+   
 
     
     

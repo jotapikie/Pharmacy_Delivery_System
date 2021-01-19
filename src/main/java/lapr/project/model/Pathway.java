@@ -21,6 +21,7 @@ public class Pathway implements PathInterface{
     private double kineticCoef;
     private double distance;
     private double wind;
+    private String street;
     
     
      public Pathway(GeographicalPoint origLocation, GeographicalPoint destLocation, double kinetic_coef, double distance, double wind) {
@@ -99,6 +100,12 @@ public class Pathway implements PathInterface{
     public double getElevationDif(){
         return destinationPoint.getElevation() - originPoint.getElevation();
     }
+
+    public String getStreet() {
+        return street;
+    }
+    
+    
 
     /**
      * method to set the final location of a path
