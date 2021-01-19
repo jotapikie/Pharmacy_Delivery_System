@@ -243,10 +243,8 @@ public class VehicleDB extends DataHandler {
         throw new NullPointerException("No info in the database. Check tables Parks, Bicycles, Vehicles and Parked_Vehicles.");
     }
 
-<<<<<<< HEAD
-    public Vehicle newDrone(int id, int weight, State state, int maxBat, int actualBat, int motor) {
-        return new Drone(id,weight,state,maxBat,actualBat,motor);
-    }
+
+  
 
     public List<EScooter> getAvailableScooters(int idPharmacy) throws SQLException {
         List<EScooter> listScooters = new ArrayList<>();
@@ -264,13 +262,6 @@ public class VehicleDB extends DataHandler {
     }
 
 
-/**
-    public Map<Integer, Set<EScooter>> checkIncapableEVehicles(int distance) throws SQLException {
-        HashMap<Integer, Set<EScooter>> mapVehicles = new HashMap<>();
-        HashSet<EScooter> setEScooters = new HashSet<>();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetEVehicles() }")) {
-=======
-   
->>>>>>> d71a4452d51904d5a6fe4658b10751cf7a658fdd
+
 
 }
