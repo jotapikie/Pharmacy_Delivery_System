@@ -10,7 +10,7 @@ import oracle.jdbc.OracleTypes;
 
 public class VehicleDB extends DataHandler {
     private static final String ESCOOTER = "escooter";
-
+    private static final String DRONE = "drone";
 
     /**
      * Creates a new instance of EScooter
@@ -28,6 +28,10 @@ public class VehicleDB extends DataHandler {
     public EScooter newEScooter(int id, State state, int maxBat, int currentBat) {
         return new EScooter(id,state,maxBat,currentBat);
     }
+    
+     public Vehicle newDrone(int id, int weight, State state, int maxBat, int actualBat, int motor) {
+        return new Drone(id,weight,state,maxBat,actualBat,motor);
+    }
 
     /**
      * Method to save a instance of bike in the dataBase
@@ -38,7 +42,12 @@ public class VehicleDB extends DataHandler {
      * @throws java.sql.SQLException
      */
     public boolean save(Vehicle v, int pharmID) throws SQLException {
+            
+        if (v instanceof Drone) {
+            addVehicle(v, pharmID, DRONE);
+        } else if (v instanceof EScooter) {
             addVehicle(v, pharmID, ESCOOTER);
+        }
         return true;
     }
 
@@ -234,34 +243,6 @@ public class VehicleDB extends DataHandler {
         throw new NullPointerException("No info in the database. Check tables Parks, Bicycles, Vehicles and Parked_Vehicles.");
     }
 
-    public Vehicle newDrone(int id, int weight, State state, int maxBat, int actualBat, int motor) {
-        return new Drone(id,weight,state,maxBat,actualBat,motor);
-    }
-/**
-    public Map<Integer, Set<EScooter>> checkIncapableEVehicles(int distance) throws SQLException {
-        HashMap<Integer, Set<EScooter>> mapVehicles = new HashMap<>();
-        HashSet<EScooter> setEScooters = new HashSet<>();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetEVehicles() }")) {
+   
 
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-            callStmt.execute();
-            ResultSet rs = (ResultSet) callStmt.getObject(1);
-
-            while (rs.next()) {
-                if (Utils.currentBattery(rs.getInt(6), rs.getInt(7)) > (Utils.motorEnergyCost(rs.getInt(8), distance, Constants.AVG_ESCOOTER_SPEED) / 1000)) {
-                    setEScooters.add(new EScooter(rs.getString(2), rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getString(5), rs.getDouble(6), rs.getInt(7), rs.getInt(8)));
-                }
-            }
-
-            if (setEScooters.isEmpty()) {
-                throw new NullPointerException("No vehicles that cant get the job done!");
-            }
-            mapVehicles.put(distance, setEScooters);
-
-            return mapVehicles;
-        } catch (SQLException e) {
-            throw new SQLException(e.getMessage());
-        }
-    }
-*/
 }
