@@ -83,6 +83,8 @@ public class AddGeographicalPointControllerTest {
             assertTrue(controller.addToQueue());
             controller.newGeographicalPoint(37.8, 21.8, 0.2, "p2");
             assertTrue(controller.addToQueue());
+            controller.newGeographicalPoint(37.8, 21.8, 0.2, "p2");
+            assertFalse(controller.addToQueue());
     }
 
     /**
