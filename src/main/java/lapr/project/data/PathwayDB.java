@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
+import lapr.project.model.StreetType;
 import lapr.project.utils.Utils;
 import oracle.jdbc.OracleTypes;
 
@@ -33,7 +34,7 @@ public class PathwayDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Pathway p = new Pathway(new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3)), new GeographicalPoint(rs.getFloat(5), rs.getFloat(6), rs.getFloat(7)), rs.getFloat(9),  rs.getFloat(10), rs.getFloat(11));
+                Pathway p = new Pathway(new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3)), new GeographicalPoint(rs.getFloat(5), rs.getFloat(6), rs.getFloat(7)), StreetType.valueOf(rs.getString(9)),  rs.getDouble(10), rs.getDouble(11), rs.getString(12));
                 listPaths.add(p);
             }
         }
@@ -42,11 +43,11 @@ public class PathwayDB extends DataHandler{
 
 
 
-    public Pathway newPath(GeographicalPoint or, GeographicalPoint dest, double kineticCoef, int windDirection, double windSpeed, String street) {
+    public Pathway newPath(GeographicalPoint or, GeographicalPoint dest, StreetType type, int windDirection, double windSpeed, String street) {
         double pathDirec = Utils.pathDirection(or.getLatitude(), or.getLongitude(), dest.getLatitude(), dest.getLongitude());
         double wind = Utils.windToPath(pathDirec, windDirection, windSpeed);
         double distance = Utils.distance(or.getLatitude(), or.getLongitude(), dest.getLatitude(), dest.getLongitude(), or.getElevation(), dest.getElevation());
-        return new Pathway(or, dest, kineticCoef, distance, wind, street);
+        return new Pathway(or, dest, type, distance, wind, street);
     }
 
     public int savePaths(Set<Pathway> paths) throws SQLException {

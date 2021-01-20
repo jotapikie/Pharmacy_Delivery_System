@@ -40,7 +40,6 @@ public class Constants {
 
     
     public static String CHARGING_SPOT = "Pharmacy";
-
     /**
      * Test purposes
      */

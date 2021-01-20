@@ -24,6 +24,7 @@ public class Order implements Comparable<Order>{
     private double price;
     private Map<Product, Integer> products;
     private Order associatedOrder;
+    private Address address;
 
     public Order() {
         setId(Constants.DEFAULT_ID);
@@ -37,7 +38,7 @@ public class Order implements Comparable<Order>{
     
 
     
-    public Order(int id, Timestamp beginDate, Timestamp endDate, String status, double price) {
+    public Order(int id, Timestamp beginDate, Timestamp endDate, String status, double price, Address address) {
         setId(id);
         setBeginDate(beginDate);
         setEndDate(endDate);
@@ -45,12 +46,22 @@ public class Order implements Comparable<Order>{
         setPrice(price);
         setProducts(new HashMap<>());
         setAssociatedOrder(null);
+        setAddress(address);
         
     }
 
+    private void setAddress(Address address) {
+        if (address==null){
+            throw new IllegalArgumentException("Invalid order address.");
+        }
+        this.address=address;
+    }
 
-    
-    
+    public Address getAddress(){
+        return this.address;
+    }
+
+
     public int getId() {
         return id;
     }

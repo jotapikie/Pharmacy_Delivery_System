@@ -10,6 +10,7 @@ import java.util.Scanner;
 import lapr.project.controller.AddPathController;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
+import lapr.project.model.StreetType;
 
 /**
  *
@@ -43,15 +44,15 @@ public class AddPathUI {
         double longitude1 = Double.parseDouble(read.nextLine());
         System.out.println("Destination longitude:");
         double latitude1 = Double.parseDouble(read.nextLine());
-        System.out.println("kinetic Coeficient:");
-        double kineticCoef = Double.parseDouble(read.nextLine());
+        System.out.println("Street Type:");
+        String streetType = read.nextLine();
         System.out.println("Wind Direction:");
         int windDirection = Integer.parseInt(read.nextLine());
         System.out.println("Wind speed:");
         double windSpeed = Double.parseDouble(read.nextLine());
         System.out.println("Street:");
         String street = read.nextLine();
-        controller.selectPoints(longitude,latitude,longitude1,latitude1,kineticCoef,windDirection,windSpeed,street);
+        controller.selectPoints(longitude,latitude,longitude1,latitude1, StreetType.valueOf(streetType),windDirection,windSpeed,street);
         System.out.println();
         System.out.println("Do you really want to add this Pathway? (y/n)");
         if(read.nextLine().equalsIgnoreCase("y")){

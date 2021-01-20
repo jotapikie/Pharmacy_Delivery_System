@@ -16,13 +16,9 @@ public class VehicleDB extends DataHandler {
      * Creates a new instance of EScooter
      *
      * @param id
-     * @param weight
      * @param state
      * @param maxBat
      * @param currentBat
-     * @param motor
-     * @param aeroCoef
-     * @param frontalArea
      * @return
      */
     public EScooter newEScooter(int id, State state, int maxBat, int currentBat) {
