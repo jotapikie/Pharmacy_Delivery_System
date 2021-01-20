@@ -44,7 +44,7 @@ public class Route implements Comparable<Route>{
     private double energyToReachChargingPoint;
     
     
-    private LinkedList<GeographicalPoint> chargingPoints;
+    private List<GeographicalPoint> chargingPoints;
 
     /**
      * Constructs a route that is a copy of another route.
@@ -149,8 +149,8 @@ public class Route implements Comparable<Route>{
         return paths.size() + 1;
     }
 
-    public LinkedList<GeographicalPoint> getChargingPoints() {
-        return chargingPoints;
+    public List<GeographicalPoint> getChargingPoints() {
+        return new LinkedList<>(chargingPoints);
     }
     
     
@@ -215,6 +215,12 @@ public class Route implements Comparable<Route>{
         }
         return routeVertexes.containsAll(toVisit);
     }
+
+    protected double getEnergyToReachChargingPoint() {
+        return energyToReachChargingPoint;
+    }
+    
+    
 
     /**
      * Compares this route to another route.

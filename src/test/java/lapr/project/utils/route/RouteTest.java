@@ -79,6 +79,7 @@ public class RouteTest {
     @Test
     public void testGetRouteCost() {
         assertEquals(45, instance.getTotalEnergy());
+        assertEquals(45, instance.getMinimumEnergy());
     }
 
     /**
@@ -158,6 +159,8 @@ public class RouteTest {
         Pathway p = new Pathway(dest, p2, 2.6, 9.6, 2.7);
         instance.addPath(p);
         assertEquals(2, instance.getPaths().size());
+        assertEquals(instance.getTotalEnergy(), instance.getEnergyToReachChargingPoint());
+        assertEquals(54.6, instance.getMinimumEnergy());
         
         boolean flag = false;
         try{
@@ -165,7 +168,15 @@ public class RouteTest {
         }catch(IllegalArgumentException e){
             flag = true;
         }
+        assertTrue(flag);
         
+        flag = false;
+        p = new Pathway(or, or, 0.2, 12.4, 0.4);
+        try{
+        instance.addPath(p);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
         assertTrue(flag);
     }
 
@@ -242,6 +253,8 @@ public class RouteTest {
         t1.addPath(p10);
         assertTrue(t1.compareTo(t)>0);
         assertTrue(t.compareTo(t1)<0);
+        
+        assertEquals(0,t.compareTo(t));
         
 
 
