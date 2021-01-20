@@ -11,6 +11,7 @@ import java.util.Set;
 import lapr.project.data.ParkDB;
 import lapr.project.data.PharmacyDB;
 import lapr.project.model.Park;
+import lapr.project.model.Pharmacy;
 
 /**
  *
@@ -21,27 +22,49 @@ public class AddParkController {
     
     private final PharmacyDB pdb;
     private final ParkDB parkdb;
-    private final String administratorEmail;
+    private final int pharmacy_id;
     private Park park;
+    private Pharmacy pharm;
 
-    public AddParkController(PharmacyDB pdb, ParkDB parkdb, String administratorEmail) {
+    public AddParkController(PharmacyDB pdb, ParkDB parkdb, int pharmacy_id, Pharmacy pharm) {
         this.pdb = pdb;
         this.parkdb = parkdb;
-        this.administratorEmail = administratorEmail;
+        this.pharmacy_id=pharmacy_id;
+        this.pharm=pharm;
     }
    
     
-    public String getSelectedPark(int id) throws SQLException{
-        park = parkdb.getParkByID(id);
-        return park.toString();
+//    public String getSelectedPark(int id) throws SQLException{
+//        park = parkdb.getParkByID(id);
+//        return park.toString();
+//    }
+    
+    
+    public String newPark(int nMaxVehicles, String type, double max_energy){
+        park=parkdb.newPark(nMaxVehicles, type, max_energy);
+        return (park==null)? null : park.toString();
     }
     
-    public void addParkToPharmacy() throws SQLException{
-            Set<Park> parks=pdb.getPharmacyByAdministrator(administratorEmail).getParks();
-            parks.add(park);
-            pdb.getPharmacyByAdministrator(administratorEmail).setParks(parks);
-        
+    public void registPark(){
+        parkdb.savePark(park, pharmacy_id);
+        Set<Park> parks=pharm.getParks();
+        pharm.setParks(addPark(parks));
     }
+    
+    public Set<Park> addPark(Set<Park> parks){
+        parks.add(park);
+        return parks;
+    }
+    
+    
+    
+    
+//    public void addParkToPharmacy() throws SQLException{
+//            Set<Park> parks=pdb.getPharmacyByAdministrator(administratorEmail).getParks();
+//            parks.add(park);
+//            pdb.getPharmacyByAdministrator(administratorEmail).setParks(parks);
+//        
+//    }
     
     
     

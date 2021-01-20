@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import lapr.project.model.ParkSlot;
+import lapr.project.utils.Constants;
 import oracle.jdbc.OracleTypes;
 
 public class ParkDB extends DataHandler {
@@ -19,6 +20,9 @@ public class ParkDB extends DataHandler {
         psdb = new ParkSlotDB();
     }
     
+    public Park newPark(int nMaxVehicles, String type, double max_energy){
+        return new Park(Constants.DEFAULT_ID, nMaxVehicles, type, max_energy);
+    }
     
     public void savePark(Park park,int pharmId) {
         getConnection();
@@ -43,7 +47,7 @@ public class ParkDB extends DataHandler {
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Park p = new Park(rs.getInt(1), rs.getInt(2), rs.getString(3), new HashSet<ParkSlot>());
+                Park p = new Park(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDouble(4));
                 p.setSlots(psdb.getParkSlotsByPark(rs.getInt(1)));
                 parks.add(p);
             }
@@ -64,23 +68,10 @@ public class ParkDB extends DataHandler {
             while (rs.next()) {
                 Set<ParkSlot> slots = null;
                 //to complete
-                p = new Park(rs.getInt(4), rs.getInt(2), rs.getString(3), slots);
+                p = new Park(rs.getInt(4), rs.getInt(2), rs.getString(3), rs.getDouble(4));
                 return p;
             }
             throw new IllegalArgumentException("Product does not exist");
         }
-    }
-    
-    public void addMaxEnergy(Park park, double max_energy) throws SQLException{
-        getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddMaxEnergy(?,?) }")) {
-
-            callStmt.setInt(1,park.getId());
-            callStmt.setDouble(2,max_energy);
-
-            callStmt.execute();
-        }
-        
-        park.setMaxEnergy(max_energy);
     }
 }
