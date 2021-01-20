@@ -97,9 +97,8 @@ public class RemoveFromCartControllerTest {
      */
     @Test
     public void testRemoveFromCart() throws Exception {
-            controller.getProductsInCart();
-            controller.getSelectedProduct(6);
             assertFalse(controller.removeFromCart());
+            
             
             controller.getProductsInCart();
             controller.getSelectedProduct(4);
@@ -107,7 +106,13 @@ public class RemoveFromCartControllerTest {
             
             controller.getProductsInCart();
             controller.getSelectedProduct(1);
+            when(cpdb.removeProduct(p1, email)).thenReturn(true);
             assertTrue(controller.removeFromCart());
+            
+            controller.getProductsInCart();
+            controller.getSelectedProduct(1);
+            when(cpdb.removeProduct(p1, email)).thenReturn(false);
+            assertFalse(controller.removeFromCart());
     }
     
 }
