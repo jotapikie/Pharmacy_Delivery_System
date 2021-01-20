@@ -62,15 +62,15 @@ public class RouteAlgorithmsTest {
         allPoints = new ArrayList<>();
         allPoints.add(p1);allPoints.add(p2);allPoints.add(p3);allPoints.add(p4);allPoints.add(p5);
         
-        path1 = new Pathway(p1, p2, 0.5, 300, 0.6);
-        path2 = new Pathway(p1, p3, 0.23, 100, 0.2);
-        path3 = new Pathway(p2, p3, 0.5, 300, 0.6);
-        path4 = new Pathway(p3, p1, 0.23, 100, 0.2);
-        path6 = new Pathway(p3, p2, 0.89, 450.2, 0.234);
-        path7 = new Pathway(p2, p4, 0.23, 120.3, 0.28);
-        path8 = new Pathway(p3, p4, 0.72, 94.7, 0.59);
-        path9 = new Pathway(p4, p5, 0.25, 23, 0.439);
-        path10 = new Pathway(p5, p4, 0.25, 23, 0.439);
+        path1 = new Pathway(p1, p2, 0.5, 300, 0.6, "Street1");
+        path2 = new Pathway(p1, p3, 0.23, 100, 0.2, "Street2");
+        path3 = new Pathway(p2, p3, 0.5, 300, 0.6, "Street3");
+        path4 = new Pathway(p3, p1, 0.23, 100, 0.2, "Street4");
+        path6 = new Pathway(p3, p2, 0.89, 450.2, 0.234, "Street5");
+        path7 = new Pathway(p2, p4, 0.23, 120.3, 0.28, "Street6");
+        path8 = new Pathway(p3, p4, 0.72, 94.7, 0.59,"Street7");
+        path9 = new Pathway(p4, p5, 0.25, 23, 0.439,"Street8");
+        path10 = new Pathway(p5, p4, 0.25, 23, 0.439,"Street9");
         allPaths = new ArrayList<>();
         allPaths.add(path1);allPaths.add(path2);allPaths.add(path3);allPaths.add(path4);
         allPaths.add(path6);allPaths.add(path7);allPaths.add(path8);allPaths.add(path9);allPaths.add(path10);
@@ -168,7 +168,7 @@ public class RouteAlgorithmsTest {
     public void testKBestRoutes_5args() {
         boolean flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(null,new ArrayList<>(), p1, p2, 1);
+            RouteAlgorithms.kBestRoutes(null,new ArrayList<>(), p1, p2, 1,Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -177,7 +177,7 @@ public class RouteAlgorithmsTest {
         // ORIGIN NULL
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), null, p2, 1);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), null, p2, 1, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -186,7 +186,7 @@ public class RouteAlgorithmsTest {
         // DESTINATION NULL
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, null, 1);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, null, 1, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -195,7 +195,7 @@ public class RouteAlgorithmsTest {
         // k <= 0
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, p2, -3);
+            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, p2, -3, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -204,7 +204,7 @@ public class RouteAlgorithmsTest {
         // toVisit = null
         flag = false;
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,null, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,null, p1, p2, 4, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -215,7 +215,7 @@ public class RouteAlgorithmsTest {
         List<GeographicalPoint> toVisit = new ArrayList<>();
         toVisit.add(p1);
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -226,7 +226,7 @@ public class RouteAlgorithmsTest {
         toVisit.clear();
         toVisit.add(p2);
         try{
-            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4);
+            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4, Integer.MAX_VALUE);
         }catch(IllegalArgumentException e){
             flag = true;
         }

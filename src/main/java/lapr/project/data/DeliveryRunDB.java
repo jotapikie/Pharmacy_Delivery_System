@@ -75,22 +75,24 @@ public class DeliveryRunDB extends DataHandler{
         }
     }
 
-    public int startDelivery(int id, String email, Route r) throws SQLException {
+    public boolean startDelivery(int id, String email, Route r, int vehicleId) {
         DeliveryRun p = null;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcStartDeliveryRun(?,?,?,?,?)}")) {
-            callStmt.registerOutParameter(1, OracleTypes.INTEGER);
-            callStmt.setInt(2, id);
-            callStmt.setString(3, email);
+        try (CallableStatement callStmt = getConnection().prepareCall("{ = call funcStartDeliveryRun(?,?,?,?,?,?)}")) {
+            callStmt.setInt(1, id);
+            callStmt.setString(2, email);
             if(r == null){
+                callStmt.setFloat(3, -1);
                 callStmt.setFloat(4, -1);
-                callStmt.setFloat(5, -1);
             }else{
-                callStmt.setFloat(4, (float) r.getRouteDistance());
-                callStmt.setFloat(5, (float) r.getRouteCost());
+                callStmt.setFloat(3, (float) r.getTotalDistance());
+                callStmt.setFloat(4, (float) r.getTotalEnergy());
             }
-            callStmt.setTimestamp(6, Timestamp.from(Instant.now()));
+            callStmt.setTimestamp(5, Timestamp.from(Instant.now()));
+            callStmt.setInt(6, vehicleId);
             callStmt.execute();
-            return callStmt.getInt(1);
+            return true;
+        }catch(SQLException e){
+            return false;
         }
     }
     

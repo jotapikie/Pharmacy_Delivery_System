@@ -76,7 +76,7 @@ public class PharmacyStockDB extends DataHandler{
            
     }
 
-    public void updateStock(int idPharmacy, Map<Product, Integer> products) throws SQLException {
+    public boolean updateStock(int idPharmacy, Map<Product, Integer> products) {
         getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddToStock(?,?,?) }")) {
             for (Product p : products.keySet()) {
@@ -88,7 +88,10 @@ public class PharmacyStockDB extends DataHandler{
                 callStmt.execute();
                
             }
+        }catch(SQLException e){
+            return false;
         }
+        return true;
     }
 
 

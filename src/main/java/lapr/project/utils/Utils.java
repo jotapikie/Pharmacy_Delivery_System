@@ -161,4 +161,29 @@ public class Utils {
         }
         return res;
     }
+
+    public static double pathDirection(double latitude1, double longitude1, double latitude2, double longitude2) {
+        if (!validateCoordinates(latitude1, longitude1) || !validateCoordinates(latitude2, longitude2)) {
+            throw new IllegalArgumentException("Invalid coordinates!");
+        }
+        return Math.toDegrees(Math.atan2(Math.abs(longitude2 - longitude1), Math.abs(latitude2 - latitude1)));
+    }
+
+    public static double windToPath(double pathDirec, int windDirection, double windSpeed) {
+        if (windSpeed < 0) {
+            throw new IllegalArgumentException("Invalid wind speed!");
+        }
+        if (!validateDegrees(pathDirec) || !validateDegrees(windDirection)) {
+            throw new IllegalArgumentException("Invalid degrees!");
+        }
+        return windSpeed * Math.cos(windDirection - pathDirec);
+    }
+
+    private static boolean validateCoordinates(double latitude, double longitude) {
+        return Math.abs(latitude) <= 90 && Math.abs(longitude)<=180;
+    }
+
+    private static boolean validateDegrees(double degrees) {
+        return 0 <= degrees && degrees < 360;
+    }
 }

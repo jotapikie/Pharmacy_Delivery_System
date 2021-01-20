@@ -43,7 +43,7 @@ public class RouteTest {
         
         or3 = new GeographicalPoint(41.233, 45.23, 34.2);
         dest3 = new GeographicalPoint(41.533, 47.23, 35.2);
-        VehiclePath p3 = new VehiclePath(or, dest3, 34, 3.4, 2.2, 56.8, 3.4);
+        VehiclePath p3 = new VehiclePath(or, dest3, 34, 3.4, 2.2, 56.8, 3.4,"Street1");
         instance3 = new Route(p3);
         
         
@@ -78,7 +78,7 @@ public class RouteTest {
      */
     @Test
     public void testGetRouteCost() {
-        assertEquals(45, instance.getRouteCost());
+        assertEquals(45, instance.getTotalEnergy());
     }
 
     /**
@@ -86,7 +86,7 @@ public class RouteTest {
      */
     @Test
     public void testGetRouteDistance() {
-        assertEquals(45, instance.getRouteDistance());
+        assertEquals(45, instance.getTotalDistance());
     }
 
     /**
@@ -219,17 +219,17 @@ public class RouteTest {
         
         GeographicalPoint p1 = new GeographicalPoint(41.233, 45.23, 34.2);
         GeographicalPoint p2 = new GeographicalPoint(41.533, 47.23, 35.2);
-        VehiclePath p3 = new VehiclePath(p1, p2, 45, 5.7, 3.2, 5.6, 56.5);
+        VehiclePath p3 = new VehiclePath(p1, p2, 45, 5.7, 3.2, 5.6, 56.5,"Street1");
         Route t = new Route(p3);
-        System.out.println(t.getRouteCost()+ " | " + instance3.getRouteCost() + " | " +instance.getRouteCost());
+        System.out.println(t.getTotalEnergy()+ " | " + instance3.getTotalEnergy() + " | " +instance.getTotalEnergy());
         assertTrue(instance3.compareTo(t) > 0);
         assertTrue(t.compareTo(instance3)<0);
         
         assertTrue(t.compareTo(t)==0);
         
-        p3 = new VehiclePath(p1, p2, 22, 5.7, 3.2, 5.6, 56.5);
+        p3 = new VehiclePath(p1, p2, 22, 5.7, 3.2, 5.6, 56.5,"Street1");
         t = new Route(p3);
-        Pathway p4 = new Pathway(p1, p2, 0.4, t.getRouteCost(), 23);
+        Pathway p4 = new Pathway(p1, p2, 0.4, t.getTotalEnergy(), 23);
         Route t1 = new Route(p4);
         assertTrue(t1.compareTo(t) <0);
         assertTrue(t.compareTo(t1)> 0);

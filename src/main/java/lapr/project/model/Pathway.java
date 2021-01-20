@@ -21,6 +21,7 @@ public class Pathway implements PathInterface{
     private double kineticCoef;
     private double distance;
     private double wind;
+    private String street;
     
     
      public Pathway(GeographicalPoint origLocation, GeographicalPoint destLocation, double kinetic_coef, double distance, double wind) {
@@ -30,6 +31,15 @@ public class Pathway implements PathInterface{
         setDistance(distance);
         setWind(wind);
 
+    }
+
+    public Pathway(GeographicalPoint or, GeographicalPoint dest, double kineticCoef, double distance, double wind, String street) {
+        setOriginPoint(or);
+        setDestinationPoint(dest);
+        setKineticCoef(kineticCoef);
+        setDistance(distance);
+        setWind(wind);
+        setStreet(street);
     }
 
     /**
@@ -100,6 +110,12 @@ public class Pathway implements PathInterface{
         return destinationPoint.getElevation() - originPoint.getElevation();
     }
 
+    public String getStreet() {
+        return street;
+    }
+    
+    
+
     /**
      * method to set the final location of a path
      *
@@ -157,6 +173,15 @@ public class Pathway implements PathInterface{
         this.wind = wind;
     }
 
+    public void setStreet(String street) {
+        if(street.isEmpty() || street == null){
+            throw new IllegalArgumentException("Invalid path street");
+        }
+        this.street = street;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -191,16 +216,6 @@ public class Pathway implements PathInterface{
         }
         return Objects.equals(this.destinationPoint, other.destinationPoint);
     }
-    
-    
-    
-    
-    
-    
-
-
-
-
 
 
 

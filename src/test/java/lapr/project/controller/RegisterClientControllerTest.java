@@ -117,6 +117,13 @@ public class RegisterClientControllerTest {
         controller.newCreditCard(1234567891234567L, "02/22", 123);
         controller.newClient("João", "joao@gmail.com", "123", 123456789, 912541623);
         assertTrue(controller.registClient());
+        
+        when(cdb.saveClient(client)).thenReturn(false);
+        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111");
+        controller.newCreditCard(1234567891234567L, "02/22", 123);
+        controller.newClient("João", "joao@gmail.com", "123", 123456789, 912541623);
+        assertFalse(controller.registClient());
+        
     }
     
 }

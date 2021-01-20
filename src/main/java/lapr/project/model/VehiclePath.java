@@ -41,8 +41,8 @@ public final class VehiclePath extends Pathway{
      * @param totalWeight
      * @param vehicleAerodynamicCoef
      */
-    public VehiclePath(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, double kineticCoef, double wind, double totalWeight, double vehicleAerodynamicCoef) {
-        super(origPoint, destPoint, kineticCoef, distance, wind);
+    public VehiclePath(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, double kineticCoef, double wind, double totalWeight, double vehicleAerodynamicCoef, String street) {
+        super(origPoint, destPoint, kineticCoef, distance, wind, street);
         setTotalWeight(totalWeight);
         setVehicleAerodynamicCoef(vehicleAerodynamicCoef);
         calculateEnergyCost();

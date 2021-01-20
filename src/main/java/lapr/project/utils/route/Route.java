@@ -7,11 +7,14 @@ package lapr.project.utils.route;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
+import lapr.project.utils.Constants;
 
 /**
  *
@@ -27,12 +30,21 @@ public class Route implements Comparable<Route>{
     /**
      * Total cost of the route.
      */
-    private double routeCost;
+    private double totalEnergy;
 
     /**
      * Total distance of the route.
      */
-    private double routeDistance;
+    private double totalDistance;
+    
+    
+    private double minimumEnergy;
+    
+    
+    private double energyToReachChargingPoint;
+    
+    
+    private LinkedList<GeographicalPoint> chargingPoints;
 
     /**
      * Constructs a route that is a copy of another route.
@@ -40,9 +52,13 @@ public class Route implements Comparable<Route>{
      * @param otherRoute the route to copy.
      */
     public Route(Route otherRoute) {
-        this.routeCost = otherRoute.routeCost;
-        this.routeDistance = otherRoute.routeDistance;
+        this.totalEnergy = otherRoute.totalEnergy;
+        this.totalDistance = otherRoute.totalDistance;
+        this.minimumEnergy = otherRoute.minimumEnergy;
         this.paths = new ArrayList<>(otherRoute.paths);
+        this.energyToReachChargingPoint = otherRoute.energyToReachChargingPoint;
+        this.minimumEnergy = otherRoute.minimumEnergy;
+        this.chargingPoints = otherRoute.chargingPoints;
     }
 
     /**
@@ -65,8 +81,11 @@ public class Route implements Comparable<Route>{
         }
         paths = new ArrayList<>();
         paths.add(startEdge);
-        routeCost = startEdge.getCost();
-        routeDistance = startEdge.getDistance();
+        totalEnergy = startEdge.getCost();
+        totalDistance = startEdge.getDistance();
+        energyToReachChargingPoint = totalEnergy;
+        minimumEnergy = totalEnergy;
+        chargingPoints = new LinkedList<>();
     }
 
     /**
@@ -83,8 +102,8 @@ public class Route implements Comparable<Route>{
      *
      * @return total cost.
      */
-    public double getRouteCost() {
-        return routeCost;
+    public double getTotalEnergy() {
+        return totalEnergy;
     }
 
     /**
@@ -92,9 +111,15 @@ public class Route implements Comparable<Route>{
      *
      * @return total distance.
      */
-    public double getRouteDistance() {
-        return routeDistance;
+    public double getTotalDistance() {
+        return totalDistance;
     }
+
+    public double getMinimumEnergy() {
+        return minimumEnergy;
+    }
+    
+    
 
     /**
      * Returns the first vertex of the route.
@@ -124,6 +149,12 @@ public class Route implements Comparable<Route>{
         return paths.size() + 1;
     }
 
+    public LinkedList<GeographicalPoint> getChargingPoints() {
+        return chargingPoints;
+    }
+    
+    
+
   
     /**
      * Adds an edge to the route, verifying the route's integrity.
@@ -151,8 +182,17 @@ public class Route implements Comparable<Route>{
             throw new IllegalArgumentException("Invalid Edge!");
         }
         this.paths.add(edge);
-        this.routeCost += edge.getCost();
-        this.routeDistance += edge.getDistance();
+        this.totalEnergy += edge.getCost();
+        this.totalDistance += edge.getDistance();
+        this.energyToReachChargingPoint += edge.getCost();
+        
+        if(energyToReachChargingPoint > minimumEnergy){
+            minimumEnergy = energyToReachChargingPoint;
+        }
+        if(edge.getDestinationPoint().getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)){
+            energyToReachChargingPoint = 0;
+            chargingPoints.add(edge.getDestinationPoint());
+         }
     }
 
     /**
@@ -189,16 +229,16 @@ public class Route implements Comparable<Route>{
         if (otherRoute == null) {
             throw new IllegalArgumentException("Invalid Route!");
         }
-        if (this.routeCost < otherRoute.routeCost) {
+        if (this.totalEnergy < otherRoute.totalEnergy) {
             return -1;
         }
-        if (this.routeCost > otherRoute.routeCost) {
+        if (this.totalEnergy > otherRoute.totalEnergy) {
             return 1;
         }
-        if (this.routeDistance < otherRoute.routeDistance) {
+        if (this.totalDistance < otherRoute.totalDistance) {
             return -1;
         }
-        if (this.routeDistance > otherRoute.routeDistance) {
+        if (this.totalDistance > otherRoute.totalDistance) {
             return 1;
         }
         if (this.paths.size() < otherRoute.paths.size()) {
@@ -218,10 +258,35 @@ public class Route implements Comparable<Route>{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Pathway p : paths){
-            sb.append(String.format("%s --> %s %n", p.getOriginPoint().getDescription(), p.getDestinationPoint().getDescription()));
+        Iterator<Pathway> it = paths.iterator();
+        for(int i = 0; i < paths.size(); i++){
+            Pathway p = it.next();
+            GeographicalPoint or = p.getOriginPoint();
+            GeographicalPoint dest = p.getDestinationPoint();
+            String sOr;
+            String sDest;
+            if(i == 0){
+                sOr = String.format("%s (%.2f, %.2f) [Origin]",or.getDescription(), or.getLongitude(), or.getLatitude());
+                sDest = String.format("%s (%.2f, %.2f)",dest.getDescription(), dest.getLatitude(), dest.getLatitude());
+                
+            }else{
+                if(i == paths.size() -1){
+                    sOr = String.format("%s (%.2f, %.2f)",or.getDescription(), or.getLongitude(), or.getLatitude());
+                    sDest = String.format("%s (%.2f, %.2f) [Destination]",dest.getDescription(), dest.getLatitude(), dest.getLatitude());
+                    
+                }else{
+                    sOr = String.format("%s (%.2f, %.2f) %s",or.getDescription(), or.getLongitude(), or.getLatitude(),(or.getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)?"[Charge]":""));
+                    sDest = String.format("%s (%.2f, %.2f) %s",dest.getDescription(), dest.getLongitude(), dest.getLatitude(),(dest.getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)?"[Charge]":""));
+                    
+                }
+            }
+            String sDist = String.format("%.2fm",p.getDistance());
+            String sEner = String.format("%.2fJ", p.getCost());
+            sb.append(String.format("%-40s -> %s %-40s  | %-20s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet(), sDist, sEner));
         }
-        sb.append(String.format("Route Distance: %.2f %nRoute Cost: %.2f", routeDistance, routeCost));
+        String sDist = String.format("%.2fm",totalDistance);
+        String sEner = String.format("%.2fJ", totalEnergy);
+        sb.append(String.format("Total Distance: %s | Total Energy: %s | Minimum Energy: %.2fJ %n", sDist, sEner, minimumEnergy));
         return sb.toString();
     }
     
@@ -245,8 +310,8 @@ public class Route implements Comparable<Route>{
             return false;
         }
         Route other = (Route) obj;
-        return this.routeCost == other.routeCost
-                && this.routeDistance == other.routeDistance
+        return this.totalEnergy == other.totalEnergy
+                && this.totalDistance == other.totalDistance
                 && this.paths.equals(other.paths);
     }
 
@@ -259,8 +324,8 @@ public class Route implements Comparable<Route>{
     public int hashCode() {
         int hash = 7;
         hash = 43 * hash + Objects.hashCode(this.paths);
-        hash = 43 * hash + (int) (Double.doubleToLongBits(this.routeCost) ^ (Double.doubleToLongBits(this.routeCost) >>> 32));
-        hash = (int) (43 * hash + this.routeDistance);
+        hash = 43 * hash + (int) (Double.doubleToLongBits(this.totalEnergy) ^ (Double.doubleToLongBits(this.totalEnergy) >>> 32));
+        hash = (int) (43 * hash + this.totalDistance);
         return hash;
     }
 

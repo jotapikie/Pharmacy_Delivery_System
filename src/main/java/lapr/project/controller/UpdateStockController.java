@@ -36,9 +36,8 @@ public class UpdateStockController {
 
     
     public List<String> getProducts() throws SQLException{
-        List<String> prds = Utils.listToString(pdb.getProducts());
-        return prds;
-    }
+        return Utils.listToString(pdb.getProducts());
+   }
     
     public String getSelectedProduct(int id) throws SQLException{
         pro = pdb.getProduct(id);
@@ -47,8 +46,7 @@ public class UpdateStockController {
     
     public boolean addToQueue(int quantity){
         if(pro != null){
-            products.put(pro, quantity);
-            return true;
+            return products.putIfAbsent(pro, quantity)==null;
         }
         return false;
     }
@@ -56,8 +54,7 @@ public class UpdateStockController {
     
     public boolean updateStock() throws SQLException{
         if(!products.isEmpty()){
-            ppdb.updateStock(idPharmacy, products);
-            return true;
+            return ppdb.updateStock(idPharmacy, products);
         }
         return false;
     }
