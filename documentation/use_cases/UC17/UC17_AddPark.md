@@ -1,7 +1,7 @@
 # UC17 - Add Park
 
 ## 1. Requirements Engineering
-The pharmacy starts adding parks. The system asks the park ID to add. The pharmacy selects the park ID. The system asks for confirmation. The pharmacy confirms. The system informs the succes of the operation.
+The pharmacy starts adding parks. The system asks the park ID and maximum energy to add. The pharmacy selects the park ID and maximum energy. The system asks for confirmation. The pharmacy confirms. The system informs the succes of the operation.
 
 ## SSD
 ![UC17_SSD.png](UC17_SSD.png)
