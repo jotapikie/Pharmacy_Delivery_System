@@ -25,7 +25,16 @@ public class Constants {
     
 
     public static final int INITIAL_POINTS = 0;
+    public static final double MAX_DISTANCE = 3 ;
     public static double GRAVITY = 9.8;
+
+    public static final double KINETIC_COEF_ASFALTO= 0.2;
+    public static final double KINETIC_COEF_PARALELO= 0.2;
+    public static final double KINETIC_COEF_TERRA_BATIDA= 0.2;
+    public static final double KINETIC_COEF_CALCADA= 0.2;
+
+
+    public static final int MAX_ORDERS_RUN= 4;
 
     /**
      * Test purposes
