@@ -17,8 +17,8 @@ import lapr.project.model.GeographicalPoint;
  */
 public class AddGeographicalPointController {
     
-    private GeographicalPointDB gpdb;
-    private Set<GeographicalPoint> points;
+    private final GeographicalPointDB gpdb;
+    private final Set<GeographicalPoint> points;
     private GeographicalPoint point;
 
     public AddGeographicalPointController(GeographicalPointDB gpdb) {
@@ -28,7 +28,7 @@ public class AddGeographicalPointController {
     
     public String newGeographicalPoint(double longitude, double latitude, double elevation, String description){
         point = gpdb.newGeographicalPoint(longitude, latitude, elevation, description);
-        return (point==null)?null:point.toString();
+        return (point==null || point.toString().isEmpty())?null:point.toString();
     }
     
     public boolean addToQueue(){
