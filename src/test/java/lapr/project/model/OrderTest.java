@@ -176,6 +176,15 @@ public class OrderTest {
         }
         assertTrue(flag);
         assertEquals(5, order.getId());
+        
+        flag = false;
+        try{
+            order.setId(0);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(5, order.getId());
     }
     
     
@@ -324,8 +333,8 @@ public class OrderTest {
      */
     @Test
     public void testToString() {
-
         assertNotNull(order2.toString());
+        assertFalse(order2.toString().isEmpty());
         
     }
     

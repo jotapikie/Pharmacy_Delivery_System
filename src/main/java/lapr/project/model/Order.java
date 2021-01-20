@@ -33,7 +33,6 @@ public class Order implements Comparable<Order>{
         setStatus(Constants.DEFAULT_STATUS);
         setPrice(Constants.DEFAULT_PRICE);
         setProducts(new HashMap<>());
-        setAssociatedOrder(null);
     }
     
 
@@ -45,7 +44,6 @@ public class Order implements Comparable<Order>{
         setStatus(status);
         setPrice(price);
         setProducts(new HashMap<>());
-        setAssociatedOrder(null);
         setAddress(address);
         
     }

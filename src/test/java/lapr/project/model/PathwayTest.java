@@ -29,6 +29,8 @@ public class PathwayTest {
         path = new Pathway(or, dest,StreetType.ASFALTO, 34, 3.5, "noName");
     }
     
+   
+    
 
    
     
@@ -37,6 +39,12 @@ public class PathwayTest {
         path = new Pathway(or, dest,StreetType.ASFALTO, 34, 3.5, "noName");
     }
 
+    
+    @Test
+    public void testPathway() {
+        Pathway temp = new Pathway(or, dest, StreetType.ASFALTO, 34, 2.3, "Street2");
+        assertEquals("Street2", temp.getStreet());
+    }
     /**
      * Test of getOriginPoint method, of class Pathway.
      */
@@ -253,6 +261,9 @@ public class PathwayTest {
         assertFalse(path.equals(p3));
         
         p3 = new Pathway(p1, dest, StreetType.ASFALTO, 34, 3.5, "noName");
+        assertFalse(path.equals(p3));
+        
+        p3 = new Pathway(or, dest, StreetType.CALCADA, 23, 4.5, "noName");
         assertFalse(path.equals(p3));
     }
     

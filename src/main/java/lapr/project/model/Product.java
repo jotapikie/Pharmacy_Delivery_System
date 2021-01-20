@@ -41,8 +41,9 @@ public class Product {
     }
 
     public final void setId(int id) {
-         if (id <= 0)
-            throw new IllegalArgumentException("Product's id is invalid.");
+        if (id <= 0){
+           throw new IllegalArgumentException("Product's id is invalid.");
+        }
         this.id = id;
     }
 
@@ -54,14 +55,16 @@ public class Product {
     }
 
     public final void setWeight(double weight) {
-        if (weight <= 0) 
+        if (weight <= 0){
             throw new IllegalArgumentException("Product's weight is invalid.");
+        }
         this.weight = weight;
     }
 
     public final void setPrice(double price) {
-        if (price < 0)
+        if (price < 0){
             throw new IllegalArgumentException("Product's price is invalid.");
+        }
         this.price = price;
     }
     

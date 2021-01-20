@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 public class Constants {
     
     public static final int DEFAULT_ID = 1;
-    public static final double DEFAULT_PRICE = 0;
+    public static final double DEFAULT_PRICE = 1;
     public static final Timestamp DEFAULT_DATE = new Timestamp(1);
     public static final String DEFAULT_STATUS= "Processing";
     
@@ -32,7 +32,7 @@ public class Constants {
     public static final double KINETIC_COEF_ASFALTO= 0.2;
     public static final double KINETIC_COEF_PARALELO= 0.2;
     public static final double KINETIC_COEF_TERRA_BATIDA= 0.2;
-    public static final double KINETIC_COEF_CALCADA= 0.2;
+    public static final double KINETIC_COEF_CALCADA= 0.3;
 
 
     public static final int MAX_ORDERS_RUN= 4;
