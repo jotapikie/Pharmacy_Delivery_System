@@ -106,7 +106,7 @@ public class VehiclePathTest {
      */
     @Test
     public void testGetCost() {
-        assertEquals(29.4, path.getCost(), 0.1);
+        assertEquals(1.1, path.getCost(), 0.1);
     }
     
 }
