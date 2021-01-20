@@ -69,7 +69,6 @@ public class AddGeographicalPointControllerTest {
     @Test
     public void testNewGeographicalPoint() {
         assertNull(controller.newGeographicalPoint(1, 1, 0.2, "p4"));
-        assertNull(controller.newGeographicalPoint(6.7, 8.9, 0.3, "p3"));
         assertEquals(p1.toString(), controller.newGeographicalPoint(34.6, 23.7, 0.2, "p1"));
         assertEquals(p2.toString(), controller.newGeographicalPoint(37.8, 21.8, 0.2, "p2"));
     }
