@@ -62,8 +62,8 @@ public class ShoppingCart {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for(Product p : items.keySet()){
-            s.append(String.format("%s | Quantity: %d %n", p.toString(), items.get(p)));
+        for(Map.Entry<Product, Integer> p: items.entrySet()){
+            s.append(String.format("%s | Quantity: %d %n", p.getKey().toString(), p.getValue()));
         }
         
         return s.toString();
