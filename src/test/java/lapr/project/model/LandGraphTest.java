@@ -161,16 +161,9 @@ public class LandGraphTest {
         points.add(p8);
         EScooter e = new EScooter(1, State.ACTIVE, 40, 20);
         List<Route> routes = graph.kBestPaths(points, p1, p1, 1, e.getMaxBat());
-        List<Route> routes1 = graph.kBestPaths(p1, routes.get(0).getChargingPoints().getFirst(), 1);
+        List<Route> routes1 = graph.kBestPaths(p1, routes.get(0).getChargingPoints().get(0), 1);
         Route res = routes1.get(0);
         
-        for(Route r: routes){
-            System.out.println(r);
-            System.out.println("##################");
-        }
-        if(res.getTotalEnergy() > e.getActualBat()){
-            System.out.println("However, you should let your scooter charge until " +res.getTotalEnergy()+ " to start the run");
-        }
         
     }
 

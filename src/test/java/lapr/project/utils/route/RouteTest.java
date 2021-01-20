@@ -172,7 +172,7 @@ public class RouteTest {
         assertTrue(flag);
         
         flag = false;
-        p = new Pathway(or, or, 0.2, 12.4, 0.4);
+        p = new Pathway(or, or, StreetType.ASFALTO, 9.5, 2.6, "Street");
         try{
         instance.addPath(p);
         }catch(IllegalArgumentException e){
