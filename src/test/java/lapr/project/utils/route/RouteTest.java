@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
+import lapr.project.model.StreetType;
 import lapr.project.model.VehiclePath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,14 +37,14 @@ public class RouteTest {
     public void setUp() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        Pathway p = new Pathway(or, dest, 2.3, 45, 2.3);
+        Pathway p = new Pathway(or, dest, StreetType.ASFALTO, 45, 2.3, "rua1");
         instance = new Route(p);
         
         Route temp = new Route(instance);
         
         or3 = new GeographicalPoint(41.233, 45.23, 34.2);
         dest3 = new GeographicalPoint(41.533, 47.23, 35.2);
-        VehiclePath p3 = new VehiclePath(or, dest3, 34, 3.4, 2.2, 56.8, 3.4,"Street1");
+        VehiclePath p3 = new VehiclePath(or, dest3, 34, StreetType.ASFALTO, 2.2, 56.8, 3.4,"Street1");
         instance3 = new Route(p3);
         
         
@@ -119,10 +120,10 @@ public class RouteTest {
     @Test
     public void testAddPaths() {
         GeographicalPoint p2 = new GeographicalPoint(43.533, 47.23, 35.2);
-        Pathway p = new Pathway(dest, p2, 23, 34,45);
+        Pathway p = new Pathway(dest, p2, StreetType.ASFALTO, 34,45, "street1");
         
         GeographicalPoint p3 = new GeographicalPoint(42.67, 45.23, 34.2);
-        Pathway pp = new Pathway(p2, p3, 6.7, 45, 56);
+        Pathway pp = new Pathway(p2, p3, StreetType.ASFALTO, 45, 56, "street1");
         
         List<Pathway> list = new ArrayList<>();
         list.add(p);
@@ -155,7 +156,7 @@ public class RouteTest {
     public void testAddPath() {
         
         GeographicalPoint p2 = new GeographicalPoint(43.533, 47.23, 35.2);
-        Pathway p = new Pathway(dest, p2, 2.6, 9.6, 2.7);
+        Pathway p = new Pathway(dest, p2, StreetType.ASFALTO, 9.6, 2.7, "RuaSemNome");
         instance.addPath(p);
         assertEquals(2, instance.getPaths().size());
         
@@ -205,7 +206,7 @@ public class RouteTest {
     public void testCompareTo() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, 3.4, 5.6, 24.5);
+        Pathway p = new Pathway(ori, desti, StreetType.ASFALTO, 5.6, 24.5, "rua Sesamo");
         Route other = new Route(p);
         assertTrue(instance.compareTo(other)>0);
         
@@ -219,7 +220,7 @@ public class RouteTest {
         
         GeographicalPoint p1 = new GeographicalPoint(41.233, 45.23, 34.2);
         GeographicalPoint p2 = new GeographicalPoint(41.533, 47.23, 35.2);
-        VehiclePath p3 = new VehiclePath(p1, p2, 45, 5.7, 3.2, 5.6, 56.5,"Street1");
+        VehiclePath p3 = new VehiclePath(p1, p2, 45, StreetType.ASFALTO, 3.2, 5.6, 56.5,"Street1");
         Route t = new Route(p3);
         System.out.println(t.getTotalEnergy()+ " | " + instance3.getTotalEnergy() + " | " +instance.getTotalEnergy());
         assertTrue(instance3.compareTo(t) > 0);
@@ -227,16 +228,16 @@ public class RouteTest {
         
         assertTrue(t.compareTo(t)==0);
         
-        p3 = new VehiclePath(p1, p2, 22, 5.7, 3.2, 5.6, 56.5,"Street1");
+        p3 = new VehiclePath(p1, p2, 22, StreetType.ASFALTO, 3.2, 5.6, 56.5,"Street1");
         t = new Route(p3);
-        Pathway p4 = new Pathway(p1, p2, 0.4, t.getTotalEnergy(), 23);
+        Pathway p4 = new Pathway(p1, p2, StreetType.ASFALTO, t.getTotalEnergy(), 23, "NoName");
         Route t1 = new Route(p4);
         assertTrue(t1.compareTo(t) <0);
         assertTrue(t.compareTo(t1)> 0);
         
-        Pathway p8 = new Pathway(p1, p2, 0.3, 50, 0.3);
-        Pathway p9 = new Pathway(p1, p2, 0.3, 25, 0.3);
-        Pathway p10 = new Pathway(p2, dest, 0.3,25, 0.3);
+        Pathway p8 = new Pathway(p1, p2, StreetType.ASFALTO, 50, 0.3, "Rua2");
+        Pathway p9 = new Pathway(p1, p2, StreetType.ASFALTO, 25, 0.3, "Rua3");
+        Pathway p10 = new Pathway(p2, dest, StreetType.ASFALTO,25, 0.3, "Rua4");
         t = new Route(p8);
         t1 = new Route(p9);
         t1.addPath(p10);
@@ -260,7 +261,7 @@ public class RouteTest {
     public void testEquals() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, 7.4, 3.5, 2.7);
+        Pathway p = new Pathway(ori, desti, StreetType.ASFALTO, 3.5, 2.7, "Rua5");
         Route other = new Route(p);
         assertFalse(instance.equals(other));
         

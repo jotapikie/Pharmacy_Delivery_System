@@ -38,7 +38,7 @@ public class OrderTest {
         order.setPrice(5.99);
         order2.setAssociatedOrder(order);
         
-        order3 = new Order(4, new Timestamp(3433), new Timestamp(3434), "Prepared", 34.56);
+        order3 = new Order(4, new Timestamp(3433), new Timestamp(3434), "Prepared", 34.56, new Address("Rua Sesamo",new GeographicalPoint(1,1,2), "Porto", 12, "4200-121" ));
     }
     
 
