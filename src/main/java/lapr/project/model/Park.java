@@ -8,6 +8,7 @@ public class Park{
     private int id;
     private int nMaxVehicles;
     private String type;
+    private double max_energy;
     private Set<ParkSlot> slots;
 
     public Park(int id, int nMaxVehicles, String type, Set<ParkSlot> slots) {
@@ -36,6 +37,14 @@ public class Park{
         if(nMaxVehicles<=0)
             throw new IllegalArgumentException("Invalid parks nMaxVehicles");
         this.nMaxVehicles = nMaxVehicles;
+    }
+    
+    public double getMaxEnergy(){
+        return max_energy;
+    }
+    
+    public void setMaxEnergy(double maxEnergy){
+        this.max_energy=maxEnergy;
     }
 
     public String getType() {

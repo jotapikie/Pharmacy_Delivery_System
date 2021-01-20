@@ -70,4 +70,17 @@ public class ParkDB extends DataHandler {
             throw new IllegalArgumentException("Product does not exist");
         }
     }
+    
+    public void addMaxEnergy(Park park, double max_energy) throws SQLException{
+        getConnection();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddMaxEnergy(?,?) }")) {
+
+            callStmt.setInt(1,park.getId());
+            callStmt.setDouble(2,max_energy);
+
+            callStmt.execute();
+        }
+        
+        park.setMaxEnergy(max_energy);
+    }
 }
