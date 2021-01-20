@@ -95,6 +95,7 @@ public class ProductTest {
             exp = true;
         }
         assertTrue(exp);
+        assertEquals(expResult, productTest.getId());
         
     }
     
@@ -145,6 +146,7 @@ public class ProductTest {
             exp = true;
         }
         assertTrue(exp);
+        assertEquals(5.9, productTest.getWeight());
     }
     
         /**
@@ -164,6 +166,7 @@ public class ProductTest {
             exp = true;
         }
         assertTrue(exp);
+        assertEquals(expResult, productTest.getPrice());
     }
     
 

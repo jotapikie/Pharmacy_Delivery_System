@@ -8,10 +8,10 @@ import lapr.project.utils.Constants;
  */
 public class EScooter extends Vehicle{
     
-    private final double weight = Constants.SCOOTER_WEIGHT;
-    private final int motor = Constants.SCOOTER_MOTOR;
-    private final double aeroCoef = Constants.SCOOTER_AERO_COEF;
-    private final double frontalArea = Constants.SCOOTER_FRONTAL_AREA;
+    private static final double weight = Constants.SCOOTER_WEIGHT;
+    private static final int motor = Constants.SCOOTER_MOTOR;
+    private static final double aeroCoef = Constants.SCOOTER_AERO_COEF;
+    private static final double frontalArea = Constants.SCOOTER_FRONTAL_AREA;
 
 
     /**
@@ -34,7 +34,7 @@ public class EScooter extends Vehicle{
         setActualBat(actualBat);
     }
 
-    public  double getFrontalArea() {
+    public double getFrontalArea() {
         return frontalArea;
     }
 

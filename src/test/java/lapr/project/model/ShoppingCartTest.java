@@ -52,6 +52,7 @@ public class ShoppingCartTest {
      */
     @Test
     public void testSetItems() {
+       
         HashMap<Product, Integer> temp = new HashMap<>();
         temp.put(new Product(3, "Product3", 0.22, 4.5), 1);
         cart.setItems(temp);
@@ -64,6 +65,9 @@ public class ShoppingCartTest {
             flag = true;
         }
         assertTrue(flag);
+        
+        ShoppingCart cart = new ShoppingCart();
+        assertNotNull(cart.getItems());
     }
 
     /**

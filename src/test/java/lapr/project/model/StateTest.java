@@ -45,4 +45,21 @@ public class StateTest {
         assertEquals(4,State.values().length);
     }
     
+    @Test
+    public void testGetName() {
+        assertEquals("Active",State.ACTIVE.getName());
+        assertEquals("Charging",State.CHARGING.getName());
+        assertEquals("Inactive",State.INACTIVE.getName());
+        assertEquals("Locked",State.LOCKED.getName());
+    }
+    
+    @Test
+    public void testFromString() {
+        assertEquals(State.ACTIVE, State.fromString("Active"));
+        assertEquals(State.CHARGING, State.fromString("Charging"));
+        assertEquals(State.INACTIVE, State.fromString("Inactive"));
+        assertEquals(State.LOCKED, State.fromString("Locked"));
+        assertNull(State.fromString("sadfsd"));
+    }
+    
 }

@@ -155,6 +155,7 @@ public class InvoiceTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(4, inv.getCreditsSpent());
     }
 
     /**
@@ -171,6 +172,7 @@ public class InvoiceTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(5, inv.getCreditsWon());
     }
 
     /**
@@ -187,6 +189,7 @@ public class InvoiceTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(7, inv.getCurrentCredits());
     }
 
     /**
@@ -238,6 +241,7 @@ public class InvoiceTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(3, inv.getPricePaid());
         
         flag = false;
         try{
@@ -246,6 +250,7 @@ public class InvoiceTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(3, inv.getPricePaid());
     }
 
     /**
@@ -262,6 +267,7 @@ public class InvoiceTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(6, inv.getTotalPrice());
     }
 
     /**
@@ -311,7 +317,7 @@ public class InvoiceTest {
     @Test
     public void testToString(){
         assertTrue(inv.toString()!=null);
-        Invoice temp = new Invoice(cli, add, products, 3, 3, 2, 2, 123456789);
-        assertTrue(temp.toString()!= null);
+        Invoice temp = new Invoice(cli, add, products, 3, 2, 2, 2, 123456789);
+        assertTrue(temp.toString().contains("Price Paid"));
     }
 }
