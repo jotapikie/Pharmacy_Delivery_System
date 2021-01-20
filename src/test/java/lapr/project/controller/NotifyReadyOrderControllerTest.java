@@ -98,13 +98,21 @@ public class NotifyReadyOrderControllerTest {
      */
     @Test
     public void testSetOrderToReady() throws Exception {
+        assertFalse(controller.setOrderToReady());
+        
         controller.getPreparingOrders();
         controller.getSelectedOrder(10);
         assertFalse(controller.setOrderToReady());
         
         controller.getPreparingOrders();
         controller.getSelectedOrder(1);
+        when(odb.setStatus(1, "Prepared", 1)).thenReturn(true);
         assertTrue(controller.setOrderToReady());
+        
+        controller.getPreparingOrders();
+        controller.getSelectedOrder(1);
+        when(odb.setStatus(1, "Prepared", 1)).thenReturn(false);
+        assertFalse(controller.setOrderToReady());
     }
     
 }

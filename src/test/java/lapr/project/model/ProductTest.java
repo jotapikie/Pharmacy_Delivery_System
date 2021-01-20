@@ -189,6 +189,9 @@ public class ProductTest {
         Product p = new Product(1,"brufen",0.2,5);
         assertEquals(true, productTest.equals(p));
         
+        p = new Product(2, "Other", 0.3, 4.6);
+        assertFalse(productTest.equals(p));
+        
 
     }
     

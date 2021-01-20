@@ -67,12 +67,15 @@ public class OrderDB extends DataHandler{
         }
     }
 
-    public void setStatus(int idOrder, String status, int idPhamarcy) throws SQLException {
+    public boolean setStatus(int idOrder, String status, int idPhamarcy) {
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procSetOrderStatus(?,?,?) }")) {
               callStmt.setInt(1, idOrder);
               callStmt.setString(2, status);
               callStmt.setInt(3, idPhamarcy);
               callStmt.execute();
+              return true;
+        }catch(SQLException e){
+            return false;
         }
     }
 

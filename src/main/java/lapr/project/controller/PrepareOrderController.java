@@ -42,8 +42,7 @@ public class PrepareOrderController {
     
     public boolean prepareOrder() throws SQLException{
         if(ord!=null && ords.contains(ord)){
-            odb.setStatus(ord.getId(), "Preparing", idPhamarcy);
-            return true;
+            return odb.setStatus(ord.getId(), "Preparing", idPhamarcy);
         }
         return false;
     }

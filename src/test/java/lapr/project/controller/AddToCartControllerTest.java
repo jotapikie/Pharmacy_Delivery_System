@@ -7,7 +7,9 @@ package lapr.project.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lapr.project.data.CartProductDB;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
@@ -26,11 +28,15 @@ import static org.mockito.Mockito.when;
 public class AddToCartControllerTest {
     
     private static AddToCartController controller;
+    private static CartProductDB cpdb;
     private static String email = "client1@lapr3.com";
     private static List<Product> products;
     private static Product p1;
     private static Product p2;
     private static Product p3;
+    private static Product p4;
+    
+    private static Map<Product, Integer> cart;
     
     
     @BeforeAll
@@ -38,12 +44,14 @@ public class AddToCartControllerTest {
         p1 = new Product(1, "Product 1", 0.56, 23);
         p2 = new Product(2, "Product 2", 4, 3.99);
         p3 = new Product(3, "Product 3", 1.2, 9.5);
+        p4 = new Product(4, "Product 4", 2.3, 8.5);
+        
         products = new ArrayList<>();
         products.add(p1);
         products.add(p2);
         products.add(p3);
         
-        
+        cart = new HashMap<>();
 
     }
 
@@ -51,7 +59,7 @@ public class AddToCartControllerTest {
     @BeforeEach
     public void setUp() throws SQLException {
         ProductDB pdb = mock(ProductDB.class);
-        CartProductDB cpdb = mock(CartProductDB.class);
+        cpdb = mock(CartProductDB.class);
         
         when(pdb.getProducts()).thenReturn(products);
         when(pdb.getProduct(1)).thenReturn(p1);
@@ -82,8 +90,17 @@ public class AddToCartControllerTest {
     }
     
     @Test
-    public void testAddToQueue(){
+    public void testAddToQueue() throws SQLException{
         assertFalse(controller.addToQueue(5));
+        
+        controller.getAvailableProducts();
+        controller.getSelectedProduct(1);
+        assertTrue(controller.addToQueue(2));
+        
+        controller.getAvailableProducts();
+        controller.getSelectedProduct(1);
+        assertFalse(controller.addToQueue(2));
+        
     }
 
    
@@ -97,7 +114,17 @@ public class AddToCartControllerTest {
         
         controller.getSelectedProduct(1);
         controller.addToQueue(4);
+        cart.put(p1,4);
+        when(cpdb.saveShoppingCart(cart, email)).thenReturn(true);
         assertTrue(controller.addToCart());
+        
+        controller.getSelectedProduct(1);
+        controller.addToQueue(4);
+        cart.put(p1,4);
+        when(cpdb.saveShoppingCart(cart, email)).thenReturn(false);
+        assertFalse(controller.addToCart());
+
     }
+    
     
 }

@@ -37,8 +37,7 @@ public class AddToCartController {
 
     
     public List<String> getAvailableProducts() throws SQLException{
-        List<String> lst = Utils.listToString(pdb.getProducts());
-        return lst;
+       return Utils.listToString(pdb.getProducts());
     }
     
     public String getSelectedProduct(int id) throws SQLException{
@@ -48,16 +47,14 @@ public class AddToCartController {
     
     public boolean addToQueue(int quantity){
         if(pro != null){
-            products.put(pro, quantity);
-            return true;
+            return products.putIfAbsent(pro, quantity)==null;
         }
         return false;
     }
     
     public boolean addToCart() throws SQLException{
         if(!products.isEmpty()){
-            cpdb.saveShoppingCart(products, clientEmail);
-            return true;
+            return cpdb.saveShoppingCart(products, clientEmail);
         }
         return false;
     }
