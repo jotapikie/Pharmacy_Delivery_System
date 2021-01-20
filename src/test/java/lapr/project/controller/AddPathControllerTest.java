@@ -106,6 +106,8 @@ public class AddPathControllerTest {
         controller.getAvailableGeographicalPoints();
         controller.selectPoints(21, 39, 22, 38, 0.2, 1, 2.4, "Street1");
         assertTrue(controller.addToQueue());
+        controller.selectPoints(21, 39, 22, 38, 0.2, 1, 2.4, "Street1");
+        assertFalse(controller.addToQueue());
     }
 
     /**

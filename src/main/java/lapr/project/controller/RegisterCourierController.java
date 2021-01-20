@@ -34,20 +34,19 @@ public class RegisterCourierController {
     }
     
     public boolean addToQueue(){
-        return couriersList.add(courier);
+        if(courier != null){
+            return couriersList.add(courier);
+        }
+        return false;
     }
 
     public int registCouriers() throws SQLException {
-        final int numRows = courierDB.saveCouriers(couriersList, idPharmacy);
-        couriersList.clear();
-        return numRows;
+        if(!couriersList.isEmpty()){
+            return courierDB.saveCouriers(couriersList, idPharmacy);
+        }
+        return 0;
     }
 
-    // FOR TEST PURPOSES
-
-    public Set<Courier> getCouriersList() {
-        return couriersList;
-    }
 
     
     

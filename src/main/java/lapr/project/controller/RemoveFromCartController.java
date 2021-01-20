@@ -41,8 +41,7 @@ public class RemoveFromCartController {
     
     public boolean removeFromCart() throws SQLException{
         if(pro != null && cart.getItems().containsKey(pro)){
-             cdb.removeProduct(pro, clientEmail);
-            return true;
+             return cdb.removeProduct(pro, clientEmail);
         }
         return false;
     }

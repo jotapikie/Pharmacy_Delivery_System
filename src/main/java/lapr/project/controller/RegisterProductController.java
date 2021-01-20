@@ -17,10 +17,11 @@ import lapr.project.model.Product;
 public class RegisterProductController {
     private final ProductDB pdb;
     private Product pro;
-    private final HashSet<Product> products = new HashSet<>();
+    private final Set<Product> products;
 
     public RegisterProductController(ProductDB productDB) {
         this.pdb=productDB;
+        products = new HashSet<>();
     }
 
     
@@ -30,17 +31,20 @@ public class RegisterProductController {
     }
 
     public boolean addToQueue(){
-        return products.add(pro);
+        if(pro != null){
+            return products.add(pro);
+        }
+        return false;
     }
 
     public int registProduct() throws SQLException {
-        final int i = pdb.saveProducts(products);
-        products.clear();
-        return i;
+        if(!products.isEmpty()){
+            return pdb.saveProducts(products);
+        }
+        return 0;
+
     }
-    public Set<Product> getProductsList() {
-        return products;
-    }
+
     
     
     

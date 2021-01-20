@@ -5,6 +5,9 @@
  */
 package lapr.project.controller;
 
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
 import org.junit.jupiter.api.AfterEach;
@@ -23,36 +26,28 @@ import static org.mockito.Mockito.when;
 public class RegisterProductControllerTest {
     private static ProductDB pdb;
     private static RegisterProductController rcp;
-    private static RegisterProductController rcp1;
     private static Product p1;
     private static Product p2;
     
-    public RegisterProductControllerTest() {
-    }
+    private static Set<Product> products;
+
     
     @BeforeAll
     public static void setUpClass() {
-        pdb = mock(ProductDB.class);
-        rcp=new RegisterProductController(pdb);
-        rcp1=new RegisterProductController(pdb);
         p1 = new Product (1,"brufen",0.2,5);
         p2 = new Product (2,"benerun",0.2,5);
-        
-        when(pdb.newProduct("brufen",0.2,5)).thenReturn(p1);
-        when(pdb.newProduct("benerun",0.2,5)).thenReturn(p2);
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
+        products = new HashSet<>();
     }
     
     @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
+    public void setUp() throws SQLException {
+        pdb = mock(ProductDB.class);
+        rcp=new RegisterProductController(pdb);
+        
+        when(pdb.newProduct("brufen",0.2,5)).thenReturn(p1);
+        when(pdb.newProduct("benerun",0.2,5)).thenReturn(p2);
+   }
+
 
     /**
      * Test of newProduct method, of class RegisterProductController.
@@ -68,18 +63,14 @@ public class RegisterProductControllerTest {
      */
     @Test
     public void testAddToQueue() {
+        assertFalse(rcp.addToQueue());
+        
         rcp.newProduct("brufen",0.2,5);
+        assertTrue(rcp.addToQueue());
         
-        assertEquals(0, rcp.getProductsList().size());
+        rcp.newProduct("brufen",0.2,5);
+        assertFalse(rcp.addToQueue());
         
-        rcp.addToQueue();
-        assertEquals(1, rcp.getProductsList().size());
-        assertEquals(true, rcp.getProductsList().contains(p1));
-        
-        rcp.newProduct("benerun",0.2,5);
-        rcp.addToQueue();
-        assertEquals(2, rcp.getProductsList().size());
-        assertEquals(true, rcp.getProductsList().contains(p2));
     }
 
     /**
@@ -87,11 +78,20 @@ public class RegisterProductControllerTest {
      */
     @Test
     public void testRegistProduct() throws Exception {
-        assertEquals(0, rcp.registProduct());          
-        rcp1.newProduct("brufen",0.2,5);
-        rcp1.addToQueue();
-        when(pdb.saveProducts(rcp1.getProductsList())).thenReturn(rcp1.getProductsList().size());
-        assertEquals(1, rcp1.registProduct());
+        assertEquals(0, rcp.registProduct());
+        
+        rcp.newProduct("brufen",0.2,5);
+        rcp.addToQueue();
+        products.add(p1);
+        when(pdb.saveProducts(products)).thenReturn(1);
+        assertEquals(1, rcp.registProduct());
+        
+        rcp.newProduct("benerun",0.2,5);
+        rcp.addToQueue();
+        products.add(p2);
+        when(pdb.saveProducts(products)).thenReturn(2);
+        assertEquals(2, rcp.registProduct());
+        
     }
     
 }
