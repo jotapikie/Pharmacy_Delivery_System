@@ -25,7 +25,15 @@ public class GeographicalPoint implements PointInterface{
         setLongitude(longitude);
         setLatitude(latitude);
         setElevation(elevation);
-        setDescription("Geographical Point (Longitude:" +longitude+",Latitude:"+latitude+")");
+        setDescription("Point");
+        counter = 0;
+    }
+
+    public GeographicalPoint(double longitude, double latitude, double elevation, String description) {
+        setLongitude(longitude);
+        setLatitude(latitude);
+        setElevation(elevation);
+        setDescription(description);
         counter = 0;
     }
 

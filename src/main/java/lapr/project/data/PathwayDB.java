@@ -5,13 +5,17 @@
  */
 package lapr.project.data;
 
+import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
+import lapr.project.utils.Utils;
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -34,6 +38,45 @@ public class PathwayDB extends DataHandler{
             }
         }
         return listPaths;
+    }
+
+
+
+    public Pathway newPath(GeographicalPoint or, GeographicalPoint dest, double kineticCoef, int windDirection, double windSpeed, String street) {
+        double pathDirec = Utils.pathDirection(or.getLatitude(), or.getLongitude(), dest.getLatitude(), dest.getLongitude());
+        double wind = Utils.windToPath(pathDirec, windDirection, windSpeed);
+        double distance = Utils.distance(or.getLatitude(), or.getLongitude(), dest.getLatitude(), dest.getLongitude(), or.getElevation(), dest.getElevation());
+        return new Pathway(or, dest, kineticCoef, distance, wind, street);
+    }
+
+    public int savePaths(Set<Pathway> paths) throws SQLException {
+       Connection c = getConnection();
+        int rows[];
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddPath(?,?,?,?,?,?,?,?) }")) {
+            for (Pathway path : paths) {
+                callStmt.setDouble(1, path.getOriginPoint().getLongitude());
+                callStmt.setDouble(2, path.getOriginPoint().getLatitude());
+                callStmt.setDouble(3, path.getDestinationPoint().getLatitude());
+                callStmt.setDouble(4, path.getDestinationPoint().getLatitude());
+                callStmt.setDouble(5, path.getDistance());
+                callStmt.setString(6, path.getStreet());
+                callStmt.setDouble(7, path.getKineticCoef());
+                callStmt.setDouble(8, (double) Math.round(path.getWind() * 100) / 100);
+
+                callStmt.addBatch();
+            }
+            c.setAutoCommit(false);
+            try {
+                rows = callStmt.executeBatch();
+                c.commit();
+            } catch (BatchUpdateException e) {
+                c.rollback();
+                throw new SQLException(e.getNextException());
+            } finally {
+                c.setAutoCommit(true);
+            }
+            return rows.length;
+        }
     }
 
 

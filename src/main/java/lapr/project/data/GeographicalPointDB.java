@@ -5,14 +5,18 @@
  */
 package lapr.project.data;
 
+import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import lapr.project.model.Address;
 import lapr.project.model.Client;
 import lapr.project.model.GeographicalPoint;
+import lapr.project.utils.Utils;
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -64,5 +68,56 @@ public class GeographicalPointDB extends DataHandler{
         }
         return listPoints;
     }
-    
+
+    public GeographicalPoint getGeographicalPoint(double longitude, double latitude) throws SQLException {
+        if (Math.abs(longitude) > 90 || Math.abs(latitude) > 180) {
+            throw new IllegalArgumentException("Invalid cordenates");
+        }
+        GeographicalPoint p;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetGeographicalPoint(?,?)}")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setDouble(2, longitude);
+            callStmt.setDouble(3, latitude);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                p = new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3), rs.getString(4));
+                return p;
+            }
+            throw new IllegalArgumentException("Geographical Point doesn't exist!");
+        }
+    }
+
+    public GeographicalPoint newGeographicalPoint(double longitude, double latitude, double elevation, String description) {
+       return new GeographicalPoint(longitude, latitude, elevation, description);
+    }
+
+    public int savePoints(Set<GeographicalPoint> points) throws SQLException {
+        Connection c = getConnection();
+        int rows[];
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddPoint(?,?,?,?) }")) {
+            for (GeographicalPoint point : points) {
+                callStmt.setDouble(1, point.getLongitude());
+                callStmt.setDouble(2, point.getLatitude());
+                callStmt.setDouble(3, point.getElevation());
+                callStmt.setString(4, point.getDescription());
+
+
+                callStmt.addBatch();
+            }
+            c.setAutoCommit(false);
+            try {
+                rows = callStmt.executeBatch();
+                c.commit();
+            } catch (BatchUpdateException e) {
+                c.rollback();
+                throw new SQLException(e.getNextException());
+            } finally {
+                c.setAutoCommit(true);
+            }
+            return rows.length;
+        }
+    }
+
+ 
 }

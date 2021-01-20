@@ -33,6 +33,15 @@ public class Pathway implements PathInterface{
 
     }
 
+    public Pathway(GeographicalPoint or, GeographicalPoint dest, double kineticCoef, double distance, double wind, String street) {
+        setOriginPoint(or);
+        setDestinationPoint(dest);
+        setKineticCoef(kineticCoef);
+        setDistance(distance);
+        setWind(wind);
+        setStreet(street);
+    }
+
     /**
      * Returns origin vertex of the edge.
      *
@@ -163,6 +172,15 @@ public class Pathway implements PathInterface{
     public final void setWind(double wind) {
         this.wind = wind;
     }
+
+    public void setStreet(String street) {
+        if(street.isEmpty() || street == null){
+            throw new IllegalArgumentException("Invalid path street");
+        }
+        this.street = street;
+    }
+    
+    
 
     @Override
     public int hashCode() {
