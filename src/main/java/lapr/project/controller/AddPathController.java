@@ -22,28 +22,25 @@ import lapr.project.utils.Utils;
  */
 public class AddPathController {
     
-    private GeographicalPointDB gpdb;
-    private PathwayDB pdb;
-    private List<GeographicalPoint> points;
+    private final GeographicalPointDB gpdb;
+    private final PathwayDB pdb;
     private Pathway path;
-    private Set<Pathway> paths;
+    private final Set<Pathway> paths;
 
     public AddPathController(GeographicalPointDB gpdb, PathwayDB pdb) {
         this.gpdb = gpdb;
         this.pdb = pdb;
-        this.points = new ArrayList<>();
         this.paths = new HashSet<>();
     }
     
     public List<String> getAvailableGeographicalPoints() throws SQLException{
-        points = gpdb.getGeographicalPoints();
-        return Utils.listToString(points);
+      return Utils.listToString(gpdb.getGeographicalPoints());
     }
     
     public String selectPoints(double longitude1, double latitude1, double longitude2, double latitude2, double kineticCoef, int windDirection, double windSpeed, String street) throws SQLException{
         GeographicalPoint or = gpdb.getGeographicalPoint(longitude1, latitude1);
         GeographicalPoint dest = gpdb.getGeographicalPoint(longitude2, latitude2);
-        if(or != null && dest != null && points.contains(or) && points.contains(dest)){
+        if(or != null && dest != null){
             path = pdb.newPath(or, dest, kineticCoef, windDirection, windSpeed, street);
             return path.toString();
         }
@@ -59,8 +56,7 @@ public class AddPathController {
     
     public int savePaths() throws SQLException{
         if(!paths.isEmpty()){
-            int i = pdb.savePaths(paths);
-            return i;
+            return pdb.savePaths(paths);
         }
         return 0;
     }

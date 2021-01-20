@@ -40,8 +40,7 @@ public class AddGeographicalPointController {
     
     public int savePoints() throws SQLException{
         if(!points.isEmpty()){
-            int i = gpdb.savePoints(points);
-            return i;
+            return gpdb.savePoints(points);
         }
         return 0;
     }
