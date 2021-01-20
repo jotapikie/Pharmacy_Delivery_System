@@ -50,6 +50,8 @@ public class EScooterTest {
         int expResult = value;
         assertEquals(expResult, result);
     }
+    
+
 
 
 

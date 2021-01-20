@@ -73,6 +73,8 @@ public class DeliveryRunTest {
      */
     @Test
     public void testSetId() {
+        rd.setId(7);
+        assertEquals(7, rd.getId());
         boolean flag = false;
         try{
             rd.setId(-3);
@@ -80,6 +82,7 @@ public class DeliveryRunTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(7, rd.getId());
     }
 
     /**
@@ -102,6 +105,7 @@ public class DeliveryRunTest {
     @Test
     public void testToString() {
         assertTrue(rd.toString()!= null);
+        assertFalse(rd.toString().isEmpty());
     }
     
 }

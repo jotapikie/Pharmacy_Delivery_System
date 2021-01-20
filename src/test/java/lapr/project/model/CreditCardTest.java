@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class CreditCardTest {
@@ -48,6 +49,15 @@ public class CreditCardTest {
         creditCard2.setVisaNumber(expResult);
         long result = creditCard2.getVisaNumber();
         assertEquals(expResult, result);
+        
+        boolean flag = false;
+        try{
+            creditCard2.setVisaNumber(3545);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(expResult, creditCard2.getVisaNumber());
     }
 
 	/**
@@ -80,6 +90,15 @@ public class CreditCardTest {
         creditCard2.setExpDate("02/22");
         String result = creditCard2.getExpDate();
         assertEquals(expResult, result);
+        boolean flag = false;
+        try{
+            creditCard2.setExpDate("4433446");
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(expResult, creditCard2.getExpDate());
+        
     }
 
     /**
@@ -112,6 +131,15 @@ public class CreditCardTest {
         creditCard2.setCcv(expResult);
         double result = creditCard2.getCcv();
         assertEquals(expResult, result);
+        
+       boolean flag = false;
+        try{
+            creditCard2.setVisaNumber(3545);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(expResult, creditCard2.getCcv());
     }
 
     /**

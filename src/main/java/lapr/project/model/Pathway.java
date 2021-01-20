@@ -37,8 +37,8 @@ public class Pathway implements PathInterface{
 
     }
 
-    private void setStreet(String street) {
-         if (street.isEmpty() || street == null){
+    public void setStreet(String street) {
+         if (street == null ||street.isEmpty()){
              throw new IllegalArgumentException("Invalid path street");
          }
          this.street=street;
@@ -47,11 +47,11 @@ public class Pathway implements PathInterface{
          return this.street;
     }
 
-    private void setStreetType(StreetType type) {
-         this.streetType= type;
+    public void setStreetType(StreetType type) {
          if (type==null){
              throw new IllegalArgumentException("Wrong Street Type");
          }
+         this.streetType= type;
          switch (type){
              case ASFALTO:
                  this.kineticCoef=Constants.KINETIC_COEF_ASFALTO;

@@ -26,6 +26,14 @@ public class GeographicalPointTest {
     }
     
 
+    @Test
+    public void testGeographicalPoint() {
+        GeographicalPoint p = new GeographicalPoint(34, 23, 3.4, "Point 5");
+        assertEquals(34, p.getLongitude());
+        assertEquals(23, p.getLatitude());
+        assertEquals(3.4, p.getElevation());
+        assertEquals("Point 5", p.getDescription());
+    }
 
     /**
      * Test of setLongitude method, of class GeographicalPoint.
@@ -43,6 +51,7 @@ public class GeographicalPointTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(23.9, instance.getLongitude());
         
         
     }
@@ -62,6 +71,7 @@ public class GeographicalPointTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(23.9, instance.getLatitude());
     }
 
     /**
@@ -96,6 +106,12 @@ public class GeographicalPointTest {
             flag = true;
         }
         assertTrue(flag);
+    }
+    
+    @Test
+    public void testToString() {
+        assertNotNull(instance.toString());
+        assertFalse(instance.toString().isEmpty());
     }
     
     

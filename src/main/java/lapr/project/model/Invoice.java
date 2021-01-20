@@ -164,9 +164,9 @@ public class Invoice {
         int quantity = 0;
         DecimalFormat df = new DecimalFormat(".##");
         
-        for(Product p : productsBought.keySet()){
-            quantity = productsBought.get(p);
-            head = String.format("%-6s %-20s %-9s %-9s %-10s%n", String.valueOf(p.getId()), p.getName(), String.valueOf(quantity), String.valueOf(df.format(p.getPrice())), String.valueOf(df.format(p.getPrice()*quantity) ));
+        for(Map.Entry<Product, Integer> p : productsBought.entrySet()){
+            quantity = p.getValue();
+            head = String.format("%-6s %-20s %-9s %-9s %-10s%n", String.valueOf(p.getKey().getId()), p.getKey().getName(), String.valueOf(quantity), String.valueOf(df.format(p.getKey().getPrice())), String.valueOf(df.format(p.getKey().getPrice()*quantity) ));
             sb.append(head);
         }
         head = String.format("%-6s %-20s %-9s %-9s %-10s%n"," " , "Delivery tax", String.valueOf(1), Platform.getDeliveryPrice(), Platform.getDeliveryPrice());

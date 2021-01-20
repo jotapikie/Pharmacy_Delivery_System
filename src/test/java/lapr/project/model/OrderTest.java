@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import lapr.project.utils.Constants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +27,7 @@ public class OrderTest {
     private static Order order;
     private static Order order2;
     private static Order order3;
+    private static Address ad;
     
     @BeforeAll
     public static void setUpClass() {
@@ -39,6 +41,7 @@ public class OrderTest {
         order2.setAssociatedOrder(order);
         
         order3 = new Order(4, new Timestamp(3433), new Timestamp(3434), "Prepared", 34.56, new Address("Rua Sesamo",new GeographicalPoint(1,1,2), "Porto", 12, "4200-121" ));
+        ad = new Address("Street1", new GeographicalPoint(23,56,0.3,"Client H"),"City1", 56, "3456-234");
     }
     
 
@@ -47,6 +50,44 @@ public class OrderTest {
     public void setUp() {
     }
     
+    
+    @Test
+    public void testOrder() {
+        Order ord = new Order();
+        assertEquals(Constants.DEFAULT_ID, ord.getId());
+        assertEquals(Constants.DEFAULT_DATE, ord.getBeginDate());
+        assertEquals(Constants.DEFAULT_DATE, ord.getEndDate());
+        assertEquals(Constants.DEFAULT_STATUS, ord.getStatus());
+        assertEquals(Constants.DEFAULT_PRICE, ord.getPrice());
+        assertEquals(new HashMap<>(), ord.getProducts());
+        assertEquals(null, ord.getAssociatedOrder());
+        
+        ad = new Address("Street1", new GeographicalPoint(23,56,0.3,"Client H"),"City1", 56, "3456-234");
+        Order ord1 = new Order(1, new Timestamp(4), new Timestamp(5), "Processed", 34.67, ad);
+        assertEquals(1, ord1.getId());
+        assertEquals(new Timestamp(4), ord1.getBeginDate());
+        assertEquals(new Timestamp(5), ord1.getEndDate());
+        assertEquals("Processed", ord1.getStatus());
+        assertEquals(34.67, ord1.getPrice());
+        assertEquals(ad, ord1.getAddress());
+        assertNotNull(ord1.getProducts());
+        
+    }
+    
+    @Test
+    public void testSetAddress() {
+        order.setAddress(ad);
+        assertEquals(ad, order.getAddress());
+        
+        boolean flag = false;
+        try{
+            order.setAddress(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(ad, order.getAddress());
+    }
 
 
     /**
@@ -134,6 +175,7 @@ public class OrderTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(5, order.getId());
     }
     
     
@@ -234,6 +276,21 @@ public class OrderTest {
         order.setStatus("Prepared");
         assertEquals("Prepared", order.getStatus());
         
+        order.setStatus("Processing");
+        assertEquals("Processing", order.getStatus());
+        
+        order.setStatus("Processed");
+        assertEquals("Processed", order.getStatus());
+        
+        order.setStatus("Preparing");
+        assertEquals("Preparing", order.getStatus());
+        
+        order.setStatus("Delivering");
+        assertEquals("Delivering", order.getStatus());
+        
+        order.setStatus("Delivered");
+        assertEquals("Delivered", order.getStatus());
+        
         boolean flag = false;
         try{
             order.setStatus("");
@@ -241,15 +298,16 @@ public class OrderTest {
             flag = true;
         }
         assertTrue(flag);
-        order.setStatus("Prepared");
+        assertEquals("Delivered", order.getStatus());
         
-//        flag = false;
-//        try{
-//            order.setStatus(null);
-//        }catch(IllegalArgumentException e){
-//            flag = true;
-//        }
-//        assertTrue(flag);
+        flag = false;
+        try{
+            order.setStatus(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals("Delivered", order.getStatus());
         
         flag = false;
         try{
@@ -258,6 +316,7 @@ public class OrderTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals("Delivered", order.getStatus());
     }
 
     /**
@@ -265,9 +324,8 @@ public class OrderTest {
      */
     @Test
     public void testToString() {
-        //String expResult = "Id: 3 | Status: Processing | Price: 5.99 €";
-        String result = order2.toString();
-        assertEquals(result, order2.toString());
+
+        assertNotNull(order2.toString());
         
     }
     

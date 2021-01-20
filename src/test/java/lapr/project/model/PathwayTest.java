@@ -92,6 +92,57 @@ public class PathwayTest {
     public void testGetAltitudeDif() {
         assertEquals(1, path.getElevationDif());
     }
+    
+    @Test
+    public void testSetStreet() {
+        path.setStreet("Street1");
+        assertEquals("Street1", path.getStreet());
+        
+        boolean flag = false;
+        try{
+            path.setStreet("");
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals("Street1", path.getStreet());
+        
+        flag = false;
+        try{
+            path.setStreet(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals("Street1", path.getStreet());
+        
+        
+    }
+    
+    @Test
+    public void testSetStreetType() {
+        path.setStreetType(StreetType.ASFALTO);
+        assertEquals(StreetType.ASFALTO, path.getStreetType());
+        
+        path.setStreetType(StreetType.CALCADA);
+        assertEquals(StreetType.CALCADA, path.getStreetType());
+        
+        path.setStreetType(StreetType.PARALELO);
+        assertEquals(StreetType.PARALELO, path.getStreetType());
+        
+        path.setStreetType(StreetType.TERRA_BATIDA);
+        assertEquals(StreetType.TERRA_BATIDA, path.getStreetType());
+        
+        boolean flag = false;
+        try{
+            path.setStreetType(null);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(StreetType.TERRA_BATIDA, path.getStreetType());
+        
+    }
 
     /**
      * Test of setOriginPoint method, of class Pathway.
@@ -149,6 +200,8 @@ public class PathwayTest {
      */
     @Test
     public void testSetKineticCoef() {
+        path.setKineticCoef(0.4);
+        assertEquals(0.4, path.getKineticCoef());
         boolean flag = false;
         try{
             path.setKineticCoef(-4);
@@ -156,6 +209,7 @@ public class PathwayTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(0.4, path.getKineticCoef());
     }
 
     /**

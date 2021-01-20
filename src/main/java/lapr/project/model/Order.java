@@ -50,7 +50,7 @@ public class Order implements Comparable<Order>{
         
     }
 
-    private void setAddress(Address address) {
+    public void setAddress(Address address) {
         if (address==null){
             throw new IllegalArgumentException("Invalid order address.");
         }
@@ -133,7 +133,7 @@ public class Order implements Comparable<Order>{
     }
     
     public final void setStatus(String status) {
-        if(status.isEmpty() || status == null || (!status.equals("Processing") && !status.equals("Processed") && !status.equals("Preparing") && !status.equals("Prepared") && !status.equals("Delivering") && !status.equals("Delivered"))){
+        if(status == null || status.isEmpty() || (!status.equals("Processing") && !status.equals("Processed") && !status.equals("Preparing") && !status.equals("Prepared") && !status.equals("Delivering") && !status.equals("Delivered"))){
             throw new IllegalArgumentException("Invalid order status");
         }
         this.status = status;

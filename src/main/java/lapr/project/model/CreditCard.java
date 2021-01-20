@@ -1,6 +1,5 @@
 package lapr.project.model;
 
-import java.util.Date;
 
 public class CreditCard {
     private long visaNumber;

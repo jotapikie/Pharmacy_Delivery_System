@@ -72,7 +72,7 @@ public class Pharmacy {
     
     
     public Set<Park> getParks() {
-        return parks;
+        return new HashSet<>(parks);
     }
 
     /**
