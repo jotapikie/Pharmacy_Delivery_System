@@ -53,14 +53,7 @@ public class GeographicalPointTest {
         assertTrue(flag);
         assertEquals(23.9, instance.getLongitude());
         
-        flag = false;
-        try{
-            instance.setLongitude(90);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        assertEquals(23.9, instance.getLongitude());
+   
         
         
     }
@@ -81,15 +74,7 @@ public class GeographicalPointTest {
         }
         assertTrue(flag);
         assertEquals(23.9, instance.getLatitude());
-        
-        flag = false;
-        try{
-            instance.setLatitude(180);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        assertEquals(23.9, instance.getLatitude());
+ 
     }
 
     /**
