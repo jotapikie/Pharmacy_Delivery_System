@@ -52,7 +52,8 @@ class NewPharmacyControllerTest {
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));
-        parks.add(new Park(1,2,"SCOOTER", slots));
+        Park park= new Park(1,2,"SCOOTER",1000);
+        park.setSlots(slots);
         Pharmacy value = new Pharmacy(1,918222222,"FarmaciaCool",admin,address,parks);
         when(fdb.newPhamarcy(anyInt(),anyInt(),anyString(),anyObject(),anyObject(),anyObject())).thenReturn(value);
 
@@ -76,7 +77,8 @@ class NewPharmacyControllerTest {
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));
-        parks.add(new Park(1,2,"SCOOTER", slots));
+        Park park= new Park(1,2,"SCOOTER",1000);
+        park.setSlots(slots);
         nfc3.newPharmacy(id,nr,name,admin,address,parks);
         when(fdb.save(any(Pharmacy.class))).thenReturn(true);
 
@@ -100,7 +102,8 @@ class NewPharmacyControllerTest {
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));
-        parks.add(new Park(1,2,"SCOOTER", slots));
+        Park park= new Park(1,2,"SCOOTER",1000);
+        park.setSlots(slots);
         Pharmacy p = nfc2.newPharmacy(id, nr,  name, admin, address, parks);
         nfc2.addPharmacyToQueue();
         assertEquals(1, nfc2.getPharmacyList().size());
@@ -133,7 +136,9 @@ class NewPharmacyControllerTest {
         HashSet<Park> parks= new HashSet<>();
         HashSet<ParkSlot> slots= new HashSet<>();
         slots.add(new ParkSlot(1, true));
-        parks.add(new Park(1,2,"SCOOTER", slots));
+        Park park= new Park(1,2,"SCOOTER",1000);
+        park.setSlots(slots);
+        parks.add(park);
 
         Pharmacy b = nfc.newPharmacy(id,nr,name,admin,address,parks);
         HashSet<Pharmacy> pharms = new HashSet<>();
