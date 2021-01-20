@@ -216,16 +216,6 @@ public class Pathway implements PathInterface{
         }
         return Objects.equals(this.destinationPoint, other.destinationPoint);
     }
-    
-    
-    
-    
-    
-    
-
-
-
-
 
 
 
