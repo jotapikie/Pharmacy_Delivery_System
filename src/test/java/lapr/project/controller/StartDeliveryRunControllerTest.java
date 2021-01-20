@@ -25,6 +25,7 @@ import lapr.project.model.Pathway;
 import lapr.project.model.Product;
 import lapr.project.model.ShoppingCart;
 import lapr.project.model.State;
+import lapr.project.model.VehiclePath;
 import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
 import lapr.project.utils.route.Route;
@@ -92,8 +93,10 @@ public class StartDeliveryRunControllerTest {
     private static int idPharmacy = 1;
     private static String email = "courier@lapr3.com";
     private static double weight = 68.6;
+    private static double totalWeight = 112.53;
     
-    
+    private static Route r1;
+    private static Route r2;
     
     
     
@@ -138,27 +141,42 @@ public class StartDeliveryRunControllerTest {
         points.add(p4);points.add(p5);points.add(p6);
         points.add(p7);points.add(p8);points.add(p9);points.add(p10);
         
-        path1 = new Pathway(p1, p2, 0.2, 100, 0.2);
-        path2 = new Pathway(p1, p3, 0.3, 75, 0.23);
-        path3 = new Pathway(p2, p7, 0.45, 130, 0.1);
-        path4 = new Pathway(p4, p1, 0.24, 200, 0.16);
-        path5 = new Pathway(p3, p9, 0.34, 50, 0.13);
-        path6 = new Pathway(p9, p3, 0.45, 130, 0.1);
-        path7 = new Pathway(p7, p5, 0.267, 20, 0.89);
-        path8 = new Pathway(p5, p8, 0.36, 110, 0.25);
-        path9 = new Pathway(p5, p6, 0.17, 190, 0.47);
-        path10 = new Pathway(p8, p9, 0.78, 115, 0.18);
-        path11 = new Pathway(p6, p4, 0.65, 30, 0.2);
-        path12 = new Pathway(p8, p10, 0.6, 30, 0.3);
-        path13 = new Pathway(p3, p4, 0.34, 60, 0.3);
+        path1 = new Pathway(p1, p2, 0.2, 100, 0.2,"Street1");
+        path2 = new Pathway(p1, p3, 0.3, 75, 0.23,"Street2");
+        path3 = new Pathway(p2, p7, 0.45, 130, 0.1,"Street3");
+        path4 = new Pathway(p4, p1, 0.24, 200, 0.16, "Street4");
+        path5 = new Pathway(p3, p9, 0.34, 50, 0.13,"Street5");
+        path6 = new Pathway(p9, p3, 0.45, 130, 0.1,"Street6");
+        path7 = new Pathway(p7, p5, 0.267, 20, 0.89, "Street7");
+        path8 = new Pathway(p5, p8, 0.36, 110, 0.25, "Street8");
+        path9 = new Pathway(p5, p6, 0.17, 190, 0.47, "Street9");
+        path10 = new Pathway(p8, p9, 0.78, 115, 0.18, "Street10");
+        path11 = new Pathway(p6, p4, 0.65, 30, 0.2, "Street11");
+        path12 = new Pathway(p8, p10, 0.6, 30, 0.3, "Street12");
+        path13 = new Pathway(p3, p4, 0.34, 60, 0.3, "Street13");
         paths = new ArrayList<>();
         paths.add(path1);paths.add(path2);paths.add(path3);paths.add(path4);paths.add(path5);
         paths.add(path6);paths.add(path7);paths.add(path8);paths.add(path9);paths.add(path10);
         paths.add(path11);paths.add(path12);paths.add(path13);
         
         
-        
-        
+   //p1 p2 p7 p5 p8 p9 p3 p4 p1
+      VehiclePath vp1 = new VehiclePath(p1, p2, 100, 0.2, 0.2, totalWeight, Constants.SCOOTER_AERO_COEF, "Street1");
+      VehiclePath vp2 = new VehiclePath(p2, p7, 130, 0.45, 0.1, totalWeight, Constants.SCOOTER_AERO_COEF, "Street3");
+      VehiclePath vp3 = new VehiclePath(p7, p5, 20, 0.267, 0.89, totalWeight, Constants.SCOOTER_AERO_COEF, "Street7");
+      VehiclePath vp4 = new VehiclePath(p5, p8, 110, 0.36, 0.25, totalWeight, Constants.SCOOTER_AERO_COEF, "Street8");
+      VehiclePath vp5 = new VehiclePath(p8, p9, 115, 0.78, 0.18, totalWeight, Constants.SCOOTER_AERO_COEF, "Street10");
+      VehiclePath vp6 = new VehiclePath(p9, p3, 130, 0.45, 0.1, totalWeight, Constants.SCOOTER_AERO_COEF, "Street6");
+      VehiclePath vp7 = new VehiclePath(p3, p4, 60, 0.34, 0.3, totalWeight, Constants.SCOOTER_AERO_COEF, "Street13");
+      VehiclePath vp8 = new VehiclePath(p4, p1, 200, 0.24, 0.16, totalWeight, Constants.SCOOTER_AERO_COEF, "Street4");
+      VehiclePath vp9 = new VehiclePath(p5, p6, 190, 0.17, 0.47, totalWeight, Constants.SCOOTER_AERO_COEF, "Street9");
+      VehiclePath vp10 = new VehiclePath(p6, p4, 30, 0.65, 0.12, totalWeight, Constants.SCOOTER_AERO_COEF, "Street11");
+      r1 = new Route(vp1);
+      r1.addPath(vp2);r1.addPath(vp3);r1.addPath(vp4);r1.addPath(vp5);r1.addPath(vp6);r1.addPath(vp7);r1.addPath(vp8);
+      
+      // p1 p2 p7 p5 p6 p4 p1 
+      r2 = new Route(vp1);
+      r2.addPath(vp2);r2.addPath(vp3);r2.addPath(vp9);r2.addPath(vp10);r2.addPath(vp8);
     }
     
 
@@ -243,8 +261,10 @@ public class StartDeliveryRunControllerTest {
         List<GeographicalPoint> interm = new ArrayList<>();
         interm.add(p5);
         when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
-        assertTrue(controller.startDeliveryRun());
+       
+        controller.startDeliveryRun();
         assertNotNull(controller.getRoute());
+        assertEquals(r2.toString(), controller.getRoute());
         assertEquals(0, controller.getEnergyToStart());
         
     }
@@ -263,9 +283,18 @@ public class StartDeliveryRunControllerTest {
         List<GeographicalPoint> interm = new ArrayList<>();
         interm.add(p8);
         when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
+       
+        when(drdb.startDelivery(1, email, r1,2)).thenReturn(true);
         assertTrue(controller.startDeliveryRun());
+        String sRoute = controller.getRoute();
+        assertEquals(r1.toString(),sRoute );
         assertNotNull(controller.getRoute());
+        assertFalse(sRoute.isEmpty());
         assertEquals(65.38, controller.getEnergyToStart(),0.1);
+        
+        when(drdb.startDelivery(1, email, r1,2)).thenReturn(false);
+        assertFalse(controller.startDeliveryRun());
+        
     }
     
         /**
@@ -305,6 +334,13 @@ public class StartDeliveryRunControllerTest {
         when(pdb.getPaths()).thenReturn(new ArrayList<>());
         assertFalse(controller.startDeliveryRun());
 
+    }
+    
+    @Test
+    public void testGetRoute(){
+        assertNull(controller.getRoute());
+        
+        
     }
     
     

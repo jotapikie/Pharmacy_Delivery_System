@@ -286,7 +286,7 @@ public class Route implements Comparable<Route>{
         }
         String sDist = String.format("%.2fm",totalDistance);
         String sEner = String.format("%.2fJ", totalEnergy);
-        sb.append(String.format("Total Distance: %s | Total Energy: %s | Minimum Energy: %.2fJ", sDist, sEner, minimumEnergy));
+        sb.append(String.format("Total Distance: %s | Total Energy: %s | Minimum Energy: %.2fJ %n", sDist, sEner, minimumEnergy));
         return sb.toString();
     }
     

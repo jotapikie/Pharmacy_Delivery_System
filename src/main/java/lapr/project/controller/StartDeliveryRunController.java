@@ -43,8 +43,6 @@ public class StartDeliveryRunController {
     private double deliveryWeight;
     private DeliveryRun dr;
     private EScooter scooter;
-    private LandGraph graph;
-    private GeographicalPoint pharmacyAdd;
     
     private Route r;
 
@@ -101,8 +99,8 @@ public class StartDeliveryRunController {
     
     public boolean startDeliveryRun() throws SQLException{
         double totalWeight = deliveryWeight + courierWeight + Constants.SCOOTER_WEIGHT;
-        graph = new LandGraph(totalWeight, Constants.SCOOTER_AERO_COEF);
-        pharmacyAdd = gpdb.getGeographicalPointByPharmacy(idPharmacy);
+        LandGraph graph = new LandGraph(totalWeight, Constants.SCOOTER_AERO_COEF);
+        GeographicalPoint pharmacyAdd = gpdb.getGeographicalPointByPharmacy(idPharmacy);
         List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
         List<Route> routes = new ArrayList<>();
         try{
@@ -113,13 +111,15 @@ public class StartDeliveryRunController {
             return false;
         }
         
-        drdb.startDelivery(idPharmacy, email, r, scooter.getId());
+        boolean res = drdb.startDelivery(idPharmacy, email, r, scooter.getId());
         
-        List<Client> clients = cdb.getClientsByDeliveryRun(dr.getId());
-        for(Client c : clients){
-            Utils.sendEmail(c.getEmail(), "Delivering", "Your order is being delivered.");
+        if(res){
+            List<Client> clients = cdb.getClientsByDeliveryRun(dr.getId());
+            for(Client c : clients){
+                Utils.sendEmail(c.getEmail(), "Delivering", "Your order is being delivered.");
+            }
         }
-        return true;
+        return res;
         
     }
     

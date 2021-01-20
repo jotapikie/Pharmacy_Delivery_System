@@ -75,7 +75,7 @@ public class DeliveryRunDB extends DataHandler{
         }
     }
 
-    public void startDelivery(int id, String email, Route r, int vehicleId) throws SQLException {
+    public boolean startDelivery(int id, String email, Route r, int vehicleId) {
         DeliveryRun p = null;
         try (CallableStatement callStmt = getConnection().prepareCall("{ = call funcStartDeliveryRun(?,?,?,?,?,?)}")) {
             callStmt.setInt(1, id);
@@ -90,7 +90,9 @@ public class DeliveryRunDB extends DataHandler{
             callStmt.setTimestamp(5, Timestamp.from(Instant.now()));
             callStmt.setInt(6, vehicleId);
             callStmt.execute();
-
+            return true;
+        }catch(SQLException e){
+            return false;
         }
     }
     

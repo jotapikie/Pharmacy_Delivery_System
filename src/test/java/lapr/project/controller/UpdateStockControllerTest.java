@@ -7,7 +7,9 @@ package lapr.project.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lapr.project.data.PharmacyStockDB;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
@@ -28,11 +30,14 @@ import static org.mockito.Mockito.when;
 public class UpdateStockControllerTest {
     
     private static UpdateStockController controller;
+    private static PharmacyStockDB ppdb;
     private static int id = 1;
     private static List<Product> products;
     private static Product p1;
     private static Product p2;
     private static Product p3;
+    
+    private static Map<Product, Integer> queue;
     
     public UpdateStockControllerTest() {
     }
@@ -46,6 +51,8 @@ public class UpdateStockControllerTest {
         products.add(p1);
         products.add(p2);
         products.add(p3);
+        
+        queue = new HashMap<>();
     }
     
     @AfterAll
@@ -55,7 +62,7 @@ public class UpdateStockControllerTest {
     @BeforeEach
     public void setUp() throws SQLException {
         ProductDB pdb = mock(ProductDB.class);
-        PharmacyStockDB ppdb = mock(PharmacyStockDB.class);
+        ppdb = mock(PharmacyStockDB.class);
 
         
         when(pdb.getProducts()).thenReturn(products);
@@ -90,8 +97,15 @@ public class UpdateStockControllerTest {
      * Test of addToQueue method, of class UpdateStockController.
      */
     @Test
-    public void testAddToQueue() {
+    public void testAddToQueue() throws SQLException {
         assertFalse(controller.addToQueue(5));
+        
+        controller.getSelectedProduct(1);
+        assertTrue(controller.addToQueue(1));
+        
+        controller.getSelectedProduct(1);
+        assertFalse(controller.addToQueue(1));
+        
     }
 
     /**
@@ -103,7 +117,15 @@ public class UpdateStockControllerTest {
         
         controller.getSelectedProduct(1);
         controller.addToQueue(4);
+        queue.put(p1, 4);
+        when(ppdb.updateStock(id, queue)).thenReturn(true);
         assertTrue(controller.updateStock());
+        
+        controller.getSelectedProduct(1);
+        controller.addToQueue(4);
+        when(ppdb.updateStock(id, queue)).thenReturn(false);
+        assertFalse(controller.updateStock());
+        
     }
     
 }

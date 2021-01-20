@@ -78,7 +78,7 @@ public class LandGraph{
         }
         for (Pathway mainEdge : edges) {
             VehiclePath energyEdge = new VehiclePath(mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getDistance(),
-                    mainEdge.getKineticCoef(), mainEdge.getWind(), totalWeight, vehicleAerodynamicCoef);
+                    mainEdge.getKineticCoef(), mainEdge.getWind(), totalWeight, vehicleAerodynamicCoef, mainEdge.getStreet());
             graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
          
         }
