@@ -11,7 +11,7 @@ public class Park{
     private double max_energy;
     private Set<ParkSlot> slots;
 
-    public Park(int id, int nMaxVehicles, String type, Set<ParkSlot> slots) {
+    public Park(int id, int nMaxVehicles, String type, double max_energy) {
         setId(id);
         setnMaxVehicles(nMaxVehicles);
         setType(type);

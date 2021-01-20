@@ -25,8 +25,10 @@ class ParkTest {
         slot2= new ParkSlot(2,false);
         slots.add(slot);
         slots.add(slot2);
-        park1 = new Park(1,3,"SCOOTER",slots);
-        park2 = new Park(2,5,"scooter",slots);
+        park1 = new Park(1,3,"SCOOTER",1001);
+        park2 = new Park(2,5,"scooter",1002);
+        park1.setSlots(slots);
+        park2.setSlots(slots); 
     }
 
     @AfterAll
@@ -241,6 +243,27 @@ class ParkTest {
         String expRes="SCOOTER";
         String res= park1.getType();
         assertEquals(expRes,res);
+    }
+    
+    /**
+     * Test of getMaxEnergy method, of class Park.
+     */
+    @Test
+    public void testGetMaxEnergy() {
+        double expRes=1001;
+        String res= park1.getType();
+        assertEquals(expRes,res);
+    }
+    
+    /**
+     * Test of setMaxEnergy method, of class Park.
+     */
+    @Test
+    public void testSetMaxEnergy() {
+        int expResult=1000;
+        park1.setnMaxVehicles(1000);
+        int res= park1.getnMaxVehicles();
+        assertEquals(expResult,res);
     }
 
     /**
