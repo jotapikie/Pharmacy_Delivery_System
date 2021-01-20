@@ -45,8 +45,7 @@ public class NotifyReadyOrderController {
     
     public boolean setOrderToReady() throws SQLException{
         if(order != null && ords.contains(order)){
-             orderDB.setStatus(order.getId(), "Prepared", idPharmacy);
-             return true;
+             return orderDB.setStatus(order.getId(), "Prepared", idPharmacy);
         }
         return false;
     }

@@ -96,13 +96,21 @@ public class PrepareOrderControllerTest {
      */
     @Test
     public void testPrepareOrder() throws Exception {
+        assertFalse(controller.prepareOrder());
+        
         controller.getReadyToPrepareOrders();
         controller.getSelectedOrder(10);
         assertFalse(controller.prepareOrder());
         
         controller.getReadyToPrepareOrders();
         controller.getSelectedOrder(1);
+        when(odb.setStatus(1, "Preparing", 1)).thenReturn(true);
         assertTrue(controller.prepareOrder());
+        
+        controller.getReadyToPrepareOrders();
+        controller.getSelectedOrder(1);
+        when(odb.setStatus(1, "Preparing", 1)).thenReturn(false);
+        assertFalse(controller.prepareOrder());
     }
     
 }
