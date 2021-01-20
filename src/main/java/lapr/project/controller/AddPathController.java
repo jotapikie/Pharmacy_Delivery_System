@@ -13,6 +13,7 @@ import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
+import lapr.project.model.StreetType;
 import lapr.project.utils.Utils;
 
 /**
@@ -36,11 +37,11 @@ public class AddPathController {
       return Utils.listToString(gpdb.getGeographicalPoints());
     }
     
-    public String selectPoints(double longitude1, double latitude1, double longitude2, double latitude2, double kineticCoef, int windDirection, double windSpeed, String street) throws SQLException{
+    public String selectPoints(double longitude1, double latitude1, double longitude2, double latitude2, StreetType type, int windDirection, double windSpeed, String street) throws SQLException{
         GeographicalPoint or = gpdb.getGeographicalPoint(longitude1, latitude1);
         GeographicalPoint dest = gpdb.getGeographicalPoint(longitude2, latitude2);
         if(or != null && dest != null){
-            path = pdb.newPath(or, dest, kineticCoef, windDirection, windSpeed, street);
+            path = pdb.newPath(or, dest, type, windDirection, windSpeed, street);
             return path.toString();
         }
         return null;

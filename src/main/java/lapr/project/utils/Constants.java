@@ -28,7 +28,7 @@ public class Constants {
     public static final double MAX_DISTANCE = 3 ;
     public static double GRAVITY = 9.8;
 
-<<<<<<< HEAD
+
     public static final double KINETIC_COEF_ASFALTO= 0.2;
     public static final double KINETIC_COEF_PARALELO= 0.2;
     public static final double KINETIC_COEF_TERRA_BATIDA= 0.2;
@@ -37,10 +37,9 @@ public class Constants {
 
     public static final int MAX_ORDERS_RUN= 4;
 
-=======
+
     
     public static String CHARGING_SPOT = "Pharmacy";
->>>>>>> 138cfd2c5317c316f6f38c3b124ae168771934af
     /**
      * Test purposes
      */

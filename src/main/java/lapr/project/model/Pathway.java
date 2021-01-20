@@ -6,6 +6,8 @@
 package lapr.project.model;
 
 import java.util.Objects;
+
+import lapr.project.utils.Constants;
 import lapr.project.utils.route.PathInterface;
 
 
@@ -22,24 +24,52 @@ public class Pathway implements PathInterface{
     private double distance;
     private double wind;
     private String street;
+    private StreetType streetType;
     
     
-     public Pathway(GeographicalPoint origLocation, GeographicalPoint destLocation, double kinetic_coef, double distance, double wind) {
+     public Pathway(GeographicalPoint origLocation, GeographicalPoint destLocation, StreetType type, double distance, double wind, String street) {
         setOriginPoint(origLocation);
         setDestinationPoint(destLocation);
-        setKineticCoef(kinetic_coef);
-        setDistance(distance);
-        setWind(wind);
-
-    }
-
-    public Pathway(GeographicalPoint or, GeographicalPoint dest, double kineticCoef, double distance, double wind, String street) {
-        setOriginPoint(or);
-        setDestinationPoint(dest);
-        setKineticCoef(kineticCoef);
+        setStreetType(type);
         setDistance(distance);
         setWind(wind);
         setStreet(street);
+
+    }
+
+    private void setStreet(String street) {
+         if (street.isEmpty() || street == null){
+             throw new IllegalArgumentException("Invalid path street");
+         }
+         this.street=street;
+    }
+    public String getStreet(){
+         return this.street;
+    }
+
+    private void setStreetType(StreetType type) {
+         this.streetType= type;
+         if (type==null){
+             throw new IllegalArgumentException("Wrong Street Type");
+         }
+         switch (type){
+             case ASFALTO:
+                 this.kineticCoef=Constants.KINETIC_COEF_ASFALTO;
+                 break;
+             case PARALELO:
+                 this.kineticCoef=Constants.KINETIC_COEF_PARALELO;
+                 break;
+             case TERRA_BATIDA:
+                 this.kineticCoef=Constants.KINETIC_COEF_TERRA_BATIDA;
+                 break;
+             case CALCADA:
+                 this.kineticCoef=Constants.KINETIC_COEF_CALCADA;
+                 break;
+         }
+    }
+
+    public StreetType getStreetType() {
+        return streetType;
     }
 
     /**
@@ -110,12 +140,6 @@ public class Pathway implements PathInterface{
         return destinationPoint.getElevation() - originPoint.getElevation();
     }
 
-    public String getStreet() {
-        return street;
-    }
-    
-    
-
     /**
      * method to set the final location of a path
      *
@@ -173,15 +197,6 @@ public class Pathway implements PathInterface{
         this.wind = wind;
     }
 
-    public void setStreet(String street) {
-        if(street.isEmpty() || street == null){
-            throw new IllegalArgumentException("Invalid path street");
-        }
-        this.street = street;
-    }
-    
-    
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -216,6 +231,16 @@ public class Pathway implements PathInterface{
         }
         return Objects.equals(this.destinationPoint, other.destinationPoint);
     }
+    
+    
+    
+    
+    
+    
+
+
+
+
 
 
 
