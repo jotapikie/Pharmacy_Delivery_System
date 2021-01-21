@@ -103,5 +103,9 @@ public class CourierTest {
             flag = true;
         }
         assertTrue(flag);
+        assertEquals(67.8, courierTest.getWeight());
+        
+        courierTest.setWeight(0);
+        assertEquals(0, courierTest.getWeight());
     }
 }

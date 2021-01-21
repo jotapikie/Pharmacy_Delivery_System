@@ -53,7 +53,8 @@ public class GeographicalPointTest {
         assertTrue(flag);
         assertEquals(23.9, instance.getLongitude());
         
-   
+        instance.setLongitude(90);
+        assertEquals(90, instance.getLongitude());
         
         
     }
@@ -74,6 +75,9 @@ public class GeographicalPointTest {
         }
         assertTrue(flag);
         assertEquals(23.9, instance.getLatitude());
+        
+        instance.setLatitude(180);
+        assertEquals(180, instance.getLatitude());
  
     }
 

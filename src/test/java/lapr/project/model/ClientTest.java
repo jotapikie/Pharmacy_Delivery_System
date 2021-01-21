@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -16,7 +17,10 @@ class ClientTest {
     private final static CreditCard creditCard= new CreditCard(1231231231231231L, "02/22", 554);
     private final static Address address= new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 67), "porto", 114,"4250-527");
     private final static ShoppingCart cart= new ShoppingCart();
+    
     private ClientTest() {
+        Client temp = new Client("name1", "password1", "email1@email.com", 123456789,912341999, creditCard, address);
+        assertEquals(912341999,temp.getPhoneNumber());
     }
 
     @BeforeAll
@@ -91,6 +95,7 @@ class ClientTest {
     
     @Test
     public void testSetPhoneNumber(){
+        client1.setPhoneNumber(111111111);
         boolean flag = false;
         try{
             client1.setPhoneNumber(9232);
@@ -98,6 +103,7 @@ class ClientTest {
          flag = true;
         }
         assertTrue(flag);
+        assertEquals(111111111, client1.getPhoneNumber());
     }
 
 
@@ -206,11 +212,13 @@ class ClientTest {
      */
     @Test
     void setNif_Invalid() {
+        client1.setNif(111111111);
         try {
             client1.setNif(123456);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException ignored) {
         }
+        assertEquals(111111111, client1.getNif());
     }
 
     /**
@@ -309,6 +317,34 @@ class ClientTest {
         ShoppingCart result=  client3.getCart();
         assertEquals(expResult, result);
     }
+    
+    
+    @Test
+    public void testEquals() {
+        Client c1 = new Client("Paulo", "123", "joao@gmail.com", cart);c1.setNif(123456789);
+        Client c2 = new Client("Tiago", "123", "tiago@gmail.com", cart);c2.setNif(123456777);
+        
+        assertTrue(c1.equals(c1));
+        
+        assertFalse(c1.equals(creditCard));
+        
+        assertFalse(c1.equals(c2));
+        
+        c2.setNif(123456789);
+        assertTrue(c1.equals(c2));
+    }
+
+    @Test
+    public void testHashCode() {
+        client1.setNif(123456789);
+        assertEquals(123456789, client1.hashCode());
+        
+        client1.setNif(111111111);
+        assertEquals(111111111, client1.hashCode());
+    }
+    
+    
+    
 
 
 }

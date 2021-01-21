@@ -102,10 +102,60 @@ public class LandGraphTest {
         pdb = mock(PathwayDB.class);
         when(gpdb.getGeographicalPoints()).thenReturn(allPoints1);
         when(pdb.getPaths()).thenReturn(allPaths1);
+        LandGraph.setup(null, null);
         LandGraph.setup(gpdb, pdb);
         graph = new LandGraph(126, 0.6);
     }
     
+    
+    @Test
+    public void testSetup() throws SQLException {
+        boolean flag = false;
+        try{
+            LandGraph temp = new LandGraph(0,0);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        
+        flag = false;
+        try{
+            LandGraph temp = new LandGraph(-2,0);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        
+        flag = false;
+        try{
+            LandGraph temp = new LandGraph(4,-3);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        
+        flag = false;
+        try{
+            LandGraph temp = new LandGraph(-5,-7);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        
+        flag = false;
+        try{
+            LandGraph temp = new LandGraph(6,7);
+            flag = true;
+        }catch(IllegalArgumentException e){
+            flag = false;
+        }
+        assertTrue(flag);
+        
+        
+    }
   
 
 

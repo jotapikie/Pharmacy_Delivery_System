@@ -5,6 +5,8 @@ import org.junit.jupiter.api.*;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -193,6 +195,13 @@ public class AddressTest {
         address1.setCity(expRes);
         String res= address1.getCity();
         assertEquals(expRes,res);
+    }
+    
+    
+    @Test
+    public void testToString() {
+        assertNotNull(address1.toString());
+        assertFalse(address1.toString().isEmpty());
     }
 
 }

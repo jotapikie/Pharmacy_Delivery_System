@@ -6,11 +6,9 @@
 package lapr.project.model;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
-import lapr.project.utils.graph.Edge;
 import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
 import lapr.project.utils.route.RouteAlgorithms;
@@ -48,7 +46,7 @@ public class LandGraph{
     /**
      * Graph of locations connected by paths, considering energy efficiency.
      */
-    private Graph<GeographicalPoint, VehiclePath> graph;
+    private final Graph<GeographicalPoint, VehiclePath> graph;
 
 
 
