@@ -1,109 +1,150 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package lapr.project.model;
 
-import org.junit.jupiter.api.*;
-
-import java.util.HashSet;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ParkSlotTest {
-
-
-    private static ParkSlot slot;
-    private static ParkSlot slot2;
-    private ParkSlotTest() {
+/**
+ *
+ * @author Diogo
+ */
+public class ParkSlotTest {
+    
+    
+    private static ParkSlot p1;
+    private static ParkSlot p2;
+    private static EScooter scooter;
+    
+    public ParkSlotTest() {
+        ParkSlot temp = new ParkSlot(45, true);
+        assertEquals(45, temp.getId());
+        assertTrue(temp.isAbleToCharge());
+        assertNull(temp.getVehicle());
+        
+        temp = new ParkSlot(38, false);
+        assertEquals(38, temp.getId());
+        assertFalse(temp.isAbleToCharge());
+        assertNull(temp.getVehicle());
+        
+        ParkSlot temp1 = new ParkSlot(25, true, scooter);
+        assertEquals(25, temp1.getId());
+        assertTrue(temp1.isAbleToCharge());
+        assertEquals(scooter, temp1.getVehicle());
+        
+        temp1 = new ParkSlot(27, false, scooter);
+        assertEquals(27, temp1.getId());
+        assertFalse(temp1.isAbleToCharge());
+        assertEquals(scooter, temp1.getVehicle());
+        
+        
     }
-
+    
     @BeforeAll
     public static void setUpClass() {
-        slot= new ParkSlot(1,true);
-        slot2= new ParkSlot(2,false);
+        scooter = new EScooter(1, State.CHARGING, 67, 43);
+        
     }
+    
 
-    @AfterAll
-    public static void tearDownClass() {
-    }
-
+    
     @BeforeEach
     public void setUp() {
+         p1 = new ParkSlot(1, true);
+         p2 = new ParkSlot(2, true, scooter);
     }
 
-    @AfterEach
-    public void tearDown() {
-    }
+
+    /**
+     * Test of getId method, of class ParkSlot.
+     */
     @Test
-    void getId() {
-        int expRes=1;
-        int res=slot.getId();
-        assertEquals(expRes,res);
+    public void testGetId() {
+        assertEquals(1, p1.getId());
+        assertEquals(2, p2.getId());
     }
 
+    /**
+     * Test of isAbleToCharge method, of class ParkSlot.
+     */
     @Test
-    void setIdSucess() {
-        int expResult=10;
-        slot.setId(10);
-        int res= slot.getId();
-        assertEquals(expResult,res);
+    public void testIsAbleToCharge() {
+        assertTrue(p1.isAbleToCharge());
+        assertTrue(p2.isAbleToCharge());
     }
-    @Test
-    void setIdFail() {
-        try {
-            slot.setId(0);
-            fail("Expected IllegalArgument");
-        }catch (IllegalArgumentException ignored){
 
+    /**
+     * Test of getScooter method, of class ParkSlot.
+     */
+    @Test
+    public void testGetVehicle() {
+        assertNull(p1.getVehicle());
+        assertEquals(scooter, p2.getVehicle());
+    }
+
+    /**
+     * Test of setId method, of class ParkSlot.
+     */
+    @Test
+    public void testSetId() {
+        p1.setId(3);
+        assertEquals(3, p1.getId());
+        
+        p2.setId(4);
+        assertEquals(4, p2.getId());
+        
+        boolean flag = false;
+        try{
+            p1.setId(-5);
+        }catch(IllegalArgumentException e){
+            flag = true;
         }
-    }
-    @Test
-    void setIdFail2() {
-        try {
-            slot.setId(-10);
-            fail("Expected IllegalArgument");
-        }catch (IllegalArgumentException ignored){
-
+        assertTrue(flag);
+        assertEquals(3, p1.getId());
+        
+        flag = false;
+        try{
+            p2.setId(-5);
+        }catch(IllegalArgumentException e){
+            flag = true;
         }
+        assertTrue(flag);
+        assertEquals(4, p2.getId());
     }
 
+    /**
+     * Test of setAbleToCharge method, of class ParkSlot.
+     */
     @Test
-    void isAbleToCharge() {
-        boolean expRes=true;
-        boolean res=slot.isAbleToCharge();
-        assertEquals(expRes,res);
+    public void testSetAbleToCharge() {
+        p1.setAbleToCharge(false);
+        assertFalse(p1.isAbleToCharge());
+        
+        p2.setAbleToCharge(false);
+        assertFalse(p1.isAbleToCharge());
     }
 
+    /**
+     * Test of setScooter method, of class ParkSlot.
+     */
     @Test
-    void isAbleToCharge1() {
-        slot2.setAbleToCharge(false);
-        boolean expRes=false;
-        boolean res=slot2.isAbleToCharge();
-        assertEquals(expRes,res);
+    public void testSetScooter() {
+        p1.setVehicle(scooter);
+        assertEquals(scooter, p1.getVehicle());
+        p1.setVehicle(null);
+        assertNull(p1.getVehicle());
+        
+        p2.setVehicle(null);
+        assertNull(p2.getVehicle());
+        p2.setVehicle(scooter);
+        assertEquals(scooter, p2.getVehicle());
     }
-    @Test
-    void setAbleToCharge() {
-        boolean expRes=true;
-        slot2.setAbleToCharge(true);
-        boolean res= slot2.isAbleToCharge();
-        assertEquals(expRes,res);
-    }
-
-
-
-
-    @Test
-    void setScooter() {
-        EScooter scooter= new EScooter(1,State.INACTIVE,10,1);
-        slot.setScooter(scooter);
-        EScooter scooterRes=slot.getScooter();
-        assertEquals(scooter,scooterRes);
-    }
-
-    @Test
-    void getScooter() {
-        EScooter scooterExp=null;
-        EScooter scooter=slot2.getScooter();
-        assertEquals(scooterExp,scooter);
-
-    }
-
-
+    
 }
