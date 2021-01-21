@@ -6,7 +6,10 @@
 package lapr.project.ui;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lapr.project.controller.AddPathController;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
@@ -20,53 +23,103 @@ public class AddPathUI {
     private AddPathController controller;
     private static Scanner read = new Scanner(System.in);
 
-    public AddPathUI() throws SQLException {
-        controller=new AddPathController(new GeographicalPointDB(),new PathwayDB());
-        showAvailableGeoPoint();
-        selectPoints();
+    public AddPathUI(){
+        try {
+            header();
+            controller=new AddPathController(new GeographicalPointDB(),new PathwayDB());
+            showAvailablePoints();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
                 
     }
     
-    private void showAvailableGeoPoint() throws SQLException{
-        System.out.println("Geographical Points:");
-        for(String s : controller.getAvailableGeographicalPoints()){
-            System.out.println(s);
-        }
+    private void showAvailablePoints() throws SQLException{
         System.out.println();
+        List<String> res = controller.getAvailableGeographicalPoints();
+        if(res.isEmpty()){
+            System.out.println("Error: In the moment, there are no geographical points availables, add it first.");
+        }else{
+            System.out.println("Available Geographical points:");
+            System.out.println();
+            for(String s : res){
+                System.out.println(s);
+            }
+            System.out.println();
+            selectPoints();
+        }
+ 
     }
 
     private void selectPoints() throws SQLException {
-        System.out.println("Origin longitude:");
-        double longitude = Double.parseDouble(read.nextLine());
-        System.out.println("Origin latitude:");
-        double latitude = Double.parseDouble(read.nextLine());
-        System.out.println("Destination latitude:");
+        try{
+        System.out.println("Longitude (Origin):");
         double longitude1 = Double.parseDouble(read.nextLine());
-        System.out.println("Destination longitude:");
-        double latitude1 = Double.parseDouble(read.nextLine());
-        System.out.println("Street Type:");
-        String streetType = read.nextLine();
-        System.out.println("Wind Direction:");
-        int windDirection = Integer.parseInt(read.nextLine());
-        System.out.println("Wind speed:");
-        double windSpeed = Double.parseDouble(read.nextLine());
-        System.out.println("Street:");
-        String street = read.nextLine();
-        controller.selectPoints(longitude,latitude,longitude1,latitude1, StreetType.valueOf(streetType),windDirection,windSpeed,street);
         System.out.println();
-        System.out.println("Do you really want to add this Pathway? (y/n)");
-        if(read.nextLine().equalsIgnoreCase("y")){
-            controller.addToQueue();
-            System.out.println("Pathway added to the queue.");
-            System.out.println("Do you want to insert another Pathway? (y/n)");
+        System.out.println("Latitude (Origin):");
+        double latitude1 = Double.parseDouble(read.nextLine());
+        System.out.println();
+        System.out.println("Longitude (Destination):");
+        double longitude2 = Double.parseDouble(read.nextLine());
+        System.out.println();
+        System.out.println("Latitude (Destination):");
+        double latitude2 = Double.parseDouble(read.nextLine());
+        System.out.println();
+        System.out.println("Wind Direction (Degrees):");
+        int windDirection = Integer.parseInt(read.nextLine());
+        System.out.println();
+        System.out.println("Wind Speed:");
+        double windSpeed = Double.parseDouble(read.nextLine());
+        System.out.println();
+        System.out.println("Road Category (Asphalt, Off-Road, Sidewalk):");
+        String streetType = read.nextLine();
+        System.out.println();
+        System.out.println("Name (Street):");
+        String street = read.nextLine();
+        System.out.println();
+        String res = controller.selectPoints(longitude1, latitude1, longitude2, latitude2, StreetType.ASPHALT, windDirection, windSpeed, street);
+        if(res == null){
+            System.out.println();
+            System.out.println("Error: Invalid data inserted, try again.");
+            showAvailablePoints();
+        }else{
+            System.out.println();
+            System.out.println(res);
+            System.out.println("Do you want to add this path to the system? (y/n)");
+            System.out.println();
             if(read.nextLine().equalsIgnoreCase("y")){
-                selectPoints();
-            }else{
-                int rs = controller.savePaths();
-                System.out.println("Sucess: " +rs+ " Pathway(s) were added to the system.");
+                controller.addToQueue();
+                System.out.println();
+                System.out.println("Path added to the queue.");
+                System.out.println();
+                System.out.println("Do you want to add more paths? (y/n)");
+                System.out.println();
+                if(read.nextLine().equalsIgnoreCase("y")){
+                    showAvailablePoints();
+                }else{
+                    System.out.println();
+                    System.out.println("Processing...");
+                    int nr = controller.savePaths();
+                    System.out.println("Sucess: " +nr+" path(s) were added to the system.");
+                    
+                }
             }
         }
+
+        }catch(NumberFormatException e){
+            System.out.println();
+            System.out.println("Error: Invalid data inserted, try again.");
+            showAvailablePoints();
+        }
     }
+
+    private void header() {
+        System.out.println();
+        System.out.println("######################################################");
+        System.out.printf("%35s%n", "x Add Pathway x");
+        System.out.println("######################################################");
+    }
+      
     
     
 }

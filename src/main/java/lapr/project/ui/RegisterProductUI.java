@@ -21,37 +21,58 @@ public class RegisterProductUI {
     public RegisterProductUI() {
         controller = new RegisterProductController(new ProductDB());
         try {
+            header();
             newProduct();
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            System.out.println("An error ocurred when tried to communciate with the database");
+            System.out.println("Error: Database error.");
         }
     }
     
     private void newProduct() throws SQLException{
-        System.out.println("Insert the required data about the new product.");
+        try{
+        System.out.println();
         System.out.println("Name: ");
         String name = read.nextLine();
+        System.out.println();
         System.out.println("Weight (kg): ");
         double weig = Double.parseDouble(read.nextLine());
+        System.out.println();
         System.out.println("Price (€): ");
         double price = Double.parseDouble((read.nextLine()));
-        String res = controller.newProduct(name, weig, price);
         System.out.println();
+        String res = controller.newProduct(name, weig, price);
         System.out.println(res);
+        System.out.println();
         System.out.println("Do you really want to add this product? (y/n)");
+        System.out.println();
         if(read.nextLine().equalsIgnoreCase("y")){
             controller.addToQueue();
+            System.out.println();
             System.out.println("Product added to the queue.");
             System.out.println("Do you want to insert another product? (y/n)");
+            System.out.println();
             if(read.nextLine().equalsIgnoreCase("y")){
                 newProduct();
             }else{
+                System.out.println();
+                System.out.println("Processing...");
                 int rs = controller.registProduct();
                 System.out.println("Sucess: " +rs+ " product(s) were added to the system.");
             }
         }
+        }catch(NumberFormatException e){
+           System.out.println();
+           System.out.println("Error: Invalid format, try again.");
+           newProduct();
+        }
         
+    }
+
+    private void header() {
+        System.out.println();
+        System.out.println("######################################################");
+        System.out.printf("%35s%n", "x Add Product x");
+        System.out.println("######################################################");
     }
 
 }

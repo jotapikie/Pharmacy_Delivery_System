@@ -26,7 +26,7 @@ public class PathwayTest {
     public static void setUpClass() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        path = new Pathway(or, dest,StreetType.ASFALTO, 34, 3.5, "noName");
+        path = new Pathway(or, dest,StreetType.ASPHALT, 34, 3.5, "noName");
     }
     
    
@@ -36,13 +36,13 @@ public class PathwayTest {
     
     @AfterEach
     public void tearDown() {
-        path = new Pathway(or, dest,StreetType.ASFALTO, 34, 3.5, "noName");
+        path = new Pathway(or, dest,StreetType.ASPHALT, 34, 3.5, "noName");
     }
 
     
     @Test
     public void testPathway() {
-        Pathway temp = new Pathway(or, dest, StreetType.ASFALTO, 34, 2.3, "Street2");
+        Pathway temp = new Pathway(or, dest, StreetType.ASPHALT, 34, 2.3, "Street2");
         assertEquals("Street2", temp.getStreet());
     }
     /**
@@ -129,17 +129,17 @@ public class PathwayTest {
     
     @Test
     public void testSetStreetType() {
-        path.setStreetType(StreetType.ASFALTO);
-        assertEquals(StreetType.ASFALTO, path.getStreetType());
+        path.setStreetType(StreetType.ASPHALT);
+        assertEquals(StreetType.ASPHALT, path.getStreetType());
         
-        path.setStreetType(StreetType.CALCADA);
-        assertEquals(StreetType.CALCADA, path.getStreetType());
+        path.setStreetType(StreetType.SIDEWALK);
+        assertEquals(StreetType.SIDEWALK, path.getStreetType());
         
         path.setStreetType(StreetType.PARALELO);
         assertEquals(StreetType.PARALELO, path.getStreetType());
         
-        path.setStreetType(StreetType.TERRA_BATIDA);
-        assertEquals(StreetType.TERRA_BATIDA, path.getStreetType());
+        path.setStreetType(StreetType.OFF_ROAD);
+        assertEquals(StreetType.OFF_ROAD, path.getStreetType());
         
         boolean flag = false;
         try{
@@ -148,7 +148,7 @@ public class PathwayTest {
             flag = true;
         }
         assertTrue(flag);
-        assertEquals(StreetType.TERRA_BATIDA, path.getStreetType());
+        assertEquals(StreetType.OFF_ROAD, path.getStreetType());
         
         
         
@@ -253,22 +253,22 @@ public class PathwayTest {
         
         GeographicalPoint p1 = new GeographicalPoint(41.233, 45.23, 34.2);
         GeographicalPoint p2 = new GeographicalPoint(41.533, 47.23, 35.2);
-        Pathway p3 = new Pathway(p1, p2,StreetType.ASFALTO, 34, 3.5, "noName");
+        Pathway p3 = new Pathway(p1, p2,StreetType.ASPHALT, 34, 3.5, "noName");
         assertFalse(path.equals(p3));
         
-        p3 = new Pathway(p1, p2, StreetType.ASFALTO, 34, 3.2, "noName");
+        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 34, 3.2, "noName");
         assertFalse(path.equals(p3));
         
-        p3 = new Pathway(p1, p2, StreetType.ASFALTO, 35, 3.5, "noName");
+        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 35, 3.5, "noName");
         assertFalse(path.equals(p3));
         
-        p3 = new Pathway(or, p2, StreetType.ASFALTO, 34, 3.5, "noName");
+        p3 = new Pathway(or, p2, StreetType.ASPHALT, 34, 3.5, "noName");
         assertFalse(path.equals(p3));
         
-        p3 = new Pathway(p1, dest, StreetType.ASFALTO, 34, 3.5, "noName");
+        p3 = new Pathway(p1, dest, StreetType.ASPHALT, 34, 3.5, "noName");
         assertFalse(path.equals(p3));
         
-        p3 = new Pathway(or, dest, StreetType.CALCADA, 23, 4.5, "noName");
+        p3 = new Pathway(or, dest, StreetType.SIDEWALK, 23, 4.5, "noName");
         assertFalse(path.equals(p3));
     }
     

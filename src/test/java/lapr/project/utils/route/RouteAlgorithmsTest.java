@@ -63,15 +63,15 @@ public class RouteAlgorithmsTest {
         allPoints = new ArrayList<>();
         allPoints.add(p1);allPoints.add(p2);allPoints.add(p3);allPoints.add(p4);allPoints.add(p5);
         
-        path1 = new Pathway(p1, p2, StreetType.ASFALTO, 300, 0.6, "Street1");
-        path2 = new Pathway(p1, p3, StreetType.ASFALTO, 100, 0.2, "Street2");
-        path3 = new Pathway(p2, p3, StreetType.ASFALTO, 300, 0.6, "Street3");
-        path4 = new Pathway(p3, p1, StreetType.ASFALTO, 100, 0.2, "Street4");
-        path6 = new Pathway(p3, p2, StreetType.ASFALTO, 450.2, 0.234, "Street5");
-        path7 = new Pathway(p2, p4, StreetType.ASFALTO, 120.3, 0.28, "Street6");
-        path8 = new Pathway(p3, p4, StreetType.ASFALTO, 94.7, 0.59,"Street7");
-        path9 = new Pathway(p4, p5, StreetType.ASFALTO, 23, 0.439,"Street8");
-        path10 = new Pathway(p5, p4, StreetType.ASFALTO, 23, 0.439,"Street9");
+        path1 = new Pathway(p1, p2, StreetType.ASPHALT, 300, 0.6, "Street1");
+        path2 = new Pathway(p1, p3, StreetType.ASPHALT, 100, 0.2, "Street2");
+        path3 = new Pathway(p2, p3, StreetType.ASPHALT, 300, 0.6, "Street3");
+        path4 = new Pathway(p3, p1, StreetType.ASPHALT, 100, 0.2, "Street4");
+        path6 = new Pathway(p3, p2, StreetType.ASPHALT, 450.2, 0.234, "Street5");
+        path7 = new Pathway(p2, p4, StreetType.ASPHALT, 120.3, 0.28, "Street6");
+        path8 = new Pathway(p3, p4, StreetType.ASPHALT, 94.7, 0.59,"Street7");
+        path9 = new Pathway(p4, p5, StreetType.ASPHALT, 23, 0.439,"Street8");
+        path10 = new Pathway(p5, p4, StreetType.ASPHALT, 23, 0.439,"Street9");
         allPaths = new ArrayList<>();
         allPaths.add(path1);allPaths.add(path2);allPaths.add(path3);allPaths.add(path4);
         allPaths.add(path6);allPaths.add(path7);allPaths.add(path8);allPaths.add(path9);allPaths.add(path10);

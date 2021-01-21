@@ -56,10 +56,10 @@ public class Pathway implements PathInterface{
              case PARALELO:
                  this.kineticCoef=Constants.KINETIC_COEF_PARALELO;
                  break;
-             case TERRA_BATIDA:
+             case OFF_ROAD:
                  this.kineticCoef=Constants.KINETIC_COEF_TERRA_BATIDA;
                  break;
-             case CALCADA:
+             case SIDEWALK:
                  this.kineticCoef=Constants.KINETIC_COEF_CALCADA;
                  break;
              default:
