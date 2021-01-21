@@ -17,8 +17,7 @@
 
 # Abstract
 
-As the last assignment of LAPR3, we have developed a project in java to support the management of a ride-sharing business. The software allows the users to rent bicycles and electric scooters with different technical features resorting to various route suggestions for their trip, including the shortest and most energically efficient routes. It is possible for the administrators to create, update and remove parks, bicycles, eletric scooters, interest points and paths with or without wind information. Furthermore, it is possible to check the available slots in a park, the bicycles and eletric scooters in a park, that charging status of every electric scooter in a park, the closest parks to the user, the distance that the user is to a park, obtain the route between two parks and calculate a projection of the calories burnt in a trip between two parks.
-
+As the last assignment of LAPR3, we have developed a project in java to support the management of a ride-sharing business. The software allows the pharmacy's to delivery orders by scooter or drone. It is possible for the administrators to create, update and remove parks, vehicles,geographical points and paths taking into account the knowledge of physics. it is possible to check the available slots in a park and the vehicles that charging status of every scooter in a park.
 
 ## Keywords
 
@@ -45,11 +44,13 @@ In this report we will make a simple explanation of the project’s main goal, f
 
 ## State of the art
 
+Sofware capable of performing similar tasks already exists in the market. Software like "Farmacia Entrega ( https://farmaciaentrega.pt/ ) offer similar features but in this case it is impossivel do delivery "SARS-CoV-2" vaccines to clients. However, the project that we developed can provide more specific and technical information to improve the user's experience and simplify the management of the business, while also allowing for more customizations (for example, in delivery methods) and scalability of the business.
 
 
 
 ## Project Goal
 
+The goal of this project was to develop an efficient and reliable software to manage the operations of a ride-sharing company. The software quality and sustainability are guaranteed by following good OO practices and a TDD approach.
 
 ---
 
@@ -62,6 +63,7 @@ In order to offer a solution to the problem statement, we used the tools and res
 - **ESINF** ( _Information Structures_ ): We learned how to efficiently use graphs and binary search trees in the programming language ``Java``.
 - **BDDAD** ( _Databases_ ): We learned how to model data and develop database with ``SQL`` and ``PLSQL``, to efficiently manipulate the data.
 - **FSIAP** ( _Applied Physics_ ): We learned the behavior of electricity.
+- **ARQCP** ( _Assembly code_ ): We learned programing in assembly and calling this function in C.
 - **LAPR3** ( _Scrum Module_ ): We learned the best practices for the Scrum agile project development and how to use ``Jira``, a software used in project management.
 
 
