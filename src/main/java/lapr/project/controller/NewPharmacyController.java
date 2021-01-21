@@ -13,6 +13,7 @@ import lapr.project.data.AdministratorDB;
 import lapr.project.data.ParkDB;
 
 import lapr.project.model.Administrator;
+import lapr.project.utils.Constants;
 
 
 public class NewPharmacyController {
@@ -24,8 +25,8 @@ public class NewPharmacyController {
     private Address add;
     private Administrator admin;
     private Pharmacy pha;
-    private Set<Park> parks;
-    private Set<Pharmacy> pharmaciesList;
+    private final Set<Park> parks;
+    private final Set<Pharmacy> pharmaciesList;
 
     public NewPharmacyController(PharmacyDB pharmacyDB, AddressDB adb, AdministratorDB adminDB, ParkDB parkDB) {
         this.pharmacyDB = pharmacyDB;
@@ -48,11 +49,11 @@ public class NewPharmacyController {
     
     public String newPark(String vehicleCategory,int maxVehicles,int ableToCharge, double doubleMaxEnergy){
         parks.add(parkDB.newPark(maxVehicles,ableToCharge, vehicleCategory, doubleMaxEnergy));
-        return parks.toString();
+        return parks.iterator().next().toString();
     }
     
     public String newPharmacy(String name, int phoneNumber){
-        pha = pharmacyDB.newPhamarcy(phoneNumber, phoneNumber, name, admin, add, parks);
+        pha = pharmacyDB.newPhamarcy(Constants.DEFAULT_ID, phoneNumber, name, admin, add, parks);
         return pha.toString();
     }
     
