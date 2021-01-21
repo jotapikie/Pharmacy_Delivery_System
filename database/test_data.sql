@@ -1,7 +1,7 @@
 -- INSERTS TO TEST FUNNCTIONS
 INSERT INTO platform_user VALUES('superadmin1@lapr', 'sadimn1', 'Tiago Pais');
 INSERT INTO super_admin VALUES('superadmin1@lapr');
-INSERT INTO platform_user VALUES('admin1@lapr3.com', 'admin1', 'Jose Gomes');
+INSERT INTO platform_user VALUES('admin1@lapr3.com', 'admin1', 'Jose Gome');
 INSERT INTO administrator VALUES('admin1@lapr3.com');
 INSERT INTO geographical_point VALUES(42.5657,45.32323, 200, 'Aliados');
 INSERT INTO address VALUES(42.5657,45.32323,'Rua dos Aliados', 'Porto', 5, '4346-456');
@@ -17,4 +17,3 @@ INSERT INTO scooter VALUES (1, 0.7, 0.5);
 INSERT INTO DELIVERY_RUN(vehicle_category) VALUES ('Scooter');
 INSERT INTO geographical_point(longitude, latitude, elevation) VALUES (42.34, 56.3, 0.6);
 INSERT INTO geographical_point(longitude, latitude, elevation) VALUES (69.4, 52.6, 0.8);
-INSERT INTO pathway VALUES(42.34, 56.3, 69.4, 52.6, 8900,'Test',0.3, 0.5);

@@ -86,21 +86,7 @@ class ParkSlotTest {
         assertEquals(expRes,res);
     }
 
-    @Test
-    void setInUse() {
-        boolean expRes=true;
-        slot.setInUse(true);
-        boolean res=slot.isInUse();
-        assertEquals(expRes,res);
-    }
 
-    @Test
-    void isInUse() {
-        boolean expRes=true;
-        slot.setInUse(true);
-        boolean res=slot.isInUse();
-        assertEquals(expRes,res);
-    }
 
 
     @Test

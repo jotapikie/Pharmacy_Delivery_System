@@ -20,6 +20,7 @@ DROP TABLE pathway                      CASCADE CONSTRAINTS PURGE;
 DROP TABLE geographical_point           CASCADE CONSTRAINTS PURGE;
 DROP TABLE cart_product                 CASCADE CONSTRAINTS PURGE;
 DROP TABLE vehicle_category             CASCADE CONSTRAINTS PURGE;
+DROP TABLE road_category                CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE platform_user(
     user_email varchar(255) CONSTRAINT pk_user_email PRIMARY KEY,
@@ -59,7 +60,7 @@ CREATE TABLE courier(
 
 CREATE TABLE credit_card(
     nr int CONSTRAINT pk_credit_card_nr PRIMARY KEY, 
-    validity_date date NOT NULL, 
+    validity_date varchar(10) NOT NULL, 
     cvv int NOT NULL,
     owner_email varchar(255)
 );
@@ -106,16 +107,17 @@ CREATE TABLE scooter(
 CREATE TABLE park(
     park_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_park_id PRIMARY KEY,
     max_vehicles int NOT NULL,
-    vehicle_category varchar(255) NOT NULL, 
-    pharmacy_id int NOT NULL
+    max_energy float NOT NULL,
+    current_energy float NOT NULL,
+    pharmacy_id int NOT NULL,
+    vehicle_category varchar(255) NOT NULL
 );
 
 CREATE TABLE park_slot(
      slot_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_park_slot_id PRIMARY KEY, 
-     able_to_charge NUMBER NOT NULL,
+     able_to_charge int NOT NULL,
      park_id int NOT NULL,
-     vehicle_nr int,
-     vehicle_category varchar(255)
+     vehicle_nr int
 );
 
 CREATE TABLE delivery_order(
@@ -172,8 +174,8 @@ CREATE TABLE pathway(
     latitude2 float NOT NULL,
     distance float NOT NULL,
     street varchar(255),
-    kinetic_coef float NOT NULL,
     wind float NOT NULL,
+    road_category varchar(255) NOT NULL,
     CONSTRAINT pk_path_address1_address2 PRIMARY KEY(longitude1, latitude1, longitude2, latitude2)
 );
 
@@ -196,6 +198,10 @@ CREATE TABLE vehicle_category(
     category_name varchar(255) CONSTRAINT pk_category_name PRIMARY KEY
 );
 
+CREATE TABLE road_category(
+    category_name varchar(255) CONSTRAINT pk_road_name PRIMARY KEY,
+    kinetic_coef float NOT NULL
+);
 
 
 
@@ -233,3 +239,4 @@ ALTER TABLE cart_product ADD CONSTRAINT fk_cart_product FOREIGN KEY (product_id)
 ALTER TABLE vehicle ADD CONSTRAINT fk_vehicle_category_name FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
 ALTER TABLE park ADD CONSTRAINT fk_park_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
 ALTER TABLE delivery_run ADD CONSTRAINT fk_run_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
+ALTER TABLE pathway ADD CONSTRAINT fk_path_road_category FOREIGN KEY (road_category) REFERENCES road_category(category_name);

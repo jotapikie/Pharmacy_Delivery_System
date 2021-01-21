@@ -7,14 +7,17 @@ import java.util.Set;
 public class Park{
     private int id;
     private int nMaxVehicles;
-    private String type;
-    private double max_energy;
+    private VehicleCategory type;
+    private double maxEnergy;
+    private double currentEnergy;
     private Set<ParkSlot> slots;
 
-    public Park(int id, int nMaxVehicles, String type, double max_energy) {
+    public Park(int id, int nMaxVehicles, VehicleCategory type, double maxEnergy, Set<ParkSlot> slots) {
         setId(id);
         setnMaxVehicles(nMaxVehicles);
         setType(type);
+        setMaxEnergy(maxEnergy);
+        setCurrentEnergy(maxEnergy);
         setSlots(slots);
     }
 
@@ -40,21 +43,34 @@ public class Park{
     }
     
     public double getMaxEnergy(){
-        return max_energy;
-    }
-    
-    public void setMaxEnergy(double maxEnergy){
-        this.max_energy=maxEnergy;
+        return maxEnergy;
     }
 
-    public String getType() {
+    public double getCurrentEnergy() {
+        return currentEnergy;
+    }
+    
+    
+    
+    public void setMaxEnergy(double maxEnergy){
+        this.maxEnergy=maxEnergy;
+    }
+
+    public VehicleCategory getType() {
         return type;
     }
 
-    public void setType(String type) {
-        if (!type.equalsIgnoreCase("SCOOTER")) throw new IllegalArgumentException("Invalid park type");
-        this.type=type;
+    public void setType(VehicleCategory type) {
+        this.type = type;
     }
+
+    public void setCurrentEnergy(double currentEnergy) {
+        this.currentEnergy = currentEnergy;
+    }
+    
+    
+ 
+
 
     public Set<ParkSlot> getSlots() {
         return  slots;
@@ -66,7 +82,7 @@ public class Park{
         this.slots = slots;
     }
 
-    public void updatePark(int nMaxVehicles, String type, Set<ParkSlot> slots ){
+    public void updatePark(int nMaxVehicles, VehicleCategory type, Set<ParkSlot> slots ){
         setnMaxVehicles(nMaxVehicles);
         setType(type);
         setSlots(slots);
@@ -102,4 +118,6 @@ public class Park{
     public String toString(){
         return String.format("%d %d %s", getId(),getnMaxVehicles(),getType());
     }
+
+
 }

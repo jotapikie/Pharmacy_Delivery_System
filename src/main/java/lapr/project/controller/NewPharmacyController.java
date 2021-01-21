@@ -8,44 +8,69 @@ import lapr.project.model.Pharmacy;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+import lapr.project.data.AddressDB;
+import lapr.project.data.AdministratorDB;
+import lapr.project.data.ParkDB;
 
 import lapr.project.model.Administrator;
 
+
 public class NewPharmacyController {
 
-    private Pharmacy pharmacy;
     private final PharmacyDB pharmacyDB;
-    private HashSet<Pharmacy> pharmaciesList = new HashSet<>();
+    private final AddressDB adb;
+    private final AdministratorDB adminDB;
+    private final ParkDB parkDB;
+    private Address add;
+    private Administrator admin;
+    private Pharmacy pha;
+    private Set<Park> parks;
+    private Set<Pharmacy> pharmaciesList;
 
-
-    public NewPharmacyController() {
-        pharmacyDB = new PharmacyDB();
-    }
-
-    public NewPharmacyController( PharmacyDB pharmacyDB) {
+    public NewPharmacyController(PharmacyDB pharmacyDB, AddressDB adb, AdministratorDB adminDB, ParkDB parkDB) {
         this.pharmacyDB = pharmacyDB;
+        this.adb = adb;
+        this.adminDB = adminDB;
+        this.parkDB = parkDB;
+        parks = new HashSet<>();
+        pharmaciesList = new HashSet<>();
     }
+    
+    public String newAddress(String street, double longitude, double latitude, double elevation, String city, String zip, int port){
+        add = adb.newAdress(street, longitude, latitude, elevation, city, port, zip);
+        return add.toString();
+    }
+    
+    public String newAdministrator(String name, String email, String pwd){
+        admin = adminDB.newAdministrator(name, email, pwd);
+        return admin.toString();
+    }
+    
+    public String newPark(String vehicleCategory,int maxVehicles,int ableToCharge, double doubleMaxEnergy){
+        parks.add(parkDB.newPark(maxVehicles,ableToCharge, vehicleCategory, doubleMaxEnergy));
+        return parks.toString();
+    }
+    
+    public String newPharmacy(String name, int phoneNumber){
+        pha = pharmacyDB.newPhamarcy(phoneNumber, phoneNumber, name, admin, add, parks);
+        return pha.toString();
+    }
+    
+    public boolean addToQueue(){
+        if(pha != null){
+            return pharmaciesList.add(pha);
+        }
+        return false;
+    }
+    
+    public int registPharmacies() throws SQLException{
+        if(!pharmaciesList.isEmpty()){
+            return pharmacyDB.save(pharmaciesList);
+        }
+        return 0;
+    }
+    
+ 
 
-    public Pharmacy newPharmacy(int id, int phoneNumber, String name, Administrator admin, Address address, Set<Park> parks) {
-        pharmacy = pharmacyDB.newPhamarcy(id, phoneNumber,name,admin,address, (HashSet<Park>) parks);
-        return pharmacy;
-    }
 
-    public boolean registerPharmacy() throws SQLException {
-        return pharmacyDB.save(pharmacy);
-    }
-
-    public boolean addPharmacyToQueue(){
-        return pharmaciesList.add(pharmacy);
-    }
-
-    public Set<Pharmacy> getPharmacyList(){
-        return new HashSet<>(pharmaciesList);
-    }
-
-    public int insertPharmacyBatchOp() throws SQLException{
-        final int numReturn = pharmacyDB.save(pharmaciesList);
-        pharmaciesList= new HashSet<>();
-        return numReturn;
-    }
 }

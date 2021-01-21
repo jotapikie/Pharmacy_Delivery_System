@@ -39,10 +39,10 @@ public class AddParkController {
 //    }
     
     
-    public String newPark(int nMaxVehicles, String type, double max_energy){
-        park=parkdb.newPark(nMaxVehicles, type, max_energy);
-        return (park==null)? null : park.toString();
-    }
+//    public String newPark(int nMaxVehicles, String type, double max_energy){
+//        park=parkdb.newPark(nMaxVehicles, type, max_energy);
+//        return (park==null)? null : park.toString();
+//    }
     
 //    public void registPark(){
 //        parkdb.savePark(park, pharmacy_id);

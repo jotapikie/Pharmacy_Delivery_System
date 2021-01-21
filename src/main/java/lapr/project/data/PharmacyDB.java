@@ -25,6 +25,7 @@ import java.util.Set;
 public class PharmacyDB extends DataHandler {
 
     private final ParkDB pdb= new ParkDB();
+    private final ParkSlotDB psdb = new ParkSlotDB();
     
     public PharmacyDB() {
     }
@@ -82,18 +83,34 @@ public class PharmacyDB extends DataHandler {
     public int addPharmacies(Set<Pharmacy> pharmaciesList) throws SQLException {
         Connection con = getConnection();
         int[] rows;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPharmacy(?,?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcRegisterPharmacy(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             for (Pharmacy p : pharmaciesList) {
-                callStmt.setInt(1, p.getId());
-                callStmt.setInt(2, p.getPhoneNumber());
-                callStmt.setString(3, p.getAdministrator().getEmail());
-                callStmt.setDouble(4, p.getAddress().getGeographicalPoint().getLatitude());
-                callStmt.setDouble(5, p.getAddress().getGeographicalPoint().getLongitude());
-                callStmt.setString(6, p.getAddress().getStreet());
-                callStmt.setString(7, p.getAddress().getCity());
-                callStmt.setInt(8, p.getAddress().getPortNumber());
-                callStmt.setString(9, p.getAddress().getZipCode());
+                callStmt.registerOutParameter(1, OracleTypes.INTEGER);
+                callStmt.setString(2, p.getName());
+                callStmt.setInt(3, p.getPhoneNumber());
+                
+                callStmt.setString(4, p.getAdministrator().getEmail());
+                callStmt.setString(5, p.getAdministrator().getName());
+                callStmt.setString(6, p.getAdministrator().getPassword());
+                
+                callStmt.setString(7, p.getAddress().getStreet());
+                callStmt.setDouble(8, p.getAddress().getGeographicalPoint().getLongitude());
+                callStmt.setDouble(9, p.getAddress().getGeographicalPoint().getLatitude());
+                callStmt.setDouble(10, p.getAddress().getGeographicalPoint().getElevation());
+                callStmt.setString(11, p.getAddress().getCity());
+                callStmt.setString(12, p.getAddress().getZipCode());
+                callStmt.setInt(13, p.getAddress().getPortNumber());
+                
+                Park park = p.getParks().iterator().next();
+                callStmt.setInt(14, park.getnMaxVehicles());
+                callStmt.setString(15, park.getType().getName());
+                callStmt.setDouble(16, park.getMaxEnergy());
+                
+                // ADICIONAR PARK SLOTS
+
                 callStmt.execute();
+                psdb.saveParkSlots(park.getSlots(), callStmt.getInt(1));
+                
 
                 con.setAutoCommit(false);
             }
