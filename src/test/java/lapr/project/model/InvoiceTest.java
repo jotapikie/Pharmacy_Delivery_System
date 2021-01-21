@@ -173,6 +173,9 @@ public class InvoiceTest {
         }
         assertTrue(flag);
         assertEquals(5, inv.getCreditsWon());
+        
+        inv.setCreditsWon(0);
+        assertEquals(0, inv.getCreditsWon());
     }
 
     /**
@@ -190,6 +193,9 @@ public class InvoiceTest {
         }
         assertTrue(flag);
         assertEquals(7, inv.getCurrentCredits());
+        
+        inv.setCurrentCredits(0);
+        assertEquals(0, inv.getCurrentCredits());
     }
 
     /**
@@ -251,6 +257,9 @@ public class InvoiceTest {
         }
         assertTrue(flag);
         assertEquals(3, inv.getPricePaid());
+        
+        inv.setPricePaid(0);
+        assertEquals(0, inv.getPricePaid());
     }
 
     /**
@@ -268,6 +277,9 @@ public class InvoiceTest {
         }
         assertTrue(flag);
         assertEquals(6, inv.getTotalPrice());
+        
+        inv.setTotalPrice(0);
+        assertEquals(0, inv.getTotalPrice());
     }
 
     /**

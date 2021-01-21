@@ -8,6 +8,7 @@ package lapr.project.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import lapr.project.data.CartProductDB;
 import lapr.project.data.ClientDB;
@@ -86,10 +87,10 @@ public class MakeOrderControllerTest {
         p2 = new Product(2, "Asprina", 0.2, 5);
 
         //1297 km
-        pha1 = new Pharmacy(1, 912456839, "Farmacia 1", new Administrator("Hugo", "admin1@lapr.com", "as"), new Address("Rua 2", new GeographicalPoint(41.7, 57.9, 3.4), "Cidade 1", 3, "3452-232"));
+        pha1 = new Pharmacy(1, 912456839, "Farmacia 1", new Administrator("Hugo", "admin1@lapr.com", "as"), new Address("Rua 2", new GeographicalPoint(41.7, 57.9, 3.4), "Cidade 1", 3, "3452-232"), new HashSet<>());
         
         //1959 km
-        pha2 = new Pharmacy(2, 912456838, "Farmacia 2", new Administrator("Miguel", "admin2@lapr.com", "as"), new Address("Rua 3", new GeographicalPoint(56.9, 52.4, 2.1), "Cidade 2", 8, "4552-232"));
+        pha2 = new Pharmacy(2, 912456838, "Farmacia 2", new Administrator("Miguel", "admin2@lapr.com", "as"), new Address("Rua 3", new GeographicalPoint(56.9, 52.4, 2.1), "Cidade 2", 8, "4552-232"), new HashSet<>());
         pharmacies = new ArrayList<>();
         pharmacies.add(pha2); pharmacies.add(pha1);
 

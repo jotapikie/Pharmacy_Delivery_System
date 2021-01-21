@@ -53,9 +53,6 @@ public class Pathway implements PathInterface{
          }
          this.streetType= type;
          switch (type){
-             case ASFALTO:
-                 this.kineticCoef=Constants.KINETIC_COEF_ASFALTO;
-                 break;
              case PARALELO:
                  this.kineticCoef=Constants.KINETIC_COEF_PARALELO;
                  break;
@@ -65,6 +62,8 @@ public class Pathway implements PathInterface{
              case CALCADA:
                  this.kineticCoef=Constants.KINETIC_COEF_CALCADA;
                  break;
+             default:
+                 this.kineticCoef=Constants.KINETIC_COEF_ASFALTO;
          }
     }
 
@@ -181,11 +180,11 @@ public class Pathway implements PathInterface{
      *
      * @param kinetic_coef
      */
-    public final void setKineticCoef(double kinetic_coef) {
-        if (kinetic_coef < 0) {
+    public final void setKineticCoef(double kineticCoef) {
+        if (kineticCoef < 0) {
             throw new IllegalArgumentException("Invalid kinetic coefficient");
         }
-        this.kineticCoef = kinetic_coef;
+        this.kineticCoef = kineticCoef;
     }
 
     /**

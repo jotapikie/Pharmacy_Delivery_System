@@ -33,15 +33,7 @@ public class Pharmacy {
         setParks(parks);
   
     }
-    
-    public Pharmacy(int id, int phoneNumber, String name, Administrator ad, Address add){
-        setId(id);
-        setPhoneNumber(phoneNumber);
-        setName(name);
-        setAdministrator(ad);
-        setAddress(add);
-        setParks(new HashSet<>());
-    }
+
 
 
     /**
@@ -117,14 +109,14 @@ public class Pharmacy {
         if(parks == null){
             throw new IllegalArgumentException("Invalid pharmacy parks.");
         }
-        this.parks = parks;
+        this.parks = new HashSet<>(parks);
     }
 
     
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 31 * hash + Objects.hashCode(this.id);
+        hash = 31 * hash + id;
         return hash;
     }
 

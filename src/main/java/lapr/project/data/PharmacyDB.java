@@ -185,7 +185,7 @@ public class PharmacyDB extends DataHandler {
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Pharmacy p = new Pharmacy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(4), rs.getString(5), rs.getString(6)), new Address(rs.getString(7), new GeographicalPoint(rs.getFloat(8), rs.getFloat(9), rs.getFloat(10)), rs.getString(11), rs.getInt(12), rs.getString(13)));
+                Pharmacy p = new Pharmacy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(4), rs.getString(5), rs.getString(6)), new Address(rs.getString(7), new GeographicalPoint(rs.getFloat(8), rs.getFloat(9), rs.getFloat(10)), rs.getString(11), rs.getInt(12), rs.getString(13)), new HashSet<>());
                 listPharmacies.add(p);
             }
         }

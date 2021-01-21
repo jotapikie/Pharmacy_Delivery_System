@@ -24,14 +24,19 @@ public class PharmacyTest {
     private static Pharmacy pharmacyTest;
     private static Pharmacy pharmacyTest2;
     private static Administrator admin=new Administrator("helder","helder@gmail.com","abc");
-    private static HashSet<Park> parks= new HashSet<Park>();
+    private static HashSet<Park> parks;
     private static Address address = new Address("Reta do Pereiro 710", new GeographicalPoint(40.738312, -7.765318, 7.8), "porto", 114, "4250-527");
     
     public PharmacyTest() {
+        
     }
     
     @BeforeAll
     public static void setUpClass() {
+        Park p1 = new Park(1, 2, VehicleCategory.DRONE, 45, new HashSet<>());
+        Park p2 = new Park(2, 3, VehicleCategory.SCOOTER, 33, new HashSet<>());
+        parks = new HashSet<>();
+        parks.add(p1);parks.add(p2);
     }
     
     @AfterAll
@@ -40,7 +45,7 @@ public class PharmacyTest {
     
     @BeforeEach
     public void setUp() {
-        pharmacyTest =new Pharmacy(1,912345678,"Farmacia Central",admin,address,new HashSet<Park>());
+        pharmacyTest =new Pharmacy(1,912345678,"Farmacia Central",admin,address,parks);
         pharmacyTest2 =new Pharmacy(2,912345678,"Farmacia ",admin,address,new HashSet<Park>());
                 
     }
@@ -170,7 +175,7 @@ public class PharmacyTest {
     public void testGetParks() {
         Set<Park> expResult = new HashSet<Park>();
         Set<Park> result = pharmacyTest.getParks();
-        assertEquals(expResult, result);
+        assertEquals(parks, result);
         
         boolean flag = false;
         try{
@@ -218,15 +223,25 @@ public class PharmacyTest {
         boolean result = pharmacyTest.equals(pharmacyTest2);
         assertEquals(expResult, result);
         
+        assertTrue(pharmacyTest.equals(pharmacyTest));
+        
         assertFalse(pharmacyTest.equals(null));
         assertFalse(pharmacyTest.equals(admin));
-        Pharmacy temp = new Pharmacy(1,912541888, "ad", admin, address);
+        Pharmacy temp = new Pharmacy(1,912541888, "ad", admin, address, new HashSet<>());
         assertTrue(pharmacyTest.equals(temp));
     }
 
     @Test
+    public void TestHashCode() {
+        assertEquals(94, pharmacyTest.hashCode());
+    }
+    
+    
+
+    @Test
     public void testToString(){
-        assertTrue(pharmacyTest.toString()!= null);
+        assertNotNull(pharmacyTest.toString());
+        assertFalse(pharmacyTest.toString().isEmpty());
     }
 
 }

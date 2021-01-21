@@ -97,6 +97,16 @@ public class ProductTest {
         assertTrue(exp);
         assertEquals(expResult, productTest.getId());
         
+        exp = false;
+        try{
+        productTest.setId(0);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+        assertEquals(expResult, productTest.getId());
+        
+        
     }
     
     
@@ -147,6 +157,15 @@ public class ProductTest {
         }
         assertTrue(exp);
         assertEquals(5.9, productTest.getWeight());
+        
+        exp = false;
+        try{
+        productTest.setWeight(0);
+        }catch(IllegalArgumentException e){
+            exp = true;
+        }
+        assertTrue(exp);
+        assertEquals(5.9, productTest.getWeight());
     }
     
         /**
@@ -167,6 +186,9 @@ public class ProductTest {
         }
         assertTrue(exp);
         assertEquals(expResult, productTest.getPrice());
+        
+        productTest.setPrice(0);
+        assertEquals(0, productTest.getPrice());
     }
     
 

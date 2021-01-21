@@ -150,6 +150,8 @@ public class PathwayTest {
         assertTrue(flag);
         assertEquals(StreetType.TERRA_BATIDA, path.getStreetType());
         
+        
+        
     }
 
     /**
@@ -218,6 +220,9 @@ public class PathwayTest {
         }
         assertTrue(flag);
         assertEquals(0.4, path.getKineticCoef());
+        
+        path.setKineticCoef(0);
+        assertEquals(0, path.getKineticCoef());
     }
 
     /**
