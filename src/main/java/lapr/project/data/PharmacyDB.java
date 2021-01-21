@@ -24,6 +24,8 @@ import java.util.Set;
  */
 public class PharmacyDB extends DataHandler {
 
+    private final ParkDB pdb= new ParkDB();
+    
     public PharmacyDB() {
     }
    
@@ -109,21 +111,39 @@ public class PharmacyDB extends DataHandler {
             }
         }
 
-    public Pharmacy getPharmacyByAdministrator(String administratorEmail) throws SQLException {
+//    public Pharmacy getPharmacyByAdministrator(String administratorEmail) throws SQLException {
+//        Pharmacy p = null;
+//        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPhamarcyByAdministrator(?)}")) {
+//            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+//            callStmt.setString(2, administratorEmail);
+//            callStmt.execute();
+//            ResultSet rs = (ResultSet) callStmt.getObject(1);
+//            while (rs.next()) {
+////                p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
+////                //p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
+////                return p;
+//            }
+//            throw new IllegalArgumentException("Phamarcy does not exist");
+//        }
+//    }
+    
+    public Pharmacy getPharmacyByid(int id) throws SQLException {
         Pharmacy p = null;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPhamarcyByAdministrator(?)}")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetPhamarcyByID(?)}")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-            callStmt.setString(2, administratorEmail);
+            callStmt.setInt(2, id);
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-//                p = newPhamarcy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), rs.getDouble(8), rs.getDouble(7), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
-//                //p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
-//                return p;
+                p = new Pharmacy(rs.getInt(1), rs.getInt(2), rs.getString(3), new Administrator(rs.getString(6), rs.getString(4), rs.getString(5)), new Address(rs.getString(9), new GeographicalPoint(rs.getDouble(7),rs.getDouble(8),0), rs.getString(10), rs.getInt(11), rs.getString(12)), new HashSet<>());
+                p.setParks(pdb.getParksByPhamarcy(rs.getInt(1)));
+                return p;
             }
             throw new IllegalArgumentException("Phamarcy does not exist");
         }
     }
+    
+    
 
     public Pharmacy getPhamarcyByCourier(String courierEmail) throws SQLException {
          Pharmacy p = null;

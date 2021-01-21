@@ -24,13 +24,12 @@ public class AddParkController {
     private final ParkDB parkdb;
     private final int pharmacy_id;
     private Park park;
-    private Pharmacy pharm;
 
-    public AddParkController(PharmacyDB pdb, ParkDB parkdb, int pharmacy_id, Pharmacy pharm) {
+    
+    public AddParkController(PharmacyDB pdb, ParkDB parkdb, int pharmacy_id) {
         this.pdb = pdb;
         this.parkdb = parkdb;
         this.pharmacy_id=pharmacy_id;
-        this.pharm=pharm;
     }
    
     
@@ -45,11 +44,18 @@ public class AddParkController {
         return (park==null)? null : park.toString();
     }
     
-    public void registPark(){
+//    public void registPark(){
+//        parkdb.savePark(park, pharmacy_id);
+//        Set<Park> parks=pharm.getParks();
+//        pharm.setParks(addPark(parks));
+//    }
+    public void registPark() throws SQLException{
         parkdb.savePark(park, pharmacy_id);
-        Set<Park> parks=pharm.getParks();
-        pharm.setParks(addPark(parks));
+        Set<Park> parks=pdb.getPharmacyByid(pharmacy_id).getParks();
+        pdb.getPharmacyByid(pharmacy_id).setParks(addPark(parks));
     }
+    
+    
     
     public Set<Park> addPark(Set<Park> parks){
         parks.add(park);
