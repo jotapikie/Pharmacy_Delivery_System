@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
  */
 public class NewPharmacyControllerTest {
     
-    private static NewPharmacyController controller;
+    private static RegisterPharmacyController controller;
     private static PharmacyDB pdb;
     private static AddressDB adb;
     private static AdministratorDB admindb;
@@ -75,7 +75,7 @@ public class NewPharmacyControllerTest {
     
     @BeforeEach
     public void setUp() {
-        controller = new NewPharmacyController(pdb, adb, admindb, parkdb);
+        controller = new RegisterPharmacyController(pdb, adb, admindb, parkdb);
         
         when(adb.newAdress("Street1", 12, 45, 0.2, "City1", 45, "3453-456")).thenReturn(add);
         when(admindb.newAdministrator("Admin1", "admin1@gmail.com", "123")).thenReturn(admin);
@@ -86,7 +86,7 @@ public class NewPharmacyControllerTest {
 
 
     /**
-     * Test of newAddress method, of class NewPharmacyController.
+     * Test of newAddress method, of class RegisterPharmacyController.
      */
     @Test
     public void testNewAddress() {
@@ -95,7 +95,7 @@ public class NewPharmacyControllerTest {
     }
 
     /**
-     * Test of newAdministrator method, of class NewPharmacyController.
+     * Test of newAdministrator method, of class RegisterPharmacyController.
      */
     @Test
     public void testNewAdministrator() {
@@ -103,7 +103,7 @@ public class NewPharmacyControllerTest {
     }
 
     /**
-     * Test of newPark method, of class NewPharmacyController.
+     * Test of newPark method, of class RegisterPharmacyController.
      */
     @Test
     public void testNewPark() {
@@ -111,7 +111,7 @@ public class NewPharmacyControllerTest {
     }
 
     /**
-     * Test of newPharmacy method, of class NewPharmacyController.
+     * Test of newPharmacy method, of class RegisterPharmacyController.
      */
     @Test
     public void testNewPharmacy() {
@@ -122,7 +122,7 @@ public class NewPharmacyControllerTest {
     }
 
     /**
-     * Test of addToQueue method, of class NewPharmacyController.
+     * Test of addToQueue method, of class RegisterPharmacyController.
      */
     @Test
     public void testAddToQueue() {
@@ -144,7 +144,7 @@ public class NewPharmacyControllerTest {
     }
 
     /**
-     * Test of registPharmacies method, of class NewPharmacyController.
+     * Test of registPharmacies method, of class RegisterPharmacyController.
      */
     @Test
     public void testRegistPharmacies() throws Exception {

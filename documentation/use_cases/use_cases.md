@@ -11,7 +11,7 @@ A use case diagram was developed to understand the responsible actor or actors f
 | UC02 | [New Vehicle](UC2/UC02_NewVehicle.md) |
 | UC03 | [Remove Vehicle](UC03/UC3_RemoveVehicle.md) |
 | UC04 | [Update Vehicle](UC04/UC4_UpdateVehicle.md) |
-| UC05 | [Create Phamarcy](UC05/UC5_CreatePhamarcy.md) |
+| UC05 | [Register Phamarcy](UC05/UC5_RegisterPhamarcy.md) |
 | UC06 | [Add to Cart](UC6/UC06_AddToCart.md) |
 | UC07 | [Remove from Cart](UC07/UC7_RemoveFromCart.md) |
 | UC08 | [Make Order](UC8/UC08_MakeOrder.md) |

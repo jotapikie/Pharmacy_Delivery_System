@@ -16,7 +16,7 @@ import lapr.project.model.Administrator;
 import lapr.project.utils.Constants;
 
 
-public class NewPharmacyController {
+public class RegisterPharmacyController {
 
     private final PharmacyDB pharmacyDB;
     private final AddressDB adb;
@@ -28,7 +28,7 @@ public class NewPharmacyController {
     private final Set<Park> parks;
     private final Set<Pharmacy> pharmaciesList;
 
-    public NewPharmacyController(PharmacyDB pharmacyDB, AddressDB adb, AdministratorDB adminDB, ParkDB parkDB) {
+    public RegisterPharmacyController(PharmacyDB pharmacyDB, AddressDB adb, AdministratorDB adminDB, ParkDB parkDB) {
         this.pharmacyDB = pharmacyDB;
         this.adb = adb;
         this.adminDB = adminDB;
