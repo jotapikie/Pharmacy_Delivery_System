@@ -56,8 +56,9 @@ public class NewVehicleController {
     }
 
     public int insertVehiclesBatchOp() throws SQLException {
-        final int i = vehicleDB.save(vehicles, pharmID);
-        vehicles = new HashSet<>();
-        return i;
+        if(vehicles.isEmpty()){
+            return vehicleDB.save(vehicles, pharmID);
+        }
+        return 0;
     }
 }

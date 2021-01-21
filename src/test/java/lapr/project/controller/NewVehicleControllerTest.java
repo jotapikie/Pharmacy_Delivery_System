@@ -9,12 +9,14 @@ import lapr.project.model.State;
 import lapr.project.model.Vehicle;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 
 public class NewVehicleControllerTest {
 
     private static NewVehicleController nvc2;
     private static NewVehicleController nvc;
+    private static NewVehicleController controller;
     private static VehicleDB vdb;
     private static int pharmID= 123;
 
@@ -31,6 +33,7 @@ public class NewVehicleControllerTest {
 
     @BeforeEach
     public void setUp() throws Exception {
+        controller = new NewVehicleController(vdb, pharmID);
     }
 
     @AfterAll
@@ -83,6 +86,9 @@ public class NewVehicleControllerTest {
         boolean expResult = true;
         boolean result = nvc3.registerVehicle();
         assertEquals(expResult, result);
+        
+        when(vdb.save(any(Vehicle.class), anyInt())).thenReturn(false);
+        assertFalse(nvc3.registerVehicle());
 
     }
 
@@ -108,7 +114,11 @@ public class NewVehicleControllerTest {
 
         assertEquals(0, nvc2.getVehicles().size());
         assertEquals(numInserts, numInserts);
-    }
+        
+        assertEquals(0, controller.insertVehiclesBatchOp());
+  
+        
+      }
 
     /**
      * Test of getVehicles method, of class NewVehicleController.

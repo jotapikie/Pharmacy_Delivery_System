@@ -1,150 +1,163 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package lapr.project.controller;
 
-import lapr.project.data.PharmacyDB;
-import lapr.project.model.*;
-import org.junit.jupiter.api.*;
-
-import java.sql.SQLException;
 import java.util.HashSet;
-
+import java.util.Set;
+import lapr.project.data.AddressDB;
+import lapr.project.data.AdministratorDB;
+import lapr.project.data.ParkDB;
+import lapr.project.data.PharmacyDB;
+import lapr.project.model.Address;
+import lapr.project.model.Administrator;
+import lapr.project.model.GeographicalPoint;
+import lapr.project.model.Park;
+import lapr.project.model.ParkSlot;
+import lapr.project.model.Pharmacy;
+import lapr.project.model.VehicleCategory;
+import lapr.project.utils.Constants;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class NewPharmacyControllerTest {
-
-    private static NewPharmacyController nfc2;
-    private static NewPharmacyController nfc;
-    private static PharmacyDB fdb;
-
+/**
+ *
+ * @author Diogo
+ */
+public class NewPharmacyControllerTest {
+    
+    private static NewPharmacyController controller;
+    private static PharmacyDB pdb;
+    private static AddressDB adb;
+    private static AdministratorDB admindb;
+    private static ParkDB parkdb;
+    
+    private static Address add;
+    private static Administrator admin;
+    private static Park park;
+    private static Pharmacy pha;
+    private static Set<Park> parks;
+    
+    private static Set<Pharmacy> phs;
+    
     @BeforeAll
     public static void setUpClass() {
-        fdb = mock(PharmacyDB.class);
-        nfc = new NewPharmacyController();
-        nfc2 = new NewPharmacyController(fdb);
+        pdb = mock(PharmacyDB.class);
+        adb = mock(AddressDB.class);
+        admindb = mock(AdministratorDB.class);
+        parkdb = mock(ParkDB.class);
+        
+        add = new Address("Street1", new GeographicalPoint(12, 45, 0.2), "City1", 45, "3453-456");
+        admin = new Administrator("Admin1", "admin1@gmail.com", "123");
+        
+        phs = new HashSet<>();
+        Set<ParkSlot> slots = new HashSet<>();
+        slots.add(new ParkSlot(1, true));
+        slots.add(new ParkSlot(2, true));
+        slots.add(new ParkSlot(3, true));
+        slots.add(new ParkSlot(4, false));
+        slots.add(new ParkSlot(5, false));
+        park = new Park(1, 5, VehicleCategory.SCOOTER, 67, slots);
+        parks = new HashSet<>();
+        parks.add(park);
+        pha = new Pharmacy(1, 912541234, "Pharmacy1", admin, add, parks);
     }
+    
 
-    @AfterEach
-    public void tearDown() throws Exception {
-    }
-
+    
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
+        controller = new NewPharmacyController(pdb, adb, admindb, parkdb);
+        
+        when(adb.newAdress("Street1", 12, 45, 0.2, "City1", 45, "3453-456")).thenReturn(add);
+        when(admindb.newAdministrator("Admin1", "admin1@gmail.com", "123")).thenReturn(admin);
+        when(parkdb.newPark(5, 3, "Scooter", 67)).thenReturn(park);
+        when(pdb.newPhamarcy(Constants.DEFAULT_ID, 912541234, "Pharmacy1", admin, add, parks)).thenReturn(pha);
+                
     }
 
-    @AfterAll
-    public static void tearDownClass() throws Exception {
+
+    /**
+     * Test of newAddress method, of class NewPharmacyController.
+     */
+    @Test
+    public void testNewAddress() {
+        String res = controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+        assertEquals(add.toString(), res);
     }
 
-    public NewPharmacyControllerTest() {
+    /**
+     * Test of newAdministrator method, of class NewPharmacyController.
+     */
+    @Test
+    public void testNewAdministrator() {
+        assertEquals(admin.toString(), controller.newAdministrator("Admin1", "admin1@gmail.com", "123"));
+    }
+
+    /**
+     * Test of newPark method, of class NewPharmacyController.
+     */
+    @Test
+    public void testNewPark() {
+        assertEquals(park.toString(), controller.newPark("Scooter", 5, 3, 67));
     }
 
     /**
      * Test of newPharmacy method, of class NewPharmacyController.
      */
     @Test
-    public void testNewPharmacy(){
-
-        Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
-        Address address= new Address("Rua", new GeographicalPoint(1, 1, 1),"porto",10,"4250-222");
-        HashSet<Park> parks= new HashSet<>();
-        HashSet<ParkSlot> slots= new HashSet<>();
-        slots.add(new ParkSlot(1, true));
-        Park park= new Park(1,2,"SCOOTER",1000);
-        park.setSlots(slots);
-        Pharmacy value = new Pharmacy(1,918222222,"FarmaciaCool",admin,address,parks);
-        when(fdb.newPhamarcy(anyInt(),anyInt(),anyString(),anyObject(),anyObject(),anyObject())).thenReturn(value);
-
-        Pharmacy expResult = value;
-        Pharmacy result = nfc2.newPharmacy(1,918222222,"FarmaciaCool",admin,address,parks);
-        assertEquals(expResult, result);
-
+    public void testNewPharmacy() {
+        controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+        controller.newAdministrator("Admin1", "admin1@gmail.com", "123");
+        controller.newPark("Scooter", 5, 3, 67);
+        assertEquals(pha.toString(), controller.newPharmacy("Pharmacy1", 912541234));
     }
 
     /**
-     * Test of registerPharmacy method, of class NewPharmacyController.
+     * Test of addToQueue method, of class NewPharmacyController.
      */
     @Test
-    public void testRegisterPharmacy() throws SQLException {
-        NewPharmacyController nfc3 = new NewPharmacyController(fdb);
-        int id= 1;
-        int nr=918822222;
-        String name= "DABID";
-        Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
-        Address address= new Address("Rua", new GeographicalPoint(1, 1, 1),"porto",10,"4250-222");
-        HashSet<Park> parks= new HashSet<>();
-        HashSet<ParkSlot> slots= new HashSet<>();
-        slots.add(new ParkSlot(1, true));
-        Park park= new Park(1,2,"SCOOTER",1000);
-        park.setSlots(slots);
-        nfc3.newPharmacy(id,nr,name,admin,address,parks);
-        when(fdb.save(any(Pharmacy.class))).thenReturn(true);
-
-        boolean expResult = true;
-        boolean result = nfc3.registerPharmacy();
-        assertEquals(expResult, result);
-
+    public void testAddToQueue() {
+            assertFalse(controller.addToQueue()); // pha == null
+           
+            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+            controller.newAdministrator("Admin1", "admin1@gmail.com", "123");
+            controller.newPark("Scooter", 5, 3, 67);
+            controller.newPharmacy("Pharmacy1", 912541234);
+            assertTrue(controller.addToQueue());
+            
+            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+            controller.newAdministrator("Admin1", "admin1@gmail.com", "123");
+            controller.newPark("Scooter", 5, 3, 67);
+            controller.newPharmacy("Pharmacy1", 912541234);
+            assertFalse(controller.addToQueue());
+            
+            
     }
 
     /**
-     * Test of addPharmacyToQueue method, of class NewPharmacyController.
+     * Test of registPharmacies method, of class NewPharmacyController.
      */
     @Test
-    public void testAddPharmacyToQueue() {
-        NewPharmacyController nfc2 = new NewPharmacyController();
-        int id= 1;
-        int nr=918822222;
-        String name= "DABID";
-        Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
-        Address address= new Address("Rua", new GeographicalPoint(1, 1, 1),"porto",10,"4250-222");
-        HashSet<Park> parks= new HashSet<>();
-        HashSet<ParkSlot> slots= new HashSet<>();
-        slots.add(new ParkSlot(1, true));
-        Park park= new Park(1,2,"SCOOTER",1000);
-        park.setSlots(slots);
-        Pharmacy p = nfc2.newPharmacy(id, nr,  name, admin, address, parks);
-        nfc2.addPharmacyToQueue();
-        assertEquals(1, nfc2.getPharmacyList().size());
+    public void testRegistPharmacies() throws Exception {
+            assertEquals(0,controller.registPharmacies());
+            
+            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+            controller.newAdministrator("Admin1", "admin1@gmail.com", "123");
+            controller.newPark("Scooter", 5, 3, 67);
+            controller.newPharmacy("Pharmacy1", 912541234);
+            controller.addToQueue();
+            phs.add(pha);
+            when(pdb.save(phs)).thenReturn(1);
+            assertEquals(1, controller.registPharmacies());
     }
-
-    /**
-     * Test of insertPharmacyBatchOp method, of class NewPharmacyController.
-     */
-    @Test
-    public void testInsertPharmaciesBatchOp() throws Exception {
-        int numInserts = nfc2.insertPharmacyBatchOp();
-        when(fdb.save(nfc2.getPharmacyList())).thenReturn(numInserts);
-
-
-
-        assertEquals(0, nfc.getPharmacyList().size());
-        assertEquals(numInserts, numInserts);
-    }
-
-    /**
-     * Test of getPharmacy method, of class NewPharmacyController.
-     */
-    @Test
-    public void testGetPharmacies() {
-        int id= 1;
-        int nr=918822222;
-        String name= "DABID";
-        Administrator admin= new Administrator("jota","1180567@isep.ipp.pt","senha");
-        Address address= new Address("Rua", new GeographicalPoint(1, 1, 1),"porto",10,"4250-222");
-        HashSet<Park> parks= new HashSet<>();
-        HashSet<ParkSlot> slots= new HashSet<>();
-        slots.add(new ParkSlot(1, true));
-        Park park= new Park(1,2,"SCOOTER",1000);
-        park.setSlots(slots);
-        parks.add(park);
-
-        Pharmacy b = nfc.newPharmacy(id,nr,name,admin,address,parks);
-        HashSet<Pharmacy> pharms = new HashSet<>();
-        pharms.add(b);
-        nfc.addPharmacyToQueue();
-        assertEquals(pharms, nfc.getPharmacyList());
-    }
-
+    
 }

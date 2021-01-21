@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import lapr.project.data.VehicleDB;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 
 public class RemoveVehicleControllerTest {
@@ -32,6 +33,9 @@ public class RemoveVehicleControllerTest {
         boolean expResult = true;
         boolean result = rvc2.remove(123);
         assertEquals(expResult, result);
+        
+        when(vdb.remove(123)).thenReturn(false);
+        assertFalse(rvc2.remove(2));
     }
 
 }

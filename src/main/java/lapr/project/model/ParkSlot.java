@@ -3,27 +3,18 @@ package lapr.project.model;
 public class ParkSlot {
     private int id;
     private boolean ableToCharge;
-    private boolean inUse;
     private EScooter scooter;
 
     public ParkSlot(int id, boolean ableToCharge, boolean inUse, EScooter scooter) {
         setId(id);
         setAbleToCharge(ableToCharge);
-        setInUse(inUse);
         setScooter(scooter);
     }
 
-    public ParkSlot(int id, boolean ableToCharge, boolean inUse) {
-        setId(id);
-        setAbleToCharge(ableToCharge);
-        setInUse(inUse);
-        scooter=null;
-    }
     
      public ParkSlot(int id, boolean ableToCharge, EScooter scooter) {
         setId(id);
         setAbleToCharge(ableToCharge);
-        setInUse(true);
         setScooter(scooter);
 
     }
@@ -31,7 +22,6 @@ public class ParkSlot {
     public ParkSlot(int id, boolean ableToCharge) {
         setId(id);
         setAbleToCharge(ableToCharge);
-        inUse = false;
         scooter=null;
     }
     
@@ -54,13 +44,6 @@ public class ParkSlot {
         this.ableToCharge = ableToCharge;
     }
 
-    public boolean isInUse() {
-        return inUse;
-    }
-
-    public void setInUse(boolean inUse) {
-        this.inUse = inUse;
-    }
 
     public EScooter getScooter() {
         return scooter;

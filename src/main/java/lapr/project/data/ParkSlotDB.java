@@ -5,7 +5,9 @@
  */
 package lapr.project.data;
 
+import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -14,6 +16,7 @@ import java.util.Set;
 import lapr.project.model.EScooter;
 import lapr.project.model.ParkSlot;
 import lapr.project.model.State;
+import lapr.project.utils.Constants;
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -21,6 +24,10 @@ import oracle.jdbc.OracleTypes;
  * @author Diogo
  */
 public class ParkSlotDB extends DataHandler{
+    
+    public ParkSlot newParkSlot(boolean ableToCharge){
+        return new ParkSlot(Constants.DEFAULT_ID, ableToCharge);
+    }
 
     public Set<ParkSlot> getParkSlotsByPark(int parkId) throws SQLException {
         HashSet<ParkSlot> parks = new HashSet<>();
@@ -47,6 +54,38 @@ public class ParkSlotDB extends DataHandler{
             }
         }
         return parks;
+    }
+
+    public int saveParkSlots(Set<ParkSlot> slots, int idPark) throws SQLException {
+        Connection con = getConnection();
+        int[] rows;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddParkSlot(?,?) }")) {
+            for (ParkSlot p : slots) {
+                callStmt.setInt(1, idPark);
+                if(p.isAbleToCharge()){
+                    callStmt.setInt(2, 1);
+                }else{
+                    callStmt.setInt(2, 0);
+                }
+   
+
+                callStmt.addBatch();
+            }
+
+            con.setAutoCommit(false);
+
+            try {
+                rows = callStmt.executeBatch();
+                con.commit();
+            } catch (BatchUpdateException e) {
+                con.rollback();
+                throw new SQLException(e.getNextException());
+            } finally {
+                con.setAutoCommit(true);
+            }
+
+            return rows.length;
+    }
     }
     
 }

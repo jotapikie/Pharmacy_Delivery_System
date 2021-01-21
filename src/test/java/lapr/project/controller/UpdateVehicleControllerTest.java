@@ -82,6 +82,12 @@ public class UpdateVehicleControllerTest {
         EScooter scooter = uvc2.updateScooterState(1, State.LOCKED);
         boolean result= uvc2.update();
         assertEquals(expResult, result);
+        
+        scooter = new EScooter(1, State.ACTIVE, 65, 45);
+        when(vdb.getVehicle(1)).thenReturn(scooter);
+        EScooter res = uvc2.updateScooterState(1, State.INACTIVE);
+        assertEquals(State.INACTIVE, scooter.getState());
+        assertEquals(scooter, res);
 
     }
 

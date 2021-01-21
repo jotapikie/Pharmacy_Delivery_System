@@ -24,7 +24,7 @@ public class Pharmacy {
     private Set<Park> parks;
 
 
-    public Pharmacy(int id, int phoneNumber, String name, Administrator administrator, Address address, HashSet<Park> parks) {
+    public Pharmacy(int id, int phoneNumber, String name, Administrator administrator, Address address, Set<Park> parks) {
         setId(id);
         setPhoneNumber(phoneNumber);
         setName(name);
