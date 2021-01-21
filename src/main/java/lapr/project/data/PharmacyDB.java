@@ -102,7 +102,7 @@ public class PharmacyDB extends DataHandler {
                 callStmt.setInt(13, p.getAddress().getPortNumber());
                 
                 Park park = p.getParks().iterator().next();
-                callStmt.setInt(14, park.getnMaxVehicles());
+                callStmt.setInt(14, park.getMaxVehicles());
                 callStmt.setString(15, park.getType().getName());
                 callStmt.setDouble(16, park.getMaxEnergy());
                 

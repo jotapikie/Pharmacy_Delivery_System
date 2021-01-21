@@ -1,12 +1,11 @@
 package lapr.project.model;
 
 
-import java.util.Objects;
 import java.util.Set;
 
 public class Park{
     private int id;
-    private int nMaxVehicles;
+    private int maxVehicles;
     private VehicleCategory type;
     private double maxEnergy;
     private double currentEnergy;
@@ -14,7 +13,7 @@ public class Park{
 
     public Park(int id, int nMaxVehicles, VehicleCategory type, double maxEnergy, Set<ParkSlot> slots) {
         setId(id);
-        setnMaxVehicles(nMaxVehicles);
+        setMaxVehicles(nMaxVehicles);
         setType(type);
         setMaxEnergy(maxEnergy);
         setCurrentEnergy(maxEnergy);
@@ -25,68 +24,75 @@ public class Park{
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        if(id<=0)
-            throw new IllegalArgumentException("Invalid park id");
-        this.id = id;
-    }
-
-    public int getnMaxVehicles() {
-        return nMaxVehicles;
-    }
-
-    public void setnMaxVehicles(int nMaxVehicles) {
-        if(nMaxVehicles<=0)
-            throw new IllegalArgumentException("Invalid parks nMaxVehicles");
-        this.nMaxVehicles = nMaxVehicles;
+    
+    public int getMaxVehicles() {
+        return maxVehicles;
     }
     
     public double getMaxEnergy(){
         return maxEnergy;
     }
-
+    
     public double getCurrentEnergy() {
         return currentEnergy;
     }
     
-    
-    
-    public void setMaxEnergy(double maxEnergy){
-        this.maxEnergy=maxEnergy;
-    }
-
     public VehicleCategory getType() {
         return type;
     }
-
-    public void setType(VehicleCategory type) {
-        this.type = type;
-    }
-
-    public void setCurrentEnergy(double currentEnergy) {
-        this.currentEnergy = currentEnergy;
-    }
     
-    
- 
-
-
     public Set<ParkSlot> getSlots() {
         return  slots;
     }
 
+    public void setId(int id) {
+        if(id<=0){
+            throw new IllegalArgumentException("Invalid park id");
+        }
+        this.id = id;
+    }
+
+
+
+    public void setMaxVehicles(int maxVehicles) {
+        if(maxVehicles<=0){
+            throw new IllegalArgumentException("Invalid parks nMaxVehicles");
+        }
+        this.maxVehicles = maxVehicles;
+    }
+    
+
+
+   public void setMaxEnergy(double maxEnergy){
+        if(maxEnergy < 0){
+            throw new IllegalArgumentException("Invalid parks max energy");
+        }
+        this.maxEnergy=maxEnergy;
+    }
+    
+    public void setCurrentEnergy(double currentEnergy) {
+        if(currentEnergy < 0 || currentEnergy > maxEnergy){
+            throw new IllegalArgumentException("Invalid park current energy");
+        }
+        this.currentEnergy = currentEnergy;
+    }
+
+
+    public void setType(VehicleCategory type) {
+        if(type == null){
+            throw new IllegalArgumentException("Invalid park type");
+        }
+        this.type = type;
+    }
+
+
     public void setSlots(Set<ParkSlot> slots) {
-//        if(slots == null || slots.size()>nMaxVehicles)
-//            throw new IllegalArgumentException("Invalid park slots");
+        if(slots == null || slots.size()> maxVehicles){
+           throw new IllegalArgumentException("Invalid park slots"); 
+        }
         this.slots = slots;
     }
 
-    public void updatePark(int nMaxVehicles, VehicleCategory type, Set<ParkSlot> slots ){
-        setnMaxVehicles(nMaxVehicles);
-        setType(type);
-        setSlots(slots);
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -100,23 +106,20 @@ public class Park{
             return false;
         }
         final Park other = (Park) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return (super.equals(other));
+        return this.id == other.id;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 31 * hash + Objects.hashCode(this.id);
+        hash = 31 * hash + id;
         return hash;
     }
 
 
     @Override
     public String toString(){
-        return String.format("%d %d %s", getId(),getnMaxVehicles(),getType());
+        return String.format("%d %d %s", getId(),getMaxVehicles(),getType());
     }
 
 

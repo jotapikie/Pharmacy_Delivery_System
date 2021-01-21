@@ -80,7 +80,7 @@ public class ParkDB extends DataHandler {
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcAddPark(?,?,?,?) }")) {
             for (Park p : parks) {
                 callStmt.registerOutParameter(1, OracleTypes.INTEGER);
-                callStmt.setInt(2, p.getnMaxVehicles());
+                callStmt.setInt(2, p.getMaxVehicles());
                 callStmt.setString(3, p.getType().getName());
                 callStmt.setDouble(4, p.getMaxEnergy());
                 callStmt.setInt(5, pharmacyId);

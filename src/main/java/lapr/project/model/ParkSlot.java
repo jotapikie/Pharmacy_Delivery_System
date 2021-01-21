@@ -31,8 +31,10 @@ public class ParkSlot {
     }
 
     public void setId(int id) {
-    if (id<=0) throw new IllegalArgumentException("Invalid parkslot Id");
-        this.id=id;
+    if (id<=0){
+        throw new IllegalArgumentException("Invalid parkslot Id");
+    }
+       this.id=id;
     }
 
    public void setAbleToCharge(boolean ableToCharge) {
