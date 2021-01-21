@@ -22,55 +22,45 @@ public class AddParkController {
     
     private final PharmacyDB pdb;
     private final ParkDB parkdb;
-    private final int pharmacy_id;
+    private final int pharmacyId;
     private Park park;
+    private final Set<Park> parks;
 
     
-    public AddParkController(PharmacyDB pdb, ParkDB parkdb, int pharmacy_id) {
+    public AddParkController(PharmacyDB pdb, ParkDB parkdb, int pharmacyId) {
         this.pdb = pdb;
         this.parkdb = parkdb;
-        this.pharmacy_id=pharmacy_id;
+        this.pharmacyId=pharmacyId;
+        parks = new HashSet<>();
     }
    
     
-//    public String getSelectedPark(int id) throws SQLException{
-//        park = parkdb.getParkByID(id);
-//        return park.toString();
-//    }
     
+    public String newPark(int nMaxVehicles,int ableToCharge, String type, double max_energy){
+        park=parkdb.newPark(nMaxVehicles,ableToCharge, type, max_energy);
+        return (park==null)? null : park.toString();
+    }
     
-//    public String newPark(int nMaxVehicles, String type, double max_energy){
-//        park=parkdb.newPark(nMaxVehicles, type, max_energy);
-//        return (park==null)? null : park.toString();
-//    }
-    
-//    public void registPark(){
-//        parkdb.savePark(park, pharmacy_id);
-//        Set<Park> parks=pharm.getParks();
-//        pharm.setParks(addPark(parks));
-//    }
-    public void registPark() throws SQLException{
-        parkdb.savePark(park, pharmacy_id);
-        Set<Park> parks=pdb.getPharmacyByid(pharmacy_id).getParks();
-        pdb.getPharmacyByid(pharmacy_id).setParks(addPark(parks));
+    public boolean addToQueue(){
+        if(park != null){
+            return parks.add(park);
+        }
+        return false;
+    }
+
+    public int saveParks(){
+        if(!parks.isEmpty()){
+            parkdb.saveParks(parks, pharmacyId);
+        }
+        return 0;
     }
     
     
-    
-    public Set<Park> addPark(Set<Park> parks){
-        parks.add(park);
-        return parks;
-    }
+ 
     
     
     
-    
-//    public void addParkToPharmacy() throws SQLException{
-//            Set<Park> parks=pdb.getPharmacyByAdministrator(administratorEmail).getParks();
-//            parks.add(park);
-//            pdb.getPharmacyByAdministrator(administratorEmail).setParks(parks);
-//        
-//    }
+
     
     
     

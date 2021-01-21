@@ -34,21 +34,7 @@ public class ParkDB extends DataHandler {
         return new Park(Constants.DEFAULT_ID, maxVehicles, VehicleCategory.fromString(vehicleCategory), doubleMaxEnergy, slots);
     }
     
-    public void savePark(Park park,int pharmId){
-        getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterPark(?,?,?,?,?) }")) {
-
-            callStmt.setInt(1,park.getId());
-            callStmt.setInt(2,park.getnMaxVehicles());
-            callStmt.setString(3,park.getType().getName());
-            callStmt.setDouble(4,park.getMaxEnergy());
-            callStmt.setInt(5,pharmId);
-
-            callStmt.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+  
     
     public Set<Park> getParksByPhamarcy(int phamarcyId) throws SQLException{
         HashSet<Park> parks = new HashSet<>();
@@ -84,6 +70,10 @@ public class ParkDB extends DataHandler {
             }
             throw new IllegalArgumentException("Product does not exist");
         }
+    }
+
+    public void saveParks(Set<Park> parks, int pharmacyId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
  
