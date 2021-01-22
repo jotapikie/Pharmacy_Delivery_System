@@ -37,7 +37,7 @@ public class AddPathController {
       return Utils.listToString(gpdb.getGeographicalPoints());
     }
     
-    public String selectPoints(double longitude1, double latitude1, double longitude2, double latitude2, StreetType type, int windDirection, double windSpeed, String street) throws SQLException{
+    public String selectPoints(double longitude1, double latitude1, double longitude2, double latitude2, String type, int windDirection, double windSpeed, String street) throws SQLException{
         GeographicalPoint or = gpdb.getGeographicalPoint(longitude1, latitude1);
         GeographicalPoint dest = gpdb.getGeographicalPoint(longitude2, latitude2);
         if(or != null && dest != null){

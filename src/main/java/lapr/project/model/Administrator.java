@@ -14,5 +14,14 @@ public class Administrator extends User{
     public Administrator(String name, String email, String pwd) {
         super(name, email, pwd);
     }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+    
     
 }

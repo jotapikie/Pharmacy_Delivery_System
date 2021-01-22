@@ -71,7 +71,7 @@ public class AddPathControllerTest {
         when(gpdb.getGeographicalPoint(22, 37)).thenReturn(p3);
         when(gpdb.getGeographicalPoint(24, 36)).thenReturn(p4);
         
-        when(pdb.newPath(p1, p2, StreetType.ASPHALT, 1, 2.4, "Street1")).thenReturn(p);
+        when(pdb.newPath(p1, p2, "Asphalt", 1, 2.4, "Street1")).thenReturn(p);
         
     }
 
@@ -93,9 +93,9 @@ public class AddPathControllerTest {
     @Test
     public void testSelectPoints() throws Exception {
         controller.getAvailableGeographicalPoints();
-        assertNull(controller.selectPoints(1, 1, 21,39, StreetType.ASPHALT, 23, 0.5, "Street1"));// Origin null
-        assertNull(controller.selectPoints(21, 39, 1,1, StreetType.SIDEWALK, 23, 0.5, "Street1"));// Destination null
-        assertFalse(controller.selectPoints(21, 39, 22, 38, StreetType.ASPHALT, 1, 2.4, "Street1").isEmpty());
+        assertNull(controller.selectPoints(1, 1, 21,39, "Asphalt", 23, 0.5, "Street1"));// Origin null
+        assertNull(controller.selectPoints(21, 39, 1,1, "Sidewalk", 23, 0.5, "Street1"));// Destination null
+        assertFalse(controller.selectPoints(21, 39, 22, 38, "Asphalt", 1, 2.4, "Street1").isEmpty());
     }
 
     /**
@@ -105,9 +105,9 @@ public class AddPathControllerTest {
     public void testAddToQueue() throws SQLException {
         assertFalse(controller.addToQueue());
         controller.getAvailableGeographicalPoints();
-        controller.selectPoints(21, 39, 22, 38, StreetType.ASPHALT, 1, 2.4, "Street1");
+        controller.selectPoints(21, 39, 22, 38, "Asphalt", 1, 2.4, "Street1");
         assertTrue(controller.addToQueue());
-        controller.selectPoints(21, 39, 22, 38, StreetType.ASPHALT, 1, 2.4, "Street1");
+        controller.selectPoints(21, 39, 22, 38, "Asphalt", 1, 2.4, "Street1");
         assertFalse(controller.addToQueue());
     }
 
@@ -119,7 +119,7 @@ public class AddPathControllerTest {
         assertEquals(0, controller.savePaths());
         
         controller.getAvailableGeographicalPoints();
-        controller.selectPoints(21, 39, 22, 38, StreetType.ASPHALT, 1, 2.4, "Street1");
+        controller.selectPoints(21, 39, 22, 38, "Asphalt", 1, 2.4, "Street1");
         controller.addToQueue();
         paths.add(p);
         when(pdb.savePaths(paths)).thenReturn(1);

@@ -197,6 +197,13 @@ public class Pathway implements PathInterface{
     }
 
     @Override
+    public String toString() {
+        return String.format("Street: %s - Path type: %s - Origin: [%s] - Destination [%s] - Distance: %.2f m - Wind: %.2f - Kinetic coefficient: %.2f", street, streetType.getName(),originPoint.toString(), destinationPoint.toString(), distance, wind, kineticCoef);
+    }
+    
+    
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 47 * hash + Objects.hashCode(this.originPoint);

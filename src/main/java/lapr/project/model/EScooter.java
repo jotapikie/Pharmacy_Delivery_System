@@ -28,10 +28,8 @@ public class EScooter extends Vehicle{
      * @param actualBat
      */
     public EScooter(int id, State state, int maxBat, int actualBat) {
-        setId(id);
+        super(id, weight, state, maxBat, actualBat, motor);
         setState(state);
-        setMaxBat(maxBat);
-        setActualBat(actualBat);
     }
 
     public double getFrontalArea() {

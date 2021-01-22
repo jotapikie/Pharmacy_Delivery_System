@@ -102,7 +102,7 @@ public class TestUCs {
         System.out.println("1. Add Pharmacy");
         System.out.println("2. Add Product");
         System.out.println("3. Add Geographical Point");
-        System.out.println("4. Add Pathway (Not supported yet)");
+        System.out.println("4. Add Pathway");
         System.out.println();
         System.out.println("0. Logout");
         System.out.println();
@@ -207,7 +207,8 @@ public class TestUCs {
         System.out.println("5. Prepare order");
         System.out.println("6. Notify prepared order");
         System.out.println("7. Add courier");
-        System.out.println("8. Add delivery run (Not supported yet)");
+        System.out.println("8. Add park");
+        System.out.println("9. Add delivery run (Not supported yet)");
         System.out.println();
         System.out.println("0. Logout");
         System.out.println();
@@ -242,7 +243,11 @@ public class TestUCs {
                 showPharmacyMenu(id);
                 break;
             case "8":
-                System.out.println("Not supported yet.");
+                new AddParkUI(id);
+                showPharmacyMenu(id);
+                break;
+            case "9":
+                System.out.println("Not supported yet");
                 showPharmacyMenu(id);
                 break;
                 

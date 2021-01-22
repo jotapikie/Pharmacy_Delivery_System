@@ -86,7 +86,7 @@ public class GeographicalPoint implements PointInterface{
 
     @Override
     public String toString() {
-        return String.format("%s - (%.5f,%.5f) %.1f m", description, latitude, longitude, elevation);
+        return String.format("Descripition: %s - Longitude: %.5f - Latitude: %.5f - Elevation: %.1f m", description, longitude, latitude, elevation);
     }
 
 

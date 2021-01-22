@@ -79,7 +79,7 @@ public class NewPharmacyControllerTest {
         
         when(adb.newAdress("Street1", 12, 45, 0.2, "City1", 45, "3453-456")).thenReturn(add);
         when(admindb.newAdministrator("Admin1", "admin1@gmail.com", "123")).thenReturn(admin);
-        when(parkdb.newPark(5, 3, "Scooter", 67)).thenReturn(park);
+        when(parkdb.newPark(1,5, 3, "Scooter", 67)).thenReturn(park);
         when(pdb.newPhamarcy(Constants.DEFAULT_ID, 912541234, "Pharmacy1", admin, add, parks)).thenReturn(pha);
                 
     }

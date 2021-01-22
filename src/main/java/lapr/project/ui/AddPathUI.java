@@ -30,7 +30,9 @@ public class AddPathUI {
             controller=new AddPathController(new GeographicalPointDB(),new PathwayDB());
             showAvailablePoints();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.out.println();
+            System.out.println("Error: There is an already defined path between those 2 points, try with others.");
+
         }
                 
     }
@@ -78,23 +80,21 @@ public class AddPathUI {
         System.out.println("Name (Street):");
         String street = read.nextLine();
         System.out.println();
-        String res = controller.selectPoints(longitude1, latitude1, longitude2, latitude2, StreetType.ASPHALT, windDirection, windSpeed, street);
+        String res = controller.selectPoints(longitude1, latitude1, longitude2, latitude2, streetType, windDirection, windSpeed, street);
         if(res == null){
             System.out.println();
             System.out.println("Error: Invalid data inserted, try again.");
             showAvailablePoints();
         }else{
-            System.out.println();
             System.out.println(res);
-            System.out.println("Do you want to add this path to the system? (y/n)");
             System.out.println();
+            System.out.println("Do you want to add this path to the system? (y/n)");
             if(read.nextLine().equalsIgnoreCase("y")){
                 controller.addToQueue();
                 System.out.println();
                 System.out.println("Path added to the queue.");
                 System.out.println();
                 System.out.println("Do you want to add more paths? (y/n)");
-                System.out.println();
                 if(read.nextLine().equalsIgnoreCase("y")){
                     showAvailablePoints();
                 }else{

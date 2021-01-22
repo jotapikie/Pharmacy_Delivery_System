@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import lapr.project.data.ParkDB;
 import lapr.project.model.Park;
+import lapr.project.utils.Constants;
 
 
 /**
@@ -35,7 +36,7 @@ public class AddParkController {
     
     
     public String newPark(int nMaxVehicles,int ableToCharge, String type, double maxEnergy){
-        park=parkdb.newPark(nMaxVehicles,ableToCharge, type, maxEnergy);
+        park=parkdb.newPark(Constants.DEFAULT_ID + parks.size(), nMaxVehicles,ableToCharge, type, maxEnergy);
         return (park==null)? null : park.toString();
     }
     

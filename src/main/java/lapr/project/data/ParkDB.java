@@ -23,7 +23,7 @@ public class ParkDB extends DataHandler {
         psdb = new ParkSlotDB();
     }
     
-    public Park newPark(int maxVehicles, int ableToCharge, String vehicleCategory, double doubleMaxEnergy) {
+    public Park newPark(int id, int maxVehicles, int ableToCharge, String vehicleCategory, double doubleMaxEnergy) {
         Set<ParkSlot> slots = new HashSet<>();
         for(int i = 0; i < maxVehicles;i++){
             if(ableToCharge > 0){
@@ -33,7 +33,7 @@ public class ParkDB extends DataHandler {
                 slots.add(psdb.newParkSlot(false));
             }
         }
-        return new Park(Constants.DEFAULT_ID, maxVehicles, VehicleCategory.fromString(vehicleCategory), doubleMaxEnergy, slots);
+        return new Park(id, maxVehicles, VehicleCategory.fromString(vehicleCategory), doubleMaxEnergy, slots);
     }
     
   
@@ -76,7 +76,7 @@ public class ParkDB extends DataHandler {
 
     public int saveParks(Set<Park> parks, int pharmacyId) throws SQLException {
         Connection con = getConnection();
-        int[] rows;
+        int i = 0;
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcAddPark(?,?,?,?) }")) {
             for (Park p : parks) {
                 callStmt.registerOutParameter(1, OracleTypes.INTEGER);
@@ -87,20 +87,11 @@ public class ParkDB extends DataHandler {
 
                 callStmt.execute();
                 psdb.saveParkSlots(p.getSlots(), callStmt.getInt(1));
+                i++;
                 
+            }
+            return i;
 
-                con.setAutoCommit(false);
-            }
-            try {
-                rows = callStmt.executeBatch();
-                con.commit();
-            } catch (BatchUpdateException e) {
-                con.rollback();
-                throw new SQLException(e.getNextException());
-            } finally {
-                con.setAutoCommit(true);
-            }
-            return rows.length;
         }
     }
 

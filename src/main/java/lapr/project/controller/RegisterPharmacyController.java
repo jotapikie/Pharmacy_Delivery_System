@@ -48,7 +48,7 @@ public class RegisterPharmacyController {
     }
     
     public String newPark(String vehicleCategory,int maxVehicles,int ableToCharge, double doubleMaxEnergy){
-        parks.add(parkDB.newPark(maxVehicles,ableToCharge, vehicleCategory, doubleMaxEnergy));
+        parks.add(parkDB.newPark(Constants.DEFAULT_ID,maxVehicles,ableToCharge, vehicleCategory, doubleMaxEnergy));
         return parks.iterator().next().toString();
     }
     

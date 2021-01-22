@@ -58,6 +58,13 @@ public class User {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Name: %s - Email: %s - Password: %s", name, email, password);
+    }
+    
+    
+
     /**
      * Boolean method to check if this user is equal to the user passed by parameter.
      *

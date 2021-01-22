@@ -43,11 +43,11 @@ public class PathwayDB extends DataHandler{
 
 
 
-    public Pathway newPath(GeographicalPoint or, GeographicalPoint dest, StreetType type, int windDirection, double windSpeed, String street) {
+    public Pathway newPath(GeographicalPoint or, GeographicalPoint dest, String type, int windDirection, double windSpeed, String street) {
         double pathDirec = Utils.pathDirection(or.getLatitude(), or.getLongitude(), dest.getLatitude(), dest.getLongitude());
         double wind = Utils.windToPath(pathDirec, windDirection, windSpeed);
-        double distance = Utils.distance(or.getLatitude(), or.getLongitude(), dest.getLatitude(), dest.getLongitude(), or.getElevation(), dest.getElevation());
-        return new Pathway(or, dest, type, distance, wind, street);
+        double distance = Utils.distance(or.getLatitude(), dest.getLatitude(), or.getLongitude(), dest.getLongitude(), or.getElevation(), dest.getElevation());
+        return new Pathway(or, dest, StreetType.fromString(type), distance, wind, street);
     }
 
     public int savePaths(Set<Pathway> paths) throws SQLException {
@@ -57,11 +57,11 @@ public class PathwayDB extends DataHandler{
             for (Pathway path : paths) {
                 callStmt.setDouble(1, path.getOriginPoint().getLongitude());
                 callStmt.setDouble(2, path.getOriginPoint().getLatitude());
-                callStmt.setDouble(3, path.getDestinationPoint().getLatitude());
+                callStmt.setDouble(3, path.getDestinationPoint().getLongitude());
                 callStmt.setDouble(4, path.getDestinationPoint().getLatitude());
                 callStmt.setDouble(5, path.getDistance());
                 callStmt.setString(6, path.getStreet());
-                callStmt.setString(7, path.getStreetType().name());
+                callStmt.setString(7, path.getStreetType().getName());
                 callStmt.setDouble(8, (double) Math.round(path.getWind() * 100) / 100);
 
                 callStmt.addBatch();

@@ -73,7 +73,7 @@ public class GeographicalPointDB extends DataHandler{
         if (Math.abs(longitude) > 90 || Math.abs(latitude) > 180) {
             throw new IllegalArgumentException("Invalid cordenates");
         }
-        GeographicalPoint p;
+        GeographicalPoint p = null;
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetGeographicalPoint(?,?)}")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.setDouble(2, longitude);
@@ -84,8 +84,9 @@ public class GeographicalPointDB extends DataHandler{
                 p = new GeographicalPoint(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4));
                 return p;
             }
-            throw new IllegalArgumentException("Geographical Point doesn't exist!");
+            
         }
+        return p;
     }
 
     public GeographicalPoint newGeographicalPoint(double longitude, double latitude, double elevation, String description) {

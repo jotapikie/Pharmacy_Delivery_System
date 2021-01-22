@@ -59,9 +59,11 @@ public class AddParkControllerTest {
         pdb = mock(ParkDB.class);
         controller = new AddParkController(pdb, idPharmacy);
         
-        when(pdb.newPark(3, 2, "Scooter", 65)).thenReturn(p1);
-        when(pdb.newPark(2, 1, "Drone", 45)).thenReturn(p2);
-        when(pdb.newPark(6, 4, "Scooter", 6)).thenReturn(null);
+        when(pdb.newPark(1,3, 2, "Scooter", 65)).thenReturn(p1);
+        when(pdb.newPark(2,3, 2, "Scooter", 65)).thenReturn(p1);
+        when(pdb.newPark(1,2, 1, "Drone", 45)).thenReturn(p2);
+        when(pdb.newPark(2,2, 1, "Drone", 45)).thenReturn(p2);
+        when(pdb.newPark(3,6, 4, "Scooter", 6)).thenReturn(null);
     }
     
    
