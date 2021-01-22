@@ -61,7 +61,7 @@ public class PathwayDB extends DataHandler{
                 callStmt.setDouble(4, path.getDestinationPoint().getLatitude());
                 callStmt.setDouble(5, path.getDistance());
                 callStmt.setString(6, path.getStreet());
-                callStmt.setDouble(7, path.getKineticCoef());
+                callStmt.setString(7, path.getStreetType().name());
                 callStmt.setDouble(8, (double) Math.round(path.getWind() * 100) / 100);
 
                 callStmt.addBatch();

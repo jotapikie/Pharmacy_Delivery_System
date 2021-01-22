@@ -11,12 +11,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import lapr.project.model.Product;
-import lapr.project.utils.Constants;
+
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -25,8 +24,8 @@ import oracle.jdbc.OracleTypes;
  */
 public class ProductDB extends DataHandler{
 
-    public Product newProduct(String name, double weight, double price){
-        return new Product(Constants.DEFAULT_ID, name, weight, price);
+    public Product newProduct(int id,String name, double weight, double price){
+        return new Product(id, name, weight, price);
     }
 
     public Product getProduct(int id) throws SQLException {

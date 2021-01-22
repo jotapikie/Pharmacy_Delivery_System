@@ -11,6 +11,7 @@ import lapr.project.controller.RegisterClientController;
 import lapr.project.data.AddressDB;
 import lapr.project.data.ClientDB;
 import lapr.project.data.CreditCardDB;
+import static lapr.project.ui.UtilsUI.header;
 
 /**
  *
@@ -22,7 +23,7 @@ public class RegisterClientUI {
     
     public RegisterClientUI() {
         controller = new RegisterClientController(new ClientDB(), new AddressDB(), new CreditCardDB());
-        header();
+        header("x Regist as Client x");
         newAddress();
     }
 
@@ -171,10 +172,5 @@ public class RegisterClientUI {
         }
     }
 
-    private void header() {
-        System.out.println();
-        System.out.println("######################################################");
-        System.out.printf("%35s%n", "x Regist as Client x");
-        System.out.println("######################################################");
-    }
+
 }

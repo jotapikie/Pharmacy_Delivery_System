@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import lapr.project.data.ProductDB;
 import lapr.project.model.Product;
+import lapr.project.utils.Constants;
 /**
  *
  * @author Helder
@@ -26,7 +27,7 @@ public class RegisterProductController {
 
     
     public String newProduct(String name, double weight, double price) {
-        pro = pdb.newProduct(name,weight,price);
+        pro = pdb.newProduct(Constants.DEFAULT_ID+products.size(), name,weight,price);
         return pro.toString();
     }
 

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import lapr.project.controller.AddGeographicalPointController;
 import lapr.project.data.GeographicalPointDB;
+import static lapr.project.ui.UtilsUI.header;
 
 /**
  *
@@ -22,7 +23,7 @@ public class AddGeographicalPointUI {
     public AddGeographicalPointUI() {
         this.controller = new AddGeographicalPointController(new GeographicalPointDB());
         try{
-        header();
+        header("x Add Point x");
         newGeographicalPoint();
         }catch(SQLException e){
             e.printStackTrace();
@@ -66,11 +67,6 @@ public class AddGeographicalPointUI {
     
     }
 
-    private void header() {
-        System.out.println();
-        System.out.println("######################################################");
-        System.out.printf("%35s%n", "x Add Point x");
-        System.out.println("######################################################");
-    }
+
     
 }

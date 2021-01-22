@@ -44,8 +44,10 @@ public class RegisterProductControllerTest {
         pdb = mock(ProductDB.class);
         rcp=new RegisterProductController(pdb);
         
-        when(pdb.newProduct("brufen",0.2,5)).thenReturn(p1);
-        when(pdb.newProduct("benerun",0.2,5)).thenReturn(p2);
+        when(pdb.newProduct(1,"brufen",0.2,5)).thenReturn(p1);
+        when(pdb.newProduct(1,"benerun",0.2,5)).thenReturn(p2);
+        when(pdb.newProduct(2,"brufen",0.2,5)).thenReturn(p1);
+        when(pdb.newProduct(2,"benerun",0.2,5)).thenReturn(p2);
    }
 
 

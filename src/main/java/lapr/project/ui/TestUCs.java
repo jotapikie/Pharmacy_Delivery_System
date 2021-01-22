@@ -7,6 +7,7 @@ package lapr.project.ui;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import static lapr.project.ui.UtilsUI.header;
 
 
 /**
@@ -117,11 +118,8 @@ public class TestUCs {
         }
     }
 
-    private static void asSuperAdministrator() {
-        System.out.println();
-        System.out.println("######################################################");
-        System.out.printf("%35s%n", "x Menu Administrator x");
-        System.out.println("######################################################");
+    private static void asSuperAdministrator() {    
+        header("x Menu Administrator x");
         System.out.println();
         System.out.println("1. Add Pharmacy");
         System.out.println("2. Add Product");
@@ -133,7 +131,7 @@ public class TestUCs {
         String ans = read.nextLine();
         switch(ans){
             case "1":
-                System.out.println("Not supported yet.");
+                new RegisterPharmacyUI();
                 asSuperAdministrator();
                 break;
             case "2":
@@ -167,7 +165,43 @@ public class TestUCs {
     }
 
     private static void asClient() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        header("x Login x");
+        System.out.println();
+        System.out.println("Email:");
+        String email = read.nextLine();
+        showMenu(email);
+    }
+    
+    private static void showMenu(String email){
+        header("x Menu Client x");
+        System.out.println();
+        System.out.println("1. Add to Cart");
+        System.out.println("2. Remove from cart");
+        System.out.println("3. Make order");
+        System.out.println();
+        System.out.println("0. Logout");
+        System.out.println();
+        String ans = read.nextLine();
+        switch(ans){
+            case "1":
+                new AddToCartUI(email);
+                showMenu(email);
+                break;
+            case "2":
+                new RemoveFromCartUI(email);
+                showMenu(email);
+                break;
+            case "3":
+                new MakeOrderUI(email);
+                showMenu(email);
+                break;
+            case "0":
+                break;
+            default:
+                System.out.println();
+                System.out.println("Error: Invalid oprion, try again.");
+                showMenu(email);
+        }
     }
     
 }

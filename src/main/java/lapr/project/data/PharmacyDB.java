@@ -82,7 +82,7 @@ public class PharmacyDB extends DataHandler {
 
     public int addPharmacies(Set<Pharmacy> pharmaciesList) throws SQLException {
         Connection con = getConnection();
-        int[] rows;
+        int rows=0;
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcRegisterPharmacy(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             for (Pharmacy p : pharmaciesList) {
                 callStmt.registerOutParameter(1, OracleTypes.INTEGER);
@@ -105,28 +105,17 @@ public class PharmacyDB extends DataHandler {
                 callStmt.setInt(14, park.getMaxVehicles());
                 callStmt.setString(15, park.getType().getName());
                 callStmt.setDouble(16, park.getMaxEnergy());
-                
-                // ADICIONAR PARK SLOTS
-
+  
                 callStmt.execute();
                 psdb.saveParkSlots(park.getSlots(), callStmt.getInt(1));
+                rows++;
+
                 
-
-                con.setAutoCommit(false);
             }
-                try {
-                    rows = callStmt.executeBatch();
-                    con.commit();
-                } catch (BatchUpdateException e) {
-                    con.rollback();
-                    throw new SQLException(e.getNextException());
-                } finally {
-                    con.setAutoCommit(true);
-                }
 
-                return rows.length;
-            }
+            return rows;
         }
+    }
 
 //    public Pharmacy getPharmacyByAdministrator(String administratorEmail) throws SQLException {
 //        Pharmacy p = null;

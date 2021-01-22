@@ -32,9 +32,9 @@ public class PharmacyStockDB extends DataHandler{
 
             return callStmt.getInt(1);
         } catch (SQLException e) {
-            e.printStackTrace();
+            return 0;
         }
-        throw new NullPointerException("No info in the database. Check table Pharmacy_Product");
+        
     }
 
     public boolean hasProduct(Product p, int quantity, int idPharmacy){

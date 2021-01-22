@@ -14,6 +14,7 @@ import lapr.project.controller.AddPathController;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
 import lapr.project.model.StreetType;
+import static lapr.project.ui.UtilsUI.header;
 
 /**
  *
@@ -25,7 +26,7 @@ public class AddPathUI {
 
     public AddPathUI(){
         try {
-            header();
+            header("x Add Pathway x");
             controller=new AddPathController(new GeographicalPointDB(),new PathwayDB());
             showAvailablePoints();
         } catch (SQLException ex) {
@@ -113,12 +114,7 @@ public class AddPathUI {
         }
     }
 
-    private void header() {
-        System.out.println();
-        System.out.println("######################################################");
-        System.out.printf("%35s%n", "x Add Pathway x");
-        System.out.println("######################################################");
-    }
+
       
     
     

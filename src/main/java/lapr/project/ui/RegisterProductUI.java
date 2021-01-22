@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import lapr.project.controller.RegisterProductController;
 import lapr.project.data.ProductDB;
+import static lapr.project.ui.UtilsUI.header;
 
 /**
  *
@@ -21,7 +22,7 @@ public class RegisterProductUI {
     public RegisterProductUI() {
         controller = new RegisterProductController(new ProductDB());
         try {
-            header();
+            header("x Add Product x");
             newProduct();
         } catch (SQLException ex) {
             System.out.println("Error: Database error.");
@@ -68,11 +69,6 @@ public class RegisterProductUI {
         
     }
 
-    private void header() {
-        System.out.println();
-        System.out.println("######################################################");
-        System.out.printf("%35s%n", "x Add Product x");
-        System.out.println("######################################################");
-    }
+
 
 }
