@@ -52,7 +52,7 @@ public class UpdateStockController {
     }
     
     
-    public boolean updateStock() throws SQLException{
+    public boolean updateStock(){
         if(!products.isEmpty()){
             return ppdb.updateStock(idPharmacy, products);
         }

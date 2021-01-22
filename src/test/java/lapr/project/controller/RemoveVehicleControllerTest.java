@@ -15,8 +15,8 @@ public class RemoveVehicleControllerTest {
     @BeforeAll
     public static void setUpClass() {
         vdb = mock(VehicleDB.class);
-        rvc2 = new RemoveVehicleController(vdb);
-        RemoveVehicleController test = new RemoveVehicleController();
+        rvc2 = new RemoveVehicleController(vdb, 1);
+        RemoveVehicleController test = new RemoveVehicleController(1);
     }
 
     public RemoveVehicleControllerTest() {
@@ -28,13 +28,13 @@ public class RemoveVehicleControllerTest {
      */
     @Test
     public void testRemove() throws SQLException {
-        when(vdb.remove(123)).thenReturn(true);
+        when(vdb.remove(123, 1)).thenReturn(true);
 
         boolean expResult = true;
         boolean result = rvc2.remove(123);
         assertEquals(expResult, result);
         
-        when(vdb.remove(123)).thenReturn(false);
+        when(vdb.remove(123, 1)).thenReturn(false);
         assertFalse(rvc2.remove(2));
     }
 

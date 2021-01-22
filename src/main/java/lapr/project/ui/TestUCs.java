@@ -22,8 +22,7 @@ public class TestUCs {
      */
     public static void main(String[] args) throws SQLException {
         showOptions();
-      
-    }
+     }
     
     private static void showOptions() throws SQLException{
         System.out.println("######################################################");
@@ -135,54 +134,13 @@ public class TestUCs {
         
     }
 
-    private static void asPharmacyAdministrator() throws SQLException {
+    private static void asPharmacyAdministrator(){
+        header("x Login x");
         System.out.println();
-        System.out.println("######################################################");
-        System.out.printf("%35s%n", "x Menu Administrator x");
-        System.out.println("######################################################");
-        System.out.println();
-        System.out.println("1. New vehicle");
-        System.out.println("2. Remove vehicle");
-        System.out.println("3. Update vehicle");
-        System.out.println("4. Update stock");
-        System.out.println("5. Notify Ready Order");
-        System.out.println("6. Restrictions to park");
-        System.out.println();
-        System.out.println("0. Logout");
-        System.out.println();
-        String ans = read.nextLine();
-        switch(ans){
-            case "1":
-                System.out.println("Not supported yet.");
-                asPharmacyAdministrator();
-                break;
-            case "2":
-                new RemoveVehicleUI();
-                asPharmacyAdministrator();
-                break;
-            case "3":
-                System.out.println("Not supported yet.");
-                asPharmacyAdministrator();
-                break;
-            case "4":
-                new UpdateStockUI(1);
-                asPharmacyAdministrator();
-                break;
-            case "5":
-                new NotifyReadyOrderUI(1);
-                asPharmacyAdministrator();
-                break;
-            case "6":
-                System.out.println("Not supported yet.");
-                asPharmacyAdministrator();
-                break;    
-            case "0":
-                break;
-            default:
-                System.out.println();
-                System.out.println("Error: Invalid option, try again");
-                asPharmacyAdministrator();
-        }
+        System.out.println("Id Pharmacy:");
+        int id = Integer.parseInt(read.nextLine());
+        showPharmacyMenu(id);
+        
     }
 
     private static void asCourier() {
@@ -194,10 +152,10 @@ public class TestUCs {
         System.out.println();
         System.out.println("Email:");
         String email = read.nextLine();
-        showMenu(email);
+        showClientMenu(email);
     }
     
-    private static void showMenu(String email){
+    private static void showClientMenu(String email){
         header("x Menu Client x");
         System.out.println();
         System.out.println("1. Add to Cart");
@@ -210,22 +168,69 @@ public class TestUCs {
         switch(ans){
             case "1":
                 new AddToCartUI(email);
-                showMenu(email);
+                showClientMenu(email);
                 break;
             case "2":
                 new RemoveFromCartUI(email);
-                showMenu(email);
+                showClientMenu(email);
                 break;
             case "3":
                 new MakeOrderUI(email);
-                showMenu(email);
+                showClientMenu(email);
                 break;
             case "0":
                 break;
             default:
                 System.out.println();
                 System.out.println("Error: Invalid oprion, try again.");
-                showMenu(email);
+                showClientMenu(email);
+        }
+    }
+
+    private static void showPharmacyMenu(int id) {
+        header("x Menu Pharmacy x");
+        System.out.println();
+        System.out.println("1. Add vehicle");
+        System.out.println("2. Remove vehicle");
+        System.out.println("3. Update vehicle");
+        System.out.println("4. Update stock");
+        System.out.println("5. Prepare order");
+        System.out.println("6. Notify prepared order");
+        System.out.println();
+        System.out.println("0. Logout");
+        System.out.println();
+        String ans = read.nextLine();
+        switch(ans){
+            case "1":
+                System.out.println("Not supported yet.");
+                showPharmacyMenu(id);
+                break;
+            case "2":
+                new RemoveVehicleUI(id);
+                showPharmacyMenu(id);
+                break;
+            case "3":
+                System.out.println("Not supported yet.");
+                showPharmacyMenu(id);
+                break;
+            case "4":
+                new UpdateStockUI(id);
+                showPharmacyMenu(id);
+                break;
+            case "5":
+                new PrepareOrderUI(id);
+                showPharmacyMenu(id);
+                break;
+            case "6":
+                new NotifyReadyOrderUI(id);
+                showPharmacyMenu(id);
+                break;    
+            case "0":
+                break;
+            default:
+                System.out.println();
+                System.out.println("Error: Invalid option, try again");
+                showPharmacyMenu(id);
         }
     }
 }

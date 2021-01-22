@@ -139,10 +139,11 @@ public class VehicleDB extends DataHandler {
      * @return
      * @throws java.sql.SQLException
      */
-    public boolean remove(int id) throws SQLException {
+    public boolean remove(int id, int idPharmacy) throws SQLException {
 
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRemoveVehicle(?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRemoveVehicle(?,?) }")) {
             callStmt.setInt(1, id);
+            callStmt.setInt(2, idPharmacy);
             callStmt.execute();
         }
         return true;

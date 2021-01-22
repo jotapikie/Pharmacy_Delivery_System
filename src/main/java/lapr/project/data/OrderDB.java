@@ -35,14 +35,14 @@ public class OrderDB extends DataHandler{
     
     public List<Order> getOrdersByStatus(int idPhamarcy, String status) throws SQLException {
         List<Order> listOrders = new ArrayList<>();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetOrdersByStatus(?, ?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetOrdersByStatus(?,?) }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.setInt(2, idPhamarcy);
             callStmt.setString(3, status);
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Order o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9)), rs.getString(10), rs.getInt(11), rs.getString(12)));
+                Order o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9)), rs.getString(10), rs.getInt(12), rs.getString(11)));
                 listOrders.add(o);
             }
         }
@@ -60,7 +60,7 @@ public class OrderDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9)), rs.getString(10), rs.getInt(11), rs.getString(12)));
+                o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9)), rs.getString(10), rs.getInt(12), rs.getString(11)));
                 return o;
             }
             throw new IllegalArgumentException("Product does not exist");

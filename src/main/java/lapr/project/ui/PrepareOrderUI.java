@@ -6,11 +6,13 @@
 package lapr.project.ui;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lapr.project.controller.PrepareOrderController;
 import lapr.project.data.OrderDB;
+import static lapr.project.ui.UtilsUI.header;
 
 /**
  *
@@ -23,36 +25,56 @@ public class PrepareOrderUI {
     public PrepareOrderUI(int idPharmacy) {
         controller = new PrepareOrderController(new OrderDB(), idPharmacy);
         try {
+            header("x Prepare order x");
             showAvailableOrders();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.out.println("An error ocurred when tried to communciate with the database");
         }
     }
     
     private void showAvailableOrders() throws SQLException{
-        System.out.println("Orders to be prepaed:");
-        for(String s: controller.getReadyToPrepareOrders()){
-            System.out.println(s);
+        System.out.println();
+        List<String> orders = controller.getReadyToPrepareOrders();
+        if(orders.isEmpty()){
+            System.out.println("There are no orders to prepare in the moment.");
+        }else{
+            System.out.println("Orders ready to prepare:");
+            System.out.println();
+            for(String order : orders){
+                System.out.println(order);
+            }
+            selectOne();
         }
-        System.out.println("Select one or 0 to end");
-        selectOne();
     }
 
     private void selectOne() throws SQLException {
+        try{
+        System.out.println();
+        System.out.println("Select one (id):");
         int id = Integer.parseInt(read.nextLine());
-        String res = controller.getSelectedOrder(id);
-        if(res == null){
-            System.out.println("Invalid order selected. Try again");
+        System.out.println();
+        String ord = controller.getSelectedOrder(id);
+        if(ord == null){
+            System.out.println("Error: Invalid option selected, try again");
             showAvailableOrders();
         }else{
-            System.out.println("Order selected:");
-            System.out.println(res);
-            System.out.println("Do tou want to prepare this order? (y/n)");
+            System.out.println(ord);
+            System.out.println();
+            System.out.println("Do you want to prepare this order? (y/n)");
             if(read.nextLine().equalsIgnoreCase("y")){
+                System.out.println();
+                System.out.println("Processing...");
                 controller.prepareOrder();
-                System.out.println("Succes: This order is now being prepared.");
+                System.out.println("Sucess: The order status was set to 'Preparing'");
+            }else{
+                System.out.println();
+                System.out.println("Operation aborted");
             }
+        }
+        }catch(NumberFormatException e){
+            System.out.println();
+            System.out.println("Error: Invalid data format, try again.");
+            showAvailableOrders();
         }
     }
     

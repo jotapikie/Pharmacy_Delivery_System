@@ -17,9 +17,13 @@ public class RemoveVehicleUI {
 
     private RemoveVehicleController controller;
     
-    public RemoveVehicleUI() throws SQLException {
-        controller=new RemoveVehicleController(new VehicleDB());
-        controller.remove(1);
+    public RemoveVehicleUI(int idPharmacy){
+        controller=new RemoveVehicleController(new VehicleDB(), idPharmacy);
+        try {
+            controller.remove(1);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     
     

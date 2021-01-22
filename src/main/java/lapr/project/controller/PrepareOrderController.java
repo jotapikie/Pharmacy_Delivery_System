@@ -40,7 +40,7 @@ public class PrepareOrderController {
         return (ord == null || !ords.contains(ord)) ? null : ord.toString();
     }
     
-    public boolean prepareOrder() throws SQLException{
+    public boolean prepareOrder(){
         if(ord!=null && ords.contains(ord)){
             return odb.setStatus(ord.getId(), "Preparing", idPhamarcy);
         }
