@@ -102,7 +102,7 @@ public class TestUCs {
         System.out.println("1. Add Pharmacy");
         System.out.println("2. Add Product");
         System.out.println("3. Add Geographical Point");
-        System.out.println("4. Add Pathway");
+        System.out.println("4. Add Pathway (Not supported yet)");
         System.out.println();
         System.out.println("0. Logout");
         System.out.println();
@@ -144,7 +144,17 @@ public class TestUCs {
     }
 
     private static void asCourier() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        header("x Login x");
+        System.out.println();
+        System.out.println("Id Pharmacy:");
+        int id = Integer.parseInt(read.nextLine());
+        System.out.println();
+        System.out.println("Email:");
+        String email = read.nextLine();
+        System.out.println();
+        System.out.println("Weight:");
+        double weight = Double.parseDouble(read.nextLine());
+        showCourierMenu(id, email, weight);
     }
 
     private static void asClient() {
@@ -190,12 +200,14 @@ public class TestUCs {
     private static void showPharmacyMenu(int id) {
         header("x Menu Pharmacy x");
         System.out.println();
-        System.out.println("1. Add vehicle");
+        System.out.println("1. Add vehicle (Not supported yet)");
         System.out.println("2. Remove vehicle");
-        System.out.println("3. Update vehicle");
+        System.out.println("3. Update vehicle (Not supported yet)");
         System.out.println("4. Update stock");
         System.out.println("5. Prepare order");
         System.out.println("6. Notify prepared order");
+        System.out.println("7. Add courier");
+        System.out.println("8. Add delivery run (Not supported yet)");
         System.out.println();
         System.out.println("0. Logout");
         System.out.println();
@@ -224,13 +236,45 @@ public class TestUCs {
             case "6":
                 new NotifyReadyOrderUI(id);
                 showPharmacyMenu(id);
-                break;    
+                break;  
+            case "7":
+                new RegisterCourierUI(id);
+                showPharmacyMenu(id);
+                break;
+            case "8":
+                System.out.println("Not supported yet.");
+                showPharmacyMenu(id);
+                break;
+                
             case "0":
                 break;
             default:
                 System.out.println();
                 System.out.println("Error: Invalid option, try again");
                 showPharmacyMenu(id);
+        }
+    }
+
+    private static void showCourierMenu(int id, String email, double weight) {
+        header("x Menu Courier x");
+        System.out.println();
+        System.out.println("1. Start delivery run");
+        System.out.println();
+        System.out.println("0. Logout");
+        System.out.println();
+        String option = read.nextLine();
+        switch(option){
+            case "1":
+                new StartDeliveryRunUI(id, weight, email);
+                showCourierMenu(id, email, weight);
+                break;
+            case "0":
+                break;
+            default:
+                System.out.println();
+                System.out.println("Error: Invalid option, try again.");
+                showCourierMenu(id, email, weight);
+                
         }
     }
 }

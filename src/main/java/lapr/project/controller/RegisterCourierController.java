@@ -28,8 +28,8 @@ public class RegisterCourierController {
         this.idPharmacy = idPharmacy;
     }
     
-    public String newCourier(String name, String email, String password, int nif, int nss, double maxWeight) {
-        courier = courierDB.newCourier(name,email,password, nif, nss, maxWeight);
+    public String newCourier(String name, String email, String password, int nif, int nss, double weight) {
+        courier = courierDB.newCourier(name,email,password, nif, nss, weight);
         return courier.toString();
     }
     
