@@ -22,31 +22,10 @@ public class TestUCs {
      */
     public static void main(String[] args) throws SQLException {
         showOptions();
-        
- 
-            
-        
-        
-//        AddToCartUI addToCart = new AddToCartUI("clien1@lapr3.com"); // FUNCIONA
-//        MakeOrderUI makeOrder = new MakeOrderUI("clien1@lapr3.com"); // FUNCIONA
-//        StartDeliveryRunUI startDelivery = new StartDeliveryRunUI(1, 67.5, "courier1@lapr3.com"); // FUNCIONA
-//        UpdateStockUI updateStock = new UpdateStockUI(1); // FUNCIONA
-//        PrepareOrderUI prepareOrder = new PrepareOrderUI(1); // FUNCIONA
-//        NotifyReadyOrderUI preparedOrder = new NotifyReadyOrderUI(1); //FUNCIONA
-//        RegisterCourierUI registCourier  = new RegisterCourierUI(1);//FUNCIONA
-//        RemoveVehicleUI removeVehicle =new RemoveVehicleUI(); // FUNCIONA
-//        RegisterClientUI registClient = new RegisterClientUI(); // FUNCIONA
-//        RegisterProductUI registProduct = new RegisterProductUI(); // FUNCIONA
-//        AddGeographicalPointUI agp =new AddGeographicalPointUI(); //FUNCIONA
-//        AddPathUI ap = new AddPathUI();
-            
-
-
-          
-
+      
     }
     
-    private static void showOptions(){
+    private static void showOptions() throws SQLException{
         System.out.println("######################################################");
         System.out.println();
         System.out.println("1. Login.");
@@ -80,7 +59,7 @@ public class TestUCs {
         }
     }
 
-    private static void doLogin() {
+    private static void doLogin() throws SQLException {
         System.out.println();
         System.out.println("######################################################");
         System.out.printf("%35s%n", "x Simulate Login x");
@@ -156,8 +135,54 @@ public class TestUCs {
         
     }
 
-    private static void asPharmacyAdministrator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private static void asPharmacyAdministrator() throws SQLException {
+        System.out.println();
+        System.out.println("######################################################");
+        System.out.printf("%35s%n", "x Menu Administrator x");
+        System.out.println("######################################################");
+        System.out.println();
+        System.out.println("1. New vehicle");
+        System.out.println("2. Remove vehicle");
+        System.out.println("3. Update vehicle");
+        System.out.println("4. Update stock");
+        System.out.println("5. Notify Ready Order");
+        System.out.println("6. Restrictions to park");
+        System.out.println();
+        System.out.println("0. Logout");
+        System.out.println();
+        String ans = read.nextLine();
+        switch(ans){
+            case "1":
+                System.out.println("Not supported yet.");
+                asPharmacyAdministrator();
+                break;
+            case "2":
+                new RemoveVehicleUI();
+                asPharmacyAdministrator();
+                break;
+            case "3":
+                System.out.println("Not supported yet.");
+                asPharmacyAdministrator();
+                break;
+            case "4":
+                new UpdateStockUI(1);
+                asPharmacyAdministrator();
+                break;
+            case "5":
+                new NotifyReadyOrderUI(1);
+                asPharmacyAdministrator();
+                break;
+            case "6":
+                System.out.println("Not supported yet.");
+                asPharmacyAdministrator();
+                break;    
+            case "0":
+                break;
+            default:
+                System.out.println();
+                System.out.println("Error: Invalid option, try again");
+                asPharmacyAdministrator();
+        }
     }
 
     private static void asCourier() {
@@ -203,5 +228,4 @@ public class TestUCs {
                 showMenu(email);
         }
     }
-    
 }
