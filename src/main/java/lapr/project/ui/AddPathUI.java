@@ -39,7 +39,7 @@ public class AddPathUI {
         System.out.println();
         List<String> res = controller.getAvailableGeographicalPoints();
         if(res.isEmpty()){
-            System.out.println("Error: In the moment, there are no geographical points availables, add it first.");
+            System.out.println("In the moment, there are no geographical points availables, add it first.");
         }else{
             System.out.println("Available Geographical points:");
             System.out.println();

@@ -66,7 +66,7 @@ public class ClientDB extends DataHandler {
                 callStmt.setInt(4, c.getNif());
                 callStmt.setInt(5, c.getPhoneNumber());
                 callStmt.setString(6, c.getCard().getExpDate());
-                callStmt.setLong(7,c.getCard().getVisaNumber());
+                callStmt.setString(7,String.valueOf(c.getCard().getVisaNumber()));
                 callStmt.setInt(8, c.getCard().getCcv());
                 callStmt.setString(9, c.getAddress().getStreet());
                 callStmt.setDouble(10, c.getAddress().getGeographicalPoint().getLongitude());
@@ -113,7 +113,7 @@ public class ClientDB extends DataHandler {
                 callStmt.setInt(4, c.getNif());
                 callStmt.setInt(5, c.getPoints());
                 callStmt.setString(6, c.getCard().getExpDate().toString());
-                callStmt.setLong(7,c.getCard().getVisaNumber());
+                callStmt.setString(7,String.valueOf(c.getCard().getVisaNumber()));
                 callStmt.setInt(8, c.getCard().getCcv());
                 callStmt.setString(9, c.getAddress().getStreet());
                 callStmt.setDouble(10, c.getAddress().getGeographicalPoint().getLatitude());

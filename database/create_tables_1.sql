@@ -33,8 +33,8 @@ CREATE TABLE pharmacy(
     phone_number int NOT NULL,
     designation varchar(255) NOT NULL,
     administrator_email varchar(255) NOT NULL CONSTRAINT uk_pharmacy_administrator UNIQUE,
-    longitude float NOT NULL,
-    latitude float NOT NULL
+    longitude NUMERIC(8,5) NOT NULL,
+    latitude NUMERIC(8,5) NOT NULL
 );
 
 CREATE TABLE administrator(
@@ -45,8 +45,8 @@ CREATE TABLE platform_client(
     email varchar(255) CONSTRAINT pk_client_email PRIMARY KEY, 
     phone_number int NOT NULL, 
     credits float NOT NULL, 
-    longitude float NOT NULL, 
-    latitude float NOT NULL,
+    longitude NUMERIC(8,5) NOT NULL, 
+    latitude NUMERIC(8,5) NOT NULL,
     nif int NOT NULL
 );
 
@@ -59,15 +59,15 @@ CREATE TABLE courier(
 );
 
 CREATE TABLE credit_card(
-    nr int CONSTRAINT pk_credit_card_nr PRIMARY KEY, 
+    nr VARCHAR(16) CONSTRAINT pk_credit_card_nr PRIMARY KEY, 
     validity_date varchar(10) NOT NULL, 
     cvv int NOT NULL,
     owner_email varchar(255)
 );
 
 CREATE TABLE address(
-    longitude float NOT NULL,
-    latitude float NOT NULL,
+    longitude NUMERIC(8,5)  NOT NULL,
+    latitude NUMERIC(8,5)   NOT NULL,
     street varchar(255) NOT NULL,
     city varchar(255) NOT NULL,
     port_number int,
@@ -78,8 +78,8 @@ CREATE TABLE address(
 CREATE TABLE product(
     product_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_product_id PRIMARY KEY,
     designation varchar(255) NOT NULL,
-    weight float NOT NULL,
-    price float NOT NULL
+    weight NUMERIC(4,2) NOT NULL,
+    price NUMERIC(5,2) NOT NULL
 );
 
 CREATE TABLE super_admin(
@@ -88,20 +88,20 @@ CREATE TABLE super_admin(
 
 CREATE TABLE vehicle(
     nr INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_vehicle_nr PRIMARY KEY,
-    weight float NOT NULL,
+    weight NUMERIC(5,2) NOT NULL,
     status varchar(255) NOT NULL,
     max_battery int NOT NULL,
     current_battery int NOT NULL,
     motor int NOT NULL,
-    max_weight float NOT NULL,
+    max_weight NUMERIC(4,2) NOT NULL,
     pharmacy_id int NOT NULL,
     vehicle_category varchar(255) NOT NULL
 );
 
 CREATE TABLE scooter(
     vehicle_nr int CONSTRAINT pk_scooter_nr PRIMARY KEY,
-    aero_coef float NOT NULL,
-    frontal_area float NOT NULL
+    aero_coef NUMERIC(4,2) NOT NULL,
+    frontal_area NUMERIC(4,2) NOT NULL
 );
 
 CREATE TABLE park(
@@ -125,7 +125,7 @@ CREATE TABLE delivery_order(
     begin_date timestamp NOT NULL,
     end_date timestamp NULL,
     status varchar(255) NOT NULL,
-    price float,
+    price NUMERIC(5,2),
     client_email varchar(255),
     delivery_run_id int,
     pharmacy_id int NOT NULL,
@@ -135,8 +135,8 @@ CREATE TABLE delivery_order(
 CREATE TABLE invoice(
     order_id int NOT NULL CONSTRAINT pk_invoice_order PRIMARY KEY,
     inv_date timestamp NOT NULL,
-    total_price float NOT NULL,
-    price_paid float NOT NULL,
+    total_price NUMERIC(5,2) NOT NULL,
+    price_paid NUMERIC(5,2) NOT NULL,
     credits_spent int NOT NULL,
     credits_won int NOT NULL,
     nif int NOT NULL
@@ -168,10 +168,10 @@ CREATE TABLE delivery_run(
 );
 
 CREATE TABLE pathway(
-    longitude1 float NOT NULL,
-    latitude1 float NOT NULL,
-    longitude2 float NOT NULL,
-    latitude2 float NOT NULL,
+    longitude1 NUMERIC(8,5)  NOT NULL,
+    latitude1 NUMERIC(8,5)  NOT NULL,
+    longitude2 NUMERIC(8,5)  NOT NULL,
+    latitude2 NUMERIC(8,5)   NOT NULL,
     distance float NOT NULL,
     street varchar(255),
     wind float NOT NULL,
@@ -180,8 +180,8 @@ CREATE TABLE pathway(
 );
 
 CREATE TABLE geographical_point(
-    longitude float NOT NULL,
-    latitude float NOT NULL,
+    longitude NUMERIC(8,5)   NOT NULL,
+    latitude NUMERIC(8,5)   NOT NULL,
     elevation float NOT NULL,
     description varchar(255),
     CONSTRAINT pk_geo_point_longitude_latitude PRIMARY KEY (longitude, latitude)
@@ -240,3 +240,11 @@ ALTER TABLE vehicle ADD CONSTRAINT fk_vehicle_category_name FOREIGN KEY (vehicle
 ALTER TABLE park ADD CONSTRAINT fk_park_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
 ALTER TABLE delivery_run ADD CONSTRAINT fk_run_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
 ALTER TABLE pathway ADD CONSTRAINT fk_path_road_category FOREIGN KEY (road_category) REFERENCES road_category(category_name);
+
+INSERT INTO platform_user VALUES('superadmin1@lapr', 'sadimn1', 'Tiago Pais');
+INSERT INTO super_admin VALUES('superadmin1@lapr');
+INSERT INTO road_category VALUES ('Asphalt', 0.2);
+INSERT INTO road_category VALUES ('Off-Road', 0.2);
+INSERT INTO road_category VALUES ('Sidewalk', 0.2);
+INSERT INTO vehicle_category VALUES ('Scooter');
+INSERT INTO vehicle_category VALUES ('Drone');

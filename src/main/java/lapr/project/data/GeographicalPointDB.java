@@ -32,7 +32,7 @@ public class GeographicalPointDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                GeographicalPoint p = new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3));
+                GeographicalPoint p = new GeographicalPoint(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4));
                 listPoints.add(p);
             }
         }
@@ -81,7 +81,7 @@ public class GeographicalPointDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                p = new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3), rs.getString(4));
+                p = new GeographicalPoint(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4));
                 return p;
             }
             throw new IllegalArgumentException("Geographical Point doesn't exist!");

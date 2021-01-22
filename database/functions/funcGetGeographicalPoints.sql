@@ -4,7 +4,7 @@ IS
     ex_no_points   EXCEPTION;
 BEGIN
     OPEN cur_points FOR
-        SELECT a.longitude, a.latitude, a.elevation
+        SELECT a.longitude, a.latitude, a.elevation, a.description
         FROM Geographical_point a;
     IF(cur_points IS NULL) THEN
         RAISE ex_no_points;
