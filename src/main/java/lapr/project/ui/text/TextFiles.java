@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lapr.project.utils.text;
-
+package lapr.project.ui.text;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,8 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lapr.project.controller.AddPathController;
@@ -23,13 +20,12 @@ import lapr.project.controller.RegisterClientController;
 import lapr.project.controller.RegisterCourierController;
 import lapr.project.controller.RegisterPharmacyController;
 import lapr.project.controller.RegisterProductController;
-import lapr.project.data.DataHandler;
 
 /**
  *
  * @author Diogo
  */
-public class TextFiles extends DataHandler{
+public class TextFiles {
     private static Scanner read = new Scanner(System.in);
     
     private static final String CLIENTS = "textFiles/clients.csv";
@@ -39,11 +35,12 @@ public class TextFiles extends DataHandler{
 
     private static String CARTS;
     private static String PATHS;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+     
         // NOTA: ANTES DE EXCEUTAR ESTE CODIGO APAGAR OS DADOS DAS TABELAS PARA NAO ERROS DE CHAVES EXCLUSIVAS
         System.out.println("Adding products...");
         System.out.printf("%d products were added. %n", insertProducts());
