@@ -55,6 +55,7 @@ public class AddPathControllerTest {
         
         p = new Pathway(p1, p2, StreetType.ASPHALT, 4.5, 2.3, "Street1");
         paths = new HashSet<>();
+        AddPathController c1 = new AddPathController();
     }
     
   

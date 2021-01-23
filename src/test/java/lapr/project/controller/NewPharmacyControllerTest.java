@@ -69,6 +69,7 @@ public class NewPharmacyControllerTest {
         parks = new HashSet<>();
         parks.add(park);
         pha = new Pharmacy(1, 912541234, "Pharmacy1", admin, add, parks);
+        RegisterPharmacyController c1 = new RegisterPharmacyController();
     }
     
 

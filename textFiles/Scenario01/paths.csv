@@ -1,0 +1,8 @@
+#lines starting with # should be ignored
+#Column description
+#name of the product.
+#weight of the product, in kg.
+#price of the product, in euros.
+origin_latitude;origin_longitude;destination_latitude;destination_longitude;path_category;wind_direction;wind_speed;street
+41.15227;-8.60929;41.14063;-8.61118;Asphalt;20;2.3;R. de Mouzinho da Silveira
+41.14063;-8.61118;41.15227;-8.60929;Asphalt;70;2.3;R. de Mouzinho da Silveira

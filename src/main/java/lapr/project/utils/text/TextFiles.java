@@ -5,8 +5,7 @@
  */
 package lapr.project.utils.text;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,7 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lapr.project.controller.AddPathController;
+import lapr.project.controller.AddToCartController;
 import lapr.project.controller.RegisterClientController;
+import lapr.project.controller.RegisterCourierController;
 import lapr.project.controller.RegisterPharmacyController;
 import lapr.project.controller.RegisterProductController;
 import lapr.project.data.DataHandler;
@@ -30,10 +32,13 @@ import lapr.project.data.DataHandler;
 public class TextFiles extends DataHandler{
     private static Scanner read = new Scanner(System.in);
     
-    private static final String USERS = "textFiles/users.csv";
+    private static final String CLIENTS = "textFiles/clients.csv";
     private static final String PHARMACIES = "textFiles/pharmacies.csv";
     private static final String PRODUCTS = "textFiles/products.csv";
+    private static final String COURIERS = "textFiles/couriers.csv";
 
+    private static String CARTS;
+    private static String PATHS;
     /**
      * @param args the command line arguments
      */
@@ -44,9 +49,11 @@ public class TextFiles extends DataHandler{
         System.out.printf("%d products were added. %n", insertProducts());
         System.out.println("Adding pharmacies...");
         System.out.printf("%d pharmacies were added. %n", insertPharmacies());
-        System.out.println("Adding users...");
-        System.out.printf("%d users were added. %n", insertUsers());
-        //menu();
+        System.out.println("Adding clients...");
+        System.out.printf("%d clients were added. %n", insertClients());
+        System.out.println("Adding couriers...");
+        System.out.printf("%d couriers were added. %n", insertCouriers());
+        menu();
     }
 
     private static void menu() {
@@ -67,23 +74,29 @@ public class TextFiles extends DataHandler{
                 System.out.println("Invalid option");
                 menu();
         }
+        
+        System.out.println("Adding paths...");
+        System.out.printf("%d paths were added.", insertPaths());
+        System.out.println("Adding products to carts...");
+        System.out.printf("%d carts were updated.", updateCarts());
                 
     }
 
     private static void scenario01() {
-        
+        CARTS = "textFiles/Scenario01/carts.csv";
+        PATHS = "textFiles/Scenario01/paths.csv";
     }
 
-    private static int insertUsers() {
+    private static int insertClients() {
        RegisterClientController controller;
        String line[];
        int usersAdded = 0;
-       for(String user : importFile(USERS)){
+       for(String user : importFile(CLIENTS)){
            line = user.split(";");
            controller = new RegisterClientController();
-           controller.newAddress(line[5], Double.parseDouble(line[7]), Double.parseDouble(line[6]), Double.parseDouble(line[8]), line[9], Integer.parseInt(line[11]), line[10]);
-           controller.newCreditCard(Long.parseLong(line[12]), line[13], Integer.parseInt(line[14]));
-           controller.newClient(line[1], line[2],line[3],Integer.parseInt(line[16]) , Integer.parseInt(line[15]));
+           controller.newAddress(line[3], Double.parseDouble(line[5]), Double.parseDouble(line[4]), Double.parseDouble(line[6]), line[7], Integer.parseInt(line[9]), line[8]);
+           controller.newCreditCard(Long.parseLong(line[10]), line[11], Integer.parseInt(line[12]));
+           controller.newClient(line[0], line[1],line[2],Integer.parseInt(line[14]) , Integer.parseInt(line[13]));
            try {
                controller.registClient();
                usersAdded++;
@@ -132,6 +145,73 @@ public class TextFiles extends DataHandler{
         return productsAdded;
     }
     
+    private static int insertCouriers() {
+        RegisterCourierController controller;
+        String line[];
+        int couriersAdded = 0;
+        for(String courier: importFile(COURIERS)){
+            line = courier.split(";");
+            controller = new RegisterCourierController(Integer.parseInt(line[0]));
+            controller.newCourier(line[1], line[2], line[3], Integer.parseInt(line[4]), Integer.parseInt(line[5]), Double.parseDouble(line[6]));
+            controller.addToQueue();
+            try {
+                couriersAdded = couriersAdded + controller.registCouriers();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return couriersAdded;
+    }
+    
+    private static int insertPaths() {
+        try {
+            AddPathController controller = new AddPathController();
+            String line[];
+            controller.getAvailableGeographicalPoints();
+            for(String path : importFile(PATHS)){
+                
+                line = path.split(";");
+                controller.selectPoints(Double.parseDouble(line[1]), Double.parseDouble(line[0]), Double.parseDouble(line[3]), Double.parseDouble(line[2]), line[4], Integer.parseInt(line[5]), Double.parseDouble(line[6]), line[7]);
+                controller.addToQueue();
+            }
+            return controller.savePaths();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+    
+    private static int updateCarts() {
+        AddToCartController controller;
+        String line[];
+        String products[];
+        String product[];
+        int cartsUpdated = 0;
+        int i;
+        for(String cart : importFile(CARTS)){
+            try {
+                line = cart.split(";");
+                products = line[1].split("%");
+                controller = new AddToCartController(line[0]);
+                i = 0;
+                controller.getAvailableProducts();
+                
+                while(i < products.length){
+                    product = products[i].split("!");
+                    controller.getSelectedProduct(Integer.parseInt(product[0]));
+                    controller.addToQueue(Integer.parseInt(product[1]));
+                    i++;
+                }
+                controller.addToCart();
+                cartsUpdated++;
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return cartsUpdated;
+    }
+    
     
     private static List<String> importFile(String s) {
         boolean ignoreFirstLine = true;
@@ -152,6 +232,11 @@ public class TextFiles extends DataHandler{
         }
         return listToReturn;
     }
+
+ 
+
+
+
 
 
 

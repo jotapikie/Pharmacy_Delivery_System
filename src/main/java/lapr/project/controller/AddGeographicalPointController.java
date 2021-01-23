@@ -25,6 +25,13 @@ public class AddGeographicalPointController {
         this.gpdb = gpdb;
         this.points = new HashSet<>();
     }
+
+    public AddGeographicalPointController() {
+        this.gpdb = new GeographicalPointDB();
+        this.points = new HashSet<>();
+    }
+    
+    
     
     public String newGeographicalPoint(double longitude, double latitude, double elevation, String description){
         point = gpdb.newGeographicalPoint(longitude, latitude, elevation, description);
