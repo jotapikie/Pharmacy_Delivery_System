@@ -25,6 +25,13 @@ public class RegisterProductController {
         products = new HashSet<>();
     }
 
+    public RegisterProductController() {
+        this.pdb = new ProductDB();
+        this.products = new HashSet<>();
+    }
+    
+    
+
     
     public String newProduct(String name, double weight, double price) {
         pro = pdb.newProduct(Constants.DEFAULT_ID+products.size(), name,weight,price);

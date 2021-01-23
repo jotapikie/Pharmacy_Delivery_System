@@ -1,0 +1,16 @@
+#lines starting with # should be ignored
+#Column description
+#name of the product.
+#weight of the product, in kg.
+#price of the product, in euros.
+name;weight;price
+SARS-CoV-2 Self Inject;0.56;29.99
+Nurofen Musc 400mg;0.345;4.25
+Fastum 100mg;0.23;3.30
+Basiflux 200mL;0.67;8.45
+Supracare 30mL;0.45;7.55
+Eucalypus 20mL;0.33;4.65
+Ambroxol 100mL;0.75;12.99
+Broxemina 150mL;0.83;17.89
+Trifene 400mg;0.389;6.30
+Sinomarin 30mL;0.22;2.75
