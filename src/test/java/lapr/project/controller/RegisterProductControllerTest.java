@@ -37,6 +37,7 @@ public class RegisterProductControllerTest {
         p1 = new Product (1,"brufen",0.2,5);
         p2 = new Product (2,"benerun",0.2,5);
         products = new HashSet<>();
+        RegisterProductController c1 = new RegisterProductController();
     }
     
     @BeforeEach

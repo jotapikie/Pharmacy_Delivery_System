@@ -69,6 +69,7 @@ public class NewPharmacyControllerTest {
         parks = new HashSet<>();
         parks.add(park);
         pha = new Pharmacy(1, 912541234, "Pharmacy1", admin, add, parks);
+        RegisterPharmacyController c1 = new RegisterPharmacyController();
     }
     
 
@@ -81,6 +82,7 @@ public class NewPharmacyControllerTest {
         when(admindb.newAdministrator("Admin1", "admin1@gmail.com", "123")).thenReturn(admin);
         when(parkdb.newPark(1,5, 3, "Scooter", 67)).thenReturn(park);
         when(pdb.newPhamarcy(Constants.DEFAULT_ID, 912541234, "Pharmacy1", admin, add, parks)).thenReturn(pha);
+        when(pdb.newPhamarcy(Constants.DEFAULT_ID +1, 912541234, "Pharmacy1", admin, add, parks)).thenReturn(pha);
                 
     }
 

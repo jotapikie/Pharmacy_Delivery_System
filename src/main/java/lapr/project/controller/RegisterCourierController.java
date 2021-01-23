@@ -27,6 +27,14 @@ public class RegisterCourierController {
         this.couriersList = new HashSet<>();
         this.idPharmacy = idPharmacy;
     }
+
+    public RegisterCourierController(int idPharmacy) {
+        this.courierDB = new CourierDB();
+        this.couriersList = new HashSet<>();
+        this.idPharmacy = idPharmacy;
+    }
+    
+    
     
     public String newCourier(String name, String email, String password, int nif, int nss, double weight) {
         courier = courierDB.newCourier(name,email,password, nif, nss, weight);

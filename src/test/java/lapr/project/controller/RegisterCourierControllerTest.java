@@ -46,9 +46,7 @@ public class RegisterCourierControllerTest {
         idPharmacy = 1;
         couriers = new HashSet<>();
 
-        
-        
-        
+        RegisterCourierController c1 = new RegisterCourierController(idPharmacy);
     }
     
     @BeforeEach

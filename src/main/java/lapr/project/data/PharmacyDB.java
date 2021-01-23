@@ -81,7 +81,7 @@ public class PharmacyDB extends DataHandler {
 
 
     public int addPharmacies(Set<Pharmacy> pharmaciesList) throws SQLException {
-        Connection con = getConnection();
+        getConnection();
         int rows=0;
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcRegisterPharmacy(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             for (Pharmacy p : pharmaciesList) {

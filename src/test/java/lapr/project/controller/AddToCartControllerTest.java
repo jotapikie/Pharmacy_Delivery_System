@@ -52,6 +52,7 @@ public class AddToCartControllerTest {
         products.add(p3);
         
         cart = new HashMap<>();
+        AddToCartController c1 = new AddToCartController(email);
 
     }
 

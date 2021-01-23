@@ -25,6 +25,14 @@ public class RegisterClientController {
         this.ccdb = ccdb;
     }
 
+    public RegisterClientController() {
+        this.cdb = new ClientDB();
+        this.adb = new AddressDB();
+        this.ccdb = new CreditCardDB();
+    }
+    
+    
+
     public String newAddress(String street, double longitude, double latitude, double elevation, String city, int portNumber, String zipCode){
         address = adb.newAdress(street, longitude, latitude, elevation, city, portNumber, zipCode);
         return (address==null)? null : address.toString();

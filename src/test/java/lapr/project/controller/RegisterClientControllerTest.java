@@ -44,6 +44,7 @@ public class RegisterClientControllerTest {
         add = new Address("Street 1", new GeographicalPoint(45.2, 23.5, 0.2), "City 1", 23, "4525-454");
         card = new CreditCard(1234567891234567L, "02/22", 123);
         client = new Client("João", "123", "joao@gmail.com", 123456789, 912541623, card, add);
+        RegisterClientController c1 = new RegisterClientController();
     }
     
 

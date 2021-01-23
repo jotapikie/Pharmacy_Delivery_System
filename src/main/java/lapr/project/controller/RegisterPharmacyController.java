@@ -33,9 +33,20 @@ public class RegisterPharmacyController {
         this.adb = adb;
         this.adminDB = adminDB;
         this.parkDB = parkDB;
-        parks = new HashSet<>();
-        pharmaciesList = new HashSet<>();
+        this.parks = new HashSet<>();
+        this.pharmaciesList = new HashSet<>();
     }
+
+    public RegisterPharmacyController() {
+        this.pharmacyDB = new PharmacyDB();
+        this.adb = new AddressDB();
+        this.adminDB = new AdministratorDB();
+        this.parkDB = new ParkDB();
+        this.parks = new HashSet<>();
+        this.pharmaciesList = new HashSet<>();
+    }
+    
+    
     
     public String newAddress(String street, double longitude, double latitude, double elevation, String city, String zip, int port){
         add = adb.newAdress(street, longitude, latitude, elevation, city, port, zip);
@@ -53,7 +64,7 @@ public class RegisterPharmacyController {
     }
     
     public String newPharmacy(String name, int phoneNumber){
-        pha = pharmacyDB.newPhamarcy(Constants.DEFAULT_ID, phoneNumber, name, admin, add, parks);
+        pha = pharmacyDB.newPhamarcy(Constants.DEFAULT_ID+pharmaciesList.size(), phoneNumber, name, admin, add, parks);
         return pha.toString();
     }
     

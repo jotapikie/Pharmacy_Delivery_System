@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 /**
  * @author Nuno Bettencourt <nmb@isep.ipp.pt> on 24/05/16.
@@ -62,6 +63,8 @@ class Main {
             } catch (IOException | InterruptedException | SQLException e  ) {
                 e.printStackTrace();
                 Thread.currentThread().interrupt();
+            } catch (MessagingException ex) {
+                ex.printStackTrace();
             }
         }
         );
@@ -89,7 +92,7 @@ class Main {
 
 
     //Listens to estimate.data and estimate.data.flag
-    private static void listenForEstimates() throws IOException, InterruptedException, SQLException {
+    private static void listenForEstimates() throws IOException, InterruptedException, SQLException, MessagingException {
 
         WatchService watchService = FileSystems.getDefault().newWatchService();
         Path path = Paths.get(PATH_FILES);
@@ -133,7 +136,7 @@ class Main {
 
 
     //Gets information of both estimate files; finishes their journeys and sends an email to the user in question either with the estimated time or an alert that the scooter is not parked correctly
-    private static boolean deleteProtocol(File deleteEstimate, File deleteFlag) throws IOException, InterruptedException {
+    private static boolean deleteProtocol(File deleteEstimate, File deleteFlag) throws IOException, InterruptedException, MessagingException {
 
         try (BufferedReader br1 = Files.newBufferedReader(Paths.get(PATH_FILES + deleteEstimate))) {
 

@@ -34,7 +34,12 @@ public class AddToCartController {
         products = new HashMap<>();
     }
 
-
+    public AddToCartController(String email) {
+        this.clientEmail = email;
+        this.pdb = new ProductDB();
+        this.cpdb = new CartProductDB();
+        this.products = new HashMap<>();
+    }
     
     public List<String> getAvailableProducts() throws SQLException{
        return Utils.listToString(pdb.getProducts());

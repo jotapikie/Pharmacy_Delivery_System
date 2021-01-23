@@ -32,6 +32,14 @@ public class AddPathController {
         this.pdb = pdb;
         this.paths = new HashSet<>();
     }
+
+    public AddPathController() {
+        this.gpdb = new GeographicalPointDB();
+        this.pdb = new PathwayDB();
+        this.paths = new HashSet<>();
+    }
+    
+    
     
     public List<String> getAvailableGeographicalPoints() throws SQLException{
       return Utils.listToString(gpdb.getGeographicalPoints());
