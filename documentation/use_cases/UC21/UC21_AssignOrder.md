@@ -1,7 +1,7 @@
 # UC21 - Assign Order
 
 ## 1. Requirements Engineering
-The pharmacy administrator requests the assignment of the prepared orders. The system asks for the vehicle's category. The pharmacy administrator submits the data needed. The system Informs the pharmacy administrator about the success of the operation.
+The pharmacy administrator requests the assignment of the prepared orders. The system shows the already prepared orders. The pharmacy administrator chooses the merchandise wanted. The system asks for confirmation. The pharmacy administrator confirms. The system informs the pharmacy administrator about the success of the operation.
 
 ## SSD
 ![UC21_SSD.png](UC21_SSD.png)
