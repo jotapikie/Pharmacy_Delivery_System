@@ -49,13 +49,9 @@ public class NewVehicleControllerTest {
     @Test
     public void testNewEScooter() {
         int id = 27;
-        int weight = 5;
         State state= State.ACTIVE;
-        double aeroCoef = 5.0;
-        double frontalArea = 2.0;
         int maxBat = 8;
         int actualBat = 5;
-        int motor = 5;
 
         EScooter value = new EScooter(id,state,maxBat,actualBat);
         when(vdb.newEScooter(anyInt(),any(),anyInt(),anyInt())).thenReturn(value);
@@ -73,13 +69,7 @@ public class NewVehicleControllerTest {
     public void testRegisterVehicle() throws SQLException {
         NewVehicleController nvc3 = new NewVehicleController(vdb, pharmID);
         int id = 3;
-        int weight = 5;
-        State state= State.INACTIVE;
-        double aeroCoef = 5.0;
-        double frontalArea = 2.0;
         int maxBat = 8;
-        int actualBat = 100;
-        int motor = 5;
         nvc3.newEScooter(id,maxBat);
         when(vdb.save(any(Vehicle.class), anyInt())).thenReturn(true);
 
@@ -126,13 +116,7 @@ public class NewVehicleControllerTest {
     @Test
     public void testGetVehicles() {
         int id = 3;
-        int weight = 5;
-        State state= State.INACTIVE;
-        double aeroCoef = 5.0;
-        int actualBat = 5;
-        double frontalArea = 2.0;
         int maxBat = 8;
-        int motor = 5;
 
         EScooter b = nvc.newEScooter(id,maxBat);
         HashSet<Vehicle> vehicles = new HashSet<>();
@@ -146,6 +130,17 @@ public class NewVehicleControllerTest {
      */
     @Test
     public void testNewDrone() {
+        int id = 27;
+        State state= State.ACTIVE;
+        int maxBat = 8;
+        int actualBat = 5;
+
+        Drone value = new Drone(id,state,maxBat,actualBat);
+        when(vdb.newDrone(anyInt(),any(),anyInt(),anyInt())).thenReturn(value);
+
+        Drone expResult = new Drone(id, state, maxBat, actualBat);
+        Drone result = nvc2.newDrone(id, maxBat);
+        assertEquals(expResult, result);
   
     }
 
