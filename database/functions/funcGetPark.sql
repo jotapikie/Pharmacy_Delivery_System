@@ -1,12 +1,12 @@
-CREATE OR REPLACE FUNCTION funcGetPark(p_park_id park.parkt_id%TYPE) RETURN SYS_REFCURSOR
+CREATE OR REPLACE FUNCTION funcGetPark(p_park_id park.park_id%TYPE) RETURN SYS_REFCURSOR
     IS
     cur_park    SYS_REFCURSOR;
 
 BEGIN
     OPEN cur_park FOR
-            SELECT p.slot_id, p.able_to_charge, p.park_id, p.vehicle_nr
-            FROM park p
-            WHERE p.park_id = p_park_id;
+            SELECT ps.slot_id, ps.able_to_charge, ps.park_id, ps.vehicle_nr
+            FROM park_slot ps
+            WHERE ps.park_id = p_park_id;
     RETURN cur_park;
 
 EXCEPTION
