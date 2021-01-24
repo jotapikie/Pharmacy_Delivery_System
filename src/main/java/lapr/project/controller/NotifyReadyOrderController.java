@@ -32,6 +32,13 @@ public class NotifyReadyOrderController {
         ords = new ArrayList<>();
         
     }
+
+    public NotifyReadyOrderController(int idPharmacy) {
+        this.orderDB = new OrderDB();
+        this.idPharmacy = idPharmacy;
+    }
+    
+    
     
     public List<String> getPreparingOrders() throws SQLException{
         ords = orderDB.getOrdersByStatus(idPharmacy, "Preparing");

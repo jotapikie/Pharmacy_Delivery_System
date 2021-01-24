@@ -29,6 +29,14 @@ public class PrepareOrderController {
         this.idPhamarcy = idPhamarcy;
         ords = new ArrayList<>();
     }
+
+    public PrepareOrderController(int idPharmacy) {
+        this.odb = new OrderDB();
+        this.idPhamarcy = idPharmacy;
+        this.ords = new ArrayList<>();
+    }
+    
+    
     
     public List<String> getReadyToPrepareOrders() throws SQLException{
         ords = odb.getOrdersByStatus(idPhamarcy, "Processed");

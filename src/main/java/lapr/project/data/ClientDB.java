@@ -158,6 +158,7 @@ public class ClientDB extends DataHandler {
 
 
     void updateAfterOrder(Client cli) throws SQLException {
+        getConnection();
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procUpdateClientAfterOrder(?,?)")) {
             
 

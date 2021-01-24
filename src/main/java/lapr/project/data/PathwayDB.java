@@ -34,7 +34,7 @@ public class PathwayDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Pathway p = new Pathway(new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3)), new GeographicalPoint(rs.getFloat(5), rs.getFloat(6), rs.getFloat(7)), StreetType.valueOf(rs.getString(9)),  rs.getDouble(10), rs.getDouble(11), rs.getString(12));
+                Pathway p = new Pathway(new GeographicalPoint(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3), rs.getString(4)), new GeographicalPoint(rs.getFloat(5), rs.getFloat(6), rs.getFloat(7), rs.getString(8)), StreetType.valueOf(rs.getString(9)),  rs.getDouble(10), rs.getDouble(11), rs.getString(12));
                 listPaths.add(p);
             }
         }

@@ -63,6 +63,8 @@ public class NotifyReadyOrderControllerTest {
         when(odb.getOrder(4)).thenReturn(ord2);
         when(odb.getOrder(7)).thenReturn(ord3);
         when(odb.getOrder(10)).thenReturn(ord4);
+        
+        NotifyReadyOrderController C1 = new NotifyReadyOrderController(1);
     }
     
 

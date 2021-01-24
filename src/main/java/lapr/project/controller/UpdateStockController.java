@@ -33,6 +33,15 @@ public class UpdateStockController {
         products = new HashMap<>();
     }
 
+    public UpdateStockController(int idPharmacy) {
+        this.pdb = new ProductDB();
+        this.ppdb = new PharmacyStockDB();
+        this.idPharmacy = idPharmacy;
+        this.products = new HashMap<>();
+    }
+    
+    
+
 
     
     public List<String> getProducts() throws SQLException{

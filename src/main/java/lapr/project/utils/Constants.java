@@ -17,6 +17,8 @@ public class Constants {
     public static final double DEFAULT_PRICE = 1;
     public static final Timestamp DEFAULT_DATE = new Timestamp(1);
     public static final String DEFAULT_STATUS= "Processing";
+    public static final double AVERAGE_COURIER_WEIGHT = 75;
+    public static final int DEFAULT_SCOOTER_MAX_BAT = 10;
     
     public static final double SCOOTER_WEIGHT = 38.9;
     public static final int SCOOTER_MOTOR = 300;

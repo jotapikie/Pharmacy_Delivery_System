@@ -46,7 +46,7 @@ public class MakeOrderControllerTest {
     private  InvoiceDB idb;
     private  PharmacyStockDB ppdb;
     private  PharmacyDB phardb;
-    private final String email = "client1@lapr3.com";
+    private static final String email = "client1@lapr3.com";
     
     private  Client cli;
     private  Product p1;
@@ -64,7 +64,7 @@ public class MakeOrderControllerTest {
     
     @BeforeAll
     public static void setUpClass() throws SQLException {
-      
+      MakeOrderController c1 = new MakeOrderController(email);
 
         
     }

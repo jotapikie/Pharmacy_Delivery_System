@@ -34,6 +34,7 @@ public class PrepareOrderControllerTest {
         odb = mock(OrderDB.class);
         controller = new PrepareOrderController(odb, 1);
         
+        PrepareOrderController c1 = new PrepareOrderController(1);
         List<Order> orders = new ArrayList<>();
 
         ord1 = new Order();

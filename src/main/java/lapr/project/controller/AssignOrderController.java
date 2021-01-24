@@ -12,13 +12,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lapr.project.data.DeliveryRunDB;
+import lapr.project.data.GeographicalPointDB;
 import lapr.project.model.DeliveryRun;
+import lapr.project.model.GeographicalPoint;
+import lapr.project.model.LandGraph;
 import lapr.project.model.Product;
+import lapr.project.utils.route.Route;
 
 public class AssignOrderController {
 
     private final OrderDB orderDB;
     private final DeliveryRunDB runDB;
+    private final GeographicalPointDB pointDB;
     private int idPharmacy;
     private List<Order> orders;
     
@@ -27,10 +32,16 @@ public class AssignOrderController {
     private DeliveryRun run;
     private Set<DeliveryRun> runs;
     private double totalWeight;
+    private GeographicalPoint pharmacyCor;
+    private List<GeographicalPoint> clients;
+    
+    private Route land;
+    private Route air;
 
-    public AssignOrderController(OrderDB orderDB, DeliveryRunDB runDB, int idPharmacy) {
+    public AssignOrderController(OrderDB orderDB, DeliveryRunDB runDB,GeographicalPointDB pointDB, int idPharmacy) {
         this.orderDB = orderDB;
         this.runDB = runDB;
+        this.pointDB = pointDB;
         this.idPharmacy = idPharmacy;
         this.ordersSelected = new ArrayList<>();
         this.runs = new HashSet<>();
@@ -41,6 +52,7 @@ public class AssignOrderController {
    public AssignOrderController(int idPharmacy){
         this.orderDB=new OrderDB();
         this.runDB = new DeliveryRunDB();
+        this.pointDB = new GeographicalPointDB();
         this.idPharmacy = idPharmacy;
         ordersSelected = new ArrayList<>();
         runs = new HashSet<>();
@@ -50,6 +62,7 @@ public class AssignOrderController {
     public List<String> getAvailableOrders() throws SQLException{
         orders = orderDB.getOrdersByStatus(idPharmacy, "Prepared");
         orders.removeAll(ordersSelected);
+        ordersSelected.clear();
         return Utils.listToString(orders);
     }
     
@@ -77,7 +90,28 @@ public class AssignOrderController {
         return null;
     }
     
-    public String getLandRoute(){
+    public String getLandRoute() throws SQLException{
+        LandGraph landGraph = new LandGraph(totalWeight + Constants.SCOOTER_WEIGHT + Constants.AVERAGE_COURIER_WEIGHT, Constants.SCOOTER_AERO_COEF);
+        pharmacyCor = pointDB.getGeographicalPointByPharmacy(idPharmacy);
+        for(Order o : ordersSelected){
+            clients.add(o.getAddress().getGeographicalPoint());
+        }
+        List<Route> routes = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1, Constants.DEFAULT_SCOOTER_MAX_BAT);
+        if(routes.isEmpty()){
+            return null;
+        }
+        land = routes.get(0);
+        return land.toString();
+    }
+    
+    public String getMostEfficient(){
+        if(land != null && air != null){
+           if(land.compareTo(air)<0){
+               return "Drone";
+           }else{
+               return "Scooter";
+           }
+        }
         return null;
     }
     

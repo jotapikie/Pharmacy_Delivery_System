@@ -51,7 +51,7 @@ public class UpdateStockControllerTest {
         products.add(p1);
         products.add(p2);
         products.add(p3);
-        
+        UpdateStockController controller = new UpdateStockController(id);
         queue = new HashMap<>();
     }
     

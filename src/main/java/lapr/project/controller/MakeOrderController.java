@@ -72,6 +72,18 @@ public class MakeOrderController {
         creditsSpent = 0;
         creditsWon= 0;
     }
+
+    public MakeOrderController(String email) {
+        this.cdb = new ClientDB();
+        this.cpdb = new CartProductDB();
+        this.odb = new OrderDB();
+        this.idb = new InvoiceDB();
+        this.ppdb = new PharmacyStockDB();
+        this.pharDB = new PharmacyDB();
+        this.email = email;
+    }
+    
+    
    
     public String getCart() throws SQLException{
         cli = cdb.getClient(email);
@@ -182,6 +194,21 @@ public class MakeOrderController {
     private void sendEmail(){
        Utils.sendEmail(cli.getEmail(), "Order #" +ord.getId() , inv==null? "Your order is being processed.":inv.toString());
     }
+
+    
+    // #####  TEXT OUTPUT DEMONSTRATIONS ONLY
+    
+    public Address getClientAddress() {
+        return add;
+    }
+
+    public Pharmacy getPharmacyAssigned() {
+        return pha;
+    }
+    
+    
+    
+    
     
  
     

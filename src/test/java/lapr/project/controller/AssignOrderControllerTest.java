@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lapr.project.data.DeliveryRunDB;
+import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.OrderDB;
 import lapr.project.model.DeliveryRun;
+import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Order;
 import lapr.project.model.Product;
 import lapr.project.model.VehicleCategory;
@@ -37,6 +39,7 @@ public class AssignOrderControllerTest {
     private static AssignOrderController controller;
     private static OrderDB odb;
     private static DeliveryRunDB drdb;
+    private static GeographicalPointDB gpdb;
     
     private static Order o1;
     private static Order o2;
@@ -93,7 +96,8 @@ public class AssignOrderControllerTest {
     public void setUp() throws SQLException {
         odb = mock(OrderDB.class);
         drdb = mock(DeliveryRunDB.class);
-        controller = new AssignOrderController(odb, drdb, idPharmacy);
+        gpdb = mock(GeographicalPointDB.class);
+        controller = new AssignOrderController(odb, drdb,gpdb, idPharmacy);
         
         when(odb.getOrdersByStatus(idPharmacy, "Prepared")).thenReturn(orders);
         when(odb.getOrder(1)).thenReturn(o1);
@@ -156,8 +160,13 @@ public class AssignOrderControllerTest {
      * Test of getLandRoute method, of class AssignOrderController.
      */
     @Test
-    public void testGetLandRoute() {
-        assertNull(controller.getLandRoute());
+    public void testGetLandRoute() throws SQLException {
+        //assertNull(controller.getLandRoute());
+    }
+    
+    @Test
+    public void testGetMostEfficient() {
+        assertNull(controller.getMostEfficient());
     }
 
     /**
