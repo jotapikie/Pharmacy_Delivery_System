@@ -18,22 +18,22 @@ public class VehiclePathTest {
     
     private static GeographicalPoint or;
     static GeographicalPoint dest;
-    static VehiclePath path;
+    static ScooterPath path;
     
     @BeforeAll
     public static void setUpClass() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        path = new VehiclePath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7, 2.3,"Street1");
+        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7, 2.3,"Street1");
     }
     
     @AfterEach
     public void tearDown() {
-        path = new VehiclePath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7, 2.3, "Street1");
+        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7, 2.3, "Street1");
     }
 
     /**
-     * Test of getTotalWeight method, of class VehiclePath.
+     * Test of getTotalWeight method, of class ScooterPath.
      */
     @Test
     public void testGetTotalWeight() {
@@ -41,7 +41,7 @@ public class VehiclePathTest {
     }
 
     /**
-     * Test of getVehicleAerodynamicCoef method, of class VehiclePath.
+     * Test of getVehicleAerodynamicCoef method, of class ScooterPath.
      */
     @Test
     public void testGetVehicleAerodynamicCoef() {
@@ -49,7 +49,7 @@ public class VehiclePathTest {
     }
 
     /**
-     * Test of setTotalWeight method, of class VehiclePath.
+     * Test of setTotalWeight method, of class ScooterPath.
      */
     @Test
     public void testSetTotalWeight() {
@@ -76,7 +76,7 @@ public class VehiclePathTest {
     }
 
     /**
-     * Test of setVehicleAerodynamicCoef method, of class VehiclePath.
+     * Test of setVehicleAerodynamicCoef method, of class ScooterPath.
      */
     @Test
     public void testSetVehicleAerodynamicCoef() {
@@ -102,7 +102,7 @@ public class VehiclePathTest {
     }
 
     /**
-     * Test of getCost method, of class VehiclePath.
+     * Test of getCost method, of class ScooterPath.
      */
     @Test
     public void testGetCost() {

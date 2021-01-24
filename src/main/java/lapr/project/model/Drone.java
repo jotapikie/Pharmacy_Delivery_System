@@ -5,22 +5,59 @@
  */
 package lapr.project.model;
 
+import lapr.project.utils.Constants;
+
 /**
  *
  * @author Helder
  */
 public class Drone extends Vehicle{
-    
-    public Drone(int id, double weight, State state, int maxBat, int actualBat, int motor) {
-        super(id, weight, state, maxBat, actualBat, motor);
+    private static final double aeroCoef = Constants.DRONE_AERO_COEF;
+    private static final double eletronicalConsumer = Constants.DRONE_ELETRONICAL_CONSUME;
+    private static final double frontalArea = Constants.DRONE_FRONTAL_AREA;
+    private static final double topArea = Constants.DRONE_TOP_AREA;
+    private static final double powerTransfer = Constants.DRONE_POWER_TRANSFER;
+    private static final double liftDrag = Constants.DRONE_LIFT_DRAG;
+
+    public Drone(int id, State state, int maxBat, int actualBat) {
+        super(id, aeroCoef, state, maxBat, actualBat, actualBat);
+    }
+
+    public static double getEletronicalConsumer() {
+        return eletronicalConsumer;
+    }
+
+    public static double getFrontalArea() {
+        return frontalArea;
+    }
+
+    public static double getTopArea() {
+        return topArea;
+    }
+
+    public static double getPowerTransfer() {
+        return powerTransfer;
+    }
+
+    public static double getLiftDrag() {
+        return liftDrag;
+    }
+
+    public static double getAeroCoef() {
+        return aeroCoef;
     }
     
-    public void updateDroneData(double weight, State state, int maxBat, int motor) {
-        super.setWeight(weight);
-        super.setState(state);
-        super.setMaxBat(maxBat);
-        super.setMotor(motor);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
 
 
     
