@@ -69,13 +69,6 @@ public class EScooterTest {
         }
     }
  
-
-
-  
-
- 
-
-
     /**
      * Test of setId method, of class vehicle.
      */
@@ -496,5 +489,17 @@ public class EScooterTest {
         boolean result = scooterTest.equals(scooter);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of getFrontalArea method, of class EScooter.
+     */
+    @Test
+    public void testGetFrontalArea() {
+        double expResult = 0.65;
+        double result = scooterTest.getFrontalArea();
+        assertEquals(expResult, result, 0.0);
+    }
+
+    
 
 }
