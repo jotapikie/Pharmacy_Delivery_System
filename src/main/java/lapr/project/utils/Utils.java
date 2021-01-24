@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.WeakHashMap;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -144,10 +145,11 @@ public class Utils {
     }
 
 
-    public static double pathEnergyCost(double totalWeight, double kineticCoef, double vehicleAerodynamicCoef, double windToPath, double altitudeDif, double distance) {
+    public static double pathEnergyCost(double totalWeight, double kineticCoef, double vehicleAerodynamicCoef, Wind windPath, double altitudeDif, double distance) {
         if (distance <= 0 || altitudeDif >= distance || vehicleAerodynamicCoef < 0 || kineticCoef <= 0 || totalWeight <= 0) {
             throw new IllegalArgumentException("This path has invalid data!");
         }
+        double windToPath= windPath.windDirection();
         double wind = (windToPath > 0) ? -Math.pow(windToPath, 2) : Math.pow(windToPath, 2);
         double result = ((Constants.GRAVITY * totalWeight * (kineticCoef + Math.asin(Math.abs(altitudeDif) / distance)))
                 + (vehicleAerodynamicCoef + wind)) * distance / 3600;
@@ -184,6 +186,7 @@ public class Utils {
         }
         return Math.toDegrees(Math.atan2(Math.abs(longitude2 - longitude1), Math.abs(latitude2 - latitude1)));
     }
+
 
     public static double windToPath(double pathDirec, int windDirection, double windSpeed) {
         if (windSpeed < 0) {

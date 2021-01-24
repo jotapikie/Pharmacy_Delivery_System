@@ -11,4 +11,8 @@ public class Wind {
         this.vz= vz;
     }
 
+    public int windDirection(){
+        return (int) Math.atan(this.vy/this.vx);
+
+    }
 }
