@@ -5,6 +5,7 @@
  */
 package lapr.project.ui.text;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,8 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lapr.project.controller.AddPathController;
@@ -58,14 +57,14 @@ public class TextFiles {
     public static void main(String[] args) {
      
         // NOTA: ANTES DE EXCEUTAR ESTE CODIGO APAGAR OS DADOS DAS TABELAS PARA NAO ERROS DE CHAVES EXCLUSIVAS
-//        System.out.println("Adding products...");
-//        System.out.printf("%d products were added. %n", insertProducts());
-//        System.out.println("Adding pharmacies...");
-//        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
-//        System.out.println("Adding clients...");
-//        System.out.printf("%d clients were added. %n", insertClients());
-//        System.out.println("Adding couriers...");
-//        System.out.printf("%d couriers were added. %n", insertCouriers());
+        System.out.println("Adding products...");
+        System.out.printf("%d products were added. %n", insertProducts());
+        System.out.println("Adding pharmacies...");
+        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
+        System.out.println("Adding clients...");
+        System.out.printf("%d clients were added. %n", insertClients());
+        System.out.println("Adding couriers...");
+        System.out.printf("%d couriers were added. %n", insertCouriers());
         menu();
     }
 
@@ -88,16 +87,16 @@ public class TextFiles {
                 menu();
         }
         
-//        System.out.println("Adding paths...");
-//        System.out.printf("%d paths were added. %n", insertPaths());
-//        System.out.println("Adding products to carts...");
-//        System.out.printf("%d carts were updated. %n", updateCarts());
-//        System.out.println("Adding products to pharmacies stocks...");
-//        System.out.printf("%d products were added to pharmacies stock. %n", updateStock());
-//        System.out.println("Making orders...");
-//        System.out.printf("%d orders were made. %n", makeOrders());
-//        System.out.println("Preparing orders...");
-//        System.out.printf("%d orders were prepared. %n", prepareOrders());
+        System.out.println("Adding paths...");
+        System.out.printf("%d paths were added. %n", insertPaths());
+        System.out.println("Adding products to carts...");
+        System.out.printf("%d carts were updated. %n", updateCarts());
+        System.out.println("Adding products to pharmacies stocks...");
+        System.out.printf("%d products were added to pharmacies stock. %n", updateStock());
+        System.out.println("Making orders...");
+        System.out.printf("%d orders were made. %n", makeOrders());
+        System.out.println("Preparing orders...");
+        System.out.printf("%d orders were prepared. %n", prepareOrders());
         System.out.println("Creating delivery runs...");
         System.out.printf("%d delivery runs were created. %n", assignOrders());
 
@@ -328,11 +327,11 @@ public class TextFiles {
                    controller.addOrder();
                    i++;
                }
-               write(String.format("Land route: %s", controller.getLandRoute()));
-               write(String.format("Air route: %s", controller.getAirRoute()));
-//               controller.newDeliveryRun(line[1]);
-//               controller.addToQueue();
-//               ordersAssigned = ordersAssigned + controller.saveDeliveryRuns();
+               write(String.format("Land route:%n%s%n", controller.getLandRoute()));
+               write(String.format("Air route:%n%s%n", controller.getAirRoute()));
+               controller.newDeliveryRun(line[1]);
+               controller.addToQueue();
+               ordersAssigned = ordersAssigned + controller.saveDeliveryRuns();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -364,14 +363,27 @@ public class TextFiles {
     }
     
     private static void write(String message){
-        try {
-            File f = new File(RESULT);
-            f.createNewFile();
-            FileWriter myWriter = new FileWriter(f);
-            myWriter.write(message);
-            myWriter.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        File log = new File(RESULT);
+        BufferedWriter bufferedWriter = null;
+        try{
+            if(!log.exists()){
+                log.createNewFile();
+            }
+
+        FileWriter fileWriter = new FileWriter(log, true);
+
+        bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(message);
+
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                bufferedWriter.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

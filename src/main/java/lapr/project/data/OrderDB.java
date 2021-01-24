@@ -64,7 +64,7 @@ public class OrderDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9)), rs.getString(10), rs.getInt(12), rs.getString(11)));
+                o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10)), rs.getString(11), rs.getInt(13), rs.getString(12)));
                 HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
                 o.setProducts(products);
                 return o;
