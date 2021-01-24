@@ -16,6 +16,7 @@ import java.util.Set;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
 import lapr.project.model.StreetType;
+import lapr.project.model.Wind;
 import lapr.project.utils.Utils;
 import oracle.jdbc.OracleTypes;
 
@@ -44,11 +45,11 @@ public class PathwayDB extends DataHandler{
 
 
 
-    public Pathway newPath(GeographicalPoint or, GeographicalPoint dest, String type, int windDirection, double windSpeed, String street) {
+    public Pathway newPath(GeographicalPoint or, GeographicalPoint dest, String type, Wind wind, String street) {
         double pathDirec = Utils.pathDirection(or.getLatitude(), or.getLongitude(), dest.getLatitude(), dest.getLongitude());
-        double wind = Utils.windToPath(pathDirec, windDirection, windSpeed);
+        double windValue = Utils.windToPath(pathDirec, wind);
         double distance = Utils.distance(or.getLatitude(), dest.getLatitude(), or.getLongitude(), dest.getLongitude(), or.getElevation(), dest.getElevation());
-        return new Pathway(or, dest, StreetType.fromString(type), distance, wind, street);
+        return new Pathway(or, dest, StreetType.fromString(type), distance, windValue, street);
     }
 
     public int savePaths(Set<Pathway> paths) throws SQLException {

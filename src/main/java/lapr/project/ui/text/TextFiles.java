@@ -28,6 +28,7 @@ import lapr.project.controller.RegisterCourierController;
 import lapr.project.controller.RegisterPharmacyController;
 import lapr.project.controller.RegisterProductController;
 import lapr.project.controller.UpdateStockController;
+import lapr.project.model.Wind;
 
 /**
  *
@@ -199,7 +200,7 @@ public class TextFiles {
             for(String path : importFile(PATHS)){
                 
                 line = path.split(";");
-                controller.selectPoints(Double.parseDouble(line[1]), Double.parseDouble(line[0]), Double.parseDouble(line[3]), Double.parseDouble(line[2]), line[4], Integer.parseInt(line[5]), Double.parseDouble(line[6]), line[7]);
+                controller.selectPoints(Double.parseDouble(line[1]), Double.parseDouble(line[0]), Double.parseDouble(line[3]), Double.parseDouble(line[2]), line[4], new Wind( Double.parseDouble(line[6]),Double.parseDouble(line[7]),Double.parseDouble(line[8])), line[9]);
                 controller.addToQueue();
             }
             return controller.savePaths();

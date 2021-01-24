@@ -14,6 +14,8 @@ import lapr.project.controller.AddPathController;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
 import lapr.project.model.StreetType;
+import lapr.project.model.Wind;
+
 import static lapr.project.ui.UtilsUI.header;
 
 /**
@@ -68,11 +70,13 @@ public class AddPathUI {
         System.out.println("Latitude (Destination):");
         double latitude2 = Double.parseDouble(read.nextLine());
         System.out.println();
-        System.out.println("Wind Direction (Degrees):");
-        int windDirection = Integer.parseInt(read.nextLine());
+        System.out.println("Wind vector (x):");
+        int windx = Integer.parseInt(read.nextLine());
+        System.out.println("Wind vector (y):");
+        int windy = Integer.parseInt(read.nextLine());
+        System.out.println("Wind vector (z):");
+        int windz = Integer.parseInt(read.nextLine());
         System.out.println();
-        System.out.println("Wind Speed:");
-        double windSpeed = Double.parseDouble(read.nextLine());
         System.out.println();
         System.out.println("Road Category (Asphalt, Off-Road, Sidewalk):");
         String streetType = read.nextLine();
@@ -80,7 +84,7 @@ public class AddPathUI {
         System.out.println("Name (Street):");
         String street = read.nextLine();
         System.out.println();
-        String res = controller.selectPoints(longitude1, latitude1, longitude2, latitude2, streetType, windDirection, windSpeed, street);
+        String res = controller.selectPoints(longitude1, latitude1, longitude2, latitude2, streetType, new Wind(windx,windy,windz), street);
         if(res == null){
             System.out.println();
             System.out.println("Error: Invalid data inserted, try again.");

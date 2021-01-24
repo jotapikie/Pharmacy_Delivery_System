@@ -203,10 +203,9 @@ public class UtilsTest {
     public void testWindToPath() {
         System.out.println("windToPath");
         double pathDirec = 1.0;
-        int windDirection = 1;
-        double windSpeed = 2.0;
+        Wind wind= new Wind(1,1,1);
         double expResult = 2.0;
-        double result = Utils.windToPath(pathDirec, windDirection, windSpeed);
+        double result = Utils.windToPath(pathDirec, wind);
         assertEquals(expResult, result, 0.0);
     }
     

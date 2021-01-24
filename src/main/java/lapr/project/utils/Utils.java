@@ -145,11 +145,10 @@ public class Utils {
     }
 
 
-    public static double pathEnergyCost(double totalWeight, double kineticCoef, double vehicleAerodynamicCoef, Wind windPath, double altitudeDif, double distance) {
+    public static double pathEnergyCost(double totalWeight, double kineticCoef, double vehicleAerodynamicCoef, double windToPath, double altitudeDif, double distance) {
         if (distance <= 0 || altitudeDif >= distance || vehicleAerodynamicCoef < 0 || kineticCoef <= 0 || totalWeight <= 0) {
             throw new IllegalArgumentException("This path has invalid data!");
-        }
-        double windToPath= windPath.windDirection();
+        };
         double wind = (windToPath > 0) ? -Math.pow(windToPath, 2) : Math.pow(windToPath, 2);
         double result = ((Constants.GRAVITY * totalWeight * (kineticCoef + Math.asin(Math.abs(altitudeDif) / distance)))
                 + (vehicleAerodynamicCoef + wind)) * distance / 3600;
@@ -188,14 +187,14 @@ public class Utils {
     }
 
 
-    public static double windToPath(double pathDirec, int windDirection, double windSpeed) {
-        if (windSpeed < 0) {
+    public static double windToPath(double pathDirec, Wind wind) {
+        if (wind == null) {
             throw new IllegalArgumentException("Invalid wind speed!");
         }
-        if (!validateDegrees(pathDirec) || !validateDegrees(windDirection)) {
+        if (!validateDegrees(pathDirec) || !validateDegrees(wind.direction())) {
             throw new IllegalArgumentException("Invalid degrees!");
         }
-        return windSpeed * Math.cos(windDirection - pathDirec);
+        return wind.speed() * Math.cos(wind.direction() - pathDirec);
     }
 
     private static boolean validateCoordinates(double latitude, double longitude) {
