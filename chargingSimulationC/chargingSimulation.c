@@ -3,12 +3,14 @@
 #include <dirent.h>
 #include <pcre.h>
 #include "asm.h"
+#include "main.h"
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <limits.h>
 #include <sys/stat.h>
 char *path= "/media/partilha/pls/LAPR3/files";
-
+short nr_parks = 0;
 
 int exists(const char *filePath)
 {
@@ -24,51 +26,6 @@ int exists(const char *filePath)
     return 1;
     
 }
-
-
-
-
-
-void writeEstimatedFile( const int scooterID, const int result){
-	char newText[20];
-    time_t now= time(NULL);
-    struct tm *t =localtime(&now);
-    strftime(newText, sizeof(newText)-1,"%Y_%m_%d_%H_%M",t);
-    
-    char *name= (char*) calloc(50,sizeof(char));
-    char *newFilePath= (char*) calloc(200,sizeof(char));
-    char *newFlagPath= (char*) calloc(200,sizeof(char));
-    sprintf(name, "estimated_%s_34.data", newText);
-    sprintf(newFilePath,"%s",path);
-    strcat(newFilePath,"/");
-    strcat(newFilePath,name);
-    strcpy(newFlagPath, newFilePath);
-    strcat(newFlagPath, ".flag");
-    
-    char *fileContent= (char*) calloc(20,sizeof(char));
-    sprintf(fileContent, "%d %d",scooterID,result);
-    FILE *fptr =NULL;
-    fptr= fopen(newFilePath, "wb");
-    if (fptr ==NULL)
-	{
-		exit(1);
-	}
-	fprintf(fptr, "%s", fileContent );
-    fclose(fptr);
-    
-    FILE *fp=NULL;	
-    fp=fopen(newFlagPath, "w");
-    if (fp ==NULL)
-	{
-		exit(1);
-	}
-    fclose(fp);
-    free(name);
-    free(newFilePath);
-    free(newFlagPath);
-    free(fileContent);
-}
-
 
 
 
@@ -112,43 +69,125 @@ void writeFailFile( const int scooterID){
 
 }
 
-void readValidatedFile(const char *filePath){
+
+
+void writeEstimatedFile( const int scooterID, const int parkID, const int slotID, const int result){
+	char newText[20];
+    time_t now= time(NULL);
+    struct tm *t =localtime(&now);
+    strftime(newText, sizeof(newText)-1,"%Y_%m_%d_%H_%M",t);
+    
+    char *name= (char*) calloc(50,sizeof(char));
+    char *newFilePath= (char*) calloc(200,sizeof(char));
+    char *newFlagPath= (char*) calloc(200,sizeof(char));
+    sprintf(name, "estimated_%s_34.data", newText);
+    sprintf(newFilePath,"%s",path);
+    strcat(newFilePath,"/");
+    strcat(newFilePath,name);
+    strcpy(newFlagPath, newFilePath);
+    strcat(newFlagPath, ".flag");
+    
+    char *fileContent= (char*) calloc(20,sizeof(char));
+    sprintf(fileContent, "%d %d %d %d ",scooterID, parkID, slotID,result);
+    FILE *fptr =NULL;
+    fptr= fopen(newFilePath, "wb");
+    if (fptr ==NULL)
+	{
+		exit(1);
+	}
+	fprintf(fptr, "%s", fileContent );
+    fclose(fptr);
+    
+    FILE *fp=NULL;	
+    fp=fopen(newFlagPath, "w");
+    if (fp ==NULL)
+	{
+		exit(1);
+	}
+    fclose(fp);
+    free(name);
+    free(newFilePath);
+    free(newFlagPath);
+    free(fileContent);
+}
+
+
+
+void readValidatedFile(const char *filePath, park *parks){
 	FILE *file=NULL;
 	file=fopen(filePath,"r");
-	int i=0,j;
     int scooterID;
-    int var;
+    int parkID;
+    int slotID;
     int input[2];
     if (file == NULL){
         exit(1);
     }
     fscanf (file, "%d", &scooterID);
-    for (j = 0; j < 2; j++)
-	{
-		fscanf (file, "%d", &var);
-		input[i++] = var;
-	}
+    fscanf (file, "%d", &parkID);
+    fscanf (file, "%d", &slotID);
+    fscanf (file, "%d", &input[0]);
+    fscanf (file, "%d", &input[1]);
 	fclose(file);
     if((input[0]==0) || (input[1]>input[0])){ 
 		writeFailFile(scooterID);
     
     }else{
-        int result= calculateEstimated(input[0],input[1]);
-        writeEstimatedFile(scooterID, result);
-		
-	
-	
+        saveOnStruct(scooterID, parkID, slotID,input[0], input[1], parks);
 }
 }
 
 
 
+void saveOnStruct(const int scooterID, const int parkID, const int slotID, const int maxBat, const int actualBat, park *parks){
+	  printf("\n%d",nr_parks);
+	   printf("\n%d", parks->id);
+      long long temp = save_park(parks, nr_parks, parkID);
+      printf("\n%d", parks->id);
+      int check = (int) (temp & UINT_MAX);
+      int i = (int) (temp >> 32);
+      //Creates a pointer for the current park
+      park *park_ptr = &parks[i];
+      if(check == 2){
+	  nr_parks++;
+	  park *tmp_ptr = (park*) realloc(parks, sizeof(park) * (nr_parks + 1));
+      if (tmp_ptr != NULL) {
+      parks = tmp_ptr;
+      tmp_ptr = NULL;
+      }
+      park *park_ptr = &parks[i];
+	
+	   park_ptr = &parks[i];
+	   park_ptr -> slots = (park_slot*) calloc(1, sizeof(park_slot));
+   }
+       save_park_slot(park_ptr, slotID, scooterID, maxBat, actualBat);
+       
+       park_slot *tmp = (park_slot*) realloc(park_ptr->slots, sizeof(park_slot) * (park_ptr->occupancy +1));  
+       if (tmp != NULL)
+	   {
+		   park_ptr->slots =tmp;
+		   tmp = NULL;
+	   }
+	   short k;
+	   for (k = 0; k < park_ptr->occupancy ; k++)
+	   {
+		park_slot *slot_ptr= &park_ptr->slots[k];
+		printf("\n%d", park_ptr->power_output);
+		int result= calculateEstimated(slot_ptr-> battery, slot_ptr-> actualBat, park_ptr-> power_output);
+		writeEstimatedFile(slot_ptr->vehicleID,*(&park_ptr->id), slot_ptr->slotID, result);
+		sleep(61);  
+	   }
+	   
+	   
 
+
+}
 
 
 
 int main(void) {
-	DIR *dir_ptr = opendir(path);
+	park *parks = (park*) calloc(2, sizeof(park));
+     	DIR *dir_ptr = opendir(path);
 	if ((dir_ptr ) == NULL){
 		printf("ERROR\n");
 		return -1;
@@ -180,7 +219,7 @@ int main(void) {
 			isThere= exists(lockFlagPath);
 			if (isThere==1)
 			{
-				readValidatedFile(lockPath);
+				readValidatedFile(lockPath, parks);
 				remove(lockPath);
 				remove(lockFlagPath);
 			    

@@ -1,5 +1,3 @@
-.section .data
- .equ POWER_OUTPUT , 12
 .section .text
  .global calculateEstimated;
  calculateEstimated:
@@ -10,8 +8,9 @@
    
    movl 8(%ebp), %eax		
    movl 12(%ebp), %ecx
+   movl 16(%ebp), %ebx
    subl %ecx, %eax
-   movl $POWER_OUTPUT, %ecx
+   movl %ebx, %ecx
    movl $0, %edx
    cdq
    idivl %ecx  
