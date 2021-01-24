@@ -152,7 +152,7 @@ public class AssignOrderControllerTest {
      * Test of getAirRoute method, of class AssignOrderController.
      */
     @Test
-    public void testGetAirRoute() {
+    public void testGetAirRoute() throws SQLException {
         assertNull(controller.getAirRoute());
     }
 
