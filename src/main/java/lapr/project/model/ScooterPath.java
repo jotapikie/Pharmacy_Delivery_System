@@ -39,7 +39,7 @@ public final class ScooterPath extends Pathway{
      * @param totalWeight
      * @param vehicleAerodynamicCoef
      */
-    public ScooterPath(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, StreetType type, double wind, double totalWeight, String street) {
+    public ScooterPath(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, StreetType type, Wind wind, double totalWeight, String street) {
         super(origPoint, destPoint, type, distance, wind, street);
         setTotalWeight(totalWeight);
         calculateEnergyCost();
@@ -74,7 +74,7 @@ public final class ScooterPath extends Pathway{
      * Calculates the energy cost in Wh.
      */
     private void calculateEnergyCost() {
-        energyCost = Utils.pathEnergyCost(totalWeight, super.getKineticCoef(),Constants.SCOOTER_AERO_COEF, super.getWind(), super.getElevationDif(), super.getDistance());
+        energyCost = Utils.pathEnergyCost(totalWeight, super.getKineticCoef(),Constants.SCOOTER_AERO_COEF, Utils.windToPath(Utils.pathDirection(super.getOriginPoint().getLatitude(),super.getOriginPoint().getLongitude(),super.getDestinationPoint().getLatitude(),super.getDestinationPoint().getLongitude()),super.getWind()), super.getElevationDif(), super.getDistance());
     }
 
     /**

@@ -35,7 +35,7 @@ public class PathwayDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Pathway p = new Pathway(new GeographicalPoint(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4)), new GeographicalPoint(rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getString(8)),StreetType.fromString(rs.getString(10)),  rs.getDouble(9), rs.getDouble(11), rs.getString(12));
+                Pathway p = new Pathway(new GeographicalPoint(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4)), new GeographicalPoint(rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getString(8)),StreetType.fromString(rs.getString(10)),  rs.getDouble(9), new Wind(rs.getDouble(11),rs.getDouble(12),rs.getDouble(13)), rs.getString(14));
                 /// REVER ISTO
                 listPaths.add(p);
             }
@@ -49,13 +49,13 @@ public class PathwayDB extends DataHandler{
         double pathDirec = Utils.pathDirection(or.getLatitude(), or.getLongitude(), dest.getLatitude(), dest.getLongitude());
         double windValue = Utils.windToPath(pathDirec, wind);
         double distance = Utils.distance(or.getLatitude(), dest.getLatitude(), or.getLongitude(), dest.getLongitude(), or.getElevation(), dest.getElevation());
-        return new Pathway(or, dest, StreetType.fromString(type), distance, windValue, street);
+        return new Pathway(or, dest, StreetType.fromString(type), distance, wind, street);
     }
 
     public int savePaths(Set<Pathway> paths) throws SQLException {
        Connection c = getConnection();
         int rows[];
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddPath(?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddPath(?,?,?,?,?,?,?,?,?,?) }")) {
             for (Pathway path : paths) {
                 callStmt.setDouble(1, path.getOriginPoint().getLongitude());
                 callStmt.setDouble(2, path.getOriginPoint().getLatitude());
@@ -64,8 +64,9 @@ public class PathwayDB extends DataHandler{
                 callStmt.setDouble(5, path.getDistance());
                 callStmt.setString(6, path.getStreet());
                 callStmt.setString(7, path.getStreetType().getName());
-                callStmt.setDouble(8, (double) Math.round(path.getWind() * 100) / 100);
-
+                callStmt.setDouble(8, path.getWind().vx);
+                callStmt.setDouble(9, path.getWind().vx);
+                callStmt.setDouble(10, path.getWind().vx);
                 callStmt.addBatch();
             }
             c.setAutoCommit(false);

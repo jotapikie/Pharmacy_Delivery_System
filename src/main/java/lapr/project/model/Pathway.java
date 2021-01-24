@@ -22,12 +22,12 @@ public class Pathway implements PathInterface{
     private GeographicalPoint destinationPoint;
     private double kineticCoef;
     private double distance;
-    private double wind;
+    private Wind wind;
     private String street;
     private StreetType streetType;
     
     
-     public Pathway(GeographicalPoint origLocation, GeographicalPoint destLocation, StreetType type, double distance, double wind, String street) {
+     public Pathway(GeographicalPoint origLocation, GeographicalPoint destLocation, StreetType type, double distance, Wind wind, String street) {
         setOriginPoint(origLocation);
         setDestinationPoint(destLocation);
         setStreetType(type);
@@ -125,7 +125,7 @@ public class Pathway implements PathInterface{
      *
      * @return
      */
-    public double getWind() {
+    public Wind getWind() {
         return wind;
     }
 
@@ -178,7 +178,7 @@ public class Pathway implements PathInterface{
     /**
      * method to set the kinetic coefficient of the path
      *
-     * @param kinetic_coef
+     * @param kineticCoef
      */
     public final void setKineticCoef(double kineticCoef) {
         if (kineticCoef < 0) {
@@ -192,7 +192,7 @@ public class Pathway implements PathInterface{
      *
      * @param wind
      */
-    public final void setWind(double wind) {
+    public final void setWind(Wind wind) {
         this.wind = wind;
     }
 
@@ -226,7 +226,7 @@ public class Pathway implements PathInterface{
         if (Double.doubleToLongBits(this.kineticCoef) != Double.doubleToLongBits(other.kineticCoef)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.wind) != Double.doubleToLongBits(other.wind)) {
+        if (this.wind.equals(other.wind)) {
             return false;
         }
         if (this.distance != other.distance) {

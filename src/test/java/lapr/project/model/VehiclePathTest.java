@@ -24,12 +24,12 @@ public class VehiclePathTest {
     public static void setUpClass() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7,"Street1");
+        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, new Wind(1,1,1), 56.7,"Street1");
     }
     
     @AfterEach
     public void tearDown() {
-        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7, "Street1");
+        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, new Wind(1,1,1), 56.7, "Street1");
     }
 
     /**

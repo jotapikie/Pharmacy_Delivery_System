@@ -131,19 +131,19 @@ public class StartDeliveryRunControllerTest {
         points.add(p4);points.add(p5);points.add(p6);
         points.add(p7);points.add(p8);points.add(p9);points.add(p10);
         
-        path1 = new Pathway(p1, p2, StreetType.ASPHALT, 100, 0.2,"Street1");
-        path2 = new Pathway(p1, p3, StreetType.ASPHALT, 75, 0.23,"Street2");
-        path3 = new Pathway(p2, p7, StreetType.ASPHALT, 130, 0.1,"Street3");
-        path4 = new Pathway(p4, p1, StreetType.ASPHALT, 200, 0.16, "Street4");
-        path5 = new Pathway(p3, p9, StreetType.ASPHALT, 50, 0.13,"Street5");
-        path6 = new Pathway(p9, p3, StreetType.ASPHALT, 130, 0.1,"Street6");
-        path7 = new Pathway(p7, p5, StreetType.ASPHALT, 20, 0.89, "Street7");
-        path8 = new Pathway(p5, p8, StreetType.ASPHALT, 110, 0.25, "Street8");
-        path9 = new Pathway(p5, p6, StreetType.ASPHALT, 190, 0.47, "Street9");
-        path10 = new Pathway(p8, p9, StreetType.ASPHALT, 115, 0.18, "Street10");
-        path11 = new Pathway(p6, p4, StreetType.ASPHALT, 30, 0.2, "Street11");
-        path12 = new Pathway(p8, p10, StreetType.ASPHALT, 30, 0.3, "Street12");
-        path13 = new Pathway(p3, p4, StreetType.ASPHALT, 60, 0.3, "Street13");
+        path1 = new Pathway(p1, p2, StreetType.ASPHALT, 100, new Wind(1,1,1),"Street1");
+        path2 = new Pathway(p1, p3, StreetType.ASPHALT, 75, new Wind(1,1,1),"Street2");
+        path3 = new Pathway(p2, p7, StreetType.ASPHALT, 130, new Wind(1,1,1),"Street3");
+        path4 = new Pathway(p4, p1, StreetType.ASPHALT, 200, new Wind(1,1,1), "Street4");
+        path5 = new Pathway(p3, p9, StreetType.ASPHALT, 50, new Wind(1,1,1),"Street5");
+        path6 = new Pathway(p9, p3, StreetType.ASPHALT, 130, new Wind(1,1,1),"Street6");
+        path7 = new Pathway(p7, p5, StreetType.ASPHALT, 20, new Wind(1,1,1), "Street7");
+        path8 = new Pathway(p5, p8, StreetType.ASPHALT, 110, new Wind(1,1,1), "Street8");
+        path9 = new Pathway(p5, p6, StreetType.ASPHALT, 190, new Wind(1,1,1), "Street9");
+        path10 = new Pathway(p8, p9, StreetType.ASPHALT, 115, new Wind(1,1,1), "Street10");
+        path11 = new Pathway(p6, p4, StreetType.ASPHALT, 30, new Wind(1,1,1), "Street11");
+        path12 = new Pathway(p8, p10, StreetType.ASPHALT, 30, new Wind(1,1,1), "Street12");
+        path13 = new Pathway(p3, p4, StreetType.ASPHALT, 60, new Wind(1,1,1), "Street13");
         paths = new ArrayList<>();
         paths.add(path1);paths.add(path2);paths.add(path3);paths.add(path4);paths.add(path5);
         paths.add(path6);paths.add(path7);paths.add(path8);paths.add(path9);paths.add(path10);
@@ -151,16 +151,16 @@ public class StartDeliveryRunControllerTest {
         
         
    //p1 p2 p7 p5 p8 p9 p3 p4 p1
-      ScooterPath vp1 = new ScooterPath(p1, p2, 100, StreetType.ASPHALT, 0.2, totalWeight, "Street1");
-      ScooterPath vp2 = new ScooterPath(p2, p7, 130, StreetType.ASPHALT, 0.1, totalWeight,  "Street3");
-      ScooterPath vp3 = new ScooterPath(p7, p5, 20, StreetType.ASPHALT, 0.89, totalWeight,  "Street7");
-      ScooterPath vp4 = new ScooterPath(p5, p8, 110, StreetType.ASPHALT, 0.25, totalWeight,  "Street8");
-      ScooterPath vp5 = new ScooterPath(p8, p9, 115, StreetType.ASPHALT, 0.18, totalWeight,  "Street10");
-      ScooterPath vp6 = new ScooterPath(p9, p3, 130, StreetType.ASPHALT, 0.1, totalWeight, "Street6");
-      ScooterPath vp7 = new ScooterPath(p3, p4, 60, StreetType.ASPHALT, 0.3, totalWeight,  "Street13");
-      ScooterPath vp8 = new ScooterPath(p4, p1, 200, StreetType.ASPHALT, 0.16, totalWeight, "Street4");
-      ScooterPath vp9 = new ScooterPath(p5, p6, 190, StreetType.ASPHALT, 0.47, totalWeight,  "Street9");
-      ScooterPath vp10 = new ScooterPath(p6, p4, 30, StreetType.ASPHALT, 0.12, totalWeight,  "Street11");
+      ScooterPath vp1 = new ScooterPath(p1, p2, 100, StreetType.ASPHALT, new Wind(1,1,1), totalWeight, "Street1");
+      ScooterPath vp2 = new ScooterPath(p2, p7, 130, StreetType.ASPHALT, new Wind(1,1,1), totalWeight,  "Street3");
+      ScooterPath vp3 = new ScooterPath(p7, p5, 20, StreetType.ASPHALT, new Wind(1,1,1), totalWeight,  "Street7");
+      ScooterPath vp4 = new ScooterPath(p5, p8, 110, StreetType.ASPHALT, new Wind(1,1,1), totalWeight,  "Street8");
+      ScooterPath vp5 = new ScooterPath(p8, p9, 115, StreetType.ASPHALT, new Wind(1,1,1), totalWeight,  "Street10");
+      ScooterPath vp6 = new ScooterPath(p9, p3, 130, StreetType.ASPHALT, new Wind(1,1,1), totalWeight, "Street6");
+      ScooterPath vp7 = new ScooterPath(p3, p4, 60, StreetType.ASPHALT, new Wind(1,1,1), totalWeight,  "Street13");
+      ScooterPath vp8 = new ScooterPath(p4, p1, 200, StreetType.ASPHALT, new Wind(1,1,1), totalWeight, "Street4");
+      ScooterPath vp9 = new ScooterPath(p5, p6, 190, StreetType.ASPHALT, new Wind(1,1,1), totalWeight,  "Street9");
+      ScooterPath vp10 = new ScooterPath(p6, p4, 30, StreetType.ASPHALT, new Wind(1,1,1), totalWeight,  "Street11");
       r1 = new Route(vp1);
       r1.addPath(vp2);r1.addPath(vp3);r1.addPath(vp4);r1.addPath(vp5);r1.addPath(vp6);r1.addPath(vp7);r1.addPath(vp8);
       

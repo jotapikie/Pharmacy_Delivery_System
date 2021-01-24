@@ -54,7 +54,7 @@ public class AddPathControllerTest {
         p4 = new GeographicalPoint(24, 36, 0.5, "p4");
         points.add(p1);points.add(p2);points.add(p3);
         
-        p = new Pathway(p1, p2, StreetType.ASPHALT, 4.5, 2.3, "Street1");
+        p = new Pathway(p1, p2, StreetType.ASPHALT, 4.5, new Wind(1,1,1), "Street1");
         paths = new HashSet<>();
         AddPathController c1 = new AddPathController();
     }

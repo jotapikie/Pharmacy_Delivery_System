@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lapr.project.model.GeographicalPoint;
-import lapr.project.model.Pathway;
-import lapr.project.model.StreetType;
-import lapr.project.model.ScooterPath;
+
+import lapr.project.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,7 +35,7 @@ public class RouteTest {
     public void setUp() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        Pathway p = new Pathway(or, dest, StreetType.ASPHALT, 45, 2.3, "rua1");
+        Pathway p = new Pathway(or, dest, StreetType.ASPHALT, 45, new Wind(1,1,1), "rua1");
         instance = new Route(p);
         
         Route temp = new Route(instance);
@@ -217,7 +215,7 @@ public class RouteTest {
     public void testCompareTo() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, StreetType.ASPHALT, 5.6, 24.5, "rua Sesamo");
+        Pathway p = new Pathway(ori, desti, StreetType.ASPHALT, 5.6, new Wind(1,1,1), "rua Sesamo");
         Route other = new Route(p);
         assertTrue(instance.compareTo(other)>0);
         

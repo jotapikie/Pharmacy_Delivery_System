@@ -26,7 +26,7 @@ public class PathwayTest {
     public static void setUpClass() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        path = new Pathway(or, dest,StreetType.ASPHALT, 34, 3.5, "noName");
+        path = new Pathway(or, dest,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
     }
     
    
@@ -36,13 +36,13 @@ public class PathwayTest {
     
     @AfterEach
     public void tearDown() {
-        path = new Pathway(or, dest,StreetType.ASPHALT, 34, 3.5, "noName");
+        path = new Pathway(or, dest,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
     }
 
     
     @Test
     public void testPathway() {
-        Pathway temp = new Pathway(or, dest, StreetType.ASPHALT, 34, 2.3, "Street2");
+        Pathway temp = new Pathway(or, dest, StreetType.ASPHALT, 34, new Wind(1,1,1), "Street2");
         assertEquals("Street2", temp.getStreet());
     }
     /**
@@ -230,8 +230,8 @@ public class PathwayTest {
      */
     @Test
     public void testSetWind() {
-        path.setWind(2.3);
-        assertEquals(2.3, path.getWind());
+        path.setWind(new Wind(2,3,4));
+        assertEquals(new Wind(2,3,4), path.getWind());
     }
 
     /**
@@ -253,13 +253,13 @@ public class PathwayTest {
         
         GeographicalPoint p1 = new GeographicalPoint(41.233, 45.23, 34.2);
         GeographicalPoint p2 = new GeographicalPoint(41.533, 47.23, 35.2);
-        Pathway p3 = new Pathway(p1, p2,StreetType.ASPHALT, 34, 3.5, "noName");
+        Pathway p3 = new Pathway(p1, p2,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
         //assertFalse(path.equals(p3));
         
-        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 34, 3.2, "noName");
+        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
         assertFalse(path.equals(p3));
         
-        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 35, 3.5, "noName");
+        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 35, new Wind(1,1,1), "noName");
         assertFalse(path.equals(p3));
         
 //        p3 = new Pathway(or, p2, StreetType.ASPHALT, 34, 3.5, "noName");
