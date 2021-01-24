@@ -23,6 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -73,7 +74,7 @@ public class AddPathControllerTest {
         when(gpdb.getGeographicalPoint(22, 37)).thenReturn(p3);
         when(gpdb.getGeographicalPoint(24, 36)).thenReturn(p4);
         
-        when(pdb.newPath(p1, p2, "Asphalt", new Wind(1,1,1), "Street1")).thenReturn(p);
+        when(pdb.newPath(p1, p2, "Asphalt", anyObject(), "Street1")).thenReturn(p);
         
     }
 

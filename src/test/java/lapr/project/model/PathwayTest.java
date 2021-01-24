@@ -90,7 +90,7 @@ public class PathwayTest {
      */
     @Test
     public void testGetWind() {
-        assertEquals(3.5, path.getWind());
+        assertEquals(new Wind(1,1,1), path.getWind());
     }
 
     /**
@@ -231,7 +231,9 @@ public class PathwayTest {
     @Test
     public void testSetWind() {
         path.setWind(new Wind(2,3,4));
-        assertEquals(new Wind(2,3,4), path.getWind());
+        assertEquals(2, path.getWind().vx);
+        assertEquals(3, path.getWind().vy);
+        assertEquals(4, path.getWind().vz);
     }
 
     /**
@@ -256,7 +258,7 @@ public class PathwayTest {
         Pathway p3 = new Pathway(p1, p2,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
         //assertFalse(path.equals(p3));
         
-        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
+        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 34, new Wind(2,1,1), "noName");
         assertFalse(path.equals(p3));
         
         p3 = new Pathway(p1, p2, StreetType.ASPHALT, 35, new Wind(1,1,1), "noName");
