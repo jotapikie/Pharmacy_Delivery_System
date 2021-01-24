@@ -198,7 +198,7 @@ public class Pathway implements PathInterface{
 
     @Override
     public String toString() {
-        return String.format("Street: %s - Path type: %s - Origin: [%s] - Destination [%s] - Distance: %.2f m - Wind: %.2f - Kinetic coefficient: %.2f", street, streetType.getName(),originPoint.toString(), destinationPoint.toString(), distance, wind, kineticCoef);
+        return String.format("Street: %s - Path type: %s - Origin: [%s] - Destination [%s] - Distance: %.2f m - Windx: %.2f - Windy: %.2f - Windz: %.2f - Kinetic coefficient: %.2f", street, streetType.getName(),originPoint.toString(), destinationPoint.toString(), distance, wind.vx,wind.vy,wind.vz, kineticCoef);
     }
     
     
