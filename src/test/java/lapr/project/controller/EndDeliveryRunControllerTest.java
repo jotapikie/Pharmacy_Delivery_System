@@ -38,6 +38,13 @@ class EndDeliveryRunControllerTest {
         String exp= null;
         assertEquals(exp, result);
     }
+    
+    @Test
+    void getScooterCourierByDeliveryRunFail2() throws SQLException {
+        String result=drdb.getCourierEmail(1);
+        String exp= null;
+        assertEquals(exp, result);
+    }
 
     @Test
     void setEndDate() throws SQLException {
@@ -50,6 +57,12 @@ class EndDeliveryRunControllerTest {
     @Test
     void setEndDateFail() throws SQLException {
         when(drdb.endDeliveryRun(anyInt())).thenReturn(false);
+        boolean result= drdb.endDeliveryRun(1);
+        boolean exp= false;
+        assertEquals(exp,result);
+    }
+    @Test
+    void setEndDateFail2() throws SQLException {
         boolean result= drdb.endDeliveryRun(1);
         boolean exp= false;
         assertEquals(exp,result);
