@@ -104,7 +104,7 @@ public class LandGraphTest {
         when(pdb.getPaths()).thenReturn(allPaths1);
         LandGraph.setup(null, null);
         LandGraph.setup(gpdb, pdb);
-        graph = new LandGraph(126, 0.6);
+        graph = new LandGraph(126);
     }
     
     
@@ -112,7 +112,7 @@ public class LandGraphTest {
     public void testSetup() throws SQLException {
         boolean flag = false;
         try{
-            LandGraph temp = new LandGraph(0,0);
+            LandGraph temp = new LandGraph(0);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -121,25 +121,18 @@ public class LandGraphTest {
         
         flag = false;
         try{
-            LandGraph temp = new LandGraph(-2,0);
+            LandGraph temp = new LandGraph(-2);
         }catch(IllegalArgumentException e){
             flag = true;
         }
         assertTrue(flag);
         
         
-        flag = false;
-        try{
-            LandGraph temp = new LandGraph(4,-3);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
+
         
         flag = false;
         try{
-            LandGraph temp = new LandGraph(-5,-7);
+            LandGraph temp = new LandGraph(-5);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -147,7 +140,7 @@ public class LandGraphTest {
         
         flag = false;
         try{
-            LandGraph temp = new LandGraph(6,7);
+            LandGraph temp = new LandGraph(6);
             flag = true;
         }catch(IllegalArgumentException e){
             flag = false;
@@ -202,20 +195,7 @@ public class LandGraphTest {
             
      }
     
-    @Test
-    public void testKbestPaths(){
 
-        
-        List<GeographicalPoint> points = new ArrayList<>();
-        points.add(p7);
-        points.add(p8);
-        EScooter e = new EScooter(1, State.ACTIVE, 40, 20);
-        List<Route> routes = graph.kBestPaths(points, p1, p1, 1, e.getMaxBat());
-        List<Route> routes1 = graph.kBestPaths(p1, routes.get(0).getChargingPoints().get(0), 1);
-        Route res = routes1.get(0);
-        
-        
-    }
 
     /**
      * Test of kBestPaths method, of class LandGraph.
@@ -276,19 +256,13 @@ public class LandGraphTest {
     public void testInvalidData() throws SQLException{
         boolean flag = false;
         try{
-            graph = new LandGraph(-1, 45);
+            graph = new LandGraph(-1);
         }catch(IllegalArgumentException e){
             flag = true;
         }
         assertTrue(flag);
         
-        flag = false;
-        try{
-            graph = new LandGraph(120, -2);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
+ 
         
     }
     

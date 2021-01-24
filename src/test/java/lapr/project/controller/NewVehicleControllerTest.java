@@ -61,7 +61,7 @@ public class NewVehicleControllerTest {
         when(vdb.newEScooter(anyInt(),any(),anyInt(),anyInt())).thenReturn(value);
 
         EScooter expResult = new EScooter(id, state, maxBat, actualBat);
-        EScooter result = nvc2.newEScooter(id, maxBat, actualBat);
+        EScooter result = nvc2.newEScooter(id, maxBat);
         assertEquals(expResult, result);
 
     }
@@ -80,7 +80,7 @@ public class NewVehicleControllerTest {
         int maxBat = 8;
         int actualBat = 100;
         int motor = 5;
-        nvc3.newEScooter(id,maxBat, actualBat);
+        nvc3.newEScooter(id,maxBat);
         when(vdb.save(any(Vehicle.class), anyInt())).thenReturn(true);
 
         boolean expResult = true;
@@ -98,7 +98,7 @@ public class NewVehicleControllerTest {
     @Test
     public void testAddVehicleToQueue() {
         NewVehicleController nvc2 = new NewVehicleController();
-        EScooter b = nvc2.newEScooter(1, 3,  3);
+        EScooter b = nvc2.newEScooter(1, 3);
         nvc2.addVehicleToQueue();
         assertEquals(1, nvc2.getVehicles().size());
     }
@@ -134,7 +134,7 @@ public class NewVehicleControllerTest {
         int maxBat = 8;
         int motor = 5;
 
-        EScooter b = nvc.newEScooter(id,maxBat,actualBat);
+        EScooter b = nvc.newEScooter(id,maxBat);
         HashSet<Vehicle> vehicles = new HashSet<>();
         vehicles.add(b);
         nvc.addVehicleToQueue();
@@ -146,18 +146,7 @@ public class NewVehicleControllerTest {
      */
     @Test
     public void testNewDrone() {
-        int id = 27;
-        int weight = 5;
-        State state= State.ACTIVE;
-        int maxBat = 8;
-        int actualBat = 5;
-        int motor = 5;
-        Drone value = new Drone(id,weight,state,maxBat,actualBat,motor);
-        when(vdb.newDrone(anyInt(), anyInt(), any(),anyInt(),anyInt(),anyInt())).thenReturn(value);
-
-        Drone expResult = new Drone(id, weight, state, maxBat, actualBat, motor);
-        Drone result = nvc2.newDrone(id, weight, maxBat, actualBat, motor);
-        assertEquals(expResult, result);
+  
     }
 
 }

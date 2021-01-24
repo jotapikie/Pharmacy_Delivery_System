@@ -10,9 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.util.Pair;
-import lapr.project.model.ScooterPath;
 import lapr.project.model.GeographicalPoint;
-import lapr.project.model.LandGraph;
+import lapr.project.model.MainGraph;
 import lapr.project.model.Pathway;
 import lapr.project.utils.Utils;
 import lapr.project.utils.bst.BST;
@@ -26,13 +25,13 @@ public class RouteAlgorithms<V> {
 
 
    @SuppressWarnings("unchecked")
-   public static <V,E> List<Route> kBestRoutes(E mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
+   public static <V> List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
 
         if (mainGraph == null || origin == null || destination == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
         }
         
-        Graph<GeographicalPoint, V> graph = mainGraph.getRouteGraph();
+        Graph<GeographicalPoint, V> graph = (Graph<GeographicalPoint, V>) mainGraph.getRouteGraph();
         if (graph == null || !graph.isDirected()) {
             throw new IllegalArgumentException("Invalid graph!");
         }
@@ -101,7 +100,7 @@ public class RouteAlgorithms<V> {
     
 
 
-    public static List<Route> kBestRoutes(LandGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, int maxEnergy) {
+    public static <V> List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, int maxEnergy) {
         
         if (graph == null || origin == null || destination == null || toVisit == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
@@ -137,7 +136,6 @@ public class RouteAlgorithms<V> {
             if (obtained != null) {
                 for (Route route : obtained) {
                     if(route.getMinimumEnergy()<= maxEnergy){
-                        System.out.println("Entrou aqui " +route.getMinimumEnergy());
                         bst.insert(route);
                     }
                 }
@@ -163,7 +161,7 @@ public class RouteAlgorithms<V> {
         return (result.isEmpty()) ? null : result;
     }
 
-    private static void fillRouteMap(LandGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map) {
+    private static <V> void fillRouteMap(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map) {
         for (GeographicalPoint vertex : toVisit) {
             map.put(new Pair<>(origin, vertex), RouteAlgorithms.kBestRoutes(graph, origin, vertex, k));
             map.put(new Pair<>(vertex, destination), RouteAlgorithms.kBestRoutes(graph, vertex, destination, k));

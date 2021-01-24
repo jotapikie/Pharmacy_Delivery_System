@@ -7,8 +7,6 @@ package lapr.project.model;
 
 import java.sql.SQLException;
 import java.util.List;
-import lapr.project.data.GeographicalPointDB;
-import lapr.project.data.PathwayDB;
 import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
 import lapr.project.utils.route.RouteAlgorithms;
@@ -17,40 +15,16 @@ import lapr.project.utils.route.RouteAlgorithms;
  *
  * @author Diogo
  */
-public class AirGraph {
+public class AirGraph extends MainGraph{
         
-      /**
-     * Static instance of the main graph.
-     */
-    private static GeographicalPointDB locationDB;
-
-    /**
-     * Static instance of the main graph.
-     */
-    private static PathwayDB pathDB;
+ 
 
 
 
-    /**
-     * Static method to setup the data accesses of the main graph (implemented
-     * to allow for unit testing).
-     * @param newLocationDB
-     * @param newPathDB
-     */
-    public static void setup(GeographicalPointDB newLocationDB, PathwayDB newPathDB) {
-        locationDB = (newLocationDB != null) ? newLocationDB : new GeographicalPointDB();
-        pathDB = (newPathDB != null) ? newPathDB : new PathwayDB();
-    }
-
-    
-    /**
+ /**
      * Graph of locations connected by paths, considering energy efficiency.
      */
     private final Graph<GeographicalPoint, DronePath> graph;
-
-
-
-
     /**
      * Constructs an instance of the energy graph.
      *
@@ -63,18 +37,17 @@ public class AirGraph {
             throw new IllegalArgumentException("Invalid energy information!");
         }
 
-        setup(locationDB, pathDB);
-        List<GeographicalPoint> vertexes = locationDB.getGeographicalPoints();
-        List<Pathway> edges = pathDB.getPaths();
 
-        this.graph = new Graph<>(true);
+
+        this.graph = new Graph<GeographicalPoint, DronePath>(true);
+        MainGraph main = new MainGraph();
         
         
-        for (GeographicalPoint vertex : vertexes) {
+        for (GeographicalPoint vertex : main.getVertexes()) {
             this.graph.insertVertex(vertex);
 
         }
-        for (Pathway mainEdge : edges) {
+        for (Pathway mainEdge : main.getEdges()) {
             DronePath energyEdge = new DronePath(totalWeight, mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getStreetType(), mainEdge.getDistance(),mainEdge.getWind(), mainEdge.getStreet());
             graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
             

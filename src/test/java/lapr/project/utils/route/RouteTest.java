@@ -44,7 +44,7 @@ public class RouteTest {
         
         or3 = new GeographicalPoint(41.233, 45.23, 34.2);
         dest3 = new GeographicalPoint(41.533, 47.23, 35.2);
-        ScooterPath p3 = new ScooterPath(or, dest3, 34, StreetType.ASPHALT, 2.2, 56.8, 3.4,"Street1");
+        ScooterPath p3 = new ScooterPath(or, dest3, 34, StreetType.ASPHALT, 2.2, 56.8,"Street1");
         instance3 = new Route(p3);
         
         
@@ -231,7 +231,7 @@ public class RouteTest {
         
         GeographicalPoint p1 = new GeographicalPoint(41.233, 45.23, 34.2);
         GeographicalPoint p2 = new GeographicalPoint(41.533, 47.23, 35.2);
-        ScooterPath p3 = new ScooterPath(p1, p2, 45, StreetType.ASPHALT, 3.2, 5.6, 56.5,"Street1");
+        ScooterPath p3 = new ScooterPath(p1, p2, 45, StreetType.ASPHALT, 3.2, 5.6,"Street1");
         Route t = new Route(p3);
         System.out.println(t.getTotalEnergy()+ " | " + instance3.getTotalEnergy() + " | " +instance.getTotalEnergy());
         assertTrue(instance3.compareTo(t) > 0);
@@ -239,7 +239,7 @@ public class RouteTest {
         
         assertTrue(t.compareTo(t)==0);
         
-        p3 = new ScooterPath(p1, p2, 22, StreetType.ASPHALT, 3.2, 5.6, 56.5,"Street1");
+        p3 = new ScooterPath(p1, p2, 22, StreetType.ASPHALT, 3.2, 5.6, "Street1");
         t = new Route(p3);
         Pathway p4 = new Pathway(p1, p2, StreetType.ASPHALT, t.getTotalEnergy(), 23, "NoName");
         Route t1 = new Route(p4);

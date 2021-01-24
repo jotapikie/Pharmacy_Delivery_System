@@ -99,7 +99,7 @@ public class StartDeliveryRunController {
     
     public boolean startDeliveryRun() throws SQLException{
         double totalWeight = deliveryWeight + courierWeight + Constants.SCOOTER_WEIGHT;
-        LandGraph graph = new LandGraph(totalWeight, Constants.SCOOTER_AERO_COEF);
+        LandGraph graph = new LandGraph(totalWeight);
         GeographicalPoint pharmacyAdd = gpdb.getGeographicalPointByPharmacy(idPharmacy);
         List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
         List<Route> routes = new ArrayList<>();

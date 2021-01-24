@@ -97,7 +97,7 @@ public class AssignOrderController {
     }
     
     public String getLandRoute() throws SQLException{
-        LandGraph landGraph = new LandGraph(totalWeight + Constants.SCOOTER_WEIGHT + Constants.AVERAGE_COURIER_WEIGHT, Constants.SCOOTER_AERO_COEF);
+        LandGraph landGraph = new LandGraph(totalWeight + Constants.SCOOTER_WEIGHT + Constants.AVERAGE_COURIER_WEIGHT);
         pharmacyCor = pointDB.getGeographicalPointByPharmacy(idPharmacy);
         for(Order o : ordersSelected){
             clients.add(o.getAddress().getGeographicalPoint());

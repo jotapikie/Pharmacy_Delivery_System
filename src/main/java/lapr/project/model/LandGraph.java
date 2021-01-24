@@ -17,30 +17,8 @@ import lapr.project.utils.route.RouteAlgorithms;
  *
  * @author Diogo
  */
-public class LandGraph{
+public class LandGraph extends MainGraph{
     
-      /**
-     * Static instance of the main graph.
-     */
-    private static GeographicalPointDB locationDB;
-
-    /**
-     * Static instance of the main graph.
-     */
-    private static PathwayDB pathDB;
-
-
-
-    /**
-     * Static method to setup the data accesses of the main graph (implemented
-     * to allow for unit testing).
-     * @param newLocationDB
-     * @param newPathDB
-     */
-    public static void setup(GeographicalPointDB newLocationDB, PathwayDB newPathDB) {
-        locationDB = (newLocationDB != null) ? newLocationDB : new GeographicalPointDB();
-        pathDB = (newPathDB != null) ? newPathDB : new PathwayDB();
-    }
 
     
     /**
@@ -63,18 +41,17 @@ public class LandGraph{
             throw new IllegalArgumentException("Invalid energy information!");
         }
 
-        setup(locationDB, pathDB);
-        List<GeographicalPoint> vertexes = locationDB.getGeographicalPoints();
-        List<Pathway> edges = pathDB.getPaths();
-
         this.graph = new Graph<>(true);
+        MainGraph main = new MainGraph();
+
         
         
-        for (GeographicalPoint vertex : vertexes) {
+        
+        for (GeographicalPoint vertex : main.getVertexes()) {
             this.graph.insertVertex(vertex);
 
         }
-        for (Pathway mainEdge : edges) {
+        for (Pathway mainEdge : main.getEdges()) {
             ScooterPath energyEdge = new ScooterPath(mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getDistance(),
                     mainEdge.getStreetType(), mainEdge.getWind(), totalWeight, mainEdge.getStreet());
             graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
@@ -133,11 +110,16 @@ public class LandGraph{
             throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
         }
     }
-    
 
+    @Override
     public Graph<GeographicalPoint, ScooterPath> getRouteGraph() {
         return this.graph;
     }
+
+  
+    
+
+ 
 
 
 

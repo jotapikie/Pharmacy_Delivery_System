@@ -87,7 +87,7 @@ public class RouteAlgorithmsTest {
         when(pdb.getPaths()).thenReturn(allPaths);
         LandGraph.setup(gpdb, pdb);
         new RouteAlgorithms();
-        landGraph = new LandGraph(135.8, 4.7);
+        landGraph = new LandGraph(135.8);
     }
     
 

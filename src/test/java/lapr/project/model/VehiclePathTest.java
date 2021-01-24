@@ -24,12 +24,12 @@ public class VehiclePathTest {
     public static void setUpClass() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7, 2.3,"Street1");
+        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7,"Street1");
     }
     
     @AfterEach
     public void tearDown() {
-        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7, 2.3, "Street1");
+        path = new ScooterPath(or, dest, 34, StreetType.ASPHALT, 3.4, 56.7, "Street1");
     }
 
     /**
@@ -40,13 +40,7 @@ public class VehiclePathTest {
         assertEquals(56.7, path.getTotalWeight());
     }
 
-    /**
-     * Test of getVehicleAerodynamicCoef method, of class ScooterPath.
-     */
-    @Test
-    public void testGetVehicleAerodynamicCoef() {
-        assertEquals(2.3, path.getVehicleAerodynamicCoef());
-    }
+
 
     /**
      * Test of setTotalWeight method, of class ScooterPath.
@@ -75,31 +69,7 @@ public class VehiclePathTest {
     
     }
 
-    /**
-     * Test of setVehicleAerodynamicCoef method, of class ScooterPath.
-     */
-    @Test
-    public void testSetVehicleAerodynamicCoef() {
-        path.setVehicleAerodynamicCoef(4.5);
-        assertEquals(4.5, path.getVehicleAerodynamicCoef());
-        
-        boolean flag = false;
-        try{
-        path.setVehicleAerodynamicCoef(0);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        
-        flag = false;
-        try{
-        path.setVehicleAerodynamicCoef(-5);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-    }
+
 
     /**
      * Test of getCost method, of class ScooterPath.
