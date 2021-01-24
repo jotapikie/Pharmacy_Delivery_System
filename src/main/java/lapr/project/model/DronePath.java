@@ -19,7 +19,7 @@ public class DronePath extends Pathway{
     
     private double energyCost;
 
-    public DronePath(double totalWeight, GeographicalPoint origLocation, GeographicalPoint destLocation, StreetType type, double distance, double wind, String street) {
+    public DronePath(double totalWeight, GeographicalPoint origLocation, GeographicalPoint destLocation, StreetType type, double distance, Wind wind, String street) {
         super(origLocation, destLocation, type, distance, wind, street);
         this.totalWeight = totalWeight;
         calculateEnegyCost();

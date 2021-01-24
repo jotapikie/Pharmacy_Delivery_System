@@ -35,7 +35,7 @@ public class ScooterPathTest {
     
     @BeforeEach
     public void setUp() {
-        test=new ScooterPath(p,p1,10.0,StreetType.ASPHALT,200.0,100.0,"rua");
+        test=new ScooterPath(p,p1,10.0,StreetType.ASPHALT,new Wind(1,1,1),100.0,"rua");
     }
     
     @AfterEach
@@ -77,7 +77,7 @@ public class ScooterPathTest {
         result = test.equals(test);
         assertEquals(expResult, result);
         
-        ScooterPath sc=new ScooterPath(p,p1,10.0,StreetType.ASPHALT,200.0,100.0,"rua");
+        ScooterPath sc=new ScooterPath(p,p1,10.0,StreetType.ASPHALT,new Wind(1,1,1),100.0,"rua");
         expResult = true;
         result = test.equals(sc);
         assertEquals(expResult, result);
