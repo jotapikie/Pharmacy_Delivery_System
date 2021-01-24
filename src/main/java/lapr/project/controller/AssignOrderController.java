@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import lapr.project.data.DeliveryRunDB;
 import lapr.project.data.GeographicalPointDB;
+import lapr.project.model.AirGraph;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
@@ -92,9 +93,7 @@ public class AssignOrderController {
         return false;
     }
     
-    public String getAirRoute(){
-        return null;
-    }
+ 
     
     public String getLandRoute() throws SQLException{
         LandGraph landGraph = new LandGraph(totalWeight + Constants.SCOOTER_WEIGHT + Constants.AVERAGE_COURIER_WEIGHT);
@@ -109,6 +108,17 @@ public class AssignOrderController {
         }
         land = routes.get(0);
         return land.toString();
+    }
+    
+      public String getAirRoute() throws SQLException{
+        AirGraph airGraph = new AirGraph(totalWeight + Constants.DRONE_WEIGHT);
+        List<Route> routes = airGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
+        if(routes.isEmpty()){
+            return null;
+        }
+        air = routes.get(0);
+        return air.toString();
+        
     }
     
     public String getMostEfficient(){

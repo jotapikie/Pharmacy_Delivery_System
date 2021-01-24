@@ -1,4 +1,10 @@
-Land route:
-null
+The order made by client whose cordinates are (41,14063,-8,61118) was assigned to Farmácia da Trindade (nearest pharmacy).Land route:
+Pharmacy (-8,61, 41,15) [Origin]         ->     Client Home (41,14, 41,14)                | R. de Mouzinho da Silveira | 1306,34m   | 108,04J    
+Client Home (-8,61, 41,14)               ->     Pharmacy (41,15, 41,15) [Destination]     | R. de Mouzinho da Silveira | 1306,34m   | 108,37J    
+Total Distance: 2612,68m | Total Energy: 216,41J | Minimum Energy: 216,41J 
+
 Air route:
-null
+Pharmacy (-8,61, 41,15) [Origin]         ->     Client Home (41,14, 41,14)                | R. de Mouzinho da Silveira | 1306,34m   | 132732,26J 
+Client Home (-8,61, 41,14)               ->     Pharmacy (41,15, 41,15) [Destination]     | R. de Mouzinho da Silveira | 1306,34m   | 132732,26J 
+Total Distance: 2612,68m | Total Energy: 265464,51J | Minimum Energy: 265464,51J 
+

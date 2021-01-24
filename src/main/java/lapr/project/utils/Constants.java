@@ -53,6 +53,7 @@ public class Constants {
     public static double DRONE_LIFT_DRAG = 1;
     public static double DRONE_FRONTAL_AREA = 1;
     public static double DRONE_TOP_AREA = 1;
+    public static double DRONE_WEIGHT =7;
     
     public static double DRONE_ALTITUDE = 150;
 

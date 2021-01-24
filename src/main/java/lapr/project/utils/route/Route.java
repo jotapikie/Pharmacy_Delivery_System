@@ -272,17 +272,17 @@ public class Route implements Comparable<Route>{
             String sOr;
             String sDest;
             if(i == 0){
-                sOr = String.format("%s (%.2f, %.2f) [Origin]",or.getDescription(), or.getLongitude(), or.getLatitude());
-                sDest = String.format("%s (%.2f, %.2f)",dest.getDescription(), dest.getLatitude(), dest.getLatitude());
+                sOr = String.format("%s (%.5f, %.5f) [Origin]",or.getDescription(), or.getLongitude(), or.getLatitude());
+                sDest = String.format("%s (%.5f, %.5f)",dest.getDescription(), dest.getLatitude(), dest.getLatitude());
                 
             }else{
                 if(i == paths.size() -1){
-                    sOr = String.format("%s (%.2f, %.2f)",or.getDescription(), or.getLongitude(), or.getLatitude());
-                    sDest = String.format("%s (%.2f, %.2f) [Destination]",dest.getDescription(), dest.getLatitude(), dest.getLatitude());
+                    sOr = String.format("%s (%.5f, %.5f)",or.getDescription(), or.getLongitude(), or.getLatitude());
+                    sDest = String.format("%s (%.5f, %.5f) [Destination]",dest.getDescription(), dest.getLatitude(), dest.getLatitude());
                     
                 }else{
-                    sOr = String.format("%s (%.2f, %.2f) %s",or.getDescription(), or.getLongitude(), or.getLatitude(),(or.getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)?"[Charge]":""));
-                    sDest = String.format("%s (%.2f, %.2f) %s",dest.getDescription(), dest.getLongitude(), dest.getLatitude(),(dest.getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)?"[Charge]":""));
+                    sOr = String.format("%s (%.5f, %.5f) %s",or.getDescription(), or.getLongitude(), or.getLatitude(),(or.getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)?"[Charge]":""));
+                    sDest = String.format("%s (%.5f, %.5f) %s",dest.getDescription(), dest.getLongitude(), dest.getLatitude(),(dest.getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)?"[Charge]":""));
                     
                 }
             }

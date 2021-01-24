@@ -329,6 +329,7 @@ public class TextFiles {
                }
                write(String.format("Land route:%n%s%n", controller.getLandRoute()));
                write(String.format("Air route:%n%s%n", controller.getAirRoute()));
+               write(String.format("Most efficient: %s %n", controller.getMostEfficient()));
                controller.newDeliveryRun(line[1]);
                controller.addToQueue();
                ordersAssigned = ordersAssigned + controller.saveDeliveryRuns();
