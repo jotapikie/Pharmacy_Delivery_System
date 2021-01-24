@@ -28,6 +28,7 @@ public class Constants {
 
     public static final int INITIAL_POINTS = 0;
     public static final double MAX_DISTANCE = 3 ;
+    public static final double RENDIMENTO_DRONE = 0.7;
     public static double GRAVITY = 9.8;
 
 
@@ -36,6 +37,8 @@ public class Constants {
     public static final double KINETIC_COEF_TERRA_BATIDA= 0.2;
     public static final double KINETIC_COEF_CALCADA= 0.3;
 
+    public static final double RO_AR= 1.225;
+    public static final double DRAG_COEF= 1.5;
 
     public static final int MAX_PAYLOAD = 10;
 

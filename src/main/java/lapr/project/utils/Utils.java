@@ -19,6 +19,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import lapr.project.model.DeliveryRun;
+import lapr.project.model.Wind;
 
 /**
  *
@@ -154,6 +155,21 @@ public class Utils {
         return (result < 0) ? 0 : result;
     }
 
+    public static double pathEnergyCostDrone(double totalWeight, double vehicleAerodynamicCoef, double powerTransfer, double liftDrag, double consumoEletronico, double areaFrontal, double areaTopo, double velocidadeMedia, Wind windToPath, double altitudeDifI, double altitudeDifF, double distance) {
+        if (distance <= 0 || altitudeDifI >= distance || altitudeDifF >= distance || vehicleAerodynamicCoef < 0 || consumoEletronico <= 0 || areaFrontal <= 0 || areaTopo <= 0 || velocidadeMedia <= 0 || totalWeight <= 0) {
+            throw new IllegalArgumentException("This path has invalid data!");
+        }
+        double fAero = ((-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaFrontal * windToPath.vx * windToPath.vx)) + (-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaFrontal * windToPath.vy * windToPath.vy)) + (-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaTopo * windToPath.vz * windToPath.vz)));
+        double eHorizontal = (((totalWeight * Constants.GRAVITY) / (liftDrag * powerTransfer)) * distance);
+        double tViagem = (velocidadeMedia / (distance * distance));
+        double eAero = fAero * tViagem * velocidadeMedia;
+        double fImpulso = ((totalWeight * Constants.GRAVITY) + (0.5 * Constants.RO_AR * areaTopo * Constants.DRAG_COEF * velocidadeMedia * velocidadeMedia));
+        double eSubir = ((fImpulso * altitudeDifI) / Constants.RENDIMENTO_DRONE);
+        double eDescer = ((fImpulso * altitudeDifF) / Constants.RENDIMENTO_DRONE);
+        return eAero + eDescer + eHorizontal + eSubir;
+    }
+
+
     public static <V> List<String> listToString(List<V> lst) {
         List<String> res = new ArrayList<>();
         for(V v : lst){
@@ -161,6 +177,7 @@ public class Utils {
         }
         return res;
     }
+
 
     public static double pathDirection(double latitude1, double longitude1, double latitude2, double longitude2) {
         if (!validateCoordinates(latitude1, longitude1) || !validateCoordinates(latitude2, longitude2)) {
