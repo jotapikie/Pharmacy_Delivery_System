@@ -7,6 +7,7 @@ package lapr.project.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import lapr.project.model.Wind;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,9 +24,6 @@ public class UtilsTest {
     
     Utils u = new Utils();
     Constants c = new Constants();
-
-
- 
 
 /**
      * Test of permutations method, of class Utils.
@@ -142,6 +140,58 @@ public class UtilsTest {
         
         
         
+    }
+    /**
+     * Test of pathEnergyCostDrone method, of class Utils.
+     */
+    @Test
+    public void testPathEnergyCostDrone() {
+        System.out.println("pathEnergyCostDrone");
+        double totalWeight = 200.0;
+        double vehicleAerodynamicCoef = 2.0;
+        double powerTransfer = 1.0;
+        double liftDrag = 1.0;
+        double consumoEletronico = 2.0;
+        double areaFrontal = 5.0;
+        double areaTopo = 2.0;
+        double velocidadeMedia = 50.0;
+        Wind windToPath = new Wind(2.0,2.0,1.0);
+        double altitudeDifI = 3.0;
+        double altitudeDifF = 2.0;
+        double distance = 35.0;
+        double expResult = 115307.5;
+        double result = Utils.pathEnergyCostDrone(totalWeight, vehicleAerodynamicCoef, powerTransfer, liftDrag, consumoEletronico, areaFrontal, areaTopo, velocidadeMedia, windToPath, altitudeDifI, altitudeDifF, distance);
+        assertEquals(expResult, result, 0.05);
+    }
+
+
+    /**
+     * Test of pathDirection method, of class Utils.
+     */
+    @Test
+    public void testPathDirection() {
+        System.out.println("pathDirection");
+        double latitude1 = 2.0;
+        double longitude1 = 3.0;
+        double latitude2 = 1.0;
+        double longitude2 = 2.0;
+        double expResult = 45.0;
+        double result = Utils.pathDirection(latitude1, longitude1, latitude2, longitude2);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of windToPath method, of class Utils.
+     */
+    @Test
+    public void testWindToPath() {
+        System.out.println("windToPath");
+        double pathDirec = 1.0;
+        int windDirection = 1;
+        double windSpeed = 2.0;
+        double expResult = 2.0;
+        double result = Utils.windToPath(pathDirec, windDirection, windSpeed);
+        assertEquals(expResult, result, 0.0);
     }
     
 }
