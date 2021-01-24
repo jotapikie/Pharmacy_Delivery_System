@@ -45,6 +45,17 @@ public class Constants {
 
     
     public static String CHARGING_SPOT = "Pharmacy";
+    
+    public static double DRONE_AERO_COEF = 0.5;
+    public static double DRONE_ELETRONICAL_CONSUME = 1;
+    public static double DRONE_AVERAGE_SPEED = 15;
+    public static double DRONE_POWER_TRANSFER = 2;
+    public static double DRONE_LIFT_DRAG = 1;
+    public static double DRONE_FRONTAL_AREA = 1;
+    public static double DRONE_TOP_AREA = 1;
+    
+    public static double DRONE_ALTITUDE = 150;
+
     /**
      * Test purposes
      */

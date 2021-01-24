@@ -25,8 +25,8 @@ public class VehicleDB extends DataHandler {
         return new EScooter(id,state,maxBat,currentBat);
     }
     
-     public Vehicle newDrone(int id, int weight, State state, int maxBat, int actualBat, int motor) {
-        return new Drone(id,weight,state,maxBat,actualBat,motor);
+     public Vehicle newDrone(int id, State state, int maxBat, int currentBat) {
+        return new Drone(id,state, maxBat, currentBat);
     }
 
     /**

@@ -8,6 +8,7 @@ import lapr.project.utils.Utils;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,7 +17,10 @@ import lapr.project.data.GeographicalPointDB;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
+import lapr.project.model.Pathway;
 import lapr.project.model.Product;
+import lapr.project.model.ScooterPath;
+import lapr.project.utils.graph.Edge;
 import lapr.project.utils.route.Route;
 
 public class AssignOrderController {
@@ -45,6 +49,7 @@ public class AssignOrderController {
         this.idPharmacy = idPharmacy;
         this.ordersSelected = new ArrayList<>();
         this.runs = new HashSet<>();
+        this.clients = new ArrayList<>();
         this.totalWeight = 0;
         
     }
@@ -56,6 +61,7 @@ public class AssignOrderController {
         this.idPharmacy = idPharmacy;
         ordersSelected = new ArrayList<>();
         runs = new HashSet<>();
+        clients = new ArrayList<>();
         totalWeight = 0;
     }
     
@@ -96,7 +102,8 @@ public class AssignOrderController {
         for(Order o : ordersSelected){
             clients.add(o.getAddress().getGeographicalPoint());
         }
-        List<Route> routes = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1, Constants.DEFAULT_SCOOTER_MAX_BAT);
+        
+        List<Route> routes = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
         if(routes.isEmpty()){
             return null;
         }

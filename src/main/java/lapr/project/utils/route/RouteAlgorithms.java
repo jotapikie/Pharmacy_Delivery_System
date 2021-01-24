@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.util.Pair;
-import lapr.project.model.VehiclePath;
+import lapr.project.model.ScooterPath;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
 import lapr.project.model.Pathway;
@@ -22,17 +22,17 @@ import lapr.project.utils.graph.Graph;
  *
  * @author Diogo
  */
-public class RouteAlgorithms {
+public class RouteAlgorithms<V> {
 
 
    @SuppressWarnings("unchecked")
-   public static List<Route> kBestRoutes(LandGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
+   public static <V,E> List<Route> kBestRoutes(E mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
 
         if (mainGraph == null || origin == null || destination == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
         }
         
-        Graph<GeographicalPoint, VehiclePath> graph = mainGraph.getRouteGraph();
+        Graph<GeographicalPoint, V> graph = mainGraph.getRouteGraph();
         if (graph == null || !graph.isDirected()) {
             throw new IllegalArgumentException("Invalid graph!");
         }
@@ -43,7 +43,7 @@ public class RouteAlgorithms {
         // Insert first routes into the BST, from origin to each neighbour 
         boolean flag = true;
         for (GeographicalPoint adjVertex : graph.adjVertices(origin)) {
-            Pathway edge = graph.getEdge(origin, adjVertex).getElement();
+            Pathway edge = (Pathway) graph.getEdge(origin, adjVertex).getElement();
             // Required to update the origin vertex in the graph itself, not the received copy
             if (flag) {
                 edge.getOriginPoint().incrementCounter();
@@ -79,7 +79,7 @@ public class RouteAlgorithms {
                 // Concatenate each neighbour to route and insert each new route into BST
                 for (GeographicalPoint adjVertex : graph.adjVertices(vertex)) {
                     Route newRoute = new Route(route);
-                    newRoute.addPath(graph.getEdge(vertex, adjVertex).getElement());
+                    newRoute.addPath((Pathway) graph.getEdge(vertex, adjVertex).getElement());
                     bst.insert(newRoute);
                 }
             }
@@ -92,7 +92,7 @@ public class RouteAlgorithms {
    
    
    
-    private static void zeroVertexCounters(Graph<GeographicalPoint, VehiclePath> graph) {
+    private static <V> void  zeroVertexCounters(Graph<GeographicalPoint, V> graph) {
 
         for (GeographicalPoint vertex : graph.vertices()) {
             vertex.resetCounter();

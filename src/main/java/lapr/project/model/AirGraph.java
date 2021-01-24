@@ -17,8 +17,8 @@ import lapr.project.utils.route.RouteAlgorithms;
  *
  * @author Diogo
  */
-public class LandGraph{
-    
+public class AirGraph {
+        
       /**
      * Static instance of the main graph.
      */
@@ -46,7 +46,7 @@ public class LandGraph{
     /**
      * Graph of locations connected by paths, considering energy efficiency.
      */
-    private final Graph<GeographicalPoint, ScooterPath> graph;
+    private final Graph<GeographicalPoint, DronePath> graph;
 
 
 
@@ -58,7 +58,7 @@ public class LandGraph{
      * @param vehicleAerodynamicCoef aerodynamic coefficient of the vehicle.
      * @throws java.sql.SQLException
      */
-    public LandGraph(double totalWeight) throws SQLException {
+    public AirGraph(double totalWeight) throws SQLException {
         if (totalWeight <= 0) {
             throw new IllegalArgumentException("Invalid energy information!");
         }
@@ -75,8 +75,7 @@ public class LandGraph{
 
         }
         for (Pathway mainEdge : edges) {
-            ScooterPath energyEdge = new ScooterPath(mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getDistance(),
-                    mainEdge.getStreetType(), mainEdge.getWind(), totalWeight, mainEdge.getStreet());
+            DronePath energyEdge = new DronePath(totalWeight, mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getStreetType(), mainEdge.getDistance(),mainEdge.getWind(), mainEdge.getStreet());
             graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
             
         }
@@ -135,15 +134,7 @@ public class LandGraph{
     }
     
 
-    public Graph<GeographicalPoint, ScooterPath> getRouteGraph() {
+    public Graph<GeographicalPoint, DronePath> getRouteGraph() {
         return this.graph;
     }
-
-
-
-
-
-
-
-
 }

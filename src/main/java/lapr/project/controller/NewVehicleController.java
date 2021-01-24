@@ -9,12 +9,13 @@ import lapr.project.model.Drone;
 import lapr.project.model.EScooter;
 import lapr.project.model.State;
 import lapr.project.model.Vehicle;
+import lapr.project.utils.Constants;
 
 public class NewVehicleController {
 
     private final VehicleDB vehicleDB;
     private Vehicle vehicle;
-    private HashSet<Vehicle> vehicles = new HashSet<>();
+    private Set<Vehicle> vehicles = new HashSet<>();
     private int pharmID;
 
     /**
@@ -34,13 +35,13 @@ public class NewVehicleController {
         this.vehicleDB = new VehicleDB();
     }
 
-    public EScooter newEScooter(int id,int maxBat, int actualBat) {
-        vehicle = vehicleDB.newEScooter(id,State.INACTIVE,maxBat,actualBat);
+    public EScooter newEScooter(int id,int maxBat) {
+        vehicle = vehicleDB.newEScooter(Constants.DEFAULT_ID+vehicles.size(),State.LOCKED,maxBat,maxBat);
         return (EScooter) vehicle;
     }
 
-    public Drone newDrone(int id, int weight, int maxBat, int actualBat, int motor) {
-        vehicle = vehicleDB.newDrone(id,weight,State.INACTIVE,maxBat,actualBat,motor);
+    public Drone newDrone(int id,int maxBat) {
+        vehicle = vehicleDB.newDrone(Constants.DEFAULT_ID+vehicles.size(),State.LOCKED,maxBat,maxBat);
         return (Drone) vehicle;
     }
     public boolean registerVehicle() throws SQLException {

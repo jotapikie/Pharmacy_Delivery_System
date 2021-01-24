@@ -86,9 +86,34 @@ public class GeographicalPoint implements PointInterface{
 
     @Override
     public String toString() {
-        return String.format("Descripition: %s - Longitude: %.5f - Latitude: %.5f - Elevation: %.1f m", description, longitude, latitude, elevation);
+        return String.format("Descripition: %s - Longitude: %f - Latitude: %f - Elevation: %f m", description, longitude, latitude, elevation);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        GeographicalPoint other = (GeographicalPoint) obj;
+        return this.longitude== other.getLongitude() && this.latitude==other.getLatitude();
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) ((longitude*3)+(latitude*2)+(elevation));
+    }
+
+   
+    
+    
+
+    
 
     
     

@@ -5,13 +5,14 @@
  */
 package lapr.project.model;
 
+import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
 
 /**
  *
  * @author Diogo
  */
-public final class VehiclePath extends Pathway{
+public final class ScooterPath extends Pathway{
      
     
     /**
@@ -19,10 +20,7 @@ public final class VehiclePath extends Pathway{
      */
     private double totalWeight;
 
-    /**
-     * Aerodynamic coefficient of the vehicle.
-     */
-    private double vehicleAerodynamicCoef;
+
 
     /**
      * Energy cost of the path in Wh.
@@ -41,10 +39,9 @@ public final class VehiclePath extends Pathway{
      * @param totalWeight
      * @param vehicleAerodynamicCoef
      */
-    public VehiclePath(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, StreetType type, double wind, double totalWeight, double vehicleAerodynamicCoef, String street) {
+    public ScooterPath(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, StreetType type, double wind, double totalWeight, String street) {
         super(origPoint, destPoint, type, distance, wind, street);
         setTotalWeight(totalWeight);
-        setVehicleAerodynamicCoef(vehicleAerodynamicCoef);
         calculateEnergyCost();
     }
 
@@ -57,14 +54,7 @@ public final class VehiclePath extends Pathway{
         return totalWeight;
     }
 
-    /**
-     * Returns the aerodynamic coefficient of the vehicle.
-     *
-     * @return aerodynamic coefficient.
-     */
-    public double getVehicleAerodynamicCoef() {
-        return vehicleAerodynamicCoef;
-    }
+
 
     /**
      * Modifies the total weight.
@@ -78,23 +68,13 @@ public final class VehiclePath extends Pathway{
         this.totalWeight = totalWeight;
     }
 
-    /**
-     * Modifies the total weight.
-     *
-     * @param vehicleAerodynamicCoef
-     */
-    public void setVehicleAerodynamicCoef(double vehicleAerodynamicCoef) {
-        if (vehicleAerodynamicCoef <= 0) {
-            throw new IllegalArgumentException("Invalid aerodynamic coefficient!");
-        }
-        this.vehicleAerodynamicCoef = vehicleAerodynamicCoef;
-    }
+
 
     /**
      * Calculates the energy cost in Wh.
      */
     private void calculateEnergyCost() {
-        energyCost = Utils.pathEnergyCost(totalWeight, super.getKineticCoef(),vehicleAerodynamicCoef, super.getWind(), super.getElevationDif(), super.getDistance());
+        energyCost = Utils.pathEnergyCost(totalWeight, super.getKineticCoef(),Constants.SCOOTER_AERO_COEF, super.getWind(), super.getElevationDif(), super.getDistance());
     }
 
     /**
@@ -107,4 +87,44 @@ public final class VehiclePath extends Pathway{
     public double getCost() {
         return energyCost;
     }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ScooterPath other = (ScooterPath) obj;
+        if(this.energyCost != other.energyCost){
+            return false;
+        }
+        
+        if(this.totalWeight != other.totalWeight){
+            return false;
+        }
+        
+        
+        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+    
+    
+    
 }

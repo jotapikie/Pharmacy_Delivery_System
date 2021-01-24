@@ -151,16 +151,16 @@ public class StartDeliveryRunControllerTest {
         
         
    //p1 p2 p7 p5 p8 p9 p3 p4 p1
-      VehiclePath vp1 = new VehiclePath(p1, p2, 100, StreetType.ASPHALT, 0.2, totalWeight, Constants.SCOOTER_AERO_COEF, "Street1");
-      VehiclePath vp2 = new VehiclePath(p2, p7, 130, StreetType.ASPHALT, 0.1, totalWeight, Constants.SCOOTER_AERO_COEF, "Street3");
-      VehiclePath vp3 = new VehiclePath(p7, p5, 20, StreetType.ASPHALT, 0.89, totalWeight, Constants.SCOOTER_AERO_COEF, "Street7");
-      VehiclePath vp4 = new VehiclePath(p5, p8, 110, StreetType.ASPHALT, 0.25, totalWeight, Constants.SCOOTER_AERO_COEF, "Street8");
-      VehiclePath vp5 = new VehiclePath(p8, p9, 115, StreetType.ASPHALT, 0.18, totalWeight, Constants.SCOOTER_AERO_COEF, "Street10");
-      VehiclePath vp6 = new VehiclePath(p9, p3, 130, StreetType.ASPHALT, 0.1, totalWeight, Constants.SCOOTER_AERO_COEF, "Street6");
-      VehiclePath vp7 = new VehiclePath(p3, p4, 60, StreetType.ASPHALT, 0.3, totalWeight, Constants.SCOOTER_AERO_COEF, "Street13");
-      VehiclePath vp8 = new VehiclePath(p4, p1, 200, StreetType.ASPHALT, 0.16, totalWeight, Constants.SCOOTER_AERO_COEF, "Street4");
-      VehiclePath vp9 = new VehiclePath(p5, p6, 190, StreetType.ASPHALT, 0.47, totalWeight, Constants.SCOOTER_AERO_COEF, "Street9");
-      VehiclePath vp10 = new VehiclePath(p6, p4, 30, StreetType.ASPHALT, 0.12, totalWeight, Constants.SCOOTER_AERO_COEF, "Street11");
+      ScooterPath vp1 = new ScooterPath(p1, p2, 100, StreetType.ASPHALT, 0.2, totalWeight, Constants.SCOOTER_AERO_COEF, "Street1");
+      ScooterPath vp2 = new ScooterPath(p2, p7, 130, StreetType.ASPHALT, 0.1, totalWeight, Constants.SCOOTER_AERO_COEF, "Street3");
+      ScooterPath vp3 = new ScooterPath(p7, p5, 20, StreetType.ASPHALT, 0.89, totalWeight, Constants.SCOOTER_AERO_COEF, "Street7");
+      ScooterPath vp4 = new ScooterPath(p5, p8, 110, StreetType.ASPHALT, 0.25, totalWeight, Constants.SCOOTER_AERO_COEF, "Street8");
+      ScooterPath vp5 = new ScooterPath(p8, p9, 115, StreetType.ASPHALT, 0.18, totalWeight, Constants.SCOOTER_AERO_COEF, "Street10");
+      ScooterPath vp6 = new ScooterPath(p9, p3, 130, StreetType.ASPHALT, 0.1, totalWeight, Constants.SCOOTER_AERO_COEF, "Street6");
+      ScooterPath vp7 = new ScooterPath(p3, p4, 60, StreetType.ASPHALT, 0.3, totalWeight, Constants.SCOOTER_AERO_COEF, "Street13");
+      ScooterPath vp8 = new ScooterPath(p4, p1, 200, StreetType.ASPHALT, 0.16, totalWeight, Constants.SCOOTER_AERO_COEF, "Street4");
+      ScooterPath vp9 = new ScooterPath(p5, p6, 190, StreetType.ASPHALT, 0.47, totalWeight, Constants.SCOOTER_AERO_COEF, "Street9");
+      ScooterPath vp10 = new ScooterPath(p6, p4, 30, StreetType.ASPHALT, 0.12, totalWeight, Constants.SCOOTER_AERO_COEF, "Street11");
       r1 = new Route(vp1);
       r1.addPath(vp2);r1.addPath(vp3);r1.addPath(vp4);r1.addPath(vp5);r1.addPath(vp6);r1.addPath(vp7);r1.addPath(vp8);
       
