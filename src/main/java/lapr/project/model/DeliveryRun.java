@@ -16,6 +16,15 @@ public class DeliveryRun {
     
     private int id;
     private List<Order> orders;
+    private VehicleCategory vehicleAssigned;
+
+    public DeliveryRun(int id, List<Order> orders, VehicleCategory vehicleAssigned) {
+        setId(id);
+        setOrders(orders);
+        this.vehicleAssigned = vehicleAssigned;
+    }
+    
+    
 
     public DeliveryRun(int id, List<Order> orders) {
         setId(id);
@@ -30,6 +39,12 @@ public class DeliveryRun {
         return new ArrayList<>(orders);
     }
 
+    public VehicleCategory getVehicleAssigned() {
+        return vehicleAssigned;
+    }
+    
+    
+
     public final void setId(int id) {
         if(id <= 0){
             throw new IllegalArgumentException("Invalid delivery run id");
@@ -43,6 +58,11 @@ public class DeliveryRun {
         }
         this.orders = new ArrayList<>(orders);
     }
+
+    public void setVehicleAssigned(VehicleCategory vehicleAssigned) {
+        this.vehicleAssigned = vehicleAssigned;
+    }
+    
     
     
     

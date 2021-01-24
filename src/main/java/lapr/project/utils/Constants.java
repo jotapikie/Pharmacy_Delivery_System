@@ -35,7 +35,7 @@ public class Constants {
     public static final double KINETIC_COEF_CALCADA= 0.3;
 
 
-    public static final int MAX_ORDERS_RUN= 4;
+    public static final int MAX_PAYLOAD = 10;
 
 
     

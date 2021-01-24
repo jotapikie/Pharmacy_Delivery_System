@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.Order;
 import lapr.project.model.Product;
+import lapr.project.model.VehicleCategory;
 import lapr.project.utils.Constants;
 import lapr.project.utils.route.Route;
 import oracle.jdbc.OracleTypes;
@@ -94,6 +96,31 @@ public class DeliveryRunDB extends DataHandler{
         }catch(SQLException e){
             return false;
         }
+    }
+
+
+
+    public int saveRuns(Set<DeliveryRun> runs) throws SQLException {
+        getConnection();
+        int rows=0;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcAddDeliveryRun(?) }")) {
+            for (DeliveryRun p : runs) {
+                callStmt.registerOutParameter(1, OracleTypes.INTEGER);
+                callStmt.setString(2, p.getVehicleAssigned().getName());
+  
+                callStmt.execute();
+                odb.assignDelivery(p.getOrders(), callStmt.getInt(1));
+                rows++;
+
+                
+            }
+
+            return rows;
+        }
+    }
+
+    public DeliveryRun newDeliveryRun(int id, String category, List<Order> ordersSelected) {
+        return new DeliveryRun(id, ordersSelected, VehicleCategory.fromString(category));
     }
     
 }

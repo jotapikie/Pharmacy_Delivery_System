@@ -5,7 +5,9 @@
  */
 package lapr.project.data;
 
+import java.sql.BatchUpdateException;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -43,6 +45,8 @@ public class OrderDB extends DataHandler{
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
                 Order o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9)), rs.getString(10), rs.getInt(12), rs.getString(11)));
+                HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
+                o.setProducts(products);
                 listOrders.add(o);
             }
         }
@@ -61,6 +65,8 @@ public class OrderDB extends DataHandler{
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
                 o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9)), rs.getString(10), rs.getInt(12), rs.getString(11)));
+                HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
+                o.setProducts(products);
                 return o;
             }
             throw new IllegalArgumentException("Product does not exist");
@@ -184,4 +190,32 @@ public class OrderDB extends DataHandler{
         }
         return listOrders;
     }
+
+    public int assignDelivery(List<Order> orders, int runID) throws SQLException {
+        Connection con = getConnection();
+        int[] rows;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAssignDeliveryRun(?,?) }")) {
+            for (Order o : orders) {
+                callStmt.setInt(1, o.getId());
+                callStmt.setInt(2, runID);
+
+                callStmt.addBatch();
+            }
+
+            con.setAutoCommit(false);
+
+            try {
+                rows = callStmt.executeBatch();
+                con.commit();
+            } catch (BatchUpdateException e) {
+                con.rollback();
+                throw new SQLException(e.getNextException());
+            } finally {
+                con.setAutoCommit(true);
+            }
+
+            return rows.length;
+    }
+}
+    
 }
