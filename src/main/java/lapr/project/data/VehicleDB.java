@@ -48,7 +48,10 @@ public class VehicleDB extends DataHandler {
     }
 
     public int save(Set<Vehicle> vehicles,int pharmID) throws SQLException {
-        return addVehicles(vehicles,pharmID, ESCOOTER);
+        if (vehicles instanceof EScooter) {
+            return addVehicles(vehicles, pharmID,ESCOOTER);
+        }
+        return addVehicles(vehicles,pharmID, DRONE);
     }
 
     private void addVehicle(Vehicle v, int pharmID, String typeVehicle) throws SQLException {
@@ -69,6 +72,8 @@ public class VehicleDB extends DataHandler {
                 //parameter to actully set
                 callStmt.setDouble(8, escooter.getAeroCoef());
                 callStmt.setDouble(9, escooter.getFrontalArea());
+            } else if (typeVehicle.equalsIgnoreCase(DRONE)) {
+                Drone drone = (Drone) v;
             }
             callStmt.execute();
         }
@@ -96,7 +101,9 @@ public class VehicleDB extends DataHandler {
                     //parameter to actully set
                     callStmt.setDouble(8, escooter.getAeroCoef());
                     callStmt.setDouble(9, escooter.getFrontalArea());
-                }
+                } else if (typeVehicle.equalsIgnoreCase(DRONE)) {
+                Drone drone = (Drone) v;
+            }
             }
 
             c.setAutoCommit(false);

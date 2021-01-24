@@ -200,7 +200,7 @@ public class TestUCs {
     private static void showPharmacyMenu(int id) {
         header("x Menu Pharmacy x");
         System.out.println();
-        System.out.println("1. Add vehicle (Not supported yet)");
+        System.out.println("1. Add vehicle");
         System.out.println("2. Remove vehicle");
         System.out.println("3. Update vehicle (Not supported yet)");
         System.out.println("4. Update stock");
@@ -215,7 +215,7 @@ public class TestUCs {
         String ans = read.nextLine();
         switch(ans){
             case "1":
-                System.out.println("Not supported yet.");
+                new NewVehicleUI(id);
                 showPharmacyMenu(id);
                 break;
             case "2":
