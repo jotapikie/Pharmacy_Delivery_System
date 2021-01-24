@@ -20,8 +20,6 @@ import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
 import lapr.project.model.Pathway;
 import lapr.project.model.Product;
-import lapr.project.model.ScooterPath;
-import lapr.project.utils.graph.Edge;
 import lapr.project.utils.route.Route;
 
 public class AssignOrderController {
