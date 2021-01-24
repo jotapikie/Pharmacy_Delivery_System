@@ -226,7 +226,13 @@ public class Pathway implements PathInterface{
         if (Double.doubleToLongBits(this.kineticCoef) != Double.doubleToLongBits(other.kineticCoef)) {
             return false;
         }
-        if (this.wind.equals(other.wind)) {
+        if (this.wind.vx!=other.wind.vx) {
+            return false;
+        }
+        if (this.wind.vy!=other.wind.vy) {
+            return false;
+        }
+        if (this.wind.vz!=other.wind.vz) {
             return false;
         }
         if (this.distance != other.distance) {

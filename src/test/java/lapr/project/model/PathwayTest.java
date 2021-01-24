@@ -90,7 +90,10 @@ public class PathwayTest {
      */
     @Test
     public void testGetWind() {
-        assertEquals(new Wind(1,1,1), path.getWind());
+
+        assertEquals(1, path.getWind().vx);
+        assertEquals(1, path.getWind().vy);
+        assertEquals(1, path.getWind().vz);
     }
 
     /**

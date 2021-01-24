@@ -42,6 +42,7 @@ public class AddPathControllerTest {
     private static GeographicalPoint p3;
     private static GeographicalPoint p4;
     private static List<GeographicalPoint> points;
+    private static Wind wind;
     
     private static Pathway p;
     private static Set<Pathway> paths;
@@ -53,9 +54,10 @@ public class AddPathControllerTest {
         p2 = new GeographicalPoint(22, 38, 0.3, "p2");
         p3 = new GeographicalPoint(22, 37, 0.4, "p3");
         p4 = new GeographicalPoint(24, 36, 0.5, "p4");
+        wind= new Wind(1,1,1);
         points.add(p1);points.add(p2);points.add(p3);
         
-        p = new Pathway(p1, p2, StreetType.ASPHALT, 4.5, new Wind(1,1,1), "Street1");
+        p = new Pathway(p1, p2, StreetType.ASPHALT, 4.5, wind, "Street1");
         paths = new HashSet<>();
         AddPathController c1 = new AddPathController();
     }
@@ -74,7 +76,7 @@ public class AddPathControllerTest {
         when(gpdb.getGeographicalPoint(22, 37)).thenReturn(p3);
         when(gpdb.getGeographicalPoint(24, 36)).thenReturn(p4);
         
-        when(pdb.newPath(p1, p2, "Asphalt", anyObject(), "Street1")).thenReturn(p);
+        when(pdb.newPath(p1, p2, "Asphalt", wind, "Street1")).thenReturn(p);
         
     }
 
@@ -96,9 +98,9 @@ public class AddPathControllerTest {
     @Test
     public void testSelectPoints() throws Exception {
         controller.getAvailableGeographicalPoints();
-        assertNull(controller.selectPoints(1, 1, 21,39, "Asphalt", new Wind(1,1,1), "Street1"));// Origin null
-        assertNull(controller.selectPoints(21, 39, 1,1, "Sidewalk", new Wind(1,1,1), "Street1"));// Destination null
-        assertFalse(controller.selectPoints(21, 39, 22, 38, "Asphalt", new Wind(1,1,1), "Street1").isEmpty());
+        assertNull(controller.selectPoints(1, 1, 21,39, "Asphalt", wind, "Street1"));// Origin null
+        assertNull(controller.selectPoints(21, 39, 1,1, "Sidewalk", wind, "Street1"));// Destination null
+        assertFalse(controller.selectPoints(21, 39, 22, 38, "Asphalt", wind, "Street1").isEmpty());
     }
 
     /**
@@ -108,9 +110,9 @@ public class AddPathControllerTest {
     public void testAddToQueue() throws SQLException {
         assertFalse(controller.addToQueue());
         controller.getAvailableGeographicalPoints();
-        controller.selectPoints(21, 39, 22, 38, "Asphalt", new Wind(1,1,1), "Street1");
+        controller.selectPoints(21, 39, 22, 38, "Asphalt", wind, "Street1");
         assertTrue(controller.addToQueue());
-        controller.selectPoints(21, 39, 22, 38, "Asphalt", new Wind(1,1,1), "Street1");
+        controller.selectPoints(21, 39, 22, 38, "Asphalt", wind, "Street1");
         assertFalse(controller.addToQueue());
     }
 
@@ -122,7 +124,7 @@ public class AddPathControllerTest {
         assertEquals(0, controller.savePaths());
         
         controller.getAvailableGeographicalPoints();
-        controller.selectPoints(21, 39, 22, 38, "Asphalt", new Wind(1,1,1), "Street1");
+        controller.selectPoints(21, 39, 22, 38, "Asphalt", wind, "Street1");
         controller.addToQueue();
         paths.add(p);
         when(pdb.savePaths(paths)).thenReturn(1);
