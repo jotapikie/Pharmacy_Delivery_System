@@ -1,5 +1,6 @@
 package lapr.project.model;
 
+import lapr.project.utils.Constants;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -365,6 +366,45 @@ public class EScooterTest {
         int expResult = 0;
         double result = instance.getMotor();
         assertEquals(expResult, result);
+        
+        
+        EScooter temp = new EScooter(1, State.ACTIVE, 30, 20);
+        assertEquals(Constants.SCOOTER_WEIGHT, temp.getWeight());
+        
+        assertEquals(Constants.SCOOTER_MOTOR, temp.getMotor());
+        assertEquals(Constants.SCOOTER_MAX_WEIGHT, temp.getMaxWeight());
+    }
+    
+    @Test
+    public void testSetMaxWeight() {
+        scooterTest.setMaxWeight(50);
+        assertEquals(50,scooterTest.getMaxWeight());
+        
+        boolean flag = false;
+        try{
+            scooterTest.setMaxWeight(-2);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(50, scooterTest.getMaxWeight());
+        
+        flag = false;
+        try{
+            scooterTest.setMaxWeight(-2);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(50, scooterTest.getMaxWeight());
+        
+        
+    }
+    
+    @Test
+    public void testHashCode() {
+        scooterTest.setId(2);
+        assertEquals(2, scooterTest.hashCode());
     }
     
 

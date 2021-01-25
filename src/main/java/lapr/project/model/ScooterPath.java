@@ -90,7 +90,7 @@ public final class ScooterPath extends Pathway{
 
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return String.format("%s - Total Weight: %.2f kg", super.toString(), totalWeight);
     }
 
     @Override
