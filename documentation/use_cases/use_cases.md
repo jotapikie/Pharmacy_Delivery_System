@@ -21,7 +21,7 @@ A use case diagram was developed to understand the responsible actor or actors f
 | UC12 | [Update Stock](UC12/UC12_UpdateStock.md) |
 | UC13 | [Start Delivery Run](UC13/UC13_StartDeliveryOrder.md) |
 | UC14 | [Assign Orders](UC14/UC14_AssignOrders.md) |
-| UC15 | [Notify Scooter Docked](UC15/UC15_NotifyScooterDocked.md) |
+| UC15 | [Parking Scooter](UC15/UC15_ParkingScooter.md) |
 | UC16 | [Notify Order Ready](UC16/UC16_OrderReady.md) |
 | UC17 | [Add Park](UC17/UC17_AddPark.md) |
 | UC18 | [Add Path](UC18/UC18_AddPath.md) |
