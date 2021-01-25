@@ -19,17 +19,19 @@ public abstract class Vehicle {
     private int maxBat;
     private int actualBat;
     private int motor;
+    private double maxWeight;
 
     public Vehicle() {
     }
 
-    public Vehicle(int id, double weight, State state, int maxBat, int actualBat, int motor) {
+    public Vehicle(int id, double weight, State state, int maxBat, int actualBat, int motor, double maxWeight) {
         setId(id);
         setWeight(weight);
         setState(state);
         setMaxBat(maxBat);
         setActualBat(actualBat);
         setMotor(motor);
+        setMaxWeight(maxWeight);
     }
 
     /**
@@ -139,6 +141,21 @@ public abstract class Vehicle {
         if (motor<=0) throw new IllegalArgumentException("Motor cannot be negative");
         this.motor = motor;
     }
+
+    public double getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(double maxWeight) {
+        if(maxWeight <= 0){
+            throw new IllegalArgumentException("Vehicle max weight is invalid.");
+        }
+        this.maxWeight = maxWeight;
+    }
+    
+    
+    
+    
 
     /**
      * Equals method

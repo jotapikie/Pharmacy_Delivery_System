@@ -34,7 +34,7 @@ public class NewVehicleUI {
        System.out.println();
        System.out.println("Do you want to insert a scooter(1) or drone(2)?");
        String ans = read.nextLine();
-       if(ans.equalsIgnoreCase("Scooter")){
+       if(ans.equalsIgnoreCase("1")){
            System.out.println();
            System.out.println("Max battery:");
            int max = Integer.parseInt(read.nextLine());
@@ -67,7 +67,7 @@ public class NewVehicleUI {
                 System.out.println("Operation aborted");
             }
            
-       }else if(ans.equalsIgnoreCase("Drone")){
+       }else if(ans.equalsIgnoreCase("2")){
            System.out.println();
            System.out.println("Max battery:");
            int max = Integer.parseInt(read.nextLine());

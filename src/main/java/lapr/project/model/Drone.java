@@ -20,7 +20,7 @@ public class Drone extends Vehicle{
     private static final double liftDrag = Constants.DRONE_LIFT_DRAG;
 
     public Drone(int id, State state, int maxBat, int actualBat) {
-        super(id, aeroCoef, state, maxBat, actualBat, actualBat);
+        super(id, aeroCoef, state, maxBat, actualBat, Constants.DRONE_MOTOR, Constants.DRONE_MAX_WEIGHT);
     }
 
     public static double getEletronicalConsumer() {

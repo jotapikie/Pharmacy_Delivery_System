@@ -24,6 +24,7 @@ public class Constants {
     public static final int SCOOTER_MOTOR = 300;
     public static final double SCOOTER_AERO_COEF = 0.7;
     public static final double SCOOTER_FRONTAL_AREA = 0.65;
+    public static final double SCOOTER_MAX_WEIGHT = 20;
     
 
     public static final int INITIAL_POINTS = 0;
@@ -54,6 +55,9 @@ public class Constants {
     public static double DRONE_FRONTAL_AREA = 1;
     public static double DRONE_TOP_AREA = 1;
     public static double DRONE_WEIGHT =7;
+    public static double DRONE_MAX_WEIGHT = 7;
+    public static int DRONE_MOTOR = 12;
+    
     
     public static double DRONE_ALTITUDE = 150;
 

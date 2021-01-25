@@ -15,20 +15,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lapr.project.controller.AddPathController;
 import lapr.project.controller.AddToCartController;
 import lapr.project.controller.AssignOrderController;
 import lapr.project.controller.MakeOrderController;
+import lapr.project.controller.NewVehicleController;
 import lapr.project.controller.NotifyReadyOrderController;
 import lapr.project.controller.PrepareOrderController;
 import lapr.project.controller.RegisterClientController;
 import lapr.project.controller.RegisterCourierController;
 import lapr.project.controller.RegisterPharmacyController;
 import lapr.project.controller.RegisterProductController;
+import lapr.project.controller.StartDeliveryRunController;
 import lapr.project.controller.UpdateStockController;
-import lapr.project.model.Wind;
+
 
 /**
  *
@@ -41,6 +45,7 @@ public class TextFiles {
     private static final String PHARMACIES = "textFiles/pharmacies.csv";
     private static final String PRODUCTS = "textFiles/products.csv";
     private static final String COURIERS = "textFiles/couriers.csv";
+    private static final String VEHICLES = "textFiles/vehicles.csv";
 
     private static String CARTS;
     private static String ORDERS;
@@ -48,6 +53,7 @@ public class TextFiles {
     private static String STOCK;
     private static String PREPARED_ORDERS;
     private static String RUNS;
+    private static String DELIVERIES;
     
     private static String RESULT;
     
@@ -58,14 +64,16 @@ public class TextFiles {
     public static void main(String[] args) {
      
         // NOTA: ANTES DE EXCEUTAR ESTE CODIGO APAGAR OS DADOS DAS TABELAS PARA NAO ERROS DE CHAVES EXCLUSIVAS
-//        System.out.println("Adding products...");
-//        System.out.printf("%d products were added. %n", insertProducts());
-//        System.out.println("Adding pharmacies...");
-//        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
-//        System.out.println("Adding clients...");
-//        System.out.printf("%d clients were added. %n", insertClients());
-//        System.out.println("Adding couriers...");
-//        System.out.printf("%d couriers were added. %n", insertCouriers());
+        System.out.println("Adding products...");
+        System.out.printf("%d products were added. %n", insertProducts());
+        System.out.println("Adding pharmacies...");
+        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
+        System.out.println("Adding clients...");
+        System.out.printf("%d clients were added. %n", insertClients());
+        System.out.println("Adding couriers...");
+        System.out.printf("%d couriers were added. %n", insertCouriers());
+        System.out.println("Adding vehicles...");
+        System.out.printf("%d vehicles were added. %n", insertVehicles());
         menu();
     }
 
@@ -100,6 +108,9 @@ public class TextFiles {
         System.out.printf("%d orders were prepared. %n", prepareOrders());
         System.out.println("Creating delivery runs...");
         System.out.printf("%d delivery runs were created. %n", assignOrders());
+        System.out.println("Starting delivery runs...");
+        System.out.printf("%d delivery runs were started. %n", startRuns());
+        
 
         
                 
@@ -112,6 +123,7 @@ public class TextFiles {
         STOCK = "textFiles/Scenario01/stock.csv";
         PREPARED_ORDERS = "textFiles/Scenario01/prep_orders.csv";
         RUNS = "textFiles/Scenario01/runs.csv";
+        DELIVERIES = "textFiles/Scenario01/deliveries.csv";
         RESULT = "textFiles/Scenario01/result.txt";
         
     }
@@ -191,6 +203,31 @@ public class TextFiles {
         }
         return couriersAdded;
     }
+    
+    private static int insertVehicles() {
+        NewVehicleController controller;
+        String line[];
+        int vehiclesAdded = 0;
+        for(String vehicle : importFile(VEHICLES)){
+            try{
+            line = vehicle.split(";");
+            controller = new NewVehicleController(Integer.parseInt(line[0]));
+            if(line[1].equalsIgnoreCase("Scooter")){
+                controller.newEScooter(Integer.parseInt(line[2]));
+                controller.addVehicleToQueue();
+                vehiclesAdded = vehiclesAdded + controller.registerVehicles();
+            }else if(line[1].equalsIgnoreCase("Drone")){
+                controller.newDrone(Integer.parseInt(line[2]));
+                controller.addVehicleToQueue();
+                vehiclesAdded = vehiclesAdded + controller.registerVehicles();
+            }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return vehiclesAdded;
+    }
+
     
     private static int insertPaths() {
         try {
@@ -345,6 +382,33 @@ public class TextFiles {
        return ordersAssigned;
     }
     
+    private static int startRuns() {
+       StartDeliveryRunController controller;
+       String line[];
+       int startedRuns = 0;
+       for(String delivery : importFile(DELIVERIES)){
+           try {
+               line = delivery.split(";");
+               controller = new StartDeliveryRunController(Integer.parseInt(line[0]), line[1], Double.parseDouble(line[2]));
+               controller.getDeliveryRuns();
+               System.out.println(controller.selectDeliveryRun(Integer.parseInt(line[3])));
+               controller.getAvailableScooters();
+               System.out.println(controller.selectScooter(Integer.parseInt(line[4])));
+               controller.startDeliveryRun();
+               startedRuns++;
+               String route = controller.getRoute();
+               write(String.format("Route for the delivery #%d: %n %s %n", Integer.parseInt(line[3]),route==null?"Not found":route));
+               double ene = controller.getEnergyToStart();
+               if(ene > 0){
+                   write(String.format("The scooter must have at least %.2f kWh to start the delivery. %n", ene));
+               }
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       }
+       return startedRuns;
+    }
+    
     
     private static List<String> importFile(String s) {
         boolean ignoreFirstLine = true;
@@ -390,6 +454,9 @@ public class TextFiles {
             }
         }
     }
+
+
+
 
 
 

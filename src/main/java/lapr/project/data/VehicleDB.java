@@ -6,11 +6,12 @@ import lapr.project.model.Drone;
 import lapr.project.model.EScooter;
 import lapr.project.model.State;
 import lapr.project.model.Vehicle;
+import lapr.project.model.VehicleCategory;
 import oracle.jdbc.OracleTypes;
 
 public class VehicleDB extends DataHandler {
-    private static final String ESCOOTER = "escooter";
-    private static final String DRONE = "drone";
+    private static final String ESCOOTER = "Scooter";
+    private static final String DRONE = "Drone";
 
     /**
      * Creates a new instance of EScooter
@@ -29,55 +30,62 @@ public class VehicleDB extends DataHandler {
         return new Drone(id,state, maxBat, currentBat);
     }
 
-    /**
-     * Method to save a instance of bike in the dataBase
-     *
-     * @param v
-     * @param pharmID
-     * @return
-     * @throws java.sql.SQLException
-     */
-    public boolean save(Vehicle v, int pharmID) throws SQLException {
-            
-        if (v instanceof Drone) {
-            addVehicle(v, pharmID, DRONE);
-        } else if (v instanceof EScooter) {
-            addVehicle(v, pharmID, ESCOOTER);
-        }
-        return true;
-    }
+ 
 
     public int save(Set<Vehicle> vehicles,int pharmID) throws SQLException {
-        if (vehicles instanceof EScooter) {
-            return addVehicles(vehicles, pharmID,ESCOOTER);
+        int i = 0;
+        for(Vehicle v : vehicles){
+            addVehicle(v, pharmID);
+            i++;
         }
-        return addVehicles(vehicles,pharmID, DRONE);
+        return i;
     }
 
-    private void addVehicle(Vehicle v, int pharmID, String typeVehicle) throws SQLException {
+    private void addVehicle(Vehicle v, int pharmID) throws SQLException {
 
         getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddVehicle(?,?,?,?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddVehicle(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
 
-            callStmt.setInt(1, v.getId());
-            callStmt.setDouble(2, v.getWeight());
-            callStmt.setString(3, v.getState().toString());
-            callStmt.setDouble(4, v.getMaxBat());
-            callStmt.setDouble(5, v.getActualBat());
-            callStmt.setDouble(6, v.getMotor());
+            callStmt.setDouble(1, v.getWeight());
+            callStmt.setString(2, v.getState().toString());
+            callStmt.setDouble(3, v.getMaxBat());
+            callStmt.setDouble(4, v.getActualBat());
+            callStmt.setDouble(5, v.getMotor());
+            callStmt.setDouble(6, v.getMaxWeight());
             callStmt.setInt(7, pharmID);
-
-            if (typeVehicle.equalsIgnoreCase(ESCOOTER)) {
-                EScooter escooter = (EScooter) v;
-                //parameter to actully set
-                callStmt.setDouble(8, escooter.getAeroCoef());
-                callStmt.setDouble(9, escooter.getFrontalArea());
-            } else if (typeVehicle.equalsIgnoreCase(DRONE)) {
-                Drone drone = (Drone) v;
+            
+            String category;
+            double aeroCoef, frontalArea,topArea,liftDrag,eleConsume,power;
+            if(v instanceof EScooter){
+                category = VehicleCategory.SCOOTER.getName();
+                aeroCoef = EScooter.getAeroCoef();
+                frontalArea = EScooter.getFrontalArea();
+                topArea = -1;
+                liftDrag = -1;
+                eleConsume = -1;
+                power = -1;
+            }else{
+                category = VehicleCategory.DRONE.getName();
+                aeroCoef = Drone.getAeroCoef();
+                frontalArea = Drone.getFrontalArea();
+                topArea = Drone.getTopArea();
+                liftDrag = Drone.getLiftDrag();
+                eleConsume = Drone.getEletronicalConsumer();
+                power = Drone.getPowerTransfer();
+                
             }
+            callStmt.setString(8, category);
+            callStmt.setDouble(9, aeroCoef);
+            callStmt.setDouble(10, frontalArea);
+            callStmt.setDouble(11, topArea);
+            callStmt.setDouble(12, liftDrag);
+            callStmt.setDouble(13, eleConsume);
+            callStmt.setDouble(14, power);
+            
             callStmt.execute();
         }
     }
+    
 
     public int addVehicles(Set<Vehicle> vehicles, int pharmID, String typeVehicle ) throws SQLException {
 
@@ -90,11 +98,12 @@ public class VehicleDB extends DataHandler {
 
                 callStmt.setInt(1, v.getId());
                 callStmt.setDouble(2, v.getWeight());
-                callStmt.setString(3, v.getState().toString());
+                callStmt.setString(3, v.getState().getName());
                 callStmt.setDouble(4, v.getMaxBat());
                 callStmt.setDouble(5, v.getActualBat());
                 callStmt.setDouble(6, v.getMotor());
-                callStmt.setInt(7, pharmID);
+                callStmt.setDouble(7, v.getMaxWeight());
+                callStmt.setInt(8, pharmID);
 
                 if (typeVehicle.equalsIgnoreCase(ESCOOTER)) {
                     EScooter escooter = (EScooter) v;
@@ -264,6 +273,8 @@ public class VehicleDB extends DataHandler {
         }
         return listScooters;
     }
+
+
 
 
 

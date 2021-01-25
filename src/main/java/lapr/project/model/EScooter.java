@@ -28,15 +28,15 @@ public class EScooter extends Vehicle{
      * @param actualBat
      */
     public EScooter(int id, State state, int maxBat, int actualBat) {
-        super(id, weight, state, maxBat, actualBat, motor);
+        super(id, weight, state, maxBat, actualBat, motor, Constants.SCOOTER_MAX_WEIGHT);
         setState(state);
     }
 
-    public double getFrontalArea() {
+    public static double getFrontalArea() {
         return frontalArea;
     }
 
-    public  double getAeroCoef() {
+    public static double getAeroCoef() {
         return aeroCoef;
     }
     

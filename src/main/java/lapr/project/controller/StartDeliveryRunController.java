@@ -6,6 +6,7 @@
 package lapr.project.controller;
 
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.ClientDB;
@@ -58,6 +59,21 @@ public class StartDeliveryRunController {
         this.deliveryWeight = 0;
         this.vdb = vdb;
     }
+
+    public StartDeliveryRunController(int idPharmacy, String email, double weight) {
+        this.drdb = new DeliveryRunDB();
+        this.gpdb = new GeographicalPointDB();
+        this.cdb = new ClientDB();
+        this.vdb = new VehicleDB();
+        this.idPharmacy = idPharmacy;
+        this.courierWeight = weight;
+        this.email = email;
+        this.deliveryWeight = 0;
+        this.runs = new ArrayList<>();
+        this.scooters = new ArrayList<>();
+    }
+    
+    
     
     
     
@@ -108,7 +124,8 @@ public class StartDeliveryRunController {
             r = routes.get(0);
         }catch(IllegalArgumentException e){
             r = null;
-            return false;
+        }catch(NullPointerException e){
+            r = null;
         }
         
         boolean res = drdb.startDelivery(idPharmacy, email, r, scooter.getId());
