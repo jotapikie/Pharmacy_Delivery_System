@@ -33,7 +33,7 @@ import lapr.project.controller.RegisterProductController;
 import lapr.project.controller.StartDeliveryRunController;
 import lapr.project.controller.UpdateStockController;
 import lapr.project.data.DataHandler;
-import lapr.project.data.UtilsDB;
+
 
 
 /**
@@ -43,7 +43,6 @@ import lapr.project.data.UtilsDB;
 public class TextFiles {
     private static Scanner read = new Scanner(System.in);
 
-    private static UtilsDB utils = new UtilsDB();
     
     private static final String CLIENTS = "textFiles/clients.csv";
     private static final String PHARMACIES = "textFiles/pharmacies.csv";
