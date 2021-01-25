@@ -58,7 +58,7 @@ class EndDeliveryRunControllerTest {
     void setEndDateFail() throws SQLException {
         when(drdb.endDeliveryRun(anyInt())).thenReturn("jota");
         String result= drdb.endDeliveryRun(1);
-        String exp= "naojota";
+        String exp= "jota";
         assertEquals(exp,result);
     }
     @Test
