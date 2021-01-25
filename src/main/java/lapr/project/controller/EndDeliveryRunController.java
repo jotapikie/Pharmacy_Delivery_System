@@ -24,9 +24,6 @@ public class EndDeliveryRunController {
         this.vdb = new VehicleDB();
     }
 
-    public String getScooterCourierByDeliveryRun(int scooterID) throws SQLException {
-        return drdb.getCourierEmail(scooterID);
-    }
 
     public String setEndDate(int scooterID) throws SQLException{
         return drdb.endDeliveryRun(scooterID);

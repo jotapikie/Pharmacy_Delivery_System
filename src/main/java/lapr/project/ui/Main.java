@@ -120,14 +120,14 @@ class Main {
             String line = br1.readLine();
             String[] arrSplit = line.split(" ");
             String email;
-            email = drc.getScooterCourierByDeliveryRun(Integer.parseInt(arrSplit[0]));
+
 
             if (arrSplit.length == 4) {
 
                 uvc.updateScooterState(Integer.parseInt(arrSplit[0]), State.CHARGING);
                 uvc.update();
                 drc.lockScooter(Integer.parseInt(arrSplit[0]), Integer.parseInt(arrSplit[1]), Integer.parseInt(arrSplit[2]));
-                drc.setEndDate(Integer.parseInt(arrSplit[0]));
+                email=drc.setEndDate(Integer.parseInt(arrSplit[0]));
 
 
                 Utils.sendEmail(email, "Scooter battery charging duration estimate", "We estimate that your scooter will have full charge in " + arrSplit[3] + " hours.");
@@ -142,7 +142,7 @@ class Main {
                 return true;
 
             } else {
-                drc.setEndDate(Integer.parseInt(arrSplit[0]));
+               email= drc.setEndDate(Integer.parseInt(arrSplit[0]));
 
                 Utils.sendEmail(email, "Scooter not Locked", "Your scooter is not properly locked. Please lock it so that the scooter can charge");
                 return true;
