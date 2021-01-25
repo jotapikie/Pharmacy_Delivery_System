@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
-import lapr.project.utils.route.RouteAlgorithms;
+
 
 /**
  *
@@ -18,7 +18,7 @@ import lapr.project.utils.route.RouteAlgorithms;
 public class AirGraph extends MainGraph{
         
  
-
+    private double totalWeight;
 
 
  /**
@@ -36,7 +36,7 @@ public class AirGraph extends MainGraph{
         if (totalWeight <= 0) {
             throw new IllegalArgumentException("Invalid energy information!");
         }
-
+        this.totalWeight = totalWeight;
 
 
         this.graph = new Graph<GeographicalPoint, DronePath>(true);
@@ -53,62 +53,14 @@ public class AirGraph extends MainGraph{
                 graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
             }
         }
-        
-  
-        
-
-        
-        
+        super.setToUse(this);
     }
     
- 
-
-    /**
-     * Calculates the k shortest routes from origin to destination parks,
-     * considering energy efficiency.
-     *
-     * @param origin origin park.
-     * @param destination destination park.
-     * @param k number of routes to calculate.
-     * @return k shortest routes.
-     */
-    @Override
-    public List<Route> kBestPaths(GeographicalPoint origin, GeographicalPoint destination, int k) {
-        if (origin == null || destination == null || origin.equals(destination) || k <= 0) {
-            throw new IllegalArgumentException("Invalid algorithm arguments!");
-        }
-        try {
-            return RouteAlgorithms.kBestRoutes(this, origin, destination, k);
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("Invalid graph vertexes!");
-        }
+    public double getTotalWeight() {
+        return totalWeight;
     }
-    
     
     @Override
-    public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
-        if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
-            throw new IllegalArgumentException("Invalid algorithm arguments!");
-        }
-        try {
-            return RouteAlgorithms.kBestRoutes(this, toVisit, origin, destination, k, Integer.MAX_VALUE);
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
-        }
-    }
-    
-    public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, int maxBattery) {
-        if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
-            throw new IllegalArgumentException("Invalid algorithm arguments!");
-        }
-        try {
-            return RouteAlgorithms.kBestRoutes(this, toVisit, origin, destination, k, maxBattery);
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
-        }
-    }
-    
-
     public Graph<GeographicalPoint, DronePath> getRouteGraph() {
         return this.graph;
     }

@@ -99,6 +99,7 @@ public class AssignOrderController {
         }
         
         try{
+            
             List<Route> routes = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
             land = routes.get(0);
             return land.toString();
