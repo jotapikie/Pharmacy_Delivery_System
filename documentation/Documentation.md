@@ -61,7 +61,7 @@ The goal of this project was to develop an efficient and reliable software to ma
 In order to offer a solution to the problem statement, we used the tools and resources learned in various curricular units of the semester:
 
 - **ESINF** ( _Information Structures_ ): We learned how to efficiently use graphs and binary search trees in the programming language ``Java``.
-- **BDDAD** ( _Databases_ ): We learned how to model data and develop database with ``SQL`` and ``PLSQL``, to efficiently manipulate the data.
+- **BDDAD** ( _Databases_ ): We learned how to model data and develop a database as well as how to properly create, functions, procedures and triggers with ``SQL`` and ``PLSQL``, so that we can efficiently manipulate the data stored.
 - **FSIAP** ( _Applied Physics_ ): We learned the behavior of electricity.
 - **ARQCP** ( _Assembly code_ ): We learned programing in assembly and calling this function in C.
 - **LAPR3** ( _Scrum Module_ ): We learned the best practices for the Scrum agile project development and how to use ``Jira``, a software used in project management.
