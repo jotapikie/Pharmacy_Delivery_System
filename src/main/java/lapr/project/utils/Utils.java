@@ -152,7 +152,7 @@ public class Utils {
         double wind = (windToPath > 0) ? -Math.pow(windToPath, 2) : Math.pow(windToPath, 2);
         double result = ((Constants.GRAVITY * totalWeight * (kineticCoef + Math.asin(Math.abs(altitudeDif) / distance)))
                 + (vehicleAerodynamicCoef + wind)) * distance / 3600;
-        return (result < 0) ? 0 : result;
+        return (result < 0) ? 0 : result*0.001;
     }
 
     public static double pathEnergyCostDrone(double totalWeight, double vehicleAerodynamicCoef, double powerTransfer, double liftDrag, double consumoEletronico, double areaFrontal, double areaTopo, double velocidadeMedia, Wind windToPath, double altitudeDifI, double altitudeDifF, double distance) {
@@ -166,7 +166,7 @@ public class Utils {
         double fImpulso = ((totalWeight * Constants.GRAVITY) + (0.5 * Constants.RO_AR * areaTopo * Constants.DRAG_COEF * velocidadeMedia * velocidadeMedia));
         double eSubir = ((fImpulso * altitudeDifI) / Constants.RENDIMENTO_DRONE);
         double eDescer = ((fImpulso * altitudeDifF) / Constants.RENDIMENTO_DRONE);
-        return eAero + eDescer + eHorizontal + eSubir;
+        return (eAero + eDescer + eHorizontal + eSubir) * (2.777778*Math.pow(10, -7));
     }
 
 

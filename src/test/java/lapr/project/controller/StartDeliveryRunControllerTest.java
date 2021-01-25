@@ -280,7 +280,7 @@ public class StartDeliveryRunControllerTest {
         assertEquals(r1.toString(),sRoute );
         assertNotNull(controller.getRoute());
         assertFalse(sRoute.isEmpty());
-        assertEquals(29.19, controller.getEnergyToStart(),0.1);
+        assertEquals(0.029, controller.getEnergyToStart(),0.01);
         
         when(drdb.startDelivery(1, email, r1,2)).thenReturn(false);
         assertFalse(controller.startDeliveryRun());

@@ -287,12 +287,12 @@ public class Route implements Comparable<Route>{
                 }
             }
             String sDist = String.format("%.2fm",p.getDistance());
-            String sEner = String.format("%.2fWh", p.getCost());
+            String sEner = String.format("%.2fkWh", p.getCost());
             sb.append(String.format("%-40s -> %s %-40s  | %-20s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet(), sDist, sEner));
         }
         String sDist = String.format("%.2fm",totalDistance);
-        String sEner = String.format("%.2fWh", totalEnergy);
-        sb.append(String.format("Total Distance: %s | Total Energy: %s | Minimum Energy: %.2fWh %n", sDist, sEner, minimumEnergy));
+        String sEner = String.format("%.2fkWh", totalEnergy);
+        sb.append(String.format("Total Distance: %s | Total Energy: %s | Minimum Energy: %.2fkWh %n", sDist, sEner, minimumEnergy));
         return sb.toString();
     }
     
