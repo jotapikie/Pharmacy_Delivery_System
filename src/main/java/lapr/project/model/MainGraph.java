@@ -131,6 +131,12 @@ public class MainGraph {
         this.toUse = toUse;
     }
 
+    public MainGraph getToUse() {
+        return toUse;
+    }
+    
+    
+
     /**
      * Calculates the k shortest routes from origin to destination parks.
      *

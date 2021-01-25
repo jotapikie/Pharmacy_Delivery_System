@@ -7,7 +7,6 @@ package lapr.project.model;
 
 import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
-import static lapr.project.utils.Utils.windToPath;
 
 /**
  *
@@ -21,7 +20,7 @@ public class DronePath extends Pathway{
 
     public DronePath(double totalWeight, GeographicalPoint origLocation, GeographicalPoint destLocation, double distance, Wind wind) {
         super(origLocation, destLocation, null, distance, wind, null, VehicleCategory.DRONE);
-        this.totalWeight = totalWeight;
+        setTotalWeight(totalWeight);
         calculateEnegyCost();
     }
 

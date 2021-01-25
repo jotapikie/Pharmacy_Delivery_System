@@ -6,9 +6,8 @@
 package lapr.project.model;
 
 import java.sql.SQLException;
-import java.util.List;
 import lapr.project.utils.graph.Graph;
-import lapr.project.utils.route.Route;
+
 
 
 /**
@@ -18,7 +17,7 @@ import lapr.project.utils.route.Route;
 public class AirGraph extends MainGraph{
         
  
-    private double totalWeight;
+    private final double totalWeight;
 
 
  /**
@@ -39,7 +38,7 @@ public class AirGraph extends MainGraph{
         this.totalWeight = totalWeight;
 
 
-        this.graph = new Graph<GeographicalPoint, DronePath>(true);
+        this.graph = new Graph<>(true);
         MainGraph main = new MainGraph();
         
         

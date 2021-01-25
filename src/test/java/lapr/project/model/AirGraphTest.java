@@ -112,6 +112,7 @@ public class AirGraphTest {
      */
     @Test
     public void testGetTotalWeight() throws SQLException {
+        assertEquals(graph, graph.getToUse());
         assertEquals(123,graph.getTotalWeight());
         
         boolean flag = false;

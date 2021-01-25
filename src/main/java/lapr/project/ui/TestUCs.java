@@ -7,7 +7,9 @@ package lapr.project.ui;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import lapr.project.controller.AddPathController;
 import static lapr.project.ui.UtilsUI.header;
+import lapr.project.utils.Utils;
 
 
 /**
@@ -21,7 +23,10 @@ public class TestUCs {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        showOptions();
+        System.out.println(Utils.distance(41.16875, 41.14582, -8.68995, -8.61398, 4, 87));
+        AddPathController c = new AddPathController();
+        System.out.println(c.selectPoints(-8.68995, 41.16875, -8.61398, 41.14582, "Asphalt", 1, 1, 1, "Scooter", "S"));
+        //showOptions();
      }
     
     private static void showOptions() throws SQLException{
