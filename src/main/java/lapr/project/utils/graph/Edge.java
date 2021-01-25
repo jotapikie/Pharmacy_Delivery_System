@@ -6,9 +6,10 @@
 package lapr.project.utils.graph;
 
 import java.lang.reflect.Array;
+import java.util.Objects;
 
 
- /* 
+/*
  * @author DEI-ESINF
  * @param <V>
  * @param <E>
@@ -137,6 +138,11 @@ public class Edge<V,E> implements Comparable<E> {
         newEdge.vDest = vDest;
         
         return newEdge;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(element, weight);
     }
     
     @Override

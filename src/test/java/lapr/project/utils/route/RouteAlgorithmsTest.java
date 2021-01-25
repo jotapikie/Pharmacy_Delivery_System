@@ -83,7 +83,6 @@ public class RouteAlgorithmsTest {
         when(gpdb.getGeographicalPoints()).thenReturn(allPoints);
         when(pdb.getPaths()).thenReturn(allPaths);
         LandGraph.setup(gpdb, pdb);
-        new RouteAlgorithms();
         landGraph = new LandGraph(135.8);
     }
     

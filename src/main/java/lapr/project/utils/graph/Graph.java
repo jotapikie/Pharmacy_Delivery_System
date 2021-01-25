@@ -8,6 +8,7 @@ package lapr.project.utils.graph;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Graph<V,E> implements GraphInterface<V,E> {
     
@@ -302,8 +303,11 @@ public class Graph<V,E> implements GraphInterface<V,E> {
         return true;
     }
 
-  
-    
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numVert, numEdge, isDirected, vertices);
+    }
     
 
     //string representation
