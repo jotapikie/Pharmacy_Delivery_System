@@ -123,7 +123,7 @@ public class VehicleDB extends DataHandler {
 
     public Vehicle getVehicle(int id) throws SQLException {
 
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetVehicle(?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetVehicle(?) }")) {
 
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
 

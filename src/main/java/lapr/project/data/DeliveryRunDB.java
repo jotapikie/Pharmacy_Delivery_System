@@ -69,7 +69,7 @@ public class DeliveryRunDB extends DataHandler{
 
     public String endDeliveryRun(int scooterID) throws SQLException {
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcEndDeliveryRun(?,?)}")) {
-            callStmt.registerOutParameter(1, OracleTypes.INTEGER);
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.setInt(2, scooterID);
             callStmt.setTimestamp(3, Timestamp.from(Instant.now()));
             callStmt.execute();
