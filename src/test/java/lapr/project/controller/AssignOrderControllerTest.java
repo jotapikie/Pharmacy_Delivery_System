@@ -15,11 +15,19 @@ import java.util.Set;
 import lapr.project.data.DeliveryRunDB;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.OrderDB;
+import lapr.project.data.PathwayDB;
+import lapr.project.model.Address;
 import lapr.project.model.DeliveryRun;
+import lapr.project.model.DronePath;
 import lapr.project.model.GeographicalPoint;
+import lapr.project.model.MainGraph;
 import lapr.project.model.Order;
+import lapr.project.model.Pathway;
 import lapr.project.model.Product;
+import lapr.project.model.ScooterPath;
+import lapr.project.model.StreetType;
 import lapr.project.model.VehicleCategory;
+import lapr.project.model.Wind;
 import lapr.project.utils.Utils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -40,6 +48,7 @@ public class AssignOrderControllerTest {
     private static OrderDB odb;
     private static DeliveryRunDB drdb;
     private static GeographicalPointDB gpdb;
+    private static PathwayDB pdb;
     
     private static Order o1;
     private static Order o2;
@@ -55,6 +64,13 @@ public class AssignOrderControllerTest {
     
     private static DeliveryRun run;
     private static Set<DeliveryRun> runs;
+    
+    private static Address aClient;
+    private static GeographicalPoint point1;
+    
+    private static List<GeographicalPoint> points;
+    private static List<Pathway> paths;
+    
     public AssignOrderControllerTest() {
         AssignOrderController c1 = new AssignOrderController(idPharmacy);
     }
@@ -67,12 +83,13 @@ public class AssignOrderControllerTest {
         Map<Product, Integer> pr = new HashMap<Product, Integer>();
         pr.put(p1, 2);
         pr.put(p3, 1);
-        
-        o1 = new Order();o1.setId(1);o1.setStatus("Prepared");o1.setProducts(pr);
+        aClient = new Address("Street1", new GeographicalPoint(21,21,0.4),"City1", 45, "4526-234");
+        o1 = new Order();o1.setId(1);o1.setStatus("Prepared");o1.setProducts(pr);o1.setAddress(aClient);
         
         pr.clear();
         pr.put(p2, 3);
-        o2 = new Order();o2.setId(2);o2.setStatus("Prepared");o2.setProducts(pr);
+        Address aClient2 = new Address("Street2", new GeographicalPoint(22,22,0.4),"City2", 45, "4526-234");
+        o2 = new Order();o2.setId(2);o2.setStatus("Prepared");o2.setProducts(pr);o2.setAddress(aClient2);
         
         pr.clear();
         pr.put(p1, 8);
@@ -86,6 +103,18 @@ public class AssignOrderControllerTest {
         run = new DeliveryRun(1, orders, VehicleCategory.SCOOTER);
         runs = new HashSet<>();
         
+        
+        point1 = new GeographicalPoint(21.4, 21.3, 0.4, "Pharmacy");
+        
+        points = new ArrayList<>();
+        points.add(point1);points.add(aClient.getGeographicalPoint());points.add(aClient2.getGeographicalPoint());
+        
+        paths = new ArrayList<>();
+        paths.add(new ScooterPath(point1, aClient.getGeographicalPoint(), 200, StreetType.ASPHALT, new Wind(1,1,1), 0.4, "Street2"));
+        paths.add(new ScooterPath(aClient.getGeographicalPoint(),point1, 200, StreetType.ASPHALT, new Wind(1,1,1), 0.4, "Street2"));
+        paths.add(new DronePath(0.4, point1, aClient.getGeographicalPoint(),200, new Wind(1,1,1)));
+        paths.add(new DronePath(0.4, aClient.getGeographicalPoint(), point1,200, new Wind(1,1,1)));
+       
     }
     
     @AfterAll
@@ -97,6 +126,7 @@ public class AssignOrderControllerTest {
         odb = mock(OrderDB.class);
         drdb = mock(DeliveryRunDB.class);
         gpdb = mock(GeographicalPointDB.class);
+        pdb = mock(PathwayDB.class);
         controller = new AssignOrderController(odb, drdb,gpdb, idPharmacy);
         
         when(odb.getOrdersByStatus(idPharmacy, "Prepared")).thenReturn(orders);
@@ -105,6 +135,12 @@ public class AssignOrderControllerTest {
         when(odb.getOrder(3)).thenReturn(o3);
         when(odb.getOrder(4)).thenReturn(o4);
         when(odb.getOrder(5)).thenReturn(null);
+        
+        MainGraph.setup(gpdb, pdb);
+        when(gpdb.getGeographicalPoints()).thenReturn(points);
+        when(pdb.getPaths()).thenReturn(paths);
+        when(gpdb.getGeographicalPointByPharmacy(idPharmacy)).thenReturn(point1);
+        
     }
     
     @AfterEach
@@ -117,6 +153,7 @@ public class AssignOrderControllerTest {
     @Test
     public void testGetAvailableOrders() throws Exception {
         assertEquals(Utils.listToString(orders), controller.getAvailableOrders());
+        assertNull(controller.newDeliveryRun("Scooter"));
     }
 
     /**
@@ -147,13 +184,59 @@ public class AssignOrderControllerTest {
           controller.selectOrder(3);
           assertFalse(controller.addOrder());
     }
+    
+      /**
+     * Test of addOrder method, of class AssignOrderController.
+     */
+    @Test
+    public void testAddOrder_2() throws SQLException {
+          controller.getAvailableOrders();
+          controller.selectOrder(3);
+          assertTrue(controller.addOrder());
+          
+    }
 
     /**
      * Test of getAirRoute method, of class AssignOrderController.
      */
     @Test
     public void testGetAirRoute() throws SQLException {
-        //assertNull(controller.getAirRoute());
+        controller.getAvailableOrders();
+        controller.selectOrder(1);
+        controller.addOrder();
+        controller.getLandRoute();
+        String air = controller.getAirRoute();
+        assertNotNull(air);
+        assertFalse(air.isEmpty());
+        
+    }
+    
+        /**
+     * Test of getAirRoute method, of class AssignOrderController.
+     */
+    @Test
+    public void testGetAirRoute_NoPath() throws SQLException {
+        controller.getAvailableOrders();
+        controller.selectOrder(2);
+        controller.addOrder();
+        assertNull(controller.getLandRoute());
+        String air = controller.getAirRoute();
+        assertNull(air);
+        
+    }
+    
+              /**
+     * Test of getLandRoute method, of class AssignOrderController.
+     */
+    @Test
+    public void testGetAirRoute_NoPaths() throws SQLException {
+        controller.getAvailableOrders();
+        controller.selectOrder(2);
+        controller.addOrder();
+        when(pdb.getPaths()).thenReturn(new ArrayList<>());
+        when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
+        assertNull(controller.getLandRoute());
+        assertNull(controller.getAirRoute());
     }
 
     /**
@@ -161,12 +244,49 @@ public class AssignOrderControllerTest {
      */
     @Test
     public void testGetLandRoute() throws SQLException {
-        //assertNull(controller.getLandRoute());
+        controller.getAvailableOrders();
+        controller.selectOrder(1);
+        controller.addOrder();
+        String land = controller.getLandRoute();
+        assertNotNull(land);
+        assertFalse(land.isEmpty());
+
+    }
+    
+        /**
+     * Test of getLandRoute method, of class AssignOrderController.
+     */
+    @Test
+    public void testGetLandRoute_NoPath() throws SQLException {
+        controller.getAvailableOrders();
+        controller.selectOrder(2);
+        controller.addOrder();
+        assertNull(controller.getLandRoute());
+    }
+    
+            /**
+     * Test of getLandRoute method, of class AssignOrderController.
+     */
+    @Test
+    public void testGetLandRoute_NoPaths() throws SQLException {
+        controller.getAvailableOrders();
+        controller.selectOrder(2);
+        controller.addOrder();
+        when(pdb.getPaths()).thenReturn(new ArrayList<>());
+        when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
+        assertNull(controller.getLandRoute());
     }
     
     @Test
-    public void testGetMostEfficient() {
-        //assertNull(controller.getMostEfficient());
+    public void testGetMostEfficient() throws SQLException {
+        assertNull(controller.getMostEfficient());
+        
+        controller.getAvailableOrders();
+        controller.selectOrder(1);
+        controller.addOrder();
+        controller.getLandRoute();
+        controller.getAirRoute();
+        assertEquals("Scooter", controller.getMostEfficient());
     }
 
     /**

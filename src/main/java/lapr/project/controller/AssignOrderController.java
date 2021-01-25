@@ -25,16 +25,16 @@ public class AssignOrderController {
     private final OrderDB orderDB;
     private final DeliveryRunDB runDB;
     private final GeographicalPointDB pointDB;
-    private int idPharmacy;
+    private final int idPharmacy;
     private List<Order> orders;
     
     private final List<Order> ordersSelected;
     private Order ord;
     private DeliveryRun run;
-    private Set<DeliveryRun> runs;
+    private final Set<DeliveryRun> runs;
     private double totalWeight;
     private GeographicalPoint pharmacyCor;
-    private List<GeographicalPoint> clients;
+    private final List<GeographicalPoint> clients;
     
     private Route land;
     private Route air;
@@ -98,22 +98,30 @@ public class AssignOrderController {
             clients.add(o.getAddress().getGeographicalPoint());
         }
         
-        List<Route> routes = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
-        if(routes.isEmpty()){
+        try{
+            List<Route> routes = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
+            land = routes.get(0);
+            return land.toString();
+        }catch(NullPointerException e){
+            return null;
+        }catch(IllegalArgumentException e){
             return null;
         }
-        land = routes.get(0);
-        return land.toString();
+
     }
     
       public String getAirRoute() throws SQLException{
         AirGraph airGraph = new AirGraph(totalWeight + Constants.DRONE_WEIGHT);
-        List<Route> routes = airGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
-        if(routes.isEmpty()){
+        try{
+            List<Route> routes = airGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
+            air = routes.get(0);
+            return air.toString();
+        }catch(NullPointerException e){
+            return null;
+        }catch(IllegalArgumentException e){
             return null;
         }
-        air = routes.get(0);
-        return air.toString();
+   
         
     }
     

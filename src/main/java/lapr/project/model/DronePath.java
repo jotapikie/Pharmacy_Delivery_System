@@ -37,7 +37,7 @@ public class DronePath extends Pathway{
     }
 
     private void calculateEnegyCost() {
-        energyCost = Utils.pathEnergyCostDrone(totalWeight, Drone.getAeroCoef(), Drone.getPowerTransfer(), Drone.getLiftDrag(), Drone.getEletronicalConsumer(), Drone.getFrontalArea(), Drone.getTopArea(), Constants.DRONE_AVERAGE_SPEED, new Wind(1, 1, 1) ,Constants.DRONE_ALTITUDE-super.getOriginPoint().getElevation(),Constants.DRONE_ALTITUDE-super.getDestinationPoint().getElevation(),super.getDistance());
+        energyCost = Utils.pathEnergyCostDrone(totalWeight, Drone.getAeroCoef(), Drone.getPowerTransfer(), Drone.getLiftDrag(), Drone.getEletronicalConsumer(), Drone.getFrontalArea(), Drone.getTopArea(), Constants.DRONE_AVERAGE_SPEED, super.getWind(),Constants.DRONE_ALTITUDE-super.getOriginPoint().getElevation(),Constants.DRONE_ALTITUDE-super.getDestinationPoint().getElevation(),super.getDistance());
     }
 
     @Override
