@@ -47,10 +47,11 @@ public class AirGraph extends MainGraph{
             this.graph.insertVertex(vertex);
 
         }
-        for (Pathway mainEdge : main.getEdges()) {
-            DronePath energyEdge = new DronePath(totalWeight, mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getStreetType(), mainEdge.getDistance(),mainEdge.getWind(), mainEdge.getStreet());
-            graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
-            
+        for (Pathway mainEdge : pathDB.getPaths()) {
+            if(mainEdge.getCategory().equals(VehicleCategory.DRONE)){
+                DronePath energyEdge = new DronePath(totalWeight, mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getDistance(),mainEdge.getWind());
+                graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
+            }
         }
         
   

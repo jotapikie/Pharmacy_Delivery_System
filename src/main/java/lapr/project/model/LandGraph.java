@@ -52,9 +52,11 @@ public class LandGraph extends MainGraph{
 
         }
         for (Pathway mainEdge : main.getEdges()) {
+            if(mainEdge.getCategory().equals(VehicleCategory.SCOOTER)){
             ScooterPath energyEdge = new ScooterPath(mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getDistance(),
                     mainEdge.getStreetType(), mainEdge.getWind(), totalWeight, mainEdge.getStreet());
             graph.insertEdge(energyEdge.getOriginPoint(), energyEdge.getDestinationPoint(), energyEdge, energyEdge.getCost());
+            }
             
         }
         

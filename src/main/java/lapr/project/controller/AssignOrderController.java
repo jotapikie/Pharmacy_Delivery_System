@@ -8,7 +8,6 @@ import lapr.project.utils.Utils;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +17,6 @@ import lapr.project.model.AirGraph;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
-import lapr.project.model.Pathway;
 import lapr.project.model.Product;
 import lapr.project.utils.route.Route;
 
@@ -121,7 +119,7 @@ public class AssignOrderController {
     
     public String getMostEfficient(){
         if(land != null && air != null){
-           if(land.compareTo(air)<0){
+           if(land.compareTo(air)>0){
                return "Drone";
            }else{
                return "Scooter";

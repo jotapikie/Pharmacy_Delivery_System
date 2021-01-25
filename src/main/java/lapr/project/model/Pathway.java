@@ -25,20 +25,22 @@ public class Pathway implements PathInterface{
     private Wind wind;
     private String street;
     private StreetType streetType;
+    private VehicleCategory category;
     
     
-     public Pathway(GeographicalPoint origLocation, GeographicalPoint destLocation, StreetType type, double distance, Wind wind, String street) {
+     public Pathway(GeographicalPoint origLocation, GeographicalPoint destLocation, StreetType type, double distance, Wind wind, String street, VehicleCategory category) {
         setOriginPoint(origLocation);
         setDestinationPoint(destLocation);
         setStreetType(type);
         setDistance(distance);
         setWind(wind);
         setStreet(street);
+        setCategory(category);
 
     }
 
     public void setStreet(String street) {
-         if (street == null ||street.isEmpty()){
+         if (street != null && street.isEmpty()){
              throw new IllegalArgumentException("Invalid path street");
          }
          this.street=street;
@@ -48,10 +50,8 @@ public class Pathway implements PathInterface{
     }
 
     public void setStreetType(StreetType type) {
-         if (type==null){
-             throw new IllegalArgumentException("Wrong Street Type");
-         }
          this.streetType= type;
+         if(type != null){
          switch (type){
              case PARALELO:
                  this.kineticCoef=Constants.KINETIC_COEF_PARALELO;
@@ -64,6 +64,7 @@ public class Pathway implements PathInterface{
                  break;
              default:
                  this.kineticCoef=Constants.KINETIC_COEF_ASFALTO;
+         }
          }
     }
 
@@ -196,9 +197,25 @@ public class Pathway implements PathInterface{
         this.wind = wind;
     }
 
+    /**
+     * method to set the category of path
+     * @param category 
+     */
+    public void setCategory(VehicleCategory category) {
+        this.category = category;
+    }
+
+    public VehicleCategory getCategory() {
+        return category;
+    }
+    
+    
+    
+    
+
     @Override
     public String toString() {
-        return String.format("Street: %s - Path type: %s - Origin: [%s] - Destination [%s] - Distance: %.2f m - Windx: %.2f - Windy: %.2f - Windz: %.2f - Kinetic coefficient: %.2f", street, streetType.getName(),originPoint.toString(), destinationPoint.toString(), distance, wind.vx,wind.vy,wind.vz, kineticCoef);
+        return String.format("Street: %s - Path type: %s - Origin: [%s] - Destination [%s] - Distance: %.2f m - Windx: %.2f - Windy: %.2f - Windz: %.2f - Kinetic coefficient: %.2f", street, streetType==null?"Air":streetType.getName(),originPoint.toString(), destinationPoint.toString(), distance, wind.vx,wind.vy,wind.vz, kineticCoef);
     }
     
     
@@ -208,6 +225,7 @@ public class Pathway implements PathInterface{
         int hash = 7;
         hash = 47 * hash + Objects.hashCode(this.originPoint);
         hash = 47 * hash + Objects.hashCode(this.destinationPoint);
+        hash = 47 * hash + Objects.hashCode(this.category);
         return hash;
     }
 
@@ -233,6 +251,10 @@ public class Pathway implements PathInterface{
             return false;
         }
         if (this.wind.vz!=other.wind.vz) {
+            return false;
+        }
+        
+        if(this.category != other.category){
             return false;
         }
         if (this.distance != other.distance) {

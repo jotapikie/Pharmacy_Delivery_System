@@ -21,6 +21,7 @@ DROP TABLE geographical_point           CASCADE CONSTRAINTS PURGE;
 DROP TABLE cart_product                 CASCADE CONSTRAINTS PURGE;
 DROP TABLE vehicle_category             CASCADE CONSTRAINTS PURGE;
 DROP TABLE road_category                CASCADE CONSTRAINTS PURGE;
+DROP TABLE drone                        CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE platform_user(
     user_email varchar(255) CONSTRAINT pk_user_email PRIMARY KEY,
@@ -104,6 +105,18 @@ CREATE TABLE scooter(
     frontal_area NUMERIC(4,2) NOT NULL
 );
 
+CREATE TABLE drone(
+    vehicle_nr int CONSTRAINT pk_drone_nr PRIMARY KEY,
+    frontal_area NUMERIC(4,2) NOT NULL,
+    top_area NUMERIC(4,2) NOT NULL,
+    lift_drag NUMERIC (4,2) NOT NULL,
+    eletrical_consume NUMERIC(4,2) NOT NULL,
+    power_transfer NUMERIC(4,2) NOT NULL,
+    aero_coef NUMERIC(4,2) NOT NULL
+);
+    
+
+
 CREATE TABLE park(
     park_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_park_id PRIMARY KEY,
     max_vehicles int NOT NULL,
@@ -174,9 +187,12 @@ CREATE TABLE pathway(
     latitude2 NUMERIC(8,5)   NOT NULL,
     distance float NOT NULL,
     street varchar(255),
-    wind float NOT NULL,
-    road_category varchar(255) NOT NULL,
-    CONSTRAINT pk_path_address1_address2 PRIMARY KEY(longitude1, latitude1, longitude2, latitude2)
+    wind_x NUMERIC(5,2) NOT NULL,
+    wind_y NUMERIC(5,2) NOT NULL,
+    wind_z NUMERIC(5,2) NOT NULL,
+    road_category varchar(255),
+    vehicle_category varchar(255) NOT NULL,
+    CONSTRAINT pk_path_address1_address2 PRIMARY KEY(longitude1, latitude1, longitude2, latitude2, vehicle_category)
 );
 
 CREATE TABLE geographical_point(
@@ -216,6 +232,7 @@ ALTER TABLE super_admin ADD CONSTRAINT fk_super_admin_email FOREIGN KEY (email) 
 ALTER TABLE pharmacy ADD CONSTRAINT fk_pharmacy_administrator FOREIGN KEY (administrator_email) REFERENCES administrator (email);
 ALTER TABLE credit_card ADD CONSTRAINT fk_credit_card_owner FOREIGN KEY (owner_email) REFERENCES platform_client (email);
 ALTER TABLE scooter ADD CONSTRAINT fk_scooter_nr FOREIGN KEY (vehicle_nr) REFERENCES vehicle (nr);
+ALTER TABLE drone ADD CONSTRAINT fk_drone_nr FOREIGN KEY (vehicle_nr) REFERENCES vehicle(nr);
 ALTER TABLE vehicle ADD CONSTRAINT fk_vehicle_pharmacy FOREIGN KEY (pharmacy_id) REFERENCES pharmacy (pharmacy_id);
 ALTER TABLE park ADD CONSTRAINT fk_park_pharmacy FOREIGN KEY (pharmacy_id) REFERENCES pharmacy (pharmacy_id);
 ALTER TABLE park_slot ADD CONSTRAINT fk_park_slot_id FOREIGN KEY (park_id) REFERENCES park (park_id);
@@ -240,6 +257,7 @@ ALTER TABLE vehicle ADD CONSTRAINT fk_vehicle_category_name FOREIGN KEY (vehicle
 ALTER TABLE park ADD CONSTRAINT fk_park_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
 ALTER TABLE delivery_run ADD CONSTRAINT fk_run_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
 ALTER TABLE pathway ADD CONSTRAINT fk_path_road_category FOREIGN KEY (road_category) REFERENCES road_category(category_name);
+ALTER TABLE pathway ADD CONSTRAINT fk_path_vehicle_category FOREIGN KEY (vehicle_category) REFERENCES vehicle_category(category_name);
 
 INSERT INTO platform_user VALUES('superadmin1@lapr', 'sadimn1', 'Tiago Pais');
 INSERT INTO super_admin VALUES('superadmin1@lapr');

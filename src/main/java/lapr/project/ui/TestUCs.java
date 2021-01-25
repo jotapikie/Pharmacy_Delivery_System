@@ -215,7 +215,7 @@ public class TestUCs {
         String ans = read.nextLine();
         switch(ans){
             case "1":
-                System.out.println("Not supported yet.");
+                new NewVehicleUI(id);
                 showPharmacyMenu(id);
                 break;
             case "2":

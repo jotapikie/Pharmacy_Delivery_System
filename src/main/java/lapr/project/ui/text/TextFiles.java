@@ -58,14 +58,14 @@ public class TextFiles {
     public static void main(String[] args) {
      
         // NOTA: ANTES DE EXCEUTAR ESTE CODIGO APAGAR OS DADOS DAS TABELAS PARA NAO ERROS DE CHAVES EXCLUSIVAS
-        System.out.println("Adding products...");
-        System.out.printf("%d products were added. %n", insertProducts());
-        System.out.println("Adding pharmacies...");
-        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
-        System.out.println("Adding clients...");
-        System.out.printf("%d clients were added. %n", insertClients());
-        System.out.println("Adding couriers...");
-        System.out.printf("%d couriers were added. %n", insertCouriers());
+//        System.out.println("Adding products...");
+//        System.out.printf("%d products were added. %n", insertProducts());
+//        System.out.println("Adding pharmacies...");
+//        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
+//        System.out.println("Adding clients...");
+//        System.out.printf("%d clients were added. %n", insertClients());
+//        System.out.println("Adding couriers...");
+//        System.out.printf("%d couriers were added. %n", insertCouriers());
         menu();
     }
 
@@ -200,7 +200,7 @@ public class TextFiles {
             for(String path : importFile(PATHS)){
                 
                 line = path.split(";");
-                controller.selectPoints(Double.parseDouble(line[1]), Double.parseDouble(line[0]), Double.parseDouble(line[3]), Double.parseDouble(line[2]), line[4], new Wind( Double.parseDouble(line[6]),Double.parseDouble(line[7]),Double.parseDouble(line[8])), line[9]);
+                controller.selectPoints(Double.parseDouble(line[1]), Double.parseDouble(line[0]), Double.parseDouble(line[3]), Double.parseDouble(line[2]), line[4].equals("-")?null:line[4], Double.parseDouble(line[5]),Double.parseDouble(line[6]),Double.parseDouble(line[7]),line[8], line[9].equalsIgnoreCase("-")?null:line[9]);
                 controller.addToQueue();
             }
             return controller.savePaths();
@@ -276,7 +276,7 @@ public class TextFiles {
                 }
                 if(controller.makeOrder(Integer.parseInt(line[1]))){
                     ordersMade++;
-                    write(String.format("The order made by client whose cordinates are (%.5f,%.5f) was assigned to %s (nearest pharmacy).", controller.getClientAddress().getGeographicalPoint().getLatitude(), controller.getClientAddress().getGeographicalPoint().getLongitude(), controller.getPharmacyAssigned().getName()));
+                    write(String.format("The order made by client whose cordinates are (%.5f,%.5f) was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getLatitude(), controller.getClientAddress().getGeographicalPoint().getLongitude(), controller.getPharmacyAssigned().getName()));
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -328,8 +328,10 @@ public class TextFiles {
                    controller.addOrder();
                    i++;
                }
-               write(String.format("Land route:%n%s%n", controller.getLandRoute()));
-               write(String.format("Air route:%n%s%n", controller.getAirRoute()));
+               String land = controller.getLandRoute();
+               String air = controller.getAirRoute();
+               write(String.format("Land route:%n%s%n", land==null?"Not found":land));
+               write(String.format("Air route:%n%s%n", air==null?"Not found":air));
                write(String.format("Most efficient: %s %n", controller.getMostEfficient()));
                controller.newDeliveryRun(line[1]);
                controller.addToQueue();

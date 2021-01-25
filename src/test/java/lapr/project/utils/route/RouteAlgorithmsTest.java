@@ -60,15 +60,15 @@ public class RouteAlgorithmsTest {
         allPoints = new ArrayList<>();
         allPoints.add(p1);allPoints.add(p2);allPoints.add(p3);allPoints.add(p4);allPoints.add(p5);
         
-        path1 = new Pathway(p1, p2, StreetType.ASPHALT, 300, new Wind(1,1,1), "Street1");
-        path2 = new Pathway(p1, p3, StreetType.ASPHALT, 100, new Wind(1,1,1), "Street2");
-        path3 = new Pathway(p2, p3, StreetType.ASPHALT, 300, new Wind(1,1,1), "Street3");
-        path4 = new Pathway(p3, p1, StreetType.ASPHALT, 100, new Wind(1,1,1), "Street4");
-        path6 = new Pathway(p3, p2, StreetType.ASPHALT, 450.2, new Wind(1,1,1), "Street5");
-        path7 = new Pathway(p2, p4, StreetType.ASPHALT, 120.3, new Wind(1,1,1), "Street6");
-        path8 = new Pathway(p3, p4, StreetType.ASPHALT, 94.7, new Wind(1,1,1),"Street7");
-        path9 = new Pathway(p4, p5, StreetType.ASPHALT, 23, new Wind(1,1,1),"Street8");
-        path10 = new Pathway(p5, p4, StreetType.ASPHALT, 23, new Wind(1,1,1),"Street9");
+        path1 = new Pathway(p1, p2, StreetType.ASPHALT, 300, new Wind(1,1,1), "Street1",VehicleCategory.SCOOTER);
+        path2 = new Pathway(p1, p3, StreetType.ASPHALT, 100, new Wind(1,1,1), "Street2",VehicleCategory.SCOOTER);
+        path3 = new Pathway(p2, p3, StreetType.ASPHALT, 300, new Wind(1,1,1), "Street3",VehicleCategory.SCOOTER);
+        path4 = new Pathway(p3, p1, StreetType.ASPHALT, 100, new Wind(1,1,1), "Street4",VehicleCategory.SCOOTER);
+        path6 = new Pathway(p3, p2, StreetType.ASPHALT, 450.2, new Wind(1,1,1), "Street5",VehicleCategory.SCOOTER);
+        path7 = new Pathway(p2, p4, StreetType.ASPHALT, 120.3, new Wind(1,1,1), "Street6",VehicleCategory.SCOOTER);
+        path8 = new Pathway(p3, p4, StreetType.ASPHALT, 94.7, new Wind(1,1,1),"Street7",VehicleCategory.SCOOTER);
+        path9 = new Pathway(p4, p5, StreetType.ASPHALT, 23, new Wind(1,1,1),"Street8",VehicleCategory.SCOOTER);
+        path10 = new Pathway(p5, p4, StreetType.ASPHALT, 23, new Wind(1,1,1),"Street9",VehicleCategory.SCOOTER);
         allPaths = new ArrayList<>();
         allPaths.add(path1);allPaths.add(path2);allPaths.add(path3);allPaths.add(path4);
         allPaths.add(path6);allPaths.add(path7);allPaths.add(path8);allPaths.add(path9);allPaths.add(path10);

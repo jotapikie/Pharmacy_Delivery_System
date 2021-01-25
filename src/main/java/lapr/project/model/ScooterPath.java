@@ -40,7 +40,7 @@ public final class ScooterPath extends Pathway{
      * @param vehicleAerodynamicCoef
      */
     public ScooterPath(GeographicalPoint origPoint, GeographicalPoint destPoint, double distance, StreetType type, Wind wind, double totalWeight, String street) {
-        super(origPoint, destPoint, type, distance, wind, street);
+        super(origPoint, destPoint, type, distance, wind, street, VehicleCategory.SCOOTER);
         setTotalWeight(totalWeight);
         calculateEnergyCost();
     }

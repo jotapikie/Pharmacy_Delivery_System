@@ -34,7 +34,7 @@ public class MainGraph {
     /**
      * Static instance of the main graph.
      */
-    private static PathwayDB pathDB = null;
+    protected static PathwayDB pathDB = null;
 
     /**
      * Static method to get or create an instance of the main graph.
@@ -93,8 +93,10 @@ public class MainGraph {
             }
         }
         for (Pathway edge : edges) {
-            if (!mainGraph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
-                throw new IllegalArgumentException("Invalid graph Edge!");
+            if(edge.getCategory().equals(VehicleCategory.SCOOTER)){
+                if (!mainGraph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
+                    throw new IllegalArgumentException("Invalid graph Edge!");
+                }
             }
         }
     }

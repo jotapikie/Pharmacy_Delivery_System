@@ -26,7 +26,7 @@ public class PathwayTest {
     public static void setUpClass() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        path = new Pathway(or, dest,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
+        path = new Pathway(or, dest,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName",VehicleCategory.SCOOTER);
     }
     
    
@@ -36,13 +36,13 @@ public class PathwayTest {
     
     @AfterEach
     public void tearDown() {
-        path = new Pathway(or, dest,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
+        path = new Pathway(or, dest,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName",VehicleCategory.SCOOTER);
     }
 
     
     @Test
     public void testPathway() {
-        Pathway temp = new Pathway(or, dest, StreetType.ASPHALT, 34, new Wind(1,1,1), "Street2");
+        Pathway temp = new Pathway(or, dest, StreetType.ASPHALT, 34, new Wind(1,1,1), "Street2",VehicleCategory.SCOOTER);
         assertEquals("Street2", temp.getStreet());
     }
     /**
@@ -118,14 +118,9 @@ public class PathwayTest {
         assertTrue(flag);
         assertEquals("Street1", path.getStreet());
         
-        flag = false;
-        try{
-            path.setStreet(null);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        assertEquals("Street1", path.getStreet());
+        path.setStreet(null);
+        assertNull(path.getStreet());
+  
         
         
     }
@@ -144,14 +139,8 @@ public class PathwayTest {
         path.setStreetType(StreetType.OFF_ROAD);
         assertEquals(StreetType.OFF_ROAD, path.getStreetType());
         
-        boolean flag = false;
-        try{
-            path.setStreetType(null);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        assertEquals(StreetType.OFF_ROAD, path.getStreetType());
+        path.setStreetType(null);
+        assertNull(path.getStreetType());
         
         
         
@@ -258,13 +247,13 @@ public class PathwayTest {
         
         GeographicalPoint p1 = new GeographicalPoint(41.233, 45.23, 34.2);
         GeographicalPoint p2 = new GeographicalPoint(41.533, 47.23, 35.2);
-        Pathway p3 = new Pathway(p1, p2,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName");
+        Pathway p3 = new Pathway(p1, p2,StreetType.ASPHALT, 34, new Wind(1,1,1), "noName",VehicleCategory.SCOOTER);
         //assertFalse(path.equals(p3));
         
-        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 34, new Wind(2,1,1), "noName");
+        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 34, new Wind(2,1,1), "noName",VehicleCategory.SCOOTER);
         assertFalse(path.equals(p3));
         
-        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 35, new Wind(1,1,1), "noName");
+        p3 = new Pathway(p1, p2, StreetType.ASPHALT, 35, new Wind(1,1,1), "noName",VehicleCategory.SCOOTER);
         assertFalse(path.equals(p3));
         
 //        p3 = new Pathway(or, p2, StreetType.ASPHALT, 34, 3.5, "noName");

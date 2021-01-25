@@ -35,7 +35,7 @@ public class DronePathTest {
     
     @BeforeEach
     public void setUp() {
-        test=new DronePath(6.0,p,p1,StreetType.ASPHALT,200.0,new Wind(1,1,1),"rua");
+        test=new DronePath(6.0,p,p1,200.0,new Wind(1,1,1));
     }
     
     @AfterEach

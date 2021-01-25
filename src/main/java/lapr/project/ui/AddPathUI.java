@@ -58,6 +58,9 @@ public class AddPathUI {
 
     private void selectPoints() throws SQLException {
         try{
+        System.out.println("Vehicle path (Scooter or Drone):");
+        String category = read.nextLine();
+        System.out.println();
         System.out.println("Longitude (Origin):");
         double longitude1 = Double.parseDouble(read.nextLine());
         System.out.println();
@@ -77,14 +80,16 @@ public class AddPathUI {
         System.out.println("Wind vector (z):");
         int windz = Integer.parseInt(read.nextLine());
         System.out.println();
-        System.out.println();
-        System.out.println("Road Category (Asphalt, Off-Road, Sidewalk):");
-        String streetType = read.nextLine();
-        System.out.println();
-        System.out.println("Name (Street):");
-        String street = read.nextLine();
-        System.out.println();
-        String res = controller.selectPoints(longitude1, latitude1, longitude2, latitude2, streetType, new Wind(windx,windy,windz), street);
+        String streetType = null; String street = null;
+        if(category.equalsIgnoreCase("Scooter")){
+            System.out.println("Road Category (Asphalt, Off-Road, Sidewalk):");
+            streetType = read.nextLine();
+            System.out.println();
+            System.out.println("Name (Street):");
+            street = read.nextLine();
+            System.out.println();
+        }
+        String res = controller.selectPoints(longitude1, latitude1, longitude2, latitude2, streetType, windx, windy, windz,category, street);
         if(res == null){
             System.out.println();
             System.out.println("Error: Invalid data inserted, try again.");

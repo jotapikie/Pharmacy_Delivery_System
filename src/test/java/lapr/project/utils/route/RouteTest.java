@@ -35,7 +35,7 @@ public class RouteTest {
     public void setUp() {
         or = new GeographicalPoint(41.233, 45.23, 34.2);
         dest = new GeographicalPoint(41.533, 47.23, 35.2);
-        Pathway p = new Pathway(or, dest, StreetType.ASPHALT, 45, new Wind(1,1,1), "rua1");
+        Pathway p = new Pathway(or, dest, StreetType.ASPHALT, 45, new Wind(1,1,1), "rua1",VehicleCategory.SCOOTER);
         instance = new Route(p);
         
         Route temp = new Route(instance);
@@ -119,10 +119,10 @@ public class RouteTest {
     @Test
     public void testAddPaths() {
         GeographicalPoint p2 = new GeographicalPoint(43.533, 47.23, 35.2);
-        Pathway p = new Pathway(dest, p2, StreetType.ASPHALT, 34,new Wind(1,1,1), "street1");
+        Pathway p = new Pathway(dest, p2, StreetType.ASPHALT, 34,new Wind(1,1,1), "street1",VehicleCategory.SCOOTER);
         
         GeographicalPoint p3 = new GeographicalPoint(42.67, 45.23, 34.2);
-        Pathway pp = new Pathway(p2, p3, StreetType.ASPHALT, 45, new Wind(1,1,1), "street1");
+        Pathway pp = new Pathway(p2, p3, StreetType.ASPHALT, 45, new Wind(1,1,1), "street1",VehicleCategory.SCOOTER);
         
         List<Pathway> list = new ArrayList<>();
         list.add(p);
@@ -155,7 +155,7 @@ public class RouteTest {
     public void testAddPath() {
         
         GeographicalPoint p2 = new GeographicalPoint(43.533, 47.23, 35.2);
-        Pathway p = new Pathway(dest, p2, StreetType.ASPHALT, 9.6, new Wind(1,1,1), "RuaSemNome");
+        Pathway p = new Pathway(dest, p2, StreetType.ASPHALT, 9.6, new Wind(1,1,1), "RuaSemNome",VehicleCategory.SCOOTER);
         instance.addPath(p);
         assertEquals(2, instance.getPaths().size());
         assertEquals(instance.getTotalEnergy(), instance.getEnergyToReachChargingPoint());
@@ -170,7 +170,7 @@ public class RouteTest {
         assertTrue(flag);
         
         flag = false;
-        p = new Pathway(or, or, StreetType.ASPHALT, 9.5, new Wind(1,1,1), "Street");
+        p = new Pathway(or, or, StreetType.ASPHALT, 9.5, new Wind(1,1,1), "Street",VehicleCategory.SCOOTER);
         try{
         instance.addPath(p);
         }catch(IllegalArgumentException e){
@@ -215,7 +215,7 @@ public class RouteTest {
     public void testCompareTo() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, StreetType.ASPHALT, 5.6, new Wind(1,1,1), "rua Sesamo");
+        Pathway p = new Pathway(ori, desti, StreetType.ASPHALT, 5.6, new Wind(1,1,1), "rua Sesamo",VehicleCategory.SCOOTER);
         Route other = new Route(p);
         assertTrue(instance.compareTo(other)>0);
         
@@ -239,14 +239,14 @@ public class RouteTest {
         
         p3 = new ScooterPath(p1, p2, 22, StreetType.ASPHALT, new Wind(1,1,1), 5.6, "Street1");
         t = new Route(p3);
-        Pathway p4 = new Pathway(p1, p2, StreetType.ASPHALT, t.getTotalEnergy(), new Wind(1,1,1), "NoName");
+        Pathway p4 = new Pathway(p1, p2, StreetType.ASPHALT, t.getTotalEnergy(), new Wind(1,1,1), "NoName",VehicleCategory.SCOOTER);
         Route t1 = new Route(p4);
         assertTrue(t1.compareTo(t) <0);
         assertTrue(t.compareTo(t1)> 0);
         
-        Pathway p8 = new Pathway(p1, p2, StreetType.ASPHALT, 50, new Wind(1,1,1), "Rua2");
-        Pathway p9 = new Pathway(p1, p2, StreetType.ASPHALT, 25, new Wind(1,1,1), "Rua3");
-        Pathway p10 = new Pathway(p2, dest, StreetType.ASPHALT,25, new Wind(1,1,1), "Rua4");
+        Pathway p8 = new Pathway(p1, p2, StreetType.ASPHALT, 50, new Wind(1,1,1), "Rua2",VehicleCategory.SCOOTER);
+        Pathway p9 = new Pathway(p1, p2, StreetType.ASPHALT, 25, new Wind(1,1,1), "Rua3",VehicleCategory.SCOOTER);
+        Pathway p10 = new Pathway(p2, dest, StreetType.ASPHALT,25, new Wind(1,1,1), "Rua4",VehicleCategory.SCOOTER);
         t = new Route(p8);
         t1 = new Route(p9);
         t1.addPath(p10);
@@ -272,7 +272,7 @@ public class RouteTest {
     public void testEquals() {
         GeographicalPoint ori = new GeographicalPoint(41.236, 44.23, 12.2);
         GeographicalPoint desti = new GeographicalPoint(41.539, 46.23, 25.2);
-        Pathway p = new Pathway(ori, desti, StreetType.ASPHALT, 3.5, new Wind(1,1,1), "Rua5");
+        Pathway p = new Pathway(ori, desti, StreetType.ASPHALT, 3.5, new Wind(1,1,1), "Rua5",VehicleCategory.SCOOTER);
         Route other = new Route(p);
         assertFalse(instance.equals(other));
         
