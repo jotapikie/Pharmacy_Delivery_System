@@ -204,4 +204,54 @@ public class AddressTest {
         assertFalse(address1.toString().isEmpty());
     }
 
+    /**
+     * Test of getStreet method, of class Address.
+     */
+    @Test
+    public void testGetStreet() {
+        String expResult = "Reta do Pereiro 710";
+        String result = address1.getStreet();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getGeographicalPoint method, of class Address.
+     */
+    @Test
+    public void testGetGeographicalPoint() {
+        GeographicalPoint expResult = new GeographicalPoint (40.738312, -7.765318, 2.3);
+        GeographicalPoint result = address1.getGeographicalPoint();
+        assertEquals(expResult, result);;
+    }
+
+    /**
+     * Test of getCity method, of class Address.
+     */
+    @Test
+    public void testGetCity() {
+        String expResult = "porto";
+        String result = address1.getCity();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getPortNumber method, of class Address.
+     */
+    @Test
+    public void testGetPortNumber() {
+        int expResult = 10;
+        int result = address1.getPortNumber();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getZipCode method, of class Address.
+     */
+    @Test
+    public void testGetZipCode() {
+        String expResult = "4250-527";
+        String result = address1.getZipCode();
+        assertEquals(expResult, result);
+    }
+
 }
