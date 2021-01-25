@@ -1,0 +1,21 @@
+The order made by client whose cordinates are (41,14063,-8,61118) was assigned to Farmácia da Trindade (nearest pharmacy).
+
+Land route:
+Pharmacy (41,15227,-8,60929) [Origin]    ->     Client Home (41,14063,-8,61118)           | R. de Mouzinho da Silveira | 1306,34m   | 0,11kWh    
+Client Home (41,14063,-8,61118)          ->     Pharmacy (41,15227,-8,60929) [Destination]  | R. de Mouzinho da Silveira | 1306,34m   | 0,11kWh    
+Total Distance: 2612,68m | Total Energy: 0,22kWh | Minimum Energy: 0,22kWh 
+
+Air route:
+Pharmacy (41,15227,-8,60929) [Origin]    ->     Client Home (41,14063,-8,61118)           | null                 | 1306,34m   | 0,04kWh    
+Client Home (41,14063,-8,61118)          ->     Pharmacy (41,15227,-8,60929) [Destination]  | null                 | 1306,34m   | 0,04kWh    
+Total Distance: 2612,68m | Total Energy: 0,07kWh | Minimum Energy: 0,07kWh 
+
+Most efficient: Drone 
+Route for the delivery #1: 
+ Pharmacy (41,15227,-8,60929) [Origin]    ->     Client Home (41,14063,-8,61118)           | R. de Mouzinho da Silveira | 1306,34m   | 0,11kWh    
+Client Home (41,14063,-8,61118)          ->     Pharmacy (41,15227,-8,60929) [Destination]  | R. de Mouzinho da Silveira | 1306,34m   | 0,11kWh    
+Total Distance: 2612,68m | Total Energy: 0,22kWh | Minimum Energy: 0,22kWh 
+ 
+The scooter must have at least 0,22 kWh to start the delivery. 
+The order made by client whose cordinates are (41,14063,-8,61118) was assigned to Farmácia da Trindade (nearest pharmacy).
+

@@ -32,6 +32,8 @@ import lapr.project.controller.RegisterPharmacyController;
 import lapr.project.controller.RegisterProductController;
 import lapr.project.controller.StartDeliveryRunController;
 import lapr.project.controller.UpdateStockController;
+import lapr.project.data.DataHandler;
+import lapr.project.data.UtilsDB;
 
 
 /**
@@ -40,6 +42,8 @@ import lapr.project.controller.UpdateStockController;
  */
 public class TextFiles {
     private static Scanner read = new Scanner(System.in);
+
+    private static UtilsDB utils = new UtilsDB();
     
     private static final String CLIENTS = "textFiles/clients.csv";
     private static final String PHARMACIES = "textFiles/pharmacies.csv";
@@ -62,8 +66,18 @@ public class TextFiles {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
      
-        // NOTA: ANTES DE EXCEUTAR ESTE CODIGO APAGAR OS DADOS DAS TABELAS PARA NAO ERROS DE CHAVES EXCLUSIVAS
+        try {
+            System.out.println("Clearing old data...");
+            DataHandler dh = new DataHandler();
+            dh.scriptRunner("textFiles/clear.sql");
+            System.out.println("Old data cleared.");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }catch(IOException a){
+            a.printStackTrace();
+        }
         System.out.println("Adding products...");
         System.out.printf("%d products were added. %n", insertProducts());
         System.out.println("Adding pharmacies...");
@@ -96,6 +110,7 @@ public class TextFiles {
                 menu();
         }
         
+        
         System.out.println("Adding paths...");
         System.out.printf("%d paths were added. %n", insertPaths());
         System.out.println("Adding products to carts...");
@@ -110,6 +125,8 @@ public class TextFiles {
         System.out.printf("%d delivery runs were created. %n", assignOrders());
         System.out.println("Starting delivery runs...");
         System.out.printf("%d delivery runs were started. %n", startRuns());
+
+ 
         
 
         

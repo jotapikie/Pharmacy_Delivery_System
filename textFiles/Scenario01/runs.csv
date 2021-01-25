@@ -1,6 +1,7 @@
 #lines starting with # should be ignored
 #Column description
-#client_email identification of the cart owner
-#products products in cart. Format: (<Product_Id>!<Quantity>|<Product_Id>!<Quantity>|...)
+#id_pharmacy who will assign the orders
+#category to be assigned (Drone or Scooter)
+#orders selected (<Order>!<Order>!...)
 id_pharmacy;category;orders
 1;Scooter;1

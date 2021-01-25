@@ -1,13 +1,19 @@
 #lines starting with # should be ignored
-#Column description
-#username for the app - e.g. "john"
-#user email - e.g. "john@my.email.server.com"
-#height - the user height in cm with no decimal places - e.g. 150
-#weight - the user mass in Kg with no decimal places - e.g. 60
-#cycling average speed - the user average speed in m/s with two decimal places e.g 4.17
-#visa card number - the visa card number
-#gender - user gender
-#password - user password
+#name of client
+#email of client
+#password of client
+#street where client lives
+#latitude where client lives
+#longitude where client lives
+#elevation where client lives (in meters)
+#city where client lives
+#zip code (xxxx-xxx)
+#port number 
+#visa_number of credit card
+#validity_date of credit cart (mm/yy)
+#ccv of credit card (3 digits)
+#phone number of client (9 digits)
+#nif of client (9 digits)
 name;email;password;street;latitude;longitude;elevation;city;zip;port;visa_number;validity_date;ccv;phone_number;nif
 Clemente Miguel;clemente@gmail.com;123;Rua da Restauração;41.14582;-8.61398;87;Porto;4050-546;586;1234567891234567;04/26;123;916892749;456278934
 Maria Santos;maria@gmail.com;ms35;Rua Santa Catarina;41.14723;-8.60657;91;Porto;4000-442;114;4456124092784058;06/25;928;918273035;782498356
