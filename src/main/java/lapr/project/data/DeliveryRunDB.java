@@ -67,13 +67,13 @@ public class DeliveryRunDB extends DataHandler{
         }
     }
 
-    public boolean endDeliveryRun(int scooterID) throws SQLException {
+    public String endDeliveryRun(int scooterID) throws SQLException {
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcEndDeliveryRun(?,?)}")) {
             callStmt.registerOutParameter(1, OracleTypes.INTEGER);
             callStmt.setInt(2, scooterID);
             callStmt.setTimestamp(3, Timestamp.from(Instant.now()));
             callStmt.execute();
-            return callStmt.getBoolean(1);
+            return callStmt.getString(1);
         }
     }
 

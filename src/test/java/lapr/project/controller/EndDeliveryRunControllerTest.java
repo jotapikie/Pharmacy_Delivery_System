@@ -48,23 +48,23 @@ class EndDeliveryRunControllerTest {
 
     @Test
     void setEndDate() throws SQLException {
-        when(drdb.endDeliveryRun(anyInt())).thenReturn(true);
-        boolean result= drdb.endDeliveryRun(1);
-        boolean exp= true;
+        when(drdb.endDeliveryRun(anyInt())).thenReturn("jota@isep.pt");
+        String result= drdb.endDeliveryRun(1);
+        String exp= "jota@isep.pt";
         assertEquals(exp,result);
     }
 
     @Test
     void setEndDateFail() throws SQLException {
-        when(drdb.endDeliveryRun(anyInt())).thenReturn(false);
-        boolean result= drdb.endDeliveryRun(1);
-        boolean exp= false;
+        when(drdb.endDeliveryRun(anyInt())).thenReturn("jota");
+        String result= drdb.endDeliveryRun(1);
+        String exp= "naojota";
         assertEquals(exp,result);
     }
     @Test
     void setEndDateFail2() throws SQLException {
-        boolean result= drdb.endDeliveryRun(1);
-        boolean exp= false;
+        String result= drdb.endDeliveryRun(1);
+        String exp= "nhe";
         assertEquals(exp,result);
     }
 }

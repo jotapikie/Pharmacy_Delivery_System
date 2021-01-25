@@ -124,8 +124,9 @@ class Main {
 
             if (arrSplit.length == 4) {
 
-                uvc.updateScooterState(Integer.parseInt(arrSplit[0]), State.LOCKED);
+                uvc.updateScooterState(Integer.parseInt(arrSplit[0]), State.CHARGING);
                 uvc.update();
+                drc.lockScooter(Integer.parseInt(arrSplit[0]), Integer.parseInt(arrSplit[1]), Integer.parseInt(arrSplit[2]));
                 drc.setEndDate(Integer.parseInt(arrSplit[0]));
 
 
