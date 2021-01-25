@@ -28,7 +28,7 @@ class Main {
     private static final Logger LOGGER = Logger.getLogger("MainLog");
 
     //Path for all files shared with C/Assembly component
-    private static final String PATH_FILES = "D:\\ARQCP\\partilha\\pls\\LAPR3\\files";
+    private static final String PATH_FILES = "D:\\ARQCP\\partilha\\pls\\LAPR3\\files\\";
 
     //File Constants
     private static final String KEY1= "estimated_";
@@ -59,8 +59,40 @@ class Main {
 
         Thread watcher = new Thread(() -> {
             try {
-                listenForEstimates();
-            } catch (IOException | InterruptedException | SQLException e  ) {
+                WatchService watchService = FileSystems.getDefault().newWatchService();
+                Path path = Paths.get(PATH_FILES);
+                WatchKey key= path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
+
+
+                boolean check = false;
+                File deleteEstimate = null;
+                File deleteFlag;
+
+                while (true) {
+                    for (WatchEvent<?> event : key.pollEvents()) {
+
+                        System.out.println("\nola jota");
+                        String filename = event.context().toString();
+                        int length = filename.length();
+                        if (filename.startsWith(KEY1)) {
+
+                            if (filename.startsWith(KEY2, length - KEY2.length()) && !check) {
+                                check = true;
+                                deleteEstimate = new File(filename);
+                            }
+
+                            if (filename.startsWith(KEY3, length - KEY3.length()) && check) {
+                                deleteFlag = new File(filename);
+
+                                if (!deleteProtocol(deleteEstimate, deleteFlag))
+                                    logWarning("Estimated files have not been deleted");
+                            } else
+                                logWarning("Something is wrong with estimated file");
+
+                        }
+                    }
+                }
+            } catch (IOException | InterruptedException e  ) {
                 e.printStackTrace();
                 Thread.currentThread().interrupt();
             } catch (MessagingException ex) {
@@ -68,70 +100,15 @@ class Main {
             }
         }
         );
-        Thread app = new Thread(()-> {
-           int count =0;
-           while (true){
-               System.out.println(++count);
-               try{
-                   Thread.sleep(1000);
-               } catch (InterruptedException e){
-                   e.printStackTrace();
-                   Thread.currentThread().interrupt();
-               }
-           }
-        });
+
         watcher.start();
-        app.start();
         watcher.join();
-        app.join();
+
     }
 
     private static void logWarning(String message) {
         LOGGER.log(Level.WARNING, message);
     }
-
-
-    //Listens to estimate.data and estimate.data.flag
-    private static void listenForEstimates() throws IOException, InterruptedException, SQLException, MessagingException {
-
-        WatchService watchService = FileSystems.getDefault().newWatchService();
-        Path path = Paths.get(PATH_FILES);
-        path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
-        WatchKey key;
-
-        boolean check = false;
-        File deleteEstimate = null;
-        File deleteFlag;
-
-        while ((key = watchService.take()) != null) {
-            for (WatchEvent<?> event : key.pollEvents()) {
-
-                String filename = event.context().toString();
-                int length = filename.length();
-                if (filename.startsWith(KEY1)) {
-
-                    if (filename.startsWith(KEY2, length - KEY2.length()) && !check) {
-                        check = true;
-                        deleteEstimate = new File(filename);
-                    }
-
-                    if (filename.startsWith(KEY3, length - KEY3.length()) && check) {
-                        deleteFlag = new File(filename);
-
-                        if (!deleteProtocol(deleteEstimate, deleteFlag))
-                            logWarning("Estimated files have not been deleted");
-                    } else
-                        logWarning("Estimated files have been deleted with success");
-
-                    return;
-                }
-            }
-        }
-        key.reset();
-    }
-
-
-
 
 
 
@@ -145,14 +122,14 @@ class Main {
             String email;
             email = drc.getScooterCourierByDeliveryRun(Integer.parseInt(arrSplit[0]));
 
-            if (arrSplit.length == 2) {
+            if (arrSplit.length == 4) {
 
                 uvc.updateScooterState(Integer.parseInt(arrSplit[0]), State.LOCKED);
                 uvc.update();
                 drc.setEndDate(Integer.parseInt(arrSplit[0]));
 
 
-                Utils.sendEmail(email, "Scooter battery charing duration estimate", "We estimate that your scooter will have full charge in " + arrSplit[1] + " hours.");
+                Utils.sendEmail(email, "Scooter battery charging duration estimate", "We estimate that your scooter will have full charge in " + arrSplit[3] + " hours.");
 
                 Thread.sleep(2000);
                 Files.delete(Paths.get(PATH_FILES + deleteEstimate));

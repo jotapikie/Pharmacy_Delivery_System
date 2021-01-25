@@ -15,7 +15,7 @@ class EndDeliveryRunControllerTest {
 
     private DeliveryRunDB drdb;
     private EndDeliveryRunController controller;
-    private static String courier;
+    private String courier;
 
     @BeforeEach
     void setUp() throws SQLException {
