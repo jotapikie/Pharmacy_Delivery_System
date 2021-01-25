@@ -72,6 +72,7 @@ public class AirGraph extends MainGraph{
      * @param k number of routes to calculate.
      * @return k shortest routes.
      */
+    @Override
     public List<Route> kBestPaths(GeographicalPoint origin, GeographicalPoint destination, int k) {
         if (origin == null || destination == null || origin.equals(destination) || k <= 0) {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
@@ -84,7 +85,7 @@ public class AirGraph extends MainGraph{
     }
     
     
-    
+    @Override
     public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
         if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
             throw new IllegalArgumentException("Invalid algorithm arguments!");

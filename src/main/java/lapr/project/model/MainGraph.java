@@ -131,7 +131,7 @@ public class MainGraph {
      * @param k number of routes to calculate.
      * @return k shortest routes.
      */
-    public List<Route> kShortestPaths(GeographicalPoint origin, GeographicalPoint destination, int k) {
+    public List<Route> kBestPaths(GeographicalPoint origin, GeographicalPoint destination, int k) {
         if (origin == null || destination == null || origin.equals(destination) || k <= 0) {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
         }
@@ -152,16 +152,16 @@ public class MainGraph {
      * @param k number of routes to calculate.
      * @return k shortest routes.
      */
-//    public List<Route<Location, Path>> kShortestPaths(List<Location> toVisit, Location origin, Location destination, int k) {
-//        if (origin == null || destination == null || toVisit == null || toVisit.contains((Location) origin) || toVisit.contains((Location) destination) || k <= 0) {
-//            throw new IllegalArgumentException("Invalid algorithm arguments!");
-//        }
-//        try {
-//            return RouteAlgorithms.kShortestRoutes(this, toVisit, (Location) origin, (Location) destination, k);
-//        } catch (NullPointerException e) {
-//            throw new IllegalArgumentException("Invalid graph vertexes!");
-//        }
-//    }
+    public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
+        if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
+            throw new IllegalArgumentException("Invalid algorithm arguments!");
+        }
+        try {
+            return RouteAlgorithms.kBestRoutes(this, toVisit, origin,destination, k, Integer.MAX_VALUE);
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException("Invalid graph vertexes!");
+        }
+    }
 
     /**
      * Returns the graph to use for route algorithms.
