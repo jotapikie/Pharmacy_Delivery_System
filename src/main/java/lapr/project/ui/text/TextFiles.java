@@ -32,6 +32,8 @@ import lapr.project.controller.RegisterPharmacyController;
 import lapr.project.controller.RegisterProductController;
 import lapr.project.controller.StartDeliveryRunController;
 import lapr.project.controller.UpdateStockController;
+import lapr.project.data.DataHandler;
+
 
 
 /**
@@ -40,6 +42,7 @@ import lapr.project.controller.UpdateStockController;
  */
 public class TextFiles {
     private static Scanner read = new Scanner(System.in);
+
     
     private static final String CLIENTS = "textFiles/clients.csv";
     private static final String PHARMACIES = "textFiles/pharmacies.csv";
@@ -62,8 +65,19 @@ public class TextFiles {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
      
-        // NOTA: ANTES DE EXCEUTAR ESTE CODIGO APAGAR OS DADOS DAS TABELAS PARA NAO ERROS DE CHAVES EXCLUSIVAS
+        try{
+            System.out.println("Clearing old data...");
+            DataHandler dh = new DataHandler();
+            dh.scriptRunner("textFiles/clear.sql");
+            System.out.println("Old data cleared.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
         System.out.println("Adding products...");
         System.out.printf("%d products were added. %n", insertProducts());
         System.out.println("Adding pharmacies...");
@@ -90,11 +104,15 @@ public class TextFiles {
             case "1":
                 scenario01();
                 break;
+            case "2":
+                scenario02();
+                break;
             default:
                 System.out.println();
                 System.out.println("Invalid option");
                 menu();
         }
+        
         
         System.out.println("Adding paths...");
         System.out.printf("%d paths were added. %n", insertPaths());
@@ -110,6 +128,8 @@ public class TextFiles {
         System.out.printf("%d delivery runs were created. %n", assignOrders());
         System.out.println("Starting delivery runs...");
         System.out.printf("%d delivery runs were started. %n", startRuns());
+
+ 
         
 
         
@@ -125,7 +145,17 @@ public class TextFiles {
         RUNS = "textFiles/Scenario01/runs.csv";
         DELIVERIES = "textFiles/Scenario01/deliveries.csv";
         RESULT = "textFiles/Scenario01/result.txt";
-        
+    }
+    
+    private static void scenario02(){
+        CARTS = "textFiles/Scenario02/carts.csv";
+        ORDERS = "textFiles/Scenario02/orders.csv";
+        PATHS = "textFiles/Scenario02/paths.csv";
+        STOCK = "textFiles/Scenario02/stock.csv";
+        PREPARED_ORDERS = "textFiles/Scenario02/prep_orders.csv";
+        RUNS = "textFiles/Scenario02/runs.csv";
+        DELIVERIES = "textFiles/Scenario02/deliveries.csv";
+        RESULT = "textFiles/Scenario02/result.txt";
     }
 
     private static int insertClients() {
@@ -314,6 +344,8 @@ public class TextFiles {
                 if(controller.makeOrder(Integer.parseInt(line[1]))){
                     ordersMade++;
                     write(String.format("The order made by client whose cordinates are (%.5f,%.5f) was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getLatitude(), controller.getClientAddress().getGeographicalPoint().getLongitude(), controller.getPharmacyAssigned().getName()));
+                }else{
+                    write(String.format("No pharmacy has enough stock for this order. %n"));
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -391,9 +423,9 @@ public class TextFiles {
                line = delivery.split(";");
                controller = new StartDeliveryRunController(Integer.parseInt(line[0]), line[1], Double.parseDouble(line[2]));
                controller.getDeliveryRuns();
-               System.out.println(controller.selectDeliveryRun(Integer.parseInt(line[3])));
+               controller.selectDeliveryRun(Integer.parseInt(line[3]));
                controller.getAvailableScooters();
-               System.out.println(controller.selectScooter(Integer.parseInt(line[4])));
+               controller.selectScooter(Integer.parseInt(line[4]));
                controller.startDeliveryRun();
                startedRuns++;
                String route = controller.getRoute();

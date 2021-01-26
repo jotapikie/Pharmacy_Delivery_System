@@ -47,7 +47,7 @@ public class VehicleDB extends DataHandler {
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procAddVehicle(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
 
             callStmt.setDouble(1, v.getWeight());
-            callStmt.setString(2, v.getState().toString());
+            callStmt.setString(2, v.getState().getName());
             callStmt.setDouble(3, v.getMaxBat());
             callStmt.setDouble(4, v.getActualBat());
             callStmt.setDouble(5, v.getMotor());

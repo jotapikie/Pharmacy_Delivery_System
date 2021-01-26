@@ -1,13 +1,12 @@
 #lines starting with # should be ignored
 #Column description
-#username for the app - e.g. "john"
-#user email - e.g. "john@my.email.server.com"
-#height - the user height in cm with no decimal places - e.g. 150
-#weight - the user mass in Kg with no decimal places - e.g. 60
-#cycling average speed - the user average speed in m/s with two decimal places e.g 4.17
-#visa card number - the visa card number
-#gender - user gender
-#password - user password
+#id_pharmacy for whose courier works
+#name of courier
+#email of courier
+#password of courier
+#nif of courier (9 digits)
+#nss of courier (9 digits)
+#weight of courier 
 id_pharmacy;name;email;password;nif;nss;weight
 1;Diogo Silva;diogomicael6@gmail.com;dm232;647829457;829004381;71.2
 1;Márcio Lima;marcio@gmail.com;ml123;268385674;283367772;76.3

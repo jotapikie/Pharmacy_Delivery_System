@@ -81,6 +81,14 @@ public class ScooterPathTest {
         expResult = true;
         result = test.equals(sc);
         assertEquals(expResult, result);
+        
+        assertFalse(test.equals(p));
+        ScooterPath other =new ScooterPath(p,p1,10.0,StreetType.ASPHALT,new Wind(2,3,4),100.0,"street");
+        assertFalse(test.equals(other));
+        
+        other =new ScooterPath(p,p1,12,StreetType.ASPHALT,new Wind(1,1,1),100.1,"rua");
+        assertFalse(other.equals(sc));
+        
     }
 
     /**
@@ -89,6 +97,12 @@ public class ScooterPathTest {
     @Test
     public void testHashCode() {
         assertTrue(test.hashCode() > 0);
+    }
+    
+    @Test
+    public void testToString() {
+        assertNotNull(test.toString());
+        assertFalse(test.toString().isEmpty());
     }
     
 }

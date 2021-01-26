@@ -54,6 +54,10 @@ public class WindTest {
         expResult=0;
         result=test1.direction();
         assertEquals(expResult, result);
+        
+        
+        Wind temp = new Wind(2,1.4,2.6);
+        assertEquals(expResult, temp.direction());
     }
 
     /**

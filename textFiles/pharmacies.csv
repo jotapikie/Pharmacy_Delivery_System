@@ -1,13 +1,20 @@
 #lines starting with # should be ignored
 #Column description
-#park identification is an identifier for the park
-#latitude, longitude are given in decimal degrees e.g. 41.152712, -8.609297
-#elevation is given in metres (m) with no decimal places. When not given, consider 0
-#park description is a descriptive name for the park e.g. "Trindade"
-#max number of bicycles - maximum park capability for bicycles e.g. 10
-#max number of escooters - maximum park capability for escooters e.g. 20
-#park input voltage - the park input voltage measured in Volts (V) e.g. 220V
-#park input current - the park input current measured in Amperes (A) e.g. 16A
+#name of pharmacy
+#phone_number of pharmacy
+#street where pharmacy is placed
+#latitude where pharmacy is placed
+#longitude where pharmacy is placed
+#elevation where pharmacy is placed (in meters)
+#zip code of pharmacy (xxxx-xxx)
+#port number of pharmacy
+#admin_name of the person who will manage the pharmacy
+#admin_email of the person who will manage the pharmacy
+#admin_pwd of the person who will manage the pharmacy
+#park_category of vehicles (Drone or Scooter)
+#max_vehicles capacity of the park
+#can_charge slots that are able to charge (less than max_vehicles)
+#max_energy the park can provide (kWh)
 name;phone_number;street;latitude;longitude;elevation;city;zip_code;port;admin_name;admin_email;admin_pwd;park_category;max_vehicles;can_charge;max_energy
 Farmácia da Trindade;222007420;Rua da Trindade;41.15227;-8.60929;104;Porto;4000-541;115;Tiago Trindade;tiago@gmail.com;tt34;Scooter;10;3;45
 Farmácia Castelo do Queijo;223456722;Rua Campinas;41.16875;-8.68995;4;Porto;4100-274;22;José Castelo;jose@gmail.com;jc78;Drone;8;4;30

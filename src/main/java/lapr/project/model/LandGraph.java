@@ -6,7 +6,10 @@
 package lapr.project.model;
 
 import java.sql.SQLException;
+import java.util.List;
 import lapr.project.utils.graph.Graph;
+import lapr.project.utils.route.Route;
+import lapr.project.utils.route.RouteAlgorithms;
 
 
 /**
@@ -62,6 +65,18 @@ public class LandGraph extends MainGraph{
 
     public double getTotalWeight() {
         return totalWeight;
+    }
+    
+    public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
+        if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
+            throw new IllegalArgumentException("Invalid algorithm arguments!");
+        }
+        try {
+            System.out.println("Entrou aqui");
+            return RouteAlgorithms.kBestRoutes(this, toVisit, origin,destination, k, Integer.MAX_VALUE);
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException("Invalid graph vertexes!");
+        }
     }
     
     @Override

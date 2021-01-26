@@ -6,10 +6,16 @@
 package lapr.project.ui;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import lapr.project.controller.AddPathController;
+import lapr.project.controller.AssignOrderController;
+import lapr.project.model.GeographicalPoint;
+import lapr.project.model.LandGraph;
 import static lapr.project.ui.UtilsUI.header;
 import lapr.project.utils.Utils;
+import lapr.project.utils.route.Route;
 
 
 /**
@@ -23,9 +29,17 @@ public class TestUCs {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        System.out.println(Utils.distance(41.16875, 41.14582, -8.68995, -8.61398, 4, 87));
-        AddPathController c = new AddPathController();
-        System.out.println(c.selectPoints(-8.68995, 41.16875, -8.61398, 41.14582, "Asphalt", 1, 1, 1, "Scooter", "S"));
+//        System.out.println(Utils.distance(41.16875, 41.14582, -8.68995, -8.61398, 4, 87));
+//        AddPathController c = new AddPathController();
+//        System.out.println(c.selectPoints(-8.68995, 41.16875, -8.61398, 41.14582, "Asphalt", 1, 1, 1, "Scooter", "S"));
+
+        LandGraph graph = new LandGraph(123);
+        System.out.println(graph.getRouteGraph().edges());
+        List<GeographicalPoint> cli = new ArrayList<>();
+        cli.add(new GeographicalPoint(-8.61118,41.14063,25, "Client Home"));
+        GeographicalPoint p = new GeographicalPoint(-8.60929, 41.15227, 104, "Pharmacy");
+        List<Route> routes = graph.kBestPaths(cli, p, p, 1);
+        System.out.println(routes.size());
         //showOptions();
      }
     
