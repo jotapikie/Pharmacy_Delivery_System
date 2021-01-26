@@ -51,7 +51,6 @@ public class RouteAlgorithms {
             }
             bst.insert(new Route(edge));
         }
-
         // While there are routes in BST
         while (!bst.isEmpty()) {
 

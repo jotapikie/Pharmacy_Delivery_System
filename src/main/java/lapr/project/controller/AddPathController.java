@@ -49,7 +49,6 @@ public class AddPathController {
         GeographicalPoint dest = gpdb.getGeographicalPoint(longitude2, latitude2);
         
         if(or != null && dest != null){
-            
             path = pdb.newPath(or, dest, type, vx, vy, vz,street, vehicle);
             return path.toString();
         }

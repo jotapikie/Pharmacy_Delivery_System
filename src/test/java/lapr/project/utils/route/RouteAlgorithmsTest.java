@@ -71,6 +71,10 @@ public class RouteAlgorithmsTest {
         path6 = new Pathway(p4, p5, StreetType.ASPHALT, 500, new Wind(1,1,1), "Street4",VehicleCategory.SCOOTER);
         path7 = new Pathway(p4, p3, StreetType.ASPHALT, 3000, new Wind(1,1,1), "Street5",VehicleCategory.SCOOTER);
         path8 = new Pathway(p3, p4, StreetType.ASPHALT, 3000, new Wind(1,1,1), "Street5",VehicleCategory.SCOOTER);
+        
+        
+
+        
 
         allPaths = new ArrayList<>();
         allPaths.add(path1);allPaths.add(path2);allPaths.add(path3);allPaths.add(path4);allPaths.add(path5);
@@ -133,6 +137,7 @@ public class RouteAlgorithmsTest {
         assertNotNull(routes.get(0));
         
     }
+
     
     
     

@@ -43,11 +43,10 @@ public class LandGraph extends MainGraph{
         this.totalWeight = totalWeight;
 
         this.graph = new Graph<>(true);
-        MainGraph main = new MainGraph();
 
         
         
-        for (GeographicalPoint vertex : main.getVertexes()) {
+        for (GeographicalPoint vertex : super.getVertexes()) {
             this.graph.insertVertex(vertex);
 
         }
@@ -66,6 +65,8 @@ public class LandGraph extends MainGraph{
     public double getTotalWeight() {
         return totalWeight;
     }
+    
+
 
     
     @Override

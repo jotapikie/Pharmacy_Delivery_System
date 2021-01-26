@@ -89,7 +89,7 @@ public class RegisterClientUI {
         System.out.println("Credit car number:");
         long nr = Long.parseLong(read.nextLine());
         System.out.println();
-        System.out.println("Validaty Date (mm/yyyy): ");
+        System.out.println("Validaty Date (mm/yy): ");
         String date = read.nextLine();
         System.out.println();
         System.out.println("CCV: ");
