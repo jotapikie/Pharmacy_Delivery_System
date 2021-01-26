@@ -3,8 +3,8 @@
 #id_pharmacy who owns the vehicle
 #category of vehicle (Drone or Scooter)
 #max_bat of vehicle (kWh)
-id_pharmacy;category;max_bat
-1;Scooter;12
-1;Scooter;11
-1;Scooter;10
-1;Drone;7
+id_pharmacy;category;max_bat;current_bat
+1;Scooter;2.3;2.1
+1;Scooter;2.2;1.4
+1;Scooter;2.4;1.5
+1;Drone;1.7;1.6

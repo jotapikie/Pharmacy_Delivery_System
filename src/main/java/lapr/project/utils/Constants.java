@@ -18,7 +18,7 @@ public class Constants {
     public static final Timestamp DEFAULT_DATE = new Timestamp(1);
     public static final String DEFAULT_STATUS= "Processing";
     public static final double AVERAGE_COURIER_WEIGHT = 80;
-    public static final int DEFAULT_SCOOTER_MAX_BAT = 10;
+    public static final double DEFAULT_SCOOTER_MAX_BAT = 2.8;
     
     public static final double SCOOTER_WEIGHT = 50;
     public static final int SCOOTER_MOTOR = 3;
@@ -56,7 +56,7 @@ public class Constants {
     public static double DRONE_LIFT_DRAG = 1;
     public static double DRONE_FRONTAL_AREA = 1;
     public static double DRONE_TOP_AREA = 1;
-    public static double DRONE_WEIGHT =7;
+    public static double DRONE_WEIGHT =3.3;
     public static double DRONE_MAX_WEIGHT = 7;
     public static int DRONE_MOTOR = 12;
     public static double DRONE_MAX_BATTERY = 1.5;

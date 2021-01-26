@@ -270,11 +270,11 @@ public class TextFiles {
             line = vehicle.split(";");
             controller = new NewVehicleController(Integer.parseInt(line[0]));
             if(line[1].equalsIgnoreCase("Scooter")){
-                controller.newEScooter(Integer.parseInt(line[2]));
+                controller.newEScooter(Double.parseDouble(line[2]), Double.parseDouble(line[3]));
                 controller.addVehicleToQueue();
                 vehiclesAdded = vehiclesAdded + controller.registerVehicles();
             }else if(line[1].equalsIgnoreCase("Drone")){
-                controller.newDrone(Integer.parseInt(line[2]));
+                controller.newDrone(Double.parseDouble(line[2]), Double.parseDouble(line[3]));
                 controller.addVehicleToQueue();
                 vehiclesAdded = vehiclesAdded + controller.registerVehicles();
             }

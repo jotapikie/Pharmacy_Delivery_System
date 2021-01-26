@@ -37,8 +37,11 @@ public class NewVehicleUI {
        if(ans.equalsIgnoreCase("1")){
            System.out.println();
            System.out.println("Max battery:");
-           int max = Integer.parseInt(read.nextLine());
-           String sc = controller.newEScooter(max);
+           double max = Double.parseDouble(read.nextLine());
+           System.out.println();
+           System.out.println("Max battery:");
+           double current = Double.parseDouble(read.nextLine());
+           String sc = controller.newEScooter(max, current);
            System.out.println();
            System.out.println(sc);
            System.out.println();
@@ -70,8 +73,11 @@ public class NewVehicleUI {
        }else if(ans.equalsIgnoreCase("2")){
            System.out.println();
            System.out.println("Max battery:");
-           int max = Integer.parseInt(read.nextLine());
-           String sc = controller.newDrone(max);
+           double max = Double.parseDouble(read.nextLine());
+           System.out.println();
+           System.out.println("Current battery:");
+           double current = Double.parseDouble(read.nextLine());
+           String sc = controller.newDrone(max, current);
            System.out.println();
            System.out.println(sc);
            System.out.println();

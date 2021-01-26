@@ -22,11 +22,11 @@ public class VehicleDB extends DataHandler {
      * @param currentBat
      * @return
      */
-    public EScooter newEScooter(int id, State state, int maxBat, int currentBat) {
+    public EScooter newEScooter(int id, State state, double maxBat, double currentBat) {
         return new EScooter(id,state,maxBat,currentBat);
     }
     
-     public Vehicle newDrone(int id, State state, int maxBat, int currentBat) {
+     public Vehicle newDrone(int id, State state, double maxBat, double currentBat) {
         return new Drone(id,state, maxBat, currentBat);
     }
 
