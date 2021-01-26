@@ -108,8 +108,8 @@ public class VehicleDB extends DataHandler {
                 if (typeVehicle.equalsIgnoreCase(ESCOOTER)) {
                     EScooter escooter = (EScooter) v;
                     //parameter to actully set
-                    callStmt.setDouble(8, escooter.getAeroCoef());
-                    callStmt.setDouble(9, escooter.getFrontalArea());
+                    callStmt.setDouble(8, EScooter.getAeroCoef());
+                    callStmt.setDouble(9, EScooter.getFrontalArea());
                 } else if (typeVehicle.equalsIgnoreCase(DRONE)) {
                 Drone drone = (Drone) v;
             }
@@ -192,8 +192,8 @@ public class VehicleDB extends DataHandler {
             if (typeVehicle.equalsIgnoreCase(ESCOOTER)) {
                 EScooter escooter = (EScooter) v;
                 //parameter to actully set
-                callStmt.setDouble(8, escooter.getAeroCoef());
-                callStmt.setDouble(9, escooter.getFrontalArea());
+                callStmt.setDouble(8, EScooter.getAeroCoef());
+                callStmt.setDouble(9, EScooter.getFrontalArea());
             }
 
             callStmt.execute();
