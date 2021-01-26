@@ -67,16 +67,17 @@ public class TextFiles {
     public static void main(String[] args) {
         
      
-        try {
+        try{
             System.out.println("Clearing old data...");
             DataHandler dh = new DataHandler();
             dh.scriptRunner("textFiles/clear.sql");
             System.out.println("Old data cleared.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }catch(IOException a){
-            a.printStackTrace();
         }
+
         System.out.println("Adding products...");
         System.out.printf("%d products were added. %n", insertProducts());
         System.out.println("Adding pharmacies...");
@@ -102,6 +103,9 @@ public class TextFiles {
         switch(ans){
             case "1":
                 scenario01();
+                break;
+            case "2":
+                scenario02();
                 break;
             default:
                 System.out.println();
@@ -141,7 +145,17 @@ public class TextFiles {
         RUNS = "textFiles/Scenario01/runs.csv";
         DELIVERIES = "textFiles/Scenario01/deliveries.csv";
         RESULT = "textFiles/Scenario01/result.txt";
-        
+    }
+    
+    private static void scenario02(){
+        CARTS = "textFiles/Scenario02/carts.csv";
+        ORDERS = "textFiles/Scenario02/orders.csv";
+        PATHS = "textFiles/Scenario02/paths.csv";
+        STOCK = "textFiles/Scenario02/stock.csv";
+        PREPARED_ORDERS = "textFiles/Scenario02/prep_orders.csv";
+        RUNS = "textFiles/Scenario02/runs.csv";
+        DELIVERIES = "textFiles/Scenario02/deliveries.csv";
+        RESULT = "textFiles/Scenario02/result.txt";
     }
 
     private static int insertClients() {
@@ -330,6 +344,8 @@ public class TextFiles {
                 if(controller.makeOrder(Integer.parseInt(line[1]))){
                     ordersMade++;
                     write(String.format("The order made by client whose cordinates are (%.5f,%.5f) was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getLatitude(), controller.getClientAddress().getGeographicalPoint().getLongitude(), controller.getPharmacyAssigned().getName()));
+                }else{
+                    write(String.format("No pharmacy has enough stock for this order. %n"));
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -407,9 +423,9 @@ public class TextFiles {
                line = delivery.split(";");
                controller = new StartDeliveryRunController(Integer.parseInt(line[0]), line[1], Double.parseDouble(line[2]));
                controller.getDeliveryRuns();
-               System.out.println(controller.selectDeliveryRun(Integer.parseInt(line[3])));
+               controller.selectDeliveryRun(Integer.parseInt(line[3]));
                controller.getAvailableScooters();
-               System.out.println(controller.selectScooter(Integer.parseInt(line[4])));
+               controller.selectScooter(Integer.parseInt(line[4]));
                controller.startDeliveryRun();
                startedRuns++;
                String route = controller.getRoute();

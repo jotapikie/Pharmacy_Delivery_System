@@ -1,0 +1,23 @@
+#lines starting with # should be ignored
+#Column description
+#origin_latitude 
+#origin_longitude
+#destination_latitude
+#destinatio_longitude
+#path_category (Asphalt, Sidewalk, Offroad or - if it is a air path)
+#wind_x value
+#wind_y value
+#wind_z value
+#vehicle_category (Drone or Scooter)
+#street that conects the 2 points (or - if it is a air path)
+origin_latitude;origin_longitude;destination_latitude;destination_longitude;path_category;wind_x;wind_y;wind_z;vehicle_category;street
+41.15227;-8.60929;41.14582;-8.61398;Asphalt;1.2;1.2;1.3;Scooter;Rua do Dr. Ricardo Jorge
+41.14582;-8.61398;41.15227;-8.60929;Asphalt;1.2;1.2;1.3;Scooter;Rua do Dr. Ricardo Jorge
+41.14582;-8.61398;41.14871;-8.60746;Asphalt;1.5;1.3;1.5;Scooter;Rua de Sá da Bandeira
+41.14871;-8.60746;41.14582;-8.61398;Asphalt;1.5;1.3;1.5;Scooter;Rua de Sá da Bandeira
+41.14582;-8.61398;41.14723;-8.60657;Asphalt;1.6;1.2;1.9;Scooter;Rua dos Clérigos
+41.14871;-8.60746;41.14063;-8.61118;Asphalt;1.3;1.2;1.3;Scooter;Rua de São João
+41.14063;-8.61118;41.14871;-8.60746;Asphalt;1.3;1.2;1.3;Scooter;Rua de São João
+41.14063;-8.61118;41.14723;-8.60657;Asphalt;1.2;2.1;1.7;Scooter;Rua do General Sousa Dias
+41.15227;-8.60929;41.14063;-8.61118;-;2.1;2;1.2;Drone;-
+41.14063;-8.61118;41.15227;-8.60929;-;2.1;2;1.2;Drone;-
