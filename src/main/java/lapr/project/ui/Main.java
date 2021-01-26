@@ -61,7 +61,7 @@ class Main {
 
                 boolean check = false;
                 File deleteEstimate = null;
-                File deleteFlag;
+                File deleteFlag = null;
 
                 while (true) {
                     for (WatchEvent<?> event : key.pollEvents()) {
@@ -78,12 +78,12 @@ class Main {
 
                             if (filename.startsWith(KEY3, length - KEY3.length()) && check) {
                                 deleteFlag = new File(filename);
-
-                                if (!deleteProtocol(deleteEstimate, deleteFlag))
+                            }
+                                if (!deleteProtocol(deleteEstimate, deleteFlag)){
                                     logWarning("Estimated files have not been deleted");
-                            } else
-                                logWarning("Something is wrong with estimated file");
-
+                            } else {
+                                    logWarning("Deleted estimated files");
+                                }
                         }
                     }
                 }
