@@ -14,9 +14,9 @@
 #ccv of credit card (3 digits)
 #phone number of client (9 digits)
 #nif of client (9 digits)
-name;email;password;street;latitude;longitude;elevation;city;zip;port;visa_number;validity_date;ccv;phone_number;nif
-Clemente Miguel;clemente@gmail.com;123;Rua da Restauração;41.14582;-8.61398;87;Porto;4050-546;586;1234567891234567;04/26;123;916892749;456278934
-Maria Santos;maria@gmail.com;ms35;Rua Santa Catarina;41.14723;-8.60657;91;Porto;4000-442;114;4456124092784058;06/25;928;918273035;782498356
-Bruno Gomes;bruno@gmail.com;bg223;Rua Formosa;41.14871;-8.60746;87;Porto;4000-443;256;4490284501923768;08/22;452;965629883;839527447
-Sara Mateus;sara@gmail.com;sm43;Rua do Sol;41.14331;-8.60914;82;Porto;4000-160;85;4920591047295067;03/23;991;912938575;849246733
-Caio Ribeiro;osmeianoite@gmail.com;cr24;Rua da Lada;41.14063;-8.61118;25;Porto;4050-509;70;8923802771844823;11/24;774;963492877;992257678
+name;email;password;street;latitude;longitude;elevation;city;zip;port;visa_number;validity_date;ccv;phone_number;nif;desc
+Clemente Miguel;clemente@gmail.com;123;Rua da Restauração;41.14582;-8.61398;87;Porto;4050-546;586;1234567891234567;04/26;123;916892749;456278934;Clerigos
+Maria Santos;maria@gmail.com;ms35;Rua Santa Catarina;41.14723;-8.60657;91;Porto;4000-442;114;4456124092784058;06/25;928;918273035;782498356;Majestic
+Bruno Gomes;bruno@gmail.com;bg223;Rua Formosa;41.14871;-8.60746;87;Porto;4000-443;256;4490284501923768;08/22;452;965629883;839527447;Bolhão
+Sara Mateus;sara@gmail.com;sm43;Rua do Sol;41.14331;-8.60914;82;Porto;4000-160;85;4920591047295067;03/23;991;912938575;849246733;Sé
+Caio Ribeiro;osmeianoite@gmail.com;cr24;Rua da Lada;41.14063;-8.61118;25;Porto;4050-509;70;8923802771844823;11/24;774;963492877;992257678;Cais da Ribeira

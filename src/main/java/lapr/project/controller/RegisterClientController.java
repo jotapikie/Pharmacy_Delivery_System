@@ -33,8 +33,8 @@ public class RegisterClientController {
     
     
 
-    public String newAddress(String street, double longitude, double latitude, double elevation, String city, int portNumber, String zipCode){
-        address = adb.newAdress(street, longitude, latitude, elevation, city, portNumber, zipCode);
+    public String newAddress(String street, double longitude, double latitude, double elevation, String city, int portNumber, String zipCode, String desc){
+        address = adb.newAdress(street, longitude, latitude, elevation, city, portNumber, zipCode, desc);
         return (address==null)? null : address.toString();
     }
     

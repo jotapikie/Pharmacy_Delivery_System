@@ -58,8 +58,11 @@ public class RegisterPharmacyUI {
         System.out.println("Zip Code:");
         String zip = read.nextLine();
         System.out.println();
+        System.out.println("Point description:");
+        String desc = read.nextLine();
+        System.out.println();
         try{
-        String add = controller.newAddress(street, longitude, latitude, elevation, city, zip, port);
+        String add = controller.newAddress(street, longitude, latitude, elevation, city, zip, port, desc);
         System.out.println();
         System.out.println("Address:");
         System.out.println(add);

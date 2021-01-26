@@ -53,8 +53,11 @@ public class RegisterClientUI {
         System.out.println("Zip Code:");
         String zip = read.nextLine();
         System.out.println();
+        System.out.println("Point description:");
+        String desc = read.nextLine();
+        System.out.println();
         try{
-        String add = controller.newAddress(street, longitude, latitude, elevation, city, port, zip);
+        String add = controller.newAddress(street, longitude, latitude, elevation, city, port, zip, desc);
         System.out.println();
         System.out.println("Address:");
         System.out.println(add);

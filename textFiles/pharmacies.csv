@@ -15,6 +15,6 @@
 #max_vehicles capacity of the park
 #can_charge slots that are able to charge (less than max_vehicles)
 #max_energy the park can provide (kWh)
-name;phone_number;street;latitude;longitude;elevation;city;zip_code;port;admin_name;admin_email;admin_pwd;park_category;max_vehicles;can_charge;max_energy
-Farmácia da Trindade;222007420;Rua da Trindade;41.15227;-8.60929;104;Porto;4000-541;115;Tiago Trindade;tiago@gmail.com;tt34;Scooter;10;3;45
-Farmácia Castelo do Queijo;223456722;Rua Campinas;41.16875;-8.68995;4;Porto;4100-274;22;José Castelo;jose@gmail.com;jc78;Drone;8;4;30
+name;phone_number;street;latitude;longitude;elevation;city;zip_code;port;admin_name;admin_email;admin_pwd;park_category;max_vehicles;can_charge;max_energy;desc
+Farmácia da Trindade;222007420;Rua da Trindade;41.15227;-8.60929;104;Porto;4000-541;115;Tiago Trindade;tiago@gmail.com;tt34;Scooter;10;3;45;Trindade
+Farmácia Castelo do Queijo;223456722;Rua Campinas;41.16875;-8.68995;4;Porto;4100-274;22;José Castelo;jose@gmail.com;jc78;Drone;8;4;30;C. do Queijo

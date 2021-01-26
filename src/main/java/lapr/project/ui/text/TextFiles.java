@@ -105,6 +105,9 @@ public class TextFiles {
             case "2":
                 scenario02();
                 break;
+            case "3":
+                scenario03();
+                break;
             default:
                 System.out.println();
                 System.out.println("Invalid option");
@@ -155,6 +158,17 @@ public class TextFiles {
         DELIVERIES = "textFiles/Scenario02/deliveries.csv";
         RESULT = "textFiles/Scenario02/result.txt";
     }
+    
+    private static void scenario03(){
+        CARTS = "textFiles/Scenario03/carts.csv";
+        ORDERS = "textFiles/Scenario03/orders.csv";
+        PATHS = "textFiles/Scenario03/paths.csv";
+        STOCK = "textFiles/Scenario03/stock.csv";
+        PREPARED_ORDERS = "textFiles/Scenario03/prep_orders.csv";
+        RUNS = "textFiles/Scenario03/runs.csv";
+        DELIVERIES = "textFiles/Scenario03/deliveries.csv";
+        RESULT = "textFiles/Scenario03/result.txt";
+    }
 
     private static int insertClients() {
        RegisterClientController controller;
@@ -163,7 +177,7 @@ public class TextFiles {
        for(String user : importFile(CLIENTS)){
            line = user.split(";");
            controller = new RegisterClientController();
-           controller.newAddress(line[3], Double.parseDouble(line[5]), Double.parseDouble(line[4]), Double.parseDouble(line[6]), line[7], Integer.parseInt(line[9]), line[8]);
+           controller.newAddress(line[3], Double.parseDouble(line[5]), Double.parseDouble(line[4]), Double.parseDouble(line[6]), line[7], Integer.parseInt(line[9]), line[8], line[15]);
            controller.newCreditCard(Long.parseLong(line[10]), line[11], Integer.parseInt(line[12]));
            controller.newClient(line[0], line[1],line[2],Integer.parseInt(line[14]) , Integer.parseInt(line[13]));
            try {
@@ -183,7 +197,7 @@ public class TextFiles {
         int pharmaciesAdded = 0;
         for(String pharmacy : importFile(PHARMACIES)){
             line = pharmacy.split(";");
-            controller.newAddress(line[2], Double.parseDouble(line[4]), Double.parseDouble(line[3]), Double.parseDouble(line[5]), line[6], line[7], Integer.parseInt(line[8]));
+            controller.newAddress(line[2], Double.parseDouble(line[4]), Double.parseDouble(line[3]), Double.parseDouble(line[5]), line[6], line[7], Integer.parseInt(line[8]), line[16]);
             controller.newAdministrator(line[9], line[10], line[11]);
             controller.newPark(line[12], Integer.parseInt(line[13]), Integer.parseInt(line[14]), Double.parseDouble(line[15]));
             controller.newPharmacy(line[0], Integer.parseInt(line[1]));
@@ -342,6 +356,9 @@ public class TextFiles {
                 if(controller.makeOrder(Integer.parseInt(line[1]))){
                     ordersMade++;
                     write(String.format("The order made by client whose cordinates are (%.5f,%.5f) was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getLatitude(), controller.getClientAddress().getGeographicalPoint().getLongitude(), controller.getPharmacyAssigned().getName()));
+                    if(controller.otherPharmacy() != null){
+                        write(String.format("Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to %s.%n", controller.otherPharmacy().getName()));
+                    }
                 }else{
                     write(String.format("No pharmacy has enough stock for this order. %n"));
                 }

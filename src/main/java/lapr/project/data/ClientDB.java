@@ -58,7 +58,7 @@ public class ClientDB extends DataHandler {
      */
     public boolean saveClient(Client c) throws SQLException {
         getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procRegisterClient(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
 
                 callStmt.setString(1, c.getName());
                 callStmt.setString(2, c.getEmail());
@@ -75,6 +75,7 @@ public class ClientDB extends DataHandler {
                 callStmt.setString(13,c.getAddress().getCity());
                 callStmt.setInt(14,c.getAddress().getPortNumber());
                 callStmt.setString(15,c.getAddress().getZipCode());
+                callStmt.setString(16, "Client - " +c.getAddress().getGeographicalPoint().getDescription());
 
 
             callStmt.execute();

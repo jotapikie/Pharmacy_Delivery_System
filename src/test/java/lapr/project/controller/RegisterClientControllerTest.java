@@ -57,7 +57,7 @@ public class RegisterClientControllerTest {
         
         controller = new RegisterClientController(cdb, adb, ccdb);
         
-        when(adb.newAdress("Street 1", 45, 45, 45, "City 1", 1, "1111-111")).thenReturn(add);
+        when(adb.newAdress("Street 1", 45, 45, 45, "City 1", 1, "1111-111","p1")).thenReturn(add);
         when(ccdb.newCreditCard(1234567891234567L, "02/22", 123)).thenReturn(card);
         when(cdb.newClient("João", "joao@gmail.com", "123", 123456789, 912541623, add, card)).thenReturn(client);
         when(cdb.saveClient(client)).thenReturn(true);
@@ -70,10 +70,10 @@ public class RegisterClientControllerTest {
      */
     @Test
     public void testNewAddress() {
-        String res = controller.newAddress("Street 2", 45, 45, 45, "City 2", 1, "2222-222");
+        String res = controller.newAddress("Street 2", 45, 45, 45, "City 2", 1, "2222-222","p1");
         assertNull(res);
         
-        res = controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111");
+        res = controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111","p1");
         assertEquals(add.toString(), res);
        
     }
@@ -95,7 +95,7 @@ public class RegisterClientControllerTest {
      */
     @Test
     public void testNewClient() {
-        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111");
+        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111","p1");
         controller.newCreditCard(1234567891234567L, "02/22", 123);
         String res = controller.newClient("Other name","other@gamil.com", "123", 123456712, 345267834);
         assertNull(res);
@@ -114,13 +114,13 @@ public class RegisterClientControllerTest {
     public void testRegistClient() throws Exception {
             assertFalse(controller.registClient());
             
-        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111");
+        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111","p1");
         controller.newCreditCard(1234567891234567L, "02/22", 123);
         controller.newClient("João", "joao@gmail.com", "123", 123456789, 912541623);
         assertTrue(controller.registClient());
         
         when(cdb.saveClient(client)).thenReturn(false);
-        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111");
+        controller.newAddress("Street 1", 45, 45, 45, "City 1", 1, "1111-111","p1");
         controller.newCreditCard(1234567891234567L, "02/22", 123);
         controller.newClient("João", "joao@gmail.com", "123", 123456789, 912541623);
         assertFalse(controller.registClient());
