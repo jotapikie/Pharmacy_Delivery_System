@@ -133,6 +133,12 @@ public class AssignOrderController {
            }else{
                return "Scooter";
            }
+        }else{
+            if(land != null && air == null){
+                return "Scooter";
+            }else if(land == null && air != null){
+                return "Drone";
+            }
         }
         return null;
     }

@@ -17,13 +17,13 @@ public class Constants {
     public static final double DEFAULT_PRICE = 1;
     public static final Timestamp DEFAULT_DATE = new Timestamp(1);
     public static final String DEFAULT_STATUS= "Processing";
-    public static final double AVERAGE_COURIER_WEIGHT = 75;
+    public static final double AVERAGE_COURIER_WEIGHT = 80;
     public static final int DEFAULT_SCOOTER_MAX_BAT = 10;
     
-    public static final double SCOOTER_WEIGHT = 38.9;
-    public static final int SCOOTER_MOTOR = 300;
-    public static final double SCOOTER_AERO_COEF = 0.7;
-    public static final double SCOOTER_FRONTAL_AREA = 0.65;
+    public static final double SCOOTER_WEIGHT = 50;
+    public static final int SCOOTER_MOTOR = 3;
+    public static final double SCOOTER_AERO_COEF = 1.1;
+    public static final double SCOOTER_FRONTAL_AREA = 0.3;
     public static final double SCOOTER_MAX_WEIGHT = 20;
     
 
@@ -60,6 +60,7 @@ public class Constants {
     
     
     public static double DRONE_ALTITUDE = 150;
+    static double AVERAGE_SPEED = 30;
 
     /**
      * Test purposes

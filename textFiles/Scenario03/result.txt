@@ -1,9 +1,0 @@
-The order made by client whose cordinates are (41,14063,-8,61118) was assigned to Farmácia da Trindade (nearest pharmacy).
-
-Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to Farmácia Castelo do Queijo.
-The order made by client whose cordinates are (41,14063,-8,61118) was assigned to Farmácia da Trindade (nearest pharmacy).
-
-Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to Farmácia Castelo do Queijo.
-The order made by client who lives in Point was assigned to Farmácia da Trindade (nearest pharmacy).
-
-Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to Farmácia Castelo do Queijo.

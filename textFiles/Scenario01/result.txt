@@ -11,9 +11,3 @@ Client - Cais da Ribeira (41,14063,-8,61118) ->     Pharmacy - Trindade (41,1522
 Total Distance: 2612,68m | Total Energy: 0,07kWh | Minimum Energy: 0,07kWh 
 
 Most efficient: Drone 
-Route for the delivery #1: 
- Pharmacy - Trindade (41,15227,-8,60929) [Origin] ->     Client - Cais da Ribeira (41,14063,-8,61118)  | R. de Mouzinho da Silveira | 1306,34m   | 0,11kWh    
-Client - Cais da Ribeira (41,14063,-8,61118) ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]  | R. de Mouzinho da Silveira | 1306,34m   | 0,11kWh    
-Total Distance: 2612,68m | Total Energy: 0,22kWh | Minimum Energy: 0,22kWh 
- 
-The scooter must have at least 0,22 kWh to start the delivery. 

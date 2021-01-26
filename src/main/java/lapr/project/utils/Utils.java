@@ -8,8 +8,10 @@ package lapr.project.utils;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
+import java.util.TreeMap;
 import java.util.WeakHashMap;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -20,6 +22,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import lapr.project.model.Wind;
+import lapr.project.utils.route.Route;
 
 /**
  *
@@ -184,6 +187,18 @@ public class Utils {
             throw new IllegalArgumentException("Invalid coordinates!");
         }
         return Math.toDegrees(Math.atan2(Math.abs(longitude2 - longitude1), Math.abs(latitude2 - latitude1)));
+    }
+    
+    public static double time(double distance){
+        return distance / Constants.AVERAGE_SPEED;
+    }
+    
+    public static TreeMap<Double, Route> lessTime(List<Route> routes){
+        TreeMap<Double, Route> rs = new TreeMap<>();
+        for(Route r : routes){
+            rs.put(time(r.getTotalDistance()), r);
+        }
+        return rs;
     }
 
 

@@ -1,0 +1,8 @@
+#lines starting with # should be ignored
+#Column description
+#client_email of the person who make the order
+#nif used to make the order
+#discount if wants to use credits or not (y/n)
+client_email;nif;discount
+osmeianoite@gmail.com;456716789;y
+bruno@gmail.com;278394892;y

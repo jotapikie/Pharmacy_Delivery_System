@@ -1,10 +1,10 @@
-The order made by client whose cordinates are (41,14063,-8,61118) was assigned to Farmácia da Trindade (nearest pharmacy).
+The order made by client who lives in Point was assigned to Farmácia da Trindade (nearest pharmacy).
 
 Land route:
 Not found
 Air route:
-Pharmacy (41,15227,-8,60929) [Origin]    ->     Client Home (41,14063,-8,61118)           | null                 | 1306,34m   | 0,04kWh    
-Client Home (41,14063,-8,61118)          ->     Pharmacy (41,15227,-8,60929) [Destination]  | null                 | 1306,34m   | 0,04kWh    
+Pharmacy - Trindade (41,15227,-8,60929) [Origin] ->     Client - Cais da Ribeira (41,14063,-8,61118)  | null                 | 1306,34m   | 0,04kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]  | null                 | 1306,34m   | 0,04kWh    
 Total Distance: 2612,68m | Total Energy: 0,07kWh | Minimum Energy: 0,07kWh 
 
 Most efficient: null 

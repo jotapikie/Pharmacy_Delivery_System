@@ -171,8 +171,8 @@ CREATE TABLE pharmacy_product(
 
 CREATE TABLE delivery_run(
     delivery_run_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_delivery_run_id PRIMARY KEY,
-    distance float,
-    energy float,
+    distance NUMBER(6,2),
+    energy NUMBER(4,2),
     start_date timestamp,
     end_date timestamp NULL,
     courier_email varchar(255),
