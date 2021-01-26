@@ -51,7 +51,7 @@ public class LandGraph extends MainGraph{
             this.graph.insertVertex(vertex);
 
         }
-        for (Pathway mainEdge : main.getEdges()) {
+        for (Pathway mainEdge : pathDB.getPaths()) {
             if(mainEdge.getCategory().equals(VehicleCategory.SCOOTER)){
             ScooterPath energyEdge = new ScooterPath(mainEdge.getOriginPoint(), mainEdge.getDestinationPoint(), mainEdge.getDistance(),
                     mainEdge.getStreetType(), mainEdge.getWind(), totalWeight, mainEdge.getStreet());
@@ -66,18 +66,7 @@ public class LandGraph extends MainGraph{
     public double getTotalWeight() {
         return totalWeight;
     }
-    
-    public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k) {
-        if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
-            throw new IllegalArgumentException("Invalid algorithm arguments!");
-        }
-        try {
-            System.out.println("Entrou aqui");
-            return RouteAlgorithms.kBestRoutes(this, toVisit, origin,destination, k, Integer.MAX_VALUE);
-        } catch (NullPointerException e) {
-            throw new IllegalArgumentException("Invalid graph vertexes!");
-        }
-    }
+
     
     @Override
     public Graph<GeographicalPoint, ScooterPath> getRouteGraph() {

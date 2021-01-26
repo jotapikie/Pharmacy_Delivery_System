@@ -146,7 +146,7 @@ public class Utils {
 
 
     public static double pathEnergyCost(double totalWeight, double kineticCoef, double vehicleAerodynamicCoef, double windToPath, double altitudeDif, double distance) {
-        if (distance <= 0 || altitudeDif >= distance || vehicleAerodynamicCoef < 0 || kineticCoef <= 0 || totalWeight <= 0) {
+        if (distance <= 0 || altitudeDif >= distance || vehicleAerodynamicCoef < 0 || kineticCoef <= 0 || totalWeight <= 0) { //
             throw new IllegalArgumentException("This path has invalid data!");
         };
         double wind = (windToPath > 0) ? -Math.pow(windToPath, 2) : Math.pow(windToPath, 2);
