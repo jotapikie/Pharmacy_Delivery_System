@@ -10,7 +10,7 @@ package lapr.project.model;
  * @author Diogo
  */
 public enum StreetType {
-    ASPHALT("Asphalt"), OFF_ROAD("Off Road"), SIDEWALK("Sidewalk"), PARALELO("Paralelo");
+    ASPHALT("Asphalt"), OFF_ROAD("Off-Road"), SIDEWALK("Sidewalk"), PARALELO("Paralelo");
     
     private final String name; 
 

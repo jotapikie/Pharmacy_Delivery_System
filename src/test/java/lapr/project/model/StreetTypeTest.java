@@ -48,7 +48,7 @@ public class StreetTypeTest {
     @Test
     public void testGetName() {
         assertEquals("Asphalt",StreetType.ASPHALT.getName());
-        assertEquals("Off Road",StreetType.OFF_ROAD.getName());
+        assertEquals("Off-Road",StreetType.OFF_ROAD.getName());
         assertEquals("Paralelo",StreetType.PARALELO.getName());
         assertEquals("Sidewalk",StreetType.SIDEWALK.getName());
     }
@@ -61,7 +61,7 @@ public class StreetTypeTest {
     @Test
     public void testFromString() {
         assertEquals(StreetType.ASPHALT, StreetType.fromString("Asphalt"));
-        assertEquals(StreetType.OFF_ROAD, StreetType.fromString("Off Road"));
+        assertEquals(StreetType.OFF_ROAD, StreetType.fromString("Off-Road"));
         assertEquals(StreetType.PARALELO, StreetType.fromString("Paralelo"));
         assertEquals(StreetType.SIDEWALK, StreetType.fromString("Sidewalk"));
         assertNull(StreetType.fromString("sadfsd"));

@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import lapr.project.data.DeliveryRunDB;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.model.AirGraph;
@@ -36,8 +37,12 @@ public class AssignOrderController {
     private GeographicalPoint pharmacyCor;
     private final List<GeographicalPoint> clients;
     
-    private Route land;
-    private Route air;
+    private Route landEnergy;
+    private Route airEnergy;
+    
+    private List<Route> land;
+    private List<Route> air;
+    
 
     public AssignOrderController(OrderDB orderDB, DeliveryRunDB runDB,GeographicalPointDB pointDB, int idPharmacy) {
         this.orderDB = orderDB;
@@ -100,9 +105,9 @@ public class AssignOrderController {
         
         try{
             
-            List<Route> routes = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
-            land = routes.get(0);
-            return land.toString();
+            land = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 10, Constants.SCOOTER_MAX_BATTERY);
+            landEnergy = land.get(0);
+            return landEnergy.toString();
         }catch(NullPointerException e){
             return null;
         }catch(IllegalArgumentException e){
@@ -111,12 +116,20 @@ public class AssignOrderController {
 
     }
     
+    public String getLessTimeLand(){
+        TreeMap<Double, Route> time = Utils.lessTime(land, Constants.SCOOTER_SPEED);
+        if(!time.isEmpty()){
+             return time.firstEntry().getValue().toString();
+        }
+        return null;
+    }
+    
       public String getAirRoute() throws SQLException{
         AirGraph airGraph = new AirGraph(totalWeight + Constants.DRONE_WEIGHT);
         try{
-            List<Route> routes = airGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 1);
-            air = routes.get(0);
-            return air.toString();
+            air = airGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 10, Constants.DRONE_MAX_BATTERY);
+            airEnergy = air.get(0);
+            return airEnergy.toString();
         }catch(NullPointerException e){
             return null;
         }catch(IllegalArgumentException e){
@@ -125,14 +138,28 @@ public class AssignOrderController {
    
         
     }
+      
+      public String getLessTimeAir(){
+        TreeMap<Double, Route> time = Utils.lessTime(air, Constants.DRONE_SPEED);
+        if(!time.isEmpty()){
+             return time.firstEntry().getValue().toString();
+        }
+        return null;
+      }
     
     public String getMostEfficient(){
-        if(land != null && air != null){
-           if(land.compareTo(air)>0){
+        if(landEnergy != null && airEnergy != null){
+           if(landEnergy.compareTo(airEnergy)>0){
                return "Drone";
            }else{
                return "Scooter";
            }
+        }else{
+            if(landEnergy != null && airEnergy == null){
+                return "Scooter";
+            }else if(landEnergy == null && airEnergy != null){
+                return "Drone";
+            }
         }
         return null;
     }

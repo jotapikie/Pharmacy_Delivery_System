@@ -148,13 +148,13 @@ public class MainGraph {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
         }
         try {
-            return RouteAlgorithms.kBestRoutes(toUse, toVisit, origin,destination, k, Integer.MAX_VALUE);
+            return RouteAlgorithms.kBestRoutes(toUse, toVisit, origin,destination, k, Double.MAX_VALUE);
         } catch (NullPointerException e) {
             throw new IllegalArgumentException("Invalid graph vertexes!");
         }
     }
     
-   public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, int maxBattery) {
+   public List<Route> kBestPaths(List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, double maxBattery) {
         if (origin == null || destination == null || toVisit == null || toVisit.contains(origin) || toVisit.contains(destination) || k <= 0) {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
         }

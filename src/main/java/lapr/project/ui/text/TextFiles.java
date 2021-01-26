@@ -108,6 +108,9 @@ public class TextFiles {
             case "3":
                 scenario03();
                 break;
+            case "4":
+                scenario04();
+                break;
             default:
                 System.out.println();
                 System.out.println("Invalid option");
@@ -169,6 +172,18 @@ public class TextFiles {
         DELIVERIES = "textFiles/Scenario03/deliveries.csv";
         RESULT = "textFiles/Scenario03/result.txt";
     }
+    
+    private static void scenario04(){
+        CARTS = "textFiles/Scenario04/carts.csv";
+        ORDERS = "textFiles/Scenario04/orders.csv";
+        PATHS = "textFiles/Scenario04/paths.csv";
+        STOCK = "textFiles/Scenario04/stock.csv";
+        PREPARED_ORDERS = "textFiles/Scenario04/prep_orders.csv";
+        RUNS = "textFiles/Scenario04/runs.csv";
+        DELIVERIES = "textFiles/Scenario04/deliveries.csv";
+        RESULT = "textFiles/Scenario04/result.txt";
+    }
+
 
     private static int insertClients() {
        RegisterClientController controller;
@@ -414,8 +429,12 @@ public class TextFiles {
                }
                String land = controller.getLandRoute();
                String air = controller.getAirRoute();
-               write(String.format("Land route:%n%s%n", land==null?"Not found":land));
-               write(String.format("Air route:%n%s%n", air==null?"Not found":air));
+               String tLand = controller.getLessTimeLand();
+               String tAir = controller.getLessTimeAir();
+               write(String.format("Land route (Less time):%n%s%n", tLand==null?"Not found":tLand));
+               write(String.format("Air route (Less time):%n%s%n", tAir==null?"Not found":tAir));
+               write(String.format("Land route (Less energy):%n%s%n", land==null?"Not found":land));
+               write(String.format("Air route (Less energy):%n%s%n", air==null?"Not found":air));
                write(String.format("Most efficient: %s %n", controller.getMostEfficient()));
                controller.newDeliveryRun(line[1]);
                controller.addToQueue();
@@ -444,7 +463,7 @@ public class TextFiles {
                controller.startDeliveryRun();
                startedRuns++;
                String route = controller.getRoute();
-               write(String.format("Route for the delivery #%d: %n %s %n", Integer.parseInt(line[3]),route==null?"Not found":route));
+               write(String.format("Route for the delivery #%d: %n%s %n", Integer.parseInt(line[3]),route==null?"Not found":route));
                double ene = controller.getEnergyToStart();
                if(ene > 0){
                    write(String.format("The scooter must have at least %.2f kWh to start the delivery. %n", ene));

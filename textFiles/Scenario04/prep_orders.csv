@@ -1,0 +1,7 @@
+#lines starting with # should be ignored
+#Column description
+#id_pharmacy who will prepare the order
+#id_order that will be prepared (must be in processed status)
+id_pharmacy;id_order
+1;1
+1;2

@@ -23,3 +23,32 @@ The client from Cais da Riberia make the same order with two valid products.This
 All the pharmacies has enough stock.
 The order is valid.
 ![scenario02.png](scenario02.png)
+
+### 2.2 Expected Result
+The delivery run should be assigned to pharmacy of Trindade becaues its nearer to the cleint.
+The suggested route should be Trindade --> Clerigos --> Bolhão --> Cais --> Bolhão --> Clérigos --> Trindade.
+
+## 3. Scenario 03
+
+### 3.1 Description
+The client from Cais da Ribeira make the same order with two valid products.This time the parmacy assigned has no stock and therefore it must make a new order to the neared pharmacy.
+The pharmacy Trindade has no enough stock.
+The order is valid
+![scenario03.png](scenario03.png)
+
+### 3.2 Expected Result
+The delivery run should be assigned to Trindade, and it must re-order the products missing from Castelo do Queijo Pharmacy.
+A delivery note should be impressed.
+
+## 4. Scenario 04
+
+### 4.1 Description
+The client from Cais da Ribeira and Bolhão make an order and it is assigned to Pharmacy Trindade.
+Pharmacy has enough stock
+![scenario04.png](scenario04.png)
+
+## Expected Result
+The orders must be asssigned to Pharmacy of Trindade.
+There is no route.
+
+

@@ -77,7 +77,7 @@ public class DeliveryRunDB extends DataHandler{
         }
     }
 
-    public boolean startDelivery(int id, String email, Route r, int vehicleId) {
+    public boolean startDelivery(int id, String email, Route r, int vehicleId) throws SQLException {
         DeliveryRun p = null;
         try (CallableStatement callStmt = getConnection().prepareCall("{ call procStartDeliveryRun(?,?,?,?,?,?)}")) {
             callStmt.setInt(1, id);
@@ -93,9 +93,6 @@ public class DeliveryRunDB extends DataHandler{
             callStmt.setInt(6, vehicleId);
             callStmt.execute();
             return true;
-        }catch(SQLException e){
-            e.printStackTrace();
-            return false;
         }
     }
 
