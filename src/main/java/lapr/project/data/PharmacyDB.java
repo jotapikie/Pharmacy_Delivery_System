@@ -83,7 +83,7 @@ public class PharmacyDB extends DataHandler {
     public int addPharmacies(Set<Pharmacy> pharmaciesList) throws SQLException {
         getConnection();
         int rows=0;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcRegisterPharmacy(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcRegisterPharmacy(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }")) {
             for (Pharmacy p : pharmaciesList) {
                 callStmt.registerOutParameter(1, OracleTypes.INTEGER);
                 callStmt.setString(2, p.getName());
@@ -105,6 +105,7 @@ public class PharmacyDB extends DataHandler {
                 callStmt.setInt(14, park.getMaxVehicles());
                 callStmt.setString(15, park.getType().getName());
                 callStmt.setDouble(16, park.getMaxEnergy());
+                callStmt.setString(17, "Pharmacy - " +p.getAddress().getGeographicalPoint().getDescription());
   
                 callStmt.execute();
                 psdb.saveParkSlots(park.getSlots(), callStmt.getInt(1));

@@ -189,7 +189,7 @@ public class Route implements Comparable<Route>{
         if(energyToReachChargingPoint > minimumEnergy){
             minimumEnergy = energyToReachChargingPoint;
         }
-        if(edge.getDestinationPoint().getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)){
+        if(edge.getDestinationPoint().getDescription().contains(Constants.CHARGING_SPOT)){
             energyToReachChargingPoint = 0;
             chargingPoints.add(edge.getDestinationPoint());
          }
@@ -281,8 +281,8 @@ public class Route implements Comparable<Route>{
                     sDest = String.format("%s (%.5f,%.5f) [Destination]",dest.getDescription(), dest.getLatitude(), dest.getLongitude());
                     
                 }else{
-                    sOr = String.format("%s (%.5f,%.5f) %s",or.getDescription(), or.getLatitude(),or.getLongitude(),(or.getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)?"[Charge]":""));
-                    sDest = String.format("%s (%.5f,%.5f) %s",dest.getDescription(), dest.getLatitude(),dest.getLongitude(),(dest.getDescription().equalsIgnoreCase(Constants.CHARGING_SPOT)?"[Charge]":""));
+                    sOr = String.format("%s (%.5f,%.5f) %s",or.getDescription(), or.getLatitude(),or.getLongitude(),(or.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":""));
+                    sDest = String.format("%s (%.5f,%.5f) %s",dest.getDescription(), dest.getLatitude(),dest.getLongitude(),(dest.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":""));
                     
                 }
             }

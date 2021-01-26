@@ -42,36 +42,43 @@ public class RouteAlgorithmsTest {
     private static Pathway path2;
     private static Pathway path3;
     private static Pathway path4;
+    private static Pathway path5;
     private static Pathway path6;
     private static Pathway path7;
     private static Pathway path8;
     private static Pathway path9;
     private static Pathway path10;
     private static List<Pathway> allPaths;
+    
+
 
     
     @BeforeAll
     public static void setUpClass() {
-        p1 = new GeographicalPoint(42.45, 23.4, 0.2);p1.setDescription("p1");
-        p2 = new GeographicalPoint(41.78, 36.7, 0.2);p2.setDescription("p2");
-        p3 = new GeographicalPoint(84.5, -23.3, 0.2);p3.setDescription("p3");
-        p4 = new GeographicalPoint(-4.53, 1.32, 0.2);p4.setDescription("p4");
-        p5 = new GeographicalPoint(89.2, -57.2, 0.2);p5.setDescription("p5");
+        p1 = new GeographicalPoint(-8.60929,41.15227,104, "Pharmacy"); //Trindade
+        p2 = new GeographicalPoint(-8.61398,41.14582,87, "Clerigos");
+        p3 = new GeographicalPoint(-8.60746,41.14871,87, "Bolhao");
+        p4 = new GeographicalPoint(-8.61118,41.14063,25, "Cais");
+        p5 = new GeographicalPoint(-8.60657,41.14723,91, "Majestic");
         allPoints = new ArrayList<>();
         allPoints.add(p1);allPoints.add(p2);allPoints.add(p3);allPoints.add(p4);allPoints.add(p5);
         
-        path1 = new Pathway(p1, p2, StreetType.ASPHALT, 300, new Wind(1,1,1), "Street1",VehicleCategory.SCOOTER);
-        path2 = new Pathway(p1, p3, StreetType.ASPHALT, 100, new Wind(1,1,1), "Street2",VehicleCategory.SCOOTER);
-        path3 = new Pathway(p2, p3, StreetType.ASPHALT, 300, new Wind(1,1,1), "Street3",VehicleCategory.SCOOTER);
-        path4 = new Pathway(p3, p1, StreetType.ASPHALT, 100, new Wind(1,1,1), "Street4",VehicleCategory.SCOOTER);
-        path6 = new Pathway(p3, p2, StreetType.ASPHALT, 450.2, new Wind(1,1,1), "Street5",VehicleCategory.SCOOTER);
-        path7 = new Pathway(p2, p4, StreetType.ASPHALT, 120.3, new Wind(1,1,1), "Street6",VehicleCategory.SCOOTER);
-        path8 = new Pathway(p3, p4, StreetType.ASPHALT, 94.7, new Wind(1,1,1),"Street7",VehicleCategory.SCOOTER);
-        path9 = new Pathway(p4, p5, StreetType.ASPHALT, 23, new Wind(1,1,1),"Street8",VehicleCategory.SCOOTER);
-        path10 = new Pathway(p5, p4, StreetType.ASPHALT, 23, new Wind(1,1,1),"Street9",VehicleCategory.SCOOTER);
+        path1 = new Pathway(p1, p2, StreetType.ASPHALT, 1000, new Wind(1,1,1), "Street1",VehicleCategory.SCOOTER);
+        path2 = new Pathway(p2, p1, StreetType.ASPHALT, 1000, new Wind(1,1,1), "Street1",VehicleCategory.SCOOTER);
+        path3 = new Pathway(p2, p3, StreetType.ASPHALT, 2100, new Wind(1,1,1), "Street2",VehicleCategory.SCOOTER);
+        path4 = new Pathway(p3, p2, StreetType.ASPHALT, 2100, new Wind(1,1,1), "Street2",VehicleCategory.SCOOTER);
+        path5 = new Pathway(p2, p5, StreetType.ASPHALT, 900, new Wind(1,1,1), "Street3",VehicleCategory.SCOOTER);
+        path6 = new Pathway(p4, p5, StreetType.ASPHALT, 500, new Wind(1,1,1), "Street4",VehicleCategory.SCOOTER);
+        path7 = new Pathway(p4, p3, StreetType.ASPHALT, 3000, new Wind(1,1,1), "Street5",VehicleCategory.SCOOTER);
+        path8 = new Pathway(p3, p4, StreetType.ASPHALT, 3000, new Wind(1,1,1), "Street5",VehicleCategory.SCOOTER);
+        
+        
+
+        
+
         allPaths = new ArrayList<>();
-        allPaths.add(path1);allPaths.add(path2);allPaths.add(path3);allPaths.add(path4);
-        allPaths.add(path6);allPaths.add(path7);allPaths.add(path8);allPaths.add(path9);allPaths.add(path10);
+        allPaths.add(path1);allPaths.add(path2);allPaths.add(path3);allPaths.add(path4);allPaths.add(path5);
+        allPaths.add(path6);allPaths.add(path7);allPaths.add(path8);
     }
     
 
@@ -86,156 +93,55 @@ public class RouteAlgorithmsTest {
         landGraph = new LandGraph(135.8);
     }
     
-
-
-    /**
-     * Test of kBestRoutes method, of class RouteAlgorithms.
-     */
     @Test
-    public void testKBestRoutes_4args() {
-        // GRAPH NULL
-        boolean flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(null, p1, p2, 1);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
+    public void testBestRoute_Point2Point() {
+        assertEquals(5, landGraph.getRouteGraph().numVertices());
+        assertEquals(8, landGraph.getRouteGraph().numEdges());
+        List<Route> routes = new ArrayList<>();
         
-        // ORIGIN NULL
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph, null, p2, 1);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
+        routes = landGraph.kBestPaths(p1, p4, 1);
+        assertNotNull(routes.get(0));
         
-        // DESTINATION NULL
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph, p1, null, 1);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        // k <= 0
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph, p1, p2, -3);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        
-        landGraph = mock(LandGraph.class);
-        when(landGraph.getRouteGraph()).thenReturn(null);
-        
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph, p1, p2, 3);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        when(landGraph.getRouteGraph()).thenReturn(new Graph<>(false));
-        
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph, p1, p2, 3);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        
-        
-        
-        
-
-    }
-
-    /**
-     * Test of kBestRoutes method, of class RouteAlgorithms.
-     */
-    @Test
-    public void testKBestRoutes_5args() {
-        boolean flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(null,new ArrayList<>(), p1, p2, 1,Integer.MAX_VALUE);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        // ORIGIN NULL
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), null, p2, 1, Integer.MAX_VALUE);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        // DESTINATION NULL
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, null, 1, Integer.MAX_VALUE);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        // k <= 0
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph,new ArrayList<>(), p1, p2, -3, Integer.MAX_VALUE);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        // toVisit = null
-        flag = false;
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph,null, p1, p2, 4, Integer.MAX_VALUE);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        // To visit copntains origin point
-        flag = false;
-        List<GeographicalPoint> toVisit = new ArrayList<>();
-        toVisit.add(p1);
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4, Integer.MAX_VALUE);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-        
-        // To visit contains destination point
-        flag = false;
-        toVisit.clear();
-        toVisit.add(p2);
-        try{
-            RouteAlgorithms.kBestRoutes(landGraph,toVisit, p1, p2, 4, Integer.MAX_VALUE);
-        }catch(IllegalArgumentException e){
-            flag = true;
-        }
-        assertTrue(flag);
-
-        
- 
-        
-        
-        
-        
+        routes = landGraph.kBestPaths(p4, p1, 1);
+        assertNotNull(routes);
         
     }
+    
+    @Test
+    public void testBestRoute_Visit() {
+        List<Route> routes = new ArrayList<>();
+        List<GeographicalPoint> points = new ArrayList<>();
+        points.add(p2);
+        
+        routes = landGraph.kBestPaths(points, p1, p1, 1);
+        assertNotNull(routes.get(0));
+        
+        points.clear();
+        points.add(p3);
+        routes = landGraph.kBestPaths(points, p1, p1, 1);
+        assertNotNull(routes.get(0));
+        
+        points.clear();
+        points.add(p4);
+        routes = landGraph.kBestPaths(points, p1, p1, 1);
+        assertNotNull(routes.get(0));
+        
+        points.clear();
+        points.add(p5);
+        routes = landGraph.kBestPaths(points, p1, p1, 1);
+        assertNull(routes);
+        
+        points.clear();
+        points.add(p4);
+        routes = landGraph.kBestPaths(points, p1, p3, 1);
+        assertNotNull(routes.get(0));
+        
+    }
+
+    
+    
+    
+
+
     
 }

@@ -14,8 +14,8 @@ import lapr.project.model.GeographicalPoint;
  */
 public class AddressDB {
 
-    public Address newAdress(String street, double longitude, double latitude, double elevation, String city, int portNumber, String zipCode) {
-        return new Address(street, new GeographicalPoint(longitude, latitude, elevation), city, portNumber, zipCode);
+    public Address newAdress(String street, double longitude, double latitude, double elevation, String city, int portNumber, String zipCode, String desc) {
+        return new Address(street, new GeographicalPoint(longitude, latitude, elevation, desc), city, portNumber, zipCode);
     }
     
 }

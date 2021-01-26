@@ -78,7 +78,7 @@ public class NewPharmacyControllerTest {
     public void setUp() {
         controller = new RegisterPharmacyController(pdb, adb, admindb, parkdb);
         
-        when(adb.newAdress("Street1", 12, 45, 0.2, "City1", 45, "3453-456")).thenReturn(add);
+        when(adb.newAdress("Street1", 12, 45, 0.2, "City1", 45, "3453-456","p1")).thenReturn(add);
         when(admindb.newAdministrator("Admin1", "admin1@gmail.com", "123")).thenReturn(admin);
         when(parkdb.newPark(1,5, 3, "Scooter", 67)).thenReturn(park);
         when(pdb.newPhamarcy(Constants.DEFAULT_ID, 912541234, "Pharmacy1", admin, add, parks)).thenReturn(pha);
@@ -92,7 +92,7 @@ public class NewPharmacyControllerTest {
      */
     @Test
     public void testNewAddress() {
-        String res = controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+        String res = controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45,"p1");
         assertEquals(add.toString(), res);
     }
 
@@ -117,7 +117,7 @@ public class NewPharmacyControllerTest {
      */
     @Test
     public void testNewPharmacy() {
-        controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+        controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45,"p1");
         controller.newAdministrator("Admin1", "admin1@gmail.com", "123");
         controller.newPark("Scooter", 5, 3, 67);
         assertEquals(pha.toString(), controller.newPharmacy("Pharmacy1", 912541234));
@@ -130,13 +130,13 @@ public class NewPharmacyControllerTest {
     public void testAddToQueue() {
             assertFalse(controller.addToQueue()); // pha == null
            
-            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45,"p1");
             controller.newAdministrator("Admin1", "admin1@gmail.com", "123");
             controller.newPark("Scooter", 5, 3, 67);
             controller.newPharmacy("Pharmacy1", 912541234);
             assertTrue(controller.addToQueue());
             
-            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45,"p1");
             controller.newAdministrator("Admin1", "admin1@gmail.com", "123");
             controller.newPark("Scooter", 5, 3, 67);
             controller.newPharmacy("Pharmacy1", 912541234);
@@ -152,7 +152,7 @@ public class NewPharmacyControllerTest {
     public void testRegistPharmacies() throws Exception {
             assertEquals(0,controller.registPharmacies());
             
-            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45);
+            controller.newAddress("Street1", 12, 45, 0.2, "City1", "3453-456", 45,"p1");
             controller.newAdministrator("Admin1", "admin1@gmail.com", "123");
             controller.newPark("Scooter", 5, 3, 67);
             controller.newPharmacy("Pharmacy1", 912541234);

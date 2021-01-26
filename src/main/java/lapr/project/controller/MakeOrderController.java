@@ -46,6 +46,7 @@ public class MakeOrderController {
     private Order ord;
     private List<Pharmacy> pharmacies;
     private Invoice inv;
+    private Pharmacy other;
     
     private double totalPrice;
     private double discPrice;
@@ -182,6 +183,7 @@ public class MakeOrderController {
             Order orderToFulfill = odb.newOrder(ord, missingProducts);
             for(Pharmacy nearPha : nearestPharmacies(pha.getAddress()).values()){
                 if(ppdb.hasProducts(missingProducts, nearPha.getId())){
+                    other = nearPha;
                     odb.saveOrderProcessing(orderToFulfill, cli, nearPha.getId(), pha.getId(), inv);
                     return true;
                 }
@@ -205,6 +207,12 @@ public class MakeOrderController {
     public Pharmacy getPharmacyAssigned() {
         return pha;
     }
+    
+    public Pharmacy otherPharmacy(){
+        return other;
+    }
+    
+
     
     
     

@@ -21,10 +21,7 @@ import lapr.project.utils.route.RouteAlgorithms;
  * @author Diogo
  */
 public class MainGraph {
-    /**
-     * Static instance of the main graph.
-     */
-    private static MainGraph instance = null;
+
 
     /**
      * Static instance of the main graph.
@@ -36,24 +33,9 @@ public class MainGraph {
      */
     protected static PathwayDB pathDB = null;
 
-    /**
-     * Static method to get or create an instance of the main graph.
-     *
-     * @throws java.sql.SQLException
-     */
-    public static MainGraph getInstance() throws SQLException {
-        if (instance == null) {
-            instance = new MainGraph();
-        }
-        return instance;
-    }
 
-    /**
-     * Static method to reset the main graph.
-     */
-    public static void resetInstance() {
-        instance = null;
-    }
+
+
 
     /**
      * Static method to setup the data accesses of the main graph (implemented
@@ -64,14 +46,7 @@ public class MainGraph {
         pathDB = (newPathDB != null) ? newPathDB : new PathwayDB();
     }
 
-    /**
-     * Static method to erase the setup of data accesses of the main graph
-     * (implemented to allow for unit testing).
-     */
-    public static void eraseSetup() {
-        locationDB = null;
-        pathDB = null;
-    }
+
 
     /**
      * Main graph of locations connected by paths.
@@ -97,9 +72,11 @@ public class MainGraph {
             }
         }
         for (Pathway edge : edges) {
-            if(edge.getCategory().equals(VehicleCategory.SCOOTER)){
-                if (!mainGraph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
-                    throw new IllegalArgumentException("Invalid graph Edge!");
+            if(edge != null){
+                if(edge.getCategory().equals(VehicleCategory.SCOOTER)){
+                    if (!mainGraph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
+                        throw new IllegalArgumentException("Invalid graph Edge!");
+                    }
                 }
             }
         }
@@ -196,14 +173,8 @@ public class MainGraph {
      * @return graph to use for route algorithms.
      */
     public Graph<GeographicalPoint,? extends Pathway> getRouteGraph() {
-        MainGraph instance;
-        try {
-            MainGraph.resetInstance();
-            instance = MainGraph.getInstance();
-        } catch (SQLException e) {
-            return null;
-        }
-        return instance.mainGraph;
+
+        return mainGraph;
     }
 
 }

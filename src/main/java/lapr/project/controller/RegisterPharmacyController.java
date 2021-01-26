@@ -48,8 +48,8 @@ public class RegisterPharmacyController {
     
     
     
-    public String newAddress(String street, double longitude, double latitude, double elevation, String city, String zip, int port){
-        add = adb.newAdress(street, longitude, latitude, elevation, city, port, zip);
+    public String newAddress(String street, double longitude, double latitude, double elevation, String city, String zip, int port, String desc){
+        add = adb.newAdress(street, longitude, latitude, elevation, city, port, zip, desc);
         return add.toString();
     }
     

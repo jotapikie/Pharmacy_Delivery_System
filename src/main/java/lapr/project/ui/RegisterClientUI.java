@@ -53,8 +53,11 @@ public class RegisterClientUI {
         System.out.println("Zip Code:");
         String zip = read.nextLine();
         System.out.println();
+        System.out.println("Point description:");
+        String desc = read.nextLine();
+        System.out.println();
         try{
-        String add = controller.newAddress(street, longitude, latitude, elevation, city, port, zip);
+        String add = controller.newAddress(street, longitude, latitude, elevation, city, port, zip, desc);
         System.out.println();
         System.out.println("Address:");
         System.out.println(add);
@@ -89,7 +92,7 @@ public class RegisterClientUI {
         System.out.println("Credit car number:");
         long nr = Long.parseLong(read.nextLine());
         System.out.println();
-        System.out.println("Validaty Date (mm/yyyy): ");
+        System.out.println("Validaty Date (mm/yy): ");
         String date = read.nextLine();
         System.out.println();
         System.out.println("CCV: ");

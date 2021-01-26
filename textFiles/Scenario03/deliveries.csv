@@ -1,0 +1,8 @@
+#lines starting with # should be ignored
+#Column description
+#id_pharmacy whose run belongs
+#courier_email of the person who will deliver
+#courier_weight of the person who will deliver
+#id_delivery will be started
+#id_vehicle used to deliver
+id_pharmacy;courier_email;courier_weight;id_delivery;id_vehicle

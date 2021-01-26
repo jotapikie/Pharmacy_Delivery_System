@@ -21,17 +21,18 @@ import lapr.project.utils.graph.Graph;
  *
  * @author Diogo
  */
-public class RouteAlgorithms<V> {
+public class RouteAlgorithms {
 
 
-   @SuppressWarnings("unchecked")
-   public static <V> List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
+
+   public static List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
 
         if (mainGraph == null || origin == null || destination == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
         }
         
-        Graph<GeographicalPoint, V> graph = (Graph<GeographicalPoint, V>) mainGraph.getRouteGraph();
+        @SuppressWarnings("unchecked")
+        Graph<GeographicalPoint, Pathway> graph =  (Graph<GeographicalPoint, Pathway>) mainGraph.getRouteGraph();
         if (graph == null || !graph.isDirected()) {
             throw new IllegalArgumentException("Invalid graph!");
         }
@@ -42,7 +43,7 @@ public class RouteAlgorithms<V> {
         // Insert first routes into the BST, from origin to each neighbour 
         boolean flag = true;
         for (GeographicalPoint adjVertex : graph.adjVertices(origin)) {
-            Pathway edge = (Pathway) graph.getEdge(origin, adjVertex).getElement();
+            Pathway edge = graph.getEdge(origin, adjVertex).getElement();
             // Required to update the origin vertex in the graph itself, not the received copy
             if (flag) {
                 edge.getOriginPoint().incrementCounter();
@@ -50,7 +51,6 @@ public class RouteAlgorithms<V> {
             }
             bst.insert(new Route(edge));
         }
-
         // While there are routes in BST
         while (!bst.isEmpty()) {
 
@@ -78,7 +78,7 @@ public class RouteAlgorithms<V> {
                 // Concatenate each neighbour to route and insert each new route into BST
                 for (GeographicalPoint adjVertex : graph.adjVertices(vertex)) {
                     Route newRoute = new Route(route);
-                    newRoute.addPath((Pathway) graph.getEdge(vertex, adjVertex).getElement());
+                    newRoute.addPath(graph.getEdge(vertex, adjVertex).getElement());
                     bst.insert(newRoute);
                 }
             }
