@@ -9,12 +9,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import lapr.project.controller.AddPathController;
-import lapr.project.controller.AssignOrderController;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
+import lapr.project.model.Pathway;
+import lapr.project.model.ScooterPath;
+import lapr.project.model.StreetType;
+import lapr.project.model.VehicleCategory;
+import lapr.project.model.Wind;
 import static lapr.project.ui.UtilsUI.header;
-import lapr.project.utils.Utils;
+import lapr.project.utils.graph.Edge;
+import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
 
 
@@ -34,12 +38,39 @@ public class TestUCs {
 //        System.out.println(c.selectPoints(-8.68995, 41.16875, -8.61398, 41.14582, "Asphalt", 1, 1, 1, "Scooter", "S"));
 
         LandGraph graph = new LandGraph(123);
-        System.out.println(graph.getRouteGraph().edges());
-        List<GeographicalPoint> cli = new ArrayList<>();
-        cli.add(new GeographicalPoint(-8.61118,41.14063,25, "Client Home"));
-        GeographicalPoint p = new GeographicalPoint(-8.60929, 41.15227, 104, "Pharmacy");
-        List<Route> routes = graph.kBestPaths(cli, p, p, 1);
-        System.out.println(routes.size());
+        GeographicalPoint p1 = new GeographicalPoint(-8.60929,41.15227,104, "Pharmacy");
+        GeographicalPoint p2 = new GeographicalPoint(-8.61398,41.14582,87, "Clerigos");
+        GeographicalPoint p4 = new GeographicalPoint(-8.61118,41.14063,25, "Cais");
+        GeographicalPoint p3 = new GeographicalPoint(-8.60746,41.14871,87, "Bolhao");
+        GeographicalPoint p5 = new GeographicalPoint(-8.60657,41.14723,91, "Majestic");
+        Graph<GeographicalPoint, ScooterPath> g = graph.getRouteGraph();
+        
+        List<GeographicalPoint> toVisit = new ArrayList<>();
+        toVisit.add(p3);
+        List <Route> route = graph.kBestPaths(toVisit,p1, p4, 1);
+        System.out.println("Pharmacy to Cais:" +route.get(0));
+        
+        route = graph.kBestPaths(p4, p3, 1);
+        System.out.println("Cais to Bolhao:" +route.get(0));
+        
+        route = graph.kBestPaths(p3, p2, 1);
+        System.out.println("Bolhao to Clerigos:" +route.get(0));
+        
+        route = graph.kBestPaths(p2, p1, 1);
+        System.out.println("Clerigos to Pharmacy: " +route.get(0));
+        
+        route = graph.kBestPaths(p4, p5, 1);
+        System.out.println("Cais to Majestic: " +route.get(0));
+        
+        route = graph.kBestPaths(p4, p2, 1);
+        System.out.println("Cais to Clerigos: " +route.get(0));
+        
+
+
+ 
+        
+
+
         //showOptions();
      }
     

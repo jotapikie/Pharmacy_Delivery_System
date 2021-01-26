@@ -97,9 +97,11 @@ public class MainGraph {
             }
         }
         for (Pathway edge : edges) {
-            if(edge.getCategory().equals(VehicleCategory.SCOOTER)){
-                if (!mainGraph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
-                    throw new IllegalArgumentException("Invalid graph Edge!");
+            if(edge != null){
+                if(edge.getCategory().equals(VehicleCategory.SCOOTER)){
+                    if (!mainGraph.insertEdge(edge.getOriginPoint(), edge.getDestinationPoint(), edge, edge.getCost())) {
+                        throw new IllegalArgumentException("Invalid graph Edge!");
+                    }
                 }
             }
         }

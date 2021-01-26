@@ -1,18 +1,13 @@
 package lapr.project.ui;
 
 import lapr.project.controller.EndDeliveryRunController;
-import lapr.project.controller.StartDeliveryRunController;
 import lapr.project.controller.UpdateVehicleController;
-import lapr.project.data.DataHandler;
-import lapr.project.data.VehicleDB;
-import lapr.project.model.CalculatorExample;
 import lapr.project.model.State;
 import lapr.project.utils.Utils;
 
 import java.io.*;
 import java.nio.file.*;
 import java.sql.SQLException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;

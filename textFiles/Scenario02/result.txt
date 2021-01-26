@@ -3,8 +3,8 @@ The order made by client whose cordinates are (41,14063,-8,61118) was assigned t
 Land route:
 Not found
 Air route:
-Pharmacy (41,15227,-8,60929) [Origin]    ->     Client Home (41,14063,-8,61118)           | null                 | 1306,34m   | 0,03kWh    
-Client Home (41,14063,-8,61118)          ->     Pharmacy (41,15227,-8,60929) [Destination]  | null                 | 1306,34m   | 0,03kWh    
+Pharmacy (41,15227,-8,60929) [Origin]    ->     Client Home (41,14063,-8,61118)           | null                 | 1306,34m   | 0,04kWh    
+Client Home (41,14063,-8,61118)          ->     Pharmacy (41,15227,-8,60929) [Destination]  | null                 | 1306,34m   | 0,04kWh    
 Total Distance: 2612,68m | Total Energy: 0,07kWh | Minimum Energy: 0,07kWh 
 
 Most efficient: null 
