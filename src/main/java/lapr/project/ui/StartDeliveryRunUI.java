@@ -117,7 +117,8 @@ public class StartDeliveryRunUI {
        if(res){
        System.out.println("Sucess: Delivery run assigned to you.");
        System.out.println();
-       System.out.println(controller.getRoute());
+       String route = controller.getRoute();
+       System.out.println(route==null?"No route found.":route);
        
        
        

@@ -116,12 +116,13 @@ public class OrderDB extends DataHandler{
     }
     
     public int saveToFullfillOrder(Order ord, int idPharmacy, int idOrder) throws SQLException{
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcSaveProcessingOrder(?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcSaveProcessingOrder(?,?,?,?,?) }")) {
                 callStmt.registerOutParameter(1, OracleTypes.INTEGER);
                 callStmt.setTimestamp(2,ord.getBeginDate());
                 callStmt.setString(3, ord.getStatus());
-                callStmt.setInt(4, idPharmacy);
-                callStmt.setInt(5, idOrder);
+                callStmt.setDouble(4, ord.getPrice());
+                callStmt.setInt(5, idPharmacy);
+                callStmt.setInt(6, idOrder);
                 
 
                 callStmt.execute();
@@ -162,6 +163,12 @@ public class OrderDB extends DataHandler{
 
     public void saveOrderProcessing(Order orderToFulfill,Client cli, int idPharmacy,int idPharmacy1, Invoice invoice) throws SQLException {
         int orderId = saveOrder(orderToFulfill.getAssociatedOrder(), cli.getEmail(),idPharmacy1 );
+        orderToFulfill.setStatus("Processed");
+        double price = 0;
+        for(Map.Entry<Product, Integer> p : orderToFulfill.getProducts().entrySet()){
+            price = price + (p.getKey().getPrice()*p.getValue());
+        }
+        orderToFulfill.setPrice(price);
         int otherOrderId = saveToFullfillOrder(orderToFulfill, idPharmacy, orderId);
         saveProducts(orderToFulfill.getAssociatedOrder(), orderId);
         saveProducts(orderToFulfill, otherOrderId);

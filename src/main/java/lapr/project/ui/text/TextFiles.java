@@ -355,7 +355,7 @@ public class TextFiles {
                 }
                 if(controller.makeOrder(Integer.parseInt(line[1]))){
                     ordersMade++;
-                    write(String.format("The order made by client whose cordinates are (%.5f,%.5f) was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getLatitude(), controller.getClientAddress().getGeographicalPoint().getLongitude(), controller.getPharmacyAssigned().getName()));
+                    write(String.format("The order made by client who lives in %s was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getDescription().replace("Client - ", ""), controller.getPharmacyAssigned().getName()));
                     if(controller.otherPharmacy() != null){
                         write(String.format("Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to %s.%n", controller.otherPharmacy().getName()));
                     }

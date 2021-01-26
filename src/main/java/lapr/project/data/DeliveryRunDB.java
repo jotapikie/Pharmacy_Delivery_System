@@ -79,21 +79,22 @@ public class DeliveryRunDB extends DataHandler{
 
     public boolean startDelivery(int id, String email, Route r, int vehicleId) {
         DeliveryRun p = null;
-        try (CallableStatement callStmt = getConnection().prepareCall("{ = call funcStartDeliveryRun(?,?,?,?,?,?)}")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ = call procStartDeliveryRun(?,?,?,?,?,?)}")) {
             callStmt.setInt(1, id);
             callStmt.setString(2, email);
             if(r == null){
-                callStmt.setFloat(3, -1);
-                callStmt.setFloat(4, -1);
+                callStmt.setDouble(3, -1);
+                callStmt.setDouble(4, -1);
             }else{
-                callStmt.setFloat(3, (float) r.getTotalDistance());
-                callStmt.setFloat(4, (float) r.getTotalEnergy());
+                callStmt.setDouble(3, r.getTotalDistance());
+                callStmt.setDouble(4, r.getTotalEnergy());
             }
             callStmt.setTimestamp(5, Timestamp.from(Instant.now()));
             callStmt.setInt(6, vehicleId);
             callStmt.execute();
             return true;
         }catch(SQLException e){
+            e.printStackTrace();
             return false;
         }
     }
