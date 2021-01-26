@@ -82,7 +82,7 @@ public class PathwayTest {
      */
     @Test
     public void testGetKineticCoef() {
-        assertEquals(0.2, path.getKineticCoef());
+        assertEquals(0.5, path.getKineticCoef());
     }
 
     /**

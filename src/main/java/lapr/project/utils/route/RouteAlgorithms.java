@@ -100,7 +100,7 @@ public class RouteAlgorithms {
     
 
 
-    public static <V> List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, int maxEnergy) {
+    public static <V> List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy) {
         
         if (graph == null || origin == null || destination == null || toVisit == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
@@ -173,7 +173,7 @@ public class RouteAlgorithms {
         }
     }
 
-    private static List<Route> kBestOfPermutation(Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map, List<GeographicalPoint> permutation, GeographicalPoint origin, GeographicalPoint destination, int k, int maxEnergy) {
+    private static List<Route> kBestOfPermutation(Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map, List<GeographicalPoint> permutation, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy) {
         // Fill a list and a BST with the best and alternative route segments for each pair of vertexes
         List<Route> bestList = new ArrayList<>();
         BST<Route> altBST = new BST<>();

@@ -429,8 +429,12 @@ public class TextFiles {
                }
                String land = controller.getLandRoute();
                String air = controller.getAirRoute();
-               write(String.format("Land route:%n%s%n", land==null?"Not found":land));
-               write(String.format("Air route:%n%s%n", air==null?"Not found":air));
+               String tLand = controller.getLessTimeLand();
+               String tAir = controller.getLessTimeAir();
+               write(String.format("Land route (Less time):%n%s%n", tLand==null?"Not found":tLand));
+               write(String.format("Air route (Less time):%n%s%n", tAir==null?"Not found":tAir));
+               write(String.format("Land route (Less energy):%n%s%n", land==null?"Not found":land));
+               write(String.format("Air route (Less energy):%n%s%n", air==null?"Not found":air));
                write(String.format("Most efficient: %s %n", controller.getMostEfficient()));
                controller.newDeliveryRun(line[1]);
                controller.addToQueue();

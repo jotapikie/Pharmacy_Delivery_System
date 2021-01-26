@@ -535,7 +535,7 @@ public class EScooterTest {
      */
     @Test
     public void testGetFrontalArea() {
-        double expResult = 0.65;
+        double expResult = 0.3;
         double result = EScooter.getFrontalArea();
         assertEquals(expResult, result, 0.0);
     }
