@@ -19,9 +19,7 @@ import lapr.project.model.StreetType;
 import lapr.project.model.VehicleCategory;
 import lapr.project.model.Wind;
 import static lapr.project.ui.UtilsUI.header;
-import lapr.project.utils.graph.Edge;
-import lapr.project.utils.graph.Graph;
-import lapr.project.utils.route.Route;
+
 
 
 /**
@@ -35,36 +33,7 @@ public class TestUCs {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        
-//        GeographicalPoint p1 = new GeographicalPoint(-8.60929,41.15227,104, "Pharmacy - Trindade"); //Trindade
-//        GeographicalPoint  p2 = new GeographicalPoint(-8.61398,41.14582,87, "Client - Clerigos");
-//        GeographicalPoint  p3 = new GeographicalPoint(-8.60746,41.14871,87, "Client - Bolhão");
-//        GeographicalPoint  p4 = new GeographicalPoint(-8.61118,41.14063,25, "Client - Cais Da Ribeira");
-//        GeographicalPoint  p5 = new GeographicalPoint(-8.60657,41.14723,91, "Client - Majestic");
-//        GeographicalPoint  p6 = new GeographicalPoint(41.16875,-8.68995,4, "Pharmacy - C. do Queijo");
-        GeographicalPoint p1 = null;
-        GeographicalPoint p2 = null;
-        List<GeographicalPoint> points = new ArrayList<>();
-        LandGraph land = new LandGraph(120);
-        Graph<GeographicalPoint, ScooterPath> graph = land.getRouteGraph();
-        for(GeographicalPoint p : graph.vertices()){
-            if(p.getDescription().contains("Trindade")){
-                p1 = p;
-            }else if(p.getDescription().contains("Cais")){
-                p2 = p;
-            }
-        }
-        points.add(p2);
-      
-        
-        
-  
-
-        System.out.println(land.kBestPaths(points, p1,p1, 1).get(0));
-
-
-
-        //showOptions();
+        showOptions();
      }
     
     private static void showOptions() throws SQLException{

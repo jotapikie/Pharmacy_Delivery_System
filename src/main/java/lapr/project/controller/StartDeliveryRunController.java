@@ -79,7 +79,6 @@ public class StartDeliveryRunController {
     
     public List<String> getDeliveryRuns() throws SQLException{
         runs = drdb.getDeliveryRuns(idPharmacy);
-        System.out.println(runs);
         return Utils.listToString(runs);
     }
     
@@ -132,7 +131,6 @@ public class StartDeliveryRunController {
             r = null;
         }
         
-        System.out.println(idPharmacy+","+email+","+scooter.getId());
         boolean res = drdb.startDelivery(dr.getId(), email, r, scooter.getId());
         
         if(res){

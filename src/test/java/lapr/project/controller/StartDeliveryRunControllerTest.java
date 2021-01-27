@@ -240,26 +240,7 @@ public class StartDeliveryRunControllerTest {
          assertEquals(scooter3.toString(), controller.selectScooter(3));
     }
 
-    /**
-     * Test of startDeliveryRun method, of class StartDeliveryRunController.
-     */
-    @Test
-    public void testStartDeliveryRun_1() throws Exception {
-        controller.getDeliveryRuns();
-        controller.selectDeliveryRun(1);
-        controller.getAvailableScooters();
-        controller.selectScooter(1);
-        
-        List<GeographicalPoint> interm = new ArrayList<>();
-        interm.add(p5);
-        when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
-       
-        controller.startDeliveryRun();
-        assertNotNull(controller.getRoute());
-        assertFalse(controller.getRoute().isEmpty());
-        assertEquals(0, controller.getEnergyToStart());
-        
-    }
+
     
     
      /**
@@ -271,11 +252,6 @@ public class StartDeliveryRunControllerTest {
         controller.selectDeliveryRun(1);
         controller.getAvailableScooters();
         controller.selectScooter(2);
-        
-        List<GeographicalPoint> interm = new ArrayList<>();
-        interm.add(p8);
-        when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
-       
         when(drdb.startDelivery(1, email, r1,2)).thenReturn(true);
         controller.startDeliveryRun();
         String sRoute = controller.getRoute();
@@ -283,7 +259,6 @@ public class StartDeliveryRunControllerTest {
         assertNotNull(controller.getRoute());
         assertFalse(sRoute.isEmpty());
         assertEquals(0, controller.getEnergyToStart());
-        
         when(drdb.startDelivery(1, email, r1,2)).thenReturn(false);
         assertFalse(controller.startDeliveryRun());
         
@@ -298,13 +273,10 @@ public class StartDeliveryRunControllerTest {
         controller.selectDeliveryRun(1);
         controller.getAvailableScooters();
         controller.selectScooter(1);
-        
-        List<GeographicalPoint> interm = new ArrayList<>();
-        interm.add(p5);
-        when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
         when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
         when(pdb.getPaths()).thenReturn(new ArrayList<>());
-        controller.startDeliveryRun();
+        when(drdb.startDelivery(1, email, null,1)).thenReturn(true);
+        assertTrue(controller.startDeliveryRun());
         assertNull(controller.getRoute());
 
     }
@@ -325,7 +297,8 @@ public class StartDeliveryRunControllerTest {
         when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
         when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
         when(pdb.getPaths()).thenReturn(new ArrayList<>());
-        controller.startDeliveryRun();
+        when(drdb.startDelivery(1, email, null,1)).thenReturn(true);
+        assertTrue(controller.startDeliveryRun());
         assertNull(controller.getRoute());
 
     }
