@@ -101,6 +101,8 @@ public class StartDeliveryRunControllerTest {
         products.put(new Product(1, "Product1",0.67,3.99), 2);
         products.put(new Product(2, "Product2",1.23,9.99), 3);
         o1.setProducts(products);
+        p5 = new GeographicalPoint(45, 35, 0.2);p5.setDescription("p5");
+        o1.setAddress(new Address("Street",p5 ,"City1", 12, "4525-345"));
         orders.add(o1);
         run1 = new DeliveryRun(1, orders);
         run2 = new DeliveryRun(2, new ArrayList<>());
@@ -275,12 +277,12 @@ public class StartDeliveryRunControllerTest {
         when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
        
         when(drdb.startDelivery(1, email, r1,2)).thenReturn(true);
-        assertFalse(controller.startDeliveryRun());
+        controller.startDeliveryRun();
         String sRoute = controller.getRoute();
         assertFalse(sRoute.isEmpty() );
         assertNotNull(controller.getRoute());
         assertFalse(sRoute.isEmpty());
-        assertEquals(0.08, controller.getEnergyToStart(),0.01);
+        assertEquals(0, controller.getEnergyToStart());
         
         when(drdb.startDelivery(1, email, r1,2)).thenReturn(false);
         assertFalse(controller.startDeliveryRun());
@@ -302,7 +304,8 @@ public class StartDeliveryRunControllerTest {
         when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
         when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
         when(pdb.getPaths()).thenReturn(new ArrayList<>());
-        assertFalse(controller.startDeliveryRun());
+        controller.startDeliveryRun();
+        assertNull(controller.getRoute());
 
     }
     
@@ -322,7 +325,8 @@ public class StartDeliveryRunControllerTest {
         when(gpdb.getPointsByDeliveryRun(1)).thenReturn(interm);
         when(gpdb.getGeographicalPoints()).thenReturn(new ArrayList<>());
         when(pdb.getPaths()).thenReturn(new ArrayList<>());
-        assertFalse(controller.startDeliveryRun());
+        controller.startDeliveryRun();
+        assertNull(controller.getRoute());
 
     }
     

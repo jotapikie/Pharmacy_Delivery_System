@@ -196,6 +196,9 @@ public class Utils {
     
     public static TreeMap<Double, Route> lessTime(List<Route> routes, double speed){
         TreeMap<Double, Route> rs = new TreeMap<>();
+        if(routes == null){
+            return rs;
+        }
         for(Route r : routes){
             rs.put(time(r.getTotalDistance(), speed), r);
         }

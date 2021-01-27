@@ -460,8 +460,9 @@ public class TextFiles {
                controller.selectDeliveryRun(Integer.parseInt(line[3]));
                controller.getAvailableScooters();
                controller.selectScooter(Integer.parseInt(line[4]));
-               controller.startDeliveryRun();
-               startedRuns++;
+               if(controller.startDeliveryRun()){
+                   startedRuns++;
+               }
                String route = controller.getRoute();
                write(String.format("Route for the delivery #%d: %n%s %n", Integer.parseInt(line[3]),route==null?"Not found":route));
                double ene = controller.getEnergyToStart();

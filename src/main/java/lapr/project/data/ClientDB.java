@@ -150,7 +150,7 @@ public class ClientDB extends DataHandler {
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                c = new Client(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), new Address(rs.getString(7), new GeographicalPoint(rs.getFloat(8), rs.getFloat(9), rs.getFloat(10)), rs.getString(11), rs.getInt(12), rs.getString(13)));
+                c = new Client(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), new Address(rs.getString(7), new GeographicalPoint(rs.getDouble(8), rs.getDouble(9), rs.getDouble(10), rs.getString(11)), rs.getString(12), rs.getInt(13), rs.getString(14)));
                 return c;
             }
             throw new IllegalArgumentException("Client does not exist");
@@ -180,7 +180,7 @@ public class ClientDB extends DataHandler {
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), new Address(rs.getString(7), new GeographicalPoint(rs.getFloat(8), rs.getFloat(9), rs.getFloat(10)), rs.getString(11), rs.getInt(12), rs.getString(13)));
+                Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), new Address(rs.getString(7), new GeographicalPoint(rs.getDouble(8), rs.getDouble(9), rs.getDouble(10), rs.getString(11)), rs.getString(12), rs.getInt(13), rs.getString(14)));
                 listClients.add(c);
             }
         }

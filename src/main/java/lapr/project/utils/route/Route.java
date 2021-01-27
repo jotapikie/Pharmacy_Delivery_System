@@ -288,7 +288,7 @@ public class Route implements Comparable<Route>{
             }
             String sDist = String.format("%.2fm",p.getDistance());
             String sEner = String.format("%.2fkWh", p.getCost());
-            sb.append(String.format("%-40s -> %s %-40s  | %-20s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet(), sDist, sEner));
+            sb.append(String.format("%-55s -> %s %-60s  | %-25s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet()==null?"Air":p.getStreet(), sDist, sEner));
         }
         String sDist = String.format("%.2fm",totalDistance);
         String sEner = String.format("%.2fkWh", totalEnergy);

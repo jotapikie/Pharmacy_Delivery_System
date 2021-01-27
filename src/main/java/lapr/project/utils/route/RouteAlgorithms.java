@@ -39,6 +39,7 @@ public class RouteAlgorithms {
         zeroVertexCounters(graph);
         List<Route> result = new ArrayList<>();
         BST<Route> bst = new BST<>();
+        
 
         // Insert first routes into the BST, from origin to each neighbour 
         boolean flag = true;
@@ -51,8 +52,13 @@ public class RouteAlgorithms {
             }
             bst.insert(new Route(edge));
         }
+        
+//        for(GeographicalPoint p : graph.vertices()){
+//            System.out.println(p.getDescription()+", "+p.getCounter()+", "+p.hashCode());
+//        }
         // While there are routes in BST
         while (!bst.isEmpty()) {
+            
 
             // Get the shortest route in BST
             Route route = bst.smallestElement();
@@ -66,6 +72,8 @@ public class RouteAlgorithms {
             bst.remove(route);
             GeographicalPoint vertex = route.getDestination();
             vertex.incrementCounter();
+            
+
 
             // Check if route is a wanted route
             if (vertex.equals(destination)) {
@@ -78,10 +86,12 @@ public class RouteAlgorithms {
                 // Concatenate each neighbour to route and insert each new route into BST
                 for (GeographicalPoint adjVertex : graph.adjVertices(vertex)) {
                     Route newRoute = new Route(route);
-                    newRoute.addPath(graph.getEdge(vertex, adjVertex).getElement());
+                    Pathway p = parse(graph, graph.getEdge(vertex, adjVertex).getElement());
+                    newRoute.addPath(p);
                     bst.insert(newRoute);
                 }
             }
+
         }
         return (result.isEmpty()) ? null : result;
     }
@@ -91,16 +101,30 @@ public class RouteAlgorithms {
    
    
    
-    private static <V> void  zeroVertexCounters(Graph<GeographicalPoint, V> graph) {
+    private static void zeroVertexCounters(Graph<GeographicalPoint, Pathway> graph) {
 
         for (GeographicalPoint vertex : graph.vertices()) {
             vertex.resetCounter();
         }
+      
+    }
+    
+    private static Pathway parse(Graph<GeographicalPoint, Pathway> graph, Pathway p){
+        GeographicalPoint pOr = p.getOriginPoint();
+        GeographicalPoint pDest = p.getDestinationPoint();
+        for(GeographicalPoint point : graph.vertices()){
+            if(pOr.equals(point)){
+                p.setOriginPoint(point);
+            }else if(pDest.equals(point)){
+                p.setDestinationPoint(point);
+            }
+        }
+        return p;
     }
     
 
 
-    public static <V> List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy) {
+    public static List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy) {
         
         if (graph == null || origin == null || destination == null || toVisit == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");

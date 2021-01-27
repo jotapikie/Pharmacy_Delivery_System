@@ -6,3 +6,4 @@
 #id_delivery will be started
 #id_vehicle used to deliver
 id_pharmacy;courier_email;courier_weight;id_delivery;id_vehicle
+2;renato@gmail.com;81;1;5

@@ -79,6 +79,7 @@ public class StartDeliveryRunController {
     
     public List<String> getDeliveryRuns() throws SQLException{
         runs = drdb.getDeliveryRuns(idPharmacy);
+        System.out.println(runs);
         return Utils.listToString(runs);
     }
     
@@ -117,7 +118,10 @@ public class StartDeliveryRunController {
         double totalWeight = deliveryWeight + courierWeight + Constants.SCOOTER_WEIGHT;
         LandGraph graph = new LandGraph(totalWeight);
         GeographicalPoint pharmacyAdd = gpdb.getGeographicalPointByPharmacy(idPharmacy);
-        List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
+        List<GeographicalPoint> points = new ArrayList<>();
+        for(Order o : dr.getOrders()){
+            points.add(o.getAddress().getGeographicalPoint());
+        }
         List<Route> routes = new ArrayList<>();
         try{
             routes = graph.kBestPaths(points, pharmacyAdd, pharmacyAdd, 1, scooter.getMaxBat());
@@ -128,7 +132,8 @@ public class StartDeliveryRunController {
             r = null;
         }
         
-        boolean res = drdb.startDelivery(idPharmacy, email, r, scooter.getId());
+        System.out.println(idPharmacy+","+email+","+scooter.getId());
+        boolean res = drdb.startDelivery(dr.getId(), email, r, scooter.getId());
         
         if(res){
             List<Client> clients = cdb.getClientsByDeliveryRun(dr.getId());
