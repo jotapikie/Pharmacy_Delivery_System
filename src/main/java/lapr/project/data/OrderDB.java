@@ -194,11 +194,7 @@ public class OrderDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Order o = new Order();
-                o.setId(rs.getInt(1));
-                o.setBeginDate(rs.getTimestamp(2));
-                o.setStatus(rs.getString(3));
-                o.setPrice(rs.getDouble(4));
+                Order o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10)),rs.getString(11), rs.getInt(13), rs.getString(12)));
                 listOrders.add(o);
             }
         }

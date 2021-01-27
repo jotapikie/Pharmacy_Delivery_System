@@ -12,9 +12,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import lapr.project.model.DronePath;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
 import lapr.project.utils.Constants;
+import lapr.project.utils.Utils;
 
 /**
  *
@@ -38,13 +40,16 @@ public class Route implements Comparable<Route>{
     private double totalDistance;
     
     
+    private long totalTime;
+    
+    
     private double minimumEnergy;
     
     
     private double energyToReachChargingPoint;
     
     
-    private List<GeographicalPoint> chargingPoints;
+    private List<GeographicalPoint> stopPoints;
 
     /**
      * Constructs a route that is a copy of another route.
@@ -54,11 +59,12 @@ public class Route implements Comparable<Route>{
     public Route(Route otherRoute) {
         this.totalEnergy = otherRoute.totalEnergy;
         this.totalDistance = otherRoute.totalDistance;
+        this.totalTime = otherRoute.totalTime;
         this.minimumEnergy = otherRoute.minimumEnergy;
         this.paths = new ArrayList<>(otherRoute.paths);
         this.energyToReachChargingPoint = otherRoute.energyToReachChargingPoint;
         this.minimumEnergy = otherRoute.minimumEnergy;
-        this.chargingPoints = otherRoute.chargingPoints;
+        this.stopPoints = otherRoute.stopPoints;
     }
 
     /**
@@ -83,9 +89,10 @@ public class Route implements Comparable<Route>{
         paths.add(startEdge);
         totalEnergy = startEdge.getCost();
         totalDistance = startEdge.getDistance();
+        totalTime = startEdge.getTime();
         energyToReachChargingPoint = totalEnergy;
         minimumEnergy = totalEnergy;
-        chargingPoints = new LinkedList<>();
+        stopPoints = new LinkedList<>();
     }
 
     /**
@@ -114,6 +121,12 @@ public class Route implements Comparable<Route>{
     public double getTotalDistance() {
         return totalDistance;
     }
+
+    public long getTotalTime() {
+        return totalTime;
+    }
+    
+    
 
     public double getMinimumEnergy() {
         return minimumEnergy;
@@ -149,8 +162,18 @@ public class Route implements Comparable<Route>{
         return paths.size() + 1;
     }
 
-    public List<GeographicalPoint> getChargingPoints() {
-        return new LinkedList<>(chargingPoints);
+    public List<GeographicalPoint> getStopPoints() {
+        return new LinkedList<>(stopPoints);
+    }
+    
+    public boolean addStopPoint(GeographicalPoint stop){
+        for(Pathway p : paths){
+          if(p.getOriginPoint().equals(stop) || p.getDestinationPoint().equals(stop)){
+              stopPoints.add(stop);
+              return true;
+          }
+        }
+        return false;
     }
     
     
@@ -184,6 +207,7 @@ public class Route implements Comparable<Route>{
         this.paths.add(edge);
         this.totalEnergy += edge.getCost();
         this.totalDistance += edge.getDistance();
+        this.totalTime += edge.getTime();
         this.energyToReachChargingPoint += edge.getCost();
         
         if(energyToReachChargingPoint > minimumEnergy){
@@ -191,7 +215,7 @@ public class Route implements Comparable<Route>{
         }
         if(edge.getDestinationPoint().getDescription().contains(Constants.CHARGING_SPOT)){
             energyToReachChargingPoint = 0;
-            chargingPoints.add(edge.getDestinationPoint());
+            stopPoints.add(edge.getDestinationPoint());
          }
     }
 
@@ -247,6 +271,12 @@ public class Route implements Comparable<Route>{
         if (this.totalDistance > otherRoute.totalDistance) {
             return 1;
         }
+        if (this.totalTime < otherRoute.totalTime) {
+            return -1;
+        }
+        if (this.totalTime > otherRoute.totalTime) {
+            return 1;
+        }
         if (this.paths.size() < otherRoute.paths.size()) {
             return -1;
         }
@@ -281,18 +311,18 @@ public class Route implements Comparable<Route>{
                     sDest = String.format("%s (%.5f,%.5f) [Destination]",dest.getDescription(), dest.getLatitude(), dest.getLongitude());
                     
                 }else{
-                    sOr = String.format("%s (%.5f,%.5f) %s",or.getDescription(), or.getLatitude(),or.getLongitude(),(or.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":""));
-                    sDest = String.format("%s (%.5f,%.5f) %s",dest.getDescription(), dest.getLatitude(),dest.getLongitude(),(dest.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":""));
+                    sOr = String.format("%s (%.5f,%.5f) %s",or.getDescription(), or.getLatitude(),or.getLongitude(),(or.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]": stopPoints.contains(or) ? "[Order]":""));
+                    sDest = String.format("%s (%.5f,%.5f) %s",dest.getDescription(), dest.getLatitude(),dest.getLongitude(),(dest.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":stopPoints.contains(dest) ? "[Order]": ""));
                     
                 }
             }
             String sDist = String.format("%.2fm",p.getDistance());
             String sEner = String.format("%.2fkWh", p.getCost());
-            sb.append(String.format("%-55s -> %s %-60s  | %-25s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet()==null?"Air":p.getStreet(), sDist, sEner));
+            sb.append(String.format("%-55s -> %s %-60s  | %-28s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet()==null?"Air":p.getStreet(), sDist, sEner));
         }
         String sDist = String.format("%.2fm",totalDistance);
         String sEner = String.format("%.2fkWh", totalEnergy);
-        sb.append(String.format("Total Distance: %s | Total Energy: %s | Minimum Energy: %.2fkWh %n", sDist, sEner, minimumEnergy));
+        sb.append(String.format("Total Distance: %s | Total Energy: %s | Total Time: %s %n", sDist, sEner, Utils.secondsToTime(totalTime)));
         return sb.toString();
     }
     

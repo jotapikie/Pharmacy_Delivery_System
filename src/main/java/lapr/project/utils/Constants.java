@@ -30,7 +30,6 @@ public class Constants {
     
 
     public static final int INITIAL_POINTS = 0;
-    public static final double MAX_DISTANCE = 3 ;
     public static final double RENDIMENTO_DRONE = 0.7;
     public static double GRAVITY = 9.8;
 
@@ -60,7 +59,8 @@ public class Constants {
     public static double DRONE_MAX_WEIGHT = 7;
     public static int DRONE_MOTOR = 12;
     public static double DRONE_MAX_BATTERY = 1.5;
-    public static double DRONE_SPEED = 16;
+    public static double DRONE__HORIZONTAL_SPEED = 16;
+    public static double DRONE_VERTICAL_SPEED = 6;
     
     public static double DRONE_ALTITUDE = 150;
     

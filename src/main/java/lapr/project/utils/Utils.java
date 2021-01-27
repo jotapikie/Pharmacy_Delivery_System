@@ -189,21 +189,6 @@ public class Utils {
         }
         return Math.toDegrees(Math.atan2(Math.abs(longitude2 - longitude1), Math.abs(latitude2 - latitude1)));
     }
-    
-    public static double time(double distance, double speed){
-        return distance / speed;
-    }
-    
-    public static TreeMap<Double, Route> lessTime(List<Route> routes, double speed){
-        TreeMap<Double, Route> rs = new TreeMap<>();
-        if(routes == null){
-            return rs;
-        }
-        for(Route r : routes){
-            rs.put(time(r.getTotalDistance(), speed), r);
-        }
-        return rs;
-    }
 
 
     public static double windToPath(double pathDirec, Wind wind) {
@@ -222,5 +207,16 @@ public class Utils {
 
     private static boolean validateDegrees(double degrees) {
         return 0 <= degrees && degrees < 360;
+    }
+    
+    public static String secondsToTime(long seconds){
+        int hours = (int) (seconds / 3600);
+        int minutes = (int) ((seconds % 3600) / 60);
+        int second = (int) (seconds % 60);
+
+        String sHo = hours< 0 ? "" :String.format("%02dh", hours);
+        String sMi = minutes<0 ? "":String.format("%02dm", minutes);
+        String sSe = second<0 ? "":String.format("%02ds", second);
+        return String.format("%s %s %s",sHo, sMi, sSe);
     }
 }

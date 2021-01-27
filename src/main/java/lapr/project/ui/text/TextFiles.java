@@ -63,8 +63,9 @@ public class TextFiles {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
      
+ 
         try{
             System.out.println("Clearing old data...");
             DataHandler dh = new DataHandler();
@@ -424,21 +425,22 @@ public class TextFiles {
                while(i < orders.length){
                    controller.getAvailableOrders();
                    controller.selectOrder(Integer.parseInt(orders[i]));
-                   controller.addOrder();
+                   System.out.println(controller.addOrder());
                    i++;
                }
                String land = controller.getLandRoute();
                String air = controller.getAirRoute();
                String tLand = controller.getLessTimeLand();
                String tAir = controller.getLessTimeAir();
+               controller.newDeliveryRun(line[1]);
+               
+               controller.addToQueue();
+               ordersAssigned = ordersAssigned + controller.saveDeliveryRuns();
                write(String.format("Land route (Less time):%n%s%n", tLand==null?"Not found":tLand));
                write(String.format("Air route (Less time):%n%s%n", tAir==null?"Not found":tAir));
                write(String.format("Land route (Less energy):%n%s%n", land==null?"Not found":land));
                write(String.format("Air route (Less energy):%n%s%n", air==null?"Not found":air));
                write(String.format("Most efficient: %s %n", controller.getMostEfficient()));
-               controller.newDeliveryRun(line[1]);
-               controller.addToQueue();
-               ordersAssigned = ordersAssigned + controller.saveDeliveryRuns();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -461,6 +463,7 @@ public class TextFiles {
                controller.getAvailableScooters();
                controller.selectScooter(Integer.parseInt(line[4]));
                if(controller.startDeliveryRun()){
+                   write(String.format("The courier with email %s started the delivery run #%d and took the scooter #%d. %n %n", line[1],Integer.parseInt(line[3]), Integer.parseInt(line[4])));
                    startedRuns++;
                }
                String route = controller.getRoute();

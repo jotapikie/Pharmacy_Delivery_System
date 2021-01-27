@@ -148,7 +148,13 @@ public class MainGraph {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
         }
         try {
-            return RouteAlgorithms.kBestRoutes(toUse, toVisit, origin,destination, k, Double.MAX_VALUE);
+            List<Route> routes =  RouteAlgorithms.kBestRoutes(toUse, toVisit, origin,destination, k, Double.MAX_VALUE);
+            for(Route r: routes){
+                for(GeographicalPoint p : toVisit){
+                    r.addStopPoint(p);
+                }
+            }
+            return routes;
         } catch (NullPointerException e) {
             throw new IllegalArgumentException("Invalid graph vertexes!");
         }
@@ -159,7 +165,13 @@ public class MainGraph {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
         }
         try {
-            return RouteAlgorithms.kBestRoutes(toUse, toVisit, origin, destination, k, maxBattery);
+            List<Route> routes = RouteAlgorithms.kBestRoutes(toUse, toVisit, origin, destination, k, maxBattery);
+            for(Route r: routes){
+                for(GeographicalPoint p : toVisit){
+                    r.addStopPoint(p);
+                }
+            }
+            return routes;
         } catch (NullPointerException e) {
             throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
         }
