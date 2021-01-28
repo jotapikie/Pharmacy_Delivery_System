@@ -1,11 +1,41 @@
-The courier with email diogomicael6@gmail.com started the delivery run 1 and took the scooter #1. 
+The order made by client who lives in Cais da Ribeira was assigned to Farmácia da Trindade (nearest pharmacy).
+
+Land route (Less time):
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Clerigos (41,14582,-8,61398)                         | Rua do Dr. Ricardo Jorge     | 817,85m    | 0,15kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Client - Bolhão (41,14871,-8,60746)                           | Rua de Sá da Bandeira        | 633,49m    | 0,12kWh    
+Client - Bolhão (41,14871,-8,60746)                     ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | Rua de São João              | 952,94m    | 0,19kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Client - Bolhão (41,14871,-8,60746)                           | Rua de São João              | 952,94m    | 0,19kWh    
+Client - Bolhão (41,14871,-8,60746)                     ->     Client - Clerigos (41,14582,-8,61398)                         | Rua de Sá da Bandeira        | 633,49m    | 0,12kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Rua do Dr. Ricardo Jorge     | 817,85m    | 0,15kWh    
+Total Distance: 4808,57m | Total Energy: 0,93kWh | Total Time: 00h 09m 36s 0,93 
+
+Air route (Less time):
+Not found
+Land route (Less energy):
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Clerigos (41,14582,-8,61398)                         | Rua do Dr. Ricardo Jorge     | 817,85m    | 0,15kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Client - Bolhão (41,14871,-8,60746)                           | Rua de Sá da Bandeira        | 633,49m    | 0,12kWh    
+Client - Bolhão (41,14871,-8,60746)                     ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | Rua de São João              | 952,94m    | 0,19kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Client - Bolhão (41,14871,-8,60746)                           | Rua de São João              | 952,94m    | 0,19kWh    
+Client - Bolhão (41,14871,-8,60746)                     ->     Client - Clerigos (41,14582,-8,61398)                         | Rua de Sá da Bandeira        | 633,49m    | 0,12kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Rua do Dr. Ricardo Jorge     | 817,85m    | 0,15kWh    
+Total Distance: 4808,57m | Total Energy: 0,93kWh | Total Time: 00h 09m 36s 0,93 
+
+Air route (Less energy):
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118)                  | Air                          | 1306,34m   | 0,03kWh    
+Client - Cais da Ribeira (41,14063,-8,61118)            ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1306,34m   | 0,03kWh    
+Total Distance: 2612,68m | Total Energy: 0,06kWh | Total Time: 00h 02m 42s 0,06 
+
+Most efficient: Drone 
+ 
+The courier with email diogomicael6@gmail.com started the delivery run #1 and took the scooter #1. 
+ 
 Route for the delivery #1: 
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Clerigos (41,14582,-8,61398)                         | Rua do Dr. Ricardo Jorge  | 817,85m    | 0,15kWh    
-Client - Clerigos (41,14582,-8,61398)                   ->     Client - Bolhão (41,14871,-8,60746)                           | Rua de Sá da Bandeira     | 633,49m    | 0,11kWh    
-Client - Bolhão (41,14871,-8,60746)                     ->     Client - Cais da Ribeira (41,14063,-8,61118)                  | Rua de São João           | 952,94m    | 0,19kWh    
-Client - Cais da Ribeira (41,14063,-8,61118)            ->     Client - Bolhão (41,14871,-8,60746)                           | Rua de São João           | 952,94m    | 0,19kWh    
-Client - Bolhão (41,14871,-8,60746)                     ->     Client - Clerigos (41,14582,-8,61398)                         | Rua de Sá da Bandeira     | 633,49m    | 0,11kWh    
-Client - Clerigos (41,14582,-8,61398)                   ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Rua do Dr. Ricardo Jorge  | 817,85m    | 0,15kWh    
-Total Distance: 4808,57m | Total Energy: 0,89kWh | Total Time: 576s 
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Clerigos (41,14582,-8,61398)                         | Rua do Dr. Ricardo Jorge     | 817,85m    | 0,15kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Client - Bolhão (41,14871,-8,60746)                           | Rua de Sá da Bandeira        | 633,49m    | 0,11kWh    
+Client - Bolhão (41,14871,-8,60746)                     ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | Rua de São João              | 952,94m    | 0,19kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Client - Bolhão (41,14871,-8,60746)                           | Rua de São João              | 952,94m    | 0,19kWh    
+Client - Bolhão (41,14871,-8,60746)                     ->     Client - Clerigos (41,14582,-8,61398)                         | Rua de Sá da Bandeira        | 633,49m    | 0,11kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Rua do Dr. Ricardo Jorge     | 817,85m    | 0,15kWh    
+Total Distance: 4808,57m | Total Energy: 0,89kWh | Total Time: 00h 09m 36s 0,89 
  
 The scooter must have at least 0,89 kWh to start the delivery. 

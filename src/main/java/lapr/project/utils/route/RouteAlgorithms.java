@@ -25,7 +25,7 @@ public class RouteAlgorithms {
 
 
 
-   public static List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
+   public static List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy){
 
         if (mainGraph == null || origin == null || destination == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
@@ -88,7 +88,9 @@ public class RouteAlgorithms {
                     Route newRoute = new Route(route);
                     Pathway p = parse(graph, graph.getEdge(vertex, adjVertex).getElement());
                     newRoute.addPath(p);
-                    bst.insert(newRoute);
+                    if(newRoute.getMinimumEnergy()<= maxEnergy){
+                        bst.insert(newRoute);
+                    }
                 }
             }
 
@@ -133,7 +135,7 @@ public class RouteAlgorithms {
         // Check if there any vertexes to visit
         if (toVisit.isEmpty()) {
             
-            return RouteAlgorithms.kBestRoutes(graph, origin, destination, k);
+            return RouteAlgorithms.kBestRoutes(graph, origin, destination, k, maxEnergy);
         }
         if (toVisit.contains(origin) || toVisit.contains(destination)) {
             throw new IllegalArgumentException("Invalid intermediate vertexes!");
@@ -141,7 +143,7 @@ public class RouteAlgorithms {
 
         // Fill a map with all the possible pairs of vertexes and their k shortest routes
         Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map = new HashMap<>();
-        fillRouteMap(graph, toVisit, origin, destination, k, map);
+        fillRouteMap(graph, toVisit, origin, destination, k, map, maxEnergy);
 
         // Check if only 1 permutation is possible
         if (toVisit.size() == 1) {
@@ -185,13 +187,13 @@ public class RouteAlgorithms {
         return (result.isEmpty()) ? null : result;
     }
 
-    private static <V> void fillRouteMap(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map) {
+    private static <V> void fillRouteMap(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map, double maxEnergy) {
         for (GeographicalPoint vertex : toVisit) {
-            map.put(new Pair<>(origin, vertex), RouteAlgorithms.kBestRoutes(graph, origin, vertex, k));
-            map.put(new Pair<>(vertex, destination), RouteAlgorithms.kBestRoutes(graph, vertex, destination, k));
+            map.put(new Pair<>(origin, vertex), RouteAlgorithms.kBestRoutes(graph, origin, vertex, k, maxEnergy));
+            map.put(new Pair<>(vertex, destination), RouteAlgorithms.kBestRoutes(graph, vertex, destination, k, maxEnergy));
             for (GeographicalPoint otherVertex : toVisit) {
                 if (!vertex.equals(otherVertex)) {
-                    map.put(new Pair<>(vertex, otherVertex), RouteAlgorithms.kBestRoutes(graph, vertex, otherVertex, k));
+                    map.put(new Pair<>(vertex, otherVertex), RouteAlgorithms.kBestRoutes(graph, vertex, otherVertex, k, maxEnergy));
                 }
             }
         }

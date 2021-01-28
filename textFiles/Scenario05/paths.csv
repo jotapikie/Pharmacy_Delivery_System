@@ -1,0 +1,28 @@
+#lines starting with # should be ignored
+#Column description
+#origin_latitude 
+#origin_longitude
+#destination_latitude
+#destinatio_longitude
+#path_category (Asphalt, Sidewalk, Offroad or - if it is a air path)
+#wind_x value
+#wind_y value
+#wind_z value
+#vehicle_category (Drone or Scooter)
+#street that conects the 2 points (or - if it is a air path)
+origin_latitude;origin_longitude;destination_latitude;destination_longitude;path_category;wind_x;wind_y;wind_z;vehicle_category;street
+41.15227;-8.60929;41.14871;-8.60746;Asphalt;1;1;1;Scooter;Rua Formosa
+41.15227;-8.60929;41.14723;-8.60657;Asphalt;1;1;1;Scooter;Rua da Alegria
+41.14871;-8.60746;41.14723;-8.60657;Asphalt;1;1;1;Scooter;R. de Passos Manuel
+41.14723;-8.60657;41.14331;-8.60914;Asphalt;1;1;1;Scooter;Av. Dom Afonso Henriques
+41.14723;-8.60657;41.14582;-8.61398;Asphalt;1;1;1;Scooter;R. de Passos Manuel
+41.14331;-8.60914;41.14582;-8.61398;Asphalt;1;1;1;Scooter;Av. Dom Afonso Henriques
+41.14331;-8.60914;41.14063;-8.61118;Asphalt;1;1;1;Scooter;R. de Mouzinho da Silveira
+41.14063;-8.61118;41.14582;-8.61398;Asphalt;1;1;1;Scooter;Rua das Taipas
+41.14582;-8.61398;41.16875;-8.68995;Asphalt;1;1;1;Scooter;Rua do Ouro
+41.14582;-8.61398;41.16766;-8.68785;Asphalt;1;1;1;Scooter;Rua de Oliveira Monteiro
+41.16875;-8.68995;41.16766;-8.68785;Asphalt;1;1;1;Scooter;Estrada da Circunvalação
+41.16875;-8.68995;41.15227;-8.60929;Asphalt;1;1;1;Scooter;Avenida da Boavista
+41.16766;-8.68785;41.15227;-8.60929;Asphalt;1;1;1;Scooter;Estrada da Circunvalação
+41.15227;-8.60929;41.14331;-8.60914;-;1;1;1;Drone;-
+41.14331;-8.60914;41.15227;-8.60929;-;1;1;1;Drone;-

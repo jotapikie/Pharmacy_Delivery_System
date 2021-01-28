@@ -59,7 +59,7 @@ public class Constants {
     public static double DRONE_MAX_WEIGHT = 7;
     public static int DRONE_MOTOR = 12;
     public static double DRONE_MAX_BATTERY = 1.5;
-    public static double DRONE__HORIZONTAL_SPEED = 16;
+    public static double DRONE_HORIZONTAL_SPEED = 16;
     public static double DRONE_VERTICAL_SPEED = 6;
     
     public static double DRONE_ALTITUDE = 150;

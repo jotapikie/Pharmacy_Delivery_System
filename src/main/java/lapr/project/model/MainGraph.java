@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
+import lapr.project.utils.Constants;
+import lapr.project.utils.Utils;
 import lapr.project.utils.graph.Edge;
 import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
@@ -127,7 +129,9 @@ public class MainGraph {
             throw new IllegalArgumentException("Invalid algorithm arguments!");
         }
         try {
-            return RouteAlgorithms.kBestRoutes(toUse, origin,  destination, k);
+            List<Route> routes = RouteAlgorithms.kBestRoutes(toUse, origin,  destination, k, Double.MAX_VALUE);
+            saveRouteInformation(routes, null);
+            return routes;
         } catch (NullPointerException e) {
             throw new IllegalArgumentException("Invalid graph vertexes!");
         }
@@ -149,11 +153,7 @@ public class MainGraph {
         }
         try {
             List<Route> routes =  RouteAlgorithms.kBestRoutes(toUse, toVisit, origin,destination, k, Double.MAX_VALUE);
-            for(Route r: routes){
-                for(GeographicalPoint p : toVisit){
-                    r.addStopPoint(p);
-                }
-            }
+            saveRouteInformation(routes, toVisit);
             return routes;
         } catch (NullPointerException e) {
             throw new IllegalArgumentException("Invalid graph vertexes!");
@@ -166,17 +166,31 @@ public class MainGraph {
         }
         try {
             List<Route> routes = RouteAlgorithms.kBestRoutes(toUse, toVisit, origin, destination, k, maxBattery);
-            for(Route r: routes){
-                for(GeographicalPoint p : toVisit){
-                    r.addStopPoint(p);
-                }
-            }
+            saveRouteInformation(routes, toVisit);
             return routes;
         } catch (NullPointerException e) {
             throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
         }
     }
     
+   private void saveRouteInformation(List<Route> routes, List<GeographicalPoint> toVisit){
+        double hSpeed = 0;
+        double vSpeed = 0;
+        if(toUse instanceof LandGraph){
+            hSpeed = Utils.kmhTOms(Constants.SCOOTER_SPEED);
+        }else{
+            hSpeed = Constants.DRONE_HORIZONTAL_SPEED;
+            vSpeed = Constants.DRONE_VERTICAL_SPEED;
+        }
+        boolean stop = toVisit != null;
+        for(Route r : routes){
+            if(stop){
+            r.addStopPoints(toVisit);
+            }
+            r.setAverageSpeed(hSpeed);
+            r.setVerticalSpeed(vSpeed);
+        }
+   }
     
 
     /**

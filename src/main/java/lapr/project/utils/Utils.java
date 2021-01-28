@@ -219,4 +219,8 @@ public class Utils {
         String sSe = second<0 ? "":String.format("%02ds", second);
         return String.format("%s %s %s",sHo, sMi, sSe);
     }
+    
+    public static double kmhTOms(double distance){
+        return distance * 0.277777778;
+    }
 }

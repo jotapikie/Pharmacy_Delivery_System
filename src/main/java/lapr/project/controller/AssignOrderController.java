@@ -108,6 +108,8 @@ public class AssignOrderController {
             clients.add(o.getAddress().getGeographicalPoint());
         }
         
+   
+        
         try{
             
             land = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 10, Constants.SCOOTER_MAX_BATTERY);

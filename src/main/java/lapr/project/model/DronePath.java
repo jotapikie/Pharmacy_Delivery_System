@@ -43,7 +43,7 @@ public class DronePath extends Pathway{
     }
     
     private void calculateTimeCost() {
-        timeCost = (long) (super.getDistance() / Constants.DRONE__HORIZONTAL_SPEED);
+        timeCost = (long) (super.getDistance() / Constants.DRONE_HORIZONTAL_SPEED);
     }
 
     @Override

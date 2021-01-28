@@ -123,8 +123,12 @@ public class StartDeliveryRunController {
         }
         List<Route> routes = new ArrayList<>();
         try{
+            
             routes = graph.kBestPaths(points, pharmacyAdd, pharmacyAdd, 1, scooter.getMaxBat());
-            r = routes.get(0);
+            if(!routes.isEmpty()){
+               r = routes.get(0); 
+            }
+            
         }catch(IllegalArgumentException e){
             r = null;
         }catch(NullPointerException e){

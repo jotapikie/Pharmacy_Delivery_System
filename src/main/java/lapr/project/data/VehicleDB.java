@@ -141,7 +141,7 @@ public class VehicleDB extends DataHandler {
             callStmt.execute();
                 ResultSet rSet = (ResultSet) callStmt.getObject(1);
                 if (rSet.next()) {
-                    return new EScooter(rSet.getInt(1), State.valueOf(rSet.getString(3)),rSet.getInt(4), rSet.getInt(5));
+                    return new EScooter(rSet.getInt(1), State.valueOf(rSet.getString(3)),rSet.getDouble(4), rSet.getDouble(5));
                 }
             }
 
@@ -267,7 +267,7 @@ public class VehicleDB extends DataHandler {
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                EScooter sc = new EScooter(rs.getInt(1), State.fromString(rs.getString(2)), rs.getInt(3), rs.getInt(4));
+                EScooter sc = new EScooter(rs.getInt(1), State.fromString(rs.getString(2)), rs.getDouble(3), rs.getDouble(4));
                 listScooters.add(sc);
             }
         }

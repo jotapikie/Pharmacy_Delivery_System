@@ -48,6 +48,10 @@ public class Route implements Comparable<Route>{
     
     private double energyToReachChargingPoint;
     
+    private double averageHorizontalSpeed;
+    
+    private double averageVerticalSpeed;
+    
     
     private List<GeographicalPoint> stopPoints;
 
@@ -176,6 +180,35 @@ public class Route implements Comparable<Route>{
         return false;
     }
     
+    public boolean addStopPoints(List<GeographicalPoint> stop){
+        int i = 0;
+        for(Pathway p : paths){
+            for(GeographicalPoint stopP : stop){
+               if(p.getOriginPoint().equals(stopP) || p.getDestinationPoint().equals(stopP)){
+                    stopPoints.add(stopP);
+                    i++;
+                }
+            }
+        }
+        return i == stop.size();
+    }
+
+    public void setAverageSpeed(double averageSpeed) {
+        if(averageSpeed < 0){
+            throw new IllegalArgumentException("Speed must be a positive number.");
+        }
+        this.averageHorizontalSpeed = averageSpeed;
+    }
+    
+    public void setVerticalSpeed(double averageSpeed){
+        if(averageSpeed < 0){
+            throw new IllegalArgumentException("Speed must be a positive number.");
+        }
+        this.averageVerticalSpeed= averageSpeed;
+    }
+    
+    
+    
     
 
   
@@ -295,6 +328,7 @@ public class Route implements Comparable<Route>{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Iterator<Pathway> it = paths.iterator();
+        
         for(int i = 0; i < paths.size(); i++){
             Pathway p = it.next();
             GeographicalPoint or = p.getOriginPoint();
@@ -303,11 +337,11 @@ public class Route implements Comparable<Route>{
             String sDest;
             if(i == 0){
                 sOr = String.format("%s (%.5f,%.5f) [Origin]",or.getDescription(), or.getLatitude(), or.getLongitude());
-                sDest = String.format("%s (%.5f,%.5f)",dest.getDescription(), dest.getLatitude(), dest.getLongitude());
+                sDest = String.format("%s (%.5f,%.5f) %s",dest.getDescription(), dest.getLatitude(), dest.getLongitude(),(dest.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":stopPoints.contains(dest) ? "[Order]": ""));
                 
             }else{
                 if(i == paths.size() -1){
-                    sOr = String.format("%s (%.5f,%.5f)",or.getDescription(), or.getLatitude(),or.getLongitude());
+                    sOr = String.format("%s (%.5f,%.5f) %s",or.getDescription(), or.getLatitude(),or.getLongitude(),(or.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]": stopPoints.contains(or) ? "[Order]":""));
                     sDest = String.format("%s (%.5f,%.5f) [Destination]",dest.getDescription(), dest.getLatitude(), dest.getLongitude());
                     
                 }else{
@@ -322,7 +356,14 @@ public class Route implements Comparable<Route>{
         }
         String sDist = String.format("%.2fm",totalDistance);
         String sEner = String.format("%.2fkWh", totalEnergy);
-        sb.append(String.format("Total Distance: %s | Total Energy: %s | Total Time: %s %n", sDist, sEner, Utils.secondsToTime(totalTime)));
+        
+        String hSpeed = String.format("| %s: %.2f m/s", averageVerticalSpeed== 0 ? "Average Speed": "Average Horizontal Speed",averageHorizontalSpeed);
+        String vSpeed = String.format("| Average Vertical Speed: %.2f m/s", averageVerticalSpeed);
+        if(averageVerticalSpeed == 0){
+            vSpeed = null;
+        }
+        
+        sb.append(String.format("Total Distance: %s | Total Energy: %s | Total Time: %s %s %s%n", sDist, sEner, Utils.secondsToTime(totalTime), hSpeed, vSpeed == null ? "": vSpeed));
         return sb.toString();
     }
     

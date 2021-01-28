@@ -84,7 +84,7 @@ public final class ScooterPath extends Pathway{
     }
     
    private void calculateTimeCost() {
-        timeCost = (long) (super.getDistance() / (Constants.SCOOTER_SPEED * 0.277777778));
+        timeCost = (long) (super.getDistance() / (Utils.kmhTOms(Constants.SCOOTER_SPEED)));
     }
 
     /**

@@ -1,0 +1,7 @@
+#lines starting with # should be ignored
+#Column description
+#id_pharmacy who will assign the orders
+#category to be assigned (Drone or Scooter)
+#orders selected (<Order>!<Order>!...)
+id_pharmacy;category;orders
+1;Scooter;1
