@@ -91,8 +91,8 @@ CREATE TABLE vehicle(
     nr INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_vehicle_nr PRIMARY KEY,
     weight NUMERIC(5,2) NOT NULL,
     status varchar(255) NOT NULL,
-    max_battery int NOT NULL,
-    current_battery int NOT NULL,
+    max_battery NUMERIC(4,2) NOT NULL,
+    current_battery NUMERIC(4,2) NOT NULL,
     motor int NOT NULL,
     max_weight NUMERIC(4,2) NOT NULL,
     pharmacy_id int NOT NULL,
@@ -172,8 +172,8 @@ CREATE TABLE pharmacy_product(
 CREATE TABLE delivery_run(
     delivery_run_id INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_delivery_run_id PRIMARY KEY,
 
-    distance NUMBER(6,2),
-    energy NUMBER(4,2),
+    distance NUMERIC(8,2),
+    energy NUMERIC(5,3),
     start_date timestamp,
     end_date timestamp NULL,
     courier_email varchar(255),

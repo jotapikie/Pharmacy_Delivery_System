@@ -117,18 +117,25 @@ public class StartDeliveryRunController {
         double totalWeight = deliveryWeight + courierWeight + Constants.SCOOTER_WEIGHT;
         LandGraph graph = new LandGraph(totalWeight);
         GeographicalPoint pharmacyAdd = gpdb.getGeographicalPointByPharmacy(idPharmacy);
-        List<GeographicalPoint> points = gpdb.getPointsByDeliveryRun(dr.getId());
+        List<GeographicalPoint> points = new ArrayList<>();
+        for(Order o : dr.getOrders()){
+            points.add(o.getAddress().getGeographicalPoint());
+        }
         List<Route> routes = new ArrayList<>();
         try{
+            
             routes = graph.kBestPaths(points, pharmacyAdd, pharmacyAdd, 1, scooter.getMaxBat());
-            r = routes.get(0);
+            if(!routes.isEmpty()){
+               r = routes.get(0); 
+            }
+            
         }catch(IllegalArgumentException e){
             r = null;
         }catch(NullPointerException e){
             r = null;
         }
         
-        boolean res = drdb.startDelivery(idPharmacy, email, r, scooter.getId());
+        boolean res = drdb.startDelivery(dr.getId(), email, r, scooter.getId());
         
         if(res){
             List<Client> clients = cdb.getClientsByDeliveryRun(dr.getId());
@@ -145,8 +152,8 @@ public class StartDeliveryRunController {
     }
     
     public double getEnergyToStart(){
-        if(r!= null && !r.getChargingPoints().isEmpty()){
-            GeographicalPoint chargingStation = r.getChargingPoints().get(0);
+        if(r!= null && !r.getStopPoints().isEmpty()){
+            GeographicalPoint chargingStation = r.getStopPoints().get(0);
             double energy = 0;
             for(Pathway p : r.getPaths()){
                 energy = energy + p.getCost();

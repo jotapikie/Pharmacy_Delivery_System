@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import static jdk.nashorn.internal.runtime.Debug.id;
 
 import lapr.project.model.*;
 import lapr.project.utils.Constants;
@@ -49,7 +50,9 @@ public class OrderDB extends DataHandler{
                 o.setProducts(products);
                 listOrders.add(o);
             }
+            verifyAssociatedOrders(idPhamarcy, status, listOrders);
         }
+        
         return listOrders;
     }
 
@@ -64,12 +67,16 @@ public class OrderDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10)), rs.getString(11), rs.getInt(13), rs.getString(12)));
+                o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getDouble(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10)), rs.getString(11), rs.getInt(13), rs.getString(12)));
                 HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
                 o.setProducts(products);
                 return o;
             }
-            throw new IllegalArgumentException("Product does not exist");
+            Order res = getAssociatedOrder(id);
+            if(res == null){
+                throw new IllegalArgumentException("No order with that id.");
+            }
+            return res;
         }
     }
 
@@ -187,14 +194,11 @@ public class OrderDB extends DataHandler{
             callStmt.execute();
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
-                Order o = new Order();
-                o.setId(rs.getInt(1));
-                o.setBeginDate(rs.getTimestamp(2));
-                o.setStatus(rs.getString(3));
-                o.setPrice(rs.getDouble(4));
+                Order o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getFloat(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10)),rs.getString(11), rs.getInt(13), rs.getString(12)));
                 listOrders.add(o);
             }
         }
+        verifyAssociated(idDelivery, listOrders);
         return listOrders;
     }
 
@@ -224,5 +228,59 @@ public class OrderDB extends DataHandler{
             return rows.length;
     }
 }
+
+    private Order getAssociatedOrder(int id) throws SQLException {
+         if (id < 1) {
+            throw new IllegalArgumentException("Invalid ID!");
+        }
+        Order o = null;
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetAssociatedOrder(?)}")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setInt(2, id);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getDouble(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10)), rs.getString(11), rs.getInt(13), rs.getString(12)));
+                HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
+                o.setProducts(products);
+                return o;
+            }
+    }
+        return null;
+    }
+
+    private void verifyAssociatedOrders(int idPhamarcy, String status, List<Order> listOrders) throws SQLException {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetAssociatedOrderByStatus(?,?) }")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setInt(2, idPhamarcy);
+            callStmt.setString(3, status);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                Order o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getDouble(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10)), rs.getString(11), rs.getInt(13), rs.getString(12)));
+                HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
+                o.setProducts(products);
+                listOrders.add(o);
+            }
+        }
+        
+        
+    }
+
+    private void verifyAssociated(int idDelivery, List<Order> listOrders) throws SQLException {
+         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetAssociatedOrderByRun(?) }")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setInt(2, idDelivery);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                Order o = new Order(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getString(4), rs.getDouble(5), new Address(rs.getString(6),new GeographicalPoint(rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10)), rs.getString(11), rs.getInt(13), rs.getString(12)));
+                HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
+                o.setProducts(products);
+                listOrders.add(o);
+            }
+        }
+    }
+
     
 }

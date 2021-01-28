@@ -25,7 +25,7 @@ public class RouteAlgorithms {
 
 
 
-   public static List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k){
+   public static List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy){
 
         if (mainGraph == null || origin == null || destination == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
@@ -39,6 +39,7 @@ public class RouteAlgorithms {
         zeroVertexCounters(graph);
         List<Route> result = new ArrayList<>();
         BST<Route> bst = new BST<>();
+        
 
         // Insert first routes into the BST, from origin to each neighbour 
         boolean flag = true;
@@ -51,8 +52,13 @@ public class RouteAlgorithms {
             }
             bst.insert(new Route(edge));
         }
+        
+//        for(GeographicalPoint p : graph.vertices()){
+//            System.out.println(p.getDescription()+", "+p.getCounter()+", "+p.hashCode());
+//        }
         // While there are routes in BST
         while (!bst.isEmpty()) {
+            
 
             // Get the shortest route in BST
             Route route = bst.smallestElement();
@@ -66,6 +72,8 @@ public class RouteAlgorithms {
             bst.remove(route);
             GeographicalPoint vertex = route.getDestination();
             vertex.incrementCounter();
+            
+
 
             // Check if route is a wanted route
             if (vertex.equals(destination)) {
@@ -78,10 +86,14 @@ public class RouteAlgorithms {
                 // Concatenate each neighbour to route and insert each new route into BST
                 for (GeographicalPoint adjVertex : graph.adjVertices(vertex)) {
                     Route newRoute = new Route(route);
-                    newRoute.addPath(graph.getEdge(vertex, adjVertex).getElement());
-                    bst.insert(newRoute);
+                    Pathway p = parse(graph, graph.getEdge(vertex, adjVertex).getElement());
+                    newRoute.addPath(p);
+                    if(newRoute.getMinimumEnergy()<= maxEnergy){
+                        bst.insert(newRoute);
+                    }
                 }
             }
+
         }
         return (result.isEmpty()) ? null : result;
     }
@@ -91,16 +103,30 @@ public class RouteAlgorithms {
    
    
    
-    private static <V> void  zeroVertexCounters(Graph<GeographicalPoint, V> graph) {
+    private static void zeroVertexCounters(Graph<GeographicalPoint, Pathway> graph) {
 
         for (GeographicalPoint vertex : graph.vertices()) {
             vertex.resetCounter();
         }
+      
+    }
+    
+    private static Pathway parse(Graph<GeographicalPoint, Pathway> graph, Pathway p){
+        GeographicalPoint pOr = p.getOriginPoint();
+        GeographicalPoint pDest = p.getDestinationPoint();
+        for(GeographicalPoint point : graph.vertices()){
+            if(pOr.equals(point)){
+                p.setOriginPoint(point);
+            }else if(pDest.equals(point)){
+                p.setDestinationPoint(point);
+            }
+        }
+        return p;
     }
     
 
 
-    public static <V> List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy) {
+    public static List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy) {
         
         if (graph == null || origin == null || destination == null || toVisit == null || k <= 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
@@ -109,7 +135,7 @@ public class RouteAlgorithms {
         // Check if there any vertexes to visit
         if (toVisit.isEmpty()) {
             
-            return RouteAlgorithms.kBestRoutes(graph, origin, destination, k);
+            return RouteAlgorithms.kBestRoutes(graph, origin, destination, k, maxEnergy);
         }
         if (toVisit.contains(origin) || toVisit.contains(destination)) {
             throw new IllegalArgumentException("Invalid intermediate vertexes!");
@@ -117,7 +143,7 @@ public class RouteAlgorithms {
 
         // Fill a map with all the possible pairs of vertexes and their k shortest routes
         Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map = new HashMap<>();
-        fillRouteMap(graph, toVisit, origin, destination, k, map);
+        fillRouteMap(graph, toVisit, origin, destination, k, map, maxEnergy);
 
         // Check if only 1 permutation is possible
         if (toVisit.size() == 1) {
@@ -161,13 +187,13 @@ public class RouteAlgorithms {
         return (result.isEmpty()) ? null : result;
     }
 
-    private static <V> void fillRouteMap(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map) {
+    private static <V> void fillRouteMap(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map, double maxEnergy) {
         for (GeographicalPoint vertex : toVisit) {
-            map.put(new Pair<>(origin, vertex), RouteAlgorithms.kBestRoutes(graph, origin, vertex, k));
-            map.put(new Pair<>(vertex, destination), RouteAlgorithms.kBestRoutes(graph, vertex, destination, k));
+            map.put(new Pair<>(origin, vertex), RouteAlgorithms.kBestRoutes(graph, origin, vertex, k, maxEnergy));
+            map.put(new Pair<>(vertex, destination), RouteAlgorithms.kBestRoutes(graph, vertex, destination, k, maxEnergy));
             for (GeographicalPoint otherVertex : toVisit) {
                 if (!vertex.equals(otherVertex)) {
-                    map.put(new Pair<>(vertex, otherVertex), RouteAlgorithms.kBestRoutes(graph, vertex, otherVertex, k));
+                    map.put(new Pair<>(vertex, otherVertex), RouteAlgorithms.kBestRoutes(graph, vertex, otherVertex, k, maxEnergy));
                 }
             }
         }

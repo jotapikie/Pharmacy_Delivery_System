@@ -139,6 +139,11 @@ public class Pathway implements PathInterface{
     public double getElevationDif(){
         return destinationPoint.getElevation() - originPoint.getElevation();
     }
+    
+    @Override
+    public long getTime(){
+        return 0;
+    }
 
     /**
      * method to set the final location of a path
@@ -265,6 +270,7 @@ public class Pathway implements PathInterface{
         }
         return Objects.equals(this.destinationPoint, other.destinationPoint);
     }
+
     
     
     

@@ -96,7 +96,7 @@ public class ScooterPathTest {
      */
     @Test
     public void testHashCode() {
-        assertTrue(test.hashCode() > 0);
+        assertTrue(test.hashCode() != 0);
     }
     
     @Test

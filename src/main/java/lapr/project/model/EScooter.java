@@ -27,7 +27,7 @@ public class EScooter extends Vehicle{
      * @param maxBat
      * @param actualBat
      */
-    public EScooter(int id, State state, int maxBat, int actualBat) {
+    public EScooter(int id, State state, double maxBat, double actualBat) {
         super(id, weight, state, maxBat, actualBat, motor, Constants.SCOOTER_MAX_WEIGHT);
         setState(state);
     }

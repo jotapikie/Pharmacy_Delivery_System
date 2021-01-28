@@ -71,7 +71,7 @@ public class NewVehicleControllerTest {
      */
     @Test
     public void testNewEScooter() {
-        assertEquals(scooter.toString(), controller.newEScooter(50));
+        assertEquals(scooter.toString(), controller.newEScooter(50,50));
     }
 
     /**
@@ -79,7 +79,7 @@ public class NewVehicleControllerTest {
      */
     @Test
     public void testNewDrone() {
-        assertEquals(drone.toString(), controller.newDrone(40));
+        assertEquals(drone.toString(), controller.newDrone(40,40));
     }
 
 
@@ -91,10 +91,10 @@ public class NewVehicleControllerTest {
     public void testAddVehicleToQueue() {
         assertFalse(controller.addVehicleToQueue());
         
-        controller.newEScooter(50);
+        controller.newEScooter(50,50);
         assertTrue(controller.addVehicleToQueue());
         
-        controller.newEScooter(50);
+        controller.newEScooter(50,50);
         assertFalse(controller.addVehicleToQueue());
         
     }
@@ -106,7 +106,7 @@ public class NewVehicleControllerTest {
     public void testRegistVehicles() throws Exception {
             assertEquals(0, controller.registerVehicles());
             
-            controller.newEScooter(50);
+            controller.newEScooter(50,50);
             controller.addVehicleToQueue();
             vehicles.add(scooter);
             when(vdb.save(vehicles, idPharmacy)).thenReturn(1);

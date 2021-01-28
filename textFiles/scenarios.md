@@ -39,16 +39,29 @@ The order is valid
 ### 3.2 Expected Result
 The delivery run should be assigned to Trindade, and it must re-order the products missing from Castelo do Queijo Pharmacy.
 A delivery note should be impressed.
+The route should be Trindade --> C. do Queijo --> Trindade
 
 ## 4. Scenario 04
 
 ### 4.1 Description
-The client from Cais da Ribeira and Bolhão make an order and it is assigned to Pharmacy Trindade.
-Pharmacy has enough stock
+The client from Cais da Ribeira and Bolhão make an order and it is assigned to Pharmacy Trindade (nearest pharmacy).
+Pharmacy has enough stock.
 ![scenario04.png](scenario04.png)
 
 ## Expected Result
 The orders must be asssigned to Pharmacy of Trindade.
-There is no route.
+The route suggested should be Trindade --> Clerigo --> Bolhão --> Cais --> Majestic --> Trindade
+
+## 5. Scenario 05
+
+### 5.1 Description
+The client from Sé make and order that is assigned to Pharmacy Trindade (nearest pharmacy).
+Pharmacy has enough stock.
+The courier picks a scooter that has less energy capacity then the average.
+The scooter will need to charge to have enough energy to do the delivery
+![scenario05.png](scenario05.png)
+
+### 5.2 Expected result
+The suggested route should be Trindade --> Majestic --> Sé --> Clérigos --> Castelo do Queijo (to charge) --> Trindade.
 
 

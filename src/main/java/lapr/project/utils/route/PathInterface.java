@@ -17,6 +17,7 @@ public interface PathInterface {
     public GeographicalPoint getDestinationPoint();
     public double getDistance();
     public double getCost();
+    public long getTime();
     public double getElevationDif();
     
     

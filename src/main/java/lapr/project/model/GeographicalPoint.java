@@ -18,7 +18,6 @@ public class GeographicalPoint implements PointInterface{
     private double latitude;
     private double elevation;
     private String description;
-    
     private int counter;
 
     public GeographicalPoint(double longitude, double latitude, double elevation) {
@@ -100,29 +99,21 @@ public class GeographicalPoint implements PointInterface{
         if (getClass() != obj.getClass()) {
             return false;
         }
+        
+        
         GeographicalPoint other = (GeographicalPoint) obj;
+//        if(!description.equalsIgnoreCase(other.description)){
+//            return false;
+//        }
         return this.longitude== other.getLongitude() && this.latitude==other.getLatitude() && this.elevation==other.getElevation();
     }
 
     @Override
     public int hashCode() {
-        return (int) ((longitude*3)+(latitude*2)+(elevation));
+        return (int) ((longitude*3)+(latitude*2)+(elevation)+description.hashCode());
     }
 
-   
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-
-    @Override
+   @Override
     public int getCounter() {
         return counter;
     }

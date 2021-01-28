@@ -17,11 +17,14 @@ public class DronePath extends Pathway{
     private double totalWeight;
     
     private double energyCost;
+    
+    private long timeCost;
 
     public DronePath(double totalWeight, GeographicalPoint origLocation, GeographicalPoint destLocation, double distance, Wind wind) {
         super(origLocation, destLocation, null, distance, wind, null, VehicleCategory.DRONE);
         setTotalWeight(totalWeight);
         calculateEnegyCost();
+        calculateTimeCost();
     }
 
     public double getTotalWeight() {
@@ -38,11 +41,24 @@ public class DronePath extends Pathway{
     private void calculateEnegyCost() {
         energyCost = Utils.pathEnergyCostDrone(totalWeight, Drone.getAeroCoef(), Drone.getPowerTransfer(), Drone.getLiftDrag(), Drone.getEletronicalConsumer(), Drone.getFrontalArea(), Drone.getTopArea(), Constants.DRONE_AVERAGE_SPEED, super.getWind(),Constants.DRONE_ALTITUDE-super.getOriginPoint().getElevation(),Constants.DRONE_ALTITUDE-super.getDestinationPoint().getElevation(),super.getDistance());
     }
+    
+    private void calculateTimeCost() {
+        timeCost = (long) (super.getDistance() / Constants.DRONE_HORIZONTAL_SPEED);
+    }
 
     @Override
     public double getCost() {
         return energyCost;
     }
+
+    @Override
+    public long getTime() {
+        return timeCost;
+    }
+    
+    
+
+
     
     
     

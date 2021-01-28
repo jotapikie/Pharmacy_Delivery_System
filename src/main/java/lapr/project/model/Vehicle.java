@@ -16,15 +16,15 @@ public abstract class Vehicle {
     private int id;
     private double weight;
     private State state;
-    private int maxBat;
-    private int actualBat;
+    private double maxBat;
+    private double actualBat;
     private int motor;
     private double maxWeight;
 
     public Vehicle() {
     }
 
-    public Vehicle(int id, double weight, State state, int maxBat, int actualBat, int motor, double maxWeight) {
+    public Vehicle(int id, double weight, State state, double maxBat, double actualBat, int motor, double maxWeight) {
         setId(id);
         setWeight(weight);
         setState(state);
@@ -78,7 +78,7 @@ public abstract class Vehicle {
      * returns the max bat of the scooter
      * @return
      */
-    public int getMaxBat() {
+    public double getMaxBat() {
         return maxBat;
     }
 
@@ -86,7 +86,7 @@ public abstract class Vehicle {
      * sets the max battery of a scooter
      * @param maxBat
      */
-    public void setMaxBat(int maxBat) {
+    public void setMaxBat(double maxBat) {
         if (maxBat<=0) throw new IllegalArgumentException("Maximum battery cannot be negative");
         this.maxBat = maxBat;
     }
@@ -103,7 +103,7 @@ public abstract class Vehicle {
      * sets the max battery of a scooter
      * @param currentBat
      */
-    public void setActualBat(int currentBat) {
+    public void setActualBat(double currentBat) {
         if (!(currentBat>=0&&currentBat<=maxBat)) throw new IllegalArgumentException("Current battery cannot be negative and greater than maxBattery");
         this.actualBat = currentBat;
     }

@@ -7,6 +7,7 @@ package lapr.project.ui;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import lapr.project.controller.AddPathController;
@@ -18,9 +19,7 @@ import lapr.project.model.StreetType;
 import lapr.project.model.VehicleCategory;
 import lapr.project.model.Wind;
 import static lapr.project.ui.UtilsUI.header;
-import lapr.project.utils.graph.Edge;
-import lapr.project.utils.graph.Graph;
-import lapr.project.utils.route.Route;
+
 
 
 /**

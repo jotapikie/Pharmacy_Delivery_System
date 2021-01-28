@@ -23,9 +23,14 @@ public final class ScooterPath extends Pathway{
 
 
     /**
-     * Energy cost of the path in Wh.
+     * Energy cost of the path in kWh.
      */
     private double energyCost;
+    
+    
+    private long timeCost;
+    
+    
 
     /**
      * Constructs an instance of PathEnergy, a path that calculates the cost
@@ -43,6 +48,7 @@ public final class ScooterPath extends Pathway{
         super(origPoint, destPoint, type, distance, wind, street, VehicleCategory.SCOOTER);
         setTotalWeight(totalWeight);
         calculateEnergyCost();
+        calculateTimeCost();
     }
 
     /**
@@ -76,6 +82,10 @@ public final class ScooterPath extends Pathway{
     private void calculateEnergyCost() {
         energyCost = Utils.pathEnergyCost(totalWeight, super.getKineticCoef(),Constants.SCOOTER_AERO_COEF, Utils.windToPath(Utils.pathDirection(super.getOriginPoint().getLatitude(),super.getOriginPoint().getLongitude(),super.getDestinationPoint().getLatitude(),super.getDestinationPoint().getLongitude()),super.getWind()), super.getElevationDif(), super.getDistance());
     }
+    
+   private void calculateTimeCost() {
+        timeCost = (long) (super.getDistance() / (Utils.kmhTOms(Constants.SCOOTER_SPEED)));
+    }
 
     /**
      * Returns the cost of the edge.
@@ -87,6 +97,15 @@ public final class ScooterPath extends Pathway{
     public double getCost() {
         return energyCost;
     }
+
+    @Override
+    public long getTime() {
+        return timeCost;
+    }
+
+    
+    
+    
 
     @Override
     public String toString() {
@@ -121,6 +140,8 @@ public final class ScooterPath extends Pathway{
     public int hashCode() {
         return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
     }
+
+
     
     
     

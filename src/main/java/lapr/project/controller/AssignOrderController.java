@@ -19,6 +19,7 @@ import lapr.project.model.DeliveryRun;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
 import lapr.project.model.Product;
+import lapr.project.model.comparator.TimeComparator;
 import lapr.project.utils.route.Route;
 
 public class AssignOrderController {
@@ -30,6 +31,7 @@ public class AssignOrderController {
     private List<Order> orders;
     
     private final List<Order> ordersSelected;
+    private final List<Order> allSelected;
     private Order ord;
     private DeliveryRun run;
     private final Set<DeliveryRun> runs;
@@ -50,6 +52,7 @@ public class AssignOrderController {
         this.pointDB = pointDB;
         this.idPharmacy = idPharmacy;
         this.ordersSelected = new ArrayList<>();
+        this.allSelected = new ArrayList<>();
         this.runs = new HashSet<>();
         this.clients = new ArrayList<>();
         this.totalWeight = 0;
@@ -62,6 +65,7 @@ public class AssignOrderController {
         this.pointDB = new GeographicalPointDB();
         this.idPharmacy = idPharmacy;
         ordersSelected = new ArrayList<>();
+        this.allSelected = new ArrayList<>();
         runs = new HashSet<>();
         clients = new ArrayList<>();
         totalWeight = 0;
@@ -69,8 +73,7 @@ public class AssignOrderController {
     
     public List<String> getAvailableOrders() throws SQLException{
         orders = orderDB.getOrdersByStatus(idPharmacy, "Prepared");
-        orders.removeAll(ordersSelected);
-        ordersSelected.clear();
+        orders.removeAll(allSelected);
         return Utils.listToString(orders);
     }
     
@@ -89,6 +92,8 @@ public class AssignOrderController {
             totalWeight = oldWeight;
             return false;
         }
+        
+        allSelected.add(ord);
         return ordersSelected.add(ord);
         }
         return false;
@@ -102,6 +107,8 @@ public class AssignOrderController {
         for(Order o : ordersSelected){
             clients.add(o.getAddress().getGeographicalPoint());
         }
+        
+   
         
         try{
             
@@ -117,11 +124,8 @@ public class AssignOrderController {
     }
     
     public String getLessTimeLand(){
-        TreeMap<Double, Route> time = Utils.lessTime(land, Constants.SCOOTER_SPEED);
-        if(!time.isEmpty()){
-             return time.firstEntry().getValue().toString();
-        }
-        return null;
+        land.sort(new TimeComparator());
+        return land.get(0).toString();
     }
     
       public String getAirRoute() throws SQLException{
@@ -140,11 +144,7 @@ public class AssignOrderController {
     }
       
       public String getLessTimeAir(){
-        TreeMap<Double, Route> time = Utils.lessTime(air, Constants.DRONE_SPEED);
-        if(!time.isEmpty()){
-             return time.firstEntry().getValue().toString();
-        }
-        return null;
+          return null;
       }
     
     public String getMostEfficient(){
@@ -166,7 +166,7 @@ public class AssignOrderController {
     
     public String newDeliveryRun(String category){
         if(!ordersSelected.isEmpty()){
-            run = runDB.newDeliveryRun(Constants.DEFAULT_ID+runs.size(), category, ordersSelected);
+            run = runDB.newDeliveryRun(Constants.DEFAULT_ID+runs.size(), category, new ArrayList<>(ordersSelected));
             return run==null ? null : run.toString();
         }
         return null;
@@ -174,6 +174,7 @@ public class AssignOrderController {
     
     public boolean addToQueue(){
         if(run != null){
+            ordersSelected.clear();
             return runs.add(run);
         }
         return false;

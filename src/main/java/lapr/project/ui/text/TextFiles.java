@@ -63,8 +63,10 @@ public class TextFiles {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
      
+ 
+
         try{
             System.out.println("Clearing old data...");
             DataHandler dh = new DataHandler();
@@ -92,10 +94,11 @@ public class TextFiles {
     private static void menu() {
         System.out.println("Scenarios:");
         System.out.println();
-        System.out.println("1. Scenario 01");
-        System.out.println("2. Scenario 02");
-        System.out.println("3. Scenario 03");
-        System.out.println("4. Scenario 04");
+        System.out.println("1. Scenario 01 (Pharmacy - Order - Pharmacy)");
+        System.out.println("2. Scenario 02 (Pharmacy - ... - Order - ... - Pharmacy");
+        System.out.println("3. Scenario 03 (Pharmacy [No stock] - Other Pharmacy - Pharmacy)");
+        System.out.println("4. Scenario 04 (Pharmacy - ... - 2 Orders - ... - Pharmacy)");
+        System.out.println("5. Scenario 05 (Pharmacy - ... - Order - ... - Charge - Pharmacy");
         System.out.println();
         String ans = read.nextLine();
         switch(ans){
@@ -110,6 +113,9 @@ public class TextFiles {
                 break;
             case "4":
                 scenario04();
+                break;
+            case "5":
+                scenario05();
                 break;
             default:
                 System.out.println();
@@ -182,6 +188,17 @@ public class TextFiles {
         RUNS = "textFiles/Scenario04/runs.csv";
         DELIVERIES = "textFiles/Scenario04/deliveries.csv";
         RESULT = "textFiles/Scenario04/result.txt";
+    }
+    
+    private static void scenario05() {
+        CARTS = "textFiles/Scenario05/carts.csv";
+        ORDERS = "textFiles/Scenario05/orders.csv";
+        PATHS = "textFiles/Scenario05/paths.csv";
+        STOCK = "textFiles/Scenario05/stock.csv";
+        PREPARED_ORDERS = "textFiles/Scenario05/prep_orders.csv";
+        RUNS = "textFiles/Scenario05/runs.csv";
+        DELIVERIES = "textFiles/Scenario05/deliveries.csv";
+        RESULT = "textFiles/Scenario05/result.txt";
     }
 
 
@@ -270,11 +287,11 @@ public class TextFiles {
             line = vehicle.split(";");
             controller = new NewVehicleController(Integer.parseInt(line[0]));
             if(line[1].equalsIgnoreCase("Scooter")){
-                controller.newEScooter(Integer.parseInt(line[2]));
+                controller.newEScooter(Double.parseDouble(line[2]), Double.parseDouble(line[3]));
                 controller.addVehicleToQueue();
                 vehiclesAdded = vehiclesAdded + controller.registerVehicles();
             }else if(line[1].equalsIgnoreCase("Drone")){
-                controller.newDrone(Integer.parseInt(line[2]));
+                controller.newDrone(Double.parseDouble(line[2]), Double.parseDouble(line[3]));
                 controller.addVehicleToQueue();
                 vehiclesAdded = vehiclesAdded + controller.registerVehicles();
             }
@@ -372,10 +389,10 @@ public class TextFiles {
                     ordersMade++;
                     write(String.format("The order made by client who lives in %s was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getDescription().replace("Client - ", ""), controller.getPharmacyAssigned().getName()));
                     if(controller.otherPharmacy() != null){
-                        write(String.format("Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to %s.%n", controller.otherPharmacy().getName()));
+                        write(String.format("Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to %s.%n %n", controller.otherPharmacy().getName()));
                     }
                 }else{
-                    write(String.format("No pharmacy has enough stock for this order. %n"));
+                    write(String.format("No pharmacy has enough stock for this order. %n %n"));
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -431,14 +448,15 @@ public class TextFiles {
                String air = controller.getAirRoute();
                String tLand = controller.getLessTimeLand();
                String tAir = controller.getLessTimeAir();
+               controller.newDeliveryRun(line[1]);
+               
+               controller.addToQueue();
+               ordersAssigned = ordersAssigned + controller.saveDeliveryRuns();
                write(String.format("Land route (Less time):%n%s%n", tLand==null?"Not found":tLand));
                write(String.format("Air route (Less time):%n%s%n", tAir==null?"Not found":tAir));
                write(String.format("Land route (Less energy):%n%s%n", land==null?"Not found":land));
                write(String.format("Air route (Less energy):%n%s%n", air==null?"Not found":air));
-               write(String.format("Most efficient: %s %n", controller.getMostEfficient()));
-               controller.newDeliveryRun(line[1]);
-               controller.addToQueue();
-               ordersAssigned = ordersAssigned + controller.saveDeliveryRuns();
+               write(String.format("Most efficient: %s %n %n", controller.getMostEfficient()));
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -460,8 +478,10 @@ public class TextFiles {
                controller.selectDeliveryRun(Integer.parseInt(line[3]));
                controller.getAvailableScooters();
                controller.selectScooter(Integer.parseInt(line[4]));
-               controller.startDeliveryRun();
-               startedRuns++;
+               if(controller.startDeliveryRun()){
+                   write(String.format("The courier with email %s started the delivery run #%d and took the scooter #%d. %n %n", line[1],Integer.parseInt(line[3]), Integer.parseInt(line[4])));
+                   startedRuns++;
+               }
                String route = controller.getRoute();
                write(String.format("Route for the delivery #%d: %n%s %n", Integer.parseInt(line[3]),route==null?"Not found":route));
                double ene = controller.getEnergyToStart();
@@ -520,6 +540,8 @@ public class TextFiles {
             }
         }
     }
+
+
 
 
 

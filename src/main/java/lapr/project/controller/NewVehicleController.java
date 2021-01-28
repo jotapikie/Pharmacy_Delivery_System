@@ -36,13 +36,13 @@ public class NewVehicleController {
         this.vehicles = new HashSet<>();
     }
 
-    public String newEScooter(int maxBat) {
-        vehicle = vehicleDB.newEScooter(Constants.DEFAULT_ID+vehicles.size(),State.LOCKED,maxBat,maxBat);
+    public String newEScooter(double maxBat, double currentBat) {
+        vehicle = vehicleDB.newEScooter(Constants.DEFAULT_ID+vehicles.size(),State.LOCKED,maxBat,currentBat);
         return vehicle.toString();
     }
 
-    public String newDrone(int maxBat) {
-        vehicle = vehicleDB.newDrone(Constants.DEFAULT_ID+vehicles.size(),State.LOCKED,maxBat,maxBat);
+    public String newDrone(double maxBat, double currentBat) {
+        vehicle = vehicleDB.newDrone(Constants.DEFAULT_ID+vehicles.size(),State.LOCKED,maxBat,currentBat);
         return vehicle.toString();
     }
 

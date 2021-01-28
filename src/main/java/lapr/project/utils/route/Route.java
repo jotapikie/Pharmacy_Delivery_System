@@ -12,9 +12,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import lapr.project.model.DronePath;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
 import lapr.project.utils.Constants;
+import lapr.project.utils.Utils;
 
 /**
  *
@@ -38,13 +40,20 @@ public class Route implements Comparable<Route>{
     private double totalDistance;
     
     
+    private long totalTime;
+    
+    
     private double minimumEnergy;
     
     
     private double energyToReachChargingPoint;
     
+    private double averageHorizontalSpeed;
     
-    private List<GeographicalPoint> chargingPoints;
+    private double averageVerticalSpeed;
+    
+    
+    private List<GeographicalPoint> stopPoints;
 
     /**
      * Constructs a route that is a copy of another route.
@@ -54,11 +63,12 @@ public class Route implements Comparable<Route>{
     public Route(Route otherRoute) {
         this.totalEnergy = otherRoute.totalEnergy;
         this.totalDistance = otherRoute.totalDistance;
+        this.totalTime = otherRoute.totalTime;
         this.minimumEnergy = otherRoute.minimumEnergy;
         this.paths = new ArrayList<>(otherRoute.paths);
         this.energyToReachChargingPoint = otherRoute.energyToReachChargingPoint;
         this.minimumEnergy = otherRoute.minimumEnergy;
-        this.chargingPoints = otherRoute.chargingPoints;
+        this.stopPoints = otherRoute.stopPoints;
     }
 
     /**
@@ -83,9 +93,10 @@ public class Route implements Comparable<Route>{
         paths.add(startEdge);
         totalEnergy = startEdge.getCost();
         totalDistance = startEdge.getDistance();
+        totalTime = startEdge.getTime();
         energyToReachChargingPoint = totalEnergy;
         minimumEnergy = totalEnergy;
-        chargingPoints = new LinkedList<>();
+        stopPoints = new LinkedList<>();
     }
 
     /**
@@ -114,6 +125,12 @@ public class Route implements Comparable<Route>{
     public double getTotalDistance() {
         return totalDistance;
     }
+
+    public long getTotalTime() {
+        return totalTime;
+    }
+    
+    
 
     public double getMinimumEnergy() {
         return minimumEnergy;
@@ -149,9 +166,48 @@ public class Route implements Comparable<Route>{
         return paths.size() + 1;
     }
 
-    public List<GeographicalPoint> getChargingPoints() {
-        return new LinkedList<>(chargingPoints);
+    public List<GeographicalPoint> getStopPoints() {
+        return new LinkedList<>(stopPoints);
     }
+    
+    public boolean addStopPoint(GeographicalPoint stop){
+        for(Pathway p : paths){
+          if(p.getOriginPoint().equals(stop) || p.getDestinationPoint().equals(stop)){
+              stopPoints.add(stop);
+              return true;
+          }
+        }
+        return false;
+    }
+    
+    public boolean addStopPoints(List<GeographicalPoint> stop){
+        int i = 0;
+        for(Pathway p : paths){
+            for(GeographicalPoint stopP : stop){
+               if(p.getOriginPoint().equals(stopP) || p.getDestinationPoint().equals(stopP)){
+                    stopPoints.add(stopP);
+                    i++;
+                }
+            }
+        }
+        return i == stop.size();
+    }
+
+    public void setAverageSpeed(double averageSpeed) {
+        if(averageSpeed < 0){
+            throw new IllegalArgumentException("Speed must be a positive number.");
+        }
+        this.averageHorizontalSpeed = averageSpeed;
+    }
+    
+    public void setVerticalSpeed(double averageSpeed){
+        if(averageSpeed < 0){
+            throw new IllegalArgumentException("Speed must be a positive number.");
+        }
+        this.averageVerticalSpeed= averageSpeed;
+    }
+    
+    
     
     
 
@@ -184,6 +240,7 @@ public class Route implements Comparable<Route>{
         this.paths.add(edge);
         this.totalEnergy += edge.getCost();
         this.totalDistance += edge.getDistance();
+        this.totalTime += edge.getTime();
         this.energyToReachChargingPoint += edge.getCost();
         
         if(energyToReachChargingPoint > minimumEnergy){
@@ -191,7 +248,7 @@ public class Route implements Comparable<Route>{
         }
         if(edge.getDestinationPoint().getDescription().contains(Constants.CHARGING_SPOT)){
             energyToReachChargingPoint = 0;
-            chargingPoints.add(edge.getDestinationPoint());
+            stopPoints.add(edge.getDestinationPoint());
          }
     }
 
@@ -247,6 +304,12 @@ public class Route implements Comparable<Route>{
         if (this.totalDistance > otherRoute.totalDistance) {
             return 1;
         }
+        if (this.totalTime < otherRoute.totalTime) {
+            return -1;
+        }
+        if (this.totalTime > otherRoute.totalTime) {
+            return 1;
+        }
         if (this.paths.size() < otherRoute.paths.size()) {
             return -1;
         }
@@ -265,6 +328,7 @@ public class Route implements Comparable<Route>{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Iterator<Pathway> it = paths.iterator();
+        
         for(int i = 0; i < paths.size(); i++){
             Pathway p = it.next();
             GeographicalPoint or = p.getOriginPoint();
@@ -273,26 +337,33 @@ public class Route implements Comparable<Route>{
             String sDest;
             if(i == 0){
                 sOr = String.format("%s (%.5f,%.5f) [Origin]",or.getDescription(), or.getLatitude(), or.getLongitude());
-                sDest = String.format("%s (%.5f,%.5f)",dest.getDescription(), dest.getLatitude(), dest.getLongitude());
+                sDest = String.format("%s (%.5f,%.5f) %s",dest.getDescription(), dest.getLatitude(), dest.getLongitude(),(dest.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":stopPoints.contains(dest) ? "[Order]": ""));
                 
             }else{
                 if(i == paths.size() -1){
-                    sOr = String.format("%s (%.5f,%.5f)",or.getDescription(), or.getLatitude(),or.getLongitude());
+                    sOr = String.format("%s (%.5f,%.5f) %s",or.getDescription(), or.getLatitude(),or.getLongitude(),(or.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]": stopPoints.contains(or) ? "[Order]":""));
                     sDest = String.format("%s (%.5f,%.5f) [Destination]",dest.getDescription(), dest.getLatitude(), dest.getLongitude());
                     
                 }else{
-                    sOr = String.format("%s (%.5f,%.5f) %s",or.getDescription(), or.getLatitude(),or.getLongitude(),(or.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":""));
-                    sDest = String.format("%s (%.5f,%.5f) %s",dest.getDescription(), dest.getLatitude(),dest.getLongitude(),(dest.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":""));
+                    sOr = String.format("%s (%.5f,%.5f) %s",or.getDescription(), or.getLatitude(),or.getLongitude(),(or.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]": stopPoints.contains(or) ? "[Order]":""));
+                    sDest = String.format("%s (%.5f,%.5f) %s",dest.getDescription(), dest.getLatitude(),dest.getLongitude(),(dest.getDescription().contains(Constants.CHARGING_SPOT)?"[Charge]":stopPoints.contains(dest) ? "[Order]": ""));
                     
                 }
             }
             String sDist = String.format("%.2fm",p.getDistance());
             String sEner = String.format("%.2fkWh", p.getCost());
-            sb.append(String.format("%-40s -> %s %-40s  | %-20s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet(), sDist, sEner));
+            sb.append(String.format("%-55s -> %s %-60s  | %-28s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet()==null?"Air":p.getStreet(), sDist, sEner));
         }
         String sDist = String.format("%.2fm",totalDistance);
         String sEner = String.format("%.2fkWh", totalEnergy);
-        sb.append(String.format("Total Distance: %s | Total Energy: %s | Minimum Energy: %.2fkWh %n", sDist, sEner, minimumEnergy));
+        
+        String hSpeed = String.format("| %s: %.2f m/s", averageVerticalSpeed== 0 ? "Average Speed": "Average Horizontal Speed",averageHorizontalSpeed);
+        String vSpeed = String.format("| Average Vertical Speed: %.2f m/s", averageVerticalSpeed);
+        if(averageVerticalSpeed == 0){
+            vSpeed = null;
+        }
+        
+        sb.append(String.format("Total Distance: %s | Total Energy: %s | Total Time: %s %s %s%n", sDist, sEner, Utils.secondsToTime(totalTime), hSpeed, vSpeed == null ? "": vSpeed));
         return sb.toString();
     }
     

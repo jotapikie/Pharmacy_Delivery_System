@@ -1,0 +1,41 @@
+The order made by client who lives in Cais da Ribeira was assigned to Farmácia da Trindade (nearest pharmacy).
+
+The order made by client who lives in Bolhão was assigned to Farmácia da Trindade (nearest pharmacy).
+
+Land route (Less time):
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Clerigos (41,14582,-8,61398)                         | R. de Mouzinho da Silveira   | 817,85m    | 0,16kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Client - Bolhão (41,14871,-8,60746) [Order]                   | Rua de Sá da Bandeira        | 633,49m    | 0,12kWh    
+Client - Bolhão (41,14871,-8,60746) [Order]             ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | Rua de São João              | 952,94m    | 0,20kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Client - Majestic (41,14723,-8,60657)                         | Rua do General Sousa Dias    | 831,84m    | 0,18kWh    
+Client - Majestic (41,14723,-8,60657)                   ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 605,07m    | 0,12kWh    
+Total Distance: 3841,20m | Total Energy: 0,77kWh | Total Time: 00h 07m 39s 
+
+Air route (Less time):
+Not found
+Land route (Less energy):
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Clerigos (41,14582,-8,61398)                         | R. de Mouzinho da Silveira   | 817,85m    | 0,16kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Client - Bolhão (41,14871,-8,60746) [Order]                   | Rua de Sá da Bandeira        | 633,49m    | 0,12kWh    
+Client - Bolhão (41,14871,-8,60746) [Order]             ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | Rua de São João              | 952,94m    | 0,20kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Client - Majestic (41,14723,-8,60657)                         | Rua do General Sousa Dias    | 831,84m    | 0,18kWh    
+Client - Majestic (41,14723,-8,60657)                   ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 605,07m    | 0,12kWh    
+Total Distance: 3841,20m | Total Energy: 0,77kWh | Total Time: 00h 07m 39s 
+
+Air route (Less energy):
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118)                  | Air                          | 1306,34m   | 0,04kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Client - Bolhão (41,14871,-8,60746) [Order]                   | Air                          | 952,94m    | 0,03kWh    
+Client - Bolhão (41,14871,-8,60746)                     ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 424,81m    | 0,02kWh    
+Total Distance: 2684,09m | Total Energy: 0,09kWh | Total Time: 00h 02m 46s 
+
+Most efficient: Drone 
+ 
+The courier with email diogomicael6@gmail.com started the delivery run #1 and took the scooter #1. 
+ 
+Route for the delivery #1: 
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Clerigos (41,14582,-8,61398)                         | R. de Mouzinho da Silveira   | 817,85m    | 0,15kWh    
+Client - Clerigos (41,14582,-8,61398)                   ->     Client - Bolhão (41,14871,-8,60746) [Order]                   | Rua de Sá da Bandeira        | 633,49m    | 0,11kWh    
+Client - Bolhão (41,14871,-8,60746) [Order]             ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | Rua de São João              | 952,94m    | 0,19kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Client - Majestic (41,14723,-8,60657)                         | Rua do General Sousa Dias    | 831,84m    | 0,17kWh    
+Client - Majestic (41,14723,-8,60657)                   ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 605,07m    | 0,11kWh    
+Total Distance: 3841,20m | Total Energy: 0,74kWh | Total Time: 00h 07m 39s 
+ 
+The scooter must have at least 0,74 kWh to start the delivery. 

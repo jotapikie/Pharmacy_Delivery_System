@@ -17,6 +17,8 @@ public class Graph<V,E> implements GraphInterface<V,E> {
     private final boolean isDirected;
     private final Map<V,Vertex<V,E>> vertices;  //all Vertices of the graph 
     
+    
+    
     // Constructs an empty graph (either undirected or directed)
     public Graph(boolean directed) { 
         numVert=0; 
@@ -24,6 +26,10 @@ public class Graph<V,E> implements GraphInterface<V,E> {
         isDirected=directed;
         vertices = new LinkedHashMap<>();
     }
+
+
+    
+    
       
     public int numVertices(){ return numVert; }
 
