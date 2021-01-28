@@ -75,13 +75,13 @@ public class StartDeliveryRunUI {
 
     private void showAvailableScooters() throws SQLException {
         System.out.println();
-        List<String> res = controller.getAvailableScooters();
+        List<String> res = controller.getAvailableVehicles();
         if(res.isEmpty()){
-            System.out.println("No available scooters in the moment, try again later.");
+            System.out.println("No available vehicles in the moment, try again later.");
         }else{
-        System.out.println("Available Scooters:");
+        System.out.println("Available vehicles:");
         System.out.println();
-        for(String s : controller.getAvailableScooters()){
+        for(String s : controller.getAvailableVehicles()){
             System.out.println(s);
         }
         selectOneScooter();
@@ -92,12 +92,12 @@ public class StartDeliveryRunUI {
         System.out.println();
         System.out.println("Select one (id)");
         int id = Integer.parseInt(read.nextLine());
-        String res = controller.selectScooter(id);
+        String res = controller.selectVehicle(id);
         System.out.println();
             if(res != null){
                 System.out.println(res);
                 System.out.println();
-                System.out.println("Do you want to take this scooter for the delivery? (y/n)");
+                System.out.println("Do you want to take this vehicle for the delivery? (y/n)");
                 if(read.nextLine().equalsIgnoreCase("y")){
                     startDelivery();
                 }else{
@@ -105,7 +105,7 @@ public class StartDeliveryRunUI {
                     System.out.println("Operation aborted");
                 }
             }else{
-                System.out.println("Error: Invalid scooter selected, try again.");
+                System.out.println("Error: Invalid vehicle selected, try again.");
                 showAvailableScooters();
             }
         
@@ -115,10 +115,19 @@ public class StartDeliveryRunUI {
        System.out.println("Starting the delivery...");
        boolean res = controller.startDeliveryRun();
        if(res){
-       System.out.println("Sucess: Delivery run assigned to you.");
+       System.out.println();
+       System.out.println("Sucess: Delivery run assigned.");
+       System.out.println();
+       System.out.println("Suggested route:");
        System.out.println();
        String route = controller.getRoute();
+       if(route != null){
+           System.out.println(route);
+           System.out.println();
+           System.out.println("The vehicle choosed must have at least " +controller.getEnergyToStart()+ " kWh to start the delivery.");
+       }
        System.out.println(route==null?"No route found.":route);
+       
        
        
        

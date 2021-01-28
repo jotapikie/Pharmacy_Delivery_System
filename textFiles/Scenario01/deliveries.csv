@@ -1,9 +1,9 @@
 #lines starting with # should be ignored
 #Column description
 #id_pharmacy whose run belongs
-#courier_email of the person who will deliver
-#courier_weight of the person who will deliver
+#courier_email of the person who will deliver (or "-" if it is a drone)
+#courier_weight of the person who will deliver (0 if it is a drone)
 #id_delivery will be started
 #id_vehicle used to deliver
 id_pharmacy;courier_email;courier_weight;id_delivery;id_vehicle
-1;diogomicael6@gmail.com;75.3;1;1
+1;diogomicael6@gmail.com;76.3;1;1

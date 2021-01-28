@@ -121,11 +121,16 @@ public class MakeOrderUI {
     private void makeOrder(int nif) throws SQLException{
         System.out.println();
         System.out.println("Making Order...");
-        boolean res = controller.makeOrder(nif);
-        if(res){
-            System.out.println("Success: Your order is made, check your email for more details.");
-        }else{
-            System.out.println("Error: The order couldn't be made. (No pharmacy has stock for that order)");
+        System.out.println();
+        try{
+            boolean res = controller.makeOrder(nif);
+            if(res){
+                System.out.println("Success: Your order is made, check your email for more details.");
+            }else{
+                System.out.println("Error: The order couldn't be made. (No pharmacy has stock for that order)");
+            }
+        }catch(IllegalArgumentException e){
+            System.out.println("Error: The order couldn't be made. (" +e.getMessage()+")");
         }
     }
     

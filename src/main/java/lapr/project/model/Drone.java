@@ -46,6 +46,13 @@ public class Drone extends Vehicle{
     public static double getAeroCoef() {
         return aeroCoef;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Category: Drone - %s", super.toString());
+    }
+    
+    
     
     
     

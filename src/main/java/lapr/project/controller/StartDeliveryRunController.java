@@ -13,14 +13,18 @@ import lapr.project.data.ClientDB;
 import lapr.project.data.DeliveryRunDB;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.VehicleDB;
+import lapr.project.model.AirGraph;
 import lapr.project.model.Client;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.EScooter;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
+import lapr.project.model.MainGraph;
 import lapr.project.model.Order;
 import lapr.project.model.Pathway;
 import lapr.project.model.Product;
+import lapr.project.model.Vehicle;
+import lapr.project.model.VehicleCategory;
 import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
 import lapr.project.utils.route.Route;
@@ -40,10 +44,11 @@ public class StartDeliveryRunController {
     private final double courierWeight;
     private final String email;
     private List<DeliveryRun> runs;
-    private List<EScooter> scooters;
+    private List<Vehicle> vehicles;
     private double deliveryWeight;
+    private double vehicleWeight;
     private DeliveryRun dr;
-    private EScooter scooter;
+    private Vehicle vehicle;
     
     private Route r;
 
@@ -55,9 +60,14 @@ public class StartDeliveryRunController {
         this.courierWeight = courierWeight;
         this.email = email;
         this.runs = new ArrayList<>();
-        this.scooters = new ArrayList<>();
+        this.vehicles = new ArrayList<>();
         this.deliveryWeight = 0;
         this.vdb = vdb;
+        if(email!=null){
+            vehicleWeight = Constants.SCOOTER_WEIGHT;
+        }else{
+            vehicleWeight = Constants.DRONE_WEIGHT;
+        }
     }
 
     public StartDeliveryRunController(int idPharmacy, String email, double weight) {
@@ -70,7 +80,12 @@ public class StartDeliveryRunController {
         this.email = email;
         this.deliveryWeight = 0;
         this.runs = new ArrayList<>();
-        this.scooters = new ArrayList<>();
+        this.vehicles = new ArrayList<>();
+        if(email!=null){
+            vehicleWeight = Constants.SCOOTER_WEIGHT;
+        }else{
+            vehicleWeight = Constants.DRONE_WEIGHT;
+        }
     }
     
     
@@ -78,7 +93,12 @@ public class StartDeliveryRunController {
     
     
     public List<String> getDeliveryRuns() throws SQLException{
-        runs = drdb.getDeliveryRuns(idPharmacy);
+        if(email == null){
+            runs = drdb.getDeliveryRuns(idPharmacy, VehicleCategory.DRONE);
+        }else{
+            runs = drdb.getDeliveryRuns(idPharmacy, VehicleCategory.SCOOTER);
+        }
+        
         return Utils.listToString(runs);
     }
     
@@ -98,24 +118,35 @@ public class StartDeliveryRunController {
         return null;
     }
     
-    public List<String> getAvailableScooters() throws SQLException{
-        scooters = vdb.getAvailableScooters(idPharmacy);
-        return Utils.listToString(scooters);
+    public List<String> getAvailableVehicles() throws SQLException{
+        
+        if(email != null){
+            vehicles = vdb.getAvailableScooters(idPharmacy);
+        }else{
+            vehicles = vdb.getAvailableDrones(idPharmacy);
+        }
+        return Utils.listToString(vehicles);
     }
     
-    public String selectScooter(int id){
-        for(EScooter e : scooters){
-            if(e.getId()== id){
-                scooter = e;
-                return e.toString();
+    public String selectVehicle(int id){
+
+        for(Vehicle v : vehicles){
+            if(v.getId()== id){
+                vehicle = v;
+                return v.toString();
             }
         }
         return null;
-    }
+   }
     
     public boolean startDeliveryRun() throws SQLException{
-        double totalWeight = deliveryWeight + courierWeight + Constants.SCOOTER_WEIGHT;
-        LandGraph graph = new LandGraph(totalWeight);
+        double totalWeight = deliveryWeight + courierWeight + vehicleWeight;
+        MainGraph graph;
+        if(email != null){
+            graph = new LandGraph(totalWeight);
+        }else{
+            graph = new AirGraph(totalWeight);
+        }
         GeographicalPoint pharmacyAdd = gpdb.getGeographicalPointByPharmacy(idPharmacy);
         List<GeographicalPoint> points = new ArrayList<>();
         for(Order o : dr.getOrders()){
@@ -124,7 +155,7 @@ public class StartDeliveryRunController {
         List<Route> routes = new ArrayList<>();
         try{
             
-            routes = graph.kBestPaths(points, pharmacyAdd, pharmacyAdd, 1, scooter.getMaxBat());
+            routes = graph.kBestPaths(points, pharmacyAdd, pharmacyAdd, 1, vehicle.getMaxBat());
             if(!routes.isEmpty()){
                r = routes.get(0); 
             }
@@ -135,7 +166,8 @@ public class StartDeliveryRunController {
             r = null;
         }
         
-        boolean res = drdb.startDelivery(dr.getId(), email, r, scooter.getId());
+        boolean res = drdb.startDelivery(dr.getId(), email, r, vehicle.getId());
+        
         
         if(res){
             List<Client> clients = cdb.getClientsByDeliveryRun(dr.getId());

@@ -63,6 +63,7 @@ public class Constants {
     public static double DRONE_VERTICAL_SPEED = 6;
     
     public static double DRONE_ALTITUDE = 150;
+    public static double MAX_DISTANCE = 30000;
     
 
     /**

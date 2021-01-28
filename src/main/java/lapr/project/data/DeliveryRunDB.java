@@ -13,13 +13,11 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import lapr.project.model.DeliveryRun;
 import lapr.project.model.Order;
 import lapr.project.model.Product;
 import lapr.project.model.VehicleCategory;
-import lapr.project.utils.Constants;
 import lapr.project.utils.route.Route;
 import oracle.jdbc.OracleTypes;
 
@@ -33,7 +31,7 @@ public class DeliveryRunDB extends DataHandler{
     private final OrderProductDB opdb = new OrderProductDB();
     
 
-    public List<DeliveryRun> getDeliveryRuns(int idPharmacy) throws SQLException {
+    public List<DeliveryRun> getDeliveryRuns(int idPharmacy, VehicleCategory c) throws SQLException {
         List<DeliveryRun> listRuns = new ArrayList<>();
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetDeliveryRuns(?) }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
@@ -42,12 +40,15 @@ public class DeliveryRunDB extends DataHandler{
             ResultSet rs = (ResultSet) callStmt.getObject(1);
             while (rs.next()) {
                 int idDelivery = rs.getInt(1);
-                List<Order> orders = odb.getOrdersByDeliveryRun(idDelivery);
-                for(Order o : orders){
-                    HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
-                    o.setProducts(products);
+                VehicleCategory category = VehicleCategory.fromString(rs.getString(2));
+                if(category.equals(c)){
+                    List<Order> orders = odb.getOrdersByDeliveryRun(idDelivery);
+                    for(Order o : orders){
+                        HashMap<Product, Integer> products = opdb.getProductsByOrder(o.getId());
+                        o.setProducts(products);
+                    }
+                listRuns.add(new DeliveryRun(idDelivery, orders, category));
                 }
-                listRuns.add(new DeliveryRun(idDelivery, orders));
                 
 
             }

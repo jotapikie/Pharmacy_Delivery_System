@@ -43,17 +43,13 @@ public class EScooter extends Vehicle{
     public void updateScooterData(State state, int maxBat, int currentBat) {
         setState(state);
         setMaxBat(maxBat);
-        setActualBat(currentBat);
+        setCurrentBat(currentBat);
     }
     
     
     @Override
     public String toString() {
-        return "Scooter{"
-                + super.toString() +
-                ", aerodinamicCoef=" + aeroCoef +
-                ", frontal Area=" + frontalArea +
-                "} " ;
+        return String.format("Category: Scooter - %s", super.toString());
     }
 
 

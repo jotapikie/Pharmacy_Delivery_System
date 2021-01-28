@@ -6,18 +6,7 @@
 package lapr.project.ui;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
-import lapr.project.controller.AddPathController;
-import lapr.project.model.GeographicalPoint;
-import lapr.project.model.LandGraph;
-import lapr.project.model.Pathway;
-import lapr.project.model.ScooterPath;
-import lapr.project.model.StreetType;
-import lapr.project.model.VehicleCategory;
-import lapr.project.model.Wind;
 import static lapr.project.ui.UtilsUI.header;
 
 
@@ -220,7 +209,8 @@ public class TestUCs {
         System.out.println("6. Notify prepared order");
         System.out.println("7. Add courier");
         System.out.println("8. Add park");
-        System.out.println("9. Add delivery run (Not supported yet)");
+        System.out.println("9. Create delivery run");
+        System.out.println("10. Start delivery run with drone.");
         System.out.println();
         System.out.println("0. Logout");
         System.out.println();
@@ -259,7 +249,11 @@ public class TestUCs {
                 showPharmacyMenu(id);
                 break;
             case "9":
-                System.out.println("Not supported yet");
+                new AssignOrderUI(id);
+                showPharmacyMenu(id);
+                break;
+            case "10":
+                new StartDeliveryRunUI(id, 0, null);
                 showPharmacyMenu(id);
                 break;
                 

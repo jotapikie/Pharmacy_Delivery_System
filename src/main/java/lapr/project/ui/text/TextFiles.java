@@ -88,7 +88,7 @@ public class TextFiles {
         System.out.printf("%d couriers were added. %n", insertCouriers());
         System.out.println("Adding vehicles...");
         System.out.printf("%d vehicles were added. %n", insertVehicles());
-        menu();
+        //menu();
     }
 
     private static void menu() {
@@ -473,20 +473,33 @@ public class TextFiles {
        for(String delivery : importFile(DELIVERIES)){
            try {
                line = delivery.split(";");
-               controller = new StartDeliveryRunController(Integer.parseInt(line[0]), line[1], Double.parseDouble(line[2]));
+               String email = line[1];
+               if(email.equalsIgnoreCase("-")){
+                   email = null;
+               }
+               controller = new StartDeliveryRunController(Integer.parseInt(line[0]), email, Double.parseDouble(line[2]));
                controller.getDeliveryRuns();
                controller.selectDeliveryRun(Integer.parseInt(line[3]));
-               controller.getAvailableScooters();
-               controller.selectScooter(Integer.parseInt(line[4]));
+               controller.getAvailableVehicles();
+               controller.selectVehicle(Integer.parseInt(line[4]));
                if(controller.startDeliveryRun()){
-                   write(String.format("The courier with email %s started the delivery run #%d and took the scooter #%d. %n %n", line[1],Integer.parseInt(line[3]), Integer.parseInt(line[4])));
-                   startedRuns++;
+                   if(email != null){
+                        write(String.format("The courier with email %s started the delivery run #%d and took the scooter #%d. %n %n", line[1],Integer.parseInt(line[3]), Integer.parseInt(line[4])));
+                        startedRuns++;
+                   }else{
+                       write(String.format("The drone #%d started the delivery run #%d. %n %n",Integer.parseInt(line[4]), Integer.parseInt(line[3])));
+                       startedRuns++;
+                   }
                }
                String route = controller.getRoute();
                write(String.format("Route for the delivery #%d: %n%s %n", Integer.parseInt(line[3]),route==null?"Not found":route));
                double ene = controller.getEnergyToStart();
                if(ene > 0){
-                   write(String.format("The scooter must have at least %.2f kWh to start the delivery. %n", ene));
+                   if(email != null){
+                        write(String.format("The scooter must have at least %.2f kWh to start the delivery. %n", ene));
+                   }else{
+                       write(String.format("The drone must have at least %.2f kWh to start the delivery. %n", ene));
+                   }
                }
            } catch (SQLException ex) {
                ex.printStackTrace();

@@ -26,6 +26,7 @@ import lapr.project.model.Pharmacy;
 import lapr.project.model.Platform;
 import lapr.project.model.Product;
 import lapr.project.model.ShoppingCart;
+import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
 
 
@@ -140,7 +141,11 @@ public class MakeOrderController {
         if(pharmacies.isEmpty()){
             return false;
         }
-        pha = nearestPharmacies(add).values().iterator().next();
+        Map.Entry<Double, Pharmacy> dist =  nearestPharmacies(add).firstEntry();
+        if(dist.getKey() > Constants.MAX_DISTANCE){
+            throw new IllegalArgumentException("There are no pharmacies near you.");
+        }
+        pha = dist.getValue();
         pharmacies.remove(pha);
         boolean success = checkPharmacyStock();
         if(success){
@@ -181,10 +186,10 @@ public class MakeOrderController {
         }else{
             ord.setProducts(existingProducts);
             Order orderToFulfill = odb.newOrder(ord, missingProducts);
-            for(Pharmacy nearPha : nearestPharmacies(pha.getAddress()).values()){
-                if(ppdb.hasProducts(missingProducts, nearPha.getId())){
-                    other = nearPha;
-                    odb.saveOrderProcessing(orderToFulfill, cli, nearPha.getId(), pha.getId(), inv);
+            for(Map.Entry<Double, Pharmacy> nearPha : nearestPharmacies(pha.getAddress()).entrySet()){
+                if(ppdb.hasProducts(missingProducts, nearPha.getValue().getId())){
+                    other = nearPha.getValue();
+                    odb.saveOrderProcessing(orderToFulfill, cli, nearPha.getValue().getId(), pha.getId(), inv);
                     return true;
                 }
             }

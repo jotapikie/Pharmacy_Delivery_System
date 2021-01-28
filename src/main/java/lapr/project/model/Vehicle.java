@@ -17,19 +17,19 @@ public abstract class Vehicle {
     private double weight;
     private State state;
     private double maxBat;
-    private double actualBat;
+    private double currentBat;
     private int motor;
     private double maxWeight;
 
     public Vehicle() {
     }
 
-    public Vehicle(int id, double weight, State state, double maxBat, double actualBat, int motor, double maxWeight) {
+    public Vehicle(int id, double weight, State state, double maxBat, double currentBat, int motor, double maxWeight) {
         setId(id);
         setWeight(weight);
         setState(state);
         setMaxBat(maxBat);
-        setActualBat(actualBat);
+        setCurrentBat(currentBat);
         setMotor(motor);
         setMaxWeight(maxWeight);
     }
@@ -95,17 +95,17 @@ public abstract class Vehicle {
      * returns the max bat of the scooter
      * @return
      */
-    public double getActualBat() {
-        return actualBat;
+    public double getCurrentBat() {
+        return currentBat;
     }
 
     /**
      * sets the max battery of a scooter
      * @param currentBat
      */
-    public void setActualBat(double currentBat) {
+    public void setCurrentBat(double currentBat) {
         if (!(currentBat>=0&&currentBat<=maxBat)) throw new IllegalArgumentException("Current battery cannot be negative and greater than maxBattery");
-        this.actualBat = currentBat;
+        this.currentBat = currentBat;
     }
 
     /**
@@ -186,13 +186,6 @@ public abstract class Vehicle {
 
     @Override
     public String toString() {
-         final StringBuilder sb = new StringBuilder();
-         sb.append("id: ").append(id);
-         sb.append(", weight=").append(weight);
-         sb.append(", state=").append(state.toString());
-         sb.append(", maxBattery=").append(maxBat);
-         sb.append(", currentBattery=").append(actualBat);
-         sb.append(", motor=").append(motor);
-        return sb.toString();
+        return String.format("Id: %d - Weight: %.2fkg | Status: %s | Max Battery: %.2fkWh | Current Bat: %.2fkWh", id, weight, state.getName(), maxBat, currentBat);
     }
 }
