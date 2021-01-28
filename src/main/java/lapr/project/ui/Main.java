@@ -71,20 +71,20 @@ class Main {
                         int length = filename.length();
                         if (filename.startsWith(KEY1)) {
 
-                            if (filename.startsWith(KEY2, length - KEY2.length()) && !check) {
+                            if (filename.startsWith(KEY3, length - KEY3.length()) && !check) {
+                                deleteFlag = new File(filename);
+                                check=true;
+                            }
+                            if (filename.startsWith(KEY2, length - KEY2.length()) && check) {
                                 check = true;
                                 deleteEstimate = new File(filename);
-                            }
 
-                            if (filename.startsWith(KEY3, length - KEY3.length()) && check) {
-                                deleteFlag = new File(filename);
-                            }
                                 if (!deleteProtocol(deleteEstimate, deleteFlag)){
                                     logWarning("Estimated files have not been deleted");
                             } else {
                                     logWarning("Deleted estimated files");
                                 }
-                        }
+                        }}
                     }
                 }
             } catch (IOException | InterruptedException e  ) {
@@ -134,8 +134,6 @@ class Main {
 
                 LOGGER.log(Level.INFO, "Estimate files deleted successfully and email with estimate sent.");
 
-                return true;
-
             } else {
                email= drc.setEndDate(Integer.parseInt(arrSplit[0]));
 
@@ -146,8 +144,6 @@ class Main {
             logWarning("Estimate file recieved is in the wrong format.");
         } catch (FileNotFoundException e) {
             logWarning("Something went wrong with estimated file");
-        } catch (RuntimeException e) {
-            logWarning("Email not sent properly.");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
