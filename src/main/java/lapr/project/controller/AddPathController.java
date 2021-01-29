@@ -13,6 +13,8 @@ import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
+import lapr.project.model.StreetType;
+import lapr.project.model.VehicleCategory;
 import lapr.project.utils.Utils;
 
 /**
@@ -55,8 +57,12 @@ public class AddPathController {
         return null;
     }
     
-    public boolean addToQueue(){
+    public boolean addToQueue(boolean isBidirectional){
         if(path != null){
+            if(isBidirectional){
+                Pathway inverse = new Pathway(path.getDestinationPoint(), path.getOriginPoint(), path.getStreetType(), path.getDistance(), path.getWind(), path.getStreet(), path.getCategory());
+                paths.add(inverse);
+            }
             return paths.add(path);
         }
         return false;

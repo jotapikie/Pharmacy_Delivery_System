@@ -75,7 +75,7 @@ public class ClientDB extends DataHandler {
                 callStmt.setString(13,c.getAddress().getCity());
                 callStmt.setInt(14,c.getAddress().getPortNumber());
                 callStmt.setString(15,c.getAddress().getZipCode());
-                callStmt.setString(16, "Client - " +c.getAddress().getGeographicalPoint().getDescription());
+                callStmt.setString(16,c.getAddress().getGeographicalPoint().getDescription());
 
 
             callStmt.execute();

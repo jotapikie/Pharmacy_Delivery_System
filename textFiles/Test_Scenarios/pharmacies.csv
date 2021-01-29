@@ -1,0 +1,27 @@
+#lines starting with # should be ignored
+#Column description
+#name of pharmacy
+#phone_number of pharmacy
+#street where pharmacy is placed
+#latitude where pharmacy is placed
+#longitude where pharmacy is placed
+#elevation where pharmacy is placed (in meters)
+#zip code of pharmacy (xxxx-xxx)
+#port number of pharmacy
+#admin_name of the person who will manage the pharmacy
+#admin_email of the person who will manage the pharmacy
+#admin_pwd of the person who will manage the pharmacy
+#park_category of vehicles (Drone or Scooter)
+#max_vehicles capacity of the park
+#can_charge slots that are able to charge (less than max_vehicles)
+#max_energy the park can provide (kWh)
+name;phone_number;street;latitude;longitude;elevation;city;zip_code;port;admin_name;admin_email;admin_pwd;park_category;max_vehicles;can_charge;max_energy;desc
+Farmácia Guifões;229537376;Rua Tourais;41.20011;-8.66618;73;Guifões;4460-033;45;Guilherme Santos;gui@gmail.com;123;Scooter;2;2;4.2;Guifões
+Farmácia Avenida;226008888;R. de o 1º de Janeiro;41.16040;-8.64372;71;Porto;4100-116;60;Alberto Silva;avn@gmail.com;23;Scooter;2;2;3.5;Avenida
+Farmácia Couto;223743841;Av. da República;41.12608;-8.60577;108;V.N de Gaia;4430-193;141;Carlos Couto;couto@gmail.com;hd2;Scooter;2;2;4;Couto
+Farmácia Sá da Bandeira;222074040;R. de Sá da Bandeira;41.14838;-8.60808;83;Porto;4000-428;236;César Sá;sab@gmail.com;df3;Scooter;2;2;2.3;Sá da Bandeira
+Farmácia Sá;225020427;R. de Vale Formoso;41.16703;-8.61175;128;Porto;4200-512;181;Sara Sá;sa@gmail.com;sah2;Scooter;2;2;2.7;Sá
+Farmácia de Fânzeres;224830312;R. Dr.Severiano;41.16107;-8.53147;93;Fânzeres;4510-554;280;Franciso Frank;fanz@gmail.com;shf3;Scooter;2;2;3.4;Fânzeres
+Farmácia Sousa Torres;229722122;MaiaShopping Loja;41.21966;-8.56081;93;Maia;4425-500;135;Hugo Sousa;sousa@gmail.com;sfh2;Scooter;2;2;3.6;Sousa Torres
+Farmácia Central;224220111;Av. 5 de Outubro;41.18995;-8.49777;138;Valongo;4440-452;57;Valter Silva;valc@gmail.com;sf3;Scooter;2;2;4.2;Valongo
+Farmácia Marques da Cunha;224224433;R. Cap. Aresta;41.19767;-8.49968;146;Valongo;4440-539;198;Marques Cunha;mcunha@gmail.com;sd3;Scooter;2;2;3.5;Marques da Cunha

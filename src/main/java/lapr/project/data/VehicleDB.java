@@ -49,7 +49,7 @@ public class VehicleDB extends DataHandler {
             callStmt.setDouble(1, v.getWeight());
             callStmt.setString(2, v.getState().getName());
             callStmt.setDouble(3, v.getMaxBat());
-            callStmt.setDouble(4, v.getActualBat());
+            callStmt.setDouble(4, v.getCurrentBat());
             callStmt.setDouble(5, v.getMotor());
             callStmt.setDouble(6, v.getMaxWeight());
             callStmt.setInt(7, pharmID);
@@ -100,7 +100,7 @@ public class VehicleDB extends DataHandler {
                 callStmt.setDouble(2, v.getWeight());
                 callStmt.setString(3, v.getState().getName());
                 callStmt.setDouble(4, v.getMaxBat());
-                callStmt.setDouble(5, v.getActualBat());
+                callStmt.setDouble(5, v.getCurrentBat());
                 callStmt.setDouble(6, v.getMotor());
                 callStmt.setDouble(7, v.getMaxWeight());
                 callStmt.setInt(8, pharmID);
@@ -186,7 +186,7 @@ public class VehicleDB extends DataHandler {
             callStmt.setDouble(2, v.getWeight());
             callStmt.setString(3, v.getState().toString());
             callStmt.setDouble(4, v.getMaxBat());
-            callStmt.setDouble(5, v.getActualBat());
+            callStmt.setDouble(5, v.getCurrentBat());
             callStmt.setDouble(6, v.getMotor());
 
             if (typeVehicle.equalsIgnoreCase(ESCOOTER)) {
@@ -199,69 +199,44 @@ public class VehicleDB extends DataHandler {
             callStmt.execute();
         }
     }
-
-    /**
-     * Method to get all the available escooters at a given park which's id is passed by parameter.
-     *
-     * @param pharmID - pharmacy's id.
-     * @return available escooters.
-     */
-    public List<String> getEscootersAtPharm(int pharmID) throws SQLException {
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetAvailableEscootersAtPharmacy(?) }")) {
-            ArrayList<String> eScooters = new ArrayList<>();
-
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-            callStmt.setInt(2, pharmID);
-            callStmt.execute();
-            ResultSet rs = (ResultSet) callStmt.getObject(1);
-
-            if (rs == null) throw new NullPointerException("There are no vehicles in the pharmacy of id " + pharmID);
-            else {
-                while (rs.next()) {
-                    eScooters.add(String.format("%s;%s;%d", rs.getString(1), rs.getString(2), rs.getInt(3)));
-                }
+    
+    public List<Vehicle> getAvailableScooters(int idPharmacy) throws SQLException{
+        List<Vehicle> vehicles = new ArrayList<>();
+        for(Vehicle v : getScooters(idPharmacy)){
+            if(v.getState().equals(State.LOCKED) || v.getState().equals(State.CHARGING)){
+                vehicles.add(v);
             }
-            return eScooters;
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        throw new NullPointerException("No info in the database. Check tables Parks, Escooters, Vehicles and Parked_Vehicles.");
+        return vehicles;
     }
-
-    /**
-     * Method to get all the available bicycles at a given park which's id is passed by parameter.
-     *
-     * @param parkID - park's id.
-     * @return available bicycles.
-     */
-    public List<String> getScooterAtPark(String parkID) throws SQLException {
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetScooterAtPark(?) }")) {
-            ArrayList<String> eScooters = new ArrayList<>();
-
-            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
-            callStmt.setString(2, parkID);
-            callStmt.execute();
-            ResultSet rs = (ResultSet) callStmt.getObject(1);
-
-            if (rs == null) throw new NullPointerException("There are no parked vehicles in the park of id " + parkID);
-            else {
-                while (rs.next()) {
-                    eScooters.add(String.format("%s;%d", rs.getString(1), rs.getInt(2)));
-                }
+    
+    public List<Vehicle> getAvailableDrones(int idPharmacy) throws SQLException{
+        List<Vehicle> vehicles = new ArrayList<>();
+        for(Vehicle v : getDrones(idPharmacy)){
+            if(v.getState().equals(State.LOCKED) || v.getState().equals(State.CHARGING)){
+                vehicles.add(v);
             }
-            return eScooters;
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        throw new NullPointerException("No info in the database. Check tables Parks, Bicycles, Vehicles and Parked_Vehicles.");
+        return vehicles;
     }
+    
+    public List<Vehicle> getVehicles(int idPharmacy) throws SQLException{
+        List<Vehicle> vehicles = new ArrayList<>();
+        vehicles.addAll(getScooters(idPharmacy));
+        vehicles.addAll(getDrones(idPharmacy));
+        return vehicles;
+    }
+    
+    
+
+
 
 
   
 
-    public List<EScooter> getAvailableScooters(int idPharmacy) throws SQLException {
-        List<EScooter> listScooters = new ArrayList<>();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetAvailableScooters(?) }")) {
+    public List<Vehicle> getScooters(int idPharmacy) throws SQLException {
+        List<Vehicle> listScooters = new ArrayList<>();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetScooters(?) }")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.setInt(2, idPharmacy);
             callStmt.execute();
@@ -273,6 +248,22 @@ public class VehicleDB extends DataHandler {
         }
         return listScooters;
     }
+
+    public List<Vehicle> getDrones(int idPharmacy) throws SQLException {
+        List<Vehicle> listDrones = new ArrayList<>();
+        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcGetDrones(?) }")) {
+            callStmt.registerOutParameter(1, OracleTypes.CURSOR);
+            callStmt.setInt(2, idPharmacy);
+            callStmt.execute();
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            while (rs.next()) {
+                Drone dr = new Drone(rs.getInt(1), State.fromString(rs.getString(2)), rs.getDouble(3), rs.getDouble(4));
+                listDrones.add(dr);
+            }
+        }
+        return listDrones;
+    }
+
 
 
 

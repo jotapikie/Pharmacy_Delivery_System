@@ -241,7 +241,7 @@ public class EScooterTest {
     @Test
     public void testGetActualBat() {
         double expResult = 2;
-        double result = scooterTest.getActualBat();
+        double result = scooterTest.getCurrentBat();
         assertEquals(expResult, result, 0);
     }
 
@@ -252,7 +252,7 @@ public class EScooterTest {
     public void testSetActualBatSmaller() {
 
         try {
-            scooterTest.setActualBat(-10);
+            scooterTest.setCurrentBat(-10);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
 
@@ -266,7 +266,7 @@ public class EScooterTest {
     public void testSetActualBatBigger() {
 
         try {
-            scooterTest.setActualBat(101);
+            scooterTest.setCurrentBat(101);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
 
@@ -280,7 +280,7 @@ public class EScooterTest {
     public void testSetActualBatLimit() {
 
         try {
-            scooterTest.setActualBat(-2);
+            scooterTest.setCurrentBat(-2);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
 
@@ -294,7 +294,7 @@ public class EScooterTest {
     public void testSetActualBatLimit9() {
 
         try {
-            scooterTest.setActualBat(-1);
+            scooterTest.setCurrentBat(-1);
             fail("expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
 
@@ -310,8 +310,8 @@ public class EScooterTest {
         try {
             int value = 0;
             EScooter instance = new EScooter();
-            instance.setActualBat(value);
-            double result = instance.getActualBat();
+            instance.setCurrentBat(value);
+            double result = instance.getCurrentBat();
             int expResult = value;
             assertEquals(expResult, result, 0);
         } catch (IllegalArgumentException e) {
@@ -329,8 +329,8 @@ public class EScooterTest {
             int value = 100;
             EScooter instance = new EScooter();
             instance.setMaxBat(102);
-            instance.setActualBat(value);
-            double result = instance.getActualBat();
+            instance.setCurrentBat(value);
+            double result = instance.getCurrentBat();
             double expResult = value;
             assertEquals(expResult, result, 0);
         } catch (IllegalArgumentException e) {
@@ -348,8 +348,8 @@ public class EScooterTest {
             int value = 1;
             EScooter instance = new EScooter();
             instance.setMaxBat(2);
-            instance.setActualBat(value);
-            double result = instance.getActualBat();
+            instance.setCurrentBat(value);
+            double result = instance.getCurrentBat();
             int expResult = value;
             assertEquals(expResult, result, 0);
         } catch (IllegalArgumentException e) {
@@ -462,7 +462,7 @@ public class EScooterTest {
     public void testUpdateEScooterData() {
         EScooter scooterTest2 = new EScooter(123, State.ACTIVE, 10, 8);
         scooterTest2.updateScooterData(State.INACTIVE, 5,5);
-        assertEquals(scooterTest2.getActualBat(), 5);
+        assertEquals(scooterTest2.getCurrentBat(), 5);
         assertEquals(scooterTest2.getId(), 123);
         assertEquals(scooterTest2.getMaxBat(), 5, 0.0);
         assertEquals(scooterTest2.getState(), State.INACTIVE);

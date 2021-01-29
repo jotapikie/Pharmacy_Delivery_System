@@ -22,7 +22,7 @@ public class AssignOrderUI {
 
     public AssignOrderUI(int idPharmacy) {
         controller = new AssignOrderController(idPharmacy);
-        header("x Assign Order x");
+        header("x Create delivery run x");
         try {
             showAvailableOrders();
         } catch (SQLException ex) {

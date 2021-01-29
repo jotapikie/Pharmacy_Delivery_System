@@ -36,7 +36,7 @@ public class RouteAlgorithms {
         if (graph == null || !graph.isDirected()) {
             throw new IllegalArgumentException("Invalid graph!");
         }
-        zeroVertexCounters(graph);
+        resetCounter(graph);
         List<Route> result = new ArrayList<>();
         BST<Route> bst = new BST<>();
         
@@ -103,7 +103,7 @@ public class RouteAlgorithms {
    
    
    
-    private static void zeroVertexCounters(Graph<GeographicalPoint, Pathway> graph) {
+    private static void resetCounter(Graph<GeographicalPoint, Pathway> graph) {
 
         for (GeographicalPoint vertex : graph.vertices()) {
             vertex.resetCounter();
@@ -143,7 +143,7 @@ public class RouteAlgorithms {
 
         // Fill a map with all the possible pairs of vertexes and their k shortest routes
         Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map = new HashMap<>();
-        fillRouteMap(graph, toVisit, origin, destination, k, map, maxEnergy);
+        fillRoute(graph, toVisit, origin, destination, k, map, maxEnergy);
 
         // Check if only 1 permutation is possible
         if (toVisit.size() == 1) {
@@ -187,7 +187,7 @@ public class RouteAlgorithms {
         return (result.isEmpty()) ? null : result;
     }
 
-    private static <V> void fillRouteMap(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map, double maxEnergy) {
+    private static void fillRoute(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, Map<Pair<GeographicalPoint, GeographicalPoint>, List<Route>> map, double maxEnergy) {
         for (GeographicalPoint vertex : toVisit) {
             map.put(new Pair<>(origin, vertex), RouteAlgorithms.kBestRoutes(graph, origin, vertex, k, maxEnergy));
             map.put(new Pair<>(vertex, destination), RouteAlgorithms.kBestRoutes(graph, vertex, destination, k, maxEnergy));

@@ -82,15 +82,13 @@ public class MakeOrderControllerTest {
         ppdb = mock(PharmacyStockDB.class);
         phardb = mock(PharmacyDB.class);
 
-        cli = new Client("Paulo", "123", email, 914673846, 43, 43245, new Address("Rua Teste", new GeographicalPoint(43.56, 68.90, 4.6), "Porto",45, "4563-456"));
+        cli = new Client("Paulo", "123", email, 914673846, 43, 43245, new Address("Rua Teste", new GeographicalPoint(41.2, 56.2, 2.1), "Porto",45, "4563-456"));
         p1 = new Product(1, "Brufen", 0.89,10);
         p2 = new Product(2, "Asprina", 0.2, 5);
 
-        //1297 km
-        pha1 = new Pharmacy(1, 912456839, "Farmacia 1", new Administrator("Hugo", "admin1@lapr.com", "as"), new Address("Rua 2", new GeographicalPoint(41.7, 57.9, 3.4), "Cidade 1", 3, "3452-232"), new HashSet<>());
+        pha1 = new Pharmacy(1, 912456839, "Farmacia 1", new Administrator("Hugo", "admin1@lapr.com", "as"), new Address("Rua 2", new GeographicalPoint(41.22, 56.22, 2.1), "Cidade 1", 3, "3452-232"), new HashSet<>());
         
-        //1959 km
-        pha2 = new Pharmacy(2, 912456838, "Farmacia 2", new Administrator("Miguel", "admin2@lapr.com", "as"), new Address("Rua 3", new GeographicalPoint(56.9, 52.4, 2.1), "Cidade 2", 8, "4552-232"), new HashSet<>());
+        pha2 = new Pharmacy(2, 912456838, "Farmacia 2", new Administrator("Miguel", "admin2@lapr.com", "as"), new Address("Rua 3", new GeographicalPoint(41.23, 56.23, 2.1), "Cidade 2", 8, "4552-232"), new HashSet<>());
         pharmacies = new ArrayList<>();
         pharmacies.add(pha2); pharmacies.add(pha1);
 
@@ -143,6 +141,7 @@ public class MakeOrderControllerTest {
     public void testGetAddress() throws SQLException {
         controller.getCart();
         assertEquals(cli.getAddress().toString(), controller.getAddress());
+        assertEquals(cli.getAddress(), controller.getClientAddress());
     }
 
     /**
@@ -207,6 +206,8 @@ public class MakeOrderControllerTest {
         when(ppdb.hasProducts(missing, 2)).thenReturn(true);
 
         assertTrue(controller.makeOrder(35323));
+        assertEquals(pha1, controller.getPharmacyAssigned());
+        assertEquals(pha2, controller.otherPharmacy());
     }
     
     
@@ -232,6 +233,30 @@ public class MakeOrderControllerTest {
         when(ppdb.getQuantity(1, 1)).thenReturn(20);
         when(ppdb.getQuantity(1, 2)).thenReturn(20);
         assertTrue(controller.makeOrder(2222));
+        
+    }
+    
+    @Test
+    public void makeOrder_AssignedWithStock_TooDistant() throws SQLException{
+        controller.getCart();
+        controller.getAddress();
+        controller.getDefaultNif();
+        controller.getCredits();
+        controller.getFinalPrice();
+        when(ppdb.getQuantity(1, 1)).thenReturn(20);
+        when(ppdb.getQuantity(1, 2)).thenReturn(20);
+        pha1.setAddress(new Address("1", new GeographicalPoint(80, 80, 21), "s1",2,"4525-345"));
+        pha2.setAddress(new Address("2", new GeographicalPoint(70, 85, 21), "s1",2,"4525-345"));
+        List<Pharmacy> phs = new ArrayList<>();
+        phs.add(pha1);phs.add(pha2);
+        when(phardb.getPharmacies()).thenReturn(phs);
+        boolean flag = false;
+        try{
+            controller.makeOrder(2222);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
         
     }
     

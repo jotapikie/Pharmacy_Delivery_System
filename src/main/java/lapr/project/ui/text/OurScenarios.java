@@ -31,6 +31,8 @@ import lapr.project.controller.RegisterProductController;
 import lapr.project.controller.StartDeliveryRunController;
 import lapr.project.controller.UpdateStockController;
 import lapr.project.data.DataHandler;
+import static lapr.project.ui.text.Utils.clearAllData;
+import static lapr.project.ui.text.Utils.write;
 
 
 
@@ -38,7 +40,7 @@ import lapr.project.data.DataHandler;
  *
  * @author Diogo
  */
-public class TextFiles {
+public class OurScenarios {
     private static Scanner read = new Scanner(System.in);
 
     
@@ -64,26 +66,17 @@ public class TextFiles {
      */
     public static void main(String[] args) {
 
-     
+ 
  
 
-        try{
-            System.out.println("Clearing old data...");
-            DataHandler dh = new DataHandler();
-            dh.scriptRunner("textFiles/clear.sql");
-            System.out.println("Old data cleared.");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        clearAllData();
 
         System.out.println("Adding products...");
         System.out.printf("%d products were added. %n", insertProducts());
         System.out.println("Adding pharmacies...");
         System.out.printf("%d pharmacies were added. %n", insertPharmacies());
         System.out.println("Adding clients...");
-        System.out.printf("%d clients were added. %n", insertClients());
+        System.out.printf("%d clients were added. %n", insertClients(CLIENTS));
         System.out.println("Adding couriers...");
         System.out.printf("%d couriers were added. %n", insertCouriers());
         System.out.println("Adding vehicles...");
@@ -202,11 +195,11 @@ public class TextFiles {
     }
 
 
-    private static int insertClients() {
+    public static int insertClients(String file) {
        RegisterClientController controller;
        String line[];
        int usersAdded = 0;
-       for(String user : importFile(CLIENTS)){
+       for(String user : importFile(file)){
            line = user.split(";");
            controller = new RegisterClientController();
            controller.newAddress(line[3], Double.parseDouble(line[5]), Double.parseDouble(line[4]), Double.parseDouble(line[6]), line[7], Integer.parseInt(line[9]), line[8], line[15]);
@@ -216,6 +209,7 @@ public class TextFiles {
                controller.registClient();
                usersAdded++;
            } catch (SQLException ex) {
+               System.out.println(usersAdded);
                ex.printStackTrace();
            }
        }
@@ -312,7 +306,11 @@ public class TextFiles {
                 
                 line = path.split(";");
                 controller.selectPoints(Double.parseDouble(line[1]), Double.parseDouble(line[0]), Double.parseDouble(line[3]), Double.parseDouble(line[2]), line[4].equals("-")?null:line[4], Double.parseDouble(line[5]),Double.parseDouble(line[6]),Double.parseDouble(line[7]),line[8], line[9].equalsIgnoreCase("-")?null:line[9]);
-                controller.addToQueue();
+                boolean isBidirectional = false;
+                if(line[10].equalsIgnoreCase("y")){
+                    isBidirectional = true;
+                }
+                controller.addToQueue(isBidirectional);
             }
             return controller.savePaths();
             
@@ -387,12 +385,12 @@ public class TextFiles {
                 }
                 if(controller.makeOrder(Integer.parseInt(line[1]))){
                     ordersMade++;
-                    write(String.format("The order made by client who lives in %s was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getDescription().replace("Client - ", ""), controller.getPharmacyAssigned().getName()));
+                    write(String.format("The order made by client who lives in %s was assigned to %s (nearest pharmacy).%n%n", controller.getClientAddress().getGeographicalPoint().getDescription().replace("Client - ", ""), controller.getPharmacyAssigned().getName()), RESULT);
                     if(controller.otherPharmacy() != null){
-                        write(String.format("Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to %s.%n %n", controller.otherPharmacy().getName()));
+                        write(String.format("Delivery Note: The pharmacy assigned has no stock for the order and so that a new order to get that missing stock was made and assigned to %s.%n %n", controller.otherPharmacy().getName()),RESULT);
                     }
                 }else{
-                    write(String.format("No pharmacy has enough stock for this order. %n %n"));
+                    write(String.format("No pharmacy has enough stock for this order. %n %n"),RESULT);
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -452,11 +450,11 @@ public class TextFiles {
                
                controller.addToQueue();
                ordersAssigned = ordersAssigned + controller.saveDeliveryRuns();
-               write(String.format("Land route (Less time):%n%s%n", tLand==null?"Not found":tLand));
-               write(String.format("Air route (Less time):%n%s%n", tAir==null?"Not found":tAir));
-               write(String.format("Land route (Less energy):%n%s%n", land==null?"Not found":land));
-               write(String.format("Air route (Less energy):%n%s%n", air==null?"Not found":air));
-               write(String.format("Most efficient: %s %n %n", controller.getMostEfficient()));
+               write(String.format("Land route (Less time):%n%s%n", tLand==null?"Not found":tLand),RESULT);
+               write(String.format("Air route (Less time):%n%s%n", tAir==null?"Not found":tAir),RESULT);
+               write(String.format("Land route (Less energy):%n%s%n", land==null?"Not found":land),RESULT);
+               write(String.format("Air route (Less energy):%n%s%n", air==null?"Not found":air),RESULT);
+               write(String.format("Most efficient: %s %n %n", controller.getMostEfficient()),RESULT);
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -473,20 +471,33 @@ public class TextFiles {
        for(String delivery : importFile(DELIVERIES)){
            try {
                line = delivery.split(";");
-               controller = new StartDeliveryRunController(Integer.parseInt(line[0]), line[1], Double.parseDouble(line[2]));
+               String email = line[1];
+               if(email.equalsIgnoreCase("-")){
+                   email = null;
+               }
+               controller = new StartDeliveryRunController(Integer.parseInt(line[0]), email, Double.parseDouble(line[2]));
                controller.getDeliveryRuns();
                controller.selectDeliveryRun(Integer.parseInt(line[3]));
-               controller.getAvailableScooters();
-               controller.selectScooter(Integer.parseInt(line[4]));
+               controller.getAvailableVehicles();
+               controller.selectVehicle(Integer.parseInt(line[4]));
                if(controller.startDeliveryRun()){
-                   write(String.format("The courier with email %s started the delivery run #%d and took the scooter #%d. %n %n", line[1],Integer.parseInt(line[3]), Integer.parseInt(line[4])));
-                   startedRuns++;
+                   if(email != null){
+                        write(String.format("The courier with email %s started the delivery run #%d and took the scooter #%d. %n %n", line[1],Integer.parseInt(line[3]), Integer.parseInt(line[4])),RESULT);
+                        startedRuns++;
+                   }else{
+                       write(String.format("The drone #%d started the delivery run #%d. %n %n",Integer.parseInt(line[4]), Integer.parseInt(line[3])),RESULT);
+                       startedRuns++;
+                   }
                }
                String route = controller.getRoute();
-               write(String.format("Route for the delivery #%d: %n%s %n", Integer.parseInt(line[3]),route==null?"Not found":route));
+               write(String.format("Route for the delivery #%d: %n%s %n", Integer.parseInt(line[3]),route==null?"Not found":route),RESULT);
                double ene = controller.getEnergyToStart();
                if(ene > 0){
-                   write(String.format("The scooter must have at least %.2f kWh to start the delivery. %n", ene));
+                   if(email != null){
+                        write(String.format("The scooter must have at least %.2f kWh to start the delivery. %n", ene),RESULT);
+                   }else{
+                       write(String.format("The drone must have at least %.2f kWh to start the delivery. %n", ene),RESULT);
+                   }
                }
            } catch (SQLException ex) {
                ex.printStackTrace();
@@ -516,30 +527,7 @@ public class TextFiles {
         return listToReturn;
     }
     
-    private static void write(String message){
-        File log = new File(RESULT);
-        BufferedWriter bufferedWriter = null;
-        try{
-            if(!log.exists()){
-                log.createNewFile();
-            }
 
-        FileWriter fileWriter = new FileWriter(log, true);
-
-        bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(message);
-
-
-        } catch(IOException e) {
-            e.printStackTrace();
-        }finally{
-            try {
-                bufferedWriter.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
 
 
 

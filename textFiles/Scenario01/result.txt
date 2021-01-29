@@ -1,29 +1,29 @@
 The order made by client who lives in Cais da Ribeira was assigned to Farmácia da Trindade (nearest pharmacy).
 
 Land route (Less time):
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118)                  | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
-Client - Cais da Ribeira (41,14063,-8,61118)            ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
-Total Distance: 2612,68m | Total Energy: 0,53kWh | Total Time: 00h 05m 12s 0,53 
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
+Total Distance: 2612,68m | Total Energy: 0,53kWh | Total Time: 00h 05m 12s | Average Speed: 8,33 m/s 
 
 Air route (Less time):
 Not found
 Land route (Less energy):
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118)                  | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
-Client - Cais da Ribeira (41,14063,-8,61118)            ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
-Total Distance: 2612,68m | Total Energy: 0,53kWh | Total Time: 00h 05m 12s 0,53 
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
+Total Distance: 2612,68m | Total Energy: 0,53kWh | Total Time: 00h 05m 12s | Average Speed: 8,33 m/s 
 
 Air route (Less energy):
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118)                  | Air                          | 1306,34m   | 0,03kWh    
-Client - Cais da Ribeira (41,14063,-8,61118)            ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1306,34m   | 0,03kWh    
-Total Distance: 2612,68m | Total Energy: 0,06kWh | Total Time: 00h 02m 42s 0,06 
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | Air                          | 1306,34m   | 0,03kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1306,34m   | 0,03kWh    
+Total Distance: 2612,68m | Total Energy: 0,06kWh | Total Time: 00h 02m 42s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
 
 Most efficient: Drone 
  
 The courier with email diogomicael6@gmail.com started the delivery run #1 and took the scooter #1. 
  
 Route for the delivery #1: 
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118)                  | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
-Client - Cais da Ribeira (41,14063,-8,61118)            ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
-Total Distance: 2612,68m | Total Energy: 0,51kWh | Total Time: 00h 05m 12s 0,51 
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Client - Cais da Ribeira (41,14063,-8,61118) [Order]          | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
+Client - Cais da Ribeira (41,14063,-8,61118) [Order]    ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | R. de Mouzinho da Silveira   | 1306,34m   | 0,26kWh    
+Total Distance: 2612,68m | Total Energy: 0,51kWh | Total Time: 00h 05m 12s | Average Speed: 8,33 m/s 
  
 The scooter must have at least 0,51 kWh to start the delivery. 
