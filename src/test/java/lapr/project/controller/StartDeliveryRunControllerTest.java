@@ -39,6 +39,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.mockito.Matchers;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -276,19 +277,19 @@ public class StartDeliveryRunControllerTest {
         controller1.selectDeliveryRun(1);
         controller1.getAvailableVehicles();
         controller1.selectVehicle(1);
-        when(drdb.startDelivery(1, courierEmail, null, 1)).thenReturn(true);
+        when(drdb.startDelivery(Matchers.anyInt(), Matchers.anyString(), Matchers.any(), Matchers.anyInt())).thenReturn(true);
         assertTrue(controller1.startDeliveryRun());
-        assertNull(controller1.getRoute());
-        assertEquals(0, controller1.getEnergyToStart());
+        assertNotNull(controller1.getRoute());
+        assertEquals(2.32, controller1.getEnergyToStart(), 0.1);
         
         controller2.getDeliveryRuns();
         controller2.selectDeliveryRun(2);
         controller2.getAvailableVehicles();
         controller2.selectVehicle(3);
-        when(drdb.startDelivery(2, null, null, 3)).thenReturn(false);
+        when(drdb.startDelivery(Matchers.anyInt(), Matchers.anyString(), Matchers.any(), Matchers.anyInt())).thenReturn(false);
         assertFalse(controller2.startDeliveryRun());
-        assertNull(controller2.getRoute());
-        assertEquals(0, controller2.getEnergyToStart());
+        assertNotNull(controller2.getRoute());
+        assertEquals(0.02, controller2.getEnergyToStart(), 0.01);
     }
 
     /**
