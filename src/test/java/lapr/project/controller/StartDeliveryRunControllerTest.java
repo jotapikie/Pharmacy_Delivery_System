@@ -23,6 +23,7 @@ import lapr.project.model.DeliveryRun;
 import lapr.project.model.Drone;
 import lapr.project.model.EScooter;
 import lapr.project.model.GeographicalPoint;
+import lapr.project.model.MainGraph;
 import lapr.project.model.Order;
 import lapr.project.model.Pathway;
 import lapr.project.model.Product;
@@ -188,6 +189,7 @@ public class StartDeliveryRunControllerTest {
         cdb = mock(ClientDB.class);
         vdb = mock(VehicleDB.class);
         pdb = mock(PathwayDB.class);
+        MainGraph.setup(gpdb, pdb);
         controller1 = new StartDeliveryRunController(drdb, gpdb, cdb, vdb, idPharmacy, courierWeight, courierEmail);
         controller2 = new StartDeliveryRunController(drdb, gpdb, cdb, vdb, idPharmacy, 0, null);
         when(drdb.getDeliveryRuns(idPharmacy, VehicleCategory.SCOOTER)).thenReturn(runsScooter);
