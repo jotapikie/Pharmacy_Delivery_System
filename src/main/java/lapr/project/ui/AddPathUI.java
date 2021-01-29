@@ -99,7 +99,13 @@ public class AddPathUI {
             System.out.println();
             System.out.println("Do you want to add this path to the system? (y/n)");
             if(read.nextLine().equalsIgnoreCase("y")){
-                controller.addToQueue();
+                System.out.println();
+                System.out.println("The path is biderctional? (y/n)");
+                boolean isBidirectional = false;
+                if(read.nextLine().equalsIgnoreCase("y")){
+                    isBidirectional = true;
+                }
+                controller.addToQueue(isBidirectional);
                 System.out.println();
                 System.out.println("Path added to the queue.");
                 System.out.println();

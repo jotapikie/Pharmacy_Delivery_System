@@ -64,36 +64,31 @@ public class TextFiles {
      */
     public static void main(String[] args) {
 
-     int i = 0;
-     for(String s : importFile("textFiles/LAPR_Scenario4/pharmacies.csv")){
-         System.out.println(s.split(";").length);
-         i++;
-     }
-     System.out.println(i);
+ 
  
 
-//        try{
-//            System.out.println("Clearing old data...");
-//            DataHandler dh = new DataHandler();
-//            dh.scriptRunner("textFiles/clear.sql");
-//            System.out.println("Old data cleared.");
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        System.out.println("Adding products...");
-//        System.out.printf("%d products were added. %n", insertProducts());
-//        System.out.println("Adding pharmacies...");
-//        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
-//        System.out.println("Adding clients...");
-//        System.out.printf("%d clients were added. %n", insertClients());
-//        System.out.println("Adding couriers...");
-//        System.out.printf("%d couriers were added. %n", insertCouriers());
-//        System.out.println("Adding vehicles...");
-//        System.out.printf("%d vehicles were added. %n", insertVehicles());
-        //menu();
+        try{
+            System.out.println("Clearing old data...");
+            DataHandler dh = new DataHandler();
+            dh.scriptRunner("textFiles/clear.sql");
+            System.out.println("Old data cleared.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.println("Adding products...");
+        System.out.printf("%d products were added. %n", insertProducts());
+        System.out.println("Adding pharmacies...");
+        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
+        System.out.println("Adding clients...");
+        System.out.printf("%d clients were added. %n", insertClients());
+        System.out.println("Adding couriers...");
+        System.out.printf("%d couriers were added. %n", insertCouriers());
+        System.out.println("Adding vehicles...");
+        System.out.printf("%d vehicles were added. %n", insertVehicles());
+        menu();
     }
 
     private static void menu() {
@@ -317,7 +312,11 @@ public class TextFiles {
                 
                 line = path.split(";");
                 controller.selectPoints(Double.parseDouble(line[1]), Double.parseDouble(line[0]), Double.parseDouble(line[3]), Double.parseDouble(line[2]), line[4].equals("-")?null:line[4], Double.parseDouble(line[5]),Double.parseDouble(line[6]),Double.parseDouble(line[7]),line[8], line[9].equalsIgnoreCase("-")?null:line[9]);
-                controller.addToQueue();
+                boolean isBidirectional = false;
+                if(line[10].equalsIgnoreCase("y")){
+                    isBidirectional = true;
+                }
+                controller.addToQueue(isBidirectional);
             }
             return controller.savePaths();
             

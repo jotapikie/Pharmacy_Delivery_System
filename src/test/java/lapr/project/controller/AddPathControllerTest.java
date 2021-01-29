@@ -109,12 +109,12 @@ public class AddPathControllerTest {
      */
     @Test
     public void testAddToQueue() throws SQLException {
-        assertFalse(controller.addToQueue());
+        assertFalse(controller.addToQueue(false));
         controller.getAvailableGeographicalPoints();
         controller.selectPoints(21, 39, 22, 38, "Asphalt", 1,1,1,"Scooter", "Street1");
-        assertTrue(controller.addToQueue());
+        assertTrue(controller.addToQueue(false));
         controller.selectPoints(21, 39, 22, 38, "Asphalt", 1,1,1,"Scooter", "Street1");
-        assertFalse(controller.addToQueue());
+        assertFalse(controller.addToQueue(false));
     }
 
     /**
@@ -126,7 +126,7 @@ public class AddPathControllerTest {
         
         controller.getAvailableGeographicalPoints();
         controller.selectPoints(21, 39, 22, 38, "Asphalt", 1,1,1, "Scooter","Street1");
-        controller.addToQueue();
+        controller.addToQueue(false);
         paths.add(p);
         when(pdb.savePaths(paths)).thenReturn(1);
         assertEquals(1, controller.savePaths());
