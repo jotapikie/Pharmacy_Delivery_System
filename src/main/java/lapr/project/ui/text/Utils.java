@@ -17,12 +17,14 @@ import lapr.project.data.DataHandler;
  * @author Diogo
  */
 public class Utils {
-    public static void clearAllData(){
-         try{
-            System.out.println("Clearing old data...");
-            DataHandler dh = new DataHandler();
+    
+    private static DataHandler dh = new DataHandler();
+    
+
+    
+    public static void executeScript(String file){
+        try{
             dh.scriptRunner("textFiles/clear.sql");
-            System.out.println("Old data cleared.");
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (SQLException ex) {

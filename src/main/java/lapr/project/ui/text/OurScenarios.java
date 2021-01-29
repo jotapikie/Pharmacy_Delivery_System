@@ -31,7 +31,6 @@ import lapr.project.controller.RegisterProductController;
 import lapr.project.controller.StartDeliveryRunController;
 import lapr.project.controller.UpdateStockController;
 import lapr.project.data.DataHandler;
-import static lapr.project.ui.text.Utils.clearAllData;
 import static lapr.project.ui.text.Utils.write;
 
 
@@ -69,14 +68,14 @@ public class OurScenarios {
  
  
 
-        clearAllData();
+        Utils.executeScript("textFiles/clear.sql");
 
         System.out.println("Adding products...");
         System.out.printf("%d products were added. %n", insertProducts());
         System.out.println("Adding pharmacies...");
-        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
+        System.out.printf("%d pharmacies were added. %n", insertPharmacies(PHARMACIES));
         System.out.println("Adding clients...");
-        System.out.printf("%d clients were added. %n", insertClients(CLIENTS));
+        System.out.printf("%d clients were added. %n", insertClients(CLIENTS,null));
         System.out.println("Adding couriers...");
         System.out.printf("%d couriers were added. %n", insertCouriers());
         System.out.println("Adding vehicles...");
@@ -195,10 +194,11 @@ public class OurScenarios {
     }
 
 
-    public static int insertClients(String file) {
+    public static int insertClients(String file, List<String> points) {
        RegisterClientController controller;
        String line[];
        int usersAdded = 0;
+       boolean addToList = points != null;
        for(String user : importFile(file)){
            line = user.split(";");
            controller = new RegisterClientController();
@@ -207,6 +207,9 @@ public class OurScenarios {
            controller.newClient(line[0], line[1],line[2],Integer.parseInt(line[14]) , Integer.parseInt(line[13]));
            try {
                controller.registClient();
+               if(addToList){
+                   points.add(line[4]+";"+line[5]);
+               }
                usersAdded++;
            } catch (SQLException ex) {
                System.out.println(usersAdded);
@@ -217,11 +220,11 @@ public class OurScenarios {
 
     }
     
-    private static int insertPharmacies(){
+    public static int insertPharmacies(String file){
         RegisterPharmacyController controller = new RegisterPharmacyController();
         String line[];
         int pharmaciesAdded = 0;
-        for(String pharmacy : importFile(PHARMACIES)){
+        for(String pharmacy : importFile(file)){
             line = pharmacy.split(";");
             controller.newAddress(line[2], Double.parseDouble(line[4]), Double.parseDouble(line[3]), Double.parseDouble(line[5]), line[6], line[7], Integer.parseInt(line[8]), line[16]);
             controller.newAdministrator(line[9], line[10], line[11]);

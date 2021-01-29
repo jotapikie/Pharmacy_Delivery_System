@@ -144,7 +144,8 @@ public class AssignOrderController {
     }
       
       public String getLessTimeAir(){
-          return null;
+          air.sort(new TimeComparator());
+          return air.get(0).toString();
       }
     
     public String getMostEfficient(){

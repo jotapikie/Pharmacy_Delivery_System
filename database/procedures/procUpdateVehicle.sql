@@ -1,14 +1,12 @@
-
-CREATE or replace PROCEDURE procAddVehicle (p_number vehicle.NUMBER%TYPE,
-											p_weight vehicle.WHEIGHT%TYPE,
-											p_state	vehicle.STATE%TYPE,
-											p_maxBattery vehicle.MAX_BATTERY%TYPE,
-											p_currentBattery vehicle.CURRENT_BATTERY%TYPE) as
-
+CREATE or replace PROCEDURE procUpdateVehicle (p_number vehicle.nr%TYPE,
+											p_weight vehicle.weight%TYPE,
+											p_state	vehicle.status%TYPE,
+											p_maxBattery vehicle.max_battery%TYPE,
+											p_currentBattery vehicle.current_battery%TYPE) as
 BEGIN
 
-    UPDATE VEHICLE
-    SET WHEIGHT = p_weight, STATE = p_frontal_area, MAX_BATTERY = p_maxBattery, CURRENT_BATTERY = p_currentBattery, 
-    where NUMBER = p_id;
+    UPDATE vehicle v
+    SET v.weight = p_weight, v.status = p_state, v.max_battery = p_maxBattery, v.current_battery = p_currentBattery
+    WHERE v.nr = p_number;
 
-end;
+END;
