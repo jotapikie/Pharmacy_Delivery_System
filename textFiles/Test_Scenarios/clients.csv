@@ -17,10 +17,10 @@
 name;email;password;street;latitude;longitude;elevation;city;zip;port;visa_number;validity_date;ccv;phone_number;nif;desc
 Maria Soares;marias@gmail.com;123;Av. Dr. Óscar Lopes;41.20690;-8.68772;40;Leça da Palmeira;4450-337;34;7482956205729456;11/23;557;919998700;275937405;Mar Shopping
 Paulo Zara;pauloz@gmail.com;psd;R. Eng. Duarte Pacheco;41.23339;-8.62175;109;Maia;4470-202;27;5291003729102212;07/24;111;911285930;728405829;C. Comercial Plaza
-Nelo Cidade;neloc@gmail.com;ncd;Av. Serpa Pinto;41.18227;-8.69270;15;Matosinhos;4450-248;551;8293042781945627;02/23;212;961272233;91846294729;C. Comercial New City
+Nelo Cidade;neloc@gmail.com;ncd;Av. Serpa Pinto;41.18227;-8.69270;15;Matosinhos;4450-248;551;8293042781945627;02/23;212;961272233;918462947;C. Comercial New City
 Paula Patins;paulap@gmail.com;pdn;R. de Alfredo Cunha;41.18451;-8.68201;32;Matosinhos;4450-023;155;6294829572837865;01/23;773;919384842;829453890;C. Comercial Parque
 Nuno Norte;norte@gmail.com;nrd;R. Sara Afonso;41.18003;-8.65404;84;Sra. da Hora;4460-841;123;8235516667291048;02/24;678;919571300;829366182;NorteShopping
-Pedro Pereira;pereira@gmail.com;prd;Praça Alfrânio Peixoto;41.17267;-8.65470;74;Porto;4100-214;100;218942067825300;05/23;627;916198210;629567293;Pereiró Post Office
+Pedro Pereira;pereira@gmail.com;prd;Praça Alfrânio Peixoto;41.17267;-8.65470;74;Porto;4100-214;100;2189420678253005;05/23;627;916198210;629567293;Pereiró Post Office
 Armando Soares;arrso@gmail.com;ars;Praceta de H. Moreira;41.14139;-8.63499;85;V.N de Gaia;4400-346;324;8926428109462895;02/28;682;913747700;627819929;ArrábidaShopping
 Carlos Taveira;cttca@gmail.com;ctt;R. do Campo Alegre;41.15260;-8.63064;78;Porto;4150-169;254;2748901956294550;03/23;998;913214474;627382910;CTT Campo Alegre
 Sophia Brasil;sbrasil@gmail.com;dsd;Praça de M. de Albuquerque;41.15753;-8.62805;92;Porto;4100-359;113;3792018569203689;07/26;378;960402114;729013759;Shopping Brasilia
