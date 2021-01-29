@@ -274,7 +274,8 @@ public class StartDeliveryRunControllerTest {
         controller1.selectDeliveryRun(1);
         controller1.getAvailableVehicles();
         controller1.selectVehicle(1);
-        controller1.startDeliveryRun();
+        when(drdb.startDelivery(1, courierEmail, null, 1)).thenReturn(true);
+        assertTrue(controller1.startDeliveryRun());
         assertNull(controller1.getRoute());
         assertEquals(0, controller1.getEnergyToStart());
         
@@ -282,7 +283,8 @@ public class StartDeliveryRunControllerTest {
         controller2.selectDeliveryRun(2);
         controller2.getAvailableVehicles();
         controller2.selectVehicle(3);
-        controller2.startDeliveryRun();
+        when(drdb.startDelivery(2, null, null, 3)).thenReturn(false);
+        assertFalse(controller2.startDeliveryRun());
         assertNull(controller2.getRoute());
         assertEquals(0, controller2.getEnergyToStart());
     }
