@@ -54,6 +54,9 @@ public class Route implements Comparable<Route>{
     
     
     private List<GeographicalPoint> stopPoints;
+    
+    
+    private List<GeographicalPoint> chargingPoints;
 
     /**
      * Constructs a route that is a copy of another route.
@@ -69,6 +72,7 @@ public class Route implements Comparable<Route>{
         this.energyToReachChargingPoint = otherRoute.energyToReachChargingPoint;
         this.minimumEnergy = otherRoute.minimumEnergy;
         this.stopPoints = otherRoute.stopPoints;
+        this.chargingPoints = otherRoute.chargingPoints;
     }
 
     /**
@@ -97,6 +101,7 @@ public class Route implements Comparable<Route>{
         energyToReachChargingPoint = totalEnergy;
         minimumEnergy = totalEnergy;
         stopPoints = new LinkedList<>();
+        chargingPoints = new LinkedList<>();
     }
 
     /**
@@ -166,9 +171,11 @@ public class Route implements Comparable<Route>{
         return paths.size() + 1;
     }
 
-    public List<GeographicalPoint> getStopPoints() {
-        return new LinkedList<>(stopPoints);
+    public List<GeographicalPoint> getChargingPoints() {
+        return new LinkedList<>(chargingPoints);
     }
+
+    
     
     public boolean addStopPoint(GeographicalPoint stop){
         for(Pathway p : paths){
@@ -248,7 +255,7 @@ public class Route implements Comparable<Route>{
         }
         if(edge.getDestinationPoint().getDescription().contains(Constants.CHARGING_SPOT)){
             energyToReachChargingPoint = 0;
-            stopPoints.add(edge.getDestinationPoint());
+            chargingPoints.add(edge.getDestinationPoint());
          }
     }
 

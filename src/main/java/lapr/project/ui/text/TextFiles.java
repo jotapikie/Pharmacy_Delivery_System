@@ -64,30 +64,35 @@ public class TextFiles {
      */
     public static void main(String[] args) {
 
-     
+     int i = 0;
+     for(String s : importFile("textFiles/LAPR_Scenario4/pharmacies.csv")){
+         System.out.println(s.split(";").length);
+         i++;
+     }
+     System.out.println(i);
  
 
-        try{
-            System.out.println("Clearing old data...");
-            DataHandler dh = new DataHandler();
-            dh.scriptRunner("textFiles/clear.sql");
-            System.out.println("Old data cleared.");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        System.out.println("Adding products...");
-        System.out.printf("%d products were added. %n", insertProducts());
-        System.out.println("Adding pharmacies...");
-        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
-        System.out.println("Adding clients...");
-        System.out.printf("%d clients were added. %n", insertClients());
-        System.out.println("Adding couriers...");
-        System.out.printf("%d couriers were added. %n", insertCouriers());
-        System.out.println("Adding vehicles...");
-        System.out.printf("%d vehicles were added. %n", insertVehicles());
+//        try{
+//            System.out.println("Clearing old data...");
+//            DataHandler dh = new DataHandler();
+//            dh.scriptRunner("textFiles/clear.sql");
+//            System.out.println("Old data cleared.");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        System.out.println("Adding products...");
+//        System.out.printf("%d products were added. %n", insertProducts());
+//        System.out.println("Adding pharmacies...");
+//        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
+//        System.out.println("Adding clients...");
+//        System.out.printf("%d clients were added. %n", insertClients());
+//        System.out.println("Adding couriers...");
+//        System.out.printf("%d couriers were added. %n", insertCouriers());
+//        System.out.println("Adding vehicles...");
+//        System.out.printf("%d vehicles were added. %n", insertVehicles());
         //menu();
     }
 

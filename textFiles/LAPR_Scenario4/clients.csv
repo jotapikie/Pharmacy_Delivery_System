@@ -1,0 +1,41 @@
+#lines starting with # should be ignored
+#name of client
+#email of client
+#password of client
+#street where client lives
+#latitude where client lives
+#longitude where client lives
+#elevation where client lives (in meters)
+#city where client lives
+#zip code (xxxx-xxx)
+#port number 
+#visa_number of credit card
+#validity_date of credit cart (mm/yy)
+#ccv of credit card (3 digits)
+#phone number of client (9 digits)
+#nif of client (9 digits)
+name;email;password;street;latitude;longitude;elevation;city;zip;port;visa_number;validity_date;ccv;phone_number;nif;desc
+Maria Soares;marias@gmail.com;123;Av. Dr. Óscar Lopes;41.20690;-8.68772;40;Leça da Palmeira;4450-337;34;7482956205729456;11/23;557;919998700;275937405;Mar Shopping
+Paulo Zara;pauloz@gmail.com;psd;R. Eng. Duarte Pacheco;41.23339;-8.62175;109;Maia;4470-202;27;5291003729102212;07/24;111;911285930;728405829;C. Comercial Plaza
+Nelo Cidade;neloc@gmail.com;ncd;Av. Serpa Pinto;41.18227;-8.69270;15;Matosinhos;4450-248;551;8293042781945627;02/23;212;961272233;91846294729;C. Comercial New City
+Paula Patins;paulap@gmail.com;pdn;R. de Alfredo Cunha;41.18451;-8.68201;32;Matosinhos;4450-023;155;6294829572837865;01/23;773;919384842;829453890;C. Comercial Parque
+Nuno Norte;norte@gmail.com;nrd;R. Sara Afonso;41.18003;-8.65404;84;Sra. da Hora;4460-841;123;8235516667291048;02/24;678;919571300;829366182;NorteShopping
+Pedro Pereira;pereira@gmail.com;prd;Praça Alfrânio Peixoto;41.17267;-8.65470;74;Porto;4100-214;100;218942067825300;05/23;627;916198210;629567293;Pereiró Post Office
+Armando Soares;arrso@gmail.com;ars;Praceta de H. Moreira;41.14139;-8.63499;85;V.N de Gaia;4400-346;324;8926428109462895;02/28;682;913747700;627819929;ArrábidaShopping
+Carlos Taveira;cttca@gmail.com;ctt;R. do Campo Alegre;41.15260;-8.63064;78;Porto;4150-169;254;2748901956294550;03/23;998;913214474;627382910;CTT Campo Alegre
+Sophia Brasil;sbrasil@gmail.com;dsd;Praça de M. de Albuquerque;41.15753;-8.62805;92;Porto;4100-359;113;3792018569203689;07/26;378;960402114;729013759;Shopping Brasilia
+Carlos Carvalhido;ccarvalhido@gmail.com;23s;Rua do Lugarinho;41.16805;-8.63043;95;Porto;4250-116;324;4829105678293456;08/23;773;962210212;839205667;C. Comercial Carvalhido
+Cesar Cedofeita;ccedofeita@gmail.com;2csh;Rua de Cedofeita;41.15461;-8.61886;92;Porto;4050-181;451;9127381957290012;03/24;774;936247593;672891056;C. Comercial de Cedofeita
+Tomás Santos;tshop@gmail.com;gsd2;Praça de Carlos Alberto;41.14795;-8.61600;90;Porto;4050-158;109;2839103781937290;09/24;221;917220098;285920567;Shop
+Salvador Praca;spraca@gmail.com;sgdh1;Rua Jau;41.13312;-8.60826;77;V.N de Gaia;4430-999;35;4829105627891234;03/12;923;917772883;920195627;Praceta S. Caetano
+Tiago Correia;tcc@gmail.com;2hsd2;Praça 9 de Abril;41.17155;-8.61273;122;Porto;4200-422;49;7182930127183067;05/26;922;910471616;823900122;CTT Porto
+Erica Colosso;ecolossal@gmail.com;2hs2;R. de Alexandre Herculano;41.14354;-8.60336;47;Porto;4000-051;134;8230104289401622;11/22;733;920187795;723819023;Espiral Colossal
+Sara Tavares;tst@gmail.com;dh2;R. de Santa Catarina;41.15345;-8.60487;118;Porto;4000-099;325;2783940167820012;12/23;990;961011899;290168394;Traditional Shopping S.
+Stephane Costa;steps@gmail.com;d2d3;Rua do Heroísmo;41.14608;-8.59501;90;Porto;4300-256;329;8239019566100245;11/24;280;912688194;273019286;C. Comercial Stop
+Carlos Ferreira;cferreira@gmail.com;2hd3;Rua das Mercês;41.17123;-8.58831;147;Porto;4200-995;152;6190023551992378;06/25;221;925020846;712233098;Correios de C. Ferreira
+Rita Alameda;ralameda@gmail.com;hsgd2;R. Bairrro do Comércio;41.16326;-8.58373;113;Porto;4350-149;23;7283910923117834;08/25;333;915076280;901263120;Alameda Shopping
+Filipe Persa;fpersa@gmail.com;sdh23;Rua Faia;41.14418;-8.57470;26;Porto;4300-526;5;6128900127219560;09/25;285;915305134;801209078;Fishisco Pesca
+Carlos Folha;folha@gmail.com;hf2;U. Mãos á Obra;41.19252;-8.57577;136;Rio Tinto;4435-318;6;9012673098812644;01/22;386;919719652;823709671;Correios Forno
+Filipe Teco;tecof@gmail.com;shf3;R. Pedro J.Ferreira;41.15395;-8.54672;68;Fânzeres;4510-706;221;8910022778867801;07/29;560;914631161;856209562;Tecofix 
+Carlos Ernesto;erne@gmail.com;hf2;Rua das Macieiras;41.20261;-8.54506;119;Ermesinde;4445-271;180;8340227765461037;05/26;573;919783250;801967283;Correios Ermesinde
+Valter Oliveira;valo@gmail.com;gj4;Avenida 5 de Outubro;41.18998;-8.49770;137;Valongo;4440-999;68;2034809812712612;05/24;672;914227310;802907607;CTT Valongo

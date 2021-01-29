@@ -184,8 +184,8 @@ public class StartDeliveryRunController {
     }
     
     public double getEnergyToStart(){
-        if(r!= null && !r.getStopPoints().isEmpty()){
-            GeographicalPoint chargingStation = r.getStopPoints().get(0);
+        if(r!= null && !r.getChargingPoints().isEmpty()){
+            GeographicalPoint chargingStation = r.getChargingPoints().get(0);
             double energy = 0;
             for(Pathway p : r.getPaths()){
                 energy = energy + p.getCost();
