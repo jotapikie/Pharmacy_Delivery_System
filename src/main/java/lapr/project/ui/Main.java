@@ -59,25 +59,24 @@ class Main {
                 WatchKey key= path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
 
 
-                boolean check = false;
+                boolean checkFlag = false;
                 File deleteEstimate = null;
                 File deleteFlag = null;
 
                 while (true) {
                     for (WatchEvent<?> event : key.pollEvents()) {
 
-                        System.out.println("\nola jota");
                         String filename = event.context().toString();
                         int length = filename.length();
                         if (filename.startsWith(KEY1)) {
 
-                            if (filename.startsWith(KEY3, length - KEY3.length()) && !check) {
-                                deleteFlag = new File(filename);
-                                check=true;
-                            }
-                            if (filename.startsWith(KEY2, length - KEY2.length()) && check) {
-                                check = true;
+                            if (filename.startsWith(KEY2, length - KEY2.length()) && !checkFlag) {
                                 deleteEstimate = new File(filename);
+                                checkFlag=true;
+                            }
+                            if (filename.startsWith(KEY3, length - KEY3.length()) || checkFlag) {
+                                checkFlag = true;
+                                deleteFlag = new File(filename);
 
                                 if (!deleteProtocol(deleteEstimate, deleteFlag)){
                                     logWarning("Estimated files have not been deleted");
@@ -108,7 +107,7 @@ class Main {
 
 
     //Gets information of both estimate files; finishes their journeys and sends an email to the user in question either with the estimated time or an alert that the scooter is not parked correctly
-    private static boolean deleteProtocol(File deleteEstimate, File deleteFlag) throws IOException, InterruptedException, MessagingException {
+    private static boolean deleteProtocol(File deleteEstimate, File deleteFlag) throws IOException, InterruptedException, RuntimeException, MessagingException {
 
         try (BufferedReader br1 = Files.newBufferedReader(Paths.get(PATH_FILES + deleteEstimate))) {
 
@@ -144,7 +143,7 @@ class Main {
             logWarning("Estimate file recieved is in the wrong format.");
         } catch (FileNotFoundException e) {
             logWarning("Something went wrong with estimated file");
-        } catch (SQLException throwables) {
+        } catch (SQLException | RuntimeException throwables) {
             throwables.printStackTrace();
         }
         return false;

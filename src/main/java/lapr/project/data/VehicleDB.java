@@ -141,7 +141,7 @@ public class VehicleDB extends DataHandler {
             callStmt.execute();
                 ResultSet rSet = (ResultSet) callStmt.getObject(1);
                 if (rSet.next()) {
-                    return new EScooter(rSet.getInt(1), State.valueOf(rSet.getString(3)),rSet.getDouble(4), rSet.getDouble(5));
+                    return new EScooter(rSet.getInt(1), State.valueOf(rSet.getString(3).toUpperCase()),rSet.getDouble(4), rSet.getDouble(5));
                 }
             }
 

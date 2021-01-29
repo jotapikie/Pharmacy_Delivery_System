@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import static jdk.nashorn.internal.runtime.Debug.id;
-
 import lapr.project.model.*;
 import lapr.project.utils.Constants;
 import oracle.jdbc.OracleTypes;
