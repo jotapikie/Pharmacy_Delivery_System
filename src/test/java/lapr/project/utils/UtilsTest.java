@@ -171,12 +171,13 @@ public class UtilsTest {
         double areaFrontal = 5.0;
         double areaTopo = 2.0;
         double velocidadeMedia = 50.0;
+        double velocidadeVertical= 10.0;
         Wind windToPath = new Wind(2.0,2.0,1.0);
         double altitudeDifI = 3.0;
         double altitudeDifF = 2.0;
         double distance = 35.0;
         double expResult = 0.032;
-        double result = Utils.pathEnergyCostDrone(totalWeight, vehicleAerodynamicCoef, powerTransfer, liftDrag, consumoEletronico, areaFrontal, areaTopo, velocidadeMedia, windToPath, altitudeDifI, altitudeDifF, distance);
+        double result = Utils.pathEnergyCostDrone(totalWeight, vehicleAerodynamicCoef, powerTransfer, liftDrag, consumoEletronico, areaFrontal, areaTopo, velocidadeMedia, velocidadeVertical, windToPath, altitudeDifI, altitudeDifF, distance);
         assertEquals(expResult, result, 0.01);
     }
 

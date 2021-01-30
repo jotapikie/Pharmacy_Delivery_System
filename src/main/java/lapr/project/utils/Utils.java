@@ -159,7 +159,7 @@ public class Utils {
         return (result < 0) ? 0 : result*0.001;
     }
 
-    public static double pathEnergyCostDrone(double totalWeight, double vehicleAerodynamicCoef, double powerTransfer, double liftDrag, double consumoEletronico, double areaFrontal, double areaTopo, double velocidadeMedia, Wind windToPath, double altitudeDifI, double altitudeDifF, double distance) {
+    public static double pathEnergyCostDrone(double totalWeight, double vehicleAerodynamicCoef, double powerTransfer, double liftDrag, double consumoEletronico, double areaFrontal, double areaTopo, double velocidadeMedia, double velocidadeVertical, Wind windToPath, double altitudeDifI, double altitudeDifF, double distance) {
         if (distance <= 0 || altitudeDifI >= distance || altitudeDifF >= distance || vehicleAerodynamicCoef < 0 || consumoEletronico <= 0 || areaFrontal <= 0 || areaTopo <= 0 || velocidadeMedia <= 0 || totalWeight <= 0) {
             throw new IllegalArgumentException("This path has invalid data!");
         }
@@ -167,7 +167,7 @@ public class Utils {
         double eHorizontal = (((totalWeight * Constants.GRAVITY) / (liftDrag * powerTransfer)) * distance);
         double tViagem = (velocidadeMedia / (distance * distance));
         double eAero = fAero * tViagem * velocidadeMedia;
-        double fImpulso = ((totalWeight * Constants.GRAVITY) + (0.5 * Constants.RO_AR * areaTopo * Constants.DRAG_COEF * velocidadeMedia * velocidadeMedia));
+        double fImpulso = ((totalWeight * Constants.GRAVITY) + (0.5 * Constants.RO_AR * areaTopo * Constants.DRAG_COEF * velocidadeVertical * velocidadeVertical));
         double eSubir = ((fImpulso * altitudeDifI) / Constants.RENDIMENTO_DRONE);
         double eDescer = ((fImpulso * altitudeDifF) / Constants.RENDIMENTO_DRONE);
         return (eAero + eDescer + eHorizontal + eSubir) * (2.777778*Math.pow(10, -7));

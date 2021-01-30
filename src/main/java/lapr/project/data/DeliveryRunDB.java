@@ -57,25 +57,16 @@ public class DeliveryRunDB extends DataHandler{
     }
 
 
-    public String getCourierEmail(int scooterID) throws SQLException{
-        try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call triggerGetCourierEmailByScooterID(?,?)}")) {
-            callStmt.registerOutParameter(1, OracleTypes.INTEGER);
-            callStmt.setInt(2, scooterID);
-            callStmt.setTimestamp(3, Timestamp.from(Instant.now()));
-            callStmt.execute();
-            return callStmt.getString(1);
-
-        }
-    }
-
     public String endDeliveryRun(int scooterID) throws SQLException {
         try (CallableStatement callStmt = getConnection().prepareCall("{ ? = call funcEndDeliveryRun(?,?)}")) {
             callStmt.registerOutParameter(1, OracleTypes.CURSOR);
             callStmt.setInt(2, scooterID);
             callStmt.setTimestamp(3, Timestamp.from(Instant.now()));
             callStmt.execute();
-            return callStmt.getString(1);
-        }
+            ResultSet rs = (ResultSet) callStmt.getObject(1);
+            rs.next();
+            return rs.getString(1);
+           }
     }
 
     public boolean startDelivery(int id, String email, Route r, int vehicleId) throws SQLException {

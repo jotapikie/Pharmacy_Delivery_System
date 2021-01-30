@@ -141,7 +141,7 @@ public class VehicleDB extends DataHandler {
             callStmt.execute();
                 ResultSet rSet = (ResultSet) callStmt.getObject(1);
                 if (rSet.next()) {
-                    return new EScooter(rSet.getInt(1), State.valueOf(rSet.getString(3).toUpperCase()),rSet.getDouble(4), rSet.getDouble(5));
+                    return new EScooter(rSet.getInt(1), State.fromString(rSet.getString(2)),rSet.getDouble(3), rSet.getDouble(4));
                 }
             }
 
@@ -180,21 +180,14 @@ public class VehicleDB extends DataHandler {
 
     private void updateVehicle(Vehicle v, String typeVehicle) throws SQLException {
         getConnection();
-        try (CallableStatement callStmt = getConnection().prepareCall("{ call procUpdateVehicle(?,?,?,?,?,?,?,?) }")) {
+        try (CallableStatement callStmt = getConnection().prepareCall("{ call procUpdateVehicle(?,?,?,?,?) }")) {
 
             callStmt.setInt(1, v.getId());
             callStmt.setDouble(2, v.getWeight());
             callStmt.setString(3, v.getState().toString());
             callStmt.setDouble(4, v.getMaxBat());
             callStmt.setDouble(5, v.getCurrentBat());
-            callStmt.setDouble(6, v.getMotor());
 
-            if (typeVehicle.equalsIgnoreCase(ESCOOTER)) {
-                EScooter escooter = (EScooter) v;
-                //parameter to actully set
-                callStmt.setDouble(8, EScooter.getAeroCoef());
-                callStmt.setDouble(9, EScooter.getFrontalArea());
-            }
 
             callStmt.execute();
         }

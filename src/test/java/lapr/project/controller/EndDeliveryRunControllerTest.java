@@ -25,26 +25,6 @@ class EndDeliveryRunControllerTest {
 
 
     }
-    @Test
-    void getScooterCourierByDeliveryRun() throws SQLException {
-        when(drdb.getCourierEmail(anyInt())).thenReturn(courier);
-        String result=drdb.getCourierEmail(1);
-        assertEquals(courier, result);
-    }
-    @Test
-    void getScooterCourierByDeliveryRunFail() throws SQLException {
-        when(drdb.getCourierEmail(anyInt())).thenReturn(null);
-        String result=drdb.getCourierEmail(1);
-        String exp= null;
-        assertEquals(exp, result);
-    }
-    
-    @Test
-    void getScooterCourierByDeliveryRunFail2() throws SQLException {
-        String result=drdb.getCourierEmail(1);
-        String exp= null;
-        assertEquals(exp, result);
-    }
 
     @Test
     void setEndDate() throws SQLException {

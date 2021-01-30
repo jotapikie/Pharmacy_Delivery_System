@@ -74,14 +74,14 @@ class Main {
                                 deleteEstimate = new File(filename);
                                 checkFlag=true;
                             }
-                            if (filename.startsWith(KEY3, length - KEY3.length()) || checkFlag) {
+                            if (filename.startsWith(KEY3, length - KEY3.length()) && checkFlag) {
                                 checkFlag = true;
                                 deleteFlag = new File(filename);
 
                                 if (!deleteProtocol(deleteEstimate, deleteFlag)){
-                                    logWarning("Estimated files have not been deleted");
+                                    logWarning("Estimated files have been deleted");
                             } else {
-                                    logWarning("Deleted estimated files");
+                                    logWarning("Estimated files not deleted");
                                 }
                         }}
                     }
@@ -124,7 +124,7 @@ class Main {
                 email=drc.setEndDate(Integer.parseInt(arrSplit[0]));
 
 
-                Utils.sendEmail(email, "Scooter battery charging duration estimate", "We estimate that your scooter will have full charge in " + arrSplit[3] + " hours.");
+                Utils.sendEmail(email, "Scooter battery charging duration estimate",arrSplit[3]==null?"ERRO":   "We estimate that your scooter will have full charge in " + arrSplit[3] + " hours.");
 
                 Thread.sleep(2000);
                 Files.delete(Paths.get(PATH_FILES + deleteEstimate));
