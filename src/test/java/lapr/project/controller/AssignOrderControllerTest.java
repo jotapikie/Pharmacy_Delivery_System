@@ -286,7 +286,7 @@ public class AssignOrderControllerTest {
         controller.addOrder();
         controller.getLandRoute();
         controller.getAirRoute();
-        assertEquals("Scooter", controller.getMostEfficient());
+        assertEquals("Drone", controller.getMostEfficient());
     }
 
     /**

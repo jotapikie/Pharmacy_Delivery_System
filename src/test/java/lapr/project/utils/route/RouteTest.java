@@ -207,6 +207,52 @@ public class RouteTest {
         
         
     }
+    
+    @Test
+    public void testAddStopPoint() {
+        assertFalse(instance.addStopPoint(new GeographicalPoint(23,54,2.2,"dsd")));
+        assertTrue(instance.addStopPoint(or));
+        assertTrue(instance.addStopPoint(dest));
+        
+    }
+    
+    @Test
+    public void testSetAverageSpeed() {
+        instance.setAverageSpeed(12);
+        assertEquals(12, instance.getAverageHorizontalSpeed());
+        
+        boolean flag = false;
+        try{
+            instance.setAverageSpeed(-2);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(12, instance.getAverageHorizontalSpeed());
+        
+        instance.setAverageSpeed(0);
+        assertEquals(0, instance.getAverageHorizontalSpeed());
+        
+    }
+    
+        @Test
+    public void testSetAverageVerticalSpeed() {
+        instance.setVerticalSpeed(12);
+        assertEquals(12, instance.getAverageVerticalSpeed());
+        
+        boolean flag = false;
+        try{
+            instance.setVerticalSpeed(-2);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(12, instance.getAverageVerticalSpeed());
+        
+        instance.setVerticalSpeed(0);
+        assertEquals(0, instance.getAverageVerticalSpeed());
+        
+    }
 
     /**
      * Test of compareTo method, of class Route.

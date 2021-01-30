@@ -289,7 +289,7 @@ public class StartDeliveryRunControllerTest {
         when(drdb.startDelivery(Matchers.anyInt(), Matchers.anyString(), Matchers.any(), Matchers.anyInt())).thenReturn(false);
         assertFalse(controller2.startDeliveryRun());
         assertNotNull(controller2.getRoute());
-        assertEquals(0.02, controller2.getEnergyToStart(), 0.01);
+        assertEquals(0.008, controller2.getEnergyToStart(), 0.001);
     }
 
     /**

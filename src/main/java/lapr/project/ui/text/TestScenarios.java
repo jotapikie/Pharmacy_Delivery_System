@@ -140,6 +140,10 @@ public class TestScenarios {
                 List<Route> lRoutes = land.kBestPaths(pointsToStop, pharmacy, pharmacy, 20 ,Constants.SCOOTER_MAX_BATTERY);
                 List<Route> aRoutes = air.kBestPaths(pointsToStop, pharmacy, pharmacy, 20, Constants.DRONE_MAX_BATTERY);
                 
+                for(Route r : lRoutes){
+                    System.out.println(r);
+                    System.out.println();
+                }
                 List<Route> landTime = new ArrayList<>(lRoutes);
                 landTime.sort(new TimeComparator());
                 List<Route> airTime = new ArrayList<>(aRoutes);

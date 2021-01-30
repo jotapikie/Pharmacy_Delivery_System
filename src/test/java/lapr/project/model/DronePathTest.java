@@ -62,6 +62,24 @@ public class DronePathTest {
         double totalWeight = 5.0;
         test.setTotalWeight(totalWeight);
         assertEquals(test.getTotalWeight(), totalWeight, 0.0);
+        
+        boolean flag = false;
+        try{
+            test.setTotalWeight(0);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(totalWeight, test.getTotalWeight());
+        
+        flag = false;
+        try{
+            test.setTotalWeight(-6);
+        }catch(IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+        assertEquals(totalWeight, test.getTotalWeight());
     }
 
     /**
@@ -69,7 +87,7 @@ public class DronePathTest {
      */
     @Test
     public void testGetCost() {
-        double expResult = 0.032;
+        double expResult = 0.012;
         double result = test.getCost();
         assertEquals(expResult, result, 0.01);
     }

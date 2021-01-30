@@ -46,6 +46,7 @@ public class AddPathControllerTest {
     private static Wind wind;
     
     private static Pathway p;
+    private static Pathway pInverse;
     private static Set<Pathway> paths;
     
     @BeforeAll
@@ -59,6 +60,7 @@ public class AddPathControllerTest {
         points.add(p1);points.add(p2);points.add(p3);
         
         p = new Pathway(p1, p2, StreetType.ASPHALT, 4.5, wind, "Street1", VehicleCategory.SCOOTER);
+        pInverse = new Pathway(p2, p1, StreetType.ASPHALT, 4.5, wind, "Street1", VehicleCategory.SCOOTER);
         paths = new HashSet<>();
         AddPathController c1 = new AddPathController();
     }
@@ -116,6 +118,22 @@ public class AddPathControllerTest {
         controller.selectPoints(21, 39, 22, 38, "Asphalt", 1,1,1,"Scooter", "Street1");
         assertFalse(controller.addToQueue(false));
     }
+    
+        /**
+     * Test of addToQueue method, of class AddPathController.
+     */
+    @Test
+    public void testAddToQueue_Bidirectional() throws SQLException {
+        controller.getAvailableGeographicalPoints();
+        controller.selectPoints(21, 39, 22, 38, "Asphalt", 1,1,1,"Scooter", "Street1");
+        controller.addToQueue(true);
+        paths.clear();
+        paths.add(p);
+        paths.add(pInverse);
+        when(pdb.savePaths(paths)).thenReturn(2);
+        assertEquals(2,controller.savePaths());
+
+    }
 
     /**
      * Test of savePaths method, of class AddPathController.
@@ -127,6 +145,7 @@ public class AddPathControllerTest {
         controller.getAvailableGeographicalPoints();
         controller.selectPoints(21, 39, 22, 38, "Asphalt", 1,1,1, "Scooter","Street1");
         controller.addToQueue(false);
+        paths.clear();
         paths.add(p);
         when(pdb.savePaths(paths)).thenReturn(1);
         assertEquals(1, controller.savePaths());

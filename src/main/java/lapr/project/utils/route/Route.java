@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import lapr.project.model.DronePath;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.Pathway;
 import lapr.project.utils.Constants;
@@ -213,13 +212,18 @@ public class Route implements Comparable<Route>{
         }
         this.averageVerticalSpeed= averageSpeed;
     }
-    
-    
-    
-    
 
-  
-    /**
+    public double getAverageHorizontalSpeed() {
+        return averageHorizontalSpeed;
+    }
+
+    public double getAverageVerticalSpeed() {
+        return averageVerticalSpeed;
+    }
+    
+    
+    
+   /**
      * Adds an edge to the route, verifying the route's integrity.
      *
      * @param edges edge to add.
