@@ -30,10 +30,9 @@ import lapr.project.controller.RegisterPharmacyController;
 import lapr.project.controller.RegisterProductController;
 import lapr.project.controller.StartDeliveryRunController;
 import lapr.project.controller.UpdateStockController;
-import lapr.project.data.DataHandler;
-import static lapr.project.ui.text.Utils.clearAllData;
 import static lapr.project.ui.text.Utils.write;
-
+import static lapr.project.ui.text.Utils.importFile;
+import static lapr.project.ui.text.Utils.executeScript;
 
 
 /**
@@ -68,15 +67,15 @@ public class OurScenarios {
 
  
  
-
-        clearAllData();
-
+        System.out.println("Clearing data...");
+        executeScript("textFiles/clear.sql");
+        System.out.println("Old data cleared.");
         System.out.println("Adding products...");
         System.out.printf("%d products were added. %n", insertProducts());
         System.out.println("Adding pharmacies...");
-        System.out.printf("%d pharmacies were added. %n", insertPharmacies());
+        System.out.printf("%d pharmacies were added. %n", insertPharmacies(PHARMACIES,null));
         System.out.println("Adding clients...");
-        System.out.printf("%d clients were added. %n", insertClients(CLIENTS));
+        System.out.printf("%d clients were added. %n", insertClients(CLIENTS,null));
         System.out.println("Adding couriers...");
         System.out.printf("%d couriers were added. %n", insertCouriers());
         System.out.println("Adding vehicles...");
@@ -195,10 +194,11 @@ public class OurScenarios {
     }
 
 
-    public static int insertClients(String file) {
+    public static int insertClients(String file, List<String> points) {
        RegisterClientController controller;
        String line[];
        int usersAdded = 0;
+       boolean addToList = points != null;
        for(String user : importFile(file)){
            line = user.split(";");
            controller = new RegisterClientController();
@@ -207,6 +207,9 @@ public class OurScenarios {
            controller.newClient(line[0], line[1],line[2],Integer.parseInt(line[14]) , Integer.parseInt(line[13]));
            try {
                controller.registClient();
+               if(addToList){
+                   points.add(line[4]+";"+line[5]);
+               }
                usersAdded++;
            } catch (SQLException ex) {
                System.out.println(usersAdded);
@@ -217,20 +220,25 @@ public class OurScenarios {
 
     }
     
-    private static int insertPharmacies(){
+    public static int insertPharmacies(String file,List<String> points){
         RegisterPharmacyController controller = new RegisterPharmacyController();
         String line[];
         int pharmaciesAdded = 0;
-        for(String pharmacy : importFile(PHARMACIES)){
+        boolean addToList = points != null;
+        for(String pharmacy : importFile(file)){
             line = pharmacy.split(";");
             controller.newAddress(line[2], Double.parseDouble(line[4]), Double.parseDouble(line[3]), Double.parseDouble(line[5]), line[6], line[7], Integer.parseInt(line[8]), line[16]);
             controller.newAdministrator(line[9], line[10], line[11]);
             controller.newPark(line[12], Integer.parseInt(line[13]), Integer.parseInt(line[14]), Double.parseDouble(line[15]));
             controller.newPharmacy(line[0], Integer.parseInt(line[1]));
             controller.addToQueue();
+            if(addToList){
+                points.add(line[3]+";"+line[4]);
+            }
         }
         try {
             pharmaciesAdded = controller.registPharmacies();
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -507,25 +515,7 @@ public class OurScenarios {
     }
     
     
-    private static List<String> importFile(String s) {
-        boolean ignoreFirstLine = true;
-        List<String> listToReturn = new ArrayList<>();
-        try (Stream<String> stream = Files.lines(Paths.get(s))) {
-            List<String> l = stream.collect(Collectors.toList());
-            for (String str : l) {
-                if (str.contains("#")) {
-                    // Skip line
-                } else if (ignoreFirstLine) {
-                    ignoreFirstLine = false;
-                } else {
-                    listToReturn.add(str);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return listToReturn;
-    }
+
     
 
 

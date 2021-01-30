@@ -25,6 +25,7 @@ import lapr.project.model.Pathway;
 import lapr.project.model.Product;
 import lapr.project.model.Vehicle;
 import lapr.project.model.VehicleCategory;
+import lapr.project.model.comparator.EnergyComparator;
 import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
 import lapr.project.utils.route.Route;
@@ -157,7 +158,9 @@ public class StartDeliveryRunController {
             
             routes = graph.kBestPaths(points, pharmacyAdd, pharmacyAdd, 1, vehicle.getMaxBat());
             if(!routes.isEmpty()){
-               r = routes.get(0); 
+               List<Route> energyOrder = new ArrayList<>(routes);
+               energyOrder.sort(new EnergyComparator());
+               r = energyOrder.get(0); 
             }
             
         }catch(IllegalArgumentException e){

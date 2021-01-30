@@ -18,6 +18,7 @@ import lapr.project.model.Pathway;
 import lapr.project.model.StreetType;
 import lapr.project.model.VehicleCategory;
 import lapr.project.model.Wind;
+import lapr.project.utils.Constants;
 import lapr.project.utils.Utils;
 import oracle.jdbc.OracleTypes;
 
@@ -47,7 +48,14 @@ public class PathwayDB extends DataHandler{
 
     public Pathway newPath(GeographicalPoint or, GeographicalPoint dest, String type, double vx, double vy, double vz, String street, String category) {
         Wind w = new Wind(vx, vy, vz);
-        double distance = Utils.distance(or.getLatitude(), dest.getLatitude(), or.getLongitude(), dest.getLongitude(), or.getElevation(), dest.getElevation());
+        double distance = 0;
+        if(category.equals("Drone")){
+            double vDistance = Math.abs(or.getElevation() - Constants.DRONE_ALTITUDE) + Math.abs(dest.getElevation() - Constants.DRONE_ALTITUDE);
+            double hDistance = Utils.distance(or.getLatitude(), dest.getLatitude(), or.getLongitude(), dest.getLongitude(), Constants.DRONE_ALTITUDE, Constants.DRONE_ALTITUDE);
+            distance = vDistance + hDistance;
+        }else{
+            distance = Utils.distance(or.getLatitude(), dest.getLatitude(), or.getLongitude(), dest.getLongitude(), or.getElevation(), dest.getElevation());
+        }
         return new Pathway(or, dest, StreetType.fromString(type), distance, w, street, VehicleCategory.fromString(category));
     }
 

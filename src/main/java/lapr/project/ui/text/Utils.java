@@ -9,7 +9,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lapr.project.data.DataHandler;
 
 /**
@@ -17,17 +23,44 @@ import lapr.project.data.DataHandler;
  * @author Diogo
  */
 public class Utils {
-    public static void clearAllData(){
-         try{
-            System.out.println("Clearing old data...");
-            DataHandler dh = new DataHandler();
-            dh.scriptRunner("textFiles/clear.sql");
-            System.out.println("Old data cleared.");
+    
+    private static DataHandler dh = new DataHandler();
+    
+
+    
+    public static void executeScript(String file){
+        try{
+            dh.scriptRunner(file);
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public static List<String> importFile(String s) {
+        boolean ignoreFirstLine = true;
+        List<String> listToReturn = new ArrayList<>();
+        try (Stream<String> stream = Files.lines(Paths.get(s))) {
+            List<String> l = stream.collect(Collectors.toList());
+            for (String str : l) {
+                if (str.contains("#")) {
+                    // Skip line
+                } else if (ignoreFirstLine) {
+                    ignoreFirstLine = false;
+                } else {
+                    listToReturn.add(str);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listToReturn;
+    }
+    
+    public static boolean deleteFile(String s){
+        File f = new File(s);
+        return f.delete();
     }
     
     

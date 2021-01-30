@@ -15,7 +15,7 @@ CREATE or replace PROCEDURE procAddVehicle (p_weight vehicle.WEIGHT%TYPE,
                                             r_id int;
 BEGIN
 
-    INSERT INTO VEHICLE(weight, status, max_battery, current_battery, max_weight, pharmacy_id, vehicle_category) VALUES (p_weight, p_state, p_maxBattery, p_currentBattery,p_maxWeight, p_idPharmacy, p_category);
+    INSERT INTO VEHICLE(weight, status, max_battery, current_battery, max_weight, pharmacy_id, vehicle_category,motor) VALUES (p_weight, p_state, p_maxBattery, p_currentBattery,p_maxWeight, p_idPharmacy, p_category,p_motor);
     SELECT MAX(v.nr) INTO r_id
     FROM vehicle v;
     
