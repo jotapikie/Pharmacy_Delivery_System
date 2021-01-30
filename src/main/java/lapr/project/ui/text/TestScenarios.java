@@ -46,23 +46,23 @@ public class TestScenarios {
      */
     public static void main(String[] args) throws SQLException {
         database = new GeographicalPointDB();
-//        System.out.println("Clearing data...");
-//        Utils.executeScript("textFiles/clear.sql");
-//        System.out.println("Old data cleared.");
-//        points = new ArrayList<>();
-//        System.out.println("Inserting clients...");
-//        System.out.printf("%d clients were registed. %n", OurScenarios.insertClients(CLIENTS,points));
-//        System.out.println("Inserting pharmacies...");
-//        System.out.printf("%d pharmacies were registed. %n", OurScenarios.insertPharmacies(PHARMACIES,points));
-//        System.out.println("Creating land paths...");
-//        System.out.printf("%d land paths were created. %n", createPaths("Scooter"));
-//        System.out.println("Creating air paths...");
-//        System.out.printf("%d air paths were created. %n", createPaths("Drone"));
-//        System.out.println("Applying land restrictions...");
-//        executeScript(LAND_RESTRICTIONS);
-//        System.out.println("Applying air restrictions...");
-//        executeScript(AIR_RESTRICTIONS);
-//        System.out.println("Restrictions applied.");
+        System.out.println("Clearing data...");
+        Utils.executeScript("textFiles/clear.sql");
+        System.out.println("Old data cleared.");
+        points = new ArrayList<>();
+        System.out.println("Inserting clients...");
+        System.out.printf("%d clients were registed. %n", OurScenarios.insertClients(CLIENTS,points));
+        System.out.println("Inserting pharmacies...");
+        System.out.printf("%d pharmacies were registed. %n", OurScenarios.insertPharmacies(PHARMACIES,points));
+        System.out.println("Creating land paths...");
+        System.out.printf("%d land paths were created. %n", createPaths("Scooter"));
+        System.out.println("Creating air paths...");
+        System.out.printf("%d air paths were created. %n", createPaths("Drone"));
+        System.out.println("Applying land restrictions...");
+        executeScript(LAND_RESTRICTIONS);
+        System.out.println("Applying air restrictions...");
+        executeScript(AIR_RESTRICTIONS);
+        System.out.println("Restrictions applied.");
         
         
         menu();
@@ -159,7 +159,7 @@ public class TestScenarios {
                 write(String.format("Land Route (less time): %n%s %n", lTime.toString()),OUTPUT);
                 write(String.format("Land Route (more efficient): %n%s %n", lEff.toString()),OUTPUT);
                 write(String.format("Air Route (less time): %n%s %n", aTime.toString()),OUTPUT);
-                write(String.format("Land Route (more efficient): %n%s %n %n", aEff.toString()),OUTPUT);
+                write(String.format("Air Route (more efficient): %n%s %n %n", aEff.toString()),OUTPUT);
                 }
             }
             System.out.println("Routes succesful exported to output file.");

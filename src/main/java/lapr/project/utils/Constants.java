@@ -26,6 +26,7 @@ public class Constants {
     public static final double SCOOTER_FRONTAL_AREA = 0.3;
     public static final double SCOOTER_MAX_WEIGHT = 20;
     public static final double SCOOTER_MAX_BATTERY = 2.8;
+    public static final double DRONE_BATTERY_VOLTAGE = 12;
     public static double SCOOTER_SPEED = 30;
     
 
@@ -49,7 +50,7 @@ public class Constants {
     public static String CHARGING_SPOT = "Pharmacy";
     
     public static double DRONE_AERO_COEF = 0.5;
-    public static double DRONE_ELETRONICAL_CONSUME = 1;
+    public static double DRONE_ELETRONICAL_CONSUME = 2000;
     public static double DRONE_AVERAGE_SPEED = 15;
     public static double DRONE_POWER_TRANSFER = 2;
     public static double DRONE_LIFT_DRAG = 1;
@@ -57,8 +58,8 @@ public class Constants {
     public static double DRONE_TOP_AREA = 1;
     public static double DRONE_WEIGHT =3.3;
     public static double DRONE_MAX_WEIGHT = 7;
-    public static int DRONE_MOTOR = 12;
-    public static double DRONE_MAX_BATTERY = 1.5;
+    public static int    DRONE_MOTOR = 12;
+    public static double DRONE_MAX_BATTERY = 15000;
     public static double DRONE_HORIZONTAL_SPEED = 16;
     public static double DRONE_VERTICAL_SPEED = 6;
     

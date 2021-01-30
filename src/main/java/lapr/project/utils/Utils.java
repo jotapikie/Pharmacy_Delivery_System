@@ -165,12 +165,14 @@ public class Utils {
         }
         double fAero = ((-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaFrontal * windToPath.vx * windToPath.vx)) + (-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaFrontal * windToPath.vy * windToPath.vy)) + (-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaTopo * windToPath.vz * windToPath.vz)));
         double eHorizontal = (((totalWeight * Constants.GRAVITY) / (liftDrag * powerTransfer)) * distance);
-        double tViagem = (velocidadeMedia / (distance * distance));
-        double eAero = fAero * tViagem * velocidadeMedia;
+        double eAero = fAero * distance;
         double fImpulso = ((totalWeight * Constants.GRAVITY) + (0.5 * Constants.RO_AR * areaTopo * Constants.DRAG_COEF * velocidadeVertical * velocidadeVertical));
-        double eSubir = ((fImpulso * altitudeDifI) / Constants.RENDIMENTO_DRONE);
-        double eDescer = ((fImpulso * altitudeDifF) / Constants.RENDIMENTO_DRONE);
-        return (eAero + eDescer + eHorizontal + eSubir) * (2.777778*Math.pow(10, -7));
+        double eSubir = ((fImpulso * altitudeDifI));
+        double eDescer = ((fImpulso * altitudeDifF) );
+        double tempoSubirDescer= (altitudeDifF/velocidadeVertical) + (altitudeDifI/velocidadeVertical);
+        double tempoHorizontal= distance/velocidadeMedia;
+        double tempoTotalHoras= (tempoHorizontal+tempoSubirDescer)/3600;
+        return (consumoEletronico*tempoTotalHoras)+((((eAero + eDescer + eHorizontal + eSubir)/Constants.RENDIMENTO_DRONE)/3600)*100)/Constants.DRONE_BATTERY_VOLTAGE;
     }
 
 
