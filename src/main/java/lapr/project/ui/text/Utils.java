@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lapr.project.data.DataHandler;
+import lapr.project.utils.Constants;
 
 /**
  *
@@ -87,5 +88,24 @@ public class Utils {
                 ex.printStackTrace();
             }
         }
+    }
+    
+    public static void variablesUsed(String file){
+        write(String.format("Scooter weight: %.2f kg%n", Constants.SCOOTER_WEIGHT), file);
+        write(String.format("Scooter aerodynamic coefficient: %.2f%n", Constants.SCOOTER_AERO_COEF), file);
+        write(String.format("Scooter frontal area: %.2f m^2%n", Constants.SCOOTER_FRONTAL_AREA), file);
+        write(String.format("Scooter average speed: %.2f km/h%n", Constants.SCOOTER_SPEED), file);
+        write(String.format("Drone aerodynamic coefficient: %.2f%n", Constants.DRONE_AERO_COEF), file);
+        write(String.format("Drone eletronical consume: %.2f%n", Constants.DRONE_ELETRONICAL_CONSUME), file);
+        write(String.format("Drone frontal area: %.2f m^2%n", Constants.DRONE_FRONTAL_AREA), file);
+        write(String.format("Drone top area: %.2f m^2%n", Constants.DRONE_TOP_AREA), file);
+        write(String.format("Drone weight: %.2f kg%n", Constants.DRONE_WEIGHT), file);
+        write(String.format("Drone average (horizontal) speed: %.2f m/s%n", Constants.DRONE_HORIZONTAL_SPEED), file);
+        write(String.format("Drone average (vertical) speed: %.2f m/s%n", Constants.DRONE_VERTICAL_SPEED), file);
+        write(String.format("Drone altitude: %.2f m%n", Constants.DRONE_ALTITUDE), file);
+        write(String.format("Drone drag coefficient: %.2f %n", Constants.DRAG_COEF), file);
+        write(String.format("Asphalt kinetic coefficient: %.2f%n", Constants.KINETIC_COEF_ASPHALT), file);
+        write(String.format("Off-Road kinetic coefficient: %.2f%n", Constants.KINETIC_COEF_OFF_ROAD),file);
+        write(String.format("Sidewalk kinetic coefficient: %.2f%n", Constants.KINETIC_COEF_SIDEWALK), file);
     }
 }

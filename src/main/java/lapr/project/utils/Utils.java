@@ -223,4 +223,8 @@ public class Utils {
     public static double kmhTOms(double distance){
         return distance * 0.277777778;
     }
+    
+    public static double battery(double percentage, double max){
+        return (percentage/100) * max;
+    }
 }

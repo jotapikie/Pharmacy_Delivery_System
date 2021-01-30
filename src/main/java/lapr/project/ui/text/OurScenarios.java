@@ -34,6 +34,7 @@ import static lapr.project.ui.text.Utils.deleteFile;
 import static lapr.project.ui.text.Utils.write;
 import static lapr.project.ui.text.Utils.importFile;
 import static lapr.project.ui.text.Utils.executeScript;
+import static lapr.project.ui.text.Utils.variablesUsed;
 
 
 /**
@@ -59,6 +60,7 @@ public class OurScenarios {
     private static String DELIVERIES;
     
     private static String RESULT;
+    private static String VARIABLES;
     
 
     /**
@@ -131,7 +133,7 @@ public class OurScenarios {
         System.out.printf("%d delivery runs were created. %n", assignOrders());
         System.out.println("Starting delivery runs...");
         System.out.printf("%d delivery runs were started. %n", startRuns());
-
+        variablesUsed(VARIABLES);
  
         
 
@@ -148,7 +150,9 @@ public class OurScenarios {
         RUNS = "textFiles/Scenario01/runs.csv";
         DELIVERIES = "textFiles/Scenario01/deliveries.csv";
         RESULT = "textFiles/Scenario01/result.txt";
+        VARIABLES = "textFiles/Scenario01/variables.txt";
         deleteFile(RESULT);
+        deleteFile(VARIABLES);
     }
     
     private static void scenario02(){
@@ -160,7 +164,9 @@ public class OurScenarios {
         RUNS = "textFiles/Scenario02/runs.csv";
         DELIVERIES = "textFiles/Scenario02/deliveries.csv";
         RESULT = "textFiles/Scenario02/result.txt";
+        VARIABLES = "textFiles/Scenario02/variables.txt";
         deleteFile(RESULT);
+        deleteFile(VARIABLES);
     }
     
     private static void scenario03(){
@@ -172,7 +178,9 @@ public class OurScenarios {
         RUNS = "textFiles/Scenario03/runs.csv";
         DELIVERIES = "textFiles/Scenario03/deliveries.csv";
         RESULT = "textFiles/Scenario03/result.txt";
+        VARIABLES = "textFiles/Scenario03/variables.txt";
         deleteFile(RESULT);
+        deleteFile(VARIABLES);
     }
     
     private static void scenario04(){
@@ -184,7 +192,9 @@ public class OurScenarios {
         RUNS = "textFiles/Scenario04/runs.csv";
         DELIVERIES = "textFiles/Scenario04/deliveries.csv";
         RESULT = "textFiles/Scenario04/result.txt";
+        VARIABLES = "textFiles/Scenario04/variables.txt";
         deleteFile(RESULT);
+        deleteFile(VARIABLES);
     }
     
     private static void scenario05() {
@@ -196,7 +206,9 @@ public class OurScenarios {
         RUNS = "textFiles/Scenario05/runs.csv";
         DELIVERIES = "textFiles/Scenario05/deliveries.csv";
         RESULT = "textFiles/Scenario05/result.txt";
+        VARIABLES = "textFiles/Scenario05/variables.txt";
         deleteFile(RESULT);
+        deleteFile(VARIABLES);
     }
 
 

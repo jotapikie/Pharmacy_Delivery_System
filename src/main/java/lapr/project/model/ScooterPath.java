@@ -95,11 +95,13 @@ public final class ScooterPath extends Pathway{
    
     @Override
     public double getCost() {
+        calculateEnergyCost();
         return energyCost;
     }
 
     @Override
     public long getTime() {
+        calculateTimeCost();
         return timeCost;
     }
 

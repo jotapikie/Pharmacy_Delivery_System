@@ -18,7 +18,6 @@ public class Constants {
     public static final Timestamp DEFAULT_DATE = new Timestamp(1);
     public static final String DEFAULT_STATUS= "Processing";
     public static final double AVERAGE_COURIER_WEIGHT = 80;
-    public static final double DEFAULT_SCOOTER_MAX_BAT = 2.8;
     
     public static final double SCOOTER_WEIGHT = 50;
     public static final int SCOOTER_MOTOR = 3;
@@ -34,10 +33,10 @@ public class Constants {
     public static double GRAVITY = 9.8;
 
 
-    public static final double KINETIC_COEF_ASFALTO= 0.5;
+    public static final double KINETIC_COEF_ASPHALT= 0.5;
     public static final double KINETIC_COEF_PARALELO= 0.2;
-    public static final double KINETIC_COEF_TERRA_BATIDA= 0.2;
-    public static final double KINETIC_COEF_CALCADA= 0.3;
+    public static final double KINETIC_COEF_OFF_ROAD= 0.2;
+    public static final double KINETIC_COEF_SIDEWALK= 0.3;
 
     public static final double RO_AR= 1.225;
     public static final double DRAG_COEF= 1.5;

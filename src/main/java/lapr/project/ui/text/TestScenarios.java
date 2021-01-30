@@ -16,13 +16,18 @@ import lapr.project.data.GeographicalPointDB;
 import lapr.project.model.AirGraph;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
+import lapr.project.model.Pathway;
+import lapr.project.model.ScooterPath;
 import lapr.project.model.comparator.EnergyComparator;
 import lapr.project.model.comparator.TimeComparator;
 import static lapr.project.ui.text.Utils.deleteFile;
 import static lapr.project.ui.text.Utils.executeScript;
 import static lapr.project.ui.text.Utils.importFile;
+import static lapr.project.ui.text.Utils.variablesUsed;
 import static lapr.project.ui.text.Utils.write;
 import lapr.project.utils.Constants;
+import static lapr.project.utils.Utils.battery;
+import lapr.project.utils.graph.Edge;
 import lapr.project.utils.route.Route;
 
 /**
@@ -36,10 +41,13 @@ public class TestScenarios {
     private static final String PHARMACIES = "textFiles/Test_Scenarios/pharmacies.csv";
     private static final String LAND_RESTRICTIONS = "textFiles/Test_Scenarios/landRestrictions.sql";
     private static final String AIR_RESTRICTIONS = "textFiles/Test_Scenarios/airRestrictions.sql";
-    private static final String RUNS = "textFiles/Test_Scenarios/Scenario04/runs.csv";
-    private static final String OUTPUT = "textFiles/Test_Scenarios/Scenario04/output.txt";
+    private static String RUNS = "textFiles/Test_Scenarios/Scenario04/runs.csv";
+    private static String OUTPUT = "textFiles/Test_Scenarios/Scenario04/output.txt";
+    private static String VARIABLES = "textFiles/Test_Scenarios/Scenario04/variables.txt";
     private static List<String> points;
     private static GeographicalPointDB database;
+    private static LandGraph landGraph;
+    private static AirGraph airGraph;
     
     /**
      * @param args the command line arguments
@@ -63,6 +71,10 @@ public class TestScenarios {
 //        System.out.println("Applying air restrictions...");
 //        executeScript(AIR_RESTRICTIONS);
 //        System.out.println("Restrictions applied.");
+//        System.out.println("Creating graphs...");
+        landGraph = new LandGraph(Constants.SCOOTER_WEIGHT + Constants.AVERAGE_COURIER_WEIGHT);
+        airGraph = new AirGraph(35);
+        System.out.println("Graphs created");
         
         
         menu();
@@ -86,6 +98,7 @@ public class TestScenarios {
                 break;
             case "3":
                 scenario04();
+                variablesUsed(VARIABLES);
                 menu();
                 break;
             default:
@@ -97,7 +110,78 @@ public class TestScenarios {
     }
 
     private static void scenario02() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        OUTPUT = "textFiles/Test_Scenarios/Scenario02/output.txt";
+        VARIABLES = "textFiles/Test_Scenarios/Scenario02/variables.txt";
+        RUNS = "textFiles/Test_Scenarios/Scenario02/runs.csv";
+        try{
+           deleteFile(OUTPUT);
+           deleteFile(VARIABLES);
+           String line[];
+           LandGraph graph = landGraph;
+           String latitudes[];
+           String longitudes[];
+           int i;
+           List<GeographicalPoint> pois = new ArrayList<>();
+           int index = 0;
+           for(String run : importFile(RUNS)){
+               index++;
+               pois.clear();
+               line = run.split(";");
+               if(!line[9].equalsIgnoreCase("0")){
+                   graph = new LandGraph(Constants.AVERAGE_COURIER_WEIGHT + Constants.SCOOTER_WEIGHT + Double.parseDouble(line[8]));
+               }
+               GeographicalPoint or = database.getGeographicalPoint(Double.parseDouble(line[2]), Double.parseDouble(line[1]));
+               double elevation = Double.parseDouble(line[5]);
+               double kineticCoef = Double.parseDouble(line[6]);
+               i = 0;
+               latitudes = line[3].split("!");
+               longitudes = line[4].split("!");
+               while(i < latitudes.length){
+                   pois.add(database.getGeographicalPoint(Double.parseDouble(longitudes[i]), Double.parseDouble(latitudes[i])));
+                   i++;
+               }
+               
+               
+               
+               boolean charge = line[11].equalsIgnoreCase("y");
+               write(String.format("###################################################### 2.2.%d ###################################################### %n", index), OUTPUT);
+               write(String.format("Origin and Destination: %s%n",or), OUTPUT);
+               for(GeographicalPoint other : pois){
+                   write(String.format("Stop points: %s%n",other), OUTPUT);
+               }
+               
+               List<Route> routes = new ArrayList<>();
+               if(!charge){
+                    double currentBat = battery(Double.parseDouble(line[7]), Double.parseDouble(line[8]));
+                    routes = graph.kBestPaths(pois, or, or, 20,currentBat);
+                }else{
+                    routes = graph.kBestPaths(pois, or, or, 20, Double.parseDouble(line[8]));
+                }
+
+               
+                if(routes != null && routes.isEmpty()){
+                    routes.sort(new EnergyComparator());
+                    Route r = routes.get(0);
+                    double energy = 0;
+                    double time = 0;
+                    double distance = 0;
+                    int numPoints = r.getNumGeographicalPoints();
+                    for(Pathway p : r.getPaths()){
+                        p.setKineticCoef(kineticCoef);
+                        energy = energy + p.getCost();
+                        time = time + p.getTime();
+                        
+                    }
+                    write(String.format("%nThe order can be delivered.(Distance=%.2fm | Energy:%2fkWh) %n",r.getTotalDistance(), r.getTotalDistance()),OUTPUT);
+                }else{
+                    write(String.format("%nThe order can't be delivered. %n"),OUTPUT);
+                }
+         }
+           
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(TestScenarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void scenario03() {
@@ -105,11 +189,15 @@ public class TestScenarios {
     }
 
     private static void scenario04() {
+        OUTPUT = "textFiles/Test_Scenarios/Scenario04/output.txt";
+        VARIABLES = "textFiles/Test_Scenarios/Scenario04/variables.txt";
+        RUNS = "textFiles/Test_Scenarios/Scenario04/runs.txt";
         try {
             deleteFile(OUTPUT);
+            deleteFile(VARIABLES);
             System.out.println("Getting points and paths from database...");
-            LandGraph land = new LandGraph(125);
-            AirGraph air = new AirGraph(35);
+            LandGraph land = landGraph;
+            AirGraph air = airGraph;
             System.out.println("Generating the results...");
             String line[];
             String[] latitudes;
@@ -220,5 +308,11 @@ public class TestScenarios {
         }
         index++;
     }
+
+
+    
+    
+    
+
     
 }

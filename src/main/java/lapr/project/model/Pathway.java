@@ -36,7 +36,6 @@ public class Pathway implements PathInterface{
         setWind(wind);
         setStreet(street);
         setCategory(category);
-
     }
 
     public void setStreet(String street) {
@@ -53,17 +52,14 @@ public class Pathway implements PathInterface{
          this.streetType= type;
          if(type != null){
          switch (type){
-             case PARALELO:
-                 this.kineticCoef=Constants.KINETIC_COEF_PARALELO;
-                 break;
              case OFF_ROAD:
-                 this.kineticCoef=Constants.KINETIC_COEF_TERRA_BATIDA;
+                 this.kineticCoef=Constants.KINETIC_COEF_OFF_ROAD;
                  break;
              case SIDEWALK:
-                 this.kineticCoef=Constants.KINETIC_COEF_CALCADA;
+                 this.kineticCoef=Constants.KINETIC_COEF_SIDEWALK;
                  break;
              default:
-                 this.kineticCoef=Constants.KINETIC_COEF_ASFALTO;
+                 this.kineticCoef=Constants.KINETIC_COEF_ASPHALT;
          }
          }
     }

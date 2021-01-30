@@ -369,11 +369,11 @@ public class Route implements Comparable<Route>{
                 }
             }
             String sDist = String.format("%.2fm",p.getDistance());
-            String sEner = String.format("%.2fkWh", p.getCost());
+            String sEner = String.format("%.2f%s", p.getCost(),averageVerticalSpeed==0?"kWh":"mAh");
             sb.append(String.format("%-55s -> %s %-60s  | %-28s | %-10s | %-10s %n", sOr,"   ", sDest, p.getStreet()==null?"Air":p.getStreet(), sDist, sEner));
         }
         String sDist = String.format("%.2fm",totalDistance);
-        String sEner = String.format("%.2fkWh", totalEnergy);
+        String sEner = String.format("%.2f%s", totalEnergy, averageVerticalSpeed==0?"kWh":"mAh");
         
         String hSpeed = String.format("| %s: %.2f m/s", averageVerticalSpeed== 0 ? "Average Speed": "Average Horizontal Speed",averageHorizontalSpeed);
         String vSpeed = String.format("| Average Vertical Speed: %.2f m/s", averageVerticalSpeed);
