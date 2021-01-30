@@ -74,7 +74,8 @@ public class TestScenarios {
 //        System.out.println("Creating graphs...");
         landGraph = new LandGraph(Constants.SCOOTER_WEIGHT + Constants.AVERAGE_COURIER_WEIGHT);
         airGraph = new AirGraph(35);
-        System.out.println("Graphs created");
+
+
         
         
         menu();
@@ -251,7 +252,7 @@ public class TestScenarios {
                 write(String.format("Land Route (less time): %n%s %n", lTime.toString()),OUTPUT);
                 write(String.format("Land Route (more efficient): %n%s %n", lEff.toString()),OUTPUT);
                 write(String.format("Air Route (less time): %n%s %n", aTime.toString()),OUTPUT);
-                write(String.format("Land Route (more efficient): %n%s %n %n", aEff.toString()),OUTPUT);
+                write(String.format("Air Route (more efficient): %n%s %n %n", aEff.toString()),OUTPUT);
                 }
             }
             System.out.println("Routes succesful exported to output file.");
