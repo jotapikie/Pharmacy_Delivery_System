@@ -102,9 +102,6 @@ public class GeographicalPoint implements PointInterface{
         
         
         GeographicalPoint other = (GeographicalPoint) obj;
-//        if(!description.equalsIgnoreCase(other.description)){
-//            return false;
-//        }
         return this.longitude== other.getLongitude() && this.latitude==other.getLatitude() && this.elevation==other.getElevation();
     }
 

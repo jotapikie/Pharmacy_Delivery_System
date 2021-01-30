@@ -121,6 +121,12 @@ public class GeographicalPointTest {
         assertFalse(instance.toString().isEmpty());
     }
     
+    @Test
+    public void testEquals() {
+        assertFalse(instance.equals(null));
+        assertFalse(instance.equals(new Order()));
+    }
+    
     
 
     /**

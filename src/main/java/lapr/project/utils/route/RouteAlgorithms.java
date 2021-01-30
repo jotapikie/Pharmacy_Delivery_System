@@ -27,7 +27,7 @@ public class RouteAlgorithms {
 
    public static List<Route> kBestRoutes(MainGraph mainGraph, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy){
 
-        if (mainGraph == null || origin == null || destination == null || k <= 0) {
+        if (mainGraph == null || origin == null || destination == null || k <= 0 || maxEnergy < 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
         }
         
@@ -128,13 +128,12 @@ public class RouteAlgorithms {
 
     public static List<Route> kBestRoutes(MainGraph graph, List<GeographicalPoint> toVisit, GeographicalPoint origin, GeographicalPoint destination, int k, double maxEnergy) {
         
-        if (graph == null || origin == null || destination == null || toVisit == null || k <= 0) {
+        if (graph == null || origin == null || destination == null || toVisit == null || k <= 0 || maxEnergy < 0) {
             throw new IllegalArgumentException("Invalid route arguments!");
         }
 
         // Check if there any vertexes to visit
         if (toVisit.isEmpty()) {
-            
             return RouteAlgorithms.kBestRoutes(graph, origin, destination, k, maxEnergy);
         }
         if (toVisit.contains(origin) || toVisit.contains(destination)) {

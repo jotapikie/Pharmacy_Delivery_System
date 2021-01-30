@@ -129,7 +129,7 @@ public class AssignOrderController {
     public String getLessTimeLand(){
         List<Route> timeOrder = new ArrayList<>(land);
         timeOrder.sort(new TimeComparator());
-        return land.get(0).toString();
+        return timeOrder.get(0).toString();
     }
     
       public String getAirRoute() throws SQLException{
