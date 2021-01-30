@@ -317,6 +317,13 @@ public class Route implements Comparable<Route>{
         if (this.totalTime > otherRoute.totalTime) {
             return 1;
         }
+        if (this.stopPoints.size() < otherRoute.stopPoints.size()) {
+            return -1;
+        }
+        if (this.stopPoints.size() > otherRoute.stopPoints.size()) {
+            return 1;
+        }
+        
         if (this.paths.size() < otherRoute.paths.size()) {
             return -1;
         }

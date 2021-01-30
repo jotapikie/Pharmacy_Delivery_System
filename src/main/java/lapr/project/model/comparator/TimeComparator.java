@@ -16,7 +16,27 @@ public class TimeComparator implements Comparator<Route>{
 
     @Override
     public int compare(Route o1, Route o2) {
-        return (int) (o1.getTotalTime() - o2.getTotalTime());
+        long time = (o1.getTotalTime() - o2.getTotalTime());
+        if(time != 0){
+            return (int) time;
+        }else{
+            int energy = Double.compare(o1.getTotalEnergy(), o2.getTotalEnergy());
+            if(energy != 0){
+                return energy;
+            }else{
+                int distance = Double.compare(o1.getTotalDistance(), o2.getTotalDistance());
+                if(distance != 0){
+                    return distance;
+                }else{
+                    int stops = o1.getChargingPoints().size() - o2.getChargingPoints().size();
+                    if(stops != 0){
+                        return stops;
+                    }else{
+                        return (o1.getNumGeographicalPoints() - o2.getNumGeographicalPoints());
+                    }
+                }
+            }
+        }
     }
 
 

@@ -19,6 +19,7 @@ import lapr.project.model.DeliveryRun;
 import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
 import lapr.project.model.Product;
+import lapr.project.model.comparator.EnergyComparator;
 import lapr.project.model.comparator.TimeComparator;
 import lapr.project.utils.route.Route;
 
@@ -113,7 +114,9 @@ public class AssignOrderController {
         try{
             
             land = landGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 10, Constants.SCOOTER_MAX_BATTERY);
-            landEnergy = land.get(0);
+            List<Route> energyOrder = new ArrayList<>(land);
+            energyOrder.sort(new EnergyComparator());
+            landEnergy = energyOrder.get(0);
             return landEnergy.toString();
         }catch(NullPointerException e){
             return null;
@@ -124,7 +127,8 @@ public class AssignOrderController {
     }
     
     public String getLessTimeLand(){
-        land.sort(new TimeComparator());
+        List<Route> timeOrder = new ArrayList<>(land);
+        timeOrder.sort(new TimeComparator());
         return land.get(0).toString();
     }
     
@@ -132,7 +136,9 @@ public class AssignOrderController {
         AirGraph airGraph = new AirGraph(totalWeight + Constants.DRONE_WEIGHT);
         try{
             air = airGraph.kBestPaths(clients, pharmacyCor, pharmacyCor, 10, Constants.DRONE_MAX_BATTERY);
-            airEnergy = air.get(0);
+            List<Route> energyOrder = new ArrayList<>(air);
+            energyOrder.sort(new EnergyComparator());
+            airEnergy = energyOrder.get(0);
             return airEnergy.toString();
         }catch(NullPointerException e){
             return null;
@@ -144,8 +150,9 @@ public class AssignOrderController {
     }
       
       public String getLessTimeAir(){
-          air.sort(new TimeComparator());
-          return air.get(0).toString();
+          List<Route> timeOrder = new ArrayList<>(air);
+          timeOrder.sort(new TimeComparator());
+          return timeOrder.get(0).toString();
       }
     
     public String getMostEfficient(){

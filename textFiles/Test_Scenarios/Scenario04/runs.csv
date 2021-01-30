@@ -1,0 +1,14 @@
+#lines starting with # should be ignored
+#Column description
+#client_email of the person who make the order
+#nif used to make the order
+#discount if wants to use credits or not (y/n)
+latitude_pharmacy;longitude_pharmacy;latitude_stop_points;longitude_stop_points
+41.16703;-8.61175;41.17123;-8.58831
+41.16703;-8.61175;41.17123!41.16326;-8.58831!-8.58373
+41.16703;-8.61175;41.16805!41.17155;-8.63043!-8.61273
+41.21966;-8.56081;41.19252!41.20261;-8.57577!-8.54506
+-;-;41.23339;-8.62175
+41.16040;-8.64372;41.15260!41.17267!41.16805;-8.63064!-8.65470!-8.63043
+41.20011;-8.66618;41.20690!41.18227!41.18451;-8.68772!-8.69270!-8.68201
+41.14838;-8.60808;41.14354!41.14608;-8.60336!-8.59501
