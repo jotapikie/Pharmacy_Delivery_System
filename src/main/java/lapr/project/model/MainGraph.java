@@ -173,7 +173,6 @@ public class MainGraph implements Cloneable{
             saveRouteInformation(routes, toVisit);
             return routes;
         } catch (NullPointerException e) {
-            e.printStackTrace();
             throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
         }
     }
