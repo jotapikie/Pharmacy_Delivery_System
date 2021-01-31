@@ -176,7 +176,7 @@ public class UtilsTest {
         double altitudeDifI = 3.0;
         double altitudeDifF = 2.0;
         double distance = 35.0;
-        double expResult = 256.34;
+        double expResult = 2682.52;
         double result = Utils.pathEnergyCostDrone(totalWeight, vehicleAerodynamicCoef, powerTransfer, liftDrag, consumoEletronico, areaFrontal, areaTopo, velocidadeMedia, velocidadeVertical, windToPath, altitudeDifI, altitudeDifF, distance);
         assertEquals(expResult, result, 0.01);
     }

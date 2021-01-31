@@ -87,7 +87,7 @@ public class DronePathTest {
      */
     @Test
     public void testGetCost() {
-        double expResult = 143.26;
+        double expResult = 819.05;
         double result = test.getCost();
         assertEquals(expResult, result, 0.01);
     }
