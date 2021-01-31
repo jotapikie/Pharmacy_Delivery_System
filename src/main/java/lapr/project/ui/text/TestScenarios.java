@@ -25,8 +25,6 @@ import lapr.project.utils.Constants;
 import static lapr.project.utils.Utils.battery;
 import static lapr.project.utils.Utils.distance;
 import static lapr.project.utils.Utils.kmhTOms;
-import lapr.project.utils.graph.Edge;
-import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
 
 /**

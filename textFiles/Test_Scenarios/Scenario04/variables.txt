@@ -9,8 +9,9 @@ Drone top area: 1,00 m^2
 Drone weight: 3,30 kg
 Drone average (horizontal) speed: 16,00 m/s
 Drone average (vertical) speed: 6,00 m/s
-Drone altitude: 150,00 m
+Drone altitude: 100,00 m
 Drone drag coefficient: 1,50 
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
