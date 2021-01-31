@@ -7,12 +7,12 @@ Majestic (41,14723,-8,60657)                            ->     Sé (41,14331,-8,6
 Sé (41,14331,-8,60914) [Order]                          ->     Clerigos (41,14582,-8,61398)                                  | Av. Dom Afonso Henriques     | 492,11m    | 0,09kWh    
 Clerigos (41,14582,-8,61398)                            ->     Senhora da Hora (41,16766,-8,68785)                           | Rua de Oliveira Monteiro     | 6644,31m   | 1,21kWh    
 Senhora da Hora (41,16766,-8,68785)                     ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Estrada da Circunvalação     | 6796,05m   | 1,25kWh    
-Total Distance: 15024,17m | Total Energy: 2,76kWh | Total Time: 00h 30m 00s | Average Speed: 8,33 m/s 
+Total Distance: 15024,17m | Total Energy: 2,76kWh | Total Time: 00h 30m 00s | Average Speed: 30,00 km/h 
 
 Air route (Less time):
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Sé (41,14331,-8,60914) [Order]                                | Air                          | 1110,39m   | 171,16mAh  
-Sé (41,14331,-8,60914) [Order]                          ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1110,39m   | 171,16mAh  
-Total Distance: 2220,77m | Total Energy: 342,32mAh | Total Time: 00h 02m 42s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Sé (41,14331,-8,60914) [Order]                                | Air                          | 1018,39m   | 948,29mAh  
+Sé (41,14331,-8,60914) [Order]                          ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1018,39m   | 948,29mAh  
+Total Distance: 2036,77m | Total Energy: 1896,59mAh | Total Time: 00h 02m 10s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
 
 Land route (Less energy):
 Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Majestic (41,14723,-8,60657)                                  | Rua da Alegria               | 605,07m    | 0,11kWh    
@@ -20,14 +20,14 @@ Majestic (41,14723,-8,60657)                            ->     Sé (41,14331,-8,6
 Sé (41,14331,-8,60914) [Order]                          ->     Clerigos (41,14582,-8,61398)                                  | Av. Dom Afonso Henriques     | 492,11m    | 0,09kWh    
 Clerigos (41,14582,-8,61398)                            ->     Senhora da Hora (41,16766,-8,68785)                           | Rua de Oliveira Monteiro     | 6644,31m   | 1,21kWh    
 Senhora da Hora (41,16766,-8,68785)                     ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Estrada da Circunvalação     | 6796,05m   | 1,25kWh    
-Total Distance: 15023,73m | Total Energy: 2,75kWh | Total Time: 00h 30m 01s | Average Speed: 8,33 m/s 
+Total Distance: 15023,73m | Total Energy: 2,75kWh | Total Time: 00h 30m 01s | Average Speed: 30,00 km/h 
 
 Air route (Less energy):
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Sé (41,14331,-8,60914) [Order]                                | Air                          | 1110,39m   | 171,16mAh  
-Sé (41,14331,-8,60914) [Order]                          ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1110,39m   | 171,16mAh  
-Total Distance: 2220,77m | Total Energy: 342,32mAh | Total Time: 00h 02m 42s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Sé (41,14331,-8,60914) [Order]                                | Air                          | 1018,39m   | 948,29mAh  
+Sé (41,14331,-8,60914) [Order]                          ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1018,39m   | 948,29mAh  
+Total Distance: 2036,77m | Total Energy: 1896,59mAh | Total Time: 00h 02m 10s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
 
-Most efficient: Scooter 
+Most efficient: Drone 
  
 The courier with email diogomicael6@gmail.com started the delivery run #1 and took the scooter #2. 
  
@@ -37,6 +37,6 @@ Majestic (41,14723,-8,60657)                            ->     Sé (41,14331,-8,6
 Sé (41,14331,-8,60914) [Order]                          ->     Clerigos (41,14582,-8,61398)                                  | Av. Dom Afonso Henriques     | 492,11m    | 0,09kWh    
 Clerigos (41,14582,-8,61398)                            ->     Pharmacy - C. do Queijo (41,16875,-8,68995) [Charge]          | Rua do Ouro                  | 6852,69m   | 1,22kWh    
 Pharmacy - C. do Queijo (41,16875,-8,68995) [Charge]    ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Avenida da Boavista          | 6997,42m   | 1,25kWh    
-Total Distance: 15433,49m | Total Energy: 2,75kWh | Total Time: 00h 30m 50s | Average Speed: 8,33 m/s 
+Total Distance: 15433,49m | Total Energy: 2,75kWh | Total Time: 00h 30m 50s | Average Speed: 30,00 km/h 
  
 The scooter must have at least 1,50 kWh to start the delivery. 

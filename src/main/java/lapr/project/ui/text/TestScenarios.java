@@ -25,8 +25,6 @@ import lapr.project.utils.Constants;
 import static lapr.project.utils.Utils.battery;
 import static lapr.project.utils.Utils.distance;
 import static lapr.project.utils.Utils.kmhTOms;
-import lapr.project.utils.graph.Edge;
-import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
 
 /**
@@ -372,7 +370,7 @@ public class TestScenarios {
             sc.setTotalWeight(sc.getTotalWeight() + additionalWeight);
             
             if(numPoints.contains(p.getDestinationPoint()) && i <= numPoints.size()){
-                elevation = manageElevation(numPoints, origin.getElevation(), Double.parseDouble(elevations[i]));
+                elevation = manageElevation(origin.getElevation(), Double.parseDouble(elevations[i]));
                 i++;
                 write(String.format("Point %d Elevation: %.2f m %n", i, origin.getElevation()+ (elevation)),VARIABLES);
                 for(GeographicalPoint p1 : numPoints){
@@ -487,8 +485,7 @@ public class TestScenarios {
         }
     }
 
-    private static double manageElevation(List<GeographicalPoint> numPoints, double elevation0, double elevation) {
-        int num = numPoints.size();
+    private static double manageElevation(double elevation0, double elevation) {
         double elevationTotal = (elevation == 0) ? 0 : elevation0*(elevation/100);
         return elevationTotal;
     }
