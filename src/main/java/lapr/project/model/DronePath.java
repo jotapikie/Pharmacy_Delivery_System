@@ -39,7 +39,7 @@ public class DronePath extends Pathway{
     }
 
     private void calculateEnergyCost() {
-        energyCost = Utils.pathEnergyCostDrone(totalWeight, Drone.getAeroCoef(), Drone.getPowerTransfer(), Drone.getLiftDrag(), Drone.getEletronicalConsumer(), Drone.getFrontalArea(), Drone.getTopArea(), Constants.DRONE_AVERAGE_SPEED, Constants.DRONE_VERTICAL_SPEED, super.getWind(),Constants.DRONE_ALTITUDE-super.getOriginPoint().getElevation(),Constants.DRONE_ALTITUDE-super.getDestinationPoint().getElevation(),super.getDistance());
+        energyCost = Utils.pathEnergyCostDrone(totalWeight, Drone.getAeroCoef(), Drone.getPowerTransfer(), Drone.getLiftDrag(), Drone.getEletronicalConsumer(), Drone.getFrontalArea(), Drone.getTopArea(), Constants.DRONE_AVERAGE_SPEED, Constants.DRONE_VERTICAL_SPEED, super.getWind(),Math.abs(Constants.DRONE_ALTITUDE-super.getOriginPoint().getElevation()),Math.abs(Constants.DRONE_ALTITUDE-super.getDestinationPoint().getElevation()),super.getDistance());
     }
     
     private void calculateTimeCost() {

@@ -13,16 +13,16 @@ Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41
 Total Distance: 4570,67m | Total Energy: 0,83kWh | Total Time: 00h 09m 08s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373)                          | Air                          | 2423,70m   | 1366,92mAh 
-Alameda Shopping (41,16326,-8,58373)                    ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1025,59m   | 482,20mAh  
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2091,84m   | 1090,40mAh 
-Total Distance: 5541,13m | Total Energy: 2939,53mAh | Total Time: 00h 06m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373)                          | Air                          | 2423,70m   | 1551,90mAh 
+Alameda Shopping (41,16326,-8,58373)                    ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1025,59m   | 752,90mAh  
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2091,84m   | 1428,77mAh 
+Total Distance: 5541,13m | Total Energy: 3733,56mAh | Total Time: 00h 06m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
 Air Route (more efficient): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373)                          | Air                          | 2423,70m   | 1366,92mAh 
-Alameda Shopping (41,16326,-8,58373)                    ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1025,59m   | 482,20mAh  
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2091,84m   | 1090,40mAh 
-Total Distance: 5541,13m | Total Energy: 2939,53mAh | Total Time: 00h 06m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373)                          | Air                          | 2423,70m   | 1551,90mAh 
+Alameda Shopping (41,16326,-8,58373)                    ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1025,59m   | 752,90mAh  
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2091,84m   | 1428,77mAh 
+Total Distance: 5541,13m | Total Energy: 3733,56mAh | Total Time: 00h 06m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.2 ###################################################### 
@@ -40,16 +40,16 @@ Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41
 Total Distance: 5365,87m | Total Energy: 0,98kWh | Total Time: 00h 10m 42s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Air                          | 2423,70m   | 1366,92mAh 
-Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1025,59m   | 482,20mAh  
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2091,84m   | 1090,40mAh 
-Total Distance: 5541,13m | Total Energy: 2939,53mAh | Total Time: 00h 06m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Air                          | 2423,70m   | 1551,90mAh 
+Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1025,59m   | 752,90mAh  
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2091,84m   | 1428,77mAh 
+Total Distance: 5541,13m | Total Energy: 3733,56mAh | Total Time: 00h 06m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
 Air Route (more efficient): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Air                          | 2423,70m   | 1366,92mAh 
-Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1025,59m   | 482,20mAh  
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2091,84m   | 1090,40mAh 
-Total Distance: 5541,13m | Total Energy: 2939,53mAh | Total Time: 00h 06m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Air                          | 2423,70m   | 1551,90mAh 
+Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1025,59m   | 752,90mAh  
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2091,84m   | 1428,77mAh 
+Total Distance: 5541,13m | Total Energy: 3733,56mAh | Total Time: 00h 06m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.3 ###################################################### 
@@ -67,16 +67,16 @@ C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41
 Total Distance: 3609,42m | Total Energy: 0,66kWh | Total Time: 00h 07m 12s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Air                          | 559,25m    | 223,96mAh  
-CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 1558,81m   | 900,28mAh  
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 1600,74m   | 911,99mAh  
-Total Distance: 3718,80m | Total Energy: 2036,22mAh | Total Time: 00h 04m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 1600,74m   | 1038,31mAh 
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     CTT Porto (41,17155,-8,61273) [Order]                         | Air                          | 1558,81m   | 999,53mAh  
+CTT Porto (41,17155,-8,61273) [Order]                   ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 559,25m    | 449,54mAh  
+Total Distance: 3718,80m | Total Energy: 2487,38mAh | Total Time: 00h 04m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
 Air Route (more efficient): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Air                          | 559,25m    | 223,96mAh  
-CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 1558,81m   | 900,28mAh  
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 1600,74m   | 911,99mAh  
-Total Distance: 3718,80m | Total Energy: 2036,22mAh | Total Time: 00h 04m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 1600,74m   | 1038,31mAh 
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     CTT Porto (41,17155,-8,61273) [Order]                         | Air                          | 1558,81m   | 999,53mAh  
+CTT Porto (41,17155,-8,61273) [Order]                   ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 559,25m    | 449,54mAh  
+Total Distance: 3718,80m | Total Energy: 2487,38mAh | Total Time: 00h 04m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.4 ###################################################### 
@@ -94,56 +94,16 @@ Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa 
 Total Distance: 8379,94m | Total Energy: 1,52kWh | Total Time: 00h 16m 45s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Air                          | 2334,71m   | 1378,75mAh 
-Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Air                          | 2858,71m   | 1597,28mAh 
-Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | Air                          | 3310,04m   | 1927,70mAh 
-Total Distance: 8503,46m | Total Energy: 4903,73mAh | Total Time: 00h 09m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Air                          | 2334,71m   | 1464,47mAh 
+Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Air                          | 2858,71m   | 1845,42mAh 
+Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | Air                          | 3310,04m   | 2090,11mAh 
+Total Distance: 8503,46m | Total Energy: 5400,00mAh | Total Time: 00h 09m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
 Air Route (more efficient): 
-Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Air                          | 2334,71m   | 1378,75mAh 
-Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 4256,69m   | 2434,55mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Pharmacy - Valongo (41,18995,-8,49777) [Charge]               | Air                          | 81,74m     | -119,96mAh 
-Pharmacy - Valongo (41,18995,-8,49777) [Charge]         ->     CTT Valongo (41,18998,-8,49770)                               | Air                          | 81,74m     | -119,96mAh 
-CTT Valongo (41,18998,-8,49770)                         ->     Correios Forno (41,19252,-8,57577) [Order]                    | Air                          | 6611,68m   | 3816,49mAh 
-Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | Air                          | 3310,04m   | 1927,70mAh 
-Total Distance: 19701,01m | Total Energy: 4878,87mAh | Total Time: 00h 25m 18s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Air                          | 2334,71m   | 1464,47mAh 
+Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Air                          | 2858,71m   | 1845,42mAh 
+Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | Air                          | 3310,04m   | 2090,11mAh 
+Total Distance: 8503,46m | Total Energy: 5400,00mAh | Total Time: 00h 09m 03s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.5 ###################################################### 
