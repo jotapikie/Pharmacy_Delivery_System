@@ -1,0 +1,24 @@
+###################################################### 3.2.3 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Guifões - Longitude: -8,66618 - Latitude: 41,20011 - Elevation: 73,00 m 
+Order: Descripition: Correios Ermesinde - Longitude: -8,54506 - Latitude: 41,20261 - Elevation: 100,00 m 
+Order: Descripition: CTT Valongo - Longitude: -8,49770 - Latitude: 41,18998 - Elevation: 100,00 m 
+
+The route needs 15945,32 mAh and the drone has 15000,00 mAh, however it can stop to charge, so that the order can be delivered.(Distance: 28558,88 m) 
+ 
+###################################################### 3.2.5 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Guifões - Longitude: -8,66618 - Latitude: 41,20011 - Elevation: 73,00 m 
+Order: Descripition: Pereiró Post Office - Longitude: -8,65470 - Latitude: 41,17267 - Elevation: 16,00 m 
+Order: Descripition: C. Comercial New City - Longitude: -8,69270 - Latitude: 41,18227 - Elevation: 16,00 m 
+
+The route needs 6195,86 mAh and the drone has 15000,00 mAh so that the order can be delivered.(Distance: 9530,57 m) 
+ 
+###################################################### 3.2.7 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Sá da Bandeira - Longitude: -8,60808 - Latitude: 41,14838 - Elevation: 83,00 m 
+Order: Descripition: Traditional Shopping S. - Longitude: -8,60487 - Latitude: 41,15345 - Elevation: 79,00 m 
+Order: Descripition: Espiral Colossal - Longitude: -8,60336 - Latitude: 41,14354 - Elevation: 79,00 m 
+
+The route needs -840,26 mAh and the drone has 15000,00 mAh so that the order can be delivered.(Distance: 2401,68 m) 
+ 

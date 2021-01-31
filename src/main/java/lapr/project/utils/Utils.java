@@ -163,7 +163,7 @@ public class Utils {
         if (distance <= 0 || altitudeDifI >= distance || altitudeDifF >= distance || vehicleAerodynamicCoef < 0 || consumoEletronico <= 0 || areaFrontal <= 0 || areaTopo <= 0 || velocidadeMedia <= 0 || totalWeight <= 0) {
             throw new IllegalArgumentException("This path has invalid data!");
         }
-        double fAero = ((-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaFrontal * windToPath.vx * windToPath.vx)) + (-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaFrontal * windToPath.vy * windToPath.vy)) + (-(0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaTopo * windToPath.vz * windToPath.vz)));
+        double fAero = (0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaFrontal * windToPath.vx * windToPath.vx) + (0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaFrontal * windToPath.vy * windToPath.vy) + (0.5 * Constants.RO_AR * vehicleAerodynamicCoef * areaTopo * windToPath.vz * windToPath.vz);
         double eHorizontal = (((totalWeight * Constants.GRAVITY) / (liftDrag * powerTransfer)) * distance);
         double eAero = fAero * distance;
         double fImpulso = ((totalWeight * Constants.GRAVITY) + (0.5 * Constants.RO_AR * areaTopo * Constants.DRAG_COEF * velocidadeVertical * velocidadeVertical));
@@ -172,7 +172,7 @@ public class Utils {
         double tempoSubirDescer= (altitudeDifF/velocidadeVertical) + (altitudeDifI/velocidadeVertical);
         double tempoHorizontal= distance/velocidadeMedia;
         double tempoTotalHoras= (tempoHorizontal+tempoSubirDescer)/3600;
-        return (consumoEletronico*tempoTotalHoras)+((((eAero + eDescer + eHorizontal + eSubir)/Constants.RENDIMENTO_DRONE)/3600)*100)/Constants.DRONE_BATTERY_VOLTAGE;
+        return (consumoEletronico*tempoTotalHoras)+((((eAero + eDescer + eHorizontal + eSubir)/Constants.RENDIMENTO_DRONE)/3600))/Constants.DRONE_BATTERY_VOLTAGE*1000;
     }
 
 

@@ -208,7 +208,7 @@ public class MainGraph implements Cloneable{
     }
 
     @Override
-    protected MainGraph clone() throws CloneNotSupportedException {
+    public MainGraph clone() throws CloneNotSupportedException {
         try {
             return new MainGraph();
         } catch (SQLException ex) {

@@ -1,0 +1,75 @@
+###################################################### 3.2.3 ###################################################### 
+ 
+Total Weight: 10,30
+Point 0 Elevation: 73,00 m 
+Point 1 Elevation: 100,00 m 
+Point 2 Elevation: 100,00 m 
+Wind Direction: 0º 
+Wind Speed: 0,00 m/s 
+Scooter weight: 50,00 kg
+Scooter aerodynamic coefficient: 1,10
+Scooter frontal area: 0,30 m^2
+Scooter average speed: 30,00 km/h
+Drone aerodynamic coefficient: 0,50
+Drone eletronical consume: 2000,00
+Drone frontal area: 1,00 m^2
+Drone top area: 1,00 m^2
+Drone weight: 3,30 kg
+Drone average (horizontal) speed: 16,00 m/s
+Drone average (vertical) speed: 6,00 m/s
+Drone altitude: 100,00 m
+Drone drag coefficient: 1,50 
+Asphalt kinetic coefficient: 0,50
+Off-Road kinetic coefficient: 0,20
+Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
+###################################################### 3.2.5 ###################################################### 
+ 
+Total Weight: 10,30
+Point 0 Elevation: 73,00 m 
+Point 1 Elevation: 75,00 m 
+Point 2 Elevation: 16,00 m 
+Wind Direction: 0º 
+Wind Speed: 0,00 m/s 
+Scooter weight: 50,00 kg
+Scooter aerodynamic coefficient: 1,10
+Scooter frontal area: 0,30 m^2
+Scooter average speed: 30,00 km/h
+Drone aerodynamic coefficient: 0,50
+Drone eletronical consume: 2000,00
+Drone frontal area: 1,00 m^2
+Drone top area: 1,00 m^2
+Drone weight: 3,30 kg
+Drone average (horizontal) speed: 16,00 m/s
+Drone average (vertical) speed: 6,00 m/s
+Drone altitude: 100,00 m
+Drone drag coefficient: 1,50 
+Asphalt kinetic coefficient: 0,50
+Off-Road kinetic coefficient: 0,20
+Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
+###################################################### 3.2.7 ###################################################### 
+ 
+Total Weight: 10,30
+Point 0 Elevation: 83,00 m 
+Point 1 Elevation: 100,00 m 
+Point 2 Elevation: 79,00 m 
+Wind Direction: 0º 
+Wind Speed: 0,00 m/s 
+Scooter weight: 50,00 kg
+Scooter aerodynamic coefficient: 1,10
+Scooter frontal area: 0,30 m^2
+Scooter average speed: 30,00 km/h
+Drone aerodynamic coefficient: 0,50
+Drone eletronical consume: 2000,00
+Drone frontal area: 1,00 m^2
+Drone top area: 1,00 m^2
+Drone weight: 3,30 kg
+Drone average (horizontal) speed: 16,00 m/s
+Drone average (vertical) speed: 6,00 m/s
+Drone altitude: 100,00 m
+Drone drag coefficient: 1,50 
+Asphalt kinetic coefficient: 0,50
+Off-Road kinetic coefficient: 0,20
+Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg

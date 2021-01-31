@@ -35,7 +35,7 @@ public class DataHandler {
     /**
      * A ligação à BD.
      */
-    private Connection connection;
+    private static Connection connection;
 
     /**
      * A invocação de "stored procedures".

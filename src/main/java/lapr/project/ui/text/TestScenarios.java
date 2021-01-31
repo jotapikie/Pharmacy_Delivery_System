@@ -13,12 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import lapr.project.controller.AddPathController;
 import lapr.project.data.GeographicalPointDB;
-import lapr.project.model.AirGraph;
-import lapr.project.model.GeographicalPoint;
-import lapr.project.model.LandGraph;
-import lapr.project.model.Pathway;
-import lapr.project.model.ScooterPath;
-import lapr.project.model.Wind;
+import lapr.project.model.*;
 import lapr.project.model.comparator.EnergyComparator;
 import lapr.project.model.comparator.TimeComparator;
 import static lapr.project.ui.text.Utils.deleteFile;
@@ -181,7 +176,68 @@ public class TestScenarios {
     }
 
     private static void scenario03() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        OUTPUT = "textFiles/Test_Scenarios/Scenario03/output.txt";
+        VARIABLES = "textFiles/Test_Scenarios/Scenario03/variables.txt";
+        RUNS = "textFiles/Test_Scenarios/Scenario03/runs.csv";
+        try{
+            deleteFile(OUTPUT);
+            deleteFile(VARIABLES);
+            String line[];
+            AirGraph graph;
+            String latitudes[];
+            String longitudes[];
+            String elevations[];
+            int i;
+            List<GeographicalPoint> pois = new ArrayList<>();
+            System.out.println("Generating result...");
+            for(String run : importFile(RUNS)){
+                graph =  airGraph.clone();
+                pois.clear();
+                line = run.split(";");
+                elevations = line[6].split("!");
+                GeographicalPoint origin = database.getGeographicalPoint(Double.parseDouble(line[3]), Double.parseDouble(line[2]));
+                latitudes = line[4].split("!");
+                longitudes = line[5].split("!");
+                i = 0;
+                while(i < latitudes.length){
+                    pois.add(database.getGeographicalPoint(Double.parseDouble(longitudes[i]), Double.parseDouble(latitudes[i])));
+                    i++;
+                }
+                int index = Integer.parseInt(line[0]);
+                write(String.format("###################################################### 3.2.%d ###################################################### %n %n", index), OUTPUT);
+                write(String.format("###################################################### 3.2.%d ###################################################### %n %n", index), VARIABLES);
+                boolean charge = line[10].equalsIgnoreCase("y");
+                double maxBat = Double.parseDouble(line[8]);
+                double currentBat = battery(Double.parseDouble(line[7]), maxBat);
+                double additionalWeight = Double.parseDouble(line[9]);
+                double vx = Double.parseDouble(line[11]);
+                double vy = Double.parseDouble(line[12]);
+                double vz = Double.parseDouble(line[13]);
+                Wind wind = new Wind(vx, vy, vz);
+
+                // FINDING BEST ROUTES WITHOUT CHANGING PARAMTERS
+                List<Route> routes = new ArrayList<>();
+                routes = graph.kBestPaths(pois, origin, origin, 1, maxBat);
+                Route route = null;
+                if(routes != null && !routes.isEmpty()){
+                    route = routes.get(0);
+                }
+
+                if(route == null){
+                    write(String.format("There's no path between the points given. %n"),OUTPUT);
+                }else{
+                    changeDataDrone(route,additionalWeight, charge, pois, elevations, origin, currentBat, maxBat, wind);
+                }
+
+
+
+
+            }
+            System.out.println("Results exported to output file.");
+
+        } catch (SQLException | CloneNotSupportedException ex) {
+            Logger.getLogger(TestScenarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void scenario04() {
@@ -364,6 +420,70 @@ public class TestScenarios {
                 write(String.format(("%nThe route needs %.2f kWh and the scooter has only %.2f, even if it can charge somewhere, the order can't be delivered.(Distance: %.2f m) %n %n"), totalEnergy,currentBat,totalDistance),OUTPUT);
               }
             
+        }
+    }
+
+    private static void changeDataDrone(Route route,double additionalWeight, boolean charge, List<GeographicalPoint> numPoints, String elevations[], GeographicalPoint origin, double currentBat, double maxBat, Wind wind) throws CloneNotSupportedException {
+
+        int i = 0;
+        double totalEnergy = 0;
+        double totalDistance = 0;
+        double elevation = 0;
+        write(String.format("Total Weight: %.2f%n",((DronePath) route.getPaths().get(0)).getTotalWeight()+additionalWeight),VARIABLES);
+        write(String.format("Point 0 Elevation: %.2f m %n", origin.getElevation()+ (elevation)),VARIABLES);
+        for(Pathway p: route.getPaths()){
+            DronePath dc = (DronePath) p;
+            dc.setTotalWeight(dc.getTotalWeight());
+
+            if(numPoints.contains(p.getDestinationPoint()) && i <= numPoints.size()){
+                elevation = Double.parseDouble(elevations[i]);
+                i++;
+                write(String.format("Point %d Elevation: %.2f m %n", i,  (elevation)),VARIABLES);
+                for(GeographicalPoint p1 : numPoints){
+                    if(p1.equals(p.getDestinationPoint())){
+                        p1.setElevation(elevation);
+                    }
+                }
+                p.getDestinationPoint().setElevation( (elevation));
+            }
+
+            if(numPoints.contains(p.getOriginPoint()) && i <= numPoints.size()){
+                for(GeographicalPoint p1 : numPoints){
+                    if(p1.equals(p.getOriginPoint())){
+                        p1.setElevation( (elevation));
+                    }
+                }
+                p.getOriginPoint().setElevation( (elevation));
+            }
+
+            p.setWind(wind);
+            p.setDistance(distance(p.getOriginPoint().getLatitude(), p.getDestinationPoint().getLatitude(), p.getOriginPoint().getLongitude(), p.getDestinationPoint().getLongitude(), p.getOriginPoint().getElevation(), p.getDestinationPoint().getElevation()));
+            totalEnergy = totalEnergy + p.getCost();
+            totalDistance = totalDistance + p.getDistance();
+        }
+        write(String.format("Wind Direction: %dº %n", wind.direction()),VARIABLES);
+        write(String.format("Wind Speed: %.2f m/s %n", wind.speed()),VARIABLES);
+        variablesUsed(VARIABLES);
+
+        route.updateValues();
+        write(String.format("Origin/Destination: %s %n", origin),OUTPUT);
+        for(GeographicalPoint p : numPoints){
+            write(String.format("Order: %s %n", p), OUTPUT);
+        }
+
+        if(!charge){
+            if(currentBat < totalEnergy){
+                write(String.format("%nThe route needs %.2f mAh and the drone has only %.2f mAh,(cannot charge) so that the order can't be delivered.(Distance: %.2f m) %n %n", totalEnergy, currentBat, totalDistance),OUTPUT);
+            }else{
+                write(String.format("%nThe route needs %.2f mAh and the drone has %.2f mAh so that the order can be delivered.(Distance: %.2f m) %n %n", totalEnergy, currentBat,totalDistance),OUTPUT);
+            }
+        }else{
+            if(route.getMinimumEnergy() < maxBat){
+                write(String.format("%nThe route needs %.2f mAh and the drone has %.2f mAh, however it can stop to charge, so that the order can be delivered.(Distance: %.2f m) %n %n", totalEnergy, currentBat,totalDistance), OUTPUT);
+            }else{
+                write(String.format(("%nThe route needs %.2f mAh and the drone has only %.2f mAh, even if it can charge somewhere, the order can't be delivered.(Distance: %.2f m) %n %n"), totalEnergy,currentBat,totalDistance),OUTPUT);
+            }
+
         }
     }
 

@@ -1,0 +1,20 @@
+#lines starting with # should be ignored
+#Column description
+#index - number of subscenario
+#motor - motor of the drone used (in W)
+#latitude_or - origin point
+#longitude_or - origin point
+#latitude_points - latitude of the points where must pass (<Latitude>!<Latitude>!...)
+#longitude_points - longitude of the points where must pass (<Longitude>!<Longitude>!...)
+#elevation - elevation (can be possitive or negative) - (<Elevation>!<Elevation>!...)
+#current_bat of the drone used (in percentage, ex: 45, 23...)
+#max_bat of the drone used(in mAh)
+#additional_weight (in kg)
+#charge - if it can charge or not(y/n)
+#wind_x - vector wx
+#wind_y - vector wy
+#wind_z - vector wz
+index;motor;latitude_or;longitude_or;latitude_points;longitude_points;elevationf;current_bat;max_bat;additional_weight;charge;wind_x;wind_y;wind_z
+3;3000;41.20011;-8.66618;41.20261!41.18998;-8.54506!-8.49770;100!100;100;15000;7;y;0;0;0
+5;3000;41.20011;-8.66618;41.17267!41.18227;-8.65470!-8.69270;75!16;100;15000;7;n;0;0;0
+7;3000;41.14838;-8.60808;41.15345!41.14354;-8.60487!-8.60336;100!79;100;15000;7;n;0;-10;0

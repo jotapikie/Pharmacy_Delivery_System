@@ -6,6 +6,9 @@
 package lapr.project.model;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import lapr.project.utils.graph.Graph;
 
 
@@ -28,7 +31,6 @@ public class AirGraph extends MainGraph{
      * Constructs an instance of the energy graph.
      *
      * @param totalWeight total weight of the vehicle and the person.
-     * @param vehicleAerodynamicCoef aerodynamic coefficient of the vehicle.
      * @throws java.sql.SQLException
      */
     public AirGraph(double totalWeight) throws SQLException {
@@ -57,6 +59,16 @@ public class AirGraph extends MainGraph{
     
     public double getTotalWeight() {
         return totalWeight;
+    }
+
+    @Override
+    public AirGraph clone() throws CloneNotSupportedException {
+        try {
+            return new AirGraph(this.totalWeight);
+        } catch (SQLException ex) {
+            Logger.getLogger(LandGraph.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     @Override
