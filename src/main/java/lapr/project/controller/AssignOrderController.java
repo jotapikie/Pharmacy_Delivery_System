@@ -156,9 +156,9 @@ public class AssignOrderController {
       }
     
     public String getMostEfficient(){
+        if(landEnergy != null && airEnergy != null){
         double airEnergyInKWH = (Constants.DRONE_BATTERY_VOLTAGE * airEnergy.getTotalEnergy()) / 1000000;
         double landEnergyInKWH = landEnergy.getTotalEnergy();
-        if(landEnergy != null && airEnergy != null){
            if(airEnergyInKWH < landEnergyInKWH){
                return "Drone";
            }else{

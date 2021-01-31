@@ -7,6 +7,7 @@ package lapr.project.ui;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import lapr.project.model.Wind;
 import static lapr.project.ui.UtilsUI.header;
 
 

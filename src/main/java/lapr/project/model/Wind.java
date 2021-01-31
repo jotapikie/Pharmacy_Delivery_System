@@ -12,7 +12,8 @@ public class Wind {
     }
 
     public int direction(){
-        return (int) Math.atan(this.vy/this.vx);
+        double res = Math.atan(this.vx/this.vy);
+        return (int) Math.toDegrees(res);
 
     }
 

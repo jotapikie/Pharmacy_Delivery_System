@@ -22,6 +22,7 @@ Drone drag coefficient: 1,50
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
 ###################################################### 2.1.2 ###################################################### 
  
 Kinetic Coef: 0,50
@@ -47,6 +48,7 @@ Drone drag coefficient: 1,50
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
 ###################################################### 2.1.4 ###################################################### 
  
 Kinetic Coef: 0,50
@@ -72,6 +74,7 @@ Drone drag coefficient: 1,50
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
 ###################################################### 2.1.6 ###################################################### 
  
 Kinetic Coef: 0,50
@@ -97,6 +100,7 @@ Drone drag coefficient: 1,50
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
 ###################################################### 2.1.8 ###################################################### 
  
 Kinetic Coef: 0,50
@@ -122,6 +126,7 @@ Drone drag coefficient: 1,50
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
 ###################################################### 2.1.10 ###################################################### 
  
 Kinetic Coef: 0,50
@@ -147,6 +152,7 @@ Drone drag coefficient: 1,50
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
 ###################################################### 2.1.12 ###################################################### 
  
 Kinetic Coef: 0,50
@@ -154,7 +160,7 @@ Total Weight: 180,00
 Point 0 Elevation: 108,00 m 
 Point 1 Elevation: 111,24 m 
 Point 2 Elevation: 111,24 m 
-Wind Direction: 1º 
+Wind Direction: 0º 
 Wind Speed: 0,00 m/s 
 Scooter weight: 50,00 kg
 Scooter aerodynamic coefficient: 1,10
@@ -172,6 +178,7 @@ Drone drag coefficient: 1,50
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg
 ###################################################### 2.1.14 ###################################################### 
  
 Kinetic Coef: 0,50
@@ -179,7 +186,7 @@ Total Weight: 180,00
 Point 0 Elevation: 108,00 m 
 Point 1 Elevation: 111,24 m 
 Point 2 Elevation: 111,24 m 
-Wind Direction: 1º 
+Wind Direction: 20º 
 Wind Speed: 2,99 m/s 
 Scooter weight: 50,00 kg
 Scooter aerodynamic coefficient: 1,10
@@ -197,3 +204,4 @@ Drone drag coefficient: 1,50
 Asphalt kinetic coefficient: 0,50
 Off-Road kinetic coefficient: 0,20
 Sidewalk kinetic coefficient: 0,30
+Courier weight: 80,00 kg

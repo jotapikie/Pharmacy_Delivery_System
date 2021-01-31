@@ -79,6 +79,7 @@ public class TestScenarios {
         landGraph = new LandGraph(Constants.SCOOTER_WEIGHT + Constants.AVERAGE_COURIER_WEIGHT);
         airGraph = new AirGraph(Constants.DRONE_WEIGHT);
         menu();
+        
     }
 
     private static void menu() throws CloneNotSupportedException {
