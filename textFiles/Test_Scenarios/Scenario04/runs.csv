@@ -1,8 +1,9 @@
 #lines starting with # should be ignored
 #Column description
-#client_email of the person who make the order
-#nif used to make the order
-#discount if wants to use credits or not (y/n)
+#latitude_pharmacy - origin
+#longitude_pharmacy - origin
+#latitude_stop_points - latitiude of each stop point (<Latitude>!<Latitude>!...)
+#longitude_stop_points - longitude of each stop point (<Longitude>!<Longitude>!...)
 latitude_pharmacy;longitude_pharmacy;latitude_stop_points;longitude_stop_points
 41.16703;-8.61175;41.17123;-8.58831
 41.16703;-8.61175;41.17123!41.16326;-8.58831!-8.58373

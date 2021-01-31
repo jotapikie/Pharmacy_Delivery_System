@@ -7,6 +7,8 @@ package lapr.project.model;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
 import lapr.project.utils.route.RouteAlgorithms;
@@ -16,7 +18,7 @@ import lapr.project.utils.route.RouteAlgorithms;
  *
  * @author Diogo
  */
-public class LandGraph extends MainGraph{
+public class LandGraph extends MainGraph implements Cloneable{
     
 
     
@@ -65,8 +67,20 @@ public class LandGraph extends MainGraph{
     public double getTotalWeight() {
         return totalWeight;
     }
-    
 
+    @Override
+    public LandGraph clone() throws CloneNotSupportedException {
+        try {
+            return new LandGraph(this.totalWeight);
+        } catch (SQLException ex) {
+            Logger.getLogger(LandGraph.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
+    
+  
 
     
     @Override

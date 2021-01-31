@@ -1,4 +1,5 @@
 ###################################################### 4.1.1 ###################################################### 
+ 
 Land Route (less time): 
 Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273)                                 | Rua de Vale Formoso          | 509,29m    | 0,09kWh    
 CTT Porto (41,17155,-8,61273)                           ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | PraÃ§a 9 de Abril            | 2044,45m   | 0,37kWh    
@@ -25,6 +26,7 @@ Total Distance: 5489,13m | Total Energy: 3465,37mAh | Total Time: 00h 05m 55s | 
  
  
 ###################################################### 4.1.2 ###################################################### 
+ 
 Land Route (less time): 
 Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Rua de Vale Formoso          | 2382,75m   | 0,43kWh    
 Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | R.CampeÃµes Europeus         | 966,19m    | 0,18kWh    
@@ -51,6 +53,7 @@ Total Distance: 5489,13m | Total Energy: 3465,37mAh | Total Time: 00h 05m 55s | 
  
  
 ###################################################### 4.1.3 ###################################################### 
+ 
 Land Route (less time): 
 Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Rua de Vale Formoso          | 509,29m    | 0,09kWh    
 CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | PraÃ§a 9 de Abril            | 1532,05m   | 0,28kWh    
@@ -77,6 +80,7 @@ Total Distance: 3818,80m | Total Energy: 2576,20mAh | Total Time: 00h 04m 19s | 
  
  
 ###################################################### 4.1.4 ###################################################### 
+ 
 Land Route (less time): 
 Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Rua CamÃ©lias                | 2308,85m   | 0,42kWh    
 Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Rua das Macieiras            | 2803,76m   | 0,50kWh    
@@ -117,6 +121,7 @@ Pharmacy - Guifões can deliver an order to C. Comercial Plaza by land.
 Pharmacy - Guifões can deliver an order to C. Comercial Plaza by air. 
 Pharmacy - Avenida can deliver an order to C. Comercial Plaza by air. 
 ###################################################### 4.1.6 ###################################################### 
+ 
 Land Route (less time): 
 Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Rua 1Âº de Janeiro           | 1396,94m   | 0,25kWh    
 CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Rua do Campo Alegre          | 1718,14m   | 0,31kWh    
@@ -147,6 +152,7 @@ Total Distance: 7419,46m | Total Energy: 5213,68mAh | Total Time: 00h 08m 40s | 
  
  
 ###################################################### 4.1.7 ###################################################### 
+ 
 Land Route (less time): 
 Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Rua Tourais                  | 1954,10m   | 0,36kWh    
 Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Av.Dr.Ã“scar Lopes           | 2770,36m   | 0,50kWh    
@@ -177,6 +183,7 @@ Total Distance: 11344,35m | Total Energy: 7995,29mAh | Total Time: 00h 13m 18s |
  
  
 ###################################################### 4.1.8 ###################################################### 
+ 
 Land Route (less time): 
 Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Origin]  ->     Espiral Colossal (41,14354,-8,60336) [Order]                  | Rua SÃ¡ da Bandeira          | 668,68m    | 0,13kWh    
 Espiral Colossal (41,14354,-8,60336) [Order]            ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Rua Alexandre Herculano      | 755,30m    | 0,15kWh    

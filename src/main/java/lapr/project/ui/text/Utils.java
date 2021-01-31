@@ -107,5 +107,6 @@ public class Utils {
         write(String.format("Asphalt kinetic coefficient: %.2f%n", Constants.KINETIC_COEF_ASPHALT), file);
         write(String.format("Off-Road kinetic coefficient: %.2f%n", Constants.KINETIC_COEF_OFF_ROAD),file);
         write(String.format("Sidewalk kinetic coefficient: %.2f%n", Constants.KINETIC_COEF_SIDEWALK), file);
+        write(String.format("Courier weight: %.2f kg%n", Constants.AVERAGE_COURIER_WEIGHT), file);
     }
 }

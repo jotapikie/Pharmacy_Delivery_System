@@ -288,6 +288,23 @@ public class Route implements Comparable<Route>{
         return energyToReachChargingPoint;
     }
     
+    public void updateValues(){
+        Route newRoute = null;
+        for(int i = 0; i < paths.size(); i++){
+            Pathway p = paths.get(i);
+            if(i == 0){
+                newRoute = new Route(p);
+            }else{
+                newRoute.addPath(p);
+            }
+        }
+        this.chargingPoints = newRoute.chargingPoints;
+        this.energyToReachChargingPoint = newRoute.energyToReachChargingPoint;
+        this.totalDistance = newRoute.totalDistance;
+        this.totalEnergy = newRoute.totalEnergy;
+        this.totalTime = newRoute.totalTime;
+    }
+    
     
 
     /**

@@ -18,6 +18,7 @@ import lapr.project.model.GeographicalPoint;
 import lapr.project.model.LandGraph;
 import lapr.project.model.Pathway;
 import lapr.project.model.ScooterPath;
+import lapr.project.model.Wind;
 import lapr.project.model.comparator.EnergyComparator;
 import lapr.project.model.comparator.TimeComparator;
 import static lapr.project.ui.text.Utils.deleteFile;
@@ -27,7 +28,10 @@ import static lapr.project.ui.text.Utils.variablesUsed;
 import static lapr.project.ui.text.Utils.write;
 import lapr.project.utils.Constants;
 import static lapr.project.utils.Utils.battery;
+import static lapr.project.utils.Utils.distance;
+import static lapr.project.utils.Utils.kmhTOms;
 import lapr.project.utils.graph.Edge;
+import lapr.project.utils.graph.Graph;
 import lapr.project.utils.route.Route;
 
 /**
@@ -52,36 +56,32 @@ public class TestScenarios {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, CloneNotSupportedException {
         database = new GeographicalPointDB();
-//        System.out.println("Clearing data...");
-//        Utils.executeScript("textFiles/clear.sql");
-//        System.out.println("Old data cleared.");
-//        points = new ArrayList<>();
-//        System.out.println("Inserting clients...");
-//        System.out.printf("%d clients were registed. %n", OurScenarios.insertClients(CLIENTS,points));
-//        System.out.println("Inserting pharmacies...");
-//        System.out.printf("%d pharmacies were registed. %n", OurScenarios.insertPharmacies(PHARMACIES,points));
-//        System.out.println("Creating land paths...");
-//        System.out.printf("%d land paths were created. %n", createPaths("Scooter"));
-//        System.out.println("Creating air paths...");
-//        System.out.printf("%d air paths were created. %n", createPaths("Drone"));
-//        System.out.println("Applying land restrictions...");
-//        executeScript(LAND_RESTRICTIONS);
-//        System.out.println("Applying air restrictions...");
-//        executeScript(AIR_RESTRICTIONS);
-//        System.out.println("Restrictions applied.");
-//        System.out.println("Creating graphs...");
+        System.out.println("Clearing data...");
+        Utils.executeScript("textFiles/clear.sql");
+        System.out.println("Old data cleared.");
+        points = new ArrayList<>();
+        System.out.println("Inserting clients...");
+        System.out.printf("%d clients were registed. %n", OurScenarios.insertClients(CLIENTS,points));
+        System.out.println("Inserting pharmacies...");
+        System.out.printf("%d pharmacies were registed. %n", OurScenarios.insertPharmacies(PHARMACIES,points));
+        System.out.println("Creating land paths...");
+        System.out.printf("%d land paths were created. %n", createPaths("Scooter"));
+        System.out.println("Creating air paths...");
+        System.out.printf("%d air paths were created. %n", createPaths("Drone"));
+        System.out.println("Applying land restrictions...");
+        executeScript(LAND_RESTRICTIONS);
+        System.out.println("Applying air restrictions...");
+        executeScript(AIR_RESTRICTIONS);
+        System.out.println("Restrictions applied.");
+        System.out.println("Creating graphs...");
         landGraph = new LandGraph(Constants.SCOOTER_WEIGHT + Constants.AVERAGE_COURIER_WEIGHT);
-        airGraph = new AirGraph(35);
-
-
-        
-        
+        airGraph = new AirGraph(Constants.DRONE_WEIGHT);
         menu();
     }
 
-    private static void menu() {
+    private static void menu() throws CloneNotSupportedException {
         System.out.println();
         System.out.println("Scenarios:");
         System.out.println();
@@ -93,9 +93,11 @@ public class TestScenarios {
         switch(ans){
             case "1":
                 scenario02();
+                menu();
                 break;
             case "2":
                 scenario03();
+                menu();
                 break;
             case "3":
                 scenario04();
@@ -110,7 +112,7 @@ public class TestScenarios {
         
     }
 
-    private static void scenario02() {
+    private static void scenario02() throws CloneNotSupportedException {
         OUTPUT = "textFiles/Test_Scenarios/Scenario02/output.txt";
         VARIABLES = "textFiles/Test_Scenarios/Scenario02/variables.txt";
         RUNS = "textFiles/Test_Scenarios/Scenario02/runs.csv";
@@ -118,71 +120,63 @@ public class TestScenarios {
            deleteFile(OUTPUT);
            deleteFile(VARIABLES);
            String line[];
-           LandGraph graph = landGraph;
+           LandGraph graph;
            String latitudes[];
            String longitudes[];
+           String elevations[];
            int i;
            List<GeographicalPoint> pois = new ArrayList<>();
-           int index = 0;
+           System.out.println("Generating result...");
            for(String run : importFile(RUNS)){
-               index++;
+               graph =  landGraph.clone();
                pois.clear();
                line = run.split(";");
-               if(!line[9].equalsIgnoreCase("0")){
-                   graph = new LandGraph(Constants.AVERAGE_COURIER_WEIGHT + Constants.SCOOTER_WEIGHT + Double.parseDouble(line[8]));
-               }
-               GeographicalPoint or = database.getGeographicalPoint(Double.parseDouble(line[2]), Double.parseDouble(line[1]));
-               double elevation = Double.parseDouble(line[5]);
-               double kineticCoef = Double.parseDouble(line[6]);
+               elevations = line[6].split("!");
+               GeographicalPoint origin = database.getGeographicalPoint(Double.parseDouble(line[3]), Double.parseDouble(line[2]));
+               latitudes = line[4].split("!");
+               longitudes = line[5].split("!");
                i = 0;
-               latitudes = line[3].split("!");
-               longitudes = line[4].split("!");
                while(i < latitudes.length){
                    pois.add(database.getGeographicalPoint(Double.parseDouble(longitudes[i]), Double.parseDouble(latitudes[i])));
                    i++;
                }
-               
-               
-               
+               int index = Integer.parseInt(line[0]);
+               write(String.format("###################################################### 2.1.%d ###################################################### %n %n", index), OUTPUT);
+               write(String.format("###################################################### 2.1.%d ###################################################### %n %n", index), VARIABLES);
                boolean charge = line[11].equalsIgnoreCase("y");
-               write(String.format("###################################################### 2.2.%d ###################################################### %n", index), OUTPUT);
-               write(String.format("Origin and Destination: %s%n",or), OUTPUT);
-               for(GeographicalPoint other : pois){
-                   write(String.format("Stop points: %s%n",other), OUTPUT);
+               double kinetic = Double.parseDouble(line[7]);
+               double maxBat = Double.parseDouble(line[9]);
+               double currentBat = battery(Double.parseDouble(line[8]), maxBat);
+               double additionalWeight = Double.parseDouble(line[10]);
+               double vx = kmhTOms(Double.parseDouble(line[12]));
+               double vy = kmhTOms(Double.parseDouble(line[13]));
+               double vz = kmhTOms(Double.parseDouble(line[14]));
+               Wind wind = new Wind(vx, vy, vz);
+               
+               // FINDING BEST ROUTES WITHOUT CHANGING PARAMTERS
+               List<Route> routes = new ArrayList<>();
+               routes = graph.kBestPaths(pois, origin, origin, 1, 10);
+               Route route = null;
+               if(routes != null && !routes.isEmpty()){
+                   route = routes.get(0);
                }
                
-               List<Route> routes = new ArrayList<>();
-               if(!charge){
-                    double currentBat = battery(Double.parseDouble(line[7]), Double.parseDouble(line[8]));
-                    routes = graph.kBestPaths(pois, or, or, 20,currentBat);
-                }else{
-                    routes = graph.kBestPaths(pois, or, or, 20, Double.parseDouble(line[8]));
-                }
-
+               if(route == null){
+                   write(String.format("There's no path between the points given. %n"),OUTPUT);
+               }else{
+                   changeData(route, additionalWeight, kinetic, charge, pois, elevations, origin, currentBat, maxBat, wind);
+               }
                
-                if(routes != null && routes.isEmpty()){
-                    routes.sort(new EnergyComparator());
-                    Route r = routes.get(0);
-                    double energy = 0;
-                    double time = 0;
-                    double distance = 0;
-                    int numPoints = r.getNumGeographicalPoints();
-                    for(Pathway p : r.getPaths()){
-                        p.setKineticCoef(kineticCoef);
-                        energy = energy + p.getCost();
-                        time = time + p.getTime();
-                        
-                    }
-                    write(String.format("%nThe order can be delivered.(Distance=%.2fm | Energy:%2fkWh) %n",r.getTotalDistance(), r.getTotalDistance()),OUTPUT);
-                }else{
-                    write(String.format("%nThe order can't be delivered. %n"),OUTPUT);
-                }
+               
+               
+               
          }
-           
+           System.out.println("Results exported to output file.");
            
         } catch (SQLException ex) {
             Logger.getLogger(TestScenarios.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     private static void scenario03() {
@@ -196,7 +190,6 @@ public class TestScenarios {
         try {
             deleteFile(OUTPUT);
             deleteFile(VARIABLES);
-            System.out.println("Getting points and paths from database...");
             LandGraph land = landGraph;
             AirGraph air = airGraph;
             System.out.println("Generating the results...");
@@ -304,6 +297,79 @@ public class TestScenarios {
             ex.printStackTrace();
         }
         index++;
+    }
+
+    private static void changeData(Route route, double additionalWeight, double kinetic, boolean charge, List<GeographicalPoint> numPoints, String elevations[], GeographicalPoint origin, double currentBat, double maxBat, Wind wind) throws CloneNotSupportedException {
+      
+        int i = 0;
+        double totalEnergy = 0;
+        double totalDistance = 0;
+        double elevation = 0;
+        write(String.format("Kinetic Coef: %.2f%n", kinetic),VARIABLES);
+        write(String.format("Total Weight: %.2f%n",((ScooterPath) route.getPaths().get(0)).getTotalWeight() + additionalWeight),VARIABLES);
+        write(String.format("Point 0 Elevation: %.2f m %n", origin.getElevation()+ (elevation)),VARIABLES);
+        for(Pathway p: route.getPaths()){
+            ScooterPath sc = (ScooterPath) p;
+            sc.setKineticCoef(kinetic);
+            
+            sc.setTotalWeight(sc.getTotalWeight() + additionalWeight);
+            
+            if(numPoints.contains(p.getDestinationPoint()) && i <= numPoints.size()){
+                elevation = manageElevation(numPoints, origin.getElevation(), Double.parseDouble(elevations[i]));
+                i++;
+                write(String.format("Point %d Elevation: %.2f m %n", i, origin.getElevation()+ (elevation)),VARIABLES);
+                for(GeographicalPoint p1 : numPoints){
+                    if(p1.equals(p.getDestinationPoint())){
+                        p1.setElevation(origin.getElevation()+ (elevation));
+                    }
+                }
+                p.getDestinationPoint().setElevation(origin.getElevation() + (elevation));
+            }
+            
+            if(numPoints.contains(p.getOriginPoint()) && i <= numPoints.size()){
+                for(GeographicalPoint p1 : numPoints){
+                    if(p1.equals(p.getOriginPoint())){
+                        p1.setElevation(origin.getElevation() + (elevation));
+                    }
+                }
+                p.getOriginPoint().setElevation(origin.getElevation() + (elevation));
+            }
+            
+            p.setWind(wind);
+            p.setDistance(distance(p.getOriginPoint().getLatitude(), p.getDestinationPoint().getLatitude(), p.getOriginPoint().getLongitude(), p.getDestinationPoint().getLongitude(), p.getOriginPoint().getElevation(), p.getDestinationPoint().getElevation()));
+            totalEnergy = totalEnergy + p.getCost();
+            totalDistance = totalDistance + p.getDistance();
+        }
+            write(String.format("Wind Direction: %dº %n", wind.direction()),VARIABLES);
+            write(String.format("Wind Speed: %.2f m/s %n", wind.speed()),VARIABLES);
+            variablesUsed(VARIABLES);
+        
+        route.updateValues();
+        write(String.format("Origin/Destination: %s %n", origin),OUTPUT);
+        for(GeographicalPoint p : numPoints){
+            write(String.format("Order: %s %n", p), OUTPUT);
+        }
+        
+        if(!charge){
+            if(currentBat < totalEnergy){
+                write(String.format("%nThe route needs %.2f kWh and the scooter has only %.2f kwh,(cannot charge) so that the order can't be delivered.(Distance: %.2f m) %n %n", totalEnergy, currentBat, totalDistance),OUTPUT);
+            }else{
+                write(String.format("%nThe route needs %.2f kWh and the scooter has %.2f kWh so that the order can be delivered.(Distance: %.2f m) %n %n", totalEnergy, currentBat,totalDistance),OUTPUT);
+            }
+        }else{
+            if(route.getMinimumEnergy() < maxBat){
+                write(String.format("%nThe route needs %.2f kWh and the scooter has %.2f kWh, however it can stop to charge, so that the order can be delivered.(Distance: %.2f m) %n %n", totalEnergy, currentBat,totalDistance), OUTPUT);
+            }else{
+                write(String.format(("%nThe route needs %.2f kWh and the scooter has only %.2f, even if it can charge somewhere, the order can't be delivered.(Distance: %.2f m) %n %n"), totalEnergy,currentBat,totalDistance),OUTPUT);
+              }
+            
+        }
+    }
+
+    private static double manageElevation(List<GeographicalPoint> numPoints, double elevation0, double elevation) {
+        int num = numPoints.size();
+        double elevationTotal = (elevation == 0) ? 0 : elevation0*(elevation/100);
+        return elevationTotal;
     }
 
 

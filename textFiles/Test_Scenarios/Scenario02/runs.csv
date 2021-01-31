@@ -1,7 +1,26 @@
 #lines starting with # should be ignored
 #Column description
-#client_email of the person who make the order
-#nif used to make the order
-#discount if wants to use credits or not (y/n)
-motor;latitude_or;longitude_or;elevation_or;latitude_points;longitude_points;elevation;kinetic_coef;current_bat;max_bat;additional_weight;orders;charge
-2;41.14838;-8.60808;83;41.20011;-8.66618;0;0.5;60;2.8;0;1;y
+#index - number of subscenario
+#motor - motor of the scooter used (in kW)
+#latitude_or - origin point
+#longitude_or - origin point
+#latitude_points - latitude of the points where must pass (<Latitude>!<Latitude>!...)
+#longitude_points - longitude of the points where must pass (<Longitude>!<Longitude>!...)
+#elevation - percentage of elevation (can be possitive or negative) - (<Elevation>!<Elevation>!...)
+#kinetic_coef of the path
+#current_bat of the scooter used (in percentage, ex: 45, 23...)
+#max_bat of the scooter_user(in kWh)
+#additional_weight (in kg)
+#charge - if it can charge or not(y/n)
+#wind_x - vector wx
+#wind_y - vector wy
+#wind_z - vector wz
+index;motor;latitude_or;longitude_or;latitude_points;longitude_points;elevation;kinetic_coef;current_bat;max_bat;additional_weight;charge;wind_x;wind_y;wind_z
+1;3;41.14838;-8.60808;41.20011;-8.66618;0;0.5;60;2.8;0;n;0;0;0
+2;3;41.14838;-8.60808;41.18003!41.20011;-8.65404!-8.66618;0!0;0.5;100;2.8;0;y;0;0;0
+4;3;41.14838;-8.60808;41.18003!41.20011;-8.65404!-8.66618;1.5!3;0.5;100;2.8;0;n;0;0;0
+6;3;41.16040;-8.64372;41.16326!41.14418;-8.58373!-8.5747;3!3;0.5;100;2.8;0;y;0;0;0
+8;3;41.16040;-8.64372;41.16326!41.14418;-8.58373!-8.5747;3!3;0.5;100;2.8;50;n;0;0;0
+10;3;41.16040;-8.64372;41.16326!41.14418;-8.58373!-8.5747;3!0.5;0.5;100;2.8;50;n;0;0;0
+12;3;41.12608;-8.60577;41.15395!41.17155;-8.54672!-8.61273;3!3;0.5;100;2.8;50;n;0;5;0
+14;3;41.12608;-8.60577;41.15395!41.17155;-8.54672!-8.61273;3!3;0.5;100;2.8;50;n;3.76;10.3;0

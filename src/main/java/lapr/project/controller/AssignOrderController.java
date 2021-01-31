@@ -156,11 +156,24 @@ public class AssignOrderController {
       }
     
     public String getMostEfficient(){
+        double airEnergyInKWH = (Constants.DRONE_BATTERY_VOLTAGE * airEnergy.getTotalEnergy()) / 1000000;
+        double landEnergyInKWH = landEnergy.getTotalEnergy();
         if(landEnergy != null && airEnergy != null){
-           if(landEnergy.compareTo(airEnergy)>0){
+           if(airEnergyInKWH < landEnergyInKWH){
                return "Drone";
            }else{
-               return "Scooter";
+               if(airEnergyInKWH > landEnergyInKWH){
+                   return "Scooter";
+               }else{
+                   if(landEnergy.getTotalDistance() > airEnergy.getTotalDistance()){
+                       return "Drone";
+                   }else{
+                       if(landEnergy.getTotalDistance() < airEnergy.getTotalDistance()){
+                           return "Scooter";
+                       }
+                   }
+               }
+               
            }
         }else{
             if(landEnergy != null && airEnergy == null){

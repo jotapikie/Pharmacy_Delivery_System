@@ -9,6 +9,8 @@ package lapr.project.model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lapr.project.data.GeographicalPointDB;
 import lapr.project.data.PathwayDB;
 import lapr.project.utils.Constants;
@@ -22,7 +24,7 @@ import lapr.project.utils.route.RouteAlgorithms;
  *
  * @author Diogo
  */
-public class MainGraph {
+public class MainGraph implements Cloneable{
 
 
     /**
@@ -171,6 +173,7 @@ public class MainGraph {
             saveRouteInformation(routes, toVisit);
             return routes;
         } catch (NullPointerException e) {
+            e.printStackTrace();
             throw new IllegalArgumentException("There is no way to reach at least on of the geographical points.");
         }
     }
@@ -204,5 +207,17 @@ public class MainGraph {
 
         return mainGraph;
     }
+
+    @Override
+    protected MainGraph clone() throws CloneNotSupportedException {
+        try {
+            return new MainGraph();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainGraph.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
 
 }

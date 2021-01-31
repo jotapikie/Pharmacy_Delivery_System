@@ -1,0 +1,63 @@
+###################################################### 2.1.1 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Sá da Bandeira - Longitude: -8,60808 - Latitude: 41,14838 - Elevation: 83,00 m 
+Order: Descripition: Pharmacy - Guifões - Longitude: -8,66618 - Latitude: 41,20011 - Elevation: 83,00 m 
+
+The route needs 2,67 kWh and the scooter has only 1,68 kwh,(cannot charge) so that the order can't be delivered.(Distance: 15064,39 m) 
+ 
+###################################################### 2.1.2 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Sá da Bandeira - Longitude: -8,60808 - Latitude: 41,14838 - Elevation: 83,00 m 
+Order: Descripition: NorteShopping - Longitude: -8,65404 - Latitude: 41,18003 - Elevation: 83,00 m 
+Order: Descripition: Pharmacy - Guifões - Longitude: -8,66618 - Latitude: 41,20011 - Elevation: 83,00 m 
+
+The route needs 2,98 kWh and the scooter has 2,80 kWh, however it can stop to charge, so that the order can be delivered.(Distance: 16765,53 m) 
+ 
+###################################################### 2.1.4 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Sá da Bandeira - Longitude: -8,60808 - Latitude: 41,14838 - Elevation: 83,00 m 
+Order: Descripition: NorteShopping - Longitude: -8,65404 - Latitude: 41,18003 - Elevation: 84,25 m 
+Order: Descripition: Pharmacy - Guifões - Longitude: -8,66618 - Latitude: 41,20011 - Elevation: 85,49 m 
+
+The route needs 2,98 kWh and the scooter has only 2,80 kwh,(cannot charge) so that the order can't be delivered.(Distance: 16765,56 m) 
+ 
+###################################################### 2.1.6 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Avenida - Longitude: -8,64372 - Latitude: 41,16040 - Elevation: 71,00 m 
+Order: Descripition: Alameda Shopping - Longitude: -8,58373 - Latitude: 41,16326 - Elevation: 73,13 m 
+Order: Descripition: Fishisco Pesca - Longitude: -8,57470 - Latitude: 41,14418 - Elevation: 73,13 m 
+
+The route needs 2,37 kWh and the scooter has 2,80 kWh, however it can stop to charge, so that the order can be delivered.(Distance: 13337,97 m) 
+ 
+###################################################### 2.1.8 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Avenida - Longitude: -8,64372 - Latitude: 41,16040 - Elevation: 71,00 m 
+Order: Descripition: Alameda Shopping - Longitude: -8,58373 - Latitude: 41,16326 - Elevation: 73,13 m 
+Order: Descripition: Fishisco Pesca - Longitude: -8,57470 - Latitude: 41,14418 - Elevation: 73,13 m 
+
+The route needs 3,27 kWh and the scooter has only 2,80 kwh,(cannot charge) so that the order can't be delivered.(Distance: 13337,97 m) 
+ 
+###################################################### 2.1.10 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Avenida - Longitude: -8,64372 - Latitude: 41,16040 - Elevation: 71,00 m 
+Order: Descripition: Alameda Shopping - Longitude: -8,58373 - Latitude: 41,16326 - Elevation: 71,36 m 
+Order: Descripition: Fishisco Pesca - Longitude: -8,57470 - Latitude: 41,14418 - Elevation: 71,36 m 
+
+The route needs 3,27 kWh and the scooter has only 2,80 kwh,(cannot charge) so that the order can't be delivered.(Distance: 13337,97 m) 
+ 
+###################################################### 2.1.12 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Couto - Longitude: -8,60577 - Latitude: 41,12608 - Elevation: 108,00 m 
+Order: Descripition: Tecofix  - Longitude: -8,54672 - Latitude: 41,15395 - Elevation: 111,24 m 
+Order: Descripition: CTT Porto - Longitude: -8,61273 - Latitude: 41,17155 - Elevation: 111,24 m 
+
+The route needs 4,12 kWh and the scooter has only 2,80 kwh,(cannot charge) so that the order can't be delivered.(Distance: 16787,44 m) 
+ 
+###################################################### 2.1.14 ###################################################### 
+ 
+Origin/Destination: Descripition: Pharmacy - Couto - Longitude: -8,60577 - Latitude: 41,12608 - Elevation: 108,00 m 
+Order: Descripition: Tecofix  - Longitude: -8,54672 - Latitude: 41,15395 - Elevation: 111,24 m 
+Order: Descripition: CTT Porto - Longitude: -8,61273 - Latitude: 41,17155 - Elevation: 111,24 m 
+
+The route needs 4,11 kWh and the scooter has only 2,80 kwh,(cannot charge) so that the order can't be delivered.(Distance: 16787,44 m) 
+ 
