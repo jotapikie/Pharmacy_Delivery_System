@@ -192,7 +192,7 @@ public class TestScenarios {
     private static void scenario04() {
         OUTPUT = "textFiles/Test_Scenarios/Scenario04/output.txt";
         VARIABLES = "textFiles/Test_Scenarios/Scenario04/variables.txt";
-        RUNS = "textFiles/Test_Scenarios/Scenario04/runs.txt";
+        RUNS = "textFiles/Test_Scenarios/Scenario04/runs.csv";
         try {
             deleteFile(OUTPUT);
             deleteFile(VARIABLES);
@@ -229,10 +229,6 @@ public class TestScenarios {
                 List<Route> lRoutes = land.kBestPaths(pointsToStop, pharmacy, pharmacy, 20 ,Constants.SCOOTER_MAX_BATTERY);
                 List<Route> aRoutes = air.kBestPaths(pointsToStop, pharmacy, pharmacy, 20, Constants.DRONE_MAX_BATTERY);
                 
-                for(Route r : lRoutes){
-                    System.out.println(r);
-                    System.out.println();
-                }
                 List<Route> landTime = new ArrayList<>(lRoutes);
                 landTime.sort(new TimeComparator());
                 List<Route> airTime = new ArrayList<>(aRoutes);
@@ -243,7 +239,7 @@ public class TestScenarios {
                 List<Route> airEnergy = new ArrayList<>(aRoutes);
                 airEnergy.sort(new EnergyComparator());
                 
-                write(String.format("###################################################### 4.1.%d ###################################################### %n", index), OUTPUT);
+                write(String.format("###################################################### 4.1.%d ###################################################### %n %n", index), OUTPUT);
                 Route lTime = landTime.get(0);
                 Route aTime = airTime.get(0);
                 Route lEff = landEnergy.get(0);
@@ -286,13 +282,13 @@ public class TestScenarios {
             GeographicalPoint point = database.getGeographicalPoint(Double.parseDouble(longitude), Double.parseDouble(latitude));
             List<GeographicalPoint> toVisit = new ArrayList<>();
             toVisit.add(point);
-            write(String.format("###################################################### 4.1.%d ###################################################### %n", index), OUTPUT);
+            write(String.format("###################################################### 4.1.%d ###################################################### %n %n", index), OUTPUT);
             for(GeographicalPoint p : land.getVertexes()){
                 if(p.getDescription().contains("Pharmacy")){
                     List<Route> lands = land.kBestPaths(toVisit, p, p, 1, Constants.SCOOTER_MAX_BATTERY);
                     List<Route> airs = air.kBestPaths(toVisit, p, p, 1, Constants.DRONE_MAX_BATTERY);
                     if(lands != null && !lands.isEmpty()){
-                        write(String.format("%n%s can deliver an order to %s by land. %n", p.getDescription(), point.getDescription()),OUTPUT);
+                        write(String.format("%s can deliver an order to %s by land. %n", p.getDescription(), point.getDescription()),OUTPUT);
                     }
                     
                     if(airs != null && !airs.isEmpty()){

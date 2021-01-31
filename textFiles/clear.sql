@@ -91,8 +91,8 @@ CREATE TABLE vehicle(
     nr INTEGER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_vehicle_nr PRIMARY KEY,
     weight NUMERIC(5,2) NOT NULL,
     status varchar(255) NOT NULL,
-    max_battery NUMERIC(4,2) NOT NULL,
-    current_battery NUMERIC(4,2) NOT NULL,
+    max_battery NUMERIC(8,2) NOT NULL,
+    current_battery NUMERIC(8,2) NOT NULL,
     motor int NOT NULL,
     max_weight NUMERIC(4,2) NOT NULL,
     pharmacy_id int NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE drone(
     frontal_area NUMERIC(4,2) NOT NULL,
     top_area NUMERIC(4,2) NOT NULL,
     lift_drag NUMERIC (4,2) NOT NULL,
-    eletrical_consume NUMERIC(4,2) NOT NULL,
+    eletrical_consume NUMERIC(8,2) NOT NULL,
     power_transfer NUMERIC(4,2) NOT NULL,
     aero_coef NUMERIC(4,2) NOT NULL
 );

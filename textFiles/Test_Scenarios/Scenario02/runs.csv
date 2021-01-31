@@ -3,5 +3,5 @@
 #client_email of the person who make the order
 #nif used to make the order
 #discount if wants to use credits or not (y/n)
-motor;latitude_or;longitude_or;latitude_points;longitude_points;elevation_diff;kinetic_coef;current_bat;max_bat;additional_weight;orders;charge
-2;41.14838;-8.60808;41.20011;-8.66618;0;0.5;60;2.8;0;1;charge
+motor;latitude_or;longitude_or;elevation_or;latitude_points;longitude_points;elevation;kinetic_coef;current_bat;max_bat;additional_weight;orders;charge
+2;41.14838;-8.60808;83;41.20011;-8.66618;0;0.5;60;2.8;0;1;y

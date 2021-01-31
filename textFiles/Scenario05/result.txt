@@ -10,9 +10,9 @@ Senhora da Hora (41,16766,-8,68785)                     ->     Pharmacy - Trinda
 Total Distance: 15024,17m | Total Energy: 2,76kWh | Total Time: 00h 30m 00s | Average Speed: 8,33 m/s 
 
 Air route (Less time):
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Sé (41,14331,-8,60914) [Order]                                | Air                          | 1110,39m   | 0,02kWh    
-Sé (41,14331,-8,60914) [Order]                          ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1110,39m   | 0,02kWh    
-Total Distance: 2220,77m | Total Energy: 0,04kWh | Total Time: 00h 02m 42s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Sé (41,14331,-8,60914) [Order]                                | Air                          | 1110,39m   | 171,16mAh  
+Sé (41,14331,-8,60914) [Order]                          ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1110,39m   | 171,16mAh  
+Total Distance: 2220,77m | Total Energy: 342,32mAh | Total Time: 00h 02m 42s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
 
 Land route (Less energy):
 Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Majestic (41,14723,-8,60657)                                  | Rua da Alegria               | 605,07m    | 0,11kWh    
@@ -23,11 +23,11 @@ Senhora da Hora (41,16766,-8,68785)                     ->     Pharmacy - Trinda
 Total Distance: 15023,73m | Total Energy: 2,75kWh | Total Time: 00h 30m 01s | Average Speed: 8,33 m/s 
 
 Air route (Less energy):
-Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Sé (41,14331,-8,60914) [Order]                                | Air                          | 1110,39m   | 0,02kWh    
-Sé (41,14331,-8,60914) [Order]                          ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1110,39m   | 0,02kWh    
-Total Distance: 2220,77m | Total Energy: 0,04kWh | Total Time: 00h 02m 42s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Trindade (41,15227,-8,60929) [Origin]        ->     Sé (41,14331,-8,60914) [Order]                                | Air                          | 1110,39m   | 171,16mAh  
+Sé (41,14331,-8,60914) [Order]                          ->     Pharmacy - Trindade (41,15227,-8,60929) [Destination]         | Air                          | 1110,39m   | 171,16mAh  
+Total Distance: 2220,77m | Total Energy: 342,32mAh | Total Time: 00h 02m 42s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
 
-Most efficient: Drone 
+Most efficient: Scooter 
  
 The courier with email diogomicael6@gmail.com started the delivery run #1 and took the scooter #2. 
  

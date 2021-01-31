@@ -112,10 +112,10 @@ public class UtilsTest {
     
     @Test
     public void testPathEnergyCost(){
-        assertEquals(0.1,Utils.pathEnergyCost(2, 2, 2, 2, 4, 8), 0.1);
+        assertEquals(0.1,Utils.pathEnergyCostScooter(2, 2, 2, 2, 4, 8), 0.1);
         boolean flag = false;
         try{
-            Utils.pathEnergyCost(2, 2, 2, 2, 2, -2);
+            Utils.pathEnergyCostScooter(2, 2, 2, 2, 2, -2);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -124,7 +124,7 @@ public class UtilsTest {
         
         flag = false;
         try{
-            Utils.pathEnergyCost(2, 2, 2, 2, 2, 1);
+            Utils.pathEnergyCostScooter(2, 2, 2, 2, 2, 1);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -132,7 +132,7 @@ public class UtilsTest {
         
         flag = false;
         try{
-            Utils.pathEnergyCost(2, 2, -2, 2, 2, 3);
+            Utils.pathEnergyCostScooter(2, 2, -2, 2, 2, 3);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -140,7 +140,7 @@ public class UtilsTest {
         
         flag = false;
         try{
-            Utils.pathEnergyCost(2, -3, 2, 2, 2, 3);
+            Utils.pathEnergyCostScooter(2, -3, 2, 2, 2, 3);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -148,7 +148,7 @@ public class UtilsTest {
         
         flag = false;
         try{
-            Utils.pathEnergyCost(-1, 2, 2, 2, 2, 3);
+            Utils.pathEnergyCostScooter(-1, 2, 2, 2, 2, 3);
         }catch(IllegalArgumentException e){
             flag = true;
         }
@@ -176,7 +176,7 @@ public class UtilsTest {
         double altitudeDifI = 3.0;
         double altitudeDifF = 2.0;
         double distance = 35.0;
-        double expResult = 1939.99;
+        double expResult = 256.34;
         double result = Utils.pathEnergyCostDrone(totalWeight, vehicleAerodynamicCoef, powerTransfer, liftDrag, consumoEletronico, areaFrontal, areaTopo, velocidadeMedia, velocidadeVertical, windToPath, altitudeDifI, altitudeDifF, distance);
         assertEquals(expResult, result, 0.01);
     }

@@ -311,9 +311,11 @@ public class OurScenarios {
                 controller.addVehicleToQueue();
                 vehiclesAdded = vehiclesAdded + controller.registerVehicles();
             }else if(line[1].equalsIgnoreCase("Drone")){
+                System.out.println("drone");
                 controller.newDrone(Double.parseDouble(line[2]), Double.parseDouble(line[3]));
                 controller.addVehicleToQueue();
                 vehiclesAdded = vehiclesAdded + controller.registerVehicles();
+                System.out.println("Drone added.");
             }
             }catch(SQLException e){
                 e.printStackTrace();

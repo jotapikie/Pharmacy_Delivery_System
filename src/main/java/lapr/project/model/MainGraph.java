@@ -179,7 +179,7 @@ public class MainGraph {
         double hSpeed = 0;
         double vSpeed = 0;
         if(toUse instanceof LandGraph){
-            hSpeed = Utils.kmhTOms(Constants.SCOOTER_SPEED);
+            hSpeed = Constants.SCOOTER_SPEED;
         }else{
             hSpeed = Constants.DRONE_HORIZONTAL_SPEED;
             vSpeed = Constants.DRONE_VERTICAL_SPEED;

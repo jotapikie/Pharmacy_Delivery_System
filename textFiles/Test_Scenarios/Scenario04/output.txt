@@ -1,206 +1,204 @@
 ###################################################### 4.1.1 ###################################################### 
 Land Route (less time): 
 Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273)                                 | Rua de Vale Formoso          | 509,29m    | 0,09kWh    
-CTT Porto (41,17155,-8,61273)                           ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | PraÃ§a 9 de Abril            | 2044,45m   | 0,36kWh    
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua das MercÃªs              | 2016,93m   | 0,35kWh    
-Total Distance: 4570,67m | Total Energy: 0,80kWh | Total Time: 00h 09m 08s | Average Speed: 8,33 m/s 
+CTT Porto (41,17155,-8,61273)                           ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | PraÃ§a 9 de Abril            | 2044,45m   | 0,37kWh    
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua das MercÃªs              | 2016,93m   | 0,36kWh    
+Total Distance: 4570,67m | Total Energy: 0,83kWh | Total Time: 00h 09m 08s | Average Speed: 30,00 km/h 
  
 Land Route (more efficient): 
 Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273)                                 | Rua de Vale Formoso          | 509,29m    | 0,09kWh    
-CTT Porto (41,17155,-8,61273)                           ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | PraÃ§a 9 de Abril            | 2044,45m   | 0,36kWh    
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua das MercÃªs              | 2016,93m   | 0,35kWh    
-Total Distance: 4570,67m | Total Energy: 0,80kWh | Total Time: 00h 09m 08s | Average Speed: 8,33 m/s 
+CTT Porto (41,17155,-8,61273)                           ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | PraÃ§a 9 de Abril            | 2044,45m   | 0,37kWh    
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua das MercÃªs              | 2016,93m   | 0,36kWh    
+Total Distance: 4570,67m | Total Energy: 0,83kWh | Total Time: 00h 09m 08s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373)                          | Air                          | 2441,70m   | 0,13kWh    
-Alameda Shopping (41,16326,-8,58373)                    ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1005,59m   | 0,06kWh    
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2041,84m   | 0,10kWh    
-Total Distance: 5489,13m | Total Energy: 0,29kWh | Total Time: 00h 05m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373)                          | Air                          | 2441,70m   | 1546,61mAh 
+Alameda Shopping (41,16326,-8,58373)                    ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1005,59m   | 657,94mAh  
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2041,84m   | 1260,82mAh 
+Total Distance: 5489,13m | Total Energy: 3465,37mAh | Total Time: 00h 05m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
-Land Route (more efficient): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373)                          | Air                          | 2441,70m   | 0,13kWh    
-Alameda Shopping (41,16326,-8,58373)                    ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1005,59m   | 0,06kWh    
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2041,84m   | 0,10kWh    
-Total Distance: 5489,13m | Total Energy: 0,29kWh | Total Time: 00h 05m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Air Route (more efficient): 
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373)                          | Air                          | 2441,70m   | 1546,61mAh 
+Alameda Shopping (41,16326,-8,58373)                    ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1005,59m   | 657,94mAh  
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2041,84m   | 1260,82mAh 
+Total Distance: 5489,13m | Total Energy: 3465,37mAh | Total Time: 00h 05m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.2 ###################################################### 
 Land Route (less time): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Rua de Vale Formoso          | 2382,75m   | 0,41kWh    
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Rua de Vale Formoso          | 2382,75m   | 0,43kWh    
 Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | R.CampeÃµes Europeus         | 966,19m    | 0,18kWh    
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua das MercÃªs              | 2016,93m   | 0,35kWh    
-Total Distance: 5365,87m | Total Energy: 0,94kWh | Total Time: 00h 10m 42s | Average Speed: 8,33 m/s 
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua das MercÃªs              | 2016,93m   | 0,36kWh    
+Total Distance: 5365,87m | Total Energy: 0,97kWh | Total Time: 00h 10m 42s | Average Speed: 30,00 km/h 
  
 Land Route (more efficient): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Rua de Vale Formoso          | 2382,75m   | 0,41kWh    
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Rua de Vale Formoso          | 2382,75m   | 0,43kWh    
 Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | R.CampeÃµes Europeus         | 966,19m    | 0,18kWh    
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua das MercÃªs              | 2016,93m   | 0,35kWh    
-Total Distance: 5365,87m | Total Energy: 0,94kWh | Total Time: 00h 10m 42s | Average Speed: 8,33 m/s 
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua das MercÃªs              | 2016,93m   | 0,36kWh    
+Total Distance: 5365,87m | Total Energy: 0,97kWh | Total Time: 00h 10m 42s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Air                          | 2441,70m   | 0,13kWh    
-Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1005,59m   | 0,06kWh    
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2041,84m   | 0,10kWh    
-Total Distance: 5489,13m | Total Energy: 0,29kWh | Total Time: 00h 05m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Air                          | 2441,70m   | 1546,61mAh 
+Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1005,59m   | 657,94mAh  
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2041,84m   | 1260,82mAh 
+Total Distance: 5489,13m | Total Energy: 3465,37mAh | Total Time: 00h 05m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
-Land Route (more efficient): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Air                          | 2441,70m   | 0,13kWh    
-Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1005,59m   | 0,06kWh    
-Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2041,84m   | 0,10kWh    
-Total Distance: 5489,13m | Total Energy: 0,29kWh | Total Time: 00h 05m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Air Route (more efficient): 
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     Alameda Shopping (41,16326,-8,58373) [Order]                  | Air                          | 2441,70m   | 1546,61mAh 
+Alameda Shopping (41,16326,-8,58373) [Order]            ->     Correios de C. Ferreira (41,17123,-8,58831) [Order]           | Air                          | 1005,59m   | 657,94mAh  
+Correios de C. Ferreira (41,17123,-8,58831) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 2041,84m   | 1260,82mAh 
+Total Distance: 5489,13m | Total Energy: 3465,37mAh | Total Time: 00h 05m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.3 ###################################################### 
 Land Route (less time): 
 Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Rua de Vale Formoso          | 509,29m    | 0,09kWh    
-CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | PraÃ§a 9 de Abril            | 1532,05m   | 0,27kWh    
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua do Lugarinho             | 1568,09m   | 0,28kWh    
-Total Distance: 3609,42m | Total Energy: 0,64kWh | Total Time: 00h 07m 12s | Average Speed: 8,33 m/s 
+CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | PraÃ§a 9 de Abril            | 1532,05m   | 0,28kWh    
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua do Lugarinho             | 1568,09m   | 0,29kWh    
+Total Distance: 3609,42m | Total Energy: 0,66kWh | Total Time: 00h 07m 12s | Average Speed: 30,00 km/h 
  
 Land Route (more efficient): 
 Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Rua de Vale Formoso          | 509,29m    | 0,09kWh    
-CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | PraÃ§a 9 de Abril            | 1532,05m   | 0,27kWh    
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua do Lugarinho             | 1568,09m   | 0,28kWh    
-Total Distance: 3609,42m | Total Energy: 0,64kWh | Total Time: 00h 07m 12s | Average Speed: 8,33 m/s 
+CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | PraÃ§a 9 de Abril            | 1532,05m   | 0,28kWh    
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Rua do Lugarinho             | 1568,09m   | 0,29kWh    
+Total Distance: 3609,42m | Total Energy: 0,66kWh | Total Time: 00h 07m 12s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Air                          | 559,25m    | 0,04kWh    
-CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 1614,81m   | 0,10kWh    
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 1644,74m   | 0,10kWh    
-Total Distance: 3818,80m | Total Energy: 0,23kWh | Total Time: 00h 04m 19s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Air                          | 559,25m    | 402,99mAh  
+CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 1614,81m   | 1081,62mAh 
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 1644,74m   | 1091,59mAh 
+Total Distance: 3818,80m | Total Energy: 2576,20mAh | Total Time: 00h 04m 19s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
-Land Route (more efficient): 
-Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Air                          | 559,25m    | 0,04kWh    
-CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 1614,81m   | 0,10kWh    
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 1644,74m   | 0,10kWh    
-Total Distance: 3818,80m | Total Energy: 0,23kWh | Total Time: 00h 04m 19s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Air Route (more efficient): 
+Pharmacy - Sá (41,16703,-8,61175) [Origin]              ->     CTT Porto (41,17155,-8,61273) [Order]                         | Air                          | 559,25m    | 402,99mAh  
+CTT Porto (41,17155,-8,61273) [Order]                   ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 1614,81m   | 1081,62mAh 
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pharmacy - Sá (41,16703,-8,61175) [Destination]               | Air                          | 1644,74m   | 1091,59mAh 
+Total Distance: 3818,80m | Total Energy: 2576,20mAh | Total Time: 00h 04m 19s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.4 ###################################################### 
 Land Route (less time): 
-Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Rua CamÃ©lias                | 2308,85m   | 0,40kWh    
-Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Rua das Macieiras            | 2803,76m   | 0,48kWh    
-Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | U.MÃ£os Ã  Obra              | 3267,33m   | 0,57kWh    
-Total Distance: 8379,94m | Total Energy: 1,46kWh | Total Time: 00h 16m 45s | Average Speed: 8,33 m/s 
+Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Rua CamÃ©lias                | 2308,85m   | 0,42kWh    
+Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Rua das Macieiras            | 2803,76m   | 0,50kWh    
+Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | U.MÃ£os Ã  Obra              | 3267,33m   | 0,59kWh    
+Total Distance: 8379,94m | Total Energy: 1,52kWh | Total Time: 00h 16m 45s | Average Speed: 30,00 km/h 
  
 Land Route (more efficient): 
-Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Rua CamÃ©lias                | 2308,85m   | 0,40kWh    
-Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Rua das Macieiras            | 2803,76m   | 0,48kWh    
-Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | U.MÃ£os Ã  Obra              | 3267,33m   | 0,57kWh    
-Total Distance: 8379,94m | Total Energy: 1,46kWh | Total Time: 00h 16m 45s | Average Speed: 8,33 m/s 
+Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Rua CamÃ©lias                | 2308,85m   | 0,42kWh    
+Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Rua das Macieiras            | 2803,76m   | 0,50kWh    
+Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | U.MÃ£os Ã  Obra              | 3267,33m   | 0,59kWh    
+Total Distance: 8379,94m | Total Energy: 1,52kWh | Total Time: 00h 16m 45s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Air                          | 2396,71m   | 0,13kWh    
-Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Air                          | 2848,71m   | 0,15kWh    
-Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | Air                          | 3338,04m   | 0,17kWh    
-Total Distance: 8583,46m | Total Energy: 0,45kWh | Total Time: 00h 09m 16s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Air                          | 2396,71m   | 1558,32mAh 
+Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Air                          | 2848,71m   | 1772,57mAh 
+Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | Air                          | 3338,04m   | 2101,46mAh 
+Total Distance: 8583,46m | Total Energy: 5432,35mAh | Total Time: 00h 09m 16s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
-Land Route (more efficient): 
-Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Air                          | 2396,71m   | 0,13kWh    
-Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Air                          | 2848,71m   | 0,15kWh    
-Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | Air                          | 3338,04m   | 0,17kWh    
-Total Distance: 8583,46m | Total Energy: 0,45kWh | Total Time: 00h 09m 16s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Air Route (more efficient): 
+Pharmacy - Sousa Torres (41,21966,-8,56081) [Origin]    ->     Correios Ermesinde (41,20261,-8,54506) [Order]                | Air                          | 2396,71m   | 1558,32mAh 
+Correios Ermesinde (41,20261,-8,54506) [Order]          ->     Correios Forno (41,19252,-8,57577) [Order]                    | Air                          | 2848,71m   | 1772,57mAh 
+Correios Forno (41,19252,-8,57577) [Order]              ->     Pharmacy - Sousa Torres (41,21966,-8,56081) [Destination]     | Air                          | 3338,04m   | 2101,46mAh 
+Total Distance: 8583,46m | Total Energy: 5432,35mAh | Total Time: 00h 09m 16s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.5 ###################################################### 
+ 
 Pharmacy - Couto can deliver an order to C. Comercial Plaza by air. 
 Pharmacy - Sá da Bandeira can deliver an order to C. Comercial Plaza by air. 
-
 Pharmacy - Sá can deliver an order to C. Comercial Plaza by land. 
 Pharmacy - Sá can deliver an order to C. Comercial Plaza by air. 
 Pharmacy - Fânzeres can deliver an order to C. Comercial Plaza by air. 
-
 Pharmacy - Sousa Torres can deliver an order to C. Comercial Plaza by land. 
 Pharmacy - Sousa Torres can deliver an order to C. Comercial Plaza by air. 
 Pharmacy - Valongo can deliver an order to C. Comercial Plaza by air. 
 Pharmacy - Marques da Cunha can deliver an order to C. Comercial Plaza by air. 
-
 Pharmacy - Guifões can deliver an order to C. Comercial Plaza by land. 
 Pharmacy - Guifões can deliver an order to C. Comercial Plaza by air. 
 Pharmacy - Avenida can deliver an order to C. Comercial Plaza by air. 
 ###################################################### 4.1.6 ###################################################### 
 Land Route (less time): 
-Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Rua 1Âº de Janeiro           | 1396,94m   | 0,24kWh    
-CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Rua do Campo Alegre          | 1718,14m   | 0,30kWh    
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pereiró Post Office (41,17267,-8,65470) [Order]               | Rua do Lugarinho             | 2095,52m   | 0,36kWh    
-Pereiró Post Office (41,17267,-8,65470) [Order]         ->     Pharmacy - Avenida (41,16040,-8,64372) [Destination]          | PraÃ§a AlfrÃ¢nio Peixoto     | 1645,07m   | 0,28kWh    
-Total Distance: 6855,67m | Total Energy: 1,19kWh | Total Time: 00h 13m 41s | Average Speed: 8,33 m/s 
+Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Rua 1Âº de Janeiro           | 1396,94m   | 0,25kWh    
+CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Rua do Campo Alegre          | 1718,14m   | 0,31kWh    
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pereiró Post Office (41,17267,-8,65470) [Order]               | Rua do Lugarinho             | 2095,52m   | 0,38kWh    
+Pereiró Post Office (41,17267,-8,65470) [Order]         ->     Pharmacy - Avenida (41,16040,-8,64372) [Destination]          | PraÃ§a AlfrÃ¢nio Peixoto     | 1645,07m   | 0,29kWh    
+Total Distance: 6855,67m | Total Energy: 1,23kWh | Total Time: 00h 13m 41s | Average Speed: 30,00 km/h 
  
 Land Route (more efficient): 
-Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Rua 1Âº de Janeiro           | 1396,94m   | 0,24kWh    
-CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Rua do Campo Alegre          | 1718,14m   | 0,30kWh    
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pereiró Post Office (41,17267,-8,65470) [Order]               | Rua do Lugarinho             | 2095,52m   | 0,36kWh    
-Pereiró Post Office (41,17267,-8,65470) [Order]         ->     Pharmacy - Avenida (41,16040,-8,64372) [Destination]          | PraÃ§a AlfrÃ¢nio Peixoto     | 1645,07m   | 0,28kWh    
-Total Distance: 6855,67m | Total Energy: 1,19kWh | Total Time: 00h 13m 41s | Average Speed: 8,33 m/s 
+Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Rua 1Âº de Janeiro           | 1396,94m   | 0,25kWh    
+CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Rua do Campo Alegre          | 1718,14m   | 0,31kWh    
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     Pereiró Post Office (41,17267,-8,65470) [Order]               | Rua do Lugarinho             | 2095,52m   | 0,38kWh    
+Pereiró Post Office (41,17267,-8,65470) [Order]         ->     Pharmacy - Avenida (41,16040,-8,64372) [Destination]          | PraÃ§a AlfrÃ¢nio Peixoto     | 1645,07m   | 0,29kWh    
+Total Distance: 6855,67m | Total Energy: 1,23kWh | Total Time: 00h 13m 41s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     Pereiró Post Office (41,17267,-8,65470) [Order]               | Air                          | 1800,07m   | 0,12kWh    
-Pereiró Post Office (41,17267,-8,65470) [Order]         ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 2226,41m   | 0,13kWh    
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Air                          | 1845,05m   | 0,12kWh    
-CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     Pharmacy - Avenida (41,16040,-8,64372) [Destination]          | Air                          | 1547,93m   | 0,11kWh    
-Total Distance: 7419,46m | Total Energy: 0,48kWh | Total Time: 00h 08m 40s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     Pereiró Post Office (41,17267,-8,65470) [Order]               | Air                          | 1800,07m   | 1289,19mAh 
+Pereiró Post Office (41,17267,-8,65470) [Order]         ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 2226,41m   | 1513,40mAh 
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Air                          | 1845,05m   | 1278,81mAh 
+CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     Pharmacy - Avenida (41,16040,-8,64372) [Destination]          | Air                          | 1547,93m   | 1132,27mAh 
+Total Distance: 7419,46m | Total Energy: 5213,68mAh | Total Time: 00h 08m 40s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
-Land Route (more efficient): 
-Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     Pereiró Post Office (41,17267,-8,65470) [Order]               | Air                          | 1800,07m   | 0,12kWh    
-Pereiró Post Office (41,17267,-8,65470) [Order]         ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 2226,41m   | 0,13kWh    
-C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Air                          | 1845,05m   | 0,12kWh    
-CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     Pharmacy - Avenida (41,16040,-8,64372) [Destination]          | Air                          | 1547,93m   | 0,11kWh    
-Total Distance: 7419,46m | Total Energy: 0,48kWh | Total Time: 00h 08m 40s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Air Route (more efficient): 
+Pharmacy - Avenida (41,16040,-8,64372) [Origin]         ->     Pereiró Post Office (41,17267,-8,65470) [Order]               | Air                          | 1800,07m   | 1289,19mAh 
+Pereiró Post Office (41,17267,-8,65470) [Order]         ->     C. Comercial Carvalhido (41,16805,-8,63043) [Order]           | Air                          | 2226,41m   | 1513,40mAh 
+C. Comercial Carvalhido (41,16805,-8,63043) [Order]     ->     CTT Campo Alegre (41,15260,-8,63064) [Order]                  | Air                          | 1845,05m   | 1278,81mAh 
+CTT Campo Alegre (41,15260,-8,63064) [Order]            ->     Pharmacy - Avenida (41,16040,-8,64372) [Destination]          | Air                          | 1547,93m   | 1132,27mAh 
+Total Distance: 7419,46m | Total Energy: 5213,68mAh | Total Time: 00h 08m 40s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.7 ###################################################### 
 Land Route (less time): 
-Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Rua Tourais                  | 1954,10m   | 0,34kWh    
-Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Av.Dr.Ã“scar Lopes           | 2770,36m   | 0,48kWh    
-C. Comercial New City (41,18227,-8,69270) [Order]       ->     C. Comercial Parque (41,18451,-8,68201) [Order]               | Av.Serpa Pinto               | 928,79m    | 0,16kWh    
-C. Comercial Parque (41,18451,-8,68201) [Order]         ->     Pharmacy - Guifões (41,20011,-8,66618) [Destination]          | Rua de Alfredo Cunha         | 2182,92m   | 0,39kWh    
-Total Distance: 7836,16m | Total Energy: 1,38kWh | Total Time: 00h 15m 38s | Average Speed: 8,33 m/s 
+Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Rua Tourais                  | 1954,10m   | 0,36kWh    
+Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Av.Dr.Ã“scar Lopes           | 2770,36m   | 0,50kWh    
+C. Comercial New City (41,18227,-8,69270) [Order]       ->     C. Comercial Parque (41,18451,-8,68201) [Order]               | Av.Serpa Pinto               | 928,79m    | 0,17kWh    
+C. Comercial Parque (41,18451,-8,68201) [Order]         ->     Pharmacy - Guifões (41,20011,-8,66618) [Destination]          | Rua de Alfredo Cunha         | 2182,92m   | 0,40kWh    
+Total Distance: 7836,16m | Total Energy: 1,43kWh | Total Time: 00h 15m 38s | Average Speed: 30,00 km/h 
  
 Land Route (more efficient): 
-Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Rua Tourais                  | 1954,10m   | 0,34kWh    
-Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Av.Dr.Ã“scar Lopes           | 2770,36m   | 0,48kWh    
-C. Comercial New City (41,18227,-8,69270) [Order]       ->     C. Comercial Parque (41,18451,-8,68201) [Order]               | Av.Serpa Pinto               | 928,79m    | 0,16kWh    
-C. Comercial Parque (41,18451,-8,68201) [Order]         ->     Pharmacy - Guifões (41,20011,-8,66618) [Destination]          | Rua de Alfredo Cunha         | 2182,92m   | 0,39kWh    
-Total Distance: 7836,16m | Total Energy: 1,38kWh | Total Time: 00h 15m 38s | Average Speed: 8,33 m/s 
+Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Rua Tourais                  | 1954,10m   | 0,36kWh    
+Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Av.Dr.Ã“scar Lopes           | 2770,36m   | 0,50kWh    
+C. Comercial New City (41,18227,-8,69270) [Order]       ->     C. Comercial Parque (41,18451,-8,68201) [Order]               | Av.Serpa Pinto               | 928,79m    | 0,17kWh    
+C. Comercial Parque (41,18451,-8,68201) [Order]         ->     Pharmacy - Guifões (41,20011,-8,66618) [Destination]          | Rua de Alfredo Cunha         | 2182,92m   | 0,40kWh    
+Total Distance: 7836,16m | Total Energy: 1,43kWh | Total Time: 00h 15m 38s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     C. Comercial Parque (41,18451,-8,68201) [Order]               | Air                          | 2377,54m   | 0,16kWh    
-C. Comercial Parque (41,18451,-8,68201) [Order]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Air                          | 2763,08m   | 0,18kWh    
-Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Air                          | 3015,25m   | 0,20kWh    
-C. Comercial New City (41,18227,-8,69270) [Order]       ->     Pharmacy - Guifões (41,20011,-8,66618) [Destination]          | Air                          | 3188,49m   | 0,20kWh    
-Total Distance: 11344,35m | Total Energy: 0,73kWh | Total Time: 00h 13m 18s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     C. Comercial Parque (41,18451,-8,68201) [Order]               | Air                          | 2377,54m   | 1689,77mAh 
+C. Comercial Parque (41,18451,-8,68201) [Order]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Air                          | 2763,08m   | 1965,63mAh 
+Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Air                          | 3015,25m   | 2139,93mAh 
+C. Comercial New City (41,18227,-8,69270) [Order]       ->     Pharmacy - Guifões (41,20011,-8,66618) [Destination]          | Air                          | 3188,49m   | 2199,97mAh 
+Total Distance: 11344,35m | Total Energy: 7995,29mAh | Total Time: 00h 13m 18s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
-Land Route (more efficient): 
-Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     C. Comercial Parque (41,18451,-8,68201) [Order]               | Air                          | 2377,54m   | 0,16kWh    
-C. Comercial Parque (41,18451,-8,68201) [Order]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Air                          | 2763,08m   | 0,18kWh    
-Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Air                          | 3015,25m   | 0,20kWh    
-C. Comercial New City (41,18227,-8,69270) [Order]       ->     Pharmacy - Guifões (41,20011,-8,66618) [Destination]          | Air                          | 3188,49m   | 0,20kWh    
-Total Distance: 11344,35m | Total Energy: 0,73kWh | Total Time: 00h 13m 18s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Air Route (more efficient): 
+Pharmacy - Guifões (41,20011,-8,66618) [Origin]         ->     C. Comercial Parque (41,18451,-8,68201) [Order]               | Air                          | 2377,54m   | 1689,77mAh 
+C. Comercial Parque (41,18451,-8,68201) [Order]         ->     Mar Shopping (41,20690,-8,68772) [Order]                      | Air                          | 2763,08m   | 1965,63mAh 
+Mar Shopping (41,20690,-8,68772) [Order]                ->     C. Comercial New City (41,18227,-8,69270) [Order]             | Air                          | 3015,25m   | 2139,93mAh 
+C. Comercial New City (41,18227,-8,69270) [Order]       ->     Pharmacy - Guifões (41,20011,-8,66618) [Destination]          | Air                          | 3188,49m   | 2199,97mAh 
+Total Distance: 11344,35m | Total Energy: 7995,29mAh | Total Time: 00h 13m 18s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  
 ###################################################### 4.1.8 ###################################################### 
 Land Route (less time): 
 Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Origin]  ->     Espiral Colossal (41,14354,-8,60336) [Order]                  | Rua SÃ¡ da Bandeira          | 668,68m    | 0,13kWh    
-Espiral Colossal (41,14354,-8,60336) [Order]            ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Rua Alexandre Herculano      | 755,30m    | 0,14kWh    
-C. Comercial Stop (41,14608,-8,59501) [Order]           ->     Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Destination]   | Rua do HeroÃ­smo             | 1123,89m   | 0,19kWh    
-Total Distance: 2547,88m | Total Energy: 0,46kWh | Total Time: 00h 05m 04s | Average Speed: 8,33 m/s 
+Espiral Colossal (41,14354,-8,60336) [Order]            ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Rua Alexandre Herculano      | 755,30m    | 0,15kWh    
+C. Comercial Stop (41,14608,-8,59501) [Order]           ->     Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Destination]   | Rua do HeroÃ­smo             | 1123,89m   | 0,20kWh    
+Total Distance: 2547,88m | Total Energy: 0,48kWh | Total Time: 00h 05m 04s | Average Speed: 30,00 km/h 
  
 Land Route (more efficient): 
 Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Origin]  ->     Espiral Colossal (41,14354,-8,60336) [Order]                  | Rua SÃ¡ da Bandeira          | 668,68m    | 0,13kWh    
-Espiral Colossal (41,14354,-8,60336) [Order]            ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Rua Alexandre Herculano      | 755,30m    | 0,14kWh    
-C. Comercial Stop (41,14608,-8,59501) [Order]           ->     Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Destination]   | Rua do HeroÃ­smo             | 1123,89m   | 0,19kWh    
-Total Distance: 2547,88m | Total Energy: 0,46kWh | Total Time: 00h 05m 04s | Average Speed: 8,33 m/s 
+Espiral Colossal (41,14354,-8,60336) [Order]            ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Rua Alexandre Herculano      | 755,30m    | 0,15kWh    
+C. Comercial Stop (41,14608,-8,59501) [Order]           ->     Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Destination]   | Rua do HeroÃ­smo             | 1123,89m   | 0,20kWh    
+Total Distance: 2547,88m | Total Energy: 0,48kWh | Total Time: 00h 05m 04s | Average Speed: 30,00 km/h 
  
 Air Route (less time): 
-Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Origin]  ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Air                          | 1250,87m   | 0,09kWh    
-C. Comercial Stop (41,14608,-8,59501) [Order]           ->     Espiral Colossal (41,14354,-8,60336) [Order]                  | Air                          | 917,08m    | 0,08kWh    
-Espiral Colossal (41,14354,-8,60336) [Order]            ->     Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Destination]   | Air                          | 837,71m    | 0,08kWh    
-Total Distance: 3005,66m | Total Energy: 0,24kWh | Total Time: 00h 03m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Origin]  ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Air                          | 1250,87m   | 921,63mAh  
+C. Comercial Stop (41,14608,-8,59501) [Order]           ->     Espiral Colossal (41,14354,-8,60336) [Order]                  | Air                          | 917,08m    | 769,09mAh  
+Espiral Colossal (41,14354,-8,60336) [Order]            ->     Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Destination]   | Air                          | 837,71m    | 730,73mAh  
+Total Distance: 3005,66m | Total Energy: 2421,45mAh | Total Time: 00h 03m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
-Land Route (more efficient): 
-Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Origin]  ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Air                          | 1250,87m   | 0,09kWh    
-C. Comercial Stop (41,14608,-8,59501) [Order]           ->     Espiral Colossal (41,14354,-8,60336) [Order]                  | Air                          | 917,08m    | 0,08kWh    
-Espiral Colossal (41,14354,-8,60336) [Order]            ->     Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Destination]   | Air                          | 837,71m    | 0,08kWh    
-Total Distance: 3005,66m | Total Energy: 0,24kWh | Total Time: 00h 03m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
+Air Route (more efficient): 
+Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Origin]  ->     C. Comercial Stop (41,14608,-8,59501) [Order]                 | Air                          | 1250,87m   | 921,63mAh  
+C. Comercial Stop (41,14608,-8,59501) [Order]           ->     Espiral Colossal (41,14354,-8,60336) [Order]                  | Air                          | 917,08m    | 769,09mAh  
+Espiral Colossal (41,14354,-8,60336) [Order]            ->     Pharmacy - Sá da Bandeira (41,14838,-8,60808) [Destination]   | Air                          | 837,71m    | 730,73mAh  
+Total Distance: 3005,66m | Total Energy: 2421,45mAh | Total Time: 00h 03m 55s | Average Horizontal Speed: 16,00 m/s | Average Vertical Speed: 6,00 m/s
  
  

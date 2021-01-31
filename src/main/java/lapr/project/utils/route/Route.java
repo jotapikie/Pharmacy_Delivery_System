@@ -375,7 +375,7 @@ public class Route implements Comparable<Route>{
         String sDist = String.format("%.2fm",totalDistance);
         String sEner = String.format("%.2f%s", totalEnergy, averageVerticalSpeed==0?"kWh":"mAh");
         
-        String hSpeed = String.format("| %s: %.2f m/s", averageVerticalSpeed== 0 ? "Average Speed": "Average Horizontal Speed",averageHorizontalSpeed);
+        String hSpeed = String.format("| %s: %.2f %s", averageVerticalSpeed== 0 ? "Average Speed": "Average Horizontal Speed",averageHorizontalSpeed,averageVerticalSpeed== 0 ? "km/h": "m/s");
         String vSpeed = String.format("| Average Vertical Speed: %.2f m/s", averageVerticalSpeed);
         if(averageVerticalSpeed == 0){
             vSpeed = null;

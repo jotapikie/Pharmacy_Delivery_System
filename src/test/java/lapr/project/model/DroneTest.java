@@ -45,7 +45,7 @@ public class DroneTest {
     @Test
     public void testGetEletronicalConsumer() {
         System.out.println("getEletronicalConsumer");
-        double expResult = 1.0;
+        double expResult = 2000.0;
         double result = Drone.getEletronicalConsumer();
         assertEquals(expResult, result, 0.0);
     }

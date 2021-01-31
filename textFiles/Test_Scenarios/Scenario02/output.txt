@@ -1,5 +1,0 @@
-###################################################### 2.2.1 ###################################################### 
-Origin and Destination: Descripition: Pharmacy - Sá da Bandeira - Longitude: -8,60808 - Latitude: 41,14838 - Elevation: 83,00 m
-Stop points: Descripition: Pharmacy - Guifões - Longitude: -8,66618 - Latitude: 41,20011 - Elevation: 73,00 m
-
-The order can't be delivered. 
