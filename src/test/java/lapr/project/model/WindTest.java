@@ -47,17 +47,10 @@ public class WindTest {
      */
     @Test
     public void testDirection() {
-        int expResult = 0;
+        int expResult = 45;
         int result = test.direction();
         assertEquals(expResult, result);
         
-        expResult=0;
-        result=test1.direction();
-        assertEquals(expResult, result);
-        
-        
-        Wind temp = new Wind(2,1.4,2.6);
-        assertEquals(expResult, temp.direction());
     }
 
     /**

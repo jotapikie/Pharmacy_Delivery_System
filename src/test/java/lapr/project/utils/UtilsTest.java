@@ -205,7 +205,7 @@ public class UtilsTest {
         System.out.println("windToPath");
         double pathDirec = 1.0;
         Wind wind= new Wind(1,1,1);
-        double expResult = 0.54;
+        double expResult = 0.99;
         double result = Utils.windToPath(pathDirec, wind);
         assertEquals(expResult, result, 0.1);
     }
